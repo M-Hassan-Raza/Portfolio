@@ -32,10 +32,15 @@ jobs:
           mkdir -p ${GITHUB_WORKSPACE}/built-site
           cp -R public/* ${GITHUB_WORKSPACE}/built-site/
           cd ${GITHUB_WORKSPACE}/built-site
+
+          # Initialize Git and set up the remote repository
           git init
-          git checkout --orphan gh-pages || git checkout gh-pages
+          git checkout -B gh-pages
           git add .
           git config user.name 'M-Hassan-Raza'
           git config user.email 'h.raza1164@yahoo.com'
           git commit -m 'Updated site' || echo "No changes to commit"
+
+          # Set the remote repository
+          git remote add origin https://github.com/M-Hassan-Raza/Portfolio.git
           git push --force origin gh-pages
