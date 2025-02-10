@@ -1,3 +1,5 @@
 baseURL: "https://m-hassan-raza.github.io/portfolio/"
 title: PortFolio
 theme: PaperMod
+defaultContentLanguage: "en"
+languageCode: "en-us"

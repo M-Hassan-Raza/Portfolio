@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: true
+          recursive: true
 
       - name: Checkout destination
         uses: actions/checkout@v3
@@ -22,21 +23,24 @@ jobs:
           path: built-site
 
       - name: Setup Hugo
-          uses: peaceiris/actions-hugo@v2
-          with:
-            hugo-version: 'latest'
-            extended: true
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
 
       - name: Build
-        run: ${RUNNER_TEMP}/hugo
+        run: hugo --minify
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         run: |
+          mkdir -p ${GITHUB_WORKSPACE}/built-site
           cp -R public/* ${GITHUB_WORKSPACE}/built-site/
           cd ${GITHUB_WORKSPACE}/built-site
+          git init
+          git checkout --orphan gh-pages || git checkout gh-pages
           git add .
-          git config user.name 'dhij'
-          git config user.email 'davidhwang.ij@gmail.com'
-          git commit -m 'Updated site'
-          git push          
+          git config user.name 'M-Hassan-Raza'
+          git config user.email 'h.raza1164@yahoo.com'
+          git commit -m 'Updated site' || echo "No changes to commit"
+          git push --force origin gh-pages
