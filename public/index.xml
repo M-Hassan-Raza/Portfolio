@@ -6,8 +6,15 @@
     <description>Recent content on PortFolio</description>
     <generator>Hugo -- 0.143.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Feb 2025 17:49:26 +0500</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2025 22:06:24 +0500</lastBuildDate>
     <atom:link href="http://localhost:1313/Portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Client1</title>
+      <link>http://localhost:1313/Portfolio/clients/client1/</link>
+      <pubDate>Mon, 10 Feb 2025 22:06:24 +0500</pubDate>
+      <guid>http://localhost:1313/Portfolio/clients/client1/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Test</title>
       <link>http://localhost:1313/Portfolio/docs/test/</link>
