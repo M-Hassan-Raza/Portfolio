@@ -1,5 +1,62 @@
 baseURL: "https://m-hassan-raza.github.io/Portfolio/"
-title: PortFolio
-theme: PaperMod
+title: "Muhammad Hassan Raza | Portfolio"
+theme: "PaperMod"
 defaultContentLanguage: "en"
 languageCode: "en-us"
+
+# Enable content for the homepage
+params:
+  homeInfoParams:
+    Title: "👋 Welcome to My Portfolio"
+    Content: "I’m a **Software Engineer, Teacher, and Product Developer** specializing in building scalable applications and solving complex problems."
+
+  # Show blog posts on the homepage (if any)
+  mainSections: ["blog"]
+
+  # Enable search and archive pages
+  ShowReadingTime: true
+  ShowBreadCrumbs: true
+  ShowToc: true
+  ShowCodeCopyButtons: true
+
+  # Profile avatar and social links
+  profileMode:
+    enabled: true
+    title: "Muhammad Hassan Raza"
+    subtitle: "Software Engineer | Teacher | Product Developer"
+    imageUrl: "images/profile.jpg"
+    imageTitle: "Profile Image"
+    buttons:
+      - name: "📂 Projects"
+        url: "/projects/"
+      - name: "✍ Blog"
+        url: "/blog/"
+      - name: "📬 Contact"
+        url: "/contact/"
+
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/m-hassan-raza"
+    - name: "linkedin"
+      url: "https://linkedin.com/in/your-link"
+    - name: "email"
+      url: "mailto:raihassanraza10@gmail.com"
+
+menu:
+  main:
+    - identifier: "about"
+      name: "About"
+      url: "/about/"
+      weight: 1
+    - identifier: "projects"
+      name: "Projects"
+      url: "/projects/"
+      weight: 2
+    - identifier: "blog"
+      name: "Blog"
+      url: "/blog/"
+      weight: 3
+    - identifier: "contact"
+      name: "Contact"
+      url: "/contact/"
+      weight: 4

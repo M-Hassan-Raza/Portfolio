@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Client1 | PortFolio</title>
+<title>Client1 | Muhammad Hassan Raza | Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="Client1 - PortFolio">
+<meta name="description" content="Client1 - Muhammad Hassan Raza | Portfolio">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/Portfolio/clients/client1/">
 <link crossorigin="anonymous" href="/Portfolio/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
@@ -73,7 +73,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/Portfolio/" accesskey="h" title="PortFolio (Alt + H)">PortFolio</a>
+            <a href="http://localhost:1313/Portfolio/" accesskey="h" title="Muhammad Hassan Raza | Portfolio (Alt + H)">Muhammad Hassan Raza | Portfolio</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -98,6 +98,26 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/Portfolio/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Portfolio/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Portfolio/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Portfolio/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -105,14 +125,15 @@
 
 <article class="post-single">
   <header class="post-header">
-    
+    <div class="breadcrumbs"><a href="http://localhost:1313/Portfolio/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/Portfolio/clients/">Clients</a></div>
     <h1 class="post-title entry-hint-parent">
       Client1
     </h1>
-    <div class="post-meta"><span title='2025-02-10 22:06:24 +0500 +05'>February 10, 2025</span>
+    <div class="post-meta"><span title='2025-02-10 22:06:24 +0500 +05'>February 10, 2025</span>&nbsp;·&nbsp;0 min
 
 </div>
   </header> 
+
 
   <footer class="post-footer">
     <ul class="post-tags">
@@ -122,7 +143,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/Portfolio/">PortFolio</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/Portfolio/">Muhammad Hassan Raza | Portfolio</a></span> · 
 
     <span>
         Powered by
@@ -189,6 +210,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
