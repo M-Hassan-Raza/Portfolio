@@ -1,4 +1,4 @@
-baseURL: "https://m-hassan-raza.github.io/portfolio/"
+baseURL = "https://m-hassan-raza.github.io/Portfolio/"
 title: PortFolio
 theme: PaperMod
 defaultContentLanguage: "en"
