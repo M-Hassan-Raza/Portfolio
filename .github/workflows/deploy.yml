@@ -15,13 +15,6 @@ jobs:
           submodules: true
           recursive: true
 
-      - name: Checkout destination
-        uses: actions/checkout@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          ref: gh-pages
-          path: built-site
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -29,7 +22,9 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify
+        run: |
+          hugo --minify
+          touch public/.nojekyll  # Prevents GitHub Pages from using Jekyll
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
