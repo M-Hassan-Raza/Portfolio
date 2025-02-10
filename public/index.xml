@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PortFolio</title>
-    <link>http://localhost:5153/portfolio/</link>
+    <link>http://localhost:1313/Portfolio/</link>
     <description>Recent content on PortFolio</description>
     <generator>Hugo -- 0.143.1</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 10 Feb 2025 17:49:26 +0500</lastBuildDate>
-    <atom:link href="http://localhost:5153/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/Portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Test</title>
-      <link>http://localhost:5153/portfolio/docs/test/</link>
+      <link>http://localhost:1313/Portfolio/docs/test/</link>
       <pubDate>Mon, 10 Feb 2025 17:49:26 +0500</pubDate>
-      <guid>http://localhost:5153/portfolio/docs/test/</guid>
+      <guid>http://localhost:1313/Portfolio/docs/test/</guid>
       <description>&lt;h3 id=&#34;this-is-a-test-page-for-my-portfolio&#34;&gt;This is a test page for my portfolio&lt;/h3&gt;
 &lt;p&gt;This is a test page!&lt;/p&gt;</description>
     </item>
