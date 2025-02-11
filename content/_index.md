@@ -5,13 +5,7 @@ description: "Software Engineer, Teacher, and Product Developer specializing in 
 
 ## Welcome to My Portfolio  
 
-I'm **Muhammad Hassan Raza**, a **Software Engineer, Product Developer, and Teacher** with expertise in building high-performance applications. I specialize in:  
-- **Full-Stack Development** (VueJS, Django, PostgreSQL)  
-- **Scalable POS & E-Commerce Systems**  
-- **Optimizing UI/UX for High-Performance Apps**  
-- **Teaching & Mentorship in Software Engineering**  
-
-**Looking for a robust solution?** [Contact Me](/contact/)  
+I'm **Muhammad Hassan Raza**, a **Software Engineer, Product Developer, and Teacher** with expertise in building high-performance applications. 
 
 ## What I Do  
 
@@ -28,8 +22,6 @@ I focus on **scalability, efficiency, and performance** in my development proces
 ### API & Backend Development  
 - Developed **high-performance Django APIs** with structured logging and security measures.  
 - Optimized database queries in **PostgreSQL** for faster data processing.  
-
-[Let's Talk](/contact/)
 
 ## Featured Projects  
 
@@ -51,9 +43,8 @@ Built with **Hugo + PaperMod**, this portfolio showcases my work, skills, and bl
 
 ## What People Say  
 
-**"Hassan's POS system streamlined our store operations significantly. Sales tracking has never been easier!"** – *Retail Business Owner*  
+**"Hassan's POS system streamlined our store operations significantly. Sales tracking has never been easier!"** – *Rai Inam (Local business owner)*  
 
-**"Amazing attention to detail! The UI and performance improvements Hassan made were game-changing."** – *Startup Founder*  
 
 ## Why Work With Me?  
 
