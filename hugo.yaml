@@ -24,7 +24,7 @@ params:
     enabled: true
     title: "Muhammad Hassan Raza"
     subtitle: "CEO | Software Engineer | Teacher"
-    imageUrl: "profile.png"
+    imageUrl: "profile.jpg"
     imageTitle: "Profile Image"
     buttons:
       - name: "Projects"
