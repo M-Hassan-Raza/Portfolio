@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="not-found">
+    <h1>404 - Page Not Found</h1>
+    <p>You've reached a place that doesn't exist. Maybe the page was moved, deleted, or never existed in the first place
+        (peak gaslighting).</p>
+
+    <h3>Here's what you can do:</h3>
+    <ul>
+        <li><a href="{{ " /" | relURL }}">Go back to the homepage</a> and start over.</li>
+        <li><a href="{{ " /projects/" | relURL }}">Explore my projects</a> to see my work.</li>
+        <li><a href="{{ " /contact/" | relURL }}">Contact me</a> if you need assistance.</li>
+    </ul>
+
+    <p>Or you can stay here and ponder the orb. The choice is yours.</p>
+</div>
+{{ end }}
