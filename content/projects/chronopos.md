@@ -5,6 +5,7 @@ description: "A powerful and scalable Point of Sale (POS) system built with VueJ
 tags: ["POS", "Retail", "Billing", "Business"]
 categories: ["Products"]
 showToc: true
+showReadingTime: false
 ---
 
 # ChronoPOS - The Ultimate POS System
