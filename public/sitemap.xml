@@ -17,6 +17,40 @@
     <loc>http://localhost:1313/Portfolio/docs/test/</loc>
     <lastmod>2025-02-10T17:49:26+05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/billing/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/business/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/Portfolio/categories/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/hugo/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/projects/portfolio-site/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/papermod/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/portfolio/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/pos/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/projects/posium/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/categories/products/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/categories/projects/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Portfolio/tags/retail/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url>
 </urlset>
