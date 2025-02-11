@@ -9,6 +9,10 @@ params:
   homeInfoParams:
     Title: "👋 Welcome to My Portfolio"
     Content: "I'm a **Software Engineer, Teacher, and Product Developer** specializing in building scalable applications and solving complex problems."
+  assets:
+    favicon: "assets/favicon.ico"
+    favicon16x16: "assets/favicon.ico" 
+    favicon32x32: "assets/favicon.ico" 
 
   # Show blog posts on the homepage (if any)
   mainSections: ["blog"]
