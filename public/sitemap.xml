@@ -2,63 +2,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:1313/Portfolio/</loc>
     <lastmod>2025-02-10T22:06:30+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/clients/client1/</loc>
+    <loc>http://localhost:1313/Portfolio/clients/client1/</loc>
     <lastmod>2025-02-10T22:06:24+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/clients/</loc>
+    <loc>http://localhost:1313/Portfolio/clients/</loc>
     <lastmod>2025-02-10T22:06:24+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/</loc>
+    <loc>http://localhost:1313/Portfolio/docs/</loc>
     <lastmod>2025-02-10T17:49:26+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/test/</loc>
+    <loc>http://localhost:1313/Portfolio/docs/test/</loc>
     <lastmod>2025-02-10T17:49:26+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/billing/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/billing/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/business/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/business/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:1313/Portfolio/categories/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/hugo/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/portfolio-site/</loc>
+    <loc>http://localhost:1313/Portfolio/projects/portfolio-site/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/papermod/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/papermod/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/portfolio/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/portfolio/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/pos/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/pos/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/posium/</loc>
+    <loc>http://localhost:1313/Portfolio/projects/posium/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/products/</loc>
+    <loc>http://localhost:1313/Portfolio/categories/products/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/projects/</loc>
+    <loc>http://localhost:1313/Portfolio/categories/projects/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/</loc>
+    <loc>http://localhost:1313/Portfolio/projects/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/retail/</loc>
+    <loc>http://localhost:1313/Portfolio/tags/retail/</loc>
     <lastmod>2025-02-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://localhost:1313/Portfolio/about/</loc>
     <lastmod>2024-01-28T12:00:00+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/about/</loc>
+    <loc>http://localhost:1313/Portfolio/about/about/</loc>
   </url>
 </urlset>
