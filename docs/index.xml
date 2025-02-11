@@ -1,2 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docs on Muhammad Hassan Raza</title><link>https://mhassan.dev/docs/</link><description>Recent content in Docs on Muhammad Hassan Raza</description><generator>Hugo -- 0.143.1</generator><language>en-us</language><lastBuildDate>Mon, 10 Feb 2025 17:49:26 +0500</lastBuildDate><atom:link href="https://mhassan.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Test</title><link>https://mhassan.dev/docs/test/</link><pubDate>Mon, 10 Feb 2025 17:49:26 +0500</pubDate><guid>https://mhassan.dev/docs/test/</guid><description>&lt;h3 id="this-is-a-test-page-for-my-portfolio">This is a test page for my portfolio&lt;/h3>
-&lt;p>This is a test page!&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Docs on Muhammad Hassan Raza</title>
+    <link>http://localhost:1313/docs/</link>
+    <description>Recent content in Docs on Muhammad Hassan Raza</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/docs/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
