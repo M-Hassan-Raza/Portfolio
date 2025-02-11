@@ -10,7 +10,6 @@ menu:
   main:
     weight: 50
 ---
-```
 
 # Get in Touch  
 
@@ -21,7 +20,7 @@ For **software development services, consultations, or collaborations**, reach o
 
 📩 **Email**: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)  
 🌐 **Portfolio**: [mhassan.dev](https://mhassan.dev/)  
-💼 **LinkedIn**: [linkedin.com/in/mhassanraza](#)  
+💼 **LinkedIn**: [linkedin.com/in/hassanraza22](linkedin.com/in/hassanraza22)  
 
 ## Support & Assistance  
 If you are a **ChronoPOS user** or need assistance with a project, feel free to contact me for:  
@@ -32,6 +31,3 @@ If you are a **ChronoPOS user** or need assistance with a project, feel free to 
 ## Let's Work Together  
 If you have an idea or project that could benefit from **secure, efficient, and scalable software**, I'd love to hear about it. Whether it's **business automation, inventory management, or e-commerce solutions**, let's build something great together.
 
-📅 **Schedule a Call**: _(Insert link if you use Calendly or similar booking services)_  
-
----
