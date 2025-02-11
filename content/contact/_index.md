@@ -18,9 +18,9 @@ Whether you're interested in **ChronoPOS**, need a **custom software solution**,
 ## Business Inquiries  
 For **software development services, consultations, or collaborations**, reach out via email or LinkedIn. I specialize in **scalable web applications, POS systems, and business automation**.
 
-📩 **Email**: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)  
-🌐 **Portfolio**: [mhassan.dev](https://mhassan.dev/)  
-💼 **LinkedIn**: [linkedin.com/in/hassanraza22](linkedin.com/in/hassanraza22)  
+**Email**: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)  
+**Portfolio**: [mhassan.dev](https://mhassan.dev/)  
+**LinkedIn**: [linkedin.com/in/hassanraza22](linkedin.com/in/hassanraza22)  
 
 ## Support & Assistance  
 If you are a **ChronoPOS user** or need assistance with a project, feel free to contact me for:  
