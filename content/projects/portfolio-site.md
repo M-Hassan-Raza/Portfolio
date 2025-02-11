@@ -7,18 +7,34 @@ categories: ["Projects"]
 showToc: true
 ---
 
-## 🌐 My Portfolio Website
+## My Portfolio Website
 
-This website is a **one-stop showcase of my expertise, projects, and experience**. Built with **Hugo and the PaperMod theme**, it is fast, lightweight, and easily customizable.
+This website serves as a comprehensive showcase of my expertise, projects, and experience. It is built with Hugo and the PaperMod theme, offering a fast, lightweight, and easily customizable solution.
 
-### 🚀 Features
-✅ **Minimalist & Fast** - Built with Hugo  
-✅ **Easy Navigation** - Clean UI with PaperMod  
-✅ **Blog & Projects Section** - Showcases my work effectively  
-✅ **Deployed on GitHub Pages** - Free and reliable hosting  
+### Key Features
 
-### 📸 Preview
-![Portfolio Screenshot](/images/portfolio-preview.png)
+- **Minimalist and Fast**: Developed with Hugo to ensure quick load times and an efficient design.
+- **Intuitive Navigation**: Utilizes the clean layout of PaperMod for an optimal user experience.
+- **Integrated Blog and Projects Section**: Effectively presents my work, including detailed project pages and blog posts.
+- **Reliable Deployment**: Hosted on GitHub Pages for stable and cost-effective performance.
+- **Comments Integration with Gisqus**: Provides a cost-effective commenting system that limits participation to GitHub users. Gisqus also offers improved moderation controls, reduced spam, and seamless GitHub integration for a more secure and streamlined user experience.
 
-### 🌍 View Live
-🔗 [Visit My Portfolio](https://m-hassan-raza.github.io/Portfolio/)
+### Detailed Overview
+
+The portfolio website is designed with both form and function in mind. Its key components include:
+
+1. **Responsive Design**: The site adapts seamlessly across devices, ensuring a great viewing experience on desktops, tablets, and mobile devices.
+2. **SEO Optimization**: Built according to SEO best practices to improve search engine visibility.
+3. **Customizable Layout**: Easily modified to add new sections or features as my portfolio evolves.
+4. **Performance Optimization**: Static site generation with Hugo ensures high performance and minimal load times.
+
+### Preview
+
+Below is a screenshot preview of the portfolio website:
+
+![Portfolio Screenshot](/assets/portfolio.png)
+
+### Live Demo
+
+To view the live version of the portfolio website, please visit:
+[Visit My Portfolio](https://mhassan.dev/)
