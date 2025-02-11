@@ -6,6 +6,7 @@ tags: ["POS", "Retail", "Billing", "Business"]
 categories: ["Products"]
 showToc: true
 showReadingTime: false
+comments: true
 ---
 
 # ChronoPOS - The Ultimate POS System
