@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ChronoPOS - The Ultimate POS System</title>
-      <link>https://mhassan.dev/projects/chronopos/</link>
+      <link>http://localhost:1313/projects/chronopos/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>https://mhassan.dev/projects/chronopos/</guid>
+      <guid>http://localhost:1313/projects/chronopos/</guid>
       <description>A powerful and scalable Point of Sale (POS) system built with VueJS, Django, and PostgreSQL.</description>
     </item>
     <item>
