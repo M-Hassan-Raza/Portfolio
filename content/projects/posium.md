@@ -7,17 +7,17 @@ categories: ["Products"]
 showToc: true
 ---
 
-## 🏪 POSium - The Ultimate POS System
+## POSium - The Ultimate POS System
 
 POSium is a **feature-rich Point of Sale system** designed for **hardware stores, supermarkets, and retail businesses**. It offers seamless **inventory management, invoicing, and customer tracking**.
 
-### 🔥 Features
+### Features
 ✅ **Fast & Scalable** - Built with VueJS + Django + PostgreSQL  
 ✅ **Inventory Tracking** - Low stock alerts and supplier management  
 ✅ **Customizable Reports** - Get insights into sales & profits  
 ✅ **Multi-User Support** - Manage staff with role-based permissions  
 
-### 📸 Screenshots
+### Screenshots
 ![POSium Dashboard](/images/posium-dashboard.png)
 
 ### 🚀 Get POSium
