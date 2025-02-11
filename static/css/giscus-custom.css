@@ -1,78 +1,13 @@
-/* Giscus Comments - Papermod-themed */
+/* Adjust the width of the giscus comment box */
 .giscus {
-    max-width: var(--main-width);
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px 20px;
+    padding: 20px;
 }
 
+/* Add padding and background color to the comment box */
 .giscus-frame {
-    background-color: var(--theme);
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-}
-
-/* Match Papermod's code block styling for input */
-.giscus .input-area textarea {
-    background-color: var(--code-bg) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 4px;
-    padding: 0.8rem !important;
-    font-family: var(--font-mono);
-}
-
-/* Reaction buttons styling */
-.giscus-reactions {
-    background: var(--code-bg);
-    border-radius: 4px;
-    padding: 0.5rem !important;
-}
-
-/* Comment text colors */
-.giscus .comment-body {
-    color: var(--content);
-}
-
-.giscus .markdown {
-    color: var(--content) !important;
-}
-
-/* Match Papermod's link colors */
-.giscus a {
-    color: var(--primary) !important;
-}
-
-.giscus a:hover {
-    color: var(--primary-hover) !important;
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-    .giscus-frame {
-        background-color: var(--darkmode-bg);
-        border-color: var(--darkmode-border);
-    }
-    
-    .giscus .input-area textarea {
-        background-color: var(--darkmode-code-bg) !important;
-        border-color: var(--darkmode-border) !important;
-        color: var(--darkmode-content);
-    }
-    
-    .giscus .markdown {
-        color: var(--darkmode-content) !important;
-    }
-}
-
-/* Match Papermod's button styling */
-.giscus .btn {
-    background: var(--secondary) !important;
-    border: 1px solid var(--border) !important;
-    color: var(--content) !important;
-    border-radius: 4px !important;
-    padding: 5px 12px !important;
-}
-
-.giscus .btn:hover {
-    background: var(--tertiary) !important;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
 }

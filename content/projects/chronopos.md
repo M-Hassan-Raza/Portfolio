@@ -49,7 +49,7 @@ Detailed reports for analyzing revenue, transactions, and customer behavior.
 
 ## Get ChronoPOS for Your Business
 
-ChronoPOS has processed over **₹68 million in transactions**, helping businesses improve efficiency and accuracy. To see it in action or request a demo, **reach out today**.
+ChronoPOS has processed over **Rs. 68 million in transactions**, helping businesses improve efficiency and accuracy. To see it in action or request a demo, **reach out today**.
 
 📩 Contact: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)
 
