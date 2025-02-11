@@ -8,5 +8,4 @@ cascade:
   showToc: true
   showBreadCrumbs: true
   showReadingTime: true
-type: "list"
 ---
