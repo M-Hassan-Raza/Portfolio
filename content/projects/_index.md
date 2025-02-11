@@ -8,8 +8,5 @@ cascade:
   showToc: true
   showBreadCrumbs: true
   showReadingTime: true
+type: "list"
 ---
-
-## My Projects  
-
-Interested in working together? **[Get in touch](/contact/)**.  
