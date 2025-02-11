@@ -44,5 +44,12 @@
       <guid>http://localhost:1313/Portfolio/about/about/</guid>
       <description></description>
     </item>
+    <item>
+      <title>404 - Page Not Found</title>
+      <link>http://localhost:1313/Portfolio/404/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Portfolio/404/</guid>
+      <description>This page doesn’t exist, but hey, at least you found this message.</description>
+    </item>
   </channel>
 </rss>
