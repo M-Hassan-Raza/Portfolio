@@ -22,7 +22,7 @@ jobs:
           extended: true
       - name: Build
         run: |
-          hugo --baseURL=https://m-hassan-raza.github.io/Portfolio/ --minify
+          hugo --minify
           touch public/.nojekyll
       - name: Deploy
         if: github.ref == 'refs/heads/main'
