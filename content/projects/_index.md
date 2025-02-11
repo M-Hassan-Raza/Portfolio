@@ -14,13 +14,13 @@ cascade:
 
 Here are some of the key projects I've worked on:
 
-### [ChronoPOS - The Ultimate POS System](/projects/ChronoPOS/)
+### [ChronoPOS - The Ultimate POS System](/projects/chronopos/)
 A **feature-rich POS system** designed for hardware stores, supermarkets, and retail businesses.  
 ✅ **VueJS + Django + PostgreSQL**  
 ✅ **Inventory Tracking, Sales, and Invoicing**  
 ✅ **Multi-User Role Management**  
 
-🔗 [Learn More](/projects/ChronoPOS/)
+🔗 [Learn More](/projects/chronopos/)
 
 ---
 
