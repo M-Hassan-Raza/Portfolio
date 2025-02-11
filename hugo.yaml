@@ -10,6 +10,7 @@ params:
     Title: "👋 Welcome to My Portfolio"
     Content: "I'm a **Software Engineer, Teacher, and Product Developer** specializing in building scalable applications and solving complex problems."
   assets:
+    disableHLJS: true
     favicon: "assets/favicon.ico"
     favicon16x16: "assets/favicon.ico" 
     favicon32x32: "assets/favicon.ico" 
