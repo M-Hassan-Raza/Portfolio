@@ -6,9 +6,6 @@ summary: "Reach out for business inquiries, project collaborations, or support f
 showToc: true
 showBreadCrumbs: true
 showReadingTime: false
-menu:
-  main:
-    weight: 50
 ---
 
 # Get in Touch  
