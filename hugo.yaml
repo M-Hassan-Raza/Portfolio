@@ -24,7 +24,7 @@ params:
     enabled: true
     title: "Muhammad Hassan Raza"
     subtitle: "Software Engineer | Teacher | Product Developer"
-    imageUrl: "images/profile.jpg"
+    imageUrl: "profile.jpg"
     imageTitle: "Profile Image"
     buttons:
       - name: "📂 Projects"
