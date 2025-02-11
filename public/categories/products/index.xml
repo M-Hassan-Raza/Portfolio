@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 10 Feb 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/products/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>POSium - The Ultimate POS System</title>
-      <link>http://localhost:1313/projects/posium/</link>
+      <title>ChronoPOS - The Ultimate POS System</title>
+      <link>http://localhost:1313/projects/ChronoPOS/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/posium/</guid>
+      <guid>http://localhost:1313/projects/ChronoPOS/</guid>
       <description>A powerful and scalable Point of Sale (POS) system built with VueJS, Django, and PostgreSQL.</description>
     </item>
   </channel>

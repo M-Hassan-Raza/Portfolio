@@ -1,5 +1,5 @@
 ---
-title: "POSium - The Ultimate POS System"
+title: "ChronoPOS - The Ultimate POS System"
 date: 2025-02-10
 description: "A powerful and scalable Point of Sale (POS) system built with VueJS, Django, and PostgreSQL."
 tags: ["POS", "Retail", "Billing", "Business"]
@@ -7,9 +7,9 @@ categories: ["Products"]
 showToc: true
 ---
 
-## POSium - The Ultimate POS System
+## ChronoPOS - The Ultimate POS System
 
-POSium is a **feature-rich Point of Sale system** designed for **hardware stores, supermarkets, and retail businesses**. It offers seamless **inventory management, invoicing, and customer tracking**.
+ChronoPOS is a **feature-rich Point of Sale system** designed for **hardware stores, supermarkets, and retail businesses**. It offers seamless **inventory management, invoicing, and customer tracking**.
 
 ### Features
 ✅ **Fast & Scalable** - Built with VueJS + Django + PostgreSQL  
@@ -18,7 +18,7 @@ POSium is a **feature-rich Point of Sale system** designed for **hardware stores
 ✅ **Multi-User Support** - Manage staff with role-based permissions  
 
 ### Screenshots
-![POSium Dashboard](/images/posium-dashboard.png)
+![ChronoPOS Dashboard](/images/ChronoPOS-dashboard.png)
 
-### 🚀 Get POSium
+### 🚀 Get ChronoPOS
 📩 Contact me at [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com) for a demo.

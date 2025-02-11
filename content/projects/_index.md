@@ -1,7 +1,7 @@
 ---
 title: "Projects"
 date: 2025-02-10
-description: "A showcase of my best projects, including POSium and my portfolio website."
+description: "A showcase of my best projects, including ChronoPOS and my portfolio website."
 summary: "Explore the products and projects I have built, from scalable POS systems to sleek portfolio websites."
 showToc: true
 cascade:
@@ -14,13 +14,13 @@ cascade:
 
 Here are some of the key projects I've worked on:
 
-### [POSium - The Ultimate POS System](/projects/posium/)
+### [ChronoPOS - The Ultimate POS System](/projects/ChronoPOS/)
 A **feature-rich POS system** designed for hardware stores, supermarkets, and retail businesses.  
 ✅ **VueJS + Django + PostgreSQL**  
 ✅ **Inventory Tracking, Sales, and Invoicing**  
 ✅ **Multi-User Role Management**  
 
-🔗 [Learn More](/projects/posium/)
+🔗 [Learn More](/projects/ChronoPOS/)
 
 ---
 

@@ -9,7 +9,7 @@ homeInfoParams:
 I have a **BSSE** and am currently pursuing **MSCS** while working as a **Senior Frontend Developer**. I specialize in **VueJS, Django, PostgreSQL**, and performance optimization.
 
 ## 💼 Featured Projects
-- **[POSium](/projects/posium/)**: A powerful POS system for businesses.  
+- **[ChronoPOS](/projects/ChronoPOS/)**: A powerful POS system for businesses.  
 - **[E-commerce Store](/projects/ecommerce/)**: A hardware store platform for managing inventory & sales.  
 - **[Portfolio Site](/projects/portfolio-site/)**: This very website built with Hugo & PaperMod.  
 
