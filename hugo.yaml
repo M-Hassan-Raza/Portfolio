@@ -23,15 +23,15 @@ params:
   profileMode:
     enabled: true
     title: "Muhammad Hassan Raza"
-    subtitle: "Software Engineer | Teacher | Product Developer"
+    subtitle: "CEO | Software Engineer | Teacher"
     imageUrl: "profile.jpg"
     imageTitle: "Profile Image"
     buttons:
-      - name: "📂 Projects"
+      - name: "Projects"
         url: "/projects/"
-      - name: "✍ Blog"
+      - name: "Blog"
         url: "/blog/"
-      - name: "📬 Contact"
+      - name: "Contact"
         url: "/contact/"
 
   socialIcons:
