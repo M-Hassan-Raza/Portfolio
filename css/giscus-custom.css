@@ -1,0 +1,13 @@
+/* Adjust the width of the giscus comment box */
+.giscus {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Add padding and background color to the comment box */
+.giscus-frame {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
