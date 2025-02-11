@@ -38,7 +38,7 @@ ChronoPOS is a **comprehensive Point of Sale system** designed for **hardware st
 ### Dashboard
 A clean, intuitive interface that provides real-time insights into business performance.
 
-![ChronoPOS Dashboard](/images/ChronoPOS-dashboard.png)
+![ChronoPOS Dashboard](/assets/dashboard.png)
 
 ### Sales & Reports
 Detailed reports for analyzing revenue, transactions, and customer behavior.
