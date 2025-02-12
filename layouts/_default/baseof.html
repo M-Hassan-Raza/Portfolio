@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
+
+<head>
+    {{- partial "head.html" . }}
+</head>
+
+<body class="{{ if .Site.Params.defaultTheme }}{{ .Site.Params.defaultTheme }}{{ end }}"
+    id="top">
+    {{- partialCached "header.html" . .Page -}}
+    <main class="main">
+        {{- block "main" . }}{{ end }}
+    </main>
+    {{ if .Site.Params.ShowFooter | default true }}
+    {{- partial "footer.html" . }}
+    {{ end }}
+</body>
+
+</html>

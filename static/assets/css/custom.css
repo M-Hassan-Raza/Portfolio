@@ -1,0 +1,11 @@
+/* Custom styles for the site */
+.giscus-comments {
+    max-width: 750px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Add space between comments and footer */
+.giscus-comments + footer {
+    margin-top: 2rem;
+}
