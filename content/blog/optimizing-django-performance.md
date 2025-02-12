@@ -8,7 +8,7 @@ showBreadCrumbs: true
 showReadingTime: true
 showComments: true
 cover:
-    image: "/assets/postgresql.png"
+    image: "/assets/db.jpg"
     alt: "PostgreSQL Database"
     caption: "Optimizing Django Performance for a POS System"
     relative: false
