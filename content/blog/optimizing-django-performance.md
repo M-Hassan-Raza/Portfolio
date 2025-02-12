@@ -9,6 +9,14 @@ showReadingTime: true
 showComments: true
 ---
 
+<figure>
+  <img src="assets/postgresql.png" alt="Postgresql Database" loading="lazy">
+  <figcaption>
+    Photo by courtesy of PostgreSQL Official Wiki
+  </figcaption>
+</figure>
+
+
 ### Background
 Building a POS system that handles inventory, sales, and real-time reporting presented multiple performance bottlenecks. With a PostgreSQL database and a Django backend, early performance issues arose due to inefficient query patterns, redundant updates, and excessive database hits.
 
