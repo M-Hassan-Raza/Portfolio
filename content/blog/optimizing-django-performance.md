@@ -7,14 +7,12 @@ showToc: true
 showBreadCrumbs: true
 showReadingTime: true
 showComments: true
+cover:
+    image: "/assets/postgresql.png"
+    alt: "PostgreSQL Database"
+    caption: "Optimizing Django Performance for a POS System"
+    relative: false
 ---
-
-<figure>
-  <img src="assets/postgresql.png" alt="Postgresql Database" loading="lazy">
-  <figcaption>
-    Photo by courtesy of PostgreSQL Official Wiki
-  </figcaption>
-</figure>
 
 
 ### Background
