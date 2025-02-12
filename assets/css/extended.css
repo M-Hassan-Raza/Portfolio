@@ -1,0 +1,25 @@
+/* Custom styles for Giscus comments */
+.giscus-container {
+    max-width: var(--post-width);
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* Ensure the iframe itself is contained */
+.giscus-frame {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Add space between comments and footer */
+.giscus-container + footer {
+    margin-top: 2rem;
+}
+
+/* Ensure comments stay within content width on mobile */
+@media screen and (max-width: 768px) {
+    .giscus-container {
+        padding: 15px;
+    }
+}

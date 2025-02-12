@@ -1,0 +1,71 @@
+{{- define "main" }}
+<article class="post-single">
+    <header class="post-header">
+        {{- partial "breadcrumbs.html" . }}
+        <h1 class="post-title">
+            {{ .Title }}
+            {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+        </h1>
+        {{- if .Description }}
+        <div class="post-description">
+            {{ .Description }}
+        </div>
+        {{- end }}
+        {{- if not (.Param "hideMeta") }}
+        <div class="post-meta">
+            {{- partial "post_meta.html" . -}}
+        </div>
+        {{- end }}
+    </header>
+    {{- $isHidden := .Params.cover.hidden | default site.Params.cover.hiddenInSingle | default site.Params.cover.hidden }}
+    {{- partial "cover.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
+    {{- if (.Param "ShowToc") }}
+    {{- partial "toc.html" . }}
+    {{- end }}
+
+    <div class="post-content">
+        {{- if not (.Param "disableAnchoredHeadings") }}
+        {{- partial "anchored_headings.html" .Content -}}
+        {{- else }}{{ .Content }}{{ end }}
+    </div>
+
+    <footer class="post-footer">
+        {{- if .Params.tags }}
+        <ul class="post-tags">
+            {{- range .Params.tags }}
+            {{- $href := print (absURL "tags/") (urlize .) }}
+            <li><a href="{{ $href }}">{{ . }}</a></li>
+            {{- end }}
+        </ul>
+        {{- end }}
+        
+        {{- if (.Param "ShowPostNavLinks") }}
+        {{- partial "post_nav_links.html" . }}
+        {{- end }}
+    </footer>
+
+    {{- if (.Param "showComments") }}
+    <div class="giscus-container">
+        <script src="https://giscus.app/client.js" 
+            data-repo="M-Hassan-Raza/Portfolio" 
+            data-repo-id="R_kgDON3Oajw"
+            data-category="General" 
+            data-category-id="DIC_kwDON3Oaj84Cm3y9" 
+            data-mapping="pathname" 
+            data-strict="0"
+            data-reactions-enabled="1" 
+            data-emit-metadata="0" 
+            data-input-position="bottom" 
+            data-theme="preferred_color_scheme"
+            data-lang="en" 
+            crossorigin="anonymous" 
+            async>
+        </script>
+    </div>
+    {{- end }}
+</article>
+
+{{- if (.Param "ShowFooter") }}
+{{- partial "footer.html" . }}
+{{- end }}
+{{- end }}
