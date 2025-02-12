@@ -5,6 +5,7 @@ description: "Discover how preloading data on page load enhances performance and
 tags: ["Performance", "Data Preloading", "Invoice System", "Web Development"]
 categories: ["Performance", "Web Development"]
 showToc: true
+showComments: true
 ---
 
 ## Introduction
