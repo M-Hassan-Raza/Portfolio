@@ -1,14 +1,32 @@
 {{- define "main" }}
+
 {{- if .Site.Params.profileMode.enabled }}
 <div class="profile">
     {{- partial "index_profile.html" . }}
 </div>
 {{- end }}
+
 <div class="post-content">
     {{- if .Content }}
         {{ .Content }}
     {{- end }}
 </div>
+
+<!-- {{- if site.Params.homeInfoParams }}
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content">
+        {{ .Content | markdownify }}
+    </div>
+    <footer class="entry-footer">
+        {{- partial "social_icons.html" site.Params }}
+    </footer>
+</article>
+{{- end }}
+{{- end }} -->
 
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- if .Site.Params.ShowAllPosts }}
@@ -19,23 +37,4 @@
 {{- partial "posts.html" . }}
 {{- end }}
 
-{{- if (.Param "showComments") }}
-<div class="giscus-comments">
-    <script src="https://giscus.app/client.js" 
-        data-repo="M-Hassan-Raza/Portfolio" 
-        data-repo-id="R_kgDON3Oajw"
-        data-category="General" 
-        data-category-id="DIC_kwDON3Oaj84Cm3y9" 
-        data-mapping="pathname" 
-        data-strict="0"
-        data-reactions-enabled="1" 
-        data-emit-metadata="0" 
-        data-input-position="bottom" 
-        data-theme="preferred_color_scheme"
-        data-lang="en" 
-        crossorigin="anonymous" 
-        async>
-    </script>
-</div>
-{{- end }}
 {{- end }}
