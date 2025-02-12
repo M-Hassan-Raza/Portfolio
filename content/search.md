@@ -1,6 +1,6 @@
 ---
-title: "Search" 
-layout: "search" 
+title: "Search 🔍" 
+layout: "search"
 summary: "search"
-placeholder: "Search posts, projects, and more..."
+placeholder: "🔍 Search posts, projects, and more..."
 ---
