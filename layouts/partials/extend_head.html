@@ -1,9 +1,6 @@
 {{ $css := resources.Get "css/extended/extended.css" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
-{{ $umamiToken := getenv "UMAMI_BEACON_TOKEN" }}
-{{ if $umamiToken }}
-<!-- Umami Analytics -->
-<script defer src="https://cloud.umami.is/script.js" data-website-id="{{ $umamiToken }}"></script>
-<!-- End Umami Analytics -->
+{{ if (getenv "UMAMI_BEACON_TOKEN") }}
+<script async defer src="https://cloud.umami.is/script.js" data-website-id="{{ getenv "UMAMI_BEACON_TOKEN" }}"></script>
 {{ end }}
