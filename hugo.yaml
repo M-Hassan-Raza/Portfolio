@@ -91,3 +91,8 @@ outputs:
         - HTML
         - RSS
         - JSON # Required for search
+
+
+[security]
+  [security.funcs]
+    getenv = ['^UMAMI_BEACON_TOKEN$']
