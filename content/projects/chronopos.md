@@ -42,6 +42,7 @@ A clean, intuitive interface that provides real-time insights into business perf
 
 ![ChronoPOS Dashboard](/assets/dashboard.png)
 
+
 ### Product Database
 Efficiently manage products, units, and pricing with a centralized database.
 
@@ -67,9 +68,9 @@ Securely store historical transaction data and records, making it easy to retrie
 ![Archive Records](/assets/archive.png)  
 *Archive Records Display*
 
-### Product Report
+### Product Sales Report
 Generate detailed reports on product performance, inventory levels, and sales trends to drive informed business decisions.  
-![Product Report Summary](/assets/product-report.png)  
+![Product Report Summary](/assets/salesreport.png)  
 *Product Report Summary*
 
 ### Customer Record
