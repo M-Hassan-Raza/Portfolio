@@ -42,10 +42,56 @@ A clean, intuitive interface that provides real-time insights into business perf
 
 ![ChronoPOS Dashboard](/assets/dashboard.png)
 
-### Sales & Reports
-Detailed reports for analyzing revenue, transactions, and customer behavior.
+### Product Database
+Efficiently manage products, units, and pricing with a centralized database.
 
-![ChronoPOS Reports](/images/ChronoPOS-reports.png)
+![ChronoPOS Product Database](/images/productdb.png)
+
+### Returns
+Efficiently manage product returns with a streamlined process that minimizes errors and ensures proper inventory updates.  
+![Returns Interface](/assets/returns.png)  
+*Returns Module Interface*
+
+### Customer Ledger
+Access comprehensive transaction histories and maintain detailed records to improve customer management and support.  
+![Customer Ledger Overview](/assets/customer-ledger.png)  
+*Customer Ledger Overview*
+
+### Supplier Ledger
+Keep organized records of supplier transactions and interactions to facilitate smoother vendor management.  
+![Supplier Ledger Dashboard](/assets/supplier-ledger.png)  
+*Supplier Ledger Dashboard*
+
+### Archive
+Securely store historical transaction data and records, making it easy to retrieve and review past information when needed.  
+![Archive Records](/assets/archive.png)  
+*Archive Records Display*
+
+### Product Report
+Generate detailed reports on product performance, inventory levels, and sales trends to drive informed business decisions.  
+![Product Report Summary](/assets/product-report.png)  
+*Product Report Summary*
+
+### Customer Record
+Maintain a centralized repository of customer information, purchase history, and feedback to enhance service quality and engagement.  
+![Customer Record Interface](/assets/customer-record.png)  
+*Customer Record Interface*
+
+### Supply Chain
+Monitor and manage the entire supply chain process from procurement to delivery, ensuring optimal operational efficiency.  
+![Supply Chain Management](/assets/supply-chain.png)  
+*Supply Chain Management*
+
+### Notes
+Quickly add and manage notes associated with transactions and communications to support clear and consistent record keeping.  
+![Notes Section](/assets/notes.png)  
+*Notes Section*
+
+### Loyalty Program
+Implement and manage a loyalty program that tracks customer rewards and encourages repeat business through personalized offers.  
+![Loyalty Program Dashboard](/assets/loyalty-program.png)  
+*Loyalty Program Dashboard*
+
 
 ## Get ChronoPOS for Your Business
 
