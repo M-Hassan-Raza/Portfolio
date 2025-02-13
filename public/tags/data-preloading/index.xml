@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data Preloading on Muhammad Hassan Raza</title>
+    <link>http://localhost:1313/tags/data-preloading/</link>
+    <description>Recent content in Data Preloading on Muhammad Hassan Raza</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data-preloading/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advantages of Preloading Data on Page Load</title>
+      <link>http://localhost:1313/blog/preloading-data-for-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/preloading-data-for-performance/</guid>
+      <description>Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.</description>
+    </item>
+  </channel>
+</rss>
