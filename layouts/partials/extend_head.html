@@ -1,4 +1,6 @@
 {{ $css := resources.Get "css/extended/extended.css" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
-<script async src="https://cloud.umami.is/script.js" data-website-id="30c7d9d6-abac-4c52-b85a-c0234f863d22"></script>
+{{ if (getenv "UMAMI_BEACON_TOKEN") }}
+<script async defer src="https://cloud.umami.is/script.js" data-website-id="{{ getenv "UMAMI_BEACON_TOKEN" }}"></script>
+{{ end }}
