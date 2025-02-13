@@ -38,8 +38,8 @@
 .footer-links {
     text-align: center;
     padding: 1rem 0;
-    background-color: var(--footer-background, #f8f9fa);
-    border-top: 1px solid var(--border-color, #ddd);
+    background-color: var(--footer-background);
+    border-top: 1px solid var(--border-color);
     margin-top: 2rem;
 }
 
@@ -61,14 +61,14 @@
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    color: var(--text-color, #333);
+    color: var(--text-color);
     font-size: 0.9rem;
     padding: 0.5rem 0.75rem;
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .footer-links nav ul li a:hover {
-    color: var(--accent-color, #007bff);
+    color: var(--accent-color);
     background-color: rgba(0, 123, 255, 0.1);
     border-radius: 4px;
 }
