@@ -5,8 +5,6 @@ description: "Software Engineer, Teacher, and Product Developer specializing in 
 
 # Transforming Ideas into Scalable Solutions  
 
-## Muhammad Hassan Raza  
-
 A **Software Engineer, Product Developer, and Teacher** dedicated to **scalable applications, efficient systems, and seamless user experiences.**  
 
 Building high-performance solutions that drive business success and developer productivity.  
@@ -67,9 +65,3 @@ Let's build something impactful.
 [Let's Discuss Your Project](/contact/)  
 
 ---
-
-### Key Improvements Applied  
-- **More engaging headline** to immediately capture attention.  
-- **Concise and structured content** for better readability.  
-- **Stronger call-to-action** encouraging potential clients to reach out.  
-- **More personal and professional tone** while maintaining clarity.  

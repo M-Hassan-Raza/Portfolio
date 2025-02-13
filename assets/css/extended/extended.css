@@ -76,3 +76,27 @@
 .footer-links nav ul li a .menu-icon {
     margin-right: 0.5rem;
 }
+
+
+/* About page content SVG icons */
+.post-content svg {
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+    fill: var(--content);
+}
+
+/* Menu icons - preserve their original styling */
+.menu-icon {
+    height: 18px;
+    width: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
