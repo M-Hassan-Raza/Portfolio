@@ -3,7 +3,8 @@
 
 {{ $umamiToken := getenv "UMAMI_BEACON_TOKEN" }}
 {{ if $umamiToken }}
-<!-- Cloudflare Web Analytics -->
+<!-- Umami Analytics -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ $umamiToken }}"></script>
-<!-- End Cloudflare Web Analytics -->
+<!-- End Umami Analytics -->
 {{ end }}
+
