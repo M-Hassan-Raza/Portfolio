@@ -4,7 +4,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Advantages of Preloading Data on Page Load | Muhammad Hassan Raza</title>
 <meta name="keywords" content="Performance, Data Preloading, Invoice System, Web Development">
 <meta name="description" content="Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.">
@@ -60,7 +60,77 @@
 
 
 <script async src="https://cloud.umami.is/script.js" data-website-id="30c7d9d6-abac-4c52-b85a-c0234f863d22"></script>
+<meta property="og:url" content="http://localhost:1313/blog/preloading-data-for-performance/">
+  <meta property="og:site_name" content="Muhammad Hassan Raza">
+  <meta property="og:title" content="Advantages of Preloading Data on Page Load">
+  <meta property="og:description" content="Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-02-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-11T00:00:00+00:00">
+    <meta property="article:tag" content="Performance">
+    <meta property="article:tag" content="Data Preloading">
+    <meta property="article:tag" content="Invoice System">
+    <meta property="article:tag" content="Web Development">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Advantages of Preloading Data on Page Load">
+<meta name="twitter:description" content="Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.">
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blog",
+      "item": "http://localhost:1313/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Advantages of Preloading Data on Page Load",
+      "item": "http://localhost:1313/blog/preloading-data-for-performance/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Advantages of Preloading Data on Page Load",
+  "name": "Advantages of Preloading Data on Page Load",
+  "description": "Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.",
+  "keywords": [
+    "Performance", "Data Preloading", "Invoice System", "Web Development"
+  ],
+  "articleBody": "Introduction In modern web applications, speed and responsiveness are essential for a smooth user experience. One effective strategy to achieve this is preloading data when a page loads. For example, on a generate invoice page, preloading product data upon mounting ensures that users can search through products without any noticeable delay. This article explains the benefits of preloading data and includes a practical code example.\nBenefits of Preloading Data Preloading data on page load offers several key advantages:\nFaster User Interactions:\nWith the data already available in memory, functions like search can filter through products immediately, without waiting for additional network requests.\nReduced Latency:\nEliminating extra API calls during user interactions minimizes delays, leading to a more responsive interface.\nImproved Application Performance:\nBy consolidating data retrieval to the initial page load, network usage is optimized and subsequent operations become faster.\nEnhanced User Experience:\nImmediate feedback during searches and other interactions creates a smoother workflow, increasing overall user satisfaction.\nCode Example Below is a sample code snippet demonstrating how to preload product data on page load and perform a local search on an invoice page. This example uses a setup function (common in Vue.js with the Composition API) to initialize the product store, load products on mount, and filter the products based on a search query.\nsetup() { const authStore = useAuthStore(); const productStore = useProductStore(); // Initialize the product store // Define reactive references for the search query and search results const searchQuery = ref(''); const searchResults = ref([]); // Function to preload products when the page loads const loadProducts = async () =\u003e { await productStore.fetchProducts(); // Fetch the products and store them }; // Function to search products locally based on the query const searchProducts = () =\u003e { if (searchQuery.value.trim() === '') { searchResults.value = []; return; } // Filter products using local data based on the search query searchResults.value = productStore.products.filter(product =\u003e { const productName = product.name || ''; // Default to empty string if undefined const productDescription = product.description || ''; // Default to empty string if undefined return productName.toLowerCase().includes(searchQuery.value.toLowerCase()) || productDescription.toLowerCase().includes(searchQuery.value.toLowerCase()); }); }; // Preload products when the component is mounted onMounted(() =\u003e { loadProducts(); }); return { authStore, productStore, searchQuery, searchResults, searchProducts }; }, Explanation of the Code Initialization:\nThe code initializes the authentication and product stores. Reactive references searchQuery and searchResults are declared to manage the user’s search input and the results, respectively.\nPreloading Data:\nThe loadProducts function asynchronously fetches products from the product store when the component mounts. This preloading ensures that all product data is available immediately after the page loads.\nLocal Search:\nThe searchProducts function performs local filtering on the preloaded product data. If the search query is empty, it resets the results. Otherwise, it filters the product list based on whether the product’s name or description contains the search query.\nonMounted Hook:\nThe onMounted lifecycle hook calls loadProducts, ensuring that the data is fetched as soon as the component is rendered.\nConclusion Preloading data on page load is a powerful technique to enhance performance in web applications. By loading the necessary data upfront, applications can deliver instant feedback for operations such as searches, resulting in a more responsive and efficient user experience. This strategy not only reduces network latency but also improves overall performance by allowing local data operations.\nImplementing such techniques in your projects, especially in critical areas like the generate invoice page, can lead to faster interactions and a more satisfying user experience. Consider adopting preloading methods in your future projects to optimize performance and streamline data access.\n",
+  "wordCount" : "592",
+  "inLanguage": "en",
+  "datePublished": "2025-02-11T00:00:00Z",
+  "dateModified": "2025-02-11T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Muhammad Hassan Raza"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/blog/preloading-data-for-performance/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Muhammad Hassan Raza",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.svg"
+    }
+  }
+}
+</script>
 </head>
 
 <body class=""

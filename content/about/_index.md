@@ -2,9 +2,10 @@
 title: "About Me"
 date: 2024-01-28T12:00:00+05:00
 draft: false
-showBreadCrumbs: false
+ShowBreadCrumbs: false
+ShowToc: true
 ---
-I’m a **Software Engineer** and **CEO** passionate about building clean, secure, and scalable software. My mantra? **No technical debt.**  
+I’m a **CEO**, **Software Engineer**, and **Teacher** who's passionate about building clean, secure, and scalable software. My mantra? **No technical debt.**  
 
 Certainly! Here's an enhanced version of your education section, incorporating a list of courses, details about your teaching assistant experience, and placeholder sections for future additions:
 
@@ -75,25 +76,7 @@ Certainly! Here's an enhanced version of your education section, incorporating a
 | Information Security                            | CS3002       |
 | Fundamentals of Software Project Management     | SE4003       |
 
-
-### Research Experience
-
-*To be added: Details about research projects, publications, or any research assistant roles.*
-
-### Certifications
-
-*To be added: List of relevant certifications, such as professional courses, online courses, or workshops attended.*
-
-### Projects
-
-*To be added: Descriptions of significant academic or personal projects, including objectives, technologies used, and outcomes.*
-
-### Skills
-
-*To be added: A list of technical and soft skills relevant to your field.*
-
 ---
-
 
 ### Key Projects  
 
