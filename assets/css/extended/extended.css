@@ -19,21 +19,17 @@
     margin-top: auto;
 }
 
-.search-icon {
+.menu-icon {
     vertical-align: middle;
     margin-right: 2px;
     position: relative;
     bottom: 1.5px;
-}
-
-/* Optional: Add hover animation */
-.menu-item:hover .search-icon {
-    transform: scale(1.1);
     transition: transform 0.2s ease;
-}
-
-/* Add to your CSS */
-.menu-item[identifier="search"] a {
     display: inline-flex;
     align-items: center;
+}
+
+/* Optional: Add hover animation for all icons */
+.menu-item:hover .menu-icon {
+    transform: translateY(-1px);
 }
