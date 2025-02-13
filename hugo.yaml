@@ -15,9 +15,9 @@ params:
     Content: "I'm a **Software Engineer, Teacher, and Product Developer** specializing in building scalable applications and solving complex problems."
   assets:
     disableHLJS: true
-    favicon: "assets/favicon.ico"
-    favicon16x16: "assets/favicon.ico" 
-    favicon32x32: "assets/favicon.ico" 
+    favicon: assets/favicon.ico
+    favicon16x16: assets/favicon.ico
+    favicon32x32: assets/favicon.ico
 
   # Show blog posts on the homepage (if any)
   mainSections: ["blog"]
@@ -103,3 +103,8 @@ security:
       - ^POST$
     csp:
       default-src: "'self' https: 'unsafe-inline'"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
