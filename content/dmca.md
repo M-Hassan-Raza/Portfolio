@@ -4,7 +4,7 @@ date: 2025-02-12
 description: "This page outlines our DMCA policy and procedures for submitting copyright infringement notices."
 tags: ["DMCA", "Legal"]
 categories: ["Legal"]
-showToc: true
+showToc: false
 ---
 
 ## DMCA Notice
