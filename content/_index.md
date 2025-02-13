@@ -1,9 +1,9 @@
 ---
 title: "Welcome to My Portfolio"
 description: "Software Engineer, Teacher, and Product Developer specializing in building scalable applications"
+draft: false
 ---
-
-# Transforming Ideas into Scalable Solutions  
+## Transforming Ideas into Scalable Solutions  
 
 A **Software Engineer, Product Developer, and Teacher** dedicated to **scalable applications, efficient systems, and seamless user experiences.**  
 

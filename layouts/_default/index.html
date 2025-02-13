@@ -1,0 +1,22 @@
+{{- define "main" }}
+{{- if .Site.Params.profileMode.enabled }}
+<div class="profile-wrapper" style="margin-bottom: -170px; padding-bottom: -25px;">
+    {{- partial "index_profile.html" . }}
+</div>
+{{- end }}
+<article class="post-single" style="margin-top: 0; padding-top: 20px;">
+    <div class="post-content">
+        {{- if .Content }}
+            {{ .Content }}
+        {{- end }}
+    </div>
+</article>
+
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- if .Site.Params.ShowAllPosts }}
+{{- $pages = site.RegularPages }}
+{{- end }}
+{{- if .Site.Params.ShowLatestPosts }}
+{{- partial "posts.html" . }}
+{{- end }}
+{{- end }}
