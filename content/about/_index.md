@@ -12,12 +12,10 @@ I’m a **Software Engineer** and **CEO** passionate about building clean, secur
 
 ## Education & Continuous Learning  
 
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-  <path d="M12 2L2 7L12 12L22 7L12 2ZM12 17L2 12L4 11V17L12 21L20 17V11L22 12L12 17Z" fill="currentColor"/>
-</svg> Currently pursuing **MS in Computer Science** at **FAST NUCES Lahore**  
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-  <path d="M12 2L2 7L12 12L22 7L12 2ZM12 17L2 12L4 11V17L12 21L20 17V11L22 12L12 17Z" fill="currentColor"/>
-</svg> **BS in Software Engineering** (3.30 GPA)  
+- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+  <path d="M12 2L2 7L12 12L22 7L12 2ZM12 17L2 12L4 11V17L12 21L20 17V11L22 12L12 17Z" fill="currentColor"/> </svg> Currently pursuing MS in Computer Science at FAST NUCES Lahore [2024-2026] (4.0 CGPA)
+- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+  <path d="M12 2L2 7L12 12L22 7L12 2ZM12 17L2 12L4 11V17L12 21L20 17V11L22 12L12 17Z" fill="currentColor"/> </svg> BS in Software Engineering at FAST NUCES Lahore [2020-2024]  (3.30 CGPA)  
 
 ---
 
