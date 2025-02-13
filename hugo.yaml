@@ -13,11 +13,13 @@ params:
   homeInfoParams:
     Title: "👋 Welcome to My Portfolio"
     Content: "I'm a **Software Engineer, Teacher, and Product Developer** specializing in building scalable applications and solving complex problems."
+  params:
   assets:
     disableHLJS: true
-    favicon: assets/favicon.ico
-    favicon16x16: assets/favicon.ico
-    favicon32x32: assets/favicon.ico
+    extendedCSS: true
+    favicon: assets/favicon.svg
+    favicon16x16: assets/favicon.svg
+    favicon32x32: assets/favicon.svg
 
   # Show blog posts on the homepage (if any)
   mainSections: ["blog"]
@@ -32,8 +34,6 @@ params:
         enabled: true
         placeholder: "Search posts, projects, and more..."
 
-  assets:
-    extendedCSS: true
 
   # Profile avatar and social links
   profileMode:
