@@ -46,7 +46,7 @@ A clean, intuitive interface that provides real-time insights into business perf
 ### Product Database
 Efficiently manage products, units, and pricing with a centralized database.
 
-![ChronoPOS Product Database](/images/productdb.png)
+![ChronoPOS Product Database](/assets/productdb.png)
 
 ### Returns
 Efficiently manage product returns with a streamlined process that minimizes errors and ensures proper inventory updates.  
