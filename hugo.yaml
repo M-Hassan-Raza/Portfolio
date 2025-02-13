@@ -96,5 +96,10 @@ outputs:
 security:
   funcs:
     getenv:
-      - '^UMAMI_BEACON_TOKEN$'
-
+      - ^UMAMI_BEACON_TOKEN$
+  http:
+    methods:
+      - ^GET$
+      - ^POST$
+    csp:
+      default-src: "'self' https: 'unsafe-inline'"

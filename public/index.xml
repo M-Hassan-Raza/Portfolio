@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Muhammad Hassan Raza</title>
+    <title>Welcome to My Portfolio on Muhammad Hassan Raza</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on Muhammad Hassan Raza</description>
+    <description>Recent content in Welcome to My Portfolio on Muhammad Hassan Raza</description>
     <generator>Hugo -- 0.143.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Feb 2025 22:06:24 +0500</lastBuildDate>
+    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DMCA Notice</title>
+      <link>http://localhost:1313/dmca/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/dmca/</guid>
+      <description>This page outlines our DMCA policy and procedures for submitting copyright infringement notices.</description>
+    </item>
+    <item>
+      <title>Privacy Policy</title>
+      <link>http://localhost:1313/privacy-policy/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/privacy-policy/</guid>
+      <description>This Privacy Policy outlines how we collect, use, and protect your personal information on our website.</description>
+    </item>
+    <item>
+      <title>The Importance of Reusable Components for Critical Actions in VueJS</title>
+      <link>http://localhost:1313/blog/reusing-components-benefits/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/reusing-components-benefits/</guid>
+      <description>Learn why creating reusable components—such as password confirmation modals, confirmation dialogs, and consistent button elements—is essential for maintaining a uniform and user-friendly interface in VueJS applications.</description>
+    </item>
+    <item>
+      <title>Advantages of Preloading Data on Page Load</title>
+      <link>http://localhost:1313/blog/preloading-data-for-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/preloading-data-for-performance/</guid>
+      <description>Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.</description>
+    </item>
+    <item>
+      <title>Optimizing Django Performance: Lessons from a POS System</title>
+      <link>http://localhost:1313/blog/optimizing-django-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/optimizing-django-performance/</guid>
+      <description>A deep dive into optimizing Django backend performance for a POS system, covering bulk updates, caching, and efficient query handling.</description>
+    </item>
     <item>
       <title>Client1</title>
       <link>http://localhost:1313/clients/client1/</link>
@@ -31,10 +66,18 @@
     </item>
     <item>
       <title>404 - Page Not Found</title>
-      <link>http://localhost:1313/404/</link>
+      <link>http://localhost:1313/404.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/404/</guid>
-      <description>This page doesn’t exist, but hey, at least you found this message.</description>
+      <guid>http://localhost:1313/404.html</guid>
+      <description>&lt;p&gt;You&amp;rsquo;ve reached a place that doesn&amp;rsquo;t exist. Maybe the page was moved, deleted, or never existed in the first place (peak gaslighting).&lt;/p&gt;
+&lt;h3 id=&#34;heres-what-you-can-do&#34;&gt;Here&amp;rsquo;s what you can do:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/&#34;&gt;Go back to the homepage&lt;/a&gt; and start over.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/projects/&#34;&gt;Explore my projects&lt;/a&gt; to see my work.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/contact/&#34;&gt;Contact me&lt;/a&gt; if you need assistance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Or you can stay here and ponder the orb. The choice is yours.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Pondering my Orb&#34; loading=&#34;lazy&#34; src=&#34;assets/ponder.png&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

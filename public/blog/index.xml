@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blog on Muhammad Hassan Raza</title>
+    <link>http://localhost:1313/blog/</link>
+    <description>Recent content in Blog on Muhammad Hassan Raza</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Importance of Reusable Components for Critical Actions in VueJS</title>
+      <link>http://localhost:1313/blog/reusing-components-benefits/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/reusing-components-benefits/</guid>
+      <description>Learn why creating reusable components—such as password confirmation modals, confirmation dialogs, and consistent button elements—is essential for maintaining a uniform and user-friendly interface in VueJS applications.</description>
+    </item>
+    <item>
+      <title>Advantages of Preloading Data on Page Load</title>
+      <link>http://localhost:1313/blog/preloading-data-for-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/preloading-data-for-performance/</guid>
+      <description>Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.</description>
+    </item>
+    <item>
+      <title>Optimizing Django Performance: Lessons from a POS System</title>
+      <link>http://localhost:1313/blog/optimizing-django-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/optimizing-django-performance/</guid>
+      <description>A deep dive into optimizing Django backend performance for a POS system, covering bulk updates, caching, and efficient query handling.</description>
+    </item>
+  </channel>
+</rss>
