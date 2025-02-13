@@ -93,6 +93,8 @@ outputs:
         - JSON # Required for search
 
 
-[security]
-  [security.funcs]
-    getenv = ['^UMAMI_BEACON_TOKEN$']
+security:
+  funcs:
+    getenv:
+      - '^UMAMI_BEACON_TOKEN$'
+
