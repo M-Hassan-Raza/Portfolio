@@ -15,24 +15,30 @@ Certainly! Here's an enhanced version of your education section, incorporating a
   *2024 – 2026*  
   **CGPA:** 4.0
 
-  **Relevant Courses:**
+  **Select Relevant Courses:**
   - Advanced Algorithms
   - Machine Learning
   - Data Mining
   - Advanced Operating Systems
+  - Research Methodologies
 
-- **Bachelor of Science (BS) in Software Engineering**  
-  *FAST National University of Computer and Emerging Sciences (NUCES), Lahore*  
-  *2020 – 2024*  
-  **CGPA:** 3.30
+**Bachelor of Science (BS) in Software Engineering**  
+*FAST National University of Computer and Emerging Sciences (NUCES), Lahore*  
+*2020 – 2024*  
+**CGPA:** 3.30
 
-  **Relevant Courses:**
-  - Object-Oriented Programming
-  - Data Structures and Algorithms
-  - Database Systems
-  - Operating Systems
-  - Software Engineering Principles
-  - Web Development
+**Select Relevant Courses:**
+
+| Course Name                      | Course Name                         |
+|----------------------------------|-------------------------------------|
+| Advanced Database Concepts       | Internet of Things                  |
+| Computer Networks                | Operating Systems                   |
+| Data Structures and Algorithms   | Software Design and Architecture    |
+| Database Systems                 | Software for Mobile Devices         |
+| Human-Computer Interaction       | Software Project Management         |
+| Information Security             | Software Quality Engineering        |
+| Web Engineering                  | Software Construction & Development |
+
 
 ## Teaching Experience
 
