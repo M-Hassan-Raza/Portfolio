@@ -7,8 +7,6 @@ ShowToc: true
 ---
 I’m a **CEO**, **Software Engineer**, and **Teacher** who's passionate about building clean, secure, and scalable software. My mantra? **No technical debt.**  
 
-Certainly! Here's an enhanced version of your education section, incorporating a list of courses, details about your teaching assistant experience, and placeholder sections for future additions:
-
 ### Education
 
 **Master of Science (MS) in Computer Science**  
@@ -16,7 +14,7 @@ Certainly! Here's an enhanced version of your education section, incorporating a
 *2024 – 2026*  
 **CGPA:** 4.0  
 
-**Select Relevant Courses:**  
+**Relevant Courses:**  
 
 | Course Name                      | Course Name                         |
 |----------------------------------|-------------------------------------|
@@ -30,7 +28,7 @@ Certainly! Here's an enhanced version of your education section, incorporating a
 *2020 – 2024*  
 **CGPA:** 3.30  
 
-**Select Relevant Courses:**  
+**Relevant Courses:**  
 
 | Course Name                      | Course Name                         |
 |----------------------------------|-------------------------------------|
@@ -68,8 +66,8 @@ Certainly! Here's an enhanced version of your education section, incorporating a
 
 **Courses Assisted:**  
 
-| Course Name                                       | Course Code   |
-|--------------------------------------------------|--------------|
+| Course Name                                     | Course Code  |
+|-------------------------------------------------|--------------|
 | Introduction to Software Engineering            | SE110        |
 | Software Engineering                            | CS3009       |
 | Software for Mobile Devices                     | CS4039       |
