@@ -14,7 +14,7 @@ I’m a **CEO**, **Software Engineer**, and **Teacher** who's passionate about b
 *2024 – 2026*  
 **CGPA:** 4.0  
 
-**Select Relevant Courses:**  
+**Relevant Courses:**  
 
 | Course Name                      | Course Name                         |
 |----------------------------------|-------------------------------------|
@@ -28,7 +28,7 @@ I’m a **CEO**, **Software Engineer**, and **Teacher** who's passionate about b
 *2020 – 2024*  
 **CGPA:** 3.30  
 
-**Select Relevant Courses:**  
+**Relevant Courses:**  
 
 | Course Name                      | Course Name                         |
 |----------------------------------|-------------------------------------|
