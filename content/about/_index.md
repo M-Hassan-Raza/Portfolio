@@ -66,8 +66,8 @@ I’m a **CEO**, **Software Engineer**, and **Teacher** who's passionate about b
 
 **Courses Assisted:**  
 
-| Course Name                                       | Course Code   |
-|--------------------------------------------------|--------------|
+| Course Name                                     | Course Code  |
+|-------------------------------------------------|--------------|
 | Introduction to Software Engineering            | SE110        |
 | Software Engineering                            | CS3009       |
 | Software for Mobile Devices                     | CS4039       |

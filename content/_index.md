@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Welcome to My Portfolio"
 description: "Software Engineer, Teacher, and Product Developer specializing in building scalable applications"
 draft: false
@@ -64,4 +64,4 @@ Let's build something impactful.
 
 [Let's Discuss Your Project](/contact/)  
 
----
+--- -->
