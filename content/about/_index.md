@@ -7,8 +7,6 @@ ShowToc: true
 ---
 I’m a **CEO**, **Software Engineer**, and **Teacher** who's passionate about building clean, secure, and scalable software. My mantra? **No technical debt.**  
 
-Certainly! Here's an enhanced version of your education section, incorporating a list of courses, details about your teaching assistant experience, and placeholder sections for future additions:
-
 ### Education
 
 **Master of Science (MS) in Computer Science**  
