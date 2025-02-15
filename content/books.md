@@ -2,7 +2,7 @@
 title: "Books I've Read"
 date: "2025-02-15T12:00:00Z"
 draft: false
-description: "A curated list of books I've read—from literature and politics to software development classics."
+description: "A curated list of books I've read—from literature and politics to software development classics. I keep this list short for a good reason."
 slug: "books"
 menu:
   main:
