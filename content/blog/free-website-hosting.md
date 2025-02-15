@@ -1,6 +1,6 @@
 ---
 title: "How I Built My Portfolio Website with Hugo, GitHub Pages, and Free Tools"
-date: 2025-02-15
+date: 2025-02-15T14:00:00+05:00
 description: "A detailed breakdown of how I built my personal portfolio website using Hugo, GitHub Pages, free analytics, and more."
 tags: [Hugo, GitHub Pages, Portfolio, Web Development]
 ---
