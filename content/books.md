@@ -1,0 +1,69 @@
+---
+title: "Books I've Read"
+date: "2025-02-15T12:00:00Z"
+draft: false
+description: "A curated list of books I've read—from literature and politics to software development classics. I keep this list short for a good reason."
+slug: "books"
+menu:
+  main:
+    weight: 150
+---
+## Fiction & Non-Fiction
+
+### The Sole Spokesman
+{{< figure src="/assets/sole.jpg" alt="The Sole Spokesman Cover" width="200" height="300" >}}
+*Author: Ayesha Jalal*  
+> A penetrating analysis of the role of a singular spokesperson in shaping public discourse.
+
+### The Brothers Karamazov
+{{< figure src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
+*Author: Fyodor Dostoyevsky*  
+> A profound exploration of morality, faith, and the human condition.
+
+### Clash of Civilizations
+{{< figure src="/assets/clash.jpg" alt="Clash of Civilizations Cover" width="200" height="300" >}}
+*Author: Samuel P. Huntington*  
+> A provocative thesis that reshaped global political discourse in the post–Cold War era.
+
+### The Limits of Power
+{{< figure src="/assets/limitofpower.jpg" alt="The Limits of Power Cover" width="200" height="300" >}}
+*Author: Andrew J. Bacevich*  
+> A critical examination of the constraints on national power and the perils of overreach.
+
+### The Da Vinci Code
+{{< figure src="/assets/davinci.jpg" alt="The Da Vinci Code Cover" width="200" height="300" >}}
+*Author: Dan Brown*  
+> A fast-paced thriller blending art, history, and conspiracy in a modern quest for truth.
+
+### Angels & Demons
+{{< figure src="/assets/angelsdemon.jpg" alt="Angels & Demons Cover" width="200" height="300" >}}
+*Author: Dan Brown*  
+> A riveting adventure that pits ancient secrets against modern science in a battle of wits.
+
+### 1984
+{{< figure src="/assets/1984.jpg" alt="1984 Cover" width="200" height="300" >}}
+*Author: George Orwell*  
+> A chilling dystopian vision of totalitarianism that remains alarmingly relevant.
+
+---
+
+## Programming & Technical
+
+### Clean Code: A Handbook of Agile Software Craftsmanship
+{{< figure src="/assets/cleancode.jpg" alt="Clean Code Cover" width="200" height="300" >}}
+*Author: Robert C. Martin*  
+> A definitive guide to writing code that is both elegant and maintainable.
+
+### Design Patterns: Elements of Reusable Object-Oriented Software
+{{< figure src="/assets/designpatterns.jpg" alt="Design Patterns Cover" width="200" height="300" >}}
+*Authors: Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides*  
+> A seminal work introducing timeless design patterns for building flexible, reusable software.
+
+### The Clean Coder: A Code of Conduct for Professional Programmers
+{{< figure src="/assets/cleancoder.jpg" alt="The Clean Coder Cover" width="200" height="300" >}}
+*Author: Robert C. Martin*  
+> A call to professional discipline and ethical behavior that sets the standard for true craftsmanship.
+
+---
+
+
