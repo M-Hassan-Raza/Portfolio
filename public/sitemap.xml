@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-02-15T14:00:00+05:00</lastmod>
+    <lastmod>2025-02-15T15:00:00+05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/github-pages/</loc>
     <lastmod>2025-02-15T14:00:00+05:00</lastmod>
@@ -40,21 +40,6 @@
   </url><url>
     <loc>http://localhost:1313/tags/performance/</loc>
     <lastmod>2025-02-15T12:00:00+05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/av1/</loc>
-    <lastmod>2025-02-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/av1-codec-future/</loc>
-    <lastmod>2025-02-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/streaming/</loc>
-    <lastmod>2025-02-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/technology/</loc>
-    <lastmod>2025-02-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/video-codec/</loc>
-    <lastmod>2025-02-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/best-practices/</loc>
     <lastmod>2025-02-12T00:00:00+00:00</lastmod>
@@ -159,6 +144,14 @@
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
   </url><url>
+    <loc>http://localhost:1313/tags/av1/</loc>
+  </url><url>
     <loc>http://localhost:1313/search/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/streaming/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/technology/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/video-codec/</loc>
   </url>
 </urlset>
