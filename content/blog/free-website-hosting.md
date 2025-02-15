@@ -20,7 +20,7 @@ I wanted a **zero-cost, hassle-free** hosting solution, and GitHub Pages was the
 2. Configured a **GitHub Actions workflow** for automatic deployment.
 3. Set the `gh-pages` branch as the **deployment source** in GitHub Pages settings.
 
-Now, every push to my `main` branch automatically updates my live website. 🚀
+Now, every push to my `main` branch automatically updates my live website.
 
 ## Free Analytics with Umami
 Google Analytics is powerful, but I preferred something **privacy-friendly and lightweight**. Umami provides:
