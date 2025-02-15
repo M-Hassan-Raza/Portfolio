@@ -55,12 +55,12 @@ Efficiently manage product returns with a streamlined process that minimizes err
 
 ### Customer Ledger
 Access comprehensive transaction histories and maintain detailed records to improve customer management and support.  
-![Customer Ledger Overview](/assets/customer-ledger.png)  
+![Customer Ledger Overview](/assets/customerledger.png)  
 *Customer Ledger Overview*
 
 ### Supplier Ledger
 Keep organized records of supplier transactions and interactions to facilitate smoother vendor management.  
-![Supplier Ledger Dashboard](/assets/supplier-ledger.png)  
+![Supplier Ledger Dashboard](/assets/supplierledger.png)  
 *Supplier Ledger Dashboard*
 
 ### Archive
@@ -75,12 +75,12 @@ Generate detailed reports on product performance, inventory levels, and sales tr
 
 ### Customer Record
 Maintain a centralized repository of customer information, purchase history, and feedback to enhance service quality and engagement.  
-![Customer Record Interface](/assets/customer-record.png)  
+![Customer Record Interface](/assets/customerrecord.png)  
 *Customer Record Interface*
 
 ### Supply Chain
 Monitor and manage the entire supply chain process from procurement to delivery, ensuring optimal operational efficiency.  
-![Supply Chain Management](/assets/supply-chain.png)  
+![Supply Chain Management](/assets/supplychain.png)  
 *Supply Chain Management*
 
 ### Notes
@@ -90,7 +90,7 @@ Quickly add and manage notes associated with transactions and communications to 
 
 ### Loyalty Program
 Implement and manage a loyalty program that tracks customer rewards and encourages repeat business through personalized offers.  
-![Loyalty Program Dashboard](/assets/loyalty-program.png)  
+![Loyalty Program Dashboard](/assets/loyaltyrewards.png)  
 *Loyalty Program Dashboard*
 
 
