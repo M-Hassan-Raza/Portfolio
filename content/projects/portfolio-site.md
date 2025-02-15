@@ -6,11 +6,6 @@ tags: ["Portfolio", "Hugo", "PaperMod"]
 categories: ["Projects"]
 showToc: true
 ---
-
-## My Portfolio Website
-
-This website serves as a comprehensive showcase of my expertise, projects, and experience. It is built with Hugo and the PaperMod theme, offering a fast, lightweight, and easily customizable solution.
-
 ### Key Features
 
 - **Minimalist and Fast**: Developed with Hugo to ensure quick load times and an efficient design.
@@ -36,5 +31,5 @@ Below is a screenshot preview of the portfolio website:
 
 ### Live Demo
 
-To view the live version of the portfolio website, please visit:
+To view the live version of the portfolio website, please visit..... just kidding. You're already on the website :):
 [Visit My Portfolio](https://mhassan.dev/)
