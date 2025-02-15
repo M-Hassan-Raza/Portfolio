@@ -13,7 +13,7 @@ menu:
 ### The Sole Spokesman
 {{< figure src="/assets/sole.jpg" alt="The Sole Spokesman Cover" width="200" height="300" >}}
 *Author: Ayesha Jalal*  
-> A penetrating analysis of the role of a singular spokesperson in shaping public discourse.
+> A penetrating analysis of the role of a singular spokesperson in shaping public discourse. The person behind it all, the mammoth. 
 
 ### The Brothers Karamazov
 {{< figure src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
@@ -52,12 +52,12 @@ menu:
 ### Clean Code: A Handbook of Agile Software Craftsmanship
 {{< figure src="/assets/cleancode.jpg" alt="Clean Code Cover" width="200" height="300" >}}
 *Author: Robert C. Martin*  
-> A definitive guide to writing code that is both elegant and maintainable.
+> A definitive guide to writing code that is both elegant and maintainable. I will continue to write garbage code though. 
 
 ### Design Patterns: Elements of Reusable Object-Oriented Software
 {{< figure src="/assets/designpatterns.jpg" alt="Design Patterns Cover" width="200" height="300" >}}
 *Authors: Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides*  
-> A seminal work introducing timeless design patterns for building flexible, reusable software.
+> A seminal work introducing timeless design patterns for building flexible, reusable software. The daddy of all design pattern books.
 
 ### The Clean Coder: A Code of Conduct for Professional Programmers
 {{< figure src="/assets/cleancoder.jpg" alt="The Clean Coder Cover" width="200" height="300" >}}
