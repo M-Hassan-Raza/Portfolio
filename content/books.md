@@ -78,6 +78,3 @@ Below is a collection of books that have influenced my thinking. I’ve grouped 
 
 ---
 
-*Note: Replace the placeholder image paths (e.g., `/images/covers/clean-code.jpg`) with the actual paths to your book cover images.*
-
-Happy reading and coding!
