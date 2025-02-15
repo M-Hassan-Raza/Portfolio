@@ -1,6 +1,6 @@
 ---
 title: "AV1 Codec: The Future of Streaming?"
-date: 2025-02-15
+date: 2025-02-15T15:00:00+05:00
 description: "Why AV1 is set to replace H.264 in the streaming industry."
 tags: [AV1, Streaming, Video Codec, Technology]
 ---
