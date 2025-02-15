@@ -58,6 +58,10 @@ params:
       url: "https://linkedin.com/in/hassanraza22"
     - name: "email"
       url: "mailto:raihassanraza10@gmail.com"
+    - name: "stackoverflow"
+      url: "https://stackoverflow.com/users/10434994/muhammad-hassan-raza"
+    - name: "medium"
+      url: "https://medium.com/@raihassanraza10"
 
 menu:
   main:
