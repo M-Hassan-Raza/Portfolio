@@ -19,6 +19,13 @@
 &lt;p&gt;A typical ledger system requires recalculating balances when transactions are inserted, updated, or deleted. Using Django signals, many implementations trigger redundant recalculations, causing excessive database queries and slowing down the application.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>How I Built My Portfolio Website with Hugo, GitHub Pages, and Free Tools</title>
+      <link>http://localhost:1313/blog/free-website-hosting/</link>
+      <pubDate>Sat, 15 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/free-website-hosting/</guid>
+      <description>A detailed breakdown of how I built my personal portfolio website using Hugo, GitHub Pages, free analytics, and more.</description>
+    </item>
+    <item>
       <title>DMCA Notice</title>
       <link>http://localhost:1313/dmca/</link>
       <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
