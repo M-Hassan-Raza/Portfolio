@@ -1,1 +1,4 @@
 .env
+# Ignore Hugo generated files
+public/
+resources/
