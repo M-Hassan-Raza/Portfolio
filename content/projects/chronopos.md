@@ -13,6 +13,8 @@ comments: true
 
 ChronoPOS is a **comprehensive Point of Sale system** designed for **hardware stores, supermarkets, and retail businesses**. Built with a focus on **efficiency, security, and scalability**, it streamlines daily operations and enhances business performance.
 
+
+
 ## Key Features
 
 ### Performance & Scalability
@@ -36,6 +38,8 @@ ChronoPOS is a **comprehensive Point of Sale system** designed for **hardware st
 - **Secure authentication and data encryption** for protection against threats.
 
 ## Visual Overview
+
+##### {{< color color="#FF5733" >}}For the following section, if an image is blurred or pixelated, it's to protect sensitive information of the customers since these iamges are taken from a real POS system. I have tried my best to give as much info as possible without compromising the privacy of the customers.{{< /color >}}
 
 ### Dashboard
 A clean, intuitive interface that provides real-time insights into business performance.
