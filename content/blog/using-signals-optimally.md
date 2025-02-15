@@ -6,6 +6,11 @@ tags: ["Django", "Performance", "Ledger", "Optimization"]
 categories: ["Backend Development"]
 ShowToc: true
 ShowComments: true
+cover:
+    image: "/assets/ledger-opt.jpg"
+    alt: "Ledger Optimization"
+    caption: "Optimizing Django Signals Performance"
+    relative: false
 ---
 
 ## Introduction
