@@ -4,182 +4,287 @@
     src: url('/fonts/Manrope-ExtraLight.woff2') format('woff2');
     font-weight: 200;
     font-style: normal;
-  }
-  
-  /* Manrope Light – 300 */
-  @font-face {
+}
+
+/* Manrope Light – 300 */
+@font-face {
     font-family: 'Manrope';
     src: url('/fonts/Manrope-Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
-  }
-  
-  /* Manrope Regular – 400 */
-  @font-face {
+}
+
+/* Manrope Regular – 400 */
+@font-face {
     font-family: 'Manrope';
     src: url('/fonts/Manrope-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
-  }
-  
-  /* Manrope Medium – 500 */
-  @font-face {
+}
+
+/* Manrope Medium – 500 */
+@font-face {
     font-family: 'Manrope';
     src: url('/fonts/Manrope-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
-  }
-  
-  /* Manrope SemiBold – 600 */
-  @font-face {
+}
+
+/* Manrope SemiBold – 600 */
+@font-face {
     font-family: 'Manrope';
     src: url('/fonts/Manrope-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
-  }
-  
-  /* Manrope Bold – 700 */
-  @font-face {
+}
+
+/* Manrope Bold – 700 */
+@font-face {
     font-family: 'Manrope';
     src: url('/fonts/Manrope-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
-  }
-  
-  /* Manrope ExtraBold – 800 */
-  @font-face {
+}
+
+/* Manrope ExtraBold – 800 */
+@font-face {
     font-family: 'Manrope';
     src: url('/fonts/Manrope-ExtraBold.woff2') format('woff2');
     font-weight: 800;
     font-style: normal;
-  }
+}
 
-  
-  /* JetBrains Mono Thin – 100 */
+
+/* JetBrains Mono Thin – 100 */
 @font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-Thin.woff2') format('woff2');
     font-weight: 100;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono Thin Italic – 100 */
-  @font-face {
+}
+
+/* JetBrains Mono Thin Italic – 100 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-ThinItalic.woff2') format('woff2');
     font-weight: 100;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono ExtraLight – 200 */
-  @font-face {
+}
+
+/* JetBrains Mono ExtraLight – 200 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-ExtraLight.woff2') format('woff2');
     font-weight: 200;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono ExtraLight Italic – 200 */
-  @font-face {
+}
+
+/* JetBrains Mono ExtraLight Italic – 200 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-ExtraLightItalic.woff2') format('woff2');
     font-weight: 200;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono Light – 300 */
-  @font-face {
+}
+
+/* JetBrains Mono Light – 300 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono Light Italic – 300 */
-  @font-face {
+}
+
+/* JetBrains Mono Light Italic – 300 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-LightItalic.woff2') format('woff2');
     font-weight: 300;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono Regular – 400 */
-  @font-face {
+}
+
+/* JetBrains Mono Regular – 400 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono Italic – 400 */
-  @font-face {
+}
+
+/* JetBrains Mono Italic – 400 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-Italic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono Medium – 500 */
-  @font-face {
+}
+
+/* JetBrains Mono Medium – 500 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono Medium Italic – 500 */
-  @font-face {
+}
+
+/* JetBrains Mono Medium Italic – 500 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-MediumItalic.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono SemiBold – 600 */
-  @font-face {
+}
+
+/* JetBrains Mono SemiBold – 600 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono SemiBold Italic – 600 */
-  @font-face {
+}
+
+/* JetBrains Mono SemiBold Italic – 600 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-SemiBoldItalic.woff2') format('woff2');
     font-weight: 600;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono Bold – 700 */
-  @font-face {
+}
+
+/* JetBrains Mono Bold – 700 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono Bold Italic – 700 */
-  @font-face {
+}
+
+/* JetBrains Mono Bold Italic – 700 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-BoldItalic.woff2') format('woff2');
     font-weight: 700;
     font-style: italic;
-  }
-  
-  /* JetBrains Mono ExtraBold – 800 */
-  @font-face {
+}
+
+/* JetBrains Mono ExtraBold – 800 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-ExtraBold.woff2') format('woff2');
     font-weight: 800;
     font-style: normal;
-  }
-  
-  /* JetBrains Mono ExtraBold Italic – 800 */
-  @font-face {
+}
+
+/* JetBrains Mono ExtraBold Italic – 800 */
+@font-face {
     font-family: 'JetBrains Mono';
     src: url('/fonts/JetBrainsMono-ExtraBoldItalic.woff2') format('woff2');
     font-weight: 800;
     font-style: italic;
-  }
-  
+}
+
+
+/* ================================
+   Cascadia Code
+   ================================ */
+
+/* Regular */
+@font-face {
+    font-family: 'Cascadia Code';
+    src: url('/fonts/CascadiaCode.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Italic */
+@font-face {
+    font-family: 'Cascadia Code';
+    src: url('/fonts/CascadiaCodeItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Nerd Font (NF) Variant - Regular */
+@font-face {
+    font-family: 'Cascadia Code NF';
+    src: url('/fonts/CascadiaCodeNF.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Nerd Font (NF) Variant - Italic */
+@font-face {
+    font-family: 'Cascadia Code NF';
+    src: url('/fonts/CascadiaCodeNFItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Powerline (PL) Variant - Regular */
+@font-face {
+    font-family: 'Cascadia Code PL';
+    src: url('/fonts/CascadiaCodePL.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Powerline (PL) Variant - Italic */
+@font-face {
+    font-family: 'Cascadia Code PL';
+    src: url('/fonts/CascadiaCodePLItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+
+/* ================================
+    Cascadia Mono
+    ================================ */
+
+/* Regular */
+@font-face {
+    font-family: 'Cascadia Mono';
+    src: url('/fonts/CascadiaMono.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Italic */
+@font-face {
+    font-family: 'Cascadia Mono';
+    src: url('/fonts/CascadiaMonoItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Nerd Font (NF) Variant - Regular */
+@font-face {
+    font-family: 'Cascadia Mono NF';
+    src: url('/fonts/CascadiaMonoNF.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Nerd Font (NF) Variant - Italic */
+@font-face {
+    font-family: 'Cascadia Mono NF';
+    src: url('/fonts/CascadiaMonoNFItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Powerline (PL) Variant - Regular */
+@font-face {
+    font-family: 'Cascadia Mono PL';
+    src: url('/fonts/CascadiaMonoPL.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Powerline (PL) Variant - Italic */
+@font-face {
+    font-family: 'Cascadia Mono PL';
+    src: url('/fonts/CascadiaMonoPLItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
