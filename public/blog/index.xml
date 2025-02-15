@@ -26,6 +26,13 @@
 &lt;p&gt;A typical ledger system requires recalculating balances when transactions are inserted, updated, or deleted. Using Django signals, many implementations trigger redundant recalculations, causing excessive database queries and slowing down the application.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>AV1 Codec: The Future of Streaming?</title>
+      <link>http://localhost:1313/blog/av1-codec-future/</link>
+      <pubDate>Sat, 15 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/av1-codec-future/</guid>
+      <description>Why AV1 is set to replace H.264 in the streaming industry.</description>
+    </item>
+    <item>
       <title>The Importance of Reusable Components for Critical Actions in VueJS</title>
       <link>http://localhost:1313/blog/reusing-components-benefits/</link>
       <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
