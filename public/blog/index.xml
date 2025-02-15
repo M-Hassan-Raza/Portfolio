@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Blog on Muhammad Hassan Raza</title>
-    <link>http://localhost:1313/blog/</link>
+    <link>https://mhassan.dev/blog/</link>
     <description>Recent content in Blog on Muhammad Hassan Raza</description>
     <generator>Hugo -- 0.143.1</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 15 Feb 2025 14:00:00 +0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mhassan.dev/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Built My Portfolio Website with Hugo, GitHub Pages, and Free Tools</title>
-      <link>http://localhost:1313/blog/free-website-hosting/</link>
+      <link>https://mhassan.dev/blog/free-website-hosting/</link>
       <pubDate>Sat, 15 Feb 2025 14:00:00 +0500</pubDate>
-      <guid>http://localhost:1313/blog/free-website-hosting/</guid>
+      <guid>https://mhassan.dev/blog/free-website-hosting/</guid>
       <description>A detailed breakdown of how I built my personal portfolio website using Hugo, GitHub Pages, free analytics, and more.</description>
     </item>
     <item>
       <title>Optimizing Django Signals for Efficient Ledger Recalculations</title>
-      <link>http://localhost:1313/blog/using-signals-optimally/</link>
+      <link>https://mhassan.dev/blog/using-signals-optimally/</link>
       <pubDate>Sat, 15 Feb 2025 12:00:00 +0500</pubDate>
-      <guid>http://localhost:1313/blog/using-signals-optimally/</guid>
+      <guid>https://mhassan.dev/blog/using-signals-optimally/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;When dealing with financial transactions in Django applications, maintaining an accurate ledger is critical. However, inefficient signal handling can lead to performance bottlenecks. In this article, we&amp;rsquo;ll explore an optimized approach to recalculating ledger balances while ensuring minimal database impact.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
@@ -27,23 +27,23 @@
     </item>
     <item>
       <title>The Importance of Reusable Components for Critical Actions in VueJS</title>
-      <link>http://localhost:1313/blog/reusing-components-benefits/</link>
+      <link>https://mhassan.dev/blog/reusing-components-benefits/</link>
       <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/reusing-components-benefits/</guid>
+      <guid>https://mhassan.dev/blog/reusing-components-benefits/</guid>
       <description>Learn why creating reusable components—such as password confirmation modals, confirmation dialogs, and consistent button elements—is essential for maintaining a uniform and user-friendly interface in VueJS applications.</description>
     </item>
     <item>
       <title>Advantages of Preloading Data on Page Load</title>
-      <link>http://localhost:1313/blog/preloading-data-for-performance/</link>
+      <link>https://mhassan.dev/blog/preloading-data-for-performance/</link>
       <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/preloading-data-for-performance/</guid>
+      <guid>https://mhassan.dev/blog/preloading-data-for-performance/</guid>
       <description>Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.</description>
     </item>
     <item>
       <title>Optimizing Django Performance: Lessons from a POS System</title>
-      <link>http://localhost:1313/blog/optimizing-django-performance/</link>
+      <link>https://mhassan.dev/blog/optimizing-django-performance/</link>
       <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/optimizing-django-performance/</guid>
+      <guid>https://mhassan.dev/blog/optimizing-django-performance/</guid>
       <description>A deep dive into optimizing Django backend performance for a POS system, covering bulk updates, caching, and efficient query handling.</description>
     </item>
   </channel>

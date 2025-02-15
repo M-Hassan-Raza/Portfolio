@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Reusable Components on Muhammad Hassan Raza</title>
-    <link>http://localhost:1313/tags/reusable-components/</link>
+    <link>https://mhassan.dev/tags/reusable-components/</link>
     <description>Recent content in Reusable Components on Muhammad Hassan Raza</description>
     <generator>Hugo -- 0.143.1</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/reusable-components/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mhassan.dev/tags/reusable-components/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Importance of Reusable Components for Critical Actions in VueJS</title>
-      <link>http://localhost:1313/blog/reusing-components-benefits/</link>
+      <link>https://mhassan.dev/blog/reusing-components-benefits/</link>
       <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/reusing-components-benefits/</guid>
+      <guid>https://mhassan.dev/blog/reusing-components-benefits/</guid>
       <description>Learn why creating reusable components—such as password confirmation modals, confirmation dialogs, and consistent button elements—is essential for maintaining a uniform and user-friendly interface in VueJS applications.</description>
     </item>
   </channel>
