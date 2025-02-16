@@ -43,13 +43,6 @@ slug: "books"
 
 -------------------------------------------------------------------------------------------------------------------
 
-### The Da Vinci Code
-{{< figure src="/assets/davinci.jpg" alt="The Da Vinci Code Cover" width="200" height="300" >}}
-*Author: Dan Brown*  
-> A fun dumb book.
-
--------------------------------------------------------------------------------------------------------------------
-
 ### Angels & Demons
 {{< figure src="/assets/angelsdemon.jpg" alt="Angels & Demons Cover" width="200" height="300" >}}
 *Author: Dan Brown*  
@@ -61,6 +54,27 @@ slug: "books"
 {{< figure src="/assets/1984.jpg" alt="1984 Cover" width="200" height="300" >}}
 *Author: George Orwell*  
 > A chilling dystopian vision of totalitarianism that remains alarmingly relevant. Read this book so you can finally understand the overused memes on the internet by the people who have never even touched a single page of this book.
+
+-------------------------------------------------------------------------------------------------------------------
+
+### Project Hail Mary
+{{< figure src="/assets/hailmary.jpg" alt="Project Hail Mary Cover" width="200" height="300" >}}
+*Auhor: Andy Weir*
+> A thrilling sci-fi adventure that combines humor, heart, and hard science. I love this book. A perfect sci-fi.
+
+-------------------------------------------------------------------------------------------------------------------
+
+### The Sword of Kaigen
+{{< figure src="/assets/swordofkaigen.jpg" alt="The Sword of Kaigen Cover" width="200" height="300" >}}
+*Author: M.L. Wang*
+> A gripping tale of family, honor, and magic set in a world inspired by Japanese mythology. The tears were definitely tearing that day.
+
+-------------------------------------------------------------------------------------------------------------------
+
+### The Will of the Many
+{{< figure src="/assets/thewillofthemany.jpg" alt="The Will of the Many Cover" width="200" height="300" >}}
+*Author: James Islington*
+> Need a book 2. I am waiting.
 
 -------------------------------------------------------------------------------------------------------------------
 
