@@ -73,10 +73,14 @@ menu:
 *Author: Robert C. Martin*  
 > A definitive guide to writing code that is both elegant and maintainable. I will continue to write garbage code though. 
 
+-------------------------------------------------------------------------------------------------------------------
+
 ### Design Patterns: Elements of Reusable Object-Oriented Software
 {{< figure src="/assets/designpatterns.jpg" alt="Design Patterns Cover" width="200" height="300" >}}
 *Authors: Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides*  
 > A seminal work introducing timeless design patterns for building flexible, reusable software. The daddy of all design pattern books.
+
+-------------------------------------------------------------------------------------------------------------------
 
 ### The Clean Coder: A Code of Conduct for Professional Programmers
 {{< figure src="/assets/cleancoder.jpg" alt="The Clean Coder Cover" width="200" height="300" >}}
