@@ -7,14 +7,14 @@ slug: "books"
 ---
 # {{< color color="#FFB4A2" >}}Pakistan{{< /color >}}
 
-### The Sole Spokesman
+### The Sole Spokesman: Jinnah, the Muslim League, and the Demand for Pakistan
 {{< figure src="/assets/sole.jpg" alt="The Sole Spokesman Cover" width="200" height="300" >}}
 *Author: Ayesha Jalal*  
 > The person who's the reason I can practice my faith freely and live in a somewhat (ahm ahm) independent society. 
 
 -------------------------------------------------------------------------------------------------------------------
 
-### The Making of Pakistan: A study in Nationalism
+### The Making of Pakistan: A Study in Nationalism
 *Author: K.K. Aziz*
 {{< figure src="/assets/makingofpakistan.jpg" alt="The Making of Pakistan Cover" width="200" height="300" >}}
 > I literally love this book. So many interesting tidbits, newspaper excerpts, and interviews. Gives you a new perspective on the creation of Pakistan.
@@ -41,10 +41,16 @@ slug: "books"
 *Author: Angela Duckworth*
 > A groundbreaking exploration of the power of grit to drive personal and professional success. Hoping to get my grit somewhere sometime soon (tm).
 
-
 -------------------------------------------------------------------------------------------------------------------
 
 # {{< color color="#FFB4A2" >}}Fiction{{< /color >}}
+
+### Mistborn Saga: Complete Trilogy
+{{< figure src="/assets/mistborn.jpg" alt="Mistborn Saga Cover" width="200" height="300" >}}
+*Author: Brandon Sanderson*
+> Peak fiction right here. I'm not fanatic of Mr. Sanderson but this is some gourmet stuff right here. 
+
+-------------------------------------------------------------------------------------------------------------------
 
 ### Angels & Demons
 {{< figure src="/assets/angelsdemon.jpg" alt="Angels & Demons Cover" width="200" height="300" >}}
