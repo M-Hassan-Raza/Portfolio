@@ -43,13 +43,6 @@ slug: "books"
 
 -------------------------------------------------------------------------------------------------------------------
 
-### The Da Vinci Code
-{{< figure src="/assets/davinci.jpg" alt="The Da Vinci Code Cover" width="200" height="300" >}}
-*Author: Dan Brown*  
-> A fun dumb book.
-
--------------------------------------------------------------------------------------------------------------------
-
 ### Angels & Demons
 {{< figure src="/assets/angelsdemon.jpg" alt="Angels & Demons Cover" width="200" height="300" >}}
 *Author: Dan Brown*  
