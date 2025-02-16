@@ -64,6 +64,27 @@ slug: "books"
 
 -------------------------------------------------------------------------------------------------------------------
 
+### Project Hail Mary
+{{< figure src="/assets/hailmary.jpg" alt="Project Hail Mary Cover" width="200" height="300" >}}
+*Auhor: Andy Weir*
+> A thrilling sci-fi adventure that combines humor, heart, and hard science. I love this book. A perfect sci-fi.
+
+-------------------------------------------------------------------------------------------------------------------
+
+### The Sword of Kaigen
+{{< figure src="/assets/swordofkaigen.jpg" alt="The Sword of Kaigen Cover" width="200" height="300" >}}
+*Author: M.L. Wang*
+> A gripping tale of family, honor, and magic set in a world inspired by Japanese mythology. The tears were definitely tearing that day.
+
+-------------------------------------------------------------------------------------------------------------------
+
+### The Will of the Many
+{{< figure src="/assets/thewillofthemany.jpg" alt="The Will of the Many Cover" width="200" height="300" >}}
+*Author: James Islington*
+> Need a book 2. I am waiting.
+
+-------------------------------------------------------------------------------------------------------------------
+
 # {{< color color="#FFB4A2" >}}Programming & Technical{{< /color >}}
 
 ### Clean Code: A Handbook of Agile Software Craftsmanship
