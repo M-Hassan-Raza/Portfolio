@@ -4,9 +4,6 @@ date: "2025-02-15T12:00:00Z"
 draft: false
 description: "A curated list of books I've read—from literature and politics to software development classics. I keep this list short for a good reason. I have read more books, please you have to trust me."
 slug: "books"
-menu:
-  main:
-    weight: 150
 ---
 # {{< color color="#FFB4A2" >}}Pakistan{{< /color >}}
 
