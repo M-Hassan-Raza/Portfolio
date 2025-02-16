@@ -8,7 +8,7 @@ menu:
   main:
     weight: 150
 ---
-# Fiction & Non-Fiction
+# {{< color color="#FFB4A2" >}}Pakistan{{< /color >}}
 
 ### The Sole Spokesman
 {{< figure src="/assets/sole.jpg" alt="The Sole Spokesman Cover" width="200" height="300" >}}
@@ -23,6 +23,7 @@ menu:
 > I literally love this book. So many interesting tidbits, newspaper excerpts, and interviews. Gives you a new perspective on the creation of Pakistan.
 
 -------------------------------------------------------------------------------------------------------------------
+# {{< color color="#FFB4A2" >}}Fiction and Non-Fiction{{< /color >}}
 
 ### The Brothers Karamazov
 {{< figure src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
@@ -66,7 +67,7 @@ menu:
 
 -------------------------------------------------------------------------------------------------------------------
 
-# Programming & Technical
+# {{< color color="#FFB4A2" >}}Programming & Technical{{< /color >}}
 
 ### Clean Code: A Handbook of Agile Software Craftsmanship
 {{< figure src="/assets/cleancode.jpg" alt="Clean Code Cover" width="200" height="300" >}}
