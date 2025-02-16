@@ -14,6 +14,23 @@ cover:
 
 ## Fiction
 
+
+### The Brothers Karamazov
+{{< figure src="/assets/brotherskaramazov.jpg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
+*Author: Fyodor Dostoevsky*
+> A masterpiece of literature that delves into the complexities of human nature, morality, and faith. A must-read for anyone who enjoys philosophical fiction.
+
+### The Sword of Kaigen
+{{< figure src="/assets/swordofkaigen.jpg" alt="The Sword of Kaigen Cover" width="200" height="300" >}}
+*Author: M.L. Wang*
+> A gripping tale of family, honor, and magic set against the backdrop of a war-torn world. The tears were definitely tearing that day.
+
+### The Will of the Many
+{{< figure src="/assets/willofthemany.jpg" alt="The Will of the Many Cover" width="200" height="300" >}}
+*Author: James Islington*
+> Need part 2 yesterday. This is peak.
+
+
 ### Mistborn Saga: Complete Trilogy
 {{< figure src="/assets/mistborn.jpg" alt="Mistborn Saga Cover" width="200" height="300" >}}
 *Author: Brandon Sanderson*  
