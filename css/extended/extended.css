@@ -22,7 +22,7 @@
 /* Menu icon styling with hover effect */
 .menu-icon {
     vertical-align: middle;
-    margin-right: 2px;
+    margin-right: 1px;
     position: relative;
     bottom: 1.5px;
     transition: transform 0.2s ease;
@@ -97,7 +97,7 @@
     stroke-linejoin: round;
     fill: none;
     vertical-align: middle;
-    margin-right: 0.25rem;
+    margin-right: 0.2rem;
     overflow: visible;
 }
 
