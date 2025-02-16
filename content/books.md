@@ -20,14 +20,7 @@ slug: "books"
 > I literally love this book. So many interesting tidbits, newspaper excerpts, and interviews. Gives you a new perspective on the creation of Pakistan.
 
 -------------------------------------------------------------------------------------------------------------------
-# {{< color color="#FFB4A2" >}}Fiction and Non-Fiction{{< /color >}}
-
-### The Brothers Karamazov
-{{< figure src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
-*Author: Fyodor Dostoyevsky*  
-> A profound exploration of morality, faith, and the human condition. It's a little long but it is what it is.
-
--------------------------------------------------------------------------------------------------------------------
+# {{< color color="#FFB4A2" >}}Non-Fiction{{< /color >}}
 
 ### Clash of Civilizations
 {{< figure src="/assets/clash.jpg" alt="Clash of Civilizations Cover" width="200" height="300" >}}
@@ -42,6 +35,16 @@ slug: "books"
 > A critical examination of the constraints on national power and the perils of overreach. Extremely these days considering how the global political discourse is shaping up.
 
 -------------------------------------------------------------------------------------------------------------------
+
+### Grit: The Power of Passion and Perseverance
+{{< figure src="/assets/gritpower.jpg" alt="Grit: The Power of Passion and Perseverance Cover" width="200" height="300" >}}
+*Author: Angela Duckworth*
+> A groundbreaking exploration of the power of grit to drive personal and professional success. Hoping to get my grit somewhere sometime soon (tm).
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+# {{< color color="#FFB4A2" >}}Fiction{{< /color >}}
 
 ### Angels & Demons
 {{< figure src="/assets/angelsdemon.jpg" alt="Angels & Demons Cover" width="200" height="300" >}}
@@ -75,6 +78,13 @@ slug: "books"
 {{< figure src="/assets/thewillofthemany.jpg" alt="The Will of the Many Cover" width="200" height="300" >}}
 *Author: James Islington*
 > Need a book 2. I am waiting.
+
+-------------------------------------------------------------------------------------------------------------------
+
+### The Brothers Karamazov
+{{< figure src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
+*Author: Fyodor Dostoyevsky*  
+> A profound exploration of morality, faith, and the human condition. It's a little long but it is what it is.
 
 -------------------------------------------------------------------------------------------------------------------
 
