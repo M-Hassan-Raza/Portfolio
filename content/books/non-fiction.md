@@ -4,6 +4,7 @@ date: "2025-02-15T12:00:00Z"
 draft: false
 description: "A selection of thought-provoking non-fiction books covering politics, history, and personal development."
 slug: "books-non-fiction"
+ShowComments: true
 ---
 
 ## Non-Fiction

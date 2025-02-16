@@ -4,6 +4,7 @@ date: "2025-02-15T12:00:00Z"
 draft: false
 description: "Books that explore the history, politics, and identity of Pakistan."
 slug: "books-pakistan"
+ShowComments: true
 ---
 
 ## Pakistan
