@@ -93,12 +93,12 @@
     height: 18px;
     width: 18px;
     stroke: currentColor;
-    stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
     vertical-align: middle;
     margin-right: 0.25rem;
+    overflow: visible;
 }
 
 
