@@ -80,8 +80,8 @@
 
 /* About page content SVG icons */
 .post-content svg {
-    height: 1em;
-    width: 1em;
+    height: 1.25em;
+    width: 1.25em;
     display: inline-block;
     vertical-align: middle;
     margin-right: 0.25rem;
@@ -90,8 +90,8 @@
 
 /* Menu icons - preserve their original styling */
 .menu-icon {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
