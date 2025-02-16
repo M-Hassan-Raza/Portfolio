@@ -26,7 +26,7 @@ cover:
 > A gripping tale of family, honor, and magic set against the backdrop of a war-torn world. The tears were definitely tearing that day.
 
 ### The Will of the Many
-{{< figure src="/assets/willofthemany.jpg" alt="The Will of the Many Cover" width="200" height="300" >}}
+{{< figure src="/assets/thewillofthemany.jpg" alt="The Will of the Many Cover" width="200" height="300" >}}
 *Author: James Islington*
 > Need part 2 yesterday. This is peak.
 
