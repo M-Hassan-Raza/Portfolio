@@ -16,7 +16,7 @@ cover:
 
 
 ### The Brothers Karamazov
-{{< figure src="/assets/brotherskaramazov.jpg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
+{{< figure src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300" >}}
 *Author: Fyodor Dostoevsky*
 > A masterpiece of literature that delves into the complexities of human nature, morality, and faith. A must-read for anyone who enjoys philosophical fiction.
 
