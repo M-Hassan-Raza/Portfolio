@@ -5,6 +5,11 @@ draft: false
 description: "Books that explore the history, politics, and identity of Pakistan."
 slug: "books-pakistan"
 ShowComments: true
+cover:
+    image: "/assets/pakistan.png"
+    alt: "Pakistan Flag"
+    caption: "Image by OpenClipart-Vectors from Pixabay"
+    relative: false
 ---
 
 ## Pakistan
