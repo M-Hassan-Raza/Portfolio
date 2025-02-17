@@ -178,6 +178,7 @@ Looking beyond traditional academic support can add a real-world edge to your FY
 - **Internship Sponsorship:** If you've interned at a company, approach them with your project proposal. They might be interested in sponsoring your project, providing financial support and ensuring your work aligns with industry needs.
 - **Professor Connections:** Many professors have strong links with software houses. Occasionally, they secure projects from these companies that can be developed as part of a student's FYP. It's worth asking your advisor if such opportunities exist.
 - **Industry Mentorship Programs:** In Pakistan, several software houses now run FYP mentorship programs. These initiatives connect students with experienced industry professionals who can offer guidance, technical insights, and real-world perspectives throughout the project.
+- **LinkedIn Networking:** Reach out to professionals in your field on LinkedIn. Many are willing to mentor students and provide valuable advice on project development, tech stack selection, and career opportunities. This way, even if you can't become a part of a mentorship program, you can still get the benefits of having a mentor. There are many professionals who are willing to help students. You just need to ask.
 
 > **Tip:** Leverage your network and inquire with both your past internship supervisors and professors about these opportunities—they could open doors to valuable industry partnerships.
 
