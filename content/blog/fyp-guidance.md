@@ -19,6 +19,34 @@ This guide will help you **choose the right topic, advisor, tech stack, and stra
 
 ---
 
+Below is the new section with an integrated table that compares Research & Development projects versus Pure Development projects. You can plug this directly into your guide:
+
+---
+
+## {{< color color="#FFB4A2" >}}Research & Development vs. Pure Development Projects{{< /color >}}
+
+When planning your FYP, it’s essential to decide which type of project best aligns with your interests, skills, and career goals. Generally, there are two broad categories:
+
+- **Research & Development (R&D) Projects:** These combine a theoretical research component with a practical implementation aspect. They often involve exploring new concepts, conducting literature reviews, and testing hypotheses alongside building a functional prototype.
+- **Pure Development Projects:** These focus mainly on building a fully functional product or system. The emphasis here is on applying existing technologies and methodologies to create a tangible solution, often with less emphasis on novel research.
+
+Below is a comparison of the pros and cons of each approach:
+
+| **Aspect**                  | **Research + Development Projects**                                                                                                                                  | **Pure Development Projects**                                                                                                              |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **Focus**                   | Combines theoretical research with practical implementation.                                                                                                        | Emphasizes building a fully functional product or system.                                                                                 |
+| **Innovation**              | High potential for original research and novel contributions; may lead to publications or further academic pursuits.                                                  | Focuses on applying proven technologies; demonstrates strong coding and implementation skills.                                             |
+| **Academic Rigor**          | Requires extensive literature reviews, hypothesis formulation, and data analysis; more academically challenging.                                                       | Less emphasis on academic research; primarily involves system design, coding, and testing.                                                  |
+| **Time Investment**         | Typically more time-consuming due to the additional research component, requiring careful planning and iterative experimentation.                                      | Generally follows a more predictable timeline centered around development cycles, making planning and scheduling easier.                      |
+| **Risk & Uncertainty**      | Higher risk due to the exploratory nature and potential for uncertain outcomes; research challenges may delay progress.                                                | Lower risk as it builds on established methods and tools, resulting in more predictable outcomes.                                            |
+| **Industry vs. Academia**   | Particularly valuable if you aim to pursue further academic studies (e.g., a Master's or PhD) or engage in innovative research projects.                                | Highly attractive for industry roles, showcasing practical technical skills and the ability to deliver a market-ready product.                |
+| **Documentation**           | Requires comprehensive documentation covering both research methodology and development process; may include experimental data and literature analysis.               | Focuses primarily on technical documentation, code quality, and project management; documentation is more streamlined and implementation-based. |
+| **Career Relevance**        | Prepares you for advanced research roles or academic careers; adds depth to your portfolio for future scholarly pursuits.                                                | Demonstrates hands-on problem-solving and technical expertise; highly relevant for immediate entry into the tech industry.                     |
+
+**Tip:** Choose a Research & Development project if you’re passionate about exploring new ideas and contributing to academic knowledge—even if it means facing higher uncertainty. Opt for a Pure Development project if you prefer focusing on practical application and building a market-ready product, while showcasing your technical skills to future employers.
+
+---
+
 ## {{< color color="#FFB4A2" >}}How to Choose a Topic{{< /color >}}
 
 Picking the right topic is **critical** for a successful FYP. A good topic should be:  
