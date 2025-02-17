@@ -104,9 +104,6 @@ outputs:
 
 
 security:
-  funcs:
-    getenv:
-      - ^UMAMI_BEACON_TOKEN$
   http:
     methods:
       - ^GET$
