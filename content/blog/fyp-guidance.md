@@ -82,11 +82,11 @@ A solid proposal increases your chances of approval. It should include:
 
 - **Project Title**: Clear and concise.  
 - **Problem Statement**: What issue are you solving?  
-- **Objectives**: Define clear, measurable goals.  
-- **Tech Stack**: Justify your choice of tools.  
-- **Expected Outcomes**: What impact will your project have?  
+- **Objectives**: Define clear, measurable goals. Don't just say things like "I want to build a website". Say things like "I want to build a website that allows users to do X, Y, and Z".
+- **Tech Stack**: Justify your choice of tools. This shows that you've researched your project and you know what you're doing. For example, why did you choose one database over another? Why did you choose one language over another? Why did you choose one framework over another?
+- **Expected Outcomes**: What impact will your project have? Obviously it's mostly speculation at this point but you should have a good idea of what you want to achieve with your project.  
 
-**Tip:** Avoid overly ambitious goals—keep it realistic and achievable.  
+**Tip:** Avoid overly ambitious goals—keep it realistic and achievable. As the saying goes, "Underpromise and overdeliver". Underpromising doesn't work if the project is too simple. But overpromising can be a disaster.
 
 ---
 
@@ -95,9 +95,10 @@ A solid proposal increases your chances of approval. It should include:
 Managing your project efficiently ensures smooth progress.  
 
 - **Use Agile/Scrum**: Break work into small, manageable tasks.  
-- **Version Control**: Use Git/GitHub for tracking changes.  
-- **Task Management**: Use Trello, Notion, or Jira for planning.  
-- **Code Documentation**: Write clean, well-commented code for maintainability.  
+- **Version Control**: Use Git/GitHub for tracking changes. For the love of all that's holy, don't send each other code files over WhatsApp. Use Git. It's not that hard to learn and it will save you a lot of time and effort.
+- **Task Management**: Use Trello, Notion, or Jira for planning. You can mostly get away with using Trello. It's simple, it's easy to use, and it's free. But if you want more features, you can use Notion or Jira. 
+- **Code Documentation**: Write clean, well-commented code for maintainability. Look into the tools that can help you with this. For example, you can use JSDoc for JavaScript, Sphinx for Python, and Doxygen for C++.
+- **Usecase based development**: Develop your project based on the use cases divided amongst each member. Don't commit the cardinal sin of assigning a whole layer to a single member (my X member did the frontend). This is a recipe for disaster. 
 
 **Tip:** Meet with your team/advisor **weekly** to track progress.  
 
@@ -109,8 +110,8 @@ Testing is often **ignored** but is **critical** for project success.
 
 - **Unit Testing**: Test small components of your project.  
 - **Integration Testing**: Ensure different modules work together.  
-- **Performance Testing**: Check for scalability and speed.  
-- **Deployment**: Choose a reliable platform (AWS, Firebase, Heroku).  
+- **Performance Testing**: Check for scalability and speed. Look into skeleton loading, lazy loading, and other performance optimization techniques. 
+- **Deployment**: Choose a reliable platform (AWS, Firebase, Heroku, DigitalOcean). I always recommend a VPS. It's cheaper and setting up your own deployment pipeline is a great learning experience. 
 
 **Tip:** Automate testing using **CI/CD pipelines** if possible.  
 
@@ -124,7 +125,7 @@ Your **FYP defense** is where you showcase your hard work. A great presentation 
 - **Performance insights**: Show efficiency improvements, benchmarking.  
 - **Common questions handling**: Prepare for expected technical and theoretical questions.  
 
-**Tip:** **Practice** your defense multiple times before presenting.  
+**Tip:** **Practice** your defense multiple times before presenting. Make sure all the members know all the details of the project. You don't want to be caught off guard by a question you should know the answer to. If there's one smart person in the room, they'll always target the other members to look for weakness. 
 
 ---
 
