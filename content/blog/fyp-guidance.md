@@ -12,14 +12,11 @@ cover:
     caption: "How to Choose, Plan, and Execute Your Final Year ProjectPhoto by Download a pic Donate a buck! ^: https://www.pexels.com/photo/silhouette-of-person-sitting-beside-body-of-water-54379/"
     relative: false
 ---
+
 ## {{< color color="#FFB4A2" >}}Introduction{{< /color >}}
 
 Your **Final Year Project (FYP)** is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.  
 This guide will help you **choose the right topic, advisor, tech stack, and strategy** to ensure your FYP stands out. Please note that this guide is mainly targeted towards FASTians because of my personal affiliation to this great institute, but the advice can be applied to any university.
-
----
-
-Below is the new section with an integrated table that compares Research & Development projects versus Pure Development projects. You can plug this directly into your guide:
 
 ---
 
@@ -43,7 +40,7 @@ Below is a comparison of the pros and cons of each approach:
 | **Documentation**           | Requires comprehensive documentation covering both research methodology and development process; may include experimental data and literature analysis.               | Focuses primarily on technical documentation, code quality, and project management; documentation is more streamlined and implementation-based. |
 | **Career Relevance**        | Prepares you for advanced research roles or academic careers; adds depth to your portfolio for future scholarly pursuits.                                                | Demonstrates hands-on problem-solving and technical expertise; highly relevant for immediate entry into the tech industry.                     |
 
-**Tip:** Choose a Research & Development project if you’re passionate about exploring new ideas and contributing to academic knowledge—even if it means facing higher uncertainty. Opt for a Pure Development project if you prefer focusing on practical application and building a market-ready product, while showcasing your technical skills to future employers.
+> **Tip:** Choose a Research & Development project if you’re passionate about exploring new ideas and contributing to academic knowledge—even if it means facing higher uncertainty. Opt for a Pure Development project if you prefer focusing on practical application and building a market-ready product, while showcasing your technical skills to future employers.
 
 ---
 
@@ -54,9 +51,9 @@ Picking the right topic is **critical** for a successful FYP. A good topic shoul
 - **Interesting**: Choose something you're passionate about. No one wants to work on a boring project, let alone for a whole year.  
 - **Feasible**: Consider your time, skills, and available resources. Scope is one of the most important factors when it comes to your FYP. It will dictate your life for the next year. And what's more? It will be the first thing your advisor(s) and the evaluation committee will ask you about.
 - **Relevant**: Align with industry trends or research needs. As an example, I am an avid "AI" pessimist but I can't deny the fact that it's the hottest trend in the industry right now. So, if you're into AI, you might want to consider a project in that domain. Look at the the recent explosion of AI Agents and Generative AI. Obviously I have many concerns about the ethical implications of these technologies but that's a topic for another day. You want a skillset that's in demand, or at the very least will allow you to have a good conversation with a potential employer. However, this is not to say that you should pick the next hottest thing and chase after it, because by the time you're done with your project, it might not be the hottest thing anymore. You should pick something that you're passionate about and what aligns with your academic and career goals.
-- **Problem-Solving**: Your project should **address a real problem** or **offer innovation**. Please don't just build another e-commerce website or a basic recommendation system. Building a novel project will not only make you stand out but also give you a sense of accomplishment (and probably a few sleepless nights but you're a FASTian, it's your life anyway). I built a relatively straightforward business project for my FYP and while I'm proud of the work me and my team did and we managed to win a prize for the idea, I can't help but feel like I could have done more.
+- **Problem-Solving**: Your project should **address a real problem** or **offer innovation**. Please don't just build another e-commerce website or a basic recommendation system. Building a novel project will not only make you stand out but also give you a sense of accomplishment (and probably a few sleepless nights but you're a FASTian, it's your life anyway).
 
-**Tip:** Browse research papers, GitHub projects, and tech blogs for inspiration.  Look at what the students from foreign universities are doing. They're not necessarily smarter than you but they have access to better resources and they're more likely to be working on cutting-edge projects. You don't have to copy them, but you should never give up on the opportunity to learn from them. A good way to shortlist a project is to do a preliminary literature review. This will give you an idea of what's already been done and what hasn't. Don't wanna jump into an overcrowded room now, do you?
+> **Tip:** Browse research papers, GitHub projects, and tech blogs for inspiration.  Look at what the students from foreign universities are doing. They're not necessarily smarter than you but they have access to better resources and they're more likely to be working on cutting-edge projects. You don't have to copy them, but you should never give up on the opportunity to learn from them. A good way to shortlist a project is to do a preliminary literature review. This will give you an idea of what's already been done and what hasn't. Don't wanna jump into an overcrowded room now, do you?
 
 ---
 
@@ -65,10 +62,9 @@ Picking the right topic is **critical** for a successful FYP. A good topic shoul
 Your advisor plays a **huge** role in your project's success. A good advisor should be:  
 
 - **Experienced in your chosen field**: If your idea is novel enough and complex enough, you might want to consider an advisor who has experience in that domain. They can guide you better and help you avoid common pitfalls. A good example of this are the HODs who excel in their respective fields. They're usually very busy but if you can get them to agree to be your advisor, you're in for a treat. However, there are many many other faculty members who are just as good (if not better, considering they have more time to dedicate to you) and you should consider them as well. 
-- **Responsive and willing to guide you properly**: This is a big one. You don't want an advisor who's too busy to meet with you or doesn't respond to your emails. And let me be clear, this isn't a slight against any of the faculty members. They're all extremely helpful and knowledgeable. But some of them are just too busy to give you the attention you need. And here is where clear communication with your potential advisor comes in. You need to be upfront about your expectations and ask them about theirs. So the advice I give is to inquire about the advisor’s current project load and typical response times
+- **Responsive and willing to guide you properly**: This is a big one. You don't want an advisor who's too busy to meet with you or doesn't respond to your emails. And let me be clear, this isn't a slight against any of the faculty members. They're all extremely helpful and knowledgeable. But some of them are just too busy to give you the attention you need. And here is where clear communication with your potential advisor comes in. You need to be upfront about your expectations and ask them about theirs. So the advice I give is to inquire about the advisor’s current project load and typical response times.
 - **Supportive of your ideas but also critical when needed**: Everyone loves a chill time but you shouldn't try to chill with your FYP. You need someone who can guide you properly and point out the flaws in your project. You need someone who can push you to do better. You need someone who can be your mentor. And you need someone who can be your friend. And you need someone who can be your critic. And you need someone who can be your cheerleader. That was a lot of "ands" but you get the point. FAST is filled with faculty members who can be all of these things and more. You just need to find the right one for you.
-- Co-Advisor: If possible, consider having a co-advisor. This can help you get different perspectives and more support. This is especially useful if you're working on a project that requires expertise in multiple domains. For example, if you're working on a project that involves both AI and Web Development, you might want to consider having an AI expert as your primary advisor and a Web Development expert as your co-advisor. This way, you get the best of both worlds.
-
+- **Co-Advisor**: If possible, consider having a co-advisor. This can help you get different perspectives and more support. This is especially useful if you're working on a project that requires expertise in multiple domains. For example, if you're working on a project that involves both AI and Web Development, you might want to consider having an AI expert as your primary advisor and a Web Development expert as your co-advisor. This way, you get the best of both worlds.
 
 **How to find one?**  
 - Check faculty profiles and see their published work.  
@@ -91,7 +87,7 @@ Your tech stack should be **practical and aligned with your project's scope**. C
 - **AI/ML**: Python (TensorFlow, PyTorch) + Flask / FastAPI  
 - **Mobile Apps**: Kotlin / Swift. I prefer native apps as compared to hybrid apps. But that's just me. You might prefer hybrid apps and that's perfectly fine. I want to squeeze every bit of performance out of my apps. But you might not care about that.
 
-**Tip:** Stick to technologies you are comfortable with or have enough time to learn.  
+> **Tip:** Stick to technologies you are comfortable with or have enough time to learn.
 
 ---
 
@@ -103,7 +99,7 @@ Absolutely! A **well-executed FYP** can:
 - **Boost your resume & portfolio**: Especially if it’s on GitHub with good documentation. code quality, a working demo, and a good commit history. 
 - **Support your Master's application**: A strong project with a research component can help in admissions and scholarships.  
 
-**Tip:** Try to publish a **paper** or present your project in a **competition** for extra credibility. 
+> **Tip:** Try to publish a **paper** or present your project in a **competition** for extra credibility.
 
 Please note that while having a good FYP improves your chances of success, it doesn't guarantee it. You still need to work hard, network, and apply to multiple places. Also, you should think of the FYP as a part of your broader portfolio. You should have other projects, internships, and extracurricular activities to show that you're a well-rounded individual. Cultural fit is just as important as technical skills.
 
@@ -124,7 +120,7 @@ A solid proposal increases your chances of approval and sets a clear roadmap for
 - **Risk Management & Contingency Plans**: Identify potential challenges and outline strategies to address them. Whether it’s technical hurdles or resource constraints, showing that you’ve thought ahead will impress evaluators.
 - **Resource & Budget Considerations** (if applicable): Detail any additional resources or funding you may require, such as software licenses, hardware, or access to special datasets.
 
-**Tip:** Avoid overly ambitious goals—keep your proposal realistic and achievable. Remember, "Underpromise and overdeliver" is a solid strategy, but overpromising on what you can achieve may lead to unnecessary stress and setbacks.
+> **Tip:** Avoid overly ambitious goals—keep your proposal realistic and achievable. Remember, "Underpromise and overdeliver" is a solid strategy, but overpromising on what you can achieve may lead to unnecessary stress and setbacks.
 
 ---
 
@@ -138,7 +134,7 @@ Managing your project efficiently ensures smooth progress.
 - **Code Documentation**: Write clean, well-commented code for maintainability. Look into the tools that can help you with this. For example, you can use JSDoc for JavaScript, Sphinx for Python, and Doxygen for C++.
 - **Usecase based development**: Develop your project based on the use cases divided amongst each member. Don't commit the cardinal sin of assigning a whole layer to a single member (my X member did the frontend). This is a recipe for disaster. 
 
-**Tip:** Meet with your team/advisor **weekly** to track progress.  
+> **Tip:** Meet with your team/advisor **weekly** to track progress.
 
 ---
 
@@ -158,7 +154,7 @@ For deployment:
 - **Automated Testing & Deployment**: Leverage CI/CD pipelines to automate the testing and deployment process. This reduces manual errors and ensures consistent releases.
 - **Backup & Rollback Plans**: Always have contingency measures in place. In case of deployment issues, a well-documented rollback plan can save valuable time and prevent data loss.
 
-**Tip:** Document any issues encountered during testing and deployment, and note how you resolved them. This documentation can be invaluable during your project defense and for future projects. 
+> **Tip:** Document any issues encountered during testing and deployment, and note how you resolved them. This documentation can be invaluable during your project defense and for future projects.
 
 ---
 
@@ -172,7 +168,7 @@ Your **FYP defense** is where you showcase your hard work. A great presentation 
 - **Presentation Design & Narrative**: Craft a clear, concise, and visually engaging presentation. A strong narrative that explains the problem, your approach, and the impact of your project can make a lasting impression.
 - **Handling Q&A**: Anticipate common questions and practice your responses. Prepare to discuss challenges, lessons learned, and possible future enhancements.
   
-**Tip:** **Practice** your defense multiple times before presenting. This practice will help you remain calm and confident, even when facing unexpected questions. Make sure all the members know all the details of the project. You don't want to be caught off guard by a question you should know the answer to.
+> **Tip:** **Practice** your defense multiple times before presenting. This practice will help you remain calm and confident, even when facing unexpected questions. Make sure all the members know all the details of the project. You don't want to be caught off guard by a question you should know the answer to.
 
 ---
 
@@ -189,4 +185,4 @@ Your FYP is more than just an academic requirement—it’s a **launchpad** for 
 
 ---
 
-I hope this guide helps you navigate your **Final Year Project** with confidence. If you have questions, feel free to **reach out** or **leave a comment**! 
+I hope this guide helps you navigate your **Final Year Project** with confidence. If you have questions, feel free to **reach out** or **leave a comment**!
