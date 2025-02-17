@@ -3,9 +3,7 @@ title: "Final Year Project (FYP) Guide for Students"
 date: 2025-02-17T12:00:00+05:00
 draft: false
 tags: ["FYP", "Final Year Project", "Students", "Software Engineering"]
-categories: ["Education", "Project Guidance"]
-ShowToc: true
-ShowComments: true
+showComments: true
 cover:
     image: "/assets/fyp-guide.jpg"
     alt: "FYP Guidance"
@@ -13,14 +11,16 @@ cover:
     relative: false
 ---
 
-## {{< color color="#FFB4A2" >}}Introduction{{< /color >}}
+## <span style="color:#FFB4A2">Introduction</span>
+
+
 
 Your **Final Year Project (FYP)** is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.  
 This guide will help you **choose the right topic, advisor, tech stack, and strategy** to ensure your FYP stands out. Please note that this guide is mainly targeted towards FASTians because of my personal affiliation to this great institute, but the advice can be applied to any university.
 
 ---
 
-## {{< color color="#FFB4A2" >}}Research & Development vs. Pure Development Projects{{< /color >}}
+## <span style="color:#FFB4A2">Research & Development vs. Pure Development Projects</span>
 
 When planning your FYP, it’s essential to decide which type of project best aligns with your interests, skills, and career goals. Generally, there are two broad categories:
 
@@ -43,8 +43,7 @@ Below is a comparison of the pros and cons of each approach:
 > **Tip:** Choose a Research & Development project if you’re passionate about exploring new ideas and contributing to academic knowledge—even if it means facing higher uncertainty. Opt for a Pure Development project if you prefer focusing on practical application and building a market-ready product, while showcasing your technical skills to future employers.
 
 ---
-
-## {{< color color="#FFB4A2" >}}How to Choose a Topic{{< /color >}}
+## <span style="color:#FFB4A2">How to Choose a Topic</span>
 
 Picking the right topic is **critical** for a successful FYP. A good topic should be:  
 
@@ -57,7 +56,7 @@ Picking the right topic is **critical** for a successful FYP. A good topic shoul
 
 ---
 
-## {{< color color="#FFB4A2" >}}How to Choose an Advisor{{< /color >}}
+## <span style="color:#FFB4A2">How to Choose an Advisor</span>
 
 Your advisor plays a **huge** role in your project's success. A good advisor should be:  
 
@@ -73,7 +72,7 @@ Your advisor plays a **huge** role in your project's success. A good advisor sho
 
 ---
 
-## {{< color color="#FFB4A2" >}}How to Choose a Tech Stack{{< /color >}}
+## <span style="color:#FFB4A2">Choosing the Right Tech Stack</span>
 
 Your tech stack should be **practical and aligned with your project's scope**. Consider:  
 
@@ -91,7 +90,7 @@ Your tech stack should be **practical and aligned with your project's scope**. C
 
 ---
 
-## {{< color color="#FFB4A2" >}}Can an FYP Help with Employment and Master's Admissions?{{< /color >}}
+## <span style="color:#FFB4A2">Can an FYP Help with Employment and Master's Admissions?</span>
 
 Absolutely! A **well-executed FYP** can:  
 
@@ -105,7 +104,7 @@ Please note that while having a good FYP improves your chances of success, it do
 
 ---
 
-## {{< color color="#FFB4A2" >}}How to Write an Effective FYP Proposal{{< /color >}}
+## <span style="color:#FFB4A2">How to Write a Strong Proposal</span>
 
 A solid proposal increases your chances of approval and sets a clear roadmap for your project. It should include:
 
@@ -124,7 +123,7 @@ A solid proposal increases your chances of approval and sets a clear roadmap for
 
 ---
 
-## {{< color color="#FFB4A2" >}}Project Management and Development Best Practices{{< /color >}}
+## <span style="color:#FFB4A2">Project Management Best Practices</span>
 
 Managing your project efficiently ensures smooth progress.  
 
@@ -138,7 +137,7 @@ Managing your project efficiently ensures smooth progress.
 
 ---
 
-## {{< color color="#FFB4A2" >}}Testing and Deployment Considerations{{< /color >}}
+## <span style="color:#FFB4A2">Testing & Deployment Strategies</span>
 
 Testing is often overlooked but is critical to ensuring your project’s success. Implement a comprehensive testing strategy that includes:
 
@@ -158,7 +157,7 @@ For deployment:
 
 ---
 
-## {{< color color="#FFB4A2" >}}How to Prepare for the FYP Defense{{< /color >}}
+## <span style="color:#FFB4A2">Preparing for Your FYP Defense</span>
 
 Your **FYP defense** is where you showcase your hard work. A great presentation includes:  
 
@@ -172,7 +171,19 @@ Your **FYP defense** is where you showcase your hard work. A great presentation 
 
 ---
 
-## {{< color color="#FFB4A2" >}}Conclusion{{< /color >}}
+## <span style="color:#FFB4A2">Company Sponsorships and Mentorship Programs</span>
+
+Looking beyond traditional academic support can add a real-world edge to your FYP. Consider these strategies:
+
+- **Internship Sponsorship:** If you've interned at a company, approach them with your project proposal. They might be interested in sponsoring your project, providing financial support and ensuring your work aligns with industry needs.
+- **Professor Connections:** Many professors have strong links with software houses. Occasionally, they secure projects from these companies that can be developed as part of a student's FYP. It's worth asking your advisor if such opportunities exist.
+- **Industry Mentorship Programs:** In Pakistan, several software houses now run FYP mentorship programs. These initiatives connect students with experienced industry professionals who can offer guidance, technical insights, and real-world perspectives throughout the project.
+
+> **Tip:** Leverage your network and inquire with both your past internship supervisors and professors about these opportunities—they could open doors to valuable industry partnerships.
+
+---
+
+## <span style="color:#FFB4A2">Conclusion</span>
 
 Your FYP is more than just an academic requirement—it’s a **launchpad** for your career.  
 
