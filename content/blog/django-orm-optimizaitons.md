@@ -8,7 +8,7 @@ ShowComments: true
 cover:
     image: "/assets/django-orm.jpg"
     alt: "Django ORM Optimization"
-    caption: "Fine-tuning Django ORM for Performance"
+    caption: "Photo by Nino Souza: https://www.pexels.com/photo/white-ring-bill-alarm-clock-2277923/"
     relative: false
 ---
 
