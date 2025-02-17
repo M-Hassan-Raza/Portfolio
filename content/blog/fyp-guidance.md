@@ -36,14 +36,14 @@ Picking the right topic is **critical** for a successful FYP. A good topic shoul
 
 Your advisor plays a **huge** role in your project's success. A good advisor should be:  
 
-- **Experienced in your chosen field**If your idea is novel enough and complex enough, you might want to consider an advisor who has experience in that domain. They can guide you better and help you avoid common pitfalls. A good example of this are the HODs who excel in their respective fields. They're usually very busy but if you can get them to agree to be your advisor, you're in for a treat. However, there are many many other faculty members who are just as good (if not better, considering they have more time to dedicate to you) and you should consider them as well.
-- **Responsive and willing to guide you properly**.  This is a big one. You don't want an advisor who's too busy to meet with you or doesn't respond to your emails. And let me be clear, this isn't a slight against any of the faculty members. They're all extremely helpful and knowledgeable. But some of them are just too busy to give you the attention you need. And here is where clear communication with your potential advisor comes in. You need to be upfront about your expectations and ask them about theirs. This ends up saving a lot of time and effort in the long run.
-- **Supportive of your ideas but also critical when needed**.  
+- **Experienced in your chosen field**: If your idea is novel enough and complex enough, you might want to consider an advisor who has experience in that domain. They can guide you better and help you avoid common pitfalls. A good example of this are the HODs who excel in their respective fields. They're usually very busy but if you can get them to agree to be your advisor, you're in for a treat. However, there are many many other faculty members who are just as good (if not better, considering they have more time to dedicate to you) and you should consider them as well.
+- **Responsive and willing to guide you properly**: This is a big one. You don't want an advisor who's too busy to meet with you or doesn't respond to your emails. And let me be clear, this isn't a slight against any of the faculty members. They're all extremely helpful and knowledgeable. But some of them are just too busy to give you the attention you need. And here is where clear communication with your potential advisor comes in. You need to be upfront about your expectations and ask them about theirs. This ends up saving a lot of time and effort in the long run.
+- **Supportive of your ideas but also critical when needed**: Everyone loves a chill time but you shouldn't try to chill with your FYP. You need someone who can guide you properly and point out the flaws in your project. You need someone who can push you to do better (even against your will hahaha). You need someone who can be your mentor. And you need someone who can be your friend. And you need someone who can be your critic. And you need someone who can be your cheerleader. That was a lot of "ands" but you get the point. FAST is filled with faculty members who can be all of these things and more. You just need to find the right one for you.
 
 **How to find one?**  
 - Check faculty profiles and see their published work.  
-- Ask seniors about their experiences with different advisors.  
-- Approach multiple advisors with a **short, well-prepared proposal**.  
+- Ask seniors about their experiences with different advisors. This is the most important one. Seniors can give you the best advice on who to choose as your advisor. They've been through the process and they know who's good and who's not. But still, they can be biased towards or against certain faculty members so take their advice with a grain of salt. Maybe the advisor who was too strict for them is the perfect fit for you.
+- Approach multiple advisors with a **short, well-prepared proposal**. Get a printed copy please. It's a small thing but it shows that you're serious about your project. And it's a good habit to get into. You should always have a printed copy of your proposal, your project plan, your project report, your project presentation, your project defense, your project... you get the point.
 
 ---
 
@@ -52,13 +52,13 @@ Your advisor plays a **huge** role in your project's success. A good advisor sho
 Your tech stack should be **practical and aligned with your project's scope**. Consider:  
 
 - **Industry Demand**: Is the tech widely used (e.g., Python, React, Django)?  
-- **Scalability**: Can your tech handle future growth?  
-- **Learning Curve**: Will you have time to master it?  
+- **Scalability**: Can your tech handle future growth? Let me be clear, not all projects need to be scalable. If you're building a project that's meant to be used by a small group of people, scalability might not be a concern for you. But if you're building a project that's meant to be used by a large group of people, scalability should be one of your top concerns. So please *don't over-engineer or under-engineer your project*. I have a habit of designing the projects (even hobby ones) that can scale to thousands of users. But that's not always necessary. 
+- **Learning Curve**: Will you have time to master it?  FASTians are built different. They can learn anything in a short amount of time. But that doesn't mean you should try to learn everything. You should stick to what you know and what you can learn in a reasonable amount of time. You don't want to be learning a new language or framework in the middle of your project. That's a recipe for disaster. Imagine flying a plane with your right while holding the manual in your left. However, if you have some time before your FYP starts, you can use that time to learn a new language or framework. 
 
 **Example Tech Stacks:**  
-- **Web Apps**: Vue.js / React + Django / Node.js + PostgreSQL  
+- **Web Apps**: Vue.js / Django / PostgreSQL. I love this stack. It's simple, it's powerful, and it's easy to learn. 
 - **AI/ML**: Python (TensorFlow, PyTorch) + Flask / FastAPI  
-- **Mobile Apps**: Flutter / React Native  
+- **Mobile Apps**: Kotlin / Swift. I prefer native apps as compared to hybrid apps. But that's just me. You might prefer hybrid apps and that's perfectly fine. I want to squeeze every bit of performance out of my apps. But you might not care about that.
 
 **Tip:** Stick to technologies you are comfortable with or have enough time to learn.  
 
@@ -68,8 +68,8 @@ Your tech stack should be **practical and aligned with your project's scope**. C
 
 Absolutely! A **well-executed FYP** can:  
 
-- **Impress recruiters**: Companies prefer candidates who have built real-world projects.  
-- **Boost your resume & portfolio**: Especially if it’s on GitHub with good documentation.  
+- **Impress recruiters**: Companies prefer candidates who have built real-world projects that they can check out. 
+- **Boost your resume & portfolio**: Especially if it’s on GitHub with good documentation. code quality, a working demo, and a good commit history. 
 - **Support your Master's application**: A strong project with a research component can help in admissions and scholarships.  
 
 **Tip:** Try to publish a **paper** or present your project in a **competition** for extra credibility.  
