@@ -23,7 +23,7 @@ This guide will help you <strong>choose the right topic, advisor, tech stack, an
 
 ---
 
-## <span style="color:#FFB4A2">Research & Development vs. Pure Development Projects</span>
+## <span style="color:#FFB4A2">Research & Development vs. Development</span>
 
 When planning your FYP, it’s essential to decide which type of project best aligns with your interests, skills, and career goals. Generally, there are two broad categories:
 
