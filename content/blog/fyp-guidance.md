@@ -15,8 +15,8 @@ cover:
 
 
 
-Your **Final Year Project (FYP)** is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.  
-This guide will help you **choose the right topic, advisor, tech stack, and strategy** to ensure your FYP stands out. Please note that this guide is mainly targeted towards FASTians because of my personal affiliation to this great institute, but the advice can be applied to any university.
+The fact that you have actually decided to read this behemoth of an article deserves admiration, and tells me that you're serious about your academics and career (or ar procrastinating on something else). Give me the next 20 mins of your life and I'll make you into a much more informed individual. Your **Final Year Project (FYP)** is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.  
+This guide will help you **choose the right topic, advisor, tech stack, and strategy** to ensure your FYP stands out. Please note that this guide is mainly targeted towards FASTians because of my personal affiliation, but the advice can be applied to any university. Also a disclaimer, I claim to be no expert in this field. I'm just a student who's been through the process and wants to help others navigate it. So take my very opinionated advice with a grain of salt.
 
 ---
 
