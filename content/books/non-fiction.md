@@ -5,11 +5,6 @@ draft: false
 description: "A selection of thought-provoking non-fiction books covering politics, history, and personal development."
 slug: "books-non-fiction"
 ShowComments: true
-cover:
-    image: "/assets/nonfiction.webp"
-    alt: "Non-Fiction Books"
-    caption: "Photo by Leah Newhouse: https://www.pexels.com/photo/close-up-photo-of-gray-typewriter-952594/"
-    relative: false
 ---
 
 <link rel="stylesheet" href="css/extended/z_custom.css">

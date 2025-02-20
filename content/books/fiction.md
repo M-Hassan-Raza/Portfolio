@@ -5,11 +5,6 @@ draft: false
 description: "A collection of immersive and thought-provoking fiction books spanning various genres."
 slug: "books-fiction"
 ShowComments: true
-cover:
-    image: "/assets/fiction.webp"
-    alt: "Fiction Books"
-    caption: "Photo by Nathan J Hilton: https://www.pexels.com/photo/cinematic-shot-of-a-sci-fi-droid-at-galaxy-s-edge-30691849/"
-    relative: false
 ---
 
 <link rel="stylesheet" href="css/extended/z_custom.css">
@@ -20,7 +15,7 @@ cover:
 
 ### <span class="book-subtitle">The Brothers Karamazov</span>
 <div class="book-cover">
-  <img src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300">
+  <img src="/assets/brotherskaramazov.webp" alt="The Brothers Karamazov Cover" width="200" height="300">
 </div>
 <p class="author">Author: Fyodor Dostoevsky</p>
 <blockquote class="review">
