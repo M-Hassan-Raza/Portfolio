@@ -14,6 +14,24 @@ cover:
 
 ## Programming & Technical
 
+
+### Database Internals: A Deep Dive into How Distributed Data Systems Work
+{{< figure src="/assets/designing-db-internals.jpg" alt="Database Internals Cover" width="200" height="300" >}}
+*Author: Alex Petrov*
+> A comprehensive guide to the internal workings of distributed data systems. A must-read for anyone working with databases. I'm greatly interested in Databases so this book was a no-brainer for me.
+
+
+### Designing Data-Intensive Applications
+{{< figure src="/assets/designing-data-intensive-applications.jpg" alt="Designing Data-Intensive Applications Cover" width="200" height="300" >}}
+*Author: Martin Kleppmann*
+> It's all about data these days. It's the new elixir of life. You won't get far into your career if you don't understand how to process and refine large amounts of data. 
+
+
+### Crafting Interpreters
+{{< figure src="/assets/crafting-interpreters.jpg" alt="Database Internals Cover" width="200" height="300" >}}
+*Author: Robert Nystrom*
+> I understand that most people might not care about their their code goes compiled/transpiled/interpreted, etc. But this was such a fun read. Writing a line that's similar to english and getting it to do things is magical and I believe every programmer should go through that euphoric feeling. 
+
 ### Clean Code: A Handbook of Agile Software Craftsmanship
 {{< figure src="/assets/cleancode.jpg" alt="Clean Code Cover" width="200" height="300" >}}
 *Author: Robert C. Martin*  
