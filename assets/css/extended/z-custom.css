@@ -162,15 +162,10 @@ body {
   height: 96px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border-light);
+  border: none;
   transition: border 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  .customer-review img {
-    border: 2px solid var(--border-dark);
-  }
-}
 
 .customer-review-content {
   flex: 1;
