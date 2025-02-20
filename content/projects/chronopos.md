@@ -100,7 +100,7 @@ Hundreds of businesses trust ChronoPOS to handle their daily operations. From sm
 </p>
 
 <div class="customer-review">
-  <img src="/assets/usman.jpg" alt="Usman Ghany">
+  <img src="/assets/usman-ghany-customer.jpg" alt="Usman Ghany">
   <div class="customer-review-content">
     <p>“ChronoPOS transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency.”</p>
     <cite>– Usman Ghany, Retail Store Owner</cite>
@@ -108,7 +108,7 @@ Hundreds of businesses trust ChronoPOS to handle their daily operations. From sm
 </div>
 
 <div class="customer-review">
-  <img src="/assets/inam.jpg" alt="Muhammad Inam">
+  <img src="/assets/muhammad-inam-customer.jpg" alt="Muhammad Inam">
   <div class="customer-review-content">
     <p>“As a wholesale business, managing suppliers and sales used to be a nightmare. ChronoPOS streamlined everything, saving us hours every week.”</p>
     <cite>– Muhammad Inam, Wholesale Business Manager</cite>
