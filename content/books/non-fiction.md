@@ -6,7 +6,7 @@ description: "A selection of thought-provoking non-fiction books covering politi
 slug: "books-non-fiction"
 ShowComments: true
 cover:
-    image: "/assets/nonfiction.jpg"
+    image: "/assets/nonfiction.webp"
     alt: "Non-Fiction Books"
     caption: "Photo by Leah Newhouse: https://www.pexels.com/photo/close-up-photo-of-gray-typewriter-952594/"
     relative: false
@@ -20,7 +20,7 @@ cover:
 
 ### <span class="book-subtitle">Clash of Civilizations</span>
 <div class="book-cover">
-  <img src="/assets/clash.jpg" alt="Clash of Civilizations Cover" width="200" height="300">
+  <img src="/assets/clash.webp" alt="Clash of Civilizations Cover" width="200" height="300">
 </div>
 <p class="author">Author: Samuel P. Huntington</p>
 <blockquote class="review">
@@ -29,7 +29,7 @@ A provocative thesis that reshaped global political discourse in the post–Cold
 
 ### <span class="book-subtitle">The Limits of Power</span>
 <div class="book-cover">
-  <img src="/assets/limitofpower.jpg" alt="The Limits of Power Cover" width="200" height="300">
+  <img src="/assets/limitofpower.webp" alt="The Limits of Power Cover" width="200" height="300">
 </div>
 <p class="author">Author: Andrew J. Bacevich</p>
 <blockquote class="review">
@@ -38,7 +38,7 @@ A critical examination of the constraints on national power and the perils of ov
 
 ### <span class="book-subtitle">Grit: The Power of Passion and Perseverance</span>
 <div class="book-cover">
-  <img src="/assets/gritpower.jpg" alt="Grit: The Power of Passion and Perseverance Cover" width="200" height="300">
+  <img src="/assets/gritpower.webp" alt="Grit: The Power of Passion and Perseverance Cover" width="200" height="300">
 </div>
 <p class="author">Author: Angela Duckworth</p>
 <blockquote class="review">
