@@ -8,8 +8,6 @@ ShowComments: true
 ---
 <div class="book-container">
 
-## <span class="book-title-main">Pakistan</span>
-
 ### <span class="book-subtitle">The Sole Spokesman: Jinnah, the Muslim League, and the Demand for Pakistan</span>
 <div class="book-cover">
   <img src="/assets/sole.webp" alt="The Sole Spokesman Cover" width="200" height="300">

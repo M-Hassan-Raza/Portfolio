@@ -6,10 +6,7 @@ description: "A collection of immersive and thought-provoking fiction books span
 slug: "books-fiction"
 ShowComments: true
 ---
-
 <div class="book-container">
-
-## <span class="book-title-main">Fiction</span>
 
 ### <span class="book-subtitle">The Brothers Karamazov</span>
 <div class="book-cover">
