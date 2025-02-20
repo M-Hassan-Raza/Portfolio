@@ -65,7 +65,17 @@ Built with <strong>VueJS, Django, and PostgreSQL</strong>, ChronoPOS is optimize
     <img src="/assets/productdb.png" alt="Product Database" class="zoomable">
     <figcaption>Manage products, units, and pricing efficiently.</figcaption>
   </figure>
+
+  <figure>
+    <img src="/assets/inventory.png" alt="Low Inventory" class="zoomable">
+    <figcaption>Never run out of things with real time inventory tracking</figcaption>
+  </figure>
   
+  <figure>
+    <img src="/assets/generateorder.png" alt="Generate Order" class="zoomable">
+    <figcaption>Quickly create orders for your suppliers</figcaption>
+  </figure>
+
   <figure>
     <img src="/assets/returns.png" alt="Returns Management" class="zoomable">
     <figcaption>Minimize errors with an automated returns process.</figcaption>
@@ -99,6 +109,11 @@ Built with <strong>VueJS, Django, and PostgreSQL</strong>, ChronoPOS is optimize
   <figure>
     <img src="/assets/archive.png" alt="Archive" class="zoomable">
     <figcaption>Track daily bills, refunds, and quotations at a glance</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/notes.png" alt="Notes" class="zoomable">
+    <figcaption>Built in diary so you never forget anything</figcaption>
   </figure>
 
   <figure>
