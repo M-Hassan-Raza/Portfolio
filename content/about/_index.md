@@ -11,10 +11,10 @@ I’m a <strong>CEO</strong>, <strong>Software Engineer</strong>, and <strong>Te
 
 ### Education
 
-<strong>Master of Science (MS) in Computer Science<strong>  
+<strong>Master of Science (MS) in Computer Science</strong>  
 *FAST National University of Computer and Emerging Sciences (NUCES), Lahore*  
 *2024 – 2026*  
-<strong>CGPA:<strong/> 4.0  
+<strong>CGPA:</strong> 4.0  
 
 <strong>Relevant Courses:</strong>  
 
@@ -28,9 +28,9 @@ I’m a <strong>CEO</strong>, <strong>Software Engineer</strong>, and <strong>Te
 <strong>Bachelor of Science (BS) in Software Engineering</strong>  
 *FAST National University of Computer and Emerging Sciences (NUCES), Lahore*  
 *2020 – 2024*  
-<strong>CGPA:<strong/> 3.30  
+<strong>CGPA:</strong> 3.30  
 
-<strong>Relevant Courses:<strong>  
+<strong>Relevant Courses:</strong>  
 
 | Course Name                      | Course Name                         |
 |----------------------------------|-------------------------------------|
@@ -45,7 +45,7 @@ I’m a <strong>CEO</strong>, <strong>Software Engineer</strong>, and <strong>Te
 
 ### Teaching Experience
 
-- <strong>Lab Instructor<strong>  
+- <strong>Lab Instructor</strong>  
   *FAST National University of Computer and Emerging Sciences (NUCES), Lahore*  
   *2024 – Present*
 
