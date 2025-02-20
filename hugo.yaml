@@ -31,6 +31,9 @@ params:
   ShowCodeCopyButtons: true
   env: production
 
+  customJS:
+    - /js/error-handler.js
+
   search:
     enabled: true
     placeholder: "Search posts, projects, and more..."
