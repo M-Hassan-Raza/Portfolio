@@ -40,7 +40,7 @@ params:
     enabled: true
     title: "Muhammad Hassan Raza"
     subtitle: "CEO | Software Engineer | Teacher"
-    imageUrl: "muhammad-hassan-raza-profile.jpg"
+    imageUrl: "muhammad-hassan-raza-profile.webp"
     imageTitle: "Profile Image"
     buttons:
       - name: "Projects"
