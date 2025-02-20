@@ -6,7 +6,7 @@ description: "Essential books on software craftsmanship, coding principles, and 
 slug: "books-technical"
 ShowComments: true
 cover:
-    image: "/assets/technical.jpg"
+    image: "/assets/technical.webp"
     alt: "Technical Books"
     caption: "Photo by Danny Meneses: https://www.pexels.com/photo/photo-of-turned-on-laptop-computer-943096/"
     relative: false
@@ -20,7 +20,7 @@ cover:
 
 ### <span class="book-subtitle">Database Internals: A Deep Dive into How Distributed Data Systems Work</span>
 <div class="book-cover">
-  <img src="/assets/designing-db-internals.jpg" alt="Database Internals Cover" width="200" height="300">
+  <img src="/assets/designing-db-internals.webp" alt="Database Internals Cover" width="200" height="300">
 </div>
 <p class="author">Author: Alex Petrov</p>
 <blockquote class="review">
@@ -29,7 +29,7 @@ A comprehensive guide to the internal workings of distributed data systems. Cove
 
 ### <span class="book-subtitle">Designing Data-Intensive Applications</span>
 <div class="book-cover">
-  <img src="/assets/designing-data-intensive-applications.jpg" alt="Designing Data-Intensive Applications Cover" width="200" height="300">
+  <img src="/assets/designing-data-intensive-applications.webp" alt="Designing Data-Intensive Applications Cover" width="200" height="300">
 </div>
 <p class="author">Author: Martin Kleppmann</p>
 <blockquote class="review">
@@ -38,7 +38,7 @@ It's all about data these days. It's the new <strong>elixir of life</strong>. Co
 
 ### <span class="book-subtitle">Crafting Interpreters</span>
 <div class="book-cover">
-  <img src="/assets/crafting-interpreters.jpg" alt="Crafting Interpreters Cover" width="200" height="300">
+  <img src="/assets/crafting-interpreters.webp" alt="Crafting Interpreters Cover" width="200" height="300">
 </div>
 <p class="author">Author: Robert Nystrom</p>
 <blockquote class="review">
@@ -47,7 +47,7 @@ Most don't care about how their code gets executed, but they should. This book t
 
 ### <span class="book-subtitle">Clean Code: A Handbook of Agile Software Craftsmanship</span>
 <div class="book-cover">
-  <img src="/assets/cleancode.jpg" alt="Clean Code Cover" width="200" height="300">
+  <img src="/assets/cleancode.webp" alt="Clean Code Cover" width="200" height="300">
 </div>
 <p class="author">Author: Robert C. Martin</p>
 <blockquote class="review">
@@ -56,7 +56,7 @@ A definitive guide to writing code that is both <strong>elegant and maintainable
 
 ### <span class="book-subtitle">Design Patterns: Elements of Reusable Object-Oriented Software</span>
 <div class="book-cover">
-  <img src="/assets/designpatterns.jpg" alt="Design Patterns Cover" width="200" height="300">
+  <img src="/assets/designpatterns.webp" alt="Design Patterns Cover" width="200" height="300">
 </div>
 <p class="author">Authors: Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</p>
 <blockquote class="review">
@@ -65,7 +65,7 @@ The <strong>daddy</strong> of all design pattern books. Introduces concepts like
 
 ### <span class="book-subtitle">The Clean Coder: A Code of Conduct for Professional Programmers</span>
 <div class="book-cover">
-  <img src="/assets/cleancoder.jpg" alt="The Clean Coder Cover" width="200" height="300">
+  <img src="/assets/cleancoder.webp" alt="The Clean Coder Cover" width="200" height="300">
 </div>
 <p class="author">Author: Robert C. Martin</p>
 <blockquote class="review">
