@@ -47,37 +47,55 @@
 
     {{- if (.Param "showComments") }}
     <div class="giscus-container">
-        <script src="https://giscus.app/client.js" data-repo="M-Hassan-Raza/Portfolio" data-repo-id="R_kgDON3Oajw"
-            data-category="General" data-category-id="DIC_kwDON3Oaj84Cm3y9" data-mapping="pathname" data-strict="0"
-            data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" 
-                data - lang="en"
-                crossorigin = "anonymous"
-                async >
-            </script>
+        <script src="https://giscus.app/client.js"
+            data-repo="M-Hassan-Raza/Portfolio"
+            data-repo-id="R_kgDON3Oajw"
+            data-category="General"
+            data-category-id="DIC_kwDON3Oaj84Cm3y9"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+        </script>
     </div>
-
     <script>
-            // Returns "dark" if the <body> has a "dark" class, else "light"
-            function getGiscusTheme() {
-                return document.body.classList.contains('dark') ? 'dark' : 'light';
+        const updateGiscusTheme = () => {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) {
+                setTimeout(updateGiscusTheme, 300);
+                return;
             }
 
-        // Immediately dispatch the current theme to giscus
-        window.dispatchEvent(new CustomEvent('giscus:set-theme', {
-            detail: { theme: getGiscusTheme() }
-        }));
+            const theme = document.documentElement.classList.contains('dark') ? 
+                'dark_dimmed' : 
+                'light';
 
-        // Watch for changes to the body class (e.g. when theme toggles)
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'class') {
-                    window.dispatchEvent(new CustomEvent('giscus:set-theme', {
-                        detail: { theme: getGiscusTheme() }
-                    }));
-                }
-            });
+            iframe.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme
+                        }
+                    }
+                },
+                'https://giscus.app'
+            );
+        };
+
+        // Update theme when the page loads
+        window.addEventListener('load', updateGiscusTheme);
+
+        // Watch for theme changes
+        const observer = new MutationObserver(updateGiscusTheme);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
         });
-        observer.observe(document.body, { attributes: true });
     </script>
     {{- end }}
 
