@@ -20,6 +20,12 @@
   }
 }
 
+body:not(.dark) {
+  --book-title-color: #A12608;
+  --book-subtitle-color: #2F7E98;
+}
+
+
 .book-container {
   text-align: justify;
   color: var(--text-color);
