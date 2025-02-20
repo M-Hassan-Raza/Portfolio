@@ -17,7 +17,8 @@
         </div>
         {{- end }}
     </header>
-    {{- $isHidden := .Params.cover.hidden | default site.Params.cover.hiddenInSingle | default site.Params.cover.hidden }}
+    {{- $isHidden := .Params.cover.hidden | default site.Params.cover.hiddenInSingle | default site.Params.cover.hidden
+    }}
     {{- partial "cover.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
     {{- if (.Param "ShowToc") }}
     {{- partial "toc.html" . }}
@@ -38,7 +39,7 @@
             {{- end }}
         </ul>
         {{- end }}
-        
+
         {{- if (.Param "ShowPostNavLinks") }}
         {{- partial "post_nav_links.html" . }}
         {{- end }}
@@ -46,22 +47,40 @@
 
     {{- if (.Param "showComments") }}
     <div class="giscus-container">
-        <script src="https://giscus.app/client.js" 
-            data-repo="M-Hassan-Raza/Portfolio" 
-            data-repo-id="R_kgDON3Oajw"
-            data-category="General" 
-            data-category-id="DIC_kwDON3Oaj84Cm3y9" 
-            data-mapping="pathname" 
-            data-strict="0"
-            data-reactions-enabled="1" 
-            data-emit-metadata="0" 
-            data-input-position="bottom" 
-            data-theme="preferred_color_scheme"
-            data-lang="en" 
-            crossorigin="anonymous" 
-            async>
-        </script>
+        <script src="https://giscus.app/client.js" data-repo="M-Hassan-Raza/Portfolio" data-repo-id="R_kgDON3Oajw"
+            data-category="General" data-category-id="DIC_kwDON3Oaj84Cm3y9" data-mapping="pathname" data-strict="0"
+            data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" <!--
+            default theme -->
+                data - lang="en"
+                crossorigin = "anonymous"
+                async >
+            </script>
     </div>
+
+    <script>
+            // Returns "dark" if the <body> has a "dark" class, else "light"
+            function getGiscusTheme() {
+                return document.body.classList.contains('dark') ? 'dark' : 'light';
+            }
+
+        // Immediately dispatch the current theme to giscus
+        window.dispatchEvent(new CustomEvent('giscus:set-theme', {
+            detail: { theme: getGiscusTheme() }
+        }));
+
+        // Watch for changes to the body class (e.g. when theme toggles)
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    window.dispatchEvent(new CustomEvent('giscus:set-theme', {
+                        detail: { theme: getGiscusTheme() }
+                    }));
+                }
+            });
+        });
+        observer.observe(document.body, { attributes: true });
+    </script>
     {{- end }}
+
 </article>
 {{- end }}
