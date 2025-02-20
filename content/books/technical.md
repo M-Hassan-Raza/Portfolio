@@ -19,8 +19,10 @@ cover:
 ## <span class="book-title-main">Programming & Technical</span>
 
 ### <span class="book-subtitle">Database Internals: A Deep Dive into How Distributed Data Systems Work</span>
+{{ $dbImg := resources.Get "assets/designing-db-internals.webp" }}
+{{ $dbResized := $dbImg.Fit "200x300" }}
 <div class="book-cover">
-  <img src="/assets/designing-db-internals.webp" alt="Database Internals Cover" width="200" height="300">
+  <img src="{{ $dbResized.RelPermalink }}" alt="Database Internals Cover" width="200" height="300">
 </div>
 <p class="author">Author: Alex Petrov</p>
 <blockquote class="review">
@@ -28,8 +30,10 @@ A comprehensive guide to the internal workings of distributed data systems. Cove
 </blockquote>
 
 ### <span class="book-subtitle">Designing Data-Intensive Applications</span>
+{{ $dataImg := resources.Get "assets/designing-data-intensive-applications.webp" }}
+{{ $dataResized := $dataImg.Fit "200x300" }}
 <div class="book-cover">
-  <img src="/assets/designing-data-intensive-applications.webp" alt="Designing Data-Intensive Applications Cover" width="200" height="300">
+  <img src="{{ $dataResized.RelPermalink }}" alt="Designing Data-Intensive Applications Cover" width="200" height="300">
 </div>
 <p class="author">Author: Martin Kleppmann</p>
 <blockquote class="review">
@@ -37,8 +41,10 @@ It's all about data these days. It's the new <strong>elixir of life</strong>. Co
 </blockquote>
 
 ### <span class="book-subtitle">Crafting Interpreters</span>
+{{ $craftImg := resources.Get "assets/crafting-interpreters.webp" }}
+{{ $craftResized := $craftImg.Fit "200x300" }}
 <div class="book-cover">
-  <img src="/assets/crafting-interpreters.webp" alt="Crafting Interpreters Cover" width="200" height="300">
+  <img src="{{ $craftResized.RelPermalink }}" alt="Crafting Interpreters Cover" width="200" height="300">
 </div>
 <p class="author">Author: Robert Nystrom</p>
 <blockquote class="review">
@@ -46,8 +52,10 @@ Most don't care about how their code gets executed, but they should. This book t
 </blockquote>
 
 ### <span class="book-subtitle">Clean Code: A Handbook of Agile Software Craftsmanship</span>
+{{ $cleanCodeImg := resources.Get "assets/cleancode.webp" }}
+{{ $cleanCodeResized := $cleanCodeImg.Fit "200x300" }}
 <div class="book-cover">
-  <img src="/assets/cleancode.webp" alt="Clean Code Cover" width="200" height="300">
+  <img src="{{ $cleanCodeResized.RelPermalink }}" alt="Clean Code Cover" width="200" height="300">
 </div>
 <p class="author">Author: Robert C. Martin</p>
 <blockquote class="review">
@@ -55,8 +63,10 @@ A definitive guide to writing code that is both <strong>elegant and maintainable
 </blockquote>
 
 ### <span class="book-subtitle">Design Patterns: Elements of Reusable Object-Oriented Software</span>
+{{ $designPatternsImg := resources.Get "assets/designpatterns.webp" }}
+{{ $designPatternsResized := $designPatternsImg.Fit "200x300" }}
 <div class="book-cover">
-  <img src="/assets/designpatterns.webp" alt="Design Patterns Cover" width="200" height="300">
+  <img src="{{ $designPatternsResized.RelPermalink }}" alt="Design Patterns Cover" width="200" height="300">
 </div>
 <p class="author">Authors: Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</p>
 <blockquote class="review">
@@ -64,8 +74,10 @@ The <strong>daddy</strong> of all design pattern books. Introduces concepts like
 </blockquote>
 
 ### <span class="book-subtitle">The Clean Coder: A Code of Conduct for Professional Programmers</span>
+{{ $cleanCoderImg := resources.Get "assets/cleancoder.webp" }}
+{{ $cleanCoderResized := $cleanCoderImg.Fit "200x300" }}
 <div class="book-cover">
-  <img src="/assets/cleancoder.webp" alt="The Clean Coder Cover" width="200" height="300">
+  <img src="{{ $cleanCoderResized.RelPermalink }}" alt="The Clean Coder Cover" width="200" height="300">
 </div>
 <p class="author">Author: Robert C. Martin</p>
 <blockquote class="review">
