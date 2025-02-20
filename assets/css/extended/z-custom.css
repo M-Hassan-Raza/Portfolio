@@ -8,8 +8,10 @@
 
 /* Dark theme colors */
 .dark {
-  --book-title-color: #ffc5b7;    /* Lighter version of FFB4A2 */
-  --book-subtitle-color: #a8d5e5;  /* Lighter version of 8ac7db */
+  --book-title-color: #ffc5b7;
+  /* Lighter version of FFB4A2 */
+  --book-subtitle-color: #a8d5e5;
+  /* Lighter version of 8ac7db */
 }
 
 /* If user's system is set to dark mode and no theme is explicitly set */
@@ -129,26 +131,45 @@ body {
   text-align: center;
 }
 
+:root {
+  --background-light: #f8f9fa;
+  --background-dark: #1e1e1e;
+  --text-light: #333;
+  --text-dark: #ddd;
+  --border-light: var(--primary-color);
+  --border-dark: #ff9800;
+  /* Adjust for dark mode contrast */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(255, 255, 255, 0.1);
+}
 
 .customer-review {
-  background: #f8f9fa; /* Softer background for a modern look */
-  border-left: 5px solid var(--primary-color); /* Highlighted border */
+  /* Default light mode */
+  border-left: 5px solid var(--border-light);
   padding: 20px;
   margin: 20px 0;
   font-style: italic;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px var(--shadow-light);
   display: flex;
   align-items: center;
   gap: 15px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .customer-review img {
   width: 80px;
   height: 80px;
-  border-radius: 50%; /* Circular images */
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--border-light);
+  transition: border 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .customer-review img {
+    border: 2px solid var(--border-dark);
+  }
 }
 
 .customer-review-content {
@@ -157,18 +178,19 @@ body {
 
 .customer-review p {
   font-size: 1rem;
-  color: #333;
+  color: var(--text-light);
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .customer-review cite {
   display: block;
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(--border-light);
   margin-top: 8px;
   font-style: normal;
+  transition: color 0.3s ease;
 }
-
 
 .contact-info {
   font-size: 1.2rem;
