@@ -8,8 +8,6 @@ ShowComments: true
 ---
 <div class="book-container">
 
-## <span class="book-title-main">Programming & Technical</span>
-
 ### <span class="book-subtitle">Database Internals: A Deep Dive into How Distributed Data Systems Work</span>
 <div class="book-cover">
   <img src="/assets/designing-db-internals.webp" alt="Database Internals Cover" width="200" height="300">

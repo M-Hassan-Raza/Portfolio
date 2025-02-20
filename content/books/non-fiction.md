@@ -8,8 +8,6 @@ ShowComments: true
 ---
 <div class="book-container">
 
-## <span class="book-title-main">Non-Fiction</span>
-
 ### <span class="book-subtitle">Clash of Civilizations</span>
 <div class="book-cover">
   <img src="/assets/clash.webp" alt="Clash of Civilizations Cover" width="200" height="300">

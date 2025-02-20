@@ -1,16 +1,43 @@
 /* books.css */
+
+:root {
+  /* Light theme colors */
+  --book-title-color: #A12608;
+  --book-subtitle-color: #2F7E98;
+}
+
+/* Dark theme colors */
+.dark {
+  --book-title-color: #ffc5b7;    /* Lighter version of FFB4A2 */
+  --book-subtitle-color: #a8d5e5;  /* Lighter version of 8ac7db */
+}
+
+/* If user's system is set to dark mode and no theme is explicitly set */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --book-title-color: #ffc5b7;
+    --book-subtitle-color: #a8d5e5;
+  }
+}
+
+body:not(.dark) {
+  --book-title-color: #A12608;
+  --book-subtitle-color: #2F7E98;
+}
+
+
 .book-container {
   text-align: justify;
+  color: var(--text-color);
 }
 
 .book-title-main {
-  color: #EA0000;
+  color: var(--book-title-color);
 }
 
 .book-subtitle {
-  color: #006FF4;
+  color: var(--book-subtitle-color);
 }
-
 
 .book-cover {
   display: flex;
@@ -25,15 +52,11 @@
   font-size: 1rem;
   text-align: center;
   margin-top: 0.5rem;
+  color: var(--text-color);
 }
 
 .review {
   margin: 1rem 0;
   font-size: 1rem;
-}
-
-/* z_custom.css */
-.toc {
-  min-height: 200px;
-  /* Reserve space to avoid shifts */
+  color: var(--text-color);
 }
