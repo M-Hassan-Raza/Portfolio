@@ -29,7 +29,8 @@ cover:
 
 ### Crafting Interpreters
 {{< figure src="/assets/crafting-interpreters.jpg" alt="Database Internals Cover" width="200" height="300" >}}
-
+*Author: Robert Nystrom*
+> I understand that most people might not care about their their code goes compiled/transpiled/interpreted, etc. But this was such a fun read. Writing a line that's similar to english and getting it to do things is magical and I believe every programmer should go through that euphoric feeling. 
 
 ### Clean Code: A Handbook of Agile Software Craftsmanship
 {{< figure src="/assets/cleancode.jpg" alt="Clean Code Cover" width="200" height="300" >}}
