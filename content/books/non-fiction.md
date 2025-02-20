@@ -12,20 +12,37 @@ cover:
     relative: false
 ---
 
-## Non-Fiction
+<link rel="stylesheet" href="css/extended/z_custom.css">
 
-### Clash of Civilizations
-{{< figure src="/assets/clash.jpg" alt="Clash of Civilizations Cover" width="200" height="300" >}}
-*Author: Samuel P. Huntington*  
-> A provocative thesis that reshaped global political discourse in the post–Cold War era. I consider it a slightly racist book but an important one nonetheless.
+<div class="book-container">
 
-### The Limits of Power
-{{< figure src="/assets/limitofpower.jpg" alt="The Limits of Power Cover" width="200" height="300" >}}
-*Author: Andrew J. Bacevich*  
-> A critical examination of the constraints on national power and the perils of overreach.
+## <span class="book-title-main">Non-Fiction</span>
 
-### Grit: The Power of Passion and Perseverance
-{{< figure src="/assets/gritpower.jpg" alt="Grit: The Power of Passion and Perseverance Cover" width="200" height="300" >}}
-*Author: Angela Duckworth*  
-> A groundbreaking exploration of the power of grit to drive personal and professional success.
+### <span class="book-subtitle">Clash of Civilizations</span>
+<div class="book-cover">
+  <img src="/assets/clash.jpg" alt="Clash of Civilizations Cover" width="200" height="300">
+</div>
+<p class="author">Author: Samuel P. Huntington</p>
+<blockquote class="review">
+A provocative thesis that reshaped global political discourse in the post–Cold War era. Examines cultural fault lines and their implications for international relations, despite its controversial tone.
+</blockquote>
 
+### <span class="book-subtitle">The Limits of Power</span>
+<div class="book-cover">
+  <img src="/assets/limitofpower.jpg" alt="The Limits of Power Cover" width="200" height="300">
+</div>
+<p class="author">Author: Andrew J. Bacevich</p>
+<blockquote class="review">
+A critical examination of the constraints on national power and the perils of overreach. Uses historical case studies to illustrate the dangers of unchecked military ambition.
+</blockquote>
+
+### <span class="book-subtitle">Grit: The Power of Passion and Perseverance</span>
+<div class="book-cover">
+  <img src="/assets/gritpower.jpg" alt="Grit: The Power of Passion and Perseverance Cover" width="200" height="300">
+</div>
+<p class="author">Author: Angela Duckworth</p>
+<blockquote class="review">
+A groundbreaking exploration of how passion and perseverance drive success. Provides actionable insights on cultivating resilience in both personal and professional spheres.
+</blockquote>
+
+</div>

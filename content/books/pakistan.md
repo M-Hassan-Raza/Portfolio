@@ -12,15 +12,28 @@ cover:
     relative: false
 ---
 
-## Pakistan
+<link rel="stylesheet" href="css/extended/z_custom.css">
 
-### The Sole Spokesman: Jinnah, the Muslim League, and the Demand for Pakistan
-{{< figure src="/assets/sole.jpg" alt="The Sole Spokesman Cover" width="200" height="300" >}}
-*Author: Ayesha Jalal*  
-> A penetrating analysis of the role of a singular spokesperson in shaping public discourse.
+<div class="book-container">
 
-### The Making of Pakistan: A Study in Nationalism
-{{< figure src="/assets/makingofpakistan.jpg" alt="The Making of Pakistan Cover" width="200" height="300" >}}
-*Author: K.K. Aziz*  
-> A fascinating exploration of Pakistan's creation, filled with historical insights, newspaper excerpts, and personal interviews.
+## <span class="book-title-main">Pakistan</span>
 
+### <span class="book-subtitle">The Sole Spokesman: Jinnah, the Muslim League, and the Demand for Pakistan</span>
+<div class="book-cover">
+  <img src="/assets/sole.jpg" alt="The Sole Spokesman Cover" width="200" height="300">
+</div>
+<p class="author">Author: Ayesha Jalal</p>
+<blockquote class="review">
+A penetrating analysis of the role of a singular spokesperson in shaping public discourse. Examines Jinnah’s influence through political rhetoric and media engagement.
+</blockquote>
+
+### <span class="book-subtitle">The Making of Pakistan: A Study in Nationalism</span>
+<div class="book-cover">
+  <img src="/assets/makingofpakistan.jpg" alt="The Making of Pakistan Cover" width="200" height="300">
+</div>
+<p class="author">Author: K.K. Aziz</p>
+<blockquote class="review">
+A fascinating exploration of Pakistan’s creation filled with historical insights, newspaper excerpts, and personal interviews. Delivers nuanced perspectives on identity and nation‐building.
+</blockquote>
+
+</div>
