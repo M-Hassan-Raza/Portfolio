@@ -5,11 +5,6 @@ draft: false
 description: "Essential books on software craftsmanship, coding principles, and system design."
 slug: "books-technical"
 ShowComments: true
-cover:
-    image: "/assets/technical.webp"
-    alt: "Technical Books"
-    caption: "Photo by Danny Meneses: https://www.pexels.com/photo/photo-of-turned-on-laptop-computer-943096/"
-    relative: false
 ---
 
 <link rel="stylesheet" href="css/extended/z_custom.css">
