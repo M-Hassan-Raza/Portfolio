@@ -6,9 +6,6 @@ description: "A selection of thought-provoking non-fiction books covering politi
 slug: "books-non-fiction"
 ShowComments: true
 ---
-
-<link rel="stylesheet" href="css/extended/z_custom.css">
-
 <div class="book-container">
 
 ## <span class="book-title-main">Non-Fiction</span>

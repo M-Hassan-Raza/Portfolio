@@ -6,9 +6,6 @@ description: "Essential books on software craftsmanship, coding principles, and 
 slug: "books-technical"
 ShowComments: true
 ---
-
-<link rel="stylesheet" href="css/extended/z_custom.css">
-
 <div class="book-container">
 
 ## <span class="book-title-main">Programming & Technical</span>
