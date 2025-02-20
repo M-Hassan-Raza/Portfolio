@@ -57,42 +57,42 @@
             data-reactions-enabled="1"
             data-emit-metadata="0"
             data-input-position="bottom"
-            data-theme="preferred_color_scheme"
+            data-theme="light"
             data-lang="en"
             crossorigin="anonymous"
             async>
         </script>
     </div>
     <script>
-        const updateGiscusTheme = () => {
+        function getTheme() {
+            return document.body.classList.contains('dark') ? 'dark' : 'light';
+        }
+
+        function updateGiscusTheme() {
             const iframe = document.querySelector('iframe.giscus-frame');
             if (!iframe) {
                 setTimeout(updateGiscusTheme, 300);
                 return;
             }
 
-            const theme = document.documentElement.classList.contains('dark') ? 
-                'dark_dimmed' : 
-                'light';
-
+            const theme = getTheme();
             iframe.contentWindow.postMessage(
-                {
-                    giscus: {
-                        setConfig: {
-                            theme: theme
-                        }
-                    }
-                },
+                { giscus: { setConfig: { theme: theme } } },
                 'https://giscus.app'
             );
-        };
+        }
 
-        // Update theme when the page loads
-        window.addEventListener('load', updateGiscusTheme);
+        // Add initial theme check
+        if (localStorage.getItem("pref-theme") === "dark") {
+            updateGiscusTheme();
+        }
 
-        // Watch for theme changes
-        const observer = new MutationObserver(updateGiscusTheme);
-        observer.observe(document.documentElement, {
+        // Watch for theme changes on body element
+        const observer = new MutationObserver(() => {
+            updateGiscusTheme();
+        });
+
+        observer.observe(document.body, {
             attributes: true,
             attributeFilter: ['class']
         });
