@@ -15,7 +15,7 @@ ShowComments: true
 
 ### <span class="book-subtitle">The Brothers Karamazov</span>
 <div class="book-cover">
-  <img src="/assets/brotherskaramazov.jpeg" alt="The Brothers Karamazov Cover" width="200" height="300">
+  <img src="/assets/brotherskaramazov.webp" alt="The Brothers Karamazov Cover" width="200" height="300">
 </div>
 <p class="author">Author: Fyodor Dostoevsky</p>
 <blockquote class="review">
