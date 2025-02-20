@@ -5,11 +5,6 @@ draft: false
 description: "A collection of immersive and thought-provoking fiction books spanning various genres."
 slug: "books-fiction"
 ShowComments: true
-cover:
-    image: "/assets/fiction.webp"
-    alt: "Fiction Books"
-    caption: "Photo by Nathan J Hilton: https://www.pexels.com/photo/cinematic-shot-of-a-sci-fi-droid-at-galaxy-s-edge-30691849/"
-    relative: false
 ---
 
 <link rel="stylesheet" href="css/extended/z_custom.css">
