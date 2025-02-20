@@ -77,8 +77,28 @@ Built with <strong>VueJS, Django, and PostgreSQL</strong>, ChronoPOS is optimize
   </figure>
 
   <figure>
+    <img src="/assets/singleledger.png" alt="Detailed Customer Ledger" class="zoomable">
+    <figcaption>Manage each customer's ledger in detail</figcaption>
+  </figure>
+
+  <figure>
     <img src="/assets/salesreport.png" alt="Sales Report" class="zoomable">
     <figcaption>Generate detailed reports for sales trends and business performance.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/supplychain.png" alt="Supply Chain" class="zoomable">
+    <figcaption>Manage Supply Chain Partners</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/supplierledger.png" alt="Supplier Ledger" class="zoomable">
+    <figcaption>Track transactions and manage supplier balances easily.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/archive.png" alt="Archive" class="zoomable">
+    <figcaption>Track daily bills, refunds, and quotations at a glance</figcaption>
   </figure>
 
   <figure>
