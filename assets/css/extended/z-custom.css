@@ -173,7 +173,6 @@ body {
 
 .customer-review p {
   font-size: 1rem;
-  color: var(--text-light);
   margin: 0;
   transition: color 0.3s ease;
 }
@@ -181,7 +180,6 @@ body {
 .customer-review cite {
   display: block;
   font-weight: bold;
-  color: var(--border-light);
   margin-top: 8px;
   font-style: normal;
   transition: color 0.3s ease;
