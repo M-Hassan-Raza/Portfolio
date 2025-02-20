@@ -93,22 +93,27 @@ Built with <strong>VueJS, Django, and PostgreSQL</strong>, ChronoPOS is optimize
   <img class="modal-content" id="fullsizeImage">
 </div>
 
-
 ## Customer Success Stories  
 
 <p class="justified-text">
 Hundreds of businesses trust ChronoPOS to handle their daily operations. From small retailers to multi-location franchises, our system has helped businesses improve efficiency, reduce costs, and increase profitability.  
 </p>
 
-<blockquote class="customer-review">
-  <p>“ChronoPOS transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency.”</p>
-  <cite>– Usman Ghany, Retail Store Owner</cite>
-</blockquote>
+<div class="customer-review">
+  <img src="/assets/usman.jpg" alt="Usman Ghany">
+  <div class="customer-review-content">
+    <p>“ChronoPOS transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency.”</p>
+    <cite>– Usman Ghany, Retail Store Owner</cite>
+  </div>
+</div>
 
-<blockquote class="customer-review">
-  <p>“As a wholesale business, managing suppliers and sales used to be a nightmare. ChronoPOS streamlined everything, saving us hours every week.”</p>
-  <cite>– Muhammad Inam, Wholesale Business Manager</cite>
-</blockquote>
+<div class="customer-review">
+  <img src="/assets/inam.jpg" alt="Muhammad Inam">
+  <div class="customer-review-content">
+    <p>“As a wholesale business, managing suppliers and sales used to be a nightmare. ChronoPOS streamlined everything, saving us hours every week.”</p>
+    <cite>– Muhammad Inam, Wholesale Business Manager</cite>
+  </div>
+</div>
 
 ## Get ChronoPOS for Your Business  
 
