@@ -7,8 +7,6 @@ slug: "books-fiction"
 ShowComments: true
 ---
 
-<link rel="stylesheet" href="css/extended/z_custom.css">
-
 <div class="book-container">
 
 ## <span class="book-title-main">Fiction</span>

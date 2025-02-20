@@ -6,9 +6,6 @@ description: "Books that explore the history, politics, and identity of Pakistan
 slug: "books-pakistan"
 ShowComments: true
 ---
-
-<link rel="stylesheet" href="css/extended/z_custom.css">
-
 <div class="book-container">
 
 ## <span class="book-title-main">Pakistan</span>
