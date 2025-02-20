@@ -4,12 +4,13 @@
 }
 
 .book-title-main {
-  color: #eb8d76;
+  color: #EA0000;
 }
 
 .book-subtitle {
-  color: #51a2bc;
+  color: #006FF4;
 }
+
 
 .book-cover {
   display: flex;
