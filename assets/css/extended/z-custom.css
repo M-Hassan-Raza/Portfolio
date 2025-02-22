@@ -281,3 +281,72 @@ body {
 .dark .resource-link:hover {
   background-color: var(--secondary-color);
 }
+
+/* Custom styles to add to your CSS file */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 3rem 2rem;
+  color: var(--bg-color);
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 1.5rem;
+  background: var(--bg-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px var(--shadow-light);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.expertise-card {
+  background: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px var(--shadow-light);
+  transition: transform 0.2s ease;
+}
+
+.dark .expertise-card,
+.dark .stat-item {
+  background: var(--background-dark);
+  box-shadow: 0 4px 6px var(--shadow-dark);
+}
+
+.cta-button {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
+  margin: 1rem 0;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
