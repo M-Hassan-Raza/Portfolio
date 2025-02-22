@@ -71,8 +71,14 @@ Choose a time that works for you to discuss:
 
 <div class="customer-review">
   <div class="customer-review-content">
-    <p>"Hassan's expertise in developing our custom POS solution has been invaluable. His technical knowledge and attention to detail resulted in a system that perfectly fits our needs."</p>
-    <cite>- Sarah Chen, Restaurant Owner</cite>
+    <p>"ChronoPOS transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency."</p>
+    <cite>- Muhammad Inam, Wholesale Business Manager</cite>
+  </div>
+</div>
+<div class="customer-review">
+  <div class="customer-review-content">
+    <p>"As a wholesale business, managing suppliers and sales used to be a nightmare. ChronoPOS streamlined everything, saving us hours every week."</p>
+    <cite>- Usman Ghany, Retail Store Owner</cite>
   </div>
 </div>
 
