@@ -3,7 +3,7 @@ title: "Let's Build Something Amazing Together"
 date: 2025-02-11
 description: "Full-Stack Developer specialized in scalable business solutions and innovative POS systems"
 summary: "Schedule a consultation to discuss your next project, ChronoPOS implementation, or custom software needs."
-showToc: true
+showToc: false
 showReadingTime: false
 ---
 

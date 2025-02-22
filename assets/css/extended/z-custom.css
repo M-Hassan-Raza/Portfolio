@@ -20,8 +20,8 @@
   
   /* Hero section specific */
   --hero-text-color: #ffffff;
-  --hero-gradient-start: #8a1f06;
-  --hero-gradient-end: #265f75;
+  --hero-gradient-start: #A12608;  /* Primary color red */
+  --hero-gradient-end: #2F7E98;    /* Secondary color blue */
 }
 
 /* Dark Theme Variables */
@@ -46,8 +46,8 @@
   
   /* Hero section specific */
   --hero-text-color: #ffffff;
-  --hero-gradient-start: #8a1f06;
-  --hero-gradient-end: #265f75;
+  --hero-gradient-start: #ff9c86;  /* Light peach from primary */
+  --hero-gradient-end: #66a7bf;    /* Dark theme secondary */
 }
 
 /* System Dark Mode Override */
@@ -162,9 +162,11 @@ body:not(.dark) {
 }
 /* Enhancing the hero section */
 .hero-section {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(
+    135deg,
     var(--hero-gradient-start),
-    var(--hero-gradient-end));
+    var(--hero-gradient-end)
+  );
   padding: 4rem 2rem;
   color: var(--hero-text-color);
   border-radius: 1rem;
@@ -177,6 +179,11 @@ body:not(.dark) {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+}
+
+.dark .hero-section h1,
+.dark .hero-section p {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-section p {
