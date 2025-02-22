@@ -10,7 +10,7 @@ showReadingTime: false
 <div class="hero-section">
   <h1>Transform Your Business with Custom Software Solutions</h1>
   <p>From point-of-sale systems to full-scale web applications, I bring your ideas to life.</p>
-  <a href="https://calendly.com/hassanraza" class="cta-button">Schedule a Free Consultation</a>
+  <a href="https://cal.com/muhammad-hassan-raza/30min" class="cta-button">Schedule a Free Consultation</a>
 </div>
 
 <div class="stats-container">
