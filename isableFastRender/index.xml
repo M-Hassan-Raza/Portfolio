@@ -134,11 +134,11 @@ This guide will help you &lt;strong&gt;choose the right topic, advisor, tech sta
       <description>Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.</description>
     </item>
     <item>
-      <title>Book a Call</title>
+      <title>Let&#39;s Build Something Amazing Together</title>
       <link>http://localhost:1313/book-a-call/</link>
       <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/book-a-call/</guid>
-      <description>Get in touch for collaborations, inquiries, or support.</description>
+      <description>Full-Stack Developer specialized in scalable business solutions and innovative POS systems</description>
     </item>
     <item>
       <title>Optimizing Django Performance: Lessons from a POS System</title>
