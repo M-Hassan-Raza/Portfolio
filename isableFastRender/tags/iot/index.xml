@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>IoT on Muhammad Hassan Raza</title>
+    <link>http://localhost:1313/tags/iot/</link>
+    <description>Recent content in IoT on Muhammad Hassan Raza</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Smart Dustbin with IoT: Arduino, Python, Kotlin &amp; Azure</title>
+      <link>http://localhost:1313/projects/iot-garbage-monitoring/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/iot-garbage-monitoring/</guid>
+      <description>An in-depth look at my IoT-based smart dustbin project, built using Arduino, Python, Kotlin for Android, and Azure for real-time monitoring.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,104 @@
+/* Custom styles for Giscus comments */
+.giscus-container {
+    max-width: var(--main-width);
+    margin: 0 auto 2rem auto;
+    padding: 0 1rem;
+}
+
+.post-content + .giscus-container {
+    margin-top: 2rem;
+}
+
+.giscus-frame {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Ensure site footer stays at bottom */
+.footer {
+    margin-top: auto;
+}
+
+/* Menu icon styling with hover effect */
+.menu-icon {
+    vertical-align: middle;
+    margin-right: 1px;
+    position: relative;
+    bottom: 1.5px;
+    transition: transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu-item:hover .menu-icon {
+    transform: translateY(-1px);
+}
+
+/* Custom styles for footer links */
+.footer-links {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--footer-background);
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+.footer-links nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-links nav ul li {
+    margin: 0;
+}
+
+.footer-links nav ul li a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.footer-links nav ul li a:hover {
+    color: var(--accent-color);
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 4px;
+}
+
+.footer-links nav ul li a .menu-icon {
+    margin-right: 0.5rem;
+}
+
+
+/* About page content SVG icons */
+.post-content svg {
+    height: 1.25em;
+    width: 1.25em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+    fill: var(--content);
+}
+
+/* Menu icons - preserve their original styling */
+.menu-icon {
+    height: 20px;
+    width: 20px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+    overflow: visible;
+}
+
+
