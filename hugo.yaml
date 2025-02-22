@@ -55,9 +55,9 @@ params:
       - name: "Contact"
         url: "/contact/"
         pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/></svg>'
-      - name: "Archive"
-        url: "/archives/"
-        pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7h-1v16h-22v-16h-1v-6h24v6zm-2 0h-20v15h20v-15zm-6 8h-8v-4h8v4zm-1-3h-6v2h6v-2zm8-10h-22v4h22v-4z"/></svg>'
+      # - name: "Archive"
+      #   url: "/archives/"
+      #   pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7h-1v16h-22v-16h-1v-6h24v6zm-2 0h-20v15h20v-15zm-6 8h-8v-4h8v4zm-1-3h-6v2h6v-2zm8-10h-22v4h22v-4z"/></svg>'
       - name: "Books"
         url: "/books/"
         pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5.495 2h16.505v-2h-17c-1.657 0-3 1.343-3 3v18c0 1.657 1.343 3 3 3h17v-20h-16.505c-1.375 0-1.375-2 0-2zm.505 4h14v16h-14v-16z"/></svg>'
