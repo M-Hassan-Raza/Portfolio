@@ -4,7 +4,7 @@ date: 2025-02-22
 description: "A collection of useful materials, including my blog archive and book recommendations."
 tags: ["Resources", "Books", "Archive"]
 categories: ["General"]
-showToc: true
+showToc: false
 showReadingTime: false
 comments: true
 ---
