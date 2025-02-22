@@ -67,8 +67,17 @@ Choose a time that works for you to discuss:
 
 <a href="https://calendly.com/hassanraza" class="cta-button">Book Your Call Now</a>
 
-## Recent Client Success
+## What People Are Saying
 
+<div class="customer-review">
+  <div class="customer-review-content">
+    <p>"I highly recommend Hassan, whom I directly supervised during both the internship and our collaborative work on the Final Year Project (FYP). He consistently demonstrated exceptional work ethic, completing assignments ahead of schedule and showcasing a strong understanding of complex tasks. 
+
+Beyond technical skills, he possesses excellent interpersonal skills, making him an invaluable team player. He consistently brought a positive attitude to the workplace, fostering a collaborative and productive environment.
+"</p>
+    <cite>- Muhammad Hamid Raza, Principle Architect @Arrivy</cite>
+  </div>
+</div>
 <div class="customer-review">
   <div class="customer-review-content">
     <p>"ChronoPOS transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency."</p>
