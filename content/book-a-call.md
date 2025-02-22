@@ -37,11 +37,23 @@ showReadingTime: false
   </div>
   <div class="expertise-card">
     <h3>Full-Stack Development</h3>
-    <p>Building robust web applications using React, Node.js, and modern cloud technologies. Focus on performance, security, and exceptional user experience.</p>
+    <p>Building robust web applications using Vue.js, Django, and PostgreSQL. Specializing in high-performance, secure, and scalable software solutions tailored to business needs.</p>
   </div>
   <div class="expertise-card">
     <h3>Business Automation</h3>
     <p>Streamlining operations through custom software solutions, API integrations, and intelligent workflow automation. Boost efficiency and reduce operational costs.</p>
+  </div>
+  <div class="expertise-card">
+    <h3>E-Commerce Solutions</h3>
+    <p>Developing and optimizing e-commerce platforms for hardware, sanitary, and industrial equipment stores. Expertise in UI/UX design, payment integration, and inventory management.</p>
+  </div>
+  <div class="expertise-card">
+    <h3>Scalable API Development</h3>
+    <p>Designing and building efficient, RESTful APIs with Django and PostgreSQL, ensuring seamless communication between applications and third-party services.</p>
+  </div>
+  <div class="expertise-card">
+    <h3>Technical Consultation & Mentorship</h3>
+    <p>Providing guidance to businesses and aspiring developers, helping them make informed technical decisions, optimize architecture, and improve software development workflows.</p>
   </div>
 </div>
 
@@ -71,6 +83,6 @@ I'm always excited to hear about new projects and challenges. Reach out through 
 - 📧 Email: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)
 - 🌐 Portfolio: [mhassan.dev](https://mhassan.dev)
 - 💼 LinkedIn: [linkedin.com/in/hassanraza22](https://linkedin.com/in/hassanraza22)
-- 📅 Calendar: [Book a call](https://calendly.com/hassanraza)
+- 📅 Calendar: [Book a call](https://cal.com/muhammad-hassan-raza/30min)
 
 Whether you need a custom software solution, want to implement ChronoPOS, or just want to discuss potential collaborations, I'm here to help turn your vision into reality.
