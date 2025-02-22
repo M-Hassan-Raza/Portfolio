@@ -1,5 +1,5 @@
 ---
-title: "Contact"
+title: "Book a Call"
 date: 2025-02-11
 description: "Get in touch for collaborations, inquiries, or support."
 summary: "Reach out for business inquiries, project collaborations, or support for ChronoPOS and other solutions."

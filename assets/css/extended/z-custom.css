@@ -236,3 +236,48 @@ body {
   color: white;
   cursor: pointer;
 }
+
+.resources-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-light);
+}
+
+.justified-text {
+  text-align: justify;
+  color: var(--text-color);
+}
+
+.resource-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.resource-link:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* Dark mode adjustments */
+.dark .resources-container {
+  box-shadow: 0 0 10px var(--shadow-dark);
+}
+
+.dark .resource-link {
+  background-color: var(--primary-color);
+  color: var(--background-dark);
+}
+
+.dark .resource-link:hover {
+  background-color: var(--secondary-color);
+}

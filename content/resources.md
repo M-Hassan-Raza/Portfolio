@@ -17,6 +17,13 @@ comments: true
 Here, you'll find a curated collection of my past writings, book recommendations, and other useful content. Whether you're looking for in-depth articles or insightful reads, this page serves as a gateway to valuable knowledge.
 </p>
 
+### My Blog
+<p class="justified-text">
+Dive into my blog, where I share my thoughts on technology, software engineering, productivity, and personal growth. Explore a wide range of topics and discover new perspectives on the ever-evolving world of tech.
+</p>
+
+<a href="/blog" class="resource-link">Visit Blog</a>
+
 ### Book Recommendations  
 <p class="justified-text">
 I’ve compiled a list of books that have significantly impacted my thinking and professional journey. These books cover a range of topics including software engineering, business, productivity, and personal growth.
@@ -24,39 +31,12 @@ I’ve compiled a list of books that have significantly impacted my thinking and
 
 <a href="/books" class="resource-link">Explore Books</a>
 
-### Blog Archive  
+### Archive  
 <p class="justified-text">
-Looking for older articles? My blog archive contains all my past writings on technology, business, and problem-solving. Browse through different categories and find content that resonates with your interests.
+Looking for older articles? My archive contains all my past writings on technology, business, and problem-solving. Browse through different categories and find content that resonates with your interests.
 </p>
 
 <a href="/archives" class="resource-link">View Archive</a>
 
 </div>
 
-<style>
-.resources-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-}
-
-.justified-text {
-  text-align: justify;
-}
-
-.resource-link {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.resource-link:hover {
-  background-color: #0056b3;
-}
-</style>
