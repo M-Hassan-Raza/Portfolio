@@ -15,11 +15,11 @@ showReadingTime: false
 
 <div class="stats-container">
   <div class="stat-item">
-    <div class="stat-number">5+</div>
+    <div class="stat-number">3.5+</div>
     <div>Years Experience</div>
   </div>
   <div class="stat-item">
-    <div class="stat-number">50+</div>
+    <div class="stat-number">13+</div>
     <div>Projects Delivered</div>
   </div>
   <div class="stat-item">
