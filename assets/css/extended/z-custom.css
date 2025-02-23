@@ -37,7 +37,7 @@
   --book-subtitle-color: #a8d5e5;
   --background-dark: #1e1e1e;
   --text-dark: #ddd;
-  --border-dark: #ff9800;
+  --border-dark: #ffc5b7;
 
   --primary-color-rgb: 255, 197, 183;  /* RGB values for #ffc5b7 */
   
@@ -286,9 +286,9 @@ body:not(.dark) {
 
 /* Enhancing customer review */
 .customer-review {
-  border-left: 5px solid var(--primary-color);
-  padding: 2rem;
-  margin: 2.5rem 0;
+  border-left: 3px solid var(--primary-color);
+  padding: 1rem;
+  margin: 1.5rem 0;
   font-style: italic;
   border-radius: 1rem;
   background: linear-gradient(to right, 
