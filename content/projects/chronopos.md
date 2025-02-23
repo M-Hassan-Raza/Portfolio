@@ -46,8 +46,8 @@ weight: -10
       </div>
       <div class="value-card">
         <img src="/assets/scale.svg" alt="Scale">
-        <h3>Multi-Store & Multi-User</h3>
-        <p>Manage multiple stores and users seamlessly. Grow without limits.</p>
+        <h3>Multi-User</h3>
+        <p>Manage multiple users seamlessly. Grow without limits.</p>
       </div>
       <div class="value-card">
         <img src="/assets/analytics.svg" alt="Analytics">
