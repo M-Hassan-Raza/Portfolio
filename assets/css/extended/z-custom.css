@@ -1,15 +1,15 @@
 /* Root Variables - Light Theme */
 :root {
   /* Core colors */
-  --primary-color: #b03d20;
+  --primary-color: #b7472b;
   --secondary-color: #2F7E98;
   --text-color: #333;
   --bg-color: #f9f9f9;
 
-  --primary-color-rgb: 161, 38, 8;  /* RGB values for #b03d20 */
+  --primary-color-rgb: 161, 38, 8;  /* RGB values for #b7472b */
   
   /* Extended theme colors */
-  --book-title-color: #b03d20;
+  --book-title-color: #b7472b;
   --book-subtitle-color: #2F7E98;
   --background-light: #f8f9fa;
   --text-light: #333;
@@ -20,7 +20,7 @@
   
   /* Hero section specific */
   --hero-text-color: #ffffff;
-  --hero-gradient-start: #b03d20;  /* Primary color red */
+  --hero-gradient-start: #b7472b;  /* Primary color red */
   --hero-gradient-end: #2F7E98;    /* Secondary color blue */
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 body:not(.dark) {
-  --book-title-color: #b03d20;
+  --book-title-color: #b7472b;
   --book-subtitle-color: #2F7E98;
 }
 
