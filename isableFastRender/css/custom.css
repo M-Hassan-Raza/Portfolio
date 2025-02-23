@@ -1,0 +1,6 @@
+/* Increase gap between text and underline by switching to a border instead of text-decoration */
+.header-menu a.active span {
+    padding-bottom: 8px !important;
+    border-bottom: 2px solid var(--link-color) !important;
+  }
+  
