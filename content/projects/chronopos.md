@@ -15,8 +15,8 @@ weight: -10
       <p class="hero-subtitle">The All-in-One POS System Built for Speed, Security, and Scalability</p>
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="stat-number">68M+</div>
-          <div class="stat-label">Transactions Processed</div>
+          <div class="stat-number">Rs. 68M+</div>
+          <div class="stat-label">Transactions</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">24/7</div>
@@ -28,7 +28,7 @@ weight: -10
         </div>
         <div class="stat-item">
           <div class="stat-number">100%</div>
-          <div class="stat-label">Cloud Powered Updates</div>
+          <div class="stat-label">Cloud Updates</div>
         </div>
       </div>
       <a href="/book-a-call/" class="cta-button">Get Started →</a>

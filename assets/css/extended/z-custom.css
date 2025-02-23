@@ -44,10 +44,9 @@
   /* Effects */
   --shadow-dark: rgba(255, 255, 255, 0.1);
   
-  /* Hero section specific */
-  --hero-text-color: #ffffff;
-  --hero-gradient-start: #ff9c86;  /* Light peach from primary */
-  --hero-gradient-end: #66a7bf;    /* Dark theme secondary */
+  --hero-gradient-start: #8B3A2B;  /* Darker red for better contrast */
+  --hero-gradient-end: #1A4E63;    /* Darker blue for dark mode */
+  --hero-text-color: #ffffff;      /* Maintain white text but now with proper contrast */
 }
 
 /* System Dark Mode Override */
@@ -182,9 +181,10 @@ body:not(.dark) {
   line-height: 1.2;
 }
 
+/* Adjust text shadows for dark mode */
 .dark .hero-section h1,
 .dark .hero-section p {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Darker shadow for better legibility */
 }
 
 .hero-section p {
@@ -198,19 +198,23 @@ body:not(.dark) {
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.75;
   gap: 1rem;
   margin: 1rem 0;
 }
 
 .stat-item {
+  flex: 1 1 0;        /* Each stat takes equal width */
+  text-align: center;  /* Center the content within each stat */
   background: rgba(255, 255, 255, 0.1);
   padding: 1rem;
   border-radius: 8px;
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: bold;
+  white-space: nowrap; /* Prevents line breaks within the number */
 }
 
 .stat-item:hover {
@@ -428,6 +432,7 @@ figcaption {
 /* Improving CTA button */
 .cta-button {
   background: var(--primary-color);
+  opacity: 0.75;
   color: var(--hero-text-color);
   padding: 1rem 2rem;
   border-radius: 0.5rem;
