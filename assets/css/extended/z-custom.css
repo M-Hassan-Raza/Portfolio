@@ -58,6 +58,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .stat-item {
+    flex: 1 1 100%; /* Each stat takes full width */
+    margin-bottom: 1rem; /* Add some space between items */
+  }
+}
+
 /* Base Styles */
 body {
   font-family: Arial, sans-serif;
@@ -199,11 +206,12 @@ body:not(.dark) {
 .hero-stats {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   opacity: 0.75;
   gap: 1rem;
   margin: 1rem 0;
   color: var(--box-text-color);
+  flex-wrap: wrap; /* Allows the items to wrap on small screens */
 }
 
 .stat-item {
