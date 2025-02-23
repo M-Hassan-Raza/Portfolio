@@ -521,6 +521,22 @@ figcaption {
   min-width: 300px;
 }
 
+@media (max-width: 600px) {
+  .testimonial-carousel {
+    flex-direction: column;  /* Stack cards vertically */
+    gap: 1rem;               /* Reduce gap for tighter spacing */
+    overflow-x: visible;      /* Disable horizontal scrolling */
+  }
+  
+  .testimonial-card {
+    min-width: auto;         /* Remove the fixed minimum width */
+    width: 100%;             /* Use full container width */
+    margin: 0 auto 1rem;      /* Center the card and add bottom spacing */
+  }
+}
+
+
+
 /* Add these styles to your CSS */
 .tab-content {
   display: none;
