@@ -567,6 +567,8 @@ figcaption {
 .value-card img {
   /* For light mode: use a filter that darkens the icon if needed */
   filter: brightness(0) invert(0);
+  height: 50px;
+  width: 50px;
 }
 
 .dark .value-card img {
