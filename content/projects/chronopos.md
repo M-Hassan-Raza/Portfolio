@@ -1,7 +1,7 @@
 ---
-title: "ChronoPOS - The Ultimate POS System"
+title: "ChronoPOS - The Ultimate POS"
 date: 2025-02-10
-description: "A powerful and scalable Point of Sale (POS) system built with VueJS, Django, and PostgreSQL."
+description: "A powerful and scalable Point of Sale system built with modern tech"
 tags: ["POS", "Retail", "Billing", "Business"]
 categories: ["Products"]
 showToc: false

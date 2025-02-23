@@ -44,9 +44,10 @@
   /* Effects */
   --shadow-dark: rgba(255, 255, 255, 0.1);
   
-  --hero-gradient-start: #8B3A2B;  /* Darker red for better contrast */
-  --hero-gradient-end: #1A4E63;    /* Darker blue for dark mode */
-  --hero-text-color: #ffffff;      /* Maintain white text but now with proper contrast */
+  --hero-gradient-start: #8B3A2B;  
+  --hero-gradient-end: #1A4E63;   
+  --hero-text-color: #1e1e1e;   
+  --box-text-color: #fff;   
 }
 
 /* System Dark Mode Override */
@@ -179,12 +180,13 @@ body:not(.dark) {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  color: rgba(var(--hero-text-color), 0.05)
 }
 
 /* Adjust text shadows for dark mode */
 .dark .hero-section h1,
 .dark .hero-section p {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Darker shadow for better legibility */
+  color: var(--hero-text-color); /* Darker shadow for better legibility */
 }
 
 .hero-section p {
@@ -201,6 +203,7 @@ body:not(.dark) {
   opacity: 0.75;
   gap: 1rem;
   margin: 1rem 0;
+  color: var(--box-text-color);
 }
 
 .stat-item {
