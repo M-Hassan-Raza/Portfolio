@@ -19,7 +19,7 @@ showReadingTime: false
       </div>
       <div class="stat-item">
         <div class="stat-number">13+</div>
-        <div class="stat-label">Projects Delivered</div>
+        <div class="stat-label">Projects</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">100%</div>
