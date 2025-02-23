@@ -558,6 +558,20 @@ figcaption {
   background: var(--light-bg);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.value-card img {
+  /* For light mode: use a filter that darkens the icon if needed */
+  filter: brightness(0) invert(0);
+}
+
+.dark .value-card img {
+  /* For dark mode: invert colors to make the icon white */
+  filter: brightness(0) invert(1);
 }
 
 .value-card:hover {
