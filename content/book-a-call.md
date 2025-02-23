@@ -14,7 +14,7 @@ showReadingTime: false
   <div class="hero-content">
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-number">3.5+</div>
+        <div class="stat-number">4.5+</div>
         <div class="stat-label">Years Experience</div>
       </div>
       <div class="stat-item">
