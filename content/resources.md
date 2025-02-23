@@ -4,7 +4,7 @@ date: 2025-02-22
 description: "A collection of useful materials, including my blog archive and book recommendations."
 tags: ["Resources", "Books", "Archive"]
 categories: ["General"]
-showToc: true
+showToc: false
 showReadingTime: false
 comments: true
 ---
@@ -22,21 +22,21 @@ Here, you'll find a curated collection of my past writings, book recommendations
 Dive into my blog, where I share my thoughts on technology, software engineering, productivity, and personal growth. Explore a wide range of topics and discover new perspectives on the ever-evolving world of tech.
 </p>
 
-<a href="/blog" class="resource-link">Visit Blog</a>
+<a href="/blog" class="cta-button">Visit Blog</a>
 
 ### Book Recommendations  
 <p class="justified-text">
 I’ve compiled a list of books that have significantly impacted my thinking and professional journey. These books cover a range of topics including software engineering, business, productivity, and personal growth.
 </p>
 
-<a href="/books" class="resource-link">Explore Books</a>
+<a href="/books" class="cta-button">Explore Books</a>
 
 ### Archive  
 <p class="justified-text">
 Looking for older articles? My archive contains all my past writings on technology, business, and problem-solving. Browse through different categories and find content that resonates with your interests.
 </p>
 
-<a href="/archives" class="resource-link">View Archive</a>
+<a href="/archives" class="cta-button">View Archive</a>
 
 </div>
 
