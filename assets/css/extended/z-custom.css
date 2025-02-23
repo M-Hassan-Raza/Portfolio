@@ -558,13 +558,13 @@ figcaption {
   flex-direction: column;
 }
 
-/* Value Grid */
 .value-grid {
   display: flex;
-  gap: 1.5 rem;
+  gap: 1.5rem; /* Corrected spacing */
   max-width: 1200px;
   margin: 0 auto;
 }
+
 
 .value-card {
   padding: 2rem;
@@ -592,4 +592,17 @@ figcaption {
 
 .value-card:hover {
   transform: translateY(-5px);
+}
+
+@media (max-width: 600px) {
+  .value-grid {
+    flex-direction: column; /* Stack the cards */
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .value-card {
+    max-width: 90%;  /* Prevents the card from stretching too wide */
+    text-align: center; /* Center the text for better readability */
+  }
 }
