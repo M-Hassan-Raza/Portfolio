@@ -6,7 +6,6 @@ tags: ["POS", "Retail", "Billing", "Business"]
 categories: ["Products"]
 showToc: false
 showReadingTime: false
-ShowComments: true
 weight: -10
 ---
 <!-- Hero Section -->
@@ -30,11 +29,6 @@ weight: -10
       </div>
       <a href="#demo" class="cta-button">Start Free Trial →</a>
     </div>
-    <div class="hero-video">
-      <video autoplay loop muted playsinline>
-        <source src="/assets/hero-demo.mp4" type="video/mp4">
-      </video>
-    </div>
   </section>
 
   <!-- Value Proposition -->
@@ -42,17 +36,17 @@ weight: -10
     <h2>Why ChronoPOS?</h2>
     <div class="value-grid">
       <div class="value-card">
-        <img src="/icons/speed.svg" alt="Speed">
+        <img src="/assets/speed.svg" alt="Speed">
         <h3>Lightning-Fast Transactions</h3>
         <p>Process sales instantly with our optimized system. No more waiting in lines!</p>
       </div>
       <div class="value-card">
-        <img src="/icons/scale.svg" alt="Scale">
+        <img src="/assets/scale.svg" alt="Scale">
         <h3>Multi-Store & Multi-User</h3>
         <p>Manage multiple stores and users seamlessly. Grow without limits.</p>
       </div>
       <div class="value-card">
-        <img src="/icons/analytics.svg" alt="Analytics">
+        <img src="/assets/analytics.svg" alt="Analytics">
         <h3>Insightful Analytics</h3>
         <p>Make data-driven decisions with real-time sales and customer insights.</p>
       </div>
@@ -75,7 +69,6 @@ weight: -10
         <li>Automated low-stock alerts</li>
         <li>Bulk import/export functionality</li>
       </ul>
-      <img src="/assets/inventory-demo.png" alt="Inventory Demo">
     </div>
     <div id="sales" class="tab-content">
       <h3>Sales & Financial Tools</h3>
@@ -84,7 +77,6 @@ weight: -10
         <li>Profit & loss calculations</li>
         <li>Integrated payment methods</li>
       </ul>
-      <img src="/assets/sales-demo.png" alt="Sales Demo">
     </div>
     <div id="security" class="tab-content">
       <h3>Advanced Security</h3>
@@ -93,7 +85,6 @@ weight: -10
         <li>Audit logging</li>
         <li>End-to-end encryption</li>
       </ul>
-      <img src="/assets/security-demo.png" alt="Security Demo">
     </div>
   </div>
 </section>
@@ -181,7 +172,7 @@ weight: -10
     <div class="pricing-cards">
       <div class="pricing-card">
         <h3>Starter</h3>
-        <div class="price">$49<span>/mo</span></div>
+        <div class="price">$49<span></span></div>
         <ul>
           <li>✓ Single Store</li>
           <li>✓ Basic Reporting</li>
@@ -190,7 +181,7 @@ weight: -10
       </div>
       <div class="pricing-card popular">
         <h3>Pro</h3>
-        <div class="price">$99<span>/mo</span></div>
+        <div class="price">$99<span></span></div>
         <ul>
           <li>✓ Multi-Store</li>
           <li>✓ Advanced Analytics</li>

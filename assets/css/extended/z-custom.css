@@ -532,9 +532,8 @@ figcaption {
 
 /* Value Grid */
 .value-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  display: flex;
+  gap: 1.5 rem;
   max-width: 1200px;
   margin: 0 auto;
 }
