@@ -26,8 +26,12 @@ weight: -10
           <div class="stat-number">99.9%</div>
           <div class="stat-label">Uptime</div>
         </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Cloud Powered Updates</div>
+        </div>
       </div>
-      <a href="#demo" class="cta-button">Start Free Trial →</a>
+      <a href="/book-a-call/" class="cta-button">Get Started →</a>
     </div>
   </section>
 
@@ -195,7 +199,7 @@ weight: -10
   <section class="cta-section">
     <h2>Ready to Transform Your Business?</h2>
     <p>Join thousands of businesses using ChronoPOS to streamline operations and boost sales.</p>
-    <a href="#demo" class="cta-button">Start Free Trial</a>
+    <a href="/book-a-call/" class="cta-button">Get Started →</a>
   </section>
 <!-- Add this modal HTML right before the closing body tag -->
 <div id="imageModal" class="modal" style="display: none;">

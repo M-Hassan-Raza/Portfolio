@@ -164,10 +164,12 @@ body:not(.dark) {
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  padding: 5rem 2rem;
-  color: var(--text-light);
+  padding: 1.5rem 1rem;
+  color: var(--hero-text-color);
   text-align: center;
+  border-radius: 5%;
 }
+
 
 .hero-content {
   max-width: 1200px;
@@ -195,8 +197,9 @@ body:not(.dark) {
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin: 2rem 0;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
 }
 
 .stat-item {
@@ -429,7 +432,9 @@ figcaption {
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 1rem 0;
   font-weight: bold;
   transition: all 0.3s ease;
@@ -529,6 +534,10 @@ figcaption {
   box-shadow: 0 4px 12px rgba(183, 71, 43, 0.2);
 }
 
+.cta-section{
+  display: flex;
+  flex-direction: column;
+}
 
 /* Value Grid */
 .value-grid {
