@@ -523,19 +523,18 @@ figcaption {
 
 @media (max-width: 600px) {
   .testimonial-carousel {
-    gap: 1rem; /* Reduce gap on small screens */
-    scroll-snap-type: x mandatory; /* Enable snap scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    padding: 1.5rem 0;
+    flex-direction: column;  /* Stack cards vertically */
+    gap: 1rem;               /* Reduce gap for tighter spacing */
+    overflow-x: visible;      /* Disable horizontal scrolling */
   }
-
+  
   .testimonial-card {
-    min-width: 90%; /* Each card occupies most of the screen width */
-    scroll-snap-align: center; /* Align each card in the center when snapping */
-    margin: 0 auto;
-    padding: 1rem; /* Adjust padding if needed */
+    min-width: auto;         /* Remove the fixed minimum width */
+    width: 100%;             /* Use full container width */
+    margin: 0 auto 1rem;      /* Center the card and add bottom spacing */
   }
 }
+
 
 
 /* Add these styles to your CSS */
