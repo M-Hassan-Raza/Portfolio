@@ -206,39 +206,69 @@ weight: -10
     <p>Join thousands of businesses using ChronoPOS to streamline operations and boost sales.</p>
     <a href="#demo" class="cta-button">Start Free Trial</a>
   </section>
-
-
+<!-- Add this modal HTML right before the closing body tag -->
+<div id="imageModal" class="modal" style="display: none;">
+  <span class="close">&times;</span>
+  <img id="fullsizeImage" class="modal-content">
+</div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("fullsizeImage");
-    const closeModal = document.querySelector(".close");
+document.addEventListener("DOMContentLoaded", function () {
+  // Image Modal Functionality
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("fullsizeImage");
+  const closeBtn = document.querySelector(".close");
 
-    // Ensure the modal is hidden initially
-    modal.style.display = "none";
+  // Ensure modal is hidden initially
+  modal.style.display = "none";
 
-    document.querySelectorAll(".zoomable").forEach(img => {
-      img.addEventListener("click", function () {
-        modal.style.display = "flex";
-        modalImg.src = this.src;
-      });
-    });
-
-    closeModal.addEventListener("click", function () {
-      modal.style.display = "none";
-    });
-
-    // Close modal when clicking outside the image
-    modal.addEventListener("click", function (e) {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
+  // Add click handlers to all zoomable images
+  document.querySelectorAll(".zoomable").forEach(img => {
+    img.addEventListener("click", function() {
+      modal.style.display = "flex";  // Changed from "block" to "flex" for better centering
+      modalImg.src = this.src;
     });
   });
+
+  // Close modal when clicking the X
+  closeBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+
+  // Close modal when clicking outside the image
+  window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Tab Functionality
+  const tabButtons = document.querySelectorAll(".tab-button");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  // Hide all tab contents initially except the first one
+  tabContents.forEach((content, index) => {
+    if (index !== 0) {
+      content.style.display = "none";
+    }
+  });
+
+  tabButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // Remove active class from all buttons and contents
+      tabButtons.forEach(btn => btn.classList.remove("active"));
+      tabContents.forEach(content => {
+        content.classList.remove("active");
+        content.style.display = "none";
+      });
+      
+      // Add active class to clicked button and show corresponding content
+      button.classList.add("active");
+      const tabId = button.getAttribute("data-tab");
+      const activeContent = document.getElementById(tabId);
+      activeContent.classList.add("active");
+      activeContent.style.display = "block";
+    });
+  });
+});
 </script>
-
-
-
-</body>
-</html>

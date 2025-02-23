@@ -497,34 +497,36 @@ figcaption {
   min-width: 300px;
 }
 
-
-/* Feature Tabs */
-.feature-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.tab-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background: var(--light-bg);
-  cursor: pointer;
-  transition: background var(--transition-speed) ease;
-}
-
-.tab-button.active {
-  background: var(--primary-color);
-  color: var(--text-light);
-}
-
+/* Add these styles to your CSS */
 .tab-content {
   display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
 }
 
 .tab-content.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab-button {
+  background: none;
+  border: 2px solid #e0e0e0;
+  padding: 12px 24px;
+  margin: 0 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(183, 71, 43, 0.2);
 }
 
 
