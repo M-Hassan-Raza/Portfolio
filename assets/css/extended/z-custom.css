@@ -318,7 +318,7 @@ body:not(.dark) {
   margin-top: 20px;
 }
 
-//* Screenshots Section */
+/* Screenshots Section */
 .screenshots-section {
   padding: 4rem 2rem;
   background: var(--light-bg);
@@ -353,21 +353,6 @@ body:not(.dark) {
 
 .image-card:hover img {
   transform: scale(1.05);
-}
-
-.zoom-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  color: white;
-  opacity: 0;
-  transition: opacity var(--transition-speed) ease;
-}
-
-.image-card:hover .zoom-icon {
-  opacity: 1;
 }
 
 figcaption {

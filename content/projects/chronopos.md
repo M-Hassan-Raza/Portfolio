@@ -98,77 +98,66 @@ weight: -10
   </div>
 </section>
 
+
 <!-- Visual Overview -->
 <section class="screenshots-section">
   <h2>Visual Overview</h2>
   <div class="image-grid">
     <figure class="image-card">
       <img src="/assets/dashboard.png" alt="ChronoPOS Dashboard" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Real-time business insights with an intuitive dashboard.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/productdb.png" alt="Product Database" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Manage products, units, and pricing efficiently.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/inventory.png" alt="Low Inventory" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Never run out of things with real-time inventory tracking.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/generateorder.png" alt="Generate Order" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Quickly create orders for your suppliers.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/returns.png" alt="Returns Management" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Minimize errors with an automated returns process.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/customerledger.png" alt="Customer Ledger" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Track transactions and manage customer balances easily.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/singleledger.png" alt="Detailed Customer Ledger" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Manage each customer's ledger in detail.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/salesreport.png" alt="Sales Report" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Generate detailed reports for sales trends and business performance.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/supplychain.png" alt="Supply Chain" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Manage supply chain partners seamlessly.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/supplierledger.png" alt="Supplier Ledger" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Track transactions and manage supplier balances easily.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/archive.png" alt="Archive" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Track daily bills, refunds, and quotations at a glance.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/notes.png" alt="Notes" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Built-in diary so you never forget anything.</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/loyaltyrewards.png" alt="Loyalty Rewards" class="zoomable">
-      <div class="zoom-icon">🔍</div>
       <figcaption>Increase retention with an integrated loyalty program.</figcaption>
     </figure>
   </div>
 </section>
+
   <!-- Testimonials -->
   <section class="testimonial-section">
     <h2>What Our Customers Say</h2>
