@@ -157,7 +157,7 @@ Hundreds of businesses trust ChronoPOS to handle their daily operations. From sm
 ChronoPOS has processed over <strong>Rs. 68 million in transactions</strong>, helping businesses enhance efficiency and accuracy. Experience its powerful features firsthand by requesting a free demo.
 </p>
 
-<p class="contact-info"><strong>Contact:</strong> <a href="mailto:raihassanraza10@gmail.com">raihassanraza10@gmail.com</a></p>
+<a href="https://mhassan.dev/book-a-call/" class="cta-button">Book Your Call Now</a>
 
 </div>
 
