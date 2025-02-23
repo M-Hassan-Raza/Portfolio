@@ -11,21 +11,23 @@ showReadingTime: false
   <h1>Transform Your Business with Custom Software Solutions</h1>
   <p>From point-of-sale systems to full-scale web applications, I bring your ideas to life.</p>
   <a href="https://cal.com/muhammad-hassan-raza/30min" class="cta-button">Schedule a Free Consultation</a>
-</div>
+  <div class="hero-content">
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">4.5+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">13+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
 
-<div class="stats-container">
-  <div class="stat-item">
-    <div class="stat-number">3.5+</div>
-    <div>Years Experience</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-number">13+</div>
-    <div>Projects Delivered</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-number">100%</div>
-    <div>Client Satisfaction</div>
-  </div>
 </div>
 
 ## What I Bring to Your Project
