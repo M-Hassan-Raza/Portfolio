@@ -229,47 +229,83 @@ weight: -10
     <p>Join thousands of businesses using ChronoPOS to streamline operations and boost sales.</p>
     <a href="/book-a-call/" class="cta-button">Get Started →</a>
   </section>
-<!-- Add this modal HTML right before the closing body tag -->
+
+<!-- Modal HTML -->
 <div id="imageModal" class="modal" style="display: none;">
   <span class="close">&times;</span>
   <img id="fullsizeImage" class="modal-content">
+  <div class="nav-arrow left-arrow">&#10094;</div>
+  <div class="nav-arrow right-arrow">&#10095;</div>
 </div>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Image Modal Functionality
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("fullsizeImage");
   const closeBtn = document.querySelector(".close");
+  const leftArrow = document.querySelector(".left-arrow");
+  const rightArrow = document.querySelector(".right-arrow");
+  const zoomableImages = document.querySelectorAll(".zoomable");
 
-  // Ensure modal is hidden initially
+  // Array of image sources and a current index tracker.
+  const imageSources = Array.from(zoomableImages).map(img => img.src);
+  let currentImageIndex = 0;
+
+  // Hide modal initially.
   modal.style.display = "none";
 
-  // Add click handlers to all zoomable images
-  document.querySelectorAll(".zoomable").forEach(img => {
+  // Open modal when an image is clicked.
+  zoomableImages.forEach((img, index) => {
     img.addEventListener("click", function() {
-      modal.style.display = "flex";  // Changed from "block" to "flex" for better centering
+      modal.style.display = "flex"; // Using flex for centering.
       modalImg.src = this.src;
+      currentImageIndex = index;
     });
   });
 
-  // Close modal when clicking the X
+  // Close modal on clicking the close button.
   closeBtn.addEventListener("click", function() {
     modal.style.display = "none";
   });
 
-  // Close modal when clicking outside the image
+  // Close modal when clicking outside the image.
   window.addEventListener("click", function(event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
   });
 
-  // Tab Functionality
+  // Keyboard navigation.
+  document.addEventListener("keydown", function(e) {
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowRight") {
+        currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+        modalImg.src = imageSources[currentImageIndex];
+      } else if (e.key === "ArrowLeft") {
+        currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+        modalImg.src = imageSources[currentImageIndex];
+      } else if (e.key === "Escape") {
+        modal.style.display = "none";
+      }
+    }
+  });
+
+  // Clickable arrows for navigation.
+  leftArrow.addEventListener("click", function() {
+    currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+    modalImg.src = imageSources[currentImageIndex];
+  });
+
+  rightArrow.addEventListener("click", function() {
+    currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+    modalImg.src = imageSources[currentImageIndex];
+  });
+
+  // Existing tab functionality remains unchanged.
   const tabButtons = document.querySelectorAll(".tab-button");
   const tabContents = document.querySelectorAll(".tab-content");
 
-  // Hide all tab contents initially except the first one
   tabContents.forEach((content, index) => {
     if (index !== 0) {
       content.style.display = "none";
@@ -278,14 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   tabButtons.forEach(button => {
     button.addEventListener("click", () => {
-      // Remove active class from all buttons and contents
       tabButtons.forEach(btn => btn.classList.remove("active"));
       tabContents.forEach(content => {
         content.classList.remove("active");
         content.style.display = "none";
       });
-      
-      // Add active class to clicked button and show corresponding content
       button.classList.add("active");
       const tabId = button.getAttribute("data-tab");
       const activeContent = document.getElementById(tabId);
