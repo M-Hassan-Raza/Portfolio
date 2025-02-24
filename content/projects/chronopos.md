@@ -182,12 +182,12 @@ weight: -10
     <h2>What Our Customers Say</h2>
     <div class="testimonial-carousel">
       <div class="testimonial-card">
-        <img src="/assets/usman-ghany-customer.webp" alt="Usman Ghany">
+        <img src="/assets/usman-ghany-customer.png" alt="Usman Ghany">
         <p>“ChronoPOS transformed how we manage our retail stores. Errors are down, and efficiency is up!”</p>
         <cite>– Usman Ghany, Retail Store Owner</cite>
       </div>
       <div class="testimonial-card">
-        <img src="/assets/muhammad-inam-customer.webp" alt="Muhammad Inam">
+        <img src="/assets/muhammad-inam-customer.png" alt="Muhammad Inam">
         <p>“Managing suppliers and sales used to be a nightmare. ChronoPOS saved us hours every week.”</p>
         <cite>– Muhammad Inam, Wholesale Manager</cite>
       </div>
