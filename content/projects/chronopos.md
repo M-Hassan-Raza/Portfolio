@@ -99,56 +99,84 @@ weight: -10
   <h2>Visual Overview</h2>
   <div class="image-grid">
     <figure class="image-card">
-      <img src="/assets/dashboard.png" alt="ChronoPOS Dashboard" class="zoomable">
+      <img src="/assets/dashboard.webp" alt="ChronoPOS Dashboard" class="zoomable">
       <figcaption>Real-time business insights with an intuitive dashboard.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/productdb.png" alt="Product Database" class="zoomable">
+      <img src="/assets/editingproduct.webp" alt="Editing a Product" class="zoomable">
+      <figcaption>Edit an existing product with great control</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/productdb.webp" alt="Product Database" class="zoomable">
       <figcaption>Manage products, units, and pricing efficiently.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/inventory.png" alt="Low Inventory" class="zoomable">
+      <img src="/assets/inventory.webp" alt="Low Inventory" class="zoomable">
       <figcaption>Never run out of things with real-time inventory tracking.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/generateorder.png" alt="Generate Order" class="zoomable">
+      <img src="/assets/generateorder.webp" alt="Generate Order" class="zoomable">
       <figcaption>Quickly create orders for your suppliers.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/returns.png" alt="Returns Management" class="zoomable">
+      <img src="/assets/returns.webp" alt="Returns Management" class="zoomable">
       <figcaption>Minimize errors with an automated returns process.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/customerledger.png" alt="Customer Ledger" class="zoomable">
+      <img src="/assets/customerledger.webp" alt="Customer Ledger" class="zoomable">
       <figcaption>Track transactions and manage customer balances easily.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/singleledger.png" alt="Detailed Customer Ledger" class="zoomable">
+      <img src="/assets/singleledger.webp" alt="Detailed Customer Ledger" class="zoomable">
       <figcaption>Manage each customer's ledger in detail.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/salesreport.png" alt="Sales Report" class="zoomable">
+      <img src="/assets/salesreport.webp" alt="Sales Report" class="zoomable">
       <figcaption>Generate detailed reports for sales trends and business performance.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/supplychain.png" alt="Supply Chain" class="zoomable">
+      <img src="/assets/supplychain.webp" alt="Supply Chain" class="zoomable">
       <figcaption>Manage supply chain partners seamlessly.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/supplierledger.png" alt="Supplier Ledger" class="zoomable">
+      <img src="/assets/supplierledger.webp" alt="Supplier Ledger" class="zoomable">
       <figcaption>Track transactions and manage supplier balances easily.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/archive.png" alt="Archive" class="zoomable">
+      <img src="/assets/archive.webp" alt="Archive" class="zoomable">
       <figcaption>Track daily bills, refunds, and quotations at a glance.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/notes.png" alt="Notes" class="zoomable">
+      <img src="/assets/notes.webp" alt="Notes" class="zoomable">
       <figcaption>Built-in diary so you never forget anything.</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/loyaltyrewards.png" alt="Loyalty Rewards" class="zoomable">
+      <img src="/assets/loyaltyrewards.webp" alt="Loyalty Rewards" class="zoomable">
       <figcaption>Increase retention with an integrated loyalty program.</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/addingledgerentry.webp" alt="Ledger Entry Creation" class="zoomable">
+      <figcaption>Manually add ledger entries for book keeping</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/passwordprotectedpages.webp" alt="Password Protected Pages" class="zoomable">
+      <figcaption>Protect sensitive pages with admin passwords</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/invoicegeneratoindialog.webp" alt="Invoice Dialog" class="zoomable">
+      <figcaption>Generate Bills or Quotations with customized data</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/cartpage.webp" alt="Cart Page" class="zoomable">
+      <figcaption>A clean and customizable cart page with previous price records</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/billpdf.webp" alt="PDF of Generated Bill" class="zoomable">
+      <figcaption>A comprehensive invoice containing previous balances.</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/customerledgerpdf.webp" alt="PDF of Customer Ledger" class="zoomable">
+      <figcaption>A comprehensive ledger containing details of all credits and debits.</figcaption>
     </figure>
   </div>
 </section>
