@@ -237,55 +237,73 @@ weight: -10
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Image Modal Functionality
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("fullsizeImage");
   const closeBtn = document.querySelector(".close");
-
-  // Ensure modal is hidden initially
+  const zoomableImages = document.querySelectorAll(".zoomable");
+  
+  // Create an array from the images and keep track of the current index.
+  const imageSources = Array.from(zoomableImages).map(img => img.src);
+  let currentImageIndex = 0;
+  
+  // Hide modal initially.
   modal.style.display = "none";
-
-  // Add click handlers to all zoomable images
-  document.querySelectorAll(".zoomable").forEach(img => {
+  
+  // Open modal when an image is clicked and set the current index.
+  zoomableImages.forEach((img, index) => {
     img.addEventListener("click", function() {
-      modal.style.display = "flex";  // Changed from "block" to "flex" for better centering
+      modal.style.display = "flex"; // Using flex for centering.
       modalImg.src = this.src;
+      currentImageIndex = index;
     });
   });
-
-  // Close modal when clicking the X
+  
+  // Close modal on clicking the close button.
   closeBtn.addEventListener("click", function() {
     modal.style.display = "none";
   });
-
-  // Close modal when clicking outside the image
+  
+  // Close modal when clicking outside the image.
   window.addEventListener("click", function(event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
   });
-
-  // Tab Functionality
+  
+  // Listen for keydown events to navigate images.
+  document.addEventListener("keydown", function(e) {
+    // Only navigate if the modal is visible.
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowRight") {
+        // Move to the next image.
+        currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+        modalImg.src = imageSources[currentImageIndex];
+      } else if (e.key === "ArrowLeft") {
+        // Move to the previous image.
+        currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+        modalImg.src = imageSources[currentImageIndex];
+      } else if (e.key === "Escape") {
+        // Optionally close the modal with Escape.
+        modal.style.display = "none";
+      }
+    }
+  });
+  
+  // Existing tab functionality can remain unchanged.
   const tabButtons = document.querySelectorAll(".tab-button");
   const tabContents = document.querySelectorAll(".tab-content");
-
-  // Hide all tab contents initially except the first one
   tabContents.forEach((content, index) => {
     if (index !== 0) {
       content.style.display = "none";
     }
   });
-
   tabButtons.forEach(button => {
     button.addEventListener("click", () => {
-      // Remove active class from all buttons and contents
       tabButtons.forEach(btn => btn.classList.remove("active"));
       tabContents.forEach(content => {
         content.classList.remove("active");
         content.style.display = "none";
       });
-      
-      // Add active class to clicked button and show corresponding content
       button.classList.add("active");
       const tabId = button.getAttribute("data-tab");
       const activeContent = document.getElementById(tabId);
