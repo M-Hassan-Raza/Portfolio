@@ -155,14 +155,6 @@ weight: -10
       <figcaption>Manually add ledger entries for book keeping</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/billpdf.webp" alt="PDF of Generated Bill" class="zoomable">
-      <figcaption>A comprehensive invoice containing previous balances.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/customerledgerpdf.webp" alt="PDF of Customer Ledger" class="zoomable">
-      <figcaption>A comprehensive ledger containing details of all credits and debits.</figcaption>
-    </figure>
-    <figure class="image-card">
       <img src="/assets/passwordprotectedpages.webp" alt="Password Protected Pages" class="zoomable">
       <figcaption>Protect sensitive pages with admin passwords</figcaption>
     </figure>
@@ -173,6 +165,14 @@ weight: -10
     <figure class="image-card">
       <img src="/assets/cartpage.webp" alt="Cart Page" class="zoomable">
       <figcaption>A clean and customizable cart page with previous price records</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/billpdf.webp" alt="PDF of Generated Bill" class="zoomable">
+      <figcaption>A comprehensive invoice containing previous balances.</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="/assets/customerledgerpdf.webp" alt="PDF of Customer Ledger" class="zoomable">
+      <figcaption>A comprehensive ledger containing details of all credits and debits.</figcaption>
     </figure>
   </div>
 </section>
