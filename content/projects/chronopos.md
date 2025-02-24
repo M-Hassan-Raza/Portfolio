@@ -229,11 +229,15 @@ weight: -10
     <p>Join thousands of businesses using ChronoPOS to streamline operations and boost sales.</p>
     <a href="/book-a-call/" class="cta-button">Get Started →</a>
   </section>
-<!-- Add this modal HTML right before the closing body tag -->
+
+<!-- Modal HTML -->
 <div id="imageModal" class="modal" style="display: none;">
   <span class="close">&times;</span>
   <img id="fullsizeImage" class="modal-content">
+  <div class="nav-arrow left-arrow">&#10094;</div>
+  <div class="nav-arrow right-arrow">&#10095;</div>
 </div>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
