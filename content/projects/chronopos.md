@@ -103,6 +103,10 @@ weight: -10
       <figcaption>Real-time business insights with an intuitive dashboard.</figcaption>
     </figure>
     <figure class="image-card">
+      <img src="/assets/editingproduct.webp" alt="Editing a Product" class="zoomable">
+      <figcaption>Edit an existing product with great control</figcaption>
+    </figure>
+    <figure class="image-card">
       <img src="/assets/productdb.webp" alt="Product Database" class="zoomable">
       <figcaption>Manage products, units, and pricing efficiently.</figcaption>
     </figure>
