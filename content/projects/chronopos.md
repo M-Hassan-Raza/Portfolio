@@ -326,5 +326,23 @@ document.addEventListener("DOMContentLoaded", function () {
       activeContent.style.display = "block";
     });
   });
+
+  // Make figcaptions clickable to open the modal just like the image
+document.querySelectorAll('.image-card figcaption').forEach((caption) => {
+  caption.style.cursor = 'pointer';
+  caption.addEventListener('click', function(e) {
+    // Prevent any other click handlers on parent elements from firing
+    e.stopPropagation();
+    // Find the image within the same image-card container
+    const img = caption.parentElement.querySelector('img');
+    // Determine the index of the clicked image in the imageSources array
+    const index = imageSources.indexOf(img.src);
+    currentImageIndex = index > -1 ? index : 0;
+    // Open the modal with the selected image
+    modal.style.display = "flex";
+    modalImg.src = img.src;
+  });
+});
+
 });
 </script>

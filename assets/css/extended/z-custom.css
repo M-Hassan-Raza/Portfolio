@@ -350,6 +350,11 @@ body:not(.dark) {
   cursor: pointer;
 }
 
+.image-card figcaption {
+  cursor: pointer;
+}
+
+
 .image-card img {
   width: 100%;
   display: block;
