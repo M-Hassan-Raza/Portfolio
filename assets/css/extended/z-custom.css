@@ -517,7 +517,6 @@ figcaption {
 
 .cta-button {
   background: var(--primary-color);
-  opacity: 0.75;
   color: var(--hero-text-color);
   padding: 1rem 2rem;
   border-radius: 0.5rem;
