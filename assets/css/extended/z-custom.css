@@ -5,7 +5,7 @@
   --secondary-color: #2F7E98;
   --text-color: #333;
   --bg-color: #f9f9f9;
-  --primary-color-rgb: 161, 38, 8;
+  --primary-color-rgb: 161, 38, 8;  /* RGB values for #b7472b */
   
   /* Extended theme colors */
   --book-title-color: #b7472b;
@@ -16,12 +16,12 @@
   
   /* Effects */
   --shadow-light: rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.3s;
   
   /* Hero section specific */
   --hero-text-color: #ffffff;
   --hero-gradient-start: #b7472b;
   --hero-gradient-end: #2F7E98;
+  --box-text-color: #fff;
 }
 
 /* Dark Theme Variables */
@@ -43,10 +43,10 @@
   /* Effects */
   --shadow-dark: rgba(255, 255, 255, 0.1);
   
+  /* Hero section specific */
   --hero-gradient-start: #8B3A2B;  
   --hero-gradient-end: #1A4E63;   
   --hero-text-color: #1e1e1e;   
-  --box-text-color: #fff;
 }
 
 /* System Dark Mode Override */
@@ -65,7 +65,12 @@ body {
   line-height: 1.6;
 }
 
-/* Container Styles */
+body:not(.dark) {
+  --book-title-color: #b7472b;
+  --book-subtitle-color: #2F7E98;
+}
+
+/* Common Container Styles */
 .chronopos-container,
 .resources-container {
   max-width: 800px;
@@ -74,6 +79,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px var(--shadow-light);
 }
+
 .resources-container {
   text-align: center;
   background-color: var(--bg-color);
@@ -84,12 +90,15 @@ body {
   text-align: justify;
   color: var(--text-color);
 }
+
 .book-title-main {
   color: var(--book-title-color);
 }
+
 .book-subtitle {
   color: var(--book-subtitle-color);
 }
+
 .book-cover {
   display: flex;
   flex-direction: column;
@@ -97,6 +106,7 @@ body {
   text-align: center;
   margin-bottom: 1rem;
 }
+
 .author {
   font-style: italic;
   font-size: 1rem;
@@ -104,6 +114,7 @@ body {
   margin-top: 0.5rem;
   color: var(--text-color);
 }
+
 .review {
   margin: 1rem 0;
   font-size: 1rem;
@@ -116,11 +127,13 @@ body {
   font-size: 1.8rem;
   margin-bottom: 10px;
 }
+
 .subsection-title {
   color: var(--secondary-color);
   font-size: 1.4rem;
   margin-bottom: 5px;
 }
+
 .justified-text {
   text-align: justify;
   color: var(--text-color);
@@ -131,10 +144,12 @@ body {
   list-style: none;
   padding: 0;
 }
+
 .feature-list li {
   padding: 5px 0;
   font-size: 1rem;
 }
+
 .feature-intro {
   padding: 10px;
   border-left: 4px solid var(--primary-color);
@@ -149,26 +164,33 @@ body {
   text-align: center;
   border-radius: 10px;
 }
+
 .hero-content {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .hero-section h1 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
   color: rgba(var(--hero-text-color), 0.05);
 }
-.dark .hero-section h1,
-.dark .hero-section p {
-  color: var(--hero-text-color);
-}
+
 .hero-section p {
   font-size: 1.2rem;
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto 2rem;
 }
+
+/* Dark mode text adjustments */
+.dark .hero-section h1,
+.dark .hero-section p {
+  color: var(--hero-text-color);
+}
+
+/* Stats section */
 .hero-stats {
   display: flex;
   justify-content: center;
@@ -179,29 +201,34 @@ body {
   color: var(--box-text-color);
   flex-wrap: wrap;
 }
+
 .stat-item {
   flex: 1 1 0;
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
   padding: 1rem;
   border-radius: 8px;
+  transition: transform 0.3s ease;
 }
+
+.stat-item:hover {
+  transform: translateY(-3px);
+}
+
 .stat-number {
   font-size: 1.75rem;
   font-weight: bold;
   white-space: nowrap;
 }
-.stat-item:hover {
-  transform: translateY(-3px);
-}
 
-/* Expertise Cards */
+/* Expertise section */
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.8rem;
   margin: 2.5rem 0;
 }
+
 .expertise-card {
   background: var(--bg-color);
   padding: 2rem;
@@ -212,6 +239,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .expertise-card::before {
   content: '';
   position: absolute;
@@ -222,10 +250,12 @@ body {
   background: var(--primary-color);
   opacity: 0.7;
 }
+
 .expertise-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 12px var(--shadow-light);
 }
+
 .expertise-card h3 {
   color: var(--primary-color);
   font-size: 1.4rem;
@@ -233,6 +263,7 @@ body {
   position: relative;
   padding-bottom: 0.5rem;
 }
+
 .expertise-card h3::after {
   content: '';
   position: absolute;
@@ -243,30 +274,36 @@ body {
   background: var(--secondary-color);
   opacity: 0.7;
 }
+
 .expertise-card p {
   color: var(--text-color);
   line-height: 1.7;
   margin: 0;
 }
 
-/* Customer Review */
+/* Customer review */
 .customer-review {
   border-left: 3px solid var(--primary-color);
   padding: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
   border-radius: 1rem;
-  background: linear-gradient(to right, rgba(var(--primary-color-rgb), 0.05), transparent);
+  background: linear-gradient(to right, 
+    rgba(var(--primary-color-rgb), 0.05),
+    transparent);
   box-shadow: 0 4px 6px var(--shadow-light);
 }
+
 .customer-review p {
   font-size: 1.1rem;
   line-height: 1.7;
 }
+
 .customer-review cite {
   color: var(--primary-color);
   font-size: 1.1rem;
 }
+
 .customer-review img {
   width: 96px;
   height: 96px;
@@ -275,6 +312,7 @@ body {
   border: none;
   transition: border 0.3s ease;
 }
+
 .customer-review-content {
   flex: 1;
 }
@@ -288,14 +326,16 @@ body {
 /* Screenshots Section */
 .screenshots-section {
   padding: 4rem 2rem;
-  background: var(--background-light);
+  background: var(--light-bg);
 }
+
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin: 2rem 0;
 }
+
 .image-card {
   position: relative;
   overflow: hidden;
@@ -303,19 +343,23 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
+
 .image-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
+
 .image-card img {
   width: 100%;
   display: block;
   transition: transform var(--transition-speed) ease;
 }
+
 .image-card:hover img {
   transform: scale(1.05);
 }
+
 figcaption {
   padding: 1rem;
   text-align: center;
@@ -328,6 +372,7 @@ figcaption {
   transform: translateY(100%);
   transition: transform var(--transition-speed) ease;
 }
+
 .image-card:hover figcaption {
   transform: translateY(0);
 }
@@ -345,10 +390,12 @@ figcaption {
   align-items: center;
   background: rgba(0, 0, 0, 0.8);
 }
+
 .modal-content {
   max-width: 90%;
   max-height: 90%;
 }
+
 /* Arrow styles */
 .nav-arrow {
   position: absolute;
@@ -362,15 +409,19 @@ figcaption {
   opacity: 0.7;
   transition: opacity 0.3s;
 }
+
 .nav-arrow:hover {
   opacity: 1;
 }
+
 .left-arrow {
   left: 10px;
 }
+
 .right-arrow {
   right: 10px;
 }
+
 .close {
   position: absolute;
   top: 20px;
@@ -388,34 +439,82 @@ figcaption {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .pricing-card {
-  background: var(--background-light);
+  background: var(--light-bg);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .pricing-card.popular {
   border: 2px solid var(--primary-color);
 }
 
-/* Dark mode adjustments */
-.dark .expertise-card {
-  background: var(--background-dark);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px var(--shadow-dark);
-}
-.dark .resources-container,
-.dark .stat-item {
-  background: var(--background-dark);
-  box-shadow: 0 4px 6px var(--shadow-dark);
-}
-.dark .customer-review {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
-  border-left-color: var(--border-dark);
-  box-shadow: 2px 2px 10px var(--shadow-dark);
+/* Testimonials */
+.testimonial-carousel {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 0;
 }
 
-/* Update CTA button styles */
+.testimonial-card {
+  background: var(--light-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+}
+/* Tabs */
+.tab-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab-button {
+  background: none;
+  border: 2px solid #e0e0e0;
+  padding: 12px 24px;
+  margin: 0 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(183, 71, 43, 0.2);
+}
+
+/* Dark Mode Overrides */
+/* In dark mode, --primary-color is defined as #ffc5b7 (a light pink), so we override the active tab text to black */
+.dark .tab-button.active {
+  background: var(--primary-color);
+  color: #000;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(183, 71, 43, 0.2);
+}
+
+
+/* CTA Section */
+.cta-section {
+  display: flex;
+  flex-direction: column;
+}
+
 .cta-button {
   background: var(--primary-color);
   opacity: 0.75;
@@ -431,77 +530,24 @@ figcaption {
   transition: all 0.3s ease;
   box-shadow: none;
 }
+
 .cta-button:hover {
   background: var(--secondary-color);
   transform: translateY(-2px);
 }
-.dark .cta-button {
-  background: var(--background-dark);
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-}
-.dark .cta-button:hover {
-  background: var(--primary-color);
-  color: var(--background-dark);
-}
 
-/* Testimonials */
-.testimonial-carousel {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding: 2rem 0;
-}
-.testimonial-card {
-  background: var(--background-light);
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-width: 300px;
-}
-
-/* Tabs */
-.tab-content {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-}
-.tab-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-.tab-button {
-  background: none;
-  border: 2px solid #e0e0e0;
-  padding: 12px 24px;
-  margin: 0 10px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.tab-button.active {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(183, 71, 43, 0.2);
-}
-.cta-section {
-  display: flex;
-  flex-direction: column;
-}
+/* Values section */
 .value-grid {
   display: flex;
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .value-card {
   padding: 2rem;
   border-radius: 8px;
-  background: var(--background-light);
+  background: var(--light-bg);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-speed) ease;
   display: flex;
@@ -509,16 +555,44 @@ figcaption {
   justify-content: center;
   align-items: center;
 }
+
 .value-card img {
   filter: brightness(0) invert(0);
   height: 50px;
   width: 50px;
 }
-.dark .value-card img {
-  filter: brightness(0) invert(1);
-}
+
 .value-card:hover {
   transform: translateY(-5px);
+}
+
+/* Dark Mode Specific Adjustments */
+.dark .resources-container,
+.dark .expertise-card,
+.dark .stat-item {
+  background: var(--background-dark);
+  box-shadow: 0 4px 6px var(--shadow-dark);
+}
+
+.dark .customer-review {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+  border-left-color: var(--border-dark);
+  box-shadow: 2px 2px 10px var(--shadow-dark);
+}
+
+.dark .cta-button {
+  background: var(--background-dark);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.dark .cta-button:hover {
+  background: var(--primary-color);
+  color: var(--background-dark);
+}
+
+.dark .value-card img {
+  filter: brightness(0) invert(1);
 }
 
 /* Responsive Styles */
@@ -527,33 +601,39 @@ figcaption {
     flex: 1 1 100%;
     margin-bottom: 1rem;
   }
+  
   .feature-tabs {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     align-items: stretch;
   }
+  
   .tab-button {
     padding: 0.75rem 1rem;
     font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
   }
+  
   .testimonial-carousel {
     flex-direction: column;
     gap: 1rem;
     overflow-x: visible;
   }
+  
   .testimonial-card {
     min-width: auto;
     width: 100%;
     margin: 0 auto 1rem;
   }
+  
   .value-grid {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
   }
+  
   .value-card {
     max-width: 90%;
     text-align: center;
