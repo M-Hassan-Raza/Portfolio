@@ -5,8 +5,7 @@
   --secondary-color: #2F7E98;
   --text-color: #333;
   --bg-color: #f9f9f9;
-
-  --primary-color-rgb: 161, 38, 8;  /* RGB values for #b7472b */
+  --primary-color-rgb: 161, 38, 8;
   
   /* Extended theme colors */
   --book-title-color: #b7472b;
@@ -17,11 +16,12 @@
   
   /* Effects */
   --shadow-light: rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
   
   /* Hero section specific */
   --hero-text-color: #ffffff;
-  --hero-gradient-start: #b7472b;  /* Primary color red */
-  --hero-gradient-end: #2F7E98;    /* Secondary color blue */
+  --hero-gradient-start: #b7472b;
+  --hero-gradient-end: #2F7E98;
 }
 
 /* Dark Theme Variables */
@@ -38,8 +38,7 @@
   --background-dark: #1e1e1e;
   --text-dark: #ddd;
   --border-dark: #ffc5b7;
-
-  --primary-color-rgb: 255, 197, 183;  /* RGB values for #ffc5b7 */
+  --primary-color-rgb: 255, 197, 183;
   
   /* Effects */
   --shadow-dark: rgba(255, 255, 255, 0.1);
@@ -47,7 +46,7 @@
   --hero-gradient-start: #8B3A2B;  
   --hero-gradient-end: #1A4E63;   
   --hero-text-color: #1e1e1e;   
-  --box-text-color: #fff;   
+  --box-text-color: #fff;
 }
 
 /* System Dark Mode Override */
@@ -55,13 +54,6 @@
   :root:not(.light) {
     --book-title-color: #ffc5b7;
     --book-subtitle-color: #a8d5e5;
-  }
-}
-
-@media (max-width: 600px) {
-  .stat-item {
-    flex: 1 1 100%; /* Each stat takes full width */
-    margin-bottom: 1rem; /* Add some space between items */
   }
 }
 
@@ -73,28 +65,18 @@ body {
   line-height: 1.6;
 }
 
-body:not(.dark) {
-  --book-title-color: #b7472b;
-  --book-subtitle-color: #2F7E98;
-}
-
 /* Container Styles */
-.chronopos-container {
+.chronopos-container,
+.resources-container {
   max-width: 800px;
   margin: auto;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px var(--shadow-light);
 }
-
 .resources-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
   text-align: center;
   background-color: var(--bg-color);
-  border-radius: 8px;
-  box-shadow: 0 0 10px var(--shadow-light);
 }
 
 /* Book Styles */
@@ -102,15 +84,12 @@ body:not(.dark) {
   text-align: justify;
   color: var(--text-color);
 }
-
 .book-title-main {
   color: var(--book-title-color);
 }
-
 .book-subtitle {
   color: var(--book-subtitle-color);
 }
-
 .book-cover {
   display: flex;
   flex-direction: column;
@@ -118,7 +97,6 @@ body:not(.dark) {
   text-align: center;
   margin-bottom: 1rem;
 }
-
 .author {
   font-style: italic;
   font-size: 1rem;
@@ -126,7 +104,6 @@ body:not(.dark) {
   margin-top: 0.5rem;
   color: var(--text-color);
 }
-
 .review {
   margin: 1rem 0;
   font-size: 1rem;
@@ -139,13 +116,11 @@ body:not(.dark) {
   font-size: 1.8rem;
   margin-bottom: 10px;
 }
-
 .subsection-title {
   color: var(--secondary-color);
   font-size: 1.4rem;
   margin-bottom: 5px;
 }
-
 .justified-text {
   text-align: justify;
   color: var(--text-color);
@@ -156,34 +131,15 @@ body:not(.dark) {
   list-style: none;
   padding: 0;
 }
-
 .feature-list li {
   padding: 5px 0;
   font-size: 1rem;
 }
-
 .feature-intro {
   padding: 10px;
   border-left: 4px solid var(--primary-color);
   margin-bottom: 15px;
 }
-
-@media (max-width: 600px) {
-  .feature-tabs {
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 0.75rem;         /* Add vertical spacing between buttons */
-    align-items: stretch;  /* Ensure buttons take full width */
-  }
-  
-  .tab-button {
-    padding: 0.75rem 1rem; /* Adjust padding for better touch targets */
-    font-size: 1rem;
-    width: 100%;         /* Optional: makes each button fill the container */
-    box-sizing: border-box;
-  }
-}
-
 
 /* Hero Section */
 .hero-section {
@@ -193,33 +149,26 @@ body:not(.dark) {
   text-align: center;
   border-radius: 10px;
 }
-
-
 .hero-content {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .hero-section h1 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: rgba(var(--hero-text-color), 0.05)
+  color: rgba(var(--hero-text-color), 0.05);
 }
-
-/* Adjust text shadows for dark mode */
 .dark .hero-section h1,
 .dark .hero-section p {
-  color: var(--hero-text-color); /* Darker shadow for better legibility */
+  color: var(--hero-text-color);
 }
-
 .hero-section p {
   font-size: 1.2rem;
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto 2rem;
 }
-
 .hero-stats {
   display: flex;
   justify-content: center;
@@ -228,35 +177,31 @@ body:not(.dark) {
   gap: 1rem;
   margin: 1rem 0;
   color: var(--box-text-color);
-  flex-wrap: wrap; /* Allows the items to wrap on small screens */
+  flex-wrap: wrap;
 }
-
 .stat-item {
-  flex: 1 1 0;        /* Each stat takes equal width */
-  text-align: center;  /* Center the content within each stat */
+  flex: 1 1 0;
+  text-align: center;
   background: rgba(255, 255, 255, 0.1);
   padding: 1rem;
   border-radius: 8px;
 }
-
 .stat-number {
   font-size: 1.75rem;
   font-weight: bold;
-  white-space: nowrap; /* Prevents line breaks within the number */
+  white-space: nowrap;
 }
-
 .stat-item:hover {
   transform: translateY(-3px);
 }
 
-/* Enhancing the expertise cards and overall layout */
+/* Expertise Cards */
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.8rem;
   margin: 2.5rem 0;
 }
-
 .expertise-card {
   background: var(--bg-color);
   padding: 2rem;
@@ -267,7 +212,6 @@ body:not(.dark) {
   position: relative;
   overflow: hidden;
 }
-
 .expertise-card::before {
   content: '';
   position: absolute;
@@ -278,12 +222,10 @@ body:not(.dark) {
   background: var(--primary-color);
   opacity: 0.7;
 }
-
 .expertise-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 12px var(--shadow-light);
 }
-
 .expertise-card h3 {
   color: var(--primary-color);
   font-size: 1.4rem;
@@ -291,7 +233,6 @@ body:not(.dark) {
   position: relative;
   padding-bottom: 0.5rem;
 }
-
 .expertise-card h3::after {
   content: '';
   position: absolute;
@@ -302,37 +243,30 @@ body:not(.dark) {
   background: var(--secondary-color);
   opacity: 0.7;
 }
-
 .expertise-card p {
   color: var(--text-color);
   line-height: 1.7;
   margin: 0;
 }
 
-/* Enhancing customer review */
+/* Customer Review */
 .customer-review {
   border-left: 3px solid var(--primary-color);
   padding: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
   border-radius: 1rem;
-  background: linear-gradient(to right, 
-    rgba(var(--primary-color-rgb), 0.05),
-    transparent);
+  background: linear-gradient(to right, rgba(var(--primary-color-rgb), 0.05), transparent);
   box-shadow: 0 4px 6px var(--shadow-light);
 }
-
 .customer-review p {
   font-size: 1.1rem;
   line-height: 1.7;
 }
-
 .customer-review cite {
   color: var(--primary-color);
   font-size: 1.1rem;
 }
-
-
 .customer-review img {
   width: 96px;
   height: 96px;
@@ -341,11 +275,9 @@ body:not(.dark) {
   border: none;
   transition: border 0.3s ease;
 }
-
 .customer-review-content {
   flex: 1;
 }
-
 
 /* Contact Info */
 .contact-info {
@@ -356,16 +288,14 @@ body:not(.dark) {
 /* Screenshots Section */
 .screenshots-section {
   padding: 4rem 2rem;
-  background: var(--light-bg);
+  background: var(--background-light);
 }
-
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin: 2rem 0;
 }
-
 .image-card {
   position: relative;
   overflow: hidden;
@@ -373,23 +303,19 @@ body:not(.dark) {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
-
 .image-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
-
 .image-card img {
   width: 100%;
   display: block;
   transition: transform var(--transition-speed) ease;
 }
-
 .image-card:hover img {
   transform: scale(1.05);
 }
-
 figcaption {
   padding: 1rem;
   text-align: center;
@@ -402,7 +328,6 @@ figcaption {
   transform: translateY(100%);
   transition: transform var(--transition-speed) ease;
 }
-
 .image-card:hover figcaption {
   transform: translateY(0);
 }
@@ -420,12 +345,10 @@ figcaption {
   align-items: center;
   background: rgba(0, 0, 0, 0.8);
 }
-
 .modal-content {
   max-width: 90%;
   max-height: 90%;
 }
-
 /* Arrow styles */
 .nav-arrow {
   position: absolute;
@@ -439,19 +362,15 @@ figcaption {
   opacity: 0.7;
   transition: opacity 0.3s;
 }
-
 .nav-arrow:hover {
   opacity: 1;
 }
-
 .left-arrow {
   left: 10px;
 }
-
 .right-arrow {
   right: 10px;
 }
-
 .close {
   position: absolute;
   top: 20px;
@@ -469,41 +388,29 @@ figcaption {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .pricing-card {
-  background: var(--light-bg);
+  background: var(--background-light);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .pricing-card.popular {
   border: 2px solid var(--primary-color);
 }
-
-
 
 /* Dark mode adjustments */
 .dark .expertise-card {
   background: var(--background-dark);
   border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px var(--shadow-dark);
 }
-
-.dark .customer-review {
-  background: linear-gradient(to right, 
-    rgba(255, 255, 255, 0.05),
-    transparent);
-}
-
-/* Dark Mode Specific Adjustments */
 .dark .resources-container,
-.dark .expertise-card,
 .dark .stat-item {
   background: var(--background-dark);
   box-shadow: 0 4px 6px var(--shadow-dark);
 }
-
 .dark .customer-review {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
   border-left-color: var(--border-dark);
   box-shadow: 2px 2px 10px var(--shadow-dark);
 }
@@ -522,30 +429,21 @@ figcaption {
   margin: 1rem 0;
   font-weight: bold;
   transition: all 0.3s ease;
+  box-shadow: none;
 }
-
 .cta-button:hover {
   background: var(--secondary-color);
   transform: translateY(-2px);
 }
-
-/* Dark mode CTA button */
 .dark .cta-button {
   background: var(--background-dark);
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
 }
-
 .dark .cta-button:hover {
   background: var(--primary-color);
   color: var(--background-dark);
 }
-
-.cta-button {
-  box-shadow: none;
-}
-
-
 
 /* Testimonials */
 .testimonial-carousel {
@@ -554,45 +452,26 @@ figcaption {
   overflow-x: auto;
   padding: 2rem 0;
 }
-
 .testimonial-card {
-  background: var(--light-bg);
+  background: var(--background-light);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 300px;
 }
 
-@media (max-width: 600px) {
-  .testimonial-carousel {
-    flex-direction: column;  /* Stack cards vertically */
-    gap: 1rem;               /* Reduce gap for tighter spacing */
-    overflow-x: visible;      /* Disable horizontal scrolling */
-  }
-  
-  .testimonial-card {
-    min-width: auto;         /* Remove the fixed minimum width */
-    width: 100%;             /* Use full container width */
-    margin: 0 auto 1rem;      /* Center the card and add bottom spacing */
-  }
-}
-
-
-
-/* Add these styles to your CSS */
+/* Tabs */
 .tab-content {
   display: none;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.3s ease;
 }
-
 .tab-content.active {
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
-
 .tab-button {
   background: none;
   border: 2px solid #e0e0e0;
@@ -602,7 +481,6 @@ figcaption {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .tab-button.active {
   background: var(--primary-color);
   color: white;
@@ -610,24 +488,20 @@ figcaption {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(183, 71, 43, 0.2);
 }
-
-.cta-section{
+.cta-section {
   display: flex;
   flex-direction: column;
 }
-
 .value-grid {
   display: flex;
-  gap: 1.5rem; /* Corrected spacing */
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
-
-
 .value-card {
   padding: 2rem;
   border-radius: 8px;
-  background: var(--light-bg);
+  background: var(--background-light);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition-speed) ease;
   display: flex;
@@ -635,32 +509,53 @@ figcaption {
   justify-content: center;
   align-items: center;
 }
-
 .value-card img {
-  /* For light mode: use a filter that darkens the icon if needed */
   filter: brightness(0) invert(0);
   height: 50px;
   width: 50px;
 }
-
 .dark .value-card img {
-  /* For dark mode: invert colors to make the icon white */
   filter: brightness(0) invert(1);
 }
-
 .value-card:hover {
   transform: translateY(-5px);
 }
 
+/* Responsive Styles */
 @media (max-width: 600px) {
+  .stat-item {
+    flex: 1 1 100%;
+    margin-bottom: 1rem;
+  }
+  .feature-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  .tab-button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .testimonial-carousel {
+    flex-direction: column;
+    gap: 1rem;
+    overflow-x: visible;
+  }
+  .testimonial-card {
+    min-width: auto;
+    width: 100%;
+    margin: 0 auto 1rem;
+  }
   .value-grid {
-    flex-direction: column; /* Stack the cards */
+    flex-direction: column;
     gap: 1rem;
     align-items: center;
   }
-  
   .value-card {
-    max-width: 90%;  /* Prevents the card from stretching too wide */
-    text-align: center; /* Center the text for better readability */
+    max-width: 90%;
+    text-align: center;
   }
 }
