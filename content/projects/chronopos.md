@@ -226,7 +226,7 @@ weight: -10
   <!-- CTA Section -->
   <section class="cta-section">
     <h2>Ready to Transform Your Business?</h2>
-    <p>Join thousands of businesses using ChronoPOS to streamline operations and boost sales.</p>
+    <p>Join tens of businesses using ChronoPOS to streamline operations and boost sales.</p>
     <a href="/book-a-call/" class="cta-button">Get Started →</a>
   </section>
 
