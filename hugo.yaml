@@ -47,7 +47,7 @@ params:
     imageTitle: "Profile Image"
     buttons:
       - name: "Projects"
-        url: "/projects/"
+        url: "https://commitsoftware.dev/"
         pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5h13v17h-24v-20h8l3 3zm-10-2v18h22v-15h-12.414l-3-3h-6.586z"/></svg>'
       # - name: "Blog"
       #   url: "/blog/"
