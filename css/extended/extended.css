@@ -102,3 +102,68 @@
 }
 
 
+.profile .buttons {
+    display: flex;         /* Use flexbox to arrange buttons */
+    flex-wrap: wrap;       /* Allow buttons to wrap onto the next line if needed */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center;   /* Align buttons vertically in the middle */
+    gap: 0.75rem;          /* Add space between buttons (adjust as needed) */
+    margin-top: 1rem;      /* Add some space above the buttons */
+}
+
+/* Style EACH button (the <a> tag) */
+.profile .buttons a.button {
+    display: inline-flex; /* CRITICAL: Override display:block. Use inline-flex for icon+text alignment */
+    align-items: center;  /* Vertically align content (icon, text) within the button */
+    justify-content: center; /* Horizontally center content within the button */
+
+    /* Reset dimensions to fit content */
+    width: auto;          /* Let the button width be determined by its content */
+    height: auto;         /* Let the button height be determined by its content + padding */
+    max-width: none;      /* Remove any potential max-width causing issues */
+
+    /* Reset margins if using gap */
+    margin: 0;
+
+    /* Standard button styling (adjust padding, border, etc. to match theme) */
+    padding: 0.6em 1.2em; /* Example padding - adjust */
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    line-height: 1.4;     /* Ensure consistent line height */
+    white-space: nowrap;  /* Prevent text from wrapping */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth hover */
+}
+
+/* Style the inner span if needed (usually fine) */
+.profile .buttons a.button .button-inner {
+    display: inline-flex; /* Keep this consistent */
+    align-items: center;
+    gap: 0.4em;          /* Space between icon and text */
+}
+
+/* Style the menu icon specifically */
+.profile .buttons a.button .menu-icon {
+    /* Your existing .menu-icon styles are likely okay */
+    /* Ensure it doesn't shrink */
+    flex-shrink: 0;
+    /* Adjust size/margin if needed */
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 0.4em; /* Overrides the gap if needed, or remove if gap is sufficient */
+}
+
+/* --- Optional: Style or Hide the Extra External Link SVG --- */
+
+/* Target the extra SVG added by PaperMod (often has no class) */
+.profile .buttons a.button[href^="http"] .button-inner svg:not(.menu-icon) {
+     /* Option 1: Hide it if you don't want it */
+     /* display: none; */
+
+     /* Option 2: Style it if you want to keep it */
+     width: 0.9em;          /* Make it smaller */
+     height: 0.9em;
+     opacity: 0.7;          /* Make it less prominent */
+     margin-left: 0.3em;    /* Add space before it */
+     vertical-align: middle; /* Align it better */
+}
