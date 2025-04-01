@@ -2,7 +2,7 @@
 title: "Let's Build Something Amazing Together"
 date: 2025-02-11
 description: "Full-Stack Developer specialized in scalable business solutions and innovative POS systems"
-summary: "Schedule a consultation to discuss your next project, ChronoPOS implementation, or custom software needs."
+summary: "Schedule a consultation to discuss your next project, Polaris implementation, or custom software needs."
 showToc: false
 showReadingTime: false
 ---
@@ -35,7 +35,7 @@ showReadingTime: false
 <div class="expertise-grid">
   <div class="expertise-card">
     <h3>Point of Sale Expertise</h3>
-    <p>Creator of ChronoPOS, delivering modern cloud-based solutions for retail, restaurants, and service industries. Seamless operations, powerful analytics, and scalable architecture.</p>
+    <p>Creator of Polaris, delivering modern cloud-based solutions for retail, restaurants, and service industries. Seamless operations, powerful analytics, and scalable architecture.</p>
   </div>
   <div class="expertise-card">
     <h3>Full-Stack Development</h3>
@@ -64,7 +64,7 @@ showReadingTime: false
 Choose a time that works for you to discuss:
 - Initial project requirements and goals
 - Technical architecture and solution design
-- ChronoPOS demos and customization options
+- Polaris demos and customization options
 - Timeline and implementation strategy
 
 <a href="https://calendly.com/hassanraza" class="cta-button">Book Your Call Now</a>
@@ -82,13 +82,13 @@ Beyond technical skills, he possesses excellent interpersonal skills, making him
 </div>
 <div class="customer-review">
   <div class="customer-review-content">
-    <p>"ChronoPOS transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency."</p>
+    <p>"Polaris transformed how we manage our retail stores. With automated inventory tracking and seamless invoicing, we have reduced errors and increased sales efficiency."</p>
     <cite>- Muhammad Inam, Wholesale Business Manager</cite>
   </div>
 </div>
 <div class="customer-review">
   <div class="customer-review-content">
-    <p>"As a wholesale business, managing suppliers and sales used to be a nightmare. ChronoPOS streamlined everything, saving us hours every week."</p>
+    <p>"As a wholesale business, managing suppliers and sales used to be a nightmare. Polaris streamlined everything, saving us hours every week."</p>
     <cite>- Usman Ghany, Retail Store Owner</cite>
   </div>
 </div>
@@ -102,4 +102,4 @@ I'm always excited to hear about new projects and challenges. Reach out through 
 - 💼 LinkedIn: [linkedin.com/in/hassanraza22](https://linkedin.com/in/hassanraza22)
 - 📅 Calendar: [Book a call](https://cal.com/muhammad-hassan-raza/30min)
 
-Whether you need a custom software solution, want to implement ChronoPOS, or just want to discuss potential collaborations, I'm here to help turn your vision into reality.
+Whether you need a custom software solution, want to implement Polaris, or just want to discuss potential collaborations, I'm here to help turn your vision into reality.

@@ -1,5 +1,5 @@
 ---
-title: "ChronoPOS - The Ultimate POS"
+title: "Polaris - The Ultimate POS"
 date: 2025-02-10
 description: "A powerful and scalable Point of Sale system built with modern tech"
 tags: ["POS", "Retail", "Billing", "Business"]
@@ -11,7 +11,7 @@ weight: -10
 <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
-      <h1>Revolutionize Your Business with ChronoPOS</h1>
+      <h1>Revolutionize Your Business with Polaris</h1>
       <p class="hero-subtitle">The All-in-One POS System Built for Speed, Security, and Scalability</p>
       <div class="hero-stats">
         <div class="stat-item">
@@ -37,7 +37,7 @@ weight: -10
 
   <!-- Value Proposition -->
   <section class="value-section">
-    <h2>Why ChronoPOS?</h2>
+    <h2>Why Polaris?</h2>
     <div class="value-grid">
       <div class="value-card">
         <img src="/assets/speed.svg" alt="Speed">
@@ -99,7 +99,7 @@ weight: -10
   <h2>Visual Overview</h2>
   <div class="image-grid">
     <figure class="image-card">
-      <img src="/assets/home.webp" alt="ChronoPOS Dashboard" class="zoomable">
+      <img src="/assets/home.webp" alt="Polaris Dashboard" class="zoomable">
       <figcaption>Real-time business insights with an intuitive dashboard.</figcaption>
     </figure>
     <figure class="image-card">
@@ -199,12 +199,12 @@ weight: -10
     <div class="testimonial-carousel">
       <div class="testimonial-card">
         <img src="/assets/usman-ghany-customer.png" alt="Usman Ghany">
-        <p>“ChronoPOS transformed how we manage our retail stores. Errors are down, and efficiency is up!”</p>
+        <p>“Polaris transformed how we manage our retail stores. Errors are down, and efficiency is up!”</p>
         <cite>– Usman Ghany, Retail Store Owner</cite>
       </div>
       <div class="testimonial-card">
         <img src="/assets/muhammad-inam-customer.png" alt="Muhammad Inam">
-        <p>“Managing suppliers and sales used to be a nightmare. ChronoPOS saved us hours every week.”</p>
+        <p>“Managing suppliers and sales used to be a nightmare. Polaris saved us hours every week.”</p>
         <cite>– Muhammad Inam, Wholesale Manager</cite>
       </div>
     </div>
@@ -238,7 +238,7 @@ weight: -10
   <!-- CTA Section -->
   <section class="cta-section">
     <h2>Ready to Transform Your Business?</h2>
-    <p>Join tens of businesses using ChronoPOS to streamline operations and boost sales.</p>
+    <p>Join tens of businesses using Polaris to streamline operations and boost sales.</p>
     <a href="/book-a-call/" class="cta-button">Get Started →</a>
   </section>
 

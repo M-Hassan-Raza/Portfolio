@@ -20,10 +20,10 @@ I’m a <strong>CEO</strong>, <strong>Software Engineer</strong>, and <strong>Te
 
 <strong>Relevant Courses:</strong>  
 
-| Course Name                      | Course Name                         |
-|----------------------------------|-------------------------------------|
-| Advanced Algorithms              | Advanced Operating Systems          |
-| Theory of Automata               | Research Methodologies              |
+| Course Name         | Course Name                |
+| ------------------- | -------------------------- |
+| Advanced Algorithms | Advanced Operating Systems |
+| Theory of Automata  | Research Methodologies     |
 
 ---
 
@@ -34,22 +34,22 @@ I’m a <strong>CEO</strong>, <strong>Software Engineer</strong>, and <strong>Te
 
 <strong>Relevant Courses:</strong>  
 
-| Course Name                      | Course Name                         |
-|----------------------------------|-------------------------------------|
-| Advanced Database Concepts       | Internet of Things                  |
-| Computer Networks                | Operating Systems                   |
-| Data Structures and Algorithms   | Software Design and Architecture    |
-| Database Systems                 | Software for Mobile Devices         |
-| Human-Computer Interaction       | Software Project Management         |
-| Information Security             | Software Quality Engineering        |
-| Web Engineering                  | Software Construction & Development |
+| Course Name                    | Course Name                         |
+| ------------------------------ | ----------------------------------- |
+| Advanced Database Concepts     | Internet of Things                  |
+| Computer Networks              | Operating Systems                   |
+| Data Structures and Algorithms | Software Design and Architecture    |
+| Database Systems               | Software for Mobile Devices         |
+| Human-Computer Interaction     | Software Project Management         |
+| Information Security           | Software Quality Engineering        |
+| Web Engineering                | Software Construction & Development |
 
 
 ---
 
 ### Development Experience
 
-- **CEO, ChronoPOS**  
+- **CEO, Commit Software Solutions**  
   *10/2024 – Present*  
   - Developed a secure and scalable POS software for retail businesses, streamlining sales, ledger, and order management.  
   - Successfully deployed a POS system with integrated inventory management, automating stock tracking and order processing.  
@@ -88,19 +88,19 @@ I’m a <strong>CEO</strong>, <strong>Software Engineer</strong>, and <strong>Te
 
 <strong>Courses Assisted:</strong>  
 
-| Course Name                                     | Course Code  |
-|-------------------------------------------------|--------------|
-| Introduction to Software Engineering            | SE110        |
-| Software Engineering                            | CS3009       |
-| Software for Mobile Devices                     | CS4039       |
-| Information Security                            | CS3002       |
-| Fundamentals of Software Project Management     | SE4003       |
+| Course Name                                 | Course Code |
+| ------------------------------------------- | ----------- |
+| Introduction to Software Engineering        | SE110       |
+| Software Engineering                        | CS3009      |
+| Software for Mobile Devices                 | CS4039      |
+| Information Security                        | CS3002      |
+| Fundamentals of Software Project Management | SE4003      |
 
 ---
 
 ### Key Projects  
 
-#### <strong>ChronoPOS (2024 - Present)</strong>  
+#### <strong>Polaris (2024 - Present)</strong>  
 Key achievements:  
 1. <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
     <path d="m21 4c0-.478-.379-1-1-1h-16c-.62 0-1 .519-1 1v16c0 .621.52 1 1 1h16c.478 0 1-.379 1-1zm-16.5.5h15v15h-15zm13.5 10.75c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75zm-11.772-.537 1.25 1.114c.13.116.293.173.455.173.185 0 .37-.075.504-.222l2.116-2.313c.12-.131.179-.296.179-.459 0-.375-.303-.682-.684-.682-.185 0-.368.074-.504.221l-1.66 1.815-.746-.665c-.131-.116-.293-.173-.455-.173-.379 0-.683.307-.683.682 0 .188.077.374.228.509zm11.772-2.711c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75zm-11.772-1.613 1.25 1.114c.13.116.293.173.455.173.185 0 .37-.074.504-.221l2.116-2.313c.12-.131.179-.296.179-.46 0-.374-.303-.682-.684-.682-.185 0-.368.074-.504.221l-1.66 1.815-.746-.664c-.131-.116-.293-.173-.455-.173-.379 0-.683.306-.683.682 0 .187.077.374.228.509zm11.772-1.639c0-.414-.336-.75-.75-.75h-4.5c-.414 0-.75.336-.75.75s.336.75.75.75h4.5c.414 0 .75-.336.75-.75z"/> </svg> Automating inventory management  
