@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Muhammad Hassan Raza</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Muhammad Hassan Raza</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChronoPOS - The Ultimate POS</title>
+      <link>http://localhost:1313/projects/chronopos/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/chronopos/</guid>
+      <description>A powerful and scalable Point of Sale system built with modern tech</description>
+    </item>
+    <item>
+      <title>Resources</title>
+      <link>http://localhost:1313/resources/</link>
+      <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/resources/</guid>
+      <description>A collection of useful materials, including my blog archive and book recommendations.</description>
+    </item>
+    <item>
+      <title>Final Year Project (FYP) Guide for Students</title>
+      <link>http://localhost:1313/blog/fyp-guidance/</link>
+      <pubDate>Mon, 17 Feb 2025 12:00:00 +0500</pubDate>
+      <guid>http://localhost:1313/blog/fyp-guidance/</guid>
+      <description>&lt;div style=&#34;text-align: justify;&#34;&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;&lt;span style=&#34;color:#FFB4A2&#34;&gt;Introduction&lt;/span&gt;&lt;/h2&gt;
+&lt;div style=&#34;text-align: justify;&#34;&gt;
+The fact that you have decided to read this behemoth of an article deserves admiration and tells me that you&#39;re serious about your academics and career (or are procrastinating on something else). Give me the next 20 mins of your life and I&#39;ll make you into a much more informed individual. Your &lt;strong&gt;Final Year Project (FYP)&lt;/strong&gt; is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.  
+This guide will help you &lt;strong&gt;choose the right topic, advisor, tech stack, and strategy&lt;/strong&gt; to ensure your FYP stands out. This guide is mainly targets FASTians because of my experience, but the advice can be applied to any university. Also, I claim to be no expert in this field. I&#39;m just a student who&#39;s been through the process and wants to help others navigate it. So take my very opinionated advice with a grain of salt.
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;research--development-vs-development&#34;&gt;&lt;span style=&#34;color:#FFB4A2&#34;&gt;Research &amp;amp; Development vs. Development&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;When planning your FYP, it’s essential to decide which type of project best aligns with your interests, skills, and career goals. Generally, there are two broad categories:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimizing Django ORM Queries for Large Applications</title>
+      <link>http://localhost:1313/blog/django-orm-optimizaitons/</link>
+      <pubDate>Mon, 17 Feb 2025 12:00:00 +0500</pubDate>
+      <guid>http://localhost:1313/blog/django-orm-optimizaitons/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;As my POS system scaled, performance bottlenecks became increasingly apparent. Customers began complaining about slow bill generation times, which made checkout frustratingly sluggish. After profiling my Django APIs, I discovered that inefficient ORM queries were causing unnecessary database overhead, leading to significant slowdowns. This prompted a deep dive into ORM optimizations to reduce query execution time and improve the overall user experience.&lt;/p&gt;
+&lt;p&gt;In this post, I&amp;rsquo;ll share how I optimized my Django ORM queries using &lt;code&gt;select_related&lt;/code&gt;, &lt;code&gt;prefetch_related&lt;/code&gt;, bulk operations, and query profiling tools to enhance the efficiency of my refund API and bill generation process.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Building a C&#43;&#43; Image Editor</title>
+      <link>http://localhost:1313/projects/pgm-editor/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/pgm-editor/</guid>
+      <description>A deep dive into my university project - a simple yet powerful image editor built with C&#43;&#43;.</description>
+    </item>
+    <item>
+      <title>Obfuscating Images with Django &amp; Azure Cloud Storage</title>
+      <link>http://localhost:1313/projects/pixelcryptor/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/pixelcryptor/</guid>
+      <description>A deep dive into my Django project that obfuscates images by embedding executable files and storing them securely on Azure Blob Storage.</description>
+    </item>
+    <item>
+      <title>Smart Dustbin with IoT: Arduino, Python, Kotlin &amp; Azure</title>
+      <link>http://localhost:1313/projects/iot-garbage-monitoring/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/iot-garbage-monitoring/</guid>
+      <description>An in-depth look at my IoT-based smart dustbin project, built using Arduino, Python, Kotlin for Android, and Azure for real-time monitoring.</description>
+    </item>
+    <item>
+      <title>Books on Pakistan</title>
+      <link>http://localhost:1313/books/books-pakistan/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-pakistan/</guid>
+      <description>Books that explore the history, politics, and identity of Pakistan.</description>
+    </item>
+    <item>
+      <title>Fiction Books</title>
+      <link>http://localhost:1313/books/books-fiction/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-fiction/</guid>
+      <description>A collection of immersive and thought-provoking fiction books spanning various genres.</description>
+    </item>
+    <item>
+      <title>Non-Fiction Books</title>
+      <link>http://localhost:1313/books/books-non-fiction/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-non-fiction/</guid>
+      <description>A selection of thought-provoking non-fiction books covering politics, history, and personal development.</description>
+    </item>
+    <item>
+      <title>Technical Books</title>
+      <link>http://localhost:1313/books/books-technical/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-technical/</guid>
+      <description>Essential books on software craftsmanship, coding principles, and system design.</description>
+    </item>
+    <item>
+      <title>How I Built My Portfolio Website with Hugo, GitHub Pages, and Free Tools</title>
+      <link>http://localhost:1313/blog/free-website-hosting/</link>
+      <pubDate>Sat, 15 Feb 2025 14:00:00 +0500</pubDate>
+      <guid>http://localhost:1313/blog/free-website-hosting/</guid>
+      <description>A detailed breakdown of how I built my personal portfolio website using Hugo, GitHub Pages, free analytics, and more.</description>
+    </item>
+    <item>
+      <title>Optimizing Django Signals for Efficient Ledger Recalculations</title>
+      <link>http://localhost:1313/blog/using-signals-optimally/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0500</pubDate>
+      <guid>http://localhost:1313/blog/using-signals-optimally/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;When dealing with financial transactions in Django applications, maintaining an accurate ledger is critical. However, inefficient signal handling can lead to performance bottlenecks. In this article, we&amp;rsquo;ll explore an optimized approach to recalculating ledger balances while ensuring minimal database impact.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;A typical ledger system requires recalculating balances when transactions are inserted, updated, or deleted. Using Django signals, many implementations trigger redundant recalculations, causing excessive database queries and slowing down the application.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DMCA Notice</title>
+      <link>http://localhost:1313/dmca/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/dmca/</guid>
+      <description>This page outlines our DMCA policy and procedures for submitting copyright infringement notices.</description>
+    </item>
+    <item>
+      <title>Privacy Policy</title>
+      <link>http://localhost:1313/privacy-policy/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/privacy-policy/</guid>
+      <description>This Privacy Policy outlines how we collect, use, and protect your personal information on our website.</description>
+    </item>
+    <item>
+      <title>The Importance of Reusable Components for Critical Actions in VueJS</title>
+      <link>http://localhost:1313/blog/reusing-components-benefits/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/reusing-components-benefits/</guid>
+      <description>Learn why creating reusable components—such as password confirmation modals, confirmation dialogs, and consistent button elements—is essential for maintaining a uniform and user-friendly interface in VueJS applications.</description>
+    </item>
+    <item>
+      <title>Advantages of Preloading Data on Page Load</title>
+      <link>http://localhost:1313/blog/preloading-data-for-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/preloading-data-for-performance/</guid>
+      <description>Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount.</description>
+    </item>
+    <item>
+      <title>Let&#39;s Build Something Amazing Together</title>
+      <link>http://localhost:1313/book-a-call/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/book-a-call/</guid>
+      <description>Full-Stack Developer specialized in scalable business solutions and innovative POS systems</description>
+    </item>
+    <item>
+      <title>Optimizing Django Performance: Lessons from a POS System</title>
+      <link>http://localhost:1313/blog/optimizing-django-performance/</link>
+      <pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/optimizing-django-performance/</guid>
+      <description>A deep dive into optimizing Django backend performance for a POS system, covering bulk updates, caching, and efficient query handling.</description>
+    </item>
+    <item>
+      <title>Client1</title>
+      <link>http://localhost:1313/clients/client1/</link>
+      <pubDate>Mon, 10 Feb 2025 22:06:24 +0500</pubDate>
+      <guid>http://localhost:1313/clients/client1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>My Portfolio Website</title>
+      <link>http://localhost:1313/projects/portfolio-site/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/portfolio-site/</guid>
+      <description>My personal portfolio built with Hugo and PaperMod, showcasing my projects and skills.</description>
+    </item>
+    <item>
+      <title>404 - Page Not Found</title>
+      <link>http://localhost:1313/404.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/404.html</guid>
+      <description>&lt;p&gt;You&amp;rsquo;ve reached a place that doesn&amp;rsquo;t exist. Maybe the page was moved, deleted, or never existed in the first place (peak gaslighting).&lt;/p&gt;
+&lt;h3 id=&#34;heres-what-you-can-do&#34;&gt;Here&amp;rsquo;s what you can do:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/&#34;&gt;Go back to the homepage&lt;/a&gt; and start over.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/projects/&#34;&gt;Explore my projects&lt;/a&gt; to see my work.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/contact/&#34;&gt;Contact me&lt;/a&gt; if you need assistance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Or you can stay here and ponder the orb. The choice is yours.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Pondering my Orb&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/assets/ponder.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

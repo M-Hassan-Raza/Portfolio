@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Books on Muhammad Hassan Raza</title>
+    <link>http://localhost:1313/books/</link>
+    <description>Recent content in Books on Muhammad Hassan Raza</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Feb 2025 12:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/books/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Books on Pakistan</title>
+      <link>http://localhost:1313/books/books-pakistan/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-pakistan/</guid>
+      <description>Books that explore the history, politics, and identity of Pakistan.</description>
+    </item>
+    <item>
+      <title>Fiction Books</title>
+      <link>http://localhost:1313/books/books-fiction/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-fiction/</guid>
+      <description>A collection of immersive and thought-provoking fiction books spanning various genres.</description>
+    </item>
+    <item>
+      <title>Non-Fiction Books</title>
+      <link>http://localhost:1313/books/books-non-fiction/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-non-fiction/</guid>
+      <description>A selection of thought-provoking non-fiction books covering politics, history, and personal development.</description>
+    </item>
+    <item>
+      <title>Technical Books</title>
+      <link>http://localhost:1313/books/books-technical/</link>
+      <pubDate>Sat, 15 Feb 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/books/books-technical/</guid>
+      <description>Essential books on software craftsmanship, coding principles, and system design.</description>
+    </item>
+  </channel>
+</rss>
