@@ -1,13 +1,13 @@
 ---
 title: "Learn Web Development for Free: Platforms with Certificates (That Aren't Just Tutorials)"
-date: 2024-10-27T10:00:00+05:00 # Adjust date as needed
+date: 2025-01-04T17:27:00+05:00
 draft: false
 tags: ["Web Development", "Free Courses", "Certificates", "Learn to Code", "freeCodeCamp", "The Odin Project", "Full Stack Open", "Scrimba", "Self-Taught", "Programming", "Portfolio"]
 showComments: true
 cover:
-    image: "/assets/web-dev.jpg" # Suggest using a relevant image
+    image: "/assets/web-dev.jpg"
     alt: "Laptop showing code editor with web development concepts"
-    caption: "Focus on building practical skills with structured, free web development resources. Photo by Fictional Source" # Replace caption source
+    caption: "Focus on building practical skills with structured, free web development resources. Photo by cottonbro studio: https://www.pexels.com/photo/workstation-computer-monitor-with-html-editor-6804613/"
     relative: false
 ---
 
