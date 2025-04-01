@@ -71,7 +71,7 @@ body:not(.dark) {
 }
 
 /* Common Container Styles */
-.chronopos-container,
+.polaris-container,
 .resources-container {
   max-width: 800px;
   margin: auto;
