@@ -1,6 +1,6 @@
 ---
 title: "Building a Smarter FAQ Bot (with Gemini, RAG, and Structured Output)"
-date: 2024-04-20T10:00:00+05:00
+date: 2025-04-20T10:00:00+05:00
 draft: false
 tags: ["FAQ Bot", "RAG", "Retrieval Augmented Generation", "Gemini API", "ChromaDB", "Embeddings", "Structured Output", "Vector Store", "Python", "AI Agents"]
 showComments: true
@@ -36,18 +36,46 @@ We need a system that answers questions accurately based *only* on a given set o
 
 ## <span style="color:#FFB4A2">The Solution: RAG + Gemini API</span>
 
-Our approach combines **Retrieval Augmented Generation (RAG)** with the capabilities of the **Gemini API**:
+<div style="text-align: justify;">
+Our approach combines **Retrieval Augmented Generation (RAG)** with the capabilities of the **Gemini API**. At a high level, the user interacts with the system like this:
+</div>
 
--   **<span style="color:#8ac7db">RAG Pipeline:</span>** This involves three main steps:
-    1.  **Indexing:** Convert the source documents (Google Car manuals) into numerical representations (embeddings) using the Gemini `text-embedding-004` model and store them in a vector database (ChromaDB). This allows for efficient similarity searches.
-    2.  **Retrieval:** When a user asks a question, embed the question using the same model and search the vector database to find the most relevant document chunks.
-    3.  **Generation:** Pass the original question and the retrieved document chunks as context to a powerful LLM (like `gemini-2.0-flash`). Instruct the model to answer the question *based only on the provided context*.
+<figure style="text-align: center;">
+    <img src="/assets/RAG Flow.webp" alt="High-Level RAG Flow Diagram: User Query -> RAG System -> Grounded Answer" style="max-width: 80%; height: auto; margin: 1em auto; display: block;">
+    <figcaption>Figure 1: High-Level RAG Interaction Flow.</figcaption>
+</figure>
 
--   **<span style="color:#8ac7db">Gemini API Features:</span>**
-    *   **High-Quality Embeddings:** `text-embedding-004` provides embeddings suitable for finding semantically similar text.
-    *   **Powerful Generation:** `gemini-2.0-flash` can synthesize answers based on the retrieved context.
-    *   **Structured Output (JSON Mode):** We instruct Gemini to return the answer and a confidence score in a predictable JSON format, making it easy for applications to use the output.
-    *   **Optional Grounding:** We can even add Google Search as a tool if the local documents don't suffice (though our primary goal here is document-based Q&A).
+<div style="text-align: justify;">
+This involves three main steps in the underlying RAG pipeline:
+<br><br>
+    1.  **<span style="color:#8ac7db">Indexing:</span>** Convert the source documents (Google Car manuals) into numerical representations (embeddings) using the Gemini `text-embedding-004` model and store them in a vector database (ChromaDB). This allows for efficient similarity searches. This setup process is crucial for enabling fast retrieval later.
+</div>
+
+<figure style="text-align: center;">
+    <img src="/assets/Indexing Flow.webp" alt="Indexing Flow Diagram: Documents -> Gemini Embedding -> Vector Embeddings -> ChromaDB Vector Store" style="max-width: 80%; height: auto; margin: 1em auto; display: block;">
+    <figcaption>Figure 2: The Document Indexing Flow.</figcaption>
+</figure>
+
+<div style="text-align: justify;">
+    2.  **<span style="color:#8ac7db">Retrieval:</span>** When a user asks a question, embed the question using the same model and search the vector database to find the most relevant document chunks based on semantic similarity.
+</div>
+
+<figure style="text-align: center;">
+    <img src="/assets/Retreival Flow.webp" alt="Retrieval Flow Diagram: User Query -> Gemini Embedding -> Query Vector -> ChromaDB -> Relevant Document Chunks" style="max-width: 80%; height: auto; margin: 1em auto; display: block;">
+    <figcaption>Figure 3: The Query Retrieval Flow.</figcaption>
+</figure>
+
+<div style="text-align: justify;">
+    3.  **<span style="color:#8ac7db">Generation:</span>** Pass the original question and the retrieved document chunks as context to a powerful LLM (like `gemini-2.0-flash`). Instruct the model to answer the question *based only on the provided context*.
+<br><br>
+Alongside the RAG structure, we leverage specific **Gemini API Features**:
+    <ul>
+        <li><strong><span style="color:#8ac7db">High-Quality Embeddings:</span></strong> <code>text-embedding-004</code> provides embeddings suitable for finding semantically similar text.</li>
+        <li><strong><span style="color:#8ac7db">Powerful Generation:</span></strong> <code>gemini-2.0-flash</code> can synthesize answers based on the retrieved context.</li>
+        <li><strong><span style="color:#8ac7db">Structured Output (JSON Mode):</span></strong> We instruct Gemini to return the answer and a confidence score in a predictable JSON format, making it easy for applications to use the output.</li>
+        <li><strong><span style="color:#8ac7db">Optional Grounding:</span></strong> We can even add Google Search as a tool if the local documents don't suffice (though our primary goal here is document-based Q&A).</li>
+    </ul>
+</div>
 
 ---
 
@@ -74,6 +102,7 @@ class GeminiEmbeddingFunction(EmbeddingFunction):
         task = "retrieval_document" if self.document_mode else "retrieval_query"
         print(f"Embedding {'documents' if self.document_mode else 'query'} ({len(input_texts)})...")
         try:
+            # Assuming 'client' is initialized Google GenAI client
             response = client.models.embed_content(
                 model="models/text-embedding-004",
                 contents=input_texts,
@@ -101,6 +130,7 @@ chroma_client = chromadb.Client() # In-memory client
 try:
     db = chroma_client.get_or_create_collection(name=DB_NAME, embedding_function=embed_fn)
     print(f"Collection '{DB_NAME}' ready. Current count: {db.count()}")
+    # Assuming 'documents' and 'doc_ids' are defined earlier
     if db.count() < len(documents):
         print(f"Adding/Updating documents in '{DB_NAME}'...")
         embed_fn.document_mode = True # Set mode for indexing
@@ -150,7 +180,11 @@ class AnswerWithConfidence(BaseModel):
 
 # --- 8. Define Augmented Generation Function ---
 def generate_structured_answer(query: str, context_docs: list[str]) -> dict | None:
-    # ... (prompt construction as shown previously) ...
+    if not context_docs:
+         print("No context provided, cannot generate answer.")
+         return {"answer": "I couldn't find relevant information in the provided documents to answer this question.", "confidence": "Low"}
+
+    context = "\n---\n".join(context_docs)
 
     prompt = f"""You are an AI assistant answering questions about a Google car based ONLY on the provided documents.
     Context Documents:
@@ -175,19 +209,42 @@ def generate_structured_answer(query: str, context_docs: list[str]) -> dict | No
             response_mime_type="application/json", # Request JSON
             response_schema=AnswerWithConfidence # Provide the schema
         )
+        # Assuming 'client' is initialized Google GenAI client
         response = client.models.generate_content(
             model="gemini-2.0-flash",
             contents=prompt,
-            config=generation_config # Pass the config object
+            generation_config=generation_config # Pass the config object
         )
-        # ... (response handling as shown previously) ...
+
         # Safe access to parsed output
         if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
-             parsed_output = response.candidates[0].content.parts[0].parsed
+             parsed_output = response.candidates[0].content.parts[0].function_call # Adjusted for potential API structure changes, or use .parsed if available
+             # Depending on exact Gemini API version/response structure, access might be different
+             # Fallback check if .parsed is used
+             if not parsed_output and hasattr(response.candidates[0].content.parts[0], 'parsed'):
+                 parsed_output = response.candidates[0].content.parts[0].parsed
+
              if isinstance(parsed_output, dict) and "answer" in parsed_output and "confidence" in parsed_output:
+                 print("Generated Answer:", parsed_output)
                  return parsed_output
-        # ... (Error handling/logging) ...
-        return {"answer": "Error: Could not generate/parse structured response.", "confidence": "Low"}
+             else:
+                 print("Warning: Could not extract valid JSON from response.")
+                 print("Raw response part:", response.candidates[0].content.parts[0])
+                 # Attempt to parse the text part if it exists and looks like JSON
+                 try:
+                     import json
+                     text_part = response.candidates[0].content.parts[0].text
+                     # Basic check if it looks like JSON
+                     if text_part and text_part.strip().startswith('{') and text_part.strip().endswith('}'):
+                         parsed_json = json.loads(text_part)
+                         if isinstance(parsed_json, dict) and "answer" in parsed_json and "confidence" in parsed_json:
+                             print("Recovered JSON from text part:", parsed_json)
+                             return parsed_json
+                 except Exception as json_e:
+                     print(f"Could not parse text part as JSON: {json_e}")
+
+        print("Error: Could not generate/parse structured response correctly.")
+        return {"answer": "Error: Could not generate or parse the structured response from the AI.", "confidence": "Low"}
 
     except Exception as e:
         print(f"Error during content generation call: {e}")
