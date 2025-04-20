@@ -99,7 +99,7 @@ cover:
 
   <figure style="text-align: center;">
     <img
-      src="/assets/RAG Flow.webp"
+      src="/assets/RAG-Flow.webp"
       alt="High-Level RAG Flow Diagram: User Query -> RAG System -> Grounded Answer"
       style="max-width: 80%; height: auto; margin: 1em auto; display: block;"
     />
@@ -119,7 +119,7 @@ cover:
 
   <figure style="text-align: center;">
     <img
-      src="/assets/Indexing Flow.webp"
+      src="/assets/Indexing-Flow.webp"
       alt="Indexing Flow Diagram: Documents -> Gemini Embedding -> Vector Embeddings -> ChromaDB Vector Store"
       style="max-width: 80%; height: auto; margin: 1em auto; display: block;"
     />
@@ -194,23 +194,23 @@ cover:
     We need to tell ChromaDB how to generate embeddings using the Gemini API.
   </p>
 
-  ```python # --- 4. Define Gemini Embedding Function for ChromaDB --- from
-  chromadb import Documents, EmbeddingFunction, Embeddings from google.api_core
-  import retry from google import genai from google.genai import types
-  is_retriable = lambda e: (isinstance(e, genai.errors.APIError) and e.code in
-  {429, 503}) class GeminiEmbeddingFunction(EmbeddingFunction): document_mode =
-  True # Toggle between indexing docs and embedding queries
-  @retry.Retry(predicate=is_retriable) def __call__(self, input_texts:
-  Documents) -> Embeddings: task = "retrieval_document" if self.document_mode
-  else "retrieval_query" print(f"Embedding {'documents' if self.document_mode
-  else 'query'} ({len(input_texts)})...") try: # Assuming 'client' is
-  initialized Google GenAI client response = client.models.embed_content(
-  model="models/text-embedding-004", contents=input_texts,
-  config=types.EmbedContentConfig(task_type=task), # Specify task type ) return
-  [e.values for e in response.embeddings] except Exception as e: print(f"Error
-  during embedding: {e}") return [[] for _ in input_texts]
+```python # --- 4. Define Gemini Embedding Function for ChromaDB --- from
+chromadb import Documents, EmbeddingFunction, Embeddings from google.api_core
+import retry from google import genai from google.genai import types
+is_retriable = lambda e: (isinstance(e, genai.errors.APIError) and e.code in
+{429, 503}) class GeminiEmbeddingFunction(EmbeddingFunction): document_mode =
+True # Toggle between indexing docs and embedding queries
+@retry.Retry(predicate=is_retriable) def __call__(self, input_texts:
+Documents) -> Embeddings: task = "retrieval_document" if self.document_mode
+else "retrieval_query" print(f"Embedding {'documents' if self.document_mode
+else 'query'} ({len(input_texts)})...") try: # Assuming 'client' is
+initialized Google GenAI client response = client.models.embed_content(
+model="models/text-embedding-004", contents=input_texts,
+config=types.EmbedContentConfig(task_type=task), # Specify task type ) return
+[e.values for e in response.embeddings] except Exception as e: print(f"Error
+during embedding: {e}") return [[] for _ in input_texts]
 </div>
-````
+```
 
 <p><strong>2. <span style="color:#8ac7db">Setting up ChromaDB and Indexing:</span></strong><br>
 We create a ChromaDB collection and add our documents. <code>get_or_create_collection</code> makes this idempotent.</p>
