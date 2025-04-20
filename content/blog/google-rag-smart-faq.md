@@ -1,6 +1,6 @@
 ---
 title: "Building a Smarter FAQ Bot (with Gemini, RAG, and Structured Output)"
-date: 2024-08-16T10:00:00+05:00
+date: 2024-04-20T10:00:00+05:00
 draft: false
 tags: ["FAQ Bot", "RAG", "Retrieval Augmented Generation", "Gemini API", "ChromaDB", "Embeddings", "Structured Output", "Vector Store", "Python", "AI Agents"]
 showComments: true
