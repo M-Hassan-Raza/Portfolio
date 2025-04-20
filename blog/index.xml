@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Blog on Muhammad Hassan Raza</title><link>https://mhassan.dev/blog/</link><description>Recent content in Blog on Muhammad Hassan Raza</description><generator>Hugo -- 0.146.6</generator><language>en-us</language><lastBuildDate>Sun, 20 Apr 2025 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Building a Smarter FAQ Bot (with Gemini, RAG, and Structured Output)</title><link>https://mhassan.dev/blog/google-rag-smart-faq/</link><pubDate>Sun, 20 Apr 2025 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/google-rag-smart-faq/</guid><description>&lt;div style="text-align: justify;">
-&lt;h2 id="introduction">&lt;span style="color:#FFB4A2">Introduction&lt;/span>&lt;/h2>
+&lt;h2>&lt;span style="color:#FFB4A2">Introduction&lt;/span>&lt;/h2>
 &lt;div style="text-align: justify;">
-If you've ever found yourself digging through product manuals, company wikis, or lengthy documents just to find a simple answer, you know the pain. The fact you're reading this suggests you're interested in how **Generative AI** can make that process less painful. Stick around for a few minutes, and I'll walk you through how we built a smarter FAQ bot using Google's Gemini API, Retrieval Augmented Generation (RAG), and structured output. This isn't just another chatbot; it's designed to give **reliable, context-aware answers** based *only* on provided information, minimizing the risk of making things up (hallucination). This example uses Google Car manuals, but the principles apply anywhere you have a set of documents you need to query effectively. I'm sharing my journey building this; it's a practical demonstration, not a definitive guide, so adapt the ideas to your needs!
+If you've ever found yourself digging through product manuals, company
+wikis, or lengthy documents just to find a simple answer, you know the pain.
+The fact you're reading this suggests you're interested in how
+&lt;strong>Generative AI&lt;/strong> can make that process less painful. Stick
+around for a few minutes, and I'll walk you through how we built a smarter
+FAQ bot using Google's Gemini API, Retrieval Augmented Generation (RAG), and
+structured output. This isn't just another chatbot; it's designed to give
+&lt;strong>reliable, context-aware answers&lt;/strong> based &lt;em>only&lt;/em> on
+provided information, minimizing the risk of making things up
+(hallucination). This example uses Google Car manuals, but the principles
+apply anywhere you have a set of documents you need to query effectively.
+I'm sharing my journey building this; it's a practical demonstration, not a
+definitive guide, so adapt the ideas to your needs!
 &lt;/div>
-&lt;hr>
-&lt;h2 id="the-problem-dumb-bots-and-information-overload">&lt;span style="color:#FFB4A2">The Problem: Dumb Bots and Information Overload&lt;/span>&lt;/h2>
-&lt;p>Traditional search methods or basic chatbots often fall short when dealing with specific document sets:&lt;/p></description></item><item><title>Final Year Project (FYP) Guide for Students</title><link>https://mhassan.dev/blog/fyp-guidance/</link><pubDate>Mon, 17 Feb 2025 12:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/fyp-guidance/</guid><description>&lt;div style="text-align: justify;">
+&lt;hr />
+&lt;h2>
+&lt;span style="color:#FFB4A2"
+>The Problem: Dumb Bots and Information Overload&lt;/span
+>
+&lt;/h2>
+&lt;p>
+Traditional search methods or basic chatbots often fall short when dealing
+with specific document sets:
+&lt;/p></description></item><item><title>Final Year Project (FYP) Guide for Students</title><link>https://mhassan.dev/blog/fyp-guidance/</link><pubDate>Mon, 17 Feb 2025 12:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/fyp-guidance/</guid><description>&lt;div style="text-align: justify;">
 &lt;h2 id="introduction">&lt;span style="color:#FFB4A2">Introduction&lt;/span>&lt;/h2>
 &lt;div style="text-align: justify;">
 The fact that you have decided to read this behemoth of an article deserves admiration and tells me that you're serious about your academics and career (or are procrastinating on something else). Give me the next 20 mins of your life and I'll make you into a much more informed individual. Your &lt;strong>Final Year Project (FYP)&lt;/strong> is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.
