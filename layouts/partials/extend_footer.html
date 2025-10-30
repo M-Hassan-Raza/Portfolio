@@ -1,3 +1,43 @@
+<script>
+  (function () {
+    try {
+      if (window.__hasLoggedConsoleBrand) return;
+
+      var styles = getComputedStyle(document.documentElement);
+      var primary = (styles.getPropertyValue("--primary") || "").trim();
+      var secondary = (styles.getPropertyValue("--secondary") || "").trim();
+
+      var primaryHsl = primary ? ("hsl(" + primary + ")") : "#4f46e5";
+      var secondaryHsl = secondary ? ("hsl(" + secondary + ")") : "#facc15";
+
+      var logoStyle = "color: " + primaryHsl + "; font-weight: bold; font-family: monospace; font-size: 12px; line-height: 1.2;";
+      var taglineStyle = "color: " + secondaryHsl + "; font-weight: bold; font-family: monospace; font-size: 10px;";
+
+      var devLogo = `%c
+███████╗ ██████╗ ██████╗     ████████╗██╗  ██╗███████╗
+██╔════╝██╔═══██╗██╔══██╗    ╚══██╔══╝██║  ██║██╔════╝
+█████╗  ██║   ██║██████╔╝       ██║   ███████║█████╗  
+██╔══╝  ██║   ██║██╔══██╗       ██║   ██╔══██║██╔══╝  
+██║     ╚██████╔╝██║  ██║       ██║   ██║  ██║███████╗
+╚═╝      ╚═════╝ ╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝
+                                                        
+███████╗███╗   ███╗██████╗ ███████╗██████╗  ██████╗ ██████╗ 
+██╔════╝████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗
+█████╗  ██╔████╔██║██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝
+██╔══╝  ██║╚██╔╝██║██╔═══╝ ██╔══╝  ██╔══██╗██║   ██║██╔══██╗
+███████╗██║ ╚═╝ ██║██║     ███████╗██║  ██║╚██████╔╝██║  ██║
+╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+%c
+⚔️ In the grim darkness of the dev console, there is only code...`;
+
+      console.log(devLogo, logoStyle, taglineStyle);
+      window.__hasLoggedConsoleBrand = true;
+    } catch (e) {
+      console.log("⚔️ In the grim darkness of the dev console, there is only code...");
+      window.__hasLoggedConsoleBrand = true;
+    }
+  })();
+</script>
 <!-- {{- /* Footer custom content area start */ -}}
 <div class="footer-links">
   <nav>
