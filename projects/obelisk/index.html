@@ -1,0 +1,946 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Obelisk | Muhammad Hassan Raza</title><meta name=keywords content="AI,LangGraph,FastAPI,PostgreSQL,RAG,Multi-Tenant,Vertex AI"><meta name=description content="AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture"><meta name=author content="Muhammad Hassan Raza"><link rel=canonical href=https://mhassan.dev/projects/obelisk/><link crossorigin=anonymous href=/assets/css/stylesheet.f65ec710c0f335abff38c2a96404121cafed60b7ceca6e1e2b912d76fe864e5b.css integrity="sha256-9l7HEMDzNav/OMKpZAQSHK/tYLfOym4eK5Etdv6GTls=" rel="preload stylesheet" as=style><link rel=icon href=https://mhassan.dev/assets/favicon.svg><link rel=icon type=image/png sizes=16x16 href=https://mhassan.dev/assets/favicon.svg><link rel=icon type=image/png sizes=32x32 href=https://mhassan.dev/assets/favicon.svg><link rel=apple-touch-icon href=https://mhassan.dev/apple-touch-icon.png><link rel=mask-icon href=https://mhassan.dev/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://mhassan.dev/projects/obelisk/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}@media(prefers-color-scheme:light){.list::-webkit-scrollbar-thumb{border-color:var(--code-bg)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><link rel=preload href=/css/extended/extended.css as=style><link rel=stylesheet href=/css/extended/extended.css><link rel=preload href=/fonts/font-family.css as=style><link rel=stylesheet href=/fonts/font-family.css><link rel=preload href=/fonts/Manrope-Regular.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/Manrope-Medium.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/Manrope-Bold.woff2 as=font type=font/woff2 crossorigin><script async src=https://cloud.umami.is/script.js data-website-id=30c7d9d6-abac-4c52-b85a-c0234f863d22></script><script async src="https://www.googletagmanager.com/gtag/js?id=%7b%7d"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","{}")</script><meta property="og:url" content="https://mhassan.dev/projects/obelisk/"><meta property="og:site_name" content="Muhammad Hassan Raza"><meta property="og:title" content="Obelisk"><meta property="og:description" content="AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture"><meta property="og:locale" content="en-us"><meta property="og:type" content="article"><meta property="article:section" content="projects"><meta property="article:published_time" content="2025-01-20T00:00:00+00:00"><meta property="article:modified_time" content="2025-01-20T00:00:00+00:00"><meta property="article:tag" content="AI"><meta property="article:tag" content="LangGraph"><meta property="article:tag" content="FastAPI"><meta property="article:tag" content="PostgreSQL"><meta property="article:tag" content="RAG"><meta property="article:tag" content="Multi-Tenant"><meta name=twitter:card content="summary"><meta name=twitter:title content="Obelisk"><meta name=twitter:description content="AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Projects","item":"https://mhassan.dev/projects/"},{"@type":"ListItem","position":2,"name":"Obelisk","item":"https://mhassan.dev/projects/obelisk/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Obelisk","name":"Obelisk","description":"AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture","keywords":["AI","LangGraph","FastAPI","PostgreSQL","RAG","Multi-Tenant","Vertex AI"],"articleBody":"Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy—all within a multi-tenant SaaS architecture with space-level isolation.\nTech Stack: FastAPI, LangGraph, PostgreSQL, Vertex AI, Redis, Google Cloud\nSource: Private (commercial product) · Book a call to discuss\nThe Hard Problems Building production AI systems exposes problems that don’t appear in tutorials:\nAgent reliability — LLMs hallucinate, get confused, and can be manipulated. How do you build agents that fail gracefully and resist prompt injection?\nRAG latency — Semantic search is slow. Vector similarity, document retrieval, context assembly—each adds latency. Users waiting 20+ seconds for a response won’t stick around.\nMulti-tenant AI — Each organization has their own brand voice, documents, and context. That data must never leak between tenants, even through the AI’s responses.\nConversation persistence — Long-running agent sessions need to survive server restarts, handle reconnections, and resume mid-conversation without losing context.\nTechnical Deep Dives AI Agent Architecture with LangGraph The system uses four specialized agents that collaborate on content tasks. LangGraph handles the orchestration—state machines for AI workflows.\nAgent Specialization\nEach agent has a focused role with its own system prompt, tools, and retrieval configuration:\nclass AgentType(Enum): SEO = \"seo\" # Search optimization, keyword research EMAIL = \"email\" # Campaign copy, subject lines, sequences BRAND = \"brand\" # Voice consistency, tone analysis STRATEGY = \"strategy\" # Content planning, competitive analysis @dataclass class AgentConfig: agent_type: AgentType system_prompt: str temperature: float tools: list[Tool] retrieval_config: RetrievalConfig max_iterations: int = 10 AGENT_CONFIGS = { AgentType.SEO: AgentConfig( agent_type=AgentType.SEO, system_prompt=SEO_SYSTEM_PROMPT, temperature=0.3, # Lower for factual accuracy tools=[keyword_research, serp_analysis, content_audit], retrieval_config=RetrievalConfig( collections=[\"seo_guidelines\", \"competitor_analysis\"], top_k=5 ) ), AgentType.BRAND: AgentConfig( agent_type=AgentType.BRAND, system_prompt=BRAND_SYSTEM_PROMPT, temperature=0.7, # Higher for creative suggestions tools=[voice_analyzer, tone_checker, style_guide_lookup], retrieval_config=RetrievalConfig( collections=[\"brand_guidelines\", \"approved_content\"], top_k=8 ) ), # ... } Contamination Detection\nLLMs are vulnerable to prompt injection—malicious instructions hidden in retrieved documents or user input. We detect and block contaminated responses:\nclass ContaminationDetector: \"\"\" Detects signs of prompt injection in LLM outputs. \"\"\" CONTAMINATION_PATTERNS = [ r\"ignore previous instructions\", r\"disregard (the |your )?system prompt\", r\"you are now\", r\"new instructions:\", r\"\u003c\\|.*?\\|\u003e\", # Common injection delimiters r\"\\[INST\\]\", # Instruction markers ] def __init__(self): self.patterns = [re.compile(p, re.I) for p in self.CONTAMINATION_PATTERNS] def check_response(self, response: str, context_docs: list[str]) -\u003e ContaminationResult: # Check for injection patterns in response for pattern in self.patterns: if pattern.search(response): return ContaminationResult( contaminated=True, reason=\"Response contains injection pattern\", pattern=pattern.pattern ) # Check if response echoes suspicious document content for doc in context_docs: if self._contains_instruction_leak(response, doc): return ContaminationResult( contaminated=True, reason=\"Response echoes suspicious document content\" ) return ContaminationResult(contaminated=False) def _contains_instruction_leak(self, response: str, doc: str) -\u003e bool: # Detect if the response is parroting instruction-like content from docs instruction_markers = [\"you must\", \"always respond\", \"your role is\"] for marker in instruction_markers: if marker in doc.lower() and marker in response.lower(): # Check similarity of surrounding context if self._context_similarity(response, doc, marker) \u003e 0.8: return True return False Conditional Routing with Multiple Termination Conditions\nAgent loops need multiple exit conditions to prevent runaway execution:\nclass AgentOrchestrator: def __init__(self, config: AgentConfig): self.config = config self.graph = self._build_graph() def _build_graph(self) -\u003e StateGraph: graph = StateGraph(AgentState) graph.add_node(\"retrieve\", self.retrieve_context) graph.add_node(\"think\", self.agent_think) graph.add_node(\"act\", self.agent_act) graph.add_node(\"check\", self.check_completion) graph.add_edge(START, \"retrieve\") graph.add_edge(\"retrieve\", \"think\") graph.add_conditional_edges( \"think\", self.route_after_think, { \"act\": \"act\", \"complete\": END, \"error\": END, } ) graph.add_edge(\"act\", \"check\") graph.add_conditional_edges( \"check\", self.route_after_check, { \"continue\": \"think\", \"complete\": END, \"max_iterations\": END, \"contaminated\": END, } ) return graph.compile(checkpointer=self.checkpointer) def route_after_check(self, state: AgentState) -\u003e str: # Multiple termination conditions if state.iterations \u003e= self.config.max_iterations: return \"max_iterations\" if state.contamination_detected: return \"contaminated\" if state.task_complete: return \"complete\" if state.needs_more_context: return \"continue\" return \"complete\" PostgreSQL Checkpointing for Conversation Resumption\nLangGraph supports checkpointing to persist conversation state. We use PostgreSQL for durability:\nfrom langgraph.checkpoint.postgres import PostgresSaver class ConversationManager: def __init__(self, db_url: str): self.checkpointer = PostgresSaver.from_conn_string(db_url) async def resume_conversation( self, thread_id: str, new_message: str ) -\u003e AsyncIterator[StreamEvent]: \"\"\"Resume a conversation from its last checkpoint.\"\"\" # Load existing state config = {\"configurable\": {\"thread_id\": thread_id}} # Get the agent graph for this conversation's type conversation = await self.get_conversation(thread_id) agent = self.get_agent(conversation.agent_type) # Stream from checkpoint async for event in agent.graph.astream( {\"messages\": [HumanMessage(content=new_message)]}, config=config, ): yield self._format_event(event) async def get_conversation_history(self, thread_id: str) -\u003e list[Message]: \"\"\"Retrieve full conversation from checkpoints.\"\"\" config = {\"configurable\": {\"thread_id\": thread_id}} state = await self.checkpointer.aget(config) return state.values.get(\"messages\", []) if state else [] Parallel RAG System Standard RAG is slow—retrieve, rank, assemble, generate. We parallelize everything possible.\n4-Stream Parallel Retrieval\nInstead of sequential retrieval, we fire four queries simultaneously:\nclass ParallelRetriever: \"\"\" Retrieves from multiple sources in parallel, merging results. \"\"\" async def retrieve( self, query: str, space_id: str, referenced_doc_ids: list[str] | None = None ) -\u003e RetrievalResult: # Fire all retrievals in parallel tasks = [ self._retrieve_referenced(referenced_doc_ids), # Explicit references self._retrieve_general(query, space_id), # Semantic search self._retrieve_urls(query, space_id), # Web content self._retrieve_business_context(space_id), # Org context ] results = await asyncio.gather(*tasks, return_exceptions=True) # Merge and deduplicate all_chunks = [] for result in results: if isinstance(result, Exception): logger.warning(f\"Retrieval stream failed: {result}\") continue all_chunks.extend(result) # Deduplicate by content hash seen = set() unique_chunks = [] for chunk in all_chunks: content_hash = hashlib.md5(chunk.content.encode()).hexdigest() if content_hash not in seen: seen.add(content_hash) unique_chunks.append(chunk) # Re-rank merged results ranked = await self.reranker.rank(query, unique_chunks) return RetrievalResult( chunks=ranked[:self.max_chunks], sources=self._extract_sources(ranked) ) Query Enhancement with Fast Model\nBefore retrieval, we enhance the query using a fast, cheap model:\nclass QueryEnhancer: \"\"\" Expands queries for better retrieval using Gemini Flash. \"\"\" def __init__(self): self.model = GenerativeModel(\"gemini-1.5-flash\") async def enhance(self, query: str, context: ConversationContext) -\u003e EnhancedQuery: prompt = f\"\"\" Given this user query and conversation context, generate: 1. An expanded search query with related terms 2. 2-3 alternative phrasings 3. Key entities to look for Query: {query} Recent context: {context.recent_summary} Respond in JSON format. \"\"\" response = await self.model.generate_content_async(prompt) enhanced = json.loads(response.text) return EnhancedQuery( original=query, expanded=enhanced[\"expanded\"], alternatives=enhanced[\"alternatives\"], entities=enhanced[\"entities\"] ) This reduced Time to First Token (TTFT) from 22s to 8-10s—a 50-65% improvement. The fast model call adds ~200ms but saves seconds on retrieval by producing better queries.\n3072D Embeddings via Vertex AI\nWe use Vertex AI’s text-embedding-004 model with 3072 dimensions for high-quality semantic matching:\nclass EmbeddingService: def __init__(self): self.model = TextEmbeddingModel.from_pretrained(\"text-embedding-004\") self.dimension = 3072 async def embed_batch( self, texts: list[str], task_type: str = \"RETRIEVAL_DOCUMENT\" ) -\u003e list[list[float]]: \"\"\" Batch embed with automatic chunking for API limits. \"\"\" embeddings = [] batch_size = 250 # Vertex AI limit for i in range(0, len(texts), batch_size): batch = texts[i:i + batch_size] inputs = [ TextEmbeddingInput(text=t, task_type=task_type) for t in batch ] results = await asyncio.to_thread( self.model.get_embeddings, inputs ) embeddings.extend([r.values for r in results]) return embeddings Document Processing Pipeline Marketing teams upload diverse documents—PDFs, slides, spreadsheets, web pages. We need unified processing.\nDocling for Multi-Format Ingestion\nDocling handles format conversion with structure preservation:\nfrom docling.document_converter import DocumentConverter from docling.datamodel.base_models import InputFormat class DocumentProcessor: def __init__(self): self.converter = DocumentConverter() self.chunker = SemanticChunker() self.embedding_service = EmbeddingService() async def process_document( self, file_path: Path, space_id: str, metadata: dict ) -\u003e ProcessedDocument: # Convert to unified format result = self.converter.convert(str(file_path)) doc = result.document # Extract structure structure = DocumentStructure( title=doc.title, headings=self._extract_headings(doc), tables=self._extract_tables(doc), images=self._extract_images(doc), ) # Semantic chunking that respects structure chunks = await self.chunker.chunk( doc, structure=structure, max_chunk_size=1500, overlap=200 ) # Generate embeddings embeddings = await self.embedding_service.embed_batch( [c.content for c in chunks] ) # Store in vector DB await self.store_chunks(chunks, embeddings, space_id, metadata) return ProcessedDocument( id=str(uuid4()), chunks=len(chunks), structure=structure ) Structure-Aware Semantic Chunking\nNaive chunking breaks context. We chunk at semantic boundaries:\nclass SemanticChunker: \"\"\" Chunks documents while preserving semantic structure. \"\"\" def chunk( self, doc: Document, structure: DocumentStructure, max_chunk_size: int, overlap: int ) -\u003e list[Chunk]: chunks = [] current_section = None for element in doc.iterate_items(): if element.is_heading: # Start new chunk at headings if current_section: chunks.extend(self._finalize_section(current_section, max_chunk_size)) current_section = Section(heading=element.text, content=[]) elif element.is_table: # Tables get their own chunks with context chunks.append(Chunk( content=self._table_to_markdown(element), metadata={\"type\": \"table\", \"section\": current_section.heading} )) elif element.is_text: if current_section: current_section.content.append(element.text) # Finalize last section if current_section: chunks.extend(self._finalize_section(current_section, max_chunk_size)) return chunks def _finalize_section(self, section: Section, max_size: int) -\u003e list[Chunk]: \"\"\"Split section content while maintaining heading context.\"\"\" full_text = \"\\n\".join(section.content) if len(full_text) \u003c= max_size: return [Chunk( content=f\"# {section.heading}\\n\\n{full_text}\", metadata={\"section\": section.heading} )] # Split at paragraph boundaries paragraphs = full_text.split(\"\\n\\n\") chunks = [] current = f\"# {section.heading}\\n\\n\" for para in paragraphs: if len(current) + len(para) \u003e max_size: chunks.append(Chunk(content=current, metadata={\"section\": section.heading})) current = f\"# {section.heading} (continued)\\n\\n{para}\\n\\n\" else: current += para + \"\\n\\n\" if current.strip(): chunks.append(Chunk(content=current, metadata={\"section\": section.heading})) return chunks Dual Embeddings for Visual Content\nSome documents are image-heavy (presentations, infographics). We generate both text and visual embeddings:\nclass DualEmbeddingService: def __init__(self): self.text_model = TextEmbeddingModel.from_pretrained(\"text-embedding-004\") self.clip_model = self._load_clip() async def embed_chunk(self, chunk: Chunk) -\u003e DualEmbedding: embeddings = {\"text\": None, \"visual\": None} # Always generate text embedding embeddings[\"text\"] = await self.embed_text(chunk.content) # Generate visual embedding if chunk contains images if chunk.images: image_embeddings = [] for img in chunk.images: img_emb = await self.embed_image(img) image_embeddings.append(img_emb) # Average pool image embeddings embeddings[\"visual\"] = np.mean(image_embeddings, axis=0).tolist() return DualEmbedding(**embeddings) Multi-Tenancy: Organization → Space → Content The system has a 3-tier hierarchy. Organizations contain spaces, spaces contain content. Each space is fully isolated.\nSpace Context Service\nEvery request resolves its space context with eager-loaded relationships:\nclass SpaceContextService: \"\"\" Resolves and caches space context for requests. \"\"\" def __init__(self, cache: Redis): self.cache = cache self.ttl = 300 # 5 minutes async def get_context(self, space_id: str, user_id: str) -\u003e SpaceContext: cache_key = f\"space_context:{space_id}:{user_id}\" # Try cache first cached = await self.cache.get(cache_key) if cached: return SpaceContext.model_validate_json(cached) # Load from DB with eager loading async with get_session() as session: result = await session.execute( select(Space) .options( selectinload(Space.organization), selectinload(Space.members), selectinload(Space.brand_settings), selectinload(Space.integrations), ) .where(Space.id == space_id) ) space = result.scalar_one_or_none() if not space: raise SpaceNotFoundError(space_id) # Verify user access if not self._user_has_access(space, user_id): raise AccessDeniedError(f\"User {user_id} cannot access space {space_id}\") context = SpaceContext( space_id=space.id, organization_id=space.organization.id, brand_voice=space.brand_settings.voice_profile, integrations=[i.type for i in space.integrations], user_role=self._get_user_role(space, user_id), ) # Cache for subsequent requests await self.cache.setex( cache_key, self.ttl, context.model_dump_json() ) return context Middleware Enforcement\nEvery request validates the X-Space-Id header:\nclass SpaceIsolationMiddleware: \"\"\" Enforces space-level isolation for all requests. \"\"\" def __init__(self, app: ASGIApp): self.app = app self.public_paths = {\"/health\", \"/auth/token\", \"/docs\", \"/openapi.json\"} async def __call__(self, scope: Scope, receive: Receive, send: Send): if scope[\"type\"] != \"http\": await self.app(scope, receive, send) return path = scope[\"path\"] if path in self.public_paths: await self.app(scope, receive, send) return headers = dict(scope[\"headers\"]) space_id = headers.get(b\"x-space-id\", b\"\").decode() if not space_id: response = JSONResponse( {\"error\": \"X-Space-Id header required\"}, status_code=400 ) await response(scope, receive, send) return # Validate space exists and user has access user = scope.get(\"user\") try: context = await self.space_service.get_context(space_id, user.id) scope[\"space_context\"] = context except (SpaceNotFoundError, AccessDeniedError) as e: response = JSONResponse({\"error\": str(e)}, status_code=403) await response(scope, receive, send) return await self.app(scope, receive, send) Query Isolation\nAll database queries are scoped to the current space:\nclass SpaceAwareRepository(Generic[T]): \"\"\" Base repository that enforces space isolation. \"\"\" def __init__(self, model: type[T], session: AsyncSession): self.model = model self.session = session def _base_query(self, space_id: str) -\u003e Select: return select(self.model).where(self.model.space_id == space_id) async def get(self, space_id: str, id: str) -\u003e T | None: result = await self.session.execute( self._base_query(space_id).where(self.model.id == id) ) return result.scalar_one_or_none() async def list( self, space_id: str, filters: dict | None = None, limit: int = 100 ) -\u003e list[T]: query = self._base_query(space_id) if filters: for key, value in filters.items(): query = query.where(getattr(self.model, key) == value) query = query.limit(limit) result = await self.session.execute(query) return list(result.scalars().all()) Authentication: RS256 JWT with Key Rotation Security is non-negotiable for a SaaS platform handling client data.\nAutomated 90-Day Key Rotation\nJWT signing keys rotate automatically:\nclass JWTKeyManager: \"\"\" Manages RS256 key pairs with automated rotation. \"\"\" def __init__(self, secret_manager: SecretManagerClient): self.secret_manager = secret_manager self.rotation_days = 90 self.keys: dict[str, RSAPrivateKey] = {} self.public_keys: dict[str, RSAPublicKey] = {} async def initialize(self): \"\"\"Load current and previous keys for seamless rotation.\"\"\" current = await self._load_or_create_key(\"current\") previous = await self._load_key(\"previous\") self.keys[\"current\"] = current self.public_keys[\"current\"] = current.public_key() if previous: self.keys[\"previous\"] = previous self.public_keys[\"previous\"] = previous.public_key() async def rotate_if_needed(self): \"\"\"Check if rotation is needed and perform it.\"\"\" metadata = await self._get_key_metadata(\"current\") if self._should_rotate(metadata): await self._rotate_keys() async def _rotate_keys(self): \"\"\"Rotate: current -\u003e previous, generate new current.\"\"\" # Move current to previous current_key = await self._load_key(\"current\") await self._store_key(\"previous\", current_key) # Generate new current new_key = rsa.generate_private_key( public_exponent=65537, key_size=4096, ) await self._store_key(\"current\", new_key) # Reload await self.initialize() logger.info(\"JWT signing keys rotated successfully\") Zero-Query User Context\nUser identity and permissions are embedded in the JWT, eliminating database lookups for auth:\nclass TokenPayload(BaseModel): sub: str # User ID org_id: str spaces: dict[str, str] # space_id -\u003e role permissions: list[str] exp: datetime iat: datetime jti: str # Unique token ID for revocation class AuthService: async def create_token(self, user: User) -\u003e str: \"\"\"Generate token with embedded permissions.\"\"\" spaces = await self._get_user_spaces(user.id) payload = TokenPayload( sub=user.id, org_id=user.organization_id, spaces={s.id: s.role for s in spaces}, permissions=self._compute_permissions(user, spaces), exp=datetime.utcnow() + timedelta(hours=24), iat=datetime.utcnow(), jti=str(uuid4()), ) return jwt.encode( payload.model_dump(), self.key_manager.keys[\"current\"], algorithm=\"RS256\", headers={\"kid\": \"current\"} ) In-Memory TTL Cache for O(1) Verification\nPublic keys are cached for fast verification:\nclass TokenVerifier: def __init__(self, key_manager: JWTKeyManager): self.key_manager = key_manager self.revoked_tokens: TTLCache = TTLCache(maxsize=10000, ttl=86400) async def verify(self, token: str) -\u003e TokenPayload: # Decode header to get key ID header = jwt.get_unverified_header(token) kid = header.get(\"kid\", \"current\") # Get public key (O(1) lookup) public_key = self.key_manager.public_keys.get(kid) if not public_key: raise InvalidTokenError(\"Unknown key ID\") # Check revocation (O(1) lookup) try: unverified = jwt.decode(token, options={\"verify_signature\": False}) if unverified.get(\"jti\") in self.revoked_tokens: raise TokenRevokedError() except jwt.DecodeError: raise InvalidTokenError(\"Malformed token\") # Verify signature try: payload = jwt.decode( token, public_key, algorithms=[\"RS256\"], ) return TokenPayload.model_validate(payload) except jwt.ExpiredSignatureError: raise TokenExpiredError() except jwt.InvalidTokenError as e: raise InvalidTokenError(str(e)) External Integrations Marketing platforms need to pull data from everywhere. We integrate with major ad and analytics platforms.\nAgentBridge Pattern for Slack\nExternal integrations use a bridge pattern that abstracts the service:\nclass SlackBridge: \"\"\" Bridge between AI agents and Slack workspaces. \"\"\" def __init__(self, credentials: SlackCredentials): self.client = AsyncWebClient(token=credentials.bot_token) async def post_content( self, channel: str, content: GeneratedContent, context: SpaceContext ) -\u003e SlackMessage: \"\"\"Post AI-generated content to Slack for review.\"\"\" blocks = self._format_content_blocks(content) response = await self.client.chat_postMessage( channel=channel, blocks=blocks, text=content.plain_text, # Fallback metadata={ \"event_type\": \"content_review\", \"event_payload\": { \"content_id\": content.id, \"space_id\": context.space_id, \"agent_type\": content.source_agent, } } ) return SlackMessage( ts=response[\"ts\"], channel=response[\"channel\"], content_id=content.id ) async def handle_interaction(self, payload: dict) -\u003e InteractionResult: \"\"\"Handle button clicks, approvals, etc.\"\"\" action = payload[\"actions\"][0] if action[\"action_id\"] == \"approve_content\": return await self._handle_approval(payload) elif action[\"action_id\"] == \"request_revision\": return await self._handle_revision_request(payload) raise UnknownActionError(action[\"action_id\"]) OAuth2 Flow for Google Analytics 4\nAnalytics integration uses OAuth2 with automatic token refresh:\nclass GA4Integration: \"\"\" Google Analytics 4 integration with OAuth2. \"\"\" TOKEN_URL = \"https://oauth2.googleapis.com/token\" SCOPES = [\"https://www.googleapis.com/auth/analytics.readonly\"] async def exchange_code(self, code: str, redirect_uri: str) -\u003e OAuthTokens: \"\"\"Exchange authorization code for tokens.\"\"\" async with httpx.AsyncClient() as client: response = await client.post( self.TOKEN_URL, data={ \"code\": code, \"client_id\": self.client_id, \"client_secret\": self.client_secret, \"redirect_uri\": redirect_uri, \"grant_type\": \"authorization_code\", } ) response.raise_for_status() data = response.json() return OAuthTokens( access_token=data[\"access_token\"], refresh_token=data[\"refresh_token\"], expires_at=datetime.utcnow() + timedelta(seconds=data[\"expires_in\"]) ) async def get_report( self, tokens: OAuthTokens, property_id: str, metrics: list[str], dimensions: list[str], date_range: DateRange ) -\u003e AnalyticsReport: \"\"\"Fetch analytics data with automatic token refresh.\"\"\" # Refresh if needed if tokens.expires_at \u003c datetime.utcnow() + timedelta(minutes=5): tokens = await self._refresh_tokens(tokens) async with httpx.AsyncClient() as client: response = await client.post( f\"https://analyticsdata.googleapis.com/v1beta/properties/{property_id}:runReport\", headers={\"Authorization\": f\"Bearer {tokens.access_token}\"}, json={ \"metrics\": [{\"name\": m} for m in metrics], \"dimensions\": [{\"name\": d} for d in dimensions], \"dateRanges\": [{\"startDate\": date_range.start, \"endDate\": date_range.end}], } ) response.raise_for_status() return AnalyticsReport.from_response(response.json()) Real-Time Streaming Users expect to see AI responses as they generate, not after a 10-second wait.\nEvent Persistence for Reconstruction\nAgent run events are persisted for replay and debugging:\nclass AgentRunEvent(Base): __tablename__ = \"agent_run_events\" id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4) run_id: Mapped[UUID] = mapped_column(ForeignKey(\"agent_runs.id\"), index=True) sequence: Mapped[int] # For ordering event_type: Mapped[str] # token, tool_call, tool_result, error, complete payload: Mapped[dict] = mapped_column(JSONB) created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow) __table_args__ = ( Index(\"ix_run_events_run_seq\", \"run_id\", \"sequence\"), ) class EventPersistence: async def persist_event( self, run_id: UUID, event_type: str, payload: dict ): async with self.session() as session: # Get next sequence number result = await session.execute( select(func.coalesce(func.max(AgentRunEvent.sequence), 0)) .where(AgentRunEvent.run_id == run_id) ) next_seq = result.scalar() + 1 event = AgentRunEvent( run_id=run_id, sequence=next_seq, event_type=event_type, payload=payload ) session.add(event) await session.commit() async def replay_events( self, run_id: UUID, from_sequence: int = 0 ) -\u003e AsyncIterator[AgentRunEvent]: \"\"\"Replay events for a run, optionally from a sequence.\"\"\" async with self.session() as session: result = await session.stream( select(AgentRunEvent) .where(AgentRunEvent.run_id == run_id) .where(AgentRunEvent.sequence \u003e from_sequence) .order_by(AgentRunEvent.sequence) ) async for event in result.scalars(): yield event WebSocket Integration with Reconnection\nClients connect via WebSocket and can reconnect to resume streams:\nclass StreamingEndpoint: async def websocket_handler(self, websocket: WebSocket): await websocket.accept() try: while True: message = await websocket.receive_json() if message[\"type\"] == \"subscribe\": await self._handle_subscribe(websocket, message) elif message[\"type\"] == \"resume\": await self._handle_resume(websocket, message) elif message[\"type\"] == \"message\": await self._handle_message(websocket, message) except WebSocketDisconnect: await self._handle_disconnect(websocket) async def _handle_resume(self, websocket: WebSocket, message: dict): \"\"\"Resume a stream from a specific sequence.\"\"\" run_id = UUID(message[\"run_id\"]) last_seq = message.get(\"last_sequence\", 0) # Replay missed events async for event in self.persistence.replay_events(run_id, last_seq): await websocket.send_json({ \"type\": event.event_type, \"sequence\": event.sequence, \"payload\": event.payload }) # Continue with live stream if still running run = await self.get_run(run_id) if run.status == \"running\": await self._subscribe_to_live(websocket, run_id) Performance Optimizations Session Pre-Creation\nLLM sessions have cold start latency. We pre-warm them:\nclass SessionPool: \"\"\" Pool of pre-warmed LLM sessions for reduced latency. \"\"\" def __init__(self, pool_size: int = 5): self.pool_size = pool_size self.available: asyncio.Queue[LLMSession] = asyncio.Queue() self.in_use: set[LLMSession] = set() async def initialize(self): \"\"\"Pre-create sessions on startup.\"\"\" for _ in range(self.pool_size): session = await self._create_session() await self.available.put(session) async def acquire(self) -\u003e LLMSession: \"\"\"Get a pre-warmed session.\"\"\" try: session = self.available.get_nowait() except asyncio.QueueEmpty: # Pool exhausted, create new session session = await self._create_session() self.in_use.add(session) return session async def release(self, session: LLMSession): \"\"\"Return session to pool.\"\"\" self.in_use.discard(session) if self.available.qsize() \u003c self.pool_size: # Reset and return to pool await session.reset() await self.available.put(session) else: # Pool full, close session await session.close() async def _create_session(self) -\u003e LLMSession: \"\"\"Create and warm up a new session.\"\"\" session = LLMSession() # Warm up with minimal prompt await session.generate(\"Hello\", max_tokens=1) return session Async PostgreSQL Connection Pool\nWe use asyncpg with connection overflow handling:\nfrom sqlalchemy.ext.asyncio import create_async_engine, AsyncSession from sqlalchemy.pool import AsyncAdaptedQueuePool engine = create_async_engine( DATABASE_URL, poolclass=AsyncAdaptedQueuePool, pool_size=15, max_overflow=25, # Allow burst to 40 total pool_timeout=30, pool_recycle=1800, # Recycle connections every 30 min pool_pre_ping=True, # Verify connections before use ) Structured Logging with Correlation IDs\nEvery request gets a correlation ID that flows through all log entries:\nclass CorrelationMiddleware: async def __call__(self, scope: Scope, receive: Receive, send: Send): if scope[\"type\"] == \"http\": correlation_id = scope[\"headers\"].get( b\"x-correlation-id\", str(uuid4()).encode() ).decode() # Set in context var for logging correlation_context.set(correlation_id) # Add to response headers async def send_wrapper(message): if message[\"type\"] == \"http.response.start\": headers = MutableHeaders(scope=message) headers.append(\"x-correlation-id\", correlation_id) await send(message) await self.app(scope, receive, send_wrapper) else: await self.app(scope, receive, send) # Logger configuration class CorrelationFilter(logging.Filter): def filter(self, record): record.correlation_id = correlation_context.get(\"\") return True What I Learned Contamination detection is essential. LLMs will faithfully execute instructions hidden in retrieved documents. You need explicit detection for prompt injection patterns, or your agents become attack vectors.\nParallel retrieval changes the latency equation. When retrieval is your bottleneck, parallelizing streams has a multiplicative effect. Query enhancement adds latency but saves more by improving retrieval quality.\nSpace-level isolation requires everywhere enforcement. Every query, every cache key, every log entry needs space scoping. A single missed scope check creates a data leak. Middleware is necessary but not sufficient—repositories and services need built-in isolation.\nCheckpointing is worth the complexity. Long-running AI conversations need persistence. LangGraph’s PostgreSQL checkpointer handles this cleanly, but you still need event streaming for real-time UI and replay.\nInterested? If you’re building AI-powered SaaS products or want to discuss LangGraph patterns, book a call.\n","wordCount":"3184","inLanguage":"en","datePublished":"2025-01-20T00:00:00Z","dateModified":"2025-01-20T00:00:00Z","author":{"@type":"Person","name":"Muhammad Hassan Raza"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://mhassan.dev/projects/obelisk/"},"publisher":{"@type":"Organization","name":"Muhammad Hassan Raza","logo":{"@type":"ImageObject","url":"https://mhassan.dev/assets/favicon.svg"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://mhassan.dev/ accesskey=h title="Muhammad Hassan Raza (Alt + H)">Muhammad Hassan Raza</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://mhassan.dev/book-a-call/ title="Book a Call"><span><svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M8.26 1.289l-1.564.772c-5.793 3.02 2.798 20.944 9.31 20.944.46.0.904-.094 1.317-.284l1.542-.755-2.898-5.594-1.54.754c-.181.087-.384.134-.597.134-2.561.0-6.841-8.204-4.241-9.596l1.546-.763L8.26 1.289zM16.006 24C10.326 24 3.785 12.886 3.785 6.168c0-2.419.833-4.146 2.457-4.992l2.382-1.176 3.857 7.347-2.437 1.201c-1.439.772 2.409 8.424 3.956 7.68l2.399-1.179 3.816 7.36s-2.36 1.162-2.476 1.215c-.547.251-1.129.376-1.733.376"/></svg>Book a Call</span></a></li><li><a href=https://mhassan.dev/projects/ title=Projects><span><svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5h13v17H0V2h8l3 3zM1 3v18h22V6H10.586l-3-3H1z"/></svg>Projects</span></a></li><li><a href=https://mhassan.dev/about/ title=About><span><svg class="menu-icon" shape-rendering="geometricPrecision" viewBox="-1 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 0c6.623.0 12 5.377 12 12s-5.377 12-12 12S0 18.623.0 12 5.377.0 12 0zm8.127 19.41c-.282-.401-.772-.654-1.624-.85-3.848-.906-4.097-1.501-4.352-2.059-.259-.565-.19-1.23.205-1.977 1.726-3.257 2.09-6.024 1.027-7.79C14.709 5.615 13.508 5 12 5c-1.521.0-2.732.626-3.409 1.763-1.066 1.789-.693 4.544 1.049 7.757.402.742.476 1.406.22 1.974-.265.586-.611 1.19-4.365 2.066-.852.196-1.342.449-1.623.848C5.884 21.615 8.782 23 12 23s6.115-1.385 8.127-3.59zm.65-.782C22.172 16.784 23 14.488 23 12c0-6.071-4.929-11-11-11S1 5.929 1 12c0 2.487.827 4.783 2.222 6.626.409-.452 1.049-.81 2.049-1.041 2.025-.462 3.376-.836 3.678-1.502.122-.272.061-.628-.188-1.087-1.917-3.535-2.282-6.641-1.03-8.745C8.584 4.82 10.139 4 12 4c1.845.0 3.391.808 4.24 2.218 1.251 2.079.896 5.195-1 8.774-.245.463-.304.821-.179 1.094.305.668 1.644 1.038 3.667 1.499 1 .23 1.64.59 2.049 1.043z"/></svg>About</span></a></li><li><a href=https://mhassan.dev/search/ title="Search (Alt + /)" accesskey=/><span><svg class="menu-icon" shape-rendering="geometricPrecision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M15.853 16.56C14.17 18.077 11.942 19 9.5 19 4.257 19 0 14.743.0 9.5S4.257.0 9.5.0 19 4.257 19 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691.0 8.5 3.809 8.5 8.5S14.191 18 9.5 18 1 14.191 1 9.5 4.809 1 9.5 1z"/></svg>Search</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://mhassan.dev/>Home</a>&nbsp;»&nbsp;<a href=https://mhassan.dev/projects/>Projects</a></div><h1 class=post-title>Obelisk</h1><div class=post-description>AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture</div><div class=post-meta><span title='2025-01-20 00:00:00 +0000 UTC'>January 20, 2025</span>&nbsp;·&nbsp;<span>15 min</span>&nbsp;·&nbsp;<span>Muhammad Hassan Raza</span></div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#the-hard-problems aria-label="The Hard Problems">The Hard Problems</a></li><li><a href=#technical-deep-dives aria-label="Technical Deep Dives">Technical Deep Dives</a><ul><li><a href=#ai-agent-architecture-with-langgraph aria-label="AI Agent Architecture with LangGraph">AI Agent Architecture with LangGraph</a></li><li><a href=#parallel-rag-system aria-label="Parallel RAG System">Parallel RAG System</a></li><li><a href=#document-processing-pipeline aria-label="Document Processing Pipeline">Document Processing Pipeline</a></li><li><a href=#multi-tenancy-organization--space--content aria-label="Multi-Tenancy: Organization → Space → Content">Multi-Tenancy: Organization → Space → Content</a></li><li><a href=#authentication-rs256-jwt-with-key-rotation aria-label="Authentication: RS256 JWT with Key Rotation">Authentication: RS256 JWT with Key Rotation</a></li><li><a href=#external-integrations aria-label="External Integrations">External Integrations</a></li><li><a href=#real-time-streaming aria-label="Real-Time Streaming">Real-Time Streaming</a></li><li><a href=#performance-optimizations aria-label="Performance Optimizations">Performance Optimizations</a></li></ul></li><li><a href=#what-i-learned aria-label="What I Learned">What I Learned</a></li><li><a href=#interested aria-label=Interested?>Interested?</a></li></ul></div></details></div><div class=post-content><p>Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy—all within a multi-tenant SaaS architecture with space-level isolation.</p><p><strong>Tech Stack:</strong> FastAPI, LangGraph, PostgreSQL, Vertex AI, Redis, Google Cloud</p><p><strong>Source:</strong> Private (commercial product) · <a href=/book-a-call/>Book a call</a> to discuss</p><hr><h2 id=the-hard-problems>The Hard Problems<a hidden class=anchor aria-hidden=true href=#the-hard-problems>#</a></h2><p>Building production AI systems exposes problems that don&rsquo;t appear in tutorials:</p><ol><li><p><strong>Agent reliability</strong> — LLMs hallucinate, get confused, and can be manipulated. How do you build agents that fail gracefully and resist prompt injection?</p></li><li><p><strong>RAG latency</strong> — Semantic search is slow. Vector similarity, document retrieval, context assembly—each adds latency. Users waiting 20+ seconds for a response won&rsquo;t stick around.</p></li><li><p><strong>Multi-tenant AI</strong> — Each organization has their own brand voice, documents, and context. That data must never leak between tenants, even through the AI&rsquo;s responses.</p></li><li><p><strong>Conversation persistence</strong> — Long-running agent sessions need to survive server restarts, handle reconnections, and resume mid-conversation without losing context.</p></li></ol><hr><h2 id=technical-deep-dives>Technical Deep Dives<a hidden class=anchor aria-hidden=true href=#technical-deep-dives>#</a></h2><h3 id=ai-agent-architecture-with-langgraph>AI Agent Architecture with LangGraph<a hidden class=anchor aria-hidden=true href=#ai-agent-architecture-with-langgraph>#</a></h3><p>The system uses four specialized agents that collaborate on content tasks. LangGraph handles the orchestration—state machines for AI workflows.</p><p><strong>Agent Specialization</strong></p><p>Each agent has a focused role with its own system prompt, tools, and retrieval configuration:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AgentType</span>(Enum):
+</span></span><span style=display:flex><span>    SEO <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;seo&#34;</span>           <span style=color:#75715e># Search optimization, keyword research</span>
+</span></span><span style=display:flex><span>    EMAIL <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;email&#34;</span>       <span style=color:#75715e># Campaign copy, subject lines, sequences</span>
+</span></span><span style=display:flex><span>    BRAND <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;brand&#34;</span>       <span style=color:#75715e># Voice consistency, tone analysis</span>
+</span></span><span style=display:flex><span>    STRATEGY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;strategy&#34;</span> <span style=color:#75715e># Content planning, competitive analysis</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@dataclass</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AgentConfig</span>:
+</span></span><span style=display:flex><span>    agent_type: AgentType
+</span></span><span style=display:flex><span>    system_prompt: str
+</span></span><span style=display:flex><span>    temperature: float
+</span></span><span style=display:flex><span>    tools: list[Tool]
+</span></span><span style=display:flex><span>    retrieval_config: RetrievalConfig
+</span></span><span style=display:flex><span>    max_iterations: int <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AGENT_CONFIGS <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    AgentType<span style=color:#f92672>.</span>SEO: AgentConfig(
+</span></span><span style=display:flex><span>        agent_type<span style=color:#f92672>=</span>AgentType<span style=color:#f92672>.</span>SEO,
+</span></span><span style=display:flex><span>        system_prompt<span style=color:#f92672>=</span>SEO_SYSTEM_PROMPT,
+</span></span><span style=display:flex><span>        temperature<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>,  <span style=color:#75715e># Lower for factual accuracy</span>
+</span></span><span style=display:flex><span>        tools<span style=color:#f92672>=</span>[keyword_research, serp_analysis, content_audit],
+</span></span><span style=display:flex><span>        retrieval_config<span style=color:#f92672>=</span>RetrievalConfig(
+</span></span><span style=display:flex><span>            collections<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;seo_guidelines&#34;</span>, <span style=color:#e6db74>&#34;competitor_analysis&#34;</span>],
+</span></span><span style=display:flex><span>            top_k<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    ),
+</span></span><span style=display:flex><span>    AgentType<span style=color:#f92672>.</span>BRAND: AgentConfig(
+</span></span><span style=display:flex><span>        agent_type<span style=color:#f92672>=</span>AgentType<span style=color:#f92672>.</span>BRAND,
+</span></span><span style=display:flex><span>        system_prompt<span style=color:#f92672>=</span>BRAND_SYSTEM_PROMPT,
+</span></span><span style=display:flex><span>        temperature<span style=color:#f92672>=</span><span style=color:#ae81ff>0.7</span>,  <span style=color:#75715e># Higher for creative suggestions</span>
+</span></span><span style=display:flex><span>        tools<span style=color:#f92672>=</span>[voice_analyzer, tone_checker, style_guide_lookup],
+</span></span><span style=display:flex><span>        retrieval_config<span style=color:#f92672>=</span>RetrievalConfig(
+</span></span><span style=display:flex><span>            collections<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;brand_guidelines&#34;</span>, <span style=color:#e6db74>&#34;approved_content&#34;</span>],
+</span></span><span style=display:flex><span>            top_k<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    ),
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>Contamination Detection</strong></p><p>LLMs are vulnerable to prompt injection—malicious instructions hidden in retrieved documents or user input. We detect and block contaminated responses:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ContaminationDetector</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Detects signs of prompt injection in LLM outputs.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    CONTAMINATION_PATTERNS <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>r</span><span style=color:#e6db74>&#34;ignore previous instructions&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>r</span><span style=color:#e6db74>&#34;disregard (the |your )?system prompt&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>r</span><span style=color:#e6db74>&#34;you are now&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>r</span><span style=color:#e6db74>&#34;new instructions:&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>r</span><span style=color:#e6db74>&#34;&lt;\|.*?\|&gt;&#34;</span>,  <span style=color:#75715e># Common injection delimiters</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>r</span><span style=color:#e6db74>&#34;\[INST\]&#34;</span>,   <span style=color:#75715e># Instruction markers</span>
+</span></span><span style=display:flex><span>    ]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>patterns <span style=color:#f92672>=</span> [re<span style=color:#f92672>.</span>compile(p, re<span style=color:#f92672>.</span>I) <span style=color:#66d9ef>for</span> p <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>CONTAMINATION_PATTERNS]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>check_response</span>(self, response: str, context_docs: list[str]) <span style=color:#f92672>-&gt;</span> ContaminationResult:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Check for injection patterns in response</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> pattern <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>patterns:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> pattern<span style=color:#f92672>.</span>search(response):
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> ContaminationResult(
+</span></span><span style=display:flex><span>                    contaminated<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
+</span></span><span style=display:flex><span>                    reason<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Response contains injection pattern&#34;</span>,
+</span></span><span style=display:flex><span>                    pattern<span style=color:#f92672>=</span>pattern<span style=color:#f92672>.</span>pattern
+</span></span><span style=display:flex><span>                )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Check if response echoes suspicious document content</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> doc <span style=color:#f92672>in</span> context_docs:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_contains_instruction_leak(response, doc):
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> ContaminationResult(
+</span></span><span style=display:flex><span>                    contaminated<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
+</span></span><span style=display:flex><span>                    reason<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Response echoes suspicious document content&#34;</span>
+</span></span><span style=display:flex><span>                )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> ContaminationResult(contaminated<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_contains_instruction_leak</span>(self, response: str, doc: str) <span style=color:#f92672>-&gt;</span> bool:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Detect if the response is parroting instruction-like content from docs</span>
+</span></span><span style=display:flex><span>        instruction_markers <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;you must&#34;</span>, <span style=color:#e6db74>&#34;always respond&#34;</span>, <span style=color:#e6db74>&#34;your role is&#34;</span>]
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> marker <span style=color:#f92672>in</span> instruction_markers:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> marker <span style=color:#f92672>in</span> doc<span style=color:#f92672>.</span>lower() <span style=color:#f92672>and</span> marker <span style=color:#f92672>in</span> response<span style=color:#f92672>.</span>lower():
+</span></span><span style=display:flex><span>                <span style=color:#75715e># Check similarity of surrounding context</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_context_similarity(response, doc, marker) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.8</span>:
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+</span></span></code></pre></div><p><strong>Conditional Routing with Multiple Termination Conditions</strong></p><p>Agent loops need multiple exit conditions to prevent runaway execution:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AgentOrchestrator</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, config: AgentConfig):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>config <span style=color:#f92672>=</span> config
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>graph <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_build_graph()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_build_graph</span>(self) <span style=color:#f92672>-&gt;</span> StateGraph:
+</span></span><span style=display:flex><span>        graph <span style=color:#f92672>=</span> StateGraph(AgentState)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_node(<span style=color:#e6db74>&#34;retrieve&#34;</span>, self<span style=color:#f92672>.</span>retrieve_context)
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_node(<span style=color:#e6db74>&#34;think&#34;</span>, self<span style=color:#f92672>.</span>agent_think)
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_node(<span style=color:#e6db74>&#34;act&#34;</span>, self<span style=color:#f92672>.</span>agent_act)
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_node(<span style=color:#e6db74>&#34;check&#34;</span>, self<span style=color:#f92672>.</span>check_completion)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_edge(START, <span style=color:#e6db74>&#34;retrieve&#34;</span>)
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_edge(<span style=color:#e6db74>&#34;retrieve&#34;</span>, <span style=color:#e6db74>&#34;think&#34;</span>)
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_conditional_edges(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;think&#34;</span>,
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>route_after_think,
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;act&#34;</span>: <span style=color:#e6db74>&#34;act&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;complete&#34;</span>: END,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;error&#34;</span>: END,
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_edge(<span style=color:#e6db74>&#34;act&#34;</span>, <span style=color:#e6db74>&#34;check&#34;</span>)
+</span></span><span style=display:flex><span>        graph<span style=color:#f92672>.</span>add_conditional_edges(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;check&#34;</span>,
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>route_after_check,
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;continue&#34;</span>: <span style=color:#e6db74>&#34;think&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;complete&#34;</span>: END,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;max_iterations&#34;</span>: END,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;contaminated&#34;</span>: END,
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> graph<span style=color:#f92672>.</span>compile(checkpointer<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>checkpointer)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>route_after_check</span>(self, state: AgentState) <span style=color:#f92672>-&gt;</span> str:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Multiple termination conditions</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> state<span style=color:#f92672>.</span>iterations <span style=color:#f92672>&gt;=</span> self<span style=color:#f92672>.</span>config<span style=color:#f92672>.</span>max_iterations:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;max_iterations&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> state<span style=color:#f92672>.</span>contamination_detected:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;contaminated&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> state<span style=color:#f92672>.</span>task_complete:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;complete&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> state<span style=color:#f92672>.</span>needs_more_context:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;continue&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;complete&#34;</span>
+</span></span></code></pre></div><p><strong>PostgreSQL Checkpointing for Conversation Resumption</strong></p><p>LangGraph supports checkpointing to persist conversation state. We use PostgreSQL for durability:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> langgraph.checkpoint.postgres <span style=color:#f92672>import</span> PostgresSaver
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ConversationManager</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, db_url: str):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>checkpointer <span style=color:#f92672>=</span> PostgresSaver<span style=color:#f92672>.</span>from_conn_string(db_url)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>resume_conversation</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        thread_id: str,
+</span></span><span style=display:flex><span>        new_message: str
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> AsyncIterator[StreamEvent]:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Resume a conversation from its last checkpoint.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Load existing state</span>
+</span></span><span style=display:flex><span>        config <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;thread_id&#34;</span>: thread_id}}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get the agent graph for this conversation&#39;s type</span>
+</span></span><span style=display:flex><span>        conversation <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>get_conversation(thread_id)
+</span></span><span style=display:flex><span>        agent <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>get_agent(conversation<span style=color:#f92672>.</span>agent_type)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Stream from checkpoint</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>for</span> event <span style=color:#f92672>in</span> agent<span style=color:#f92672>.</span>graph<span style=color:#f92672>.</span>astream(
+</span></span><span style=display:flex><span>            {<span style=color:#e6db74>&#34;messages&#34;</span>: [HumanMessage(content<span style=color:#f92672>=</span>new_message)]},
+</span></span><span style=display:flex><span>            config<span style=color:#f92672>=</span>config,
+</span></span><span style=display:flex><span>        ):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>yield</span> self<span style=color:#f92672>.</span>_format_event(event)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_conversation_history</span>(self, thread_id: str) <span style=color:#f92672>-&gt;</span> list[Message]:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Retrieve full conversation from checkpoints.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        config <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;thread_id&#34;</span>: thread_id}}
+</span></span><span style=display:flex><span>        state <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>checkpointer<span style=color:#f92672>.</span>aget(config)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> state<span style=color:#f92672>.</span>values<span style=color:#f92672>.</span>get(<span style=color:#e6db74>&#34;messages&#34;</span>, []) <span style=color:#66d9ef>if</span> state <span style=color:#66d9ef>else</span> []
+</span></span></code></pre></div><hr><h3 id=parallel-rag-system>Parallel RAG System<a hidden class=anchor aria-hidden=true href=#parallel-rag-system>#</a></h3><p>Standard RAG is slow—retrieve, rank, assemble, generate. We parallelize everything possible.</p><p><strong>4-Stream Parallel Retrieval</strong></p><p>Instead of sequential retrieval, we fire four queries simultaneously:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ParallelRetriever</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Retrieves from multiple sources in parallel, merging results.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>retrieve</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        query: str,
+</span></span><span style=display:flex><span>        space_id: str,
+</span></span><span style=display:flex><span>        referenced_doc_ids: list[str] <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> RetrievalResult:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Fire all retrievals in parallel</span>
+</span></span><span style=display:flex><span>        tasks <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>_retrieve_referenced(referenced_doc_ids),  <span style=color:#75715e># Explicit references</span>
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>_retrieve_general(query, space_id),        <span style=color:#75715e># Semantic search</span>
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>_retrieve_urls(query, space_id),           <span style=color:#75715e># Web content</span>
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>_retrieve_business_context(space_id),      <span style=color:#75715e># Org context</span>
+</span></span><span style=display:flex><span>        ]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        results <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> asyncio<span style=color:#f92672>.</span>gather(<span style=color:#f92672>*</span>tasks, return_exceptions<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Merge and deduplicate</span>
+</span></span><span style=display:flex><span>        all_chunks <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> result <span style=color:#f92672>in</span> results:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> isinstance(result, <span style=color:#a6e22e>Exception</span>):
+</span></span><span style=display:flex><span>                logger<span style=color:#f92672>.</span>warning(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Retrieval stream failed: </span><span style=color:#e6db74>{</span>result<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>            all_chunks<span style=color:#f92672>.</span>extend(result)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Deduplicate by content hash</span>
+</span></span><span style=display:flex><span>        seen <span style=color:#f92672>=</span> set()
+</span></span><span style=display:flex><span>        unique_chunks <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> chunk <span style=color:#f92672>in</span> all_chunks:
+</span></span><span style=display:flex><span>            content_hash <span style=color:#f92672>=</span> hashlib<span style=color:#f92672>.</span>md5(chunk<span style=color:#f92672>.</span>content<span style=color:#f92672>.</span>encode())<span style=color:#f92672>.</span>hexdigest()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> content_hash <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> seen:
+</span></span><span style=display:flex><span>                seen<span style=color:#f92672>.</span>add(content_hash)
+</span></span><span style=display:flex><span>                unique_chunks<span style=color:#f92672>.</span>append(chunk)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Re-rank merged results</span>
+</span></span><span style=display:flex><span>        ranked <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>reranker<span style=color:#f92672>.</span>rank(query, unique_chunks)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> RetrievalResult(
+</span></span><span style=display:flex><span>            chunks<span style=color:#f92672>=</span>ranked[:self<span style=color:#f92672>.</span>max_chunks],
+</span></span><span style=display:flex><span>            sources<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_extract_sources(ranked)
+</span></span><span style=display:flex><span>        )
+</span></span></code></pre></div><p><strong>Query Enhancement with Fast Model</strong></p><p>Before retrieval, we enhance the query using a fast, cheap model:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>QueryEnhancer</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Expands queries for better retrieval using Gemini Flash.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>model <span style=color:#f92672>=</span> GenerativeModel(<span style=color:#e6db74>&#34;gemini-1.5-flash&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>enhance</span>(self, query: str, context: ConversationContext) <span style=color:#f92672>-&gt;</span> EnhancedQuery:
+</span></span><span style=display:flex><span>        prompt <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        Given this user query and conversation context, generate:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        1. An expanded search query with related terms
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        2. 2-3 alternative phrasings
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        3. Key entities to look for
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        Query: </span><span style=color:#e6db74>{</span>query<span style=color:#e6db74>}</span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        Recent context: </span><span style=color:#e6db74>{</span>context<span style=color:#f92672>.</span>recent_summary<span style=color:#e6db74>}</span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        Respond in JSON format.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        response <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>model<span style=color:#f92672>.</span>generate_content_async(prompt)
+</span></span><span style=display:flex><span>        enhanced <span style=color:#f92672>=</span> json<span style=color:#f92672>.</span>loads(response<span style=color:#f92672>.</span>text)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> EnhancedQuery(
+</span></span><span style=display:flex><span>            original<span style=color:#f92672>=</span>query,
+</span></span><span style=display:flex><span>            expanded<span style=color:#f92672>=</span>enhanced[<span style=color:#e6db74>&#34;expanded&#34;</span>],
+</span></span><span style=display:flex><span>            alternatives<span style=color:#f92672>=</span>enhanced[<span style=color:#e6db74>&#34;alternatives&#34;</span>],
+</span></span><span style=display:flex><span>            entities<span style=color:#f92672>=</span>enhanced[<span style=color:#e6db74>&#34;entities&#34;</span>]
+</span></span><span style=display:flex><span>        )
+</span></span></code></pre></div><p>This reduced Time to First Token (TTFT) from 22s to 8-10s—a 50-65% improvement. The fast model call adds ~200ms but saves seconds on retrieval by producing better queries.</p><p><strong>3072D Embeddings via Vertex AI</strong></p><p>We use Vertex AI&rsquo;s text-embedding-004 model with 3072 dimensions for high-quality semantic matching:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EmbeddingService</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>model <span style=color:#f92672>=</span> TextEmbeddingModel<span style=color:#f92672>.</span>from_pretrained(<span style=color:#e6db74>&#34;text-embedding-004&#34;</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>dimension <span style=color:#f92672>=</span> <span style=color:#ae81ff>3072</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>embed_batch</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        texts: list[str],
+</span></span><span style=display:flex><span>        task_type: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;RETRIEVAL_DOCUMENT&#34;</span>
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> list[list[float]]:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        Batch embed with automatic chunking for API limits.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        embeddings <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        batch_size <span style=color:#f92672>=</span> <span style=color:#ae81ff>250</span>  <span style=color:#75715e># Vertex AI limit</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, len(texts), batch_size):
+</span></span><span style=display:flex><span>            batch <span style=color:#f92672>=</span> texts[i:i <span style=color:#f92672>+</span> batch_size]
+</span></span><span style=display:flex><span>            inputs <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>                TextEmbeddingInput(text<span style=color:#f92672>=</span>t, task_type<span style=color:#f92672>=</span>task_type)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> t <span style=color:#f92672>in</span> batch
+</span></span><span style=display:flex><span>            ]
+</span></span><span style=display:flex><span>            results <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> asyncio<span style=color:#f92672>.</span>to_thread(
+</span></span><span style=display:flex><span>                self<span style=color:#f92672>.</span>model<span style=color:#f92672>.</span>get_embeddings, inputs
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            embeddings<span style=color:#f92672>.</span>extend([r<span style=color:#f92672>.</span>values <span style=color:#66d9ef>for</span> r <span style=color:#f92672>in</span> results])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> embeddings
+</span></span></code></pre></div><hr><h3 id=document-processing-pipeline>Document Processing Pipeline<a hidden class=anchor aria-hidden=true href=#document-processing-pipeline>#</a></h3><p>Marketing teams upload diverse documents—PDFs, slides, spreadsheets, web pages. We need unified processing.</p><p><strong>Docling for Multi-Format Ingestion</strong></p><p>Docling handles format conversion with structure preservation:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> docling.document_converter <span style=color:#f92672>import</span> DocumentConverter
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> docling.datamodel.base_models <span style=color:#f92672>import</span> InputFormat
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DocumentProcessor</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>converter <span style=color:#f92672>=</span> DocumentConverter()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>chunker <span style=color:#f92672>=</span> SemanticChunker()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>embedding_service <span style=color:#f92672>=</span> EmbeddingService()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>process_document</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        file_path: Path,
+</span></span><span style=display:flex><span>        space_id: str,
+</span></span><span style=display:flex><span>        metadata: dict
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> ProcessedDocument:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Convert to unified format</span>
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>converter<span style=color:#f92672>.</span>convert(str(file_path))
+</span></span><span style=display:flex><span>        doc <span style=color:#f92672>=</span> result<span style=color:#f92672>.</span>document
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Extract structure</span>
+</span></span><span style=display:flex><span>        structure <span style=color:#f92672>=</span> DocumentStructure(
+</span></span><span style=display:flex><span>            title<span style=color:#f92672>=</span>doc<span style=color:#f92672>.</span>title,
+</span></span><span style=display:flex><span>            headings<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_extract_headings(doc),
+</span></span><span style=display:flex><span>            tables<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_extract_tables(doc),
+</span></span><span style=display:flex><span>            images<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_extract_images(doc),
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Semantic chunking that respects structure</span>
+</span></span><span style=display:flex><span>        chunks <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>chunker<span style=color:#f92672>.</span>chunk(
+</span></span><span style=display:flex><span>            doc,
+</span></span><span style=display:flex><span>            structure<span style=color:#f92672>=</span>structure,
+</span></span><span style=display:flex><span>            max_chunk_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1500</span>,
+</span></span><span style=display:flex><span>            overlap<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Generate embeddings</span>
+</span></span><span style=display:flex><span>        embeddings <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>embedding_service<span style=color:#f92672>.</span>embed_batch(
+</span></span><span style=display:flex><span>            [c<span style=color:#f92672>.</span>content <span style=color:#66d9ef>for</span> c <span style=color:#f92672>in</span> chunks]
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Store in vector DB</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>store_chunks(chunks, embeddings, space_id, metadata)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> ProcessedDocument(
+</span></span><span style=display:flex><span>            id<span style=color:#f92672>=</span>str(uuid4()),
+</span></span><span style=display:flex><span>            chunks<span style=color:#f92672>=</span>len(chunks),
+</span></span><span style=display:flex><span>            structure<span style=color:#f92672>=</span>structure
+</span></span><span style=display:flex><span>        )
+</span></span></code></pre></div><p><strong>Structure-Aware Semantic Chunking</strong></p><p>Naive chunking breaks context. We chunk at semantic boundaries:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SemanticChunker</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Chunks documents while preserving semantic structure.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>chunk</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        doc: Document,
+</span></span><span style=display:flex><span>        structure: DocumentStructure,
+</span></span><span style=display:flex><span>        max_chunk_size: int,
+</span></span><span style=display:flex><span>        overlap: int
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> list[Chunk]:
+</span></span><span style=display:flex><span>        chunks <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        current_section <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> element <span style=color:#f92672>in</span> doc<span style=color:#f92672>.</span>iterate_items():
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> element<span style=color:#f92672>.</span>is_heading:
+</span></span><span style=display:flex><span>                <span style=color:#75715e># Start new chunk at headings</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> current_section:
+</span></span><span style=display:flex><span>                    chunks<span style=color:#f92672>.</span>extend(self<span style=color:#f92672>.</span>_finalize_section(current_section, max_chunk_size))
+</span></span><span style=display:flex><span>                current_section <span style=color:#f92672>=</span> Section(heading<span style=color:#f92672>=</span>element<span style=color:#f92672>.</span>text, content<span style=color:#f92672>=</span>[])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>elif</span> element<span style=color:#f92672>.</span>is_table:
+</span></span><span style=display:flex><span>                <span style=color:#75715e># Tables get their own chunks with context</span>
+</span></span><span style=display:flex><span>                chunks<span style=color:#f92672>.</span>append(Chunk(
+</span></span><span style=display:flex><span>                    content<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_table_to_markdown(element),
+</span></span><span style=display:flex><span>                    metadata<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;table&#34;</span>, <span style=color:#e6db74>&#34;section&#34;</span>: current_section<span style=color:#f92672>.</span>heading}
+</span></span><span style=display:flex><span>                ))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>elif</span> element<span style=color:#f92672>.</span>is_text:
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> current_section:
+</span></span><span style=display:flex><span>                    current_section<span style=color:#f92672>.</span>content<span style=color:#f92672>.</span>append(element<span style=color:#f92672>.</span>text)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Finalize last section</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> current_section:
+</span></span><span style=display:flex><span>            chunks<span style=color:#f92672>.</span>extend(self<span style=color:#f92672>.</span>_finalize_section(current_section, max_chunk_size))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> chunks
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_finalize_section</span>(self, section: Section, max_size: int) <span style=color:#f92672>-&gt;</span> list[Chunk]:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Split section content while maintaining heading context.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        full_text <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span><span style=color:#f92672>.</span>join(section<span style=color:#f92672>.</span>content)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> len(full_text) <span style=color:#f92672>&lt;=</span> max_size:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> [Chunk(
+</span></span><span style=display:flex><span>                content<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;# </span><span style=color:#e6db74>{</span>section<span style=color:#f92672>.</span>heading<span style=color:#e6db74>}</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>{</span>full_text<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>,
+</span></span><span style=display:flex><span>                metadata<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;section&#34;</span>: section<span style=color:#f92672>.</span>heading}
+</span></span><span style=display:flex><span>            )]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Split at paragraph boundaries</span>
+</span></span><span style=display:flex><span>        paragraphs <span style=color:#f92672>=</span> full_text<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        chunks <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        current <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;# </span><span style=color:#e6db74>{</span>section<span style=color:#f92672>.</span>heading<span style=color:#e6db74>}</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> para <span style=color:#f92672>in</span> paragraphs:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> len(current) <span style=color:#f92672>+</span> len(para) <span style=color:#f92672>&gt;</span> max_size:
+</span></span><span style=display:flex><span>                chunks<span style=color:#f92672>.</span>append(Chunk(content<span style=color:#f92672>=</span>current, metadata<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;section&#34;</span>: section<span style=color:#f92672>.</span>heading}))
+</span></span><span style=display:flex><span>                current <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;# </span><span style=color:#e6db74>{</span>section<span style=color:#f92672>.</span>heading<span style=color:#e6db74>}</span><span style=color:#e6db74> (continued)</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>{</span>para<span style=color:#e6db74>}</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>                current <span style=color:#f92672>+=</span> para <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> current<span style=color:#f92672>.</span>strip():
+</span></span><span style=display:flex><span>            chunks<span style=color:#f92672>.</span>append(Chunk(content<span style=color:#f92672>=</span>current, metadata<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;section&#34;</span>: section<span style=color:#f92672>.</span>heading}))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> chunks
+</span></span></code></pre></div><p><strong>Dual Embeddings for Visual Content</strong></p><p>Some documents are image-heavy (presentations, infographics). We generate both text and visual embeddings:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DualEmbeddingService</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>text_model <span style=color:#f92672>=</span> TextEmbeddingModel<span style=color:#f92672>.</span>from_pretrained(<span style=color:#e6db74>&#34;text-embedding-004&#34;</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>clip_model <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_load_clip()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>embed_chunk</span>(self, chunk: Chunk) <span style=color:#f92672>-&gt;</span> DualEmbedding:
+</span></span><span style=display:flex><span>        embeddings <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#66d9ef>None</span>, <span style=color:#e6db74>&#34;visual&#34;</span>: <span style=color:#66d9ef>None</span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Always generate text embedding</span>
+</span></span><span style=display:flex><span>        embeddings[<span style=color:#e6db74>&#34;text&#34;</span>] <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>embed_text(chunk<span style=color:#f92672>.</span>content)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Generate visual embedding if chunk contains images</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> chunk<span style=color:#f92672>.</span>images:
+</span></span><span style=display:flex><span>            image_embeddings <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> img <span style=color:#f92672>in</span> chunk<span style=color:#f92672>.</span>images:
+</span></span><span style=display:flex><span>                img_emb <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>embed_image(img)
+</span></span><span style=display:flex><span>                image_embeddings<span style=color:#f92672>.</span>append(img_emb)
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Average pool image embeddings</span>
+</span></span><span style=display:flex><span>            embeddings[<span style=color:#e6db74>&#34;visual&#34;</span>] <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mean(image_embeddings, axis<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)<span style=color:#f92672>.</span>tolist()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> DualEmbedding(<span style=color:#f92672>**</span>embeddings)
+</span></span></code></pre></div><hr><h3 id=multi-tenancy-organization--space--content>Multi-Tenancy: Organization → Space → Content<a hidden class=anchor aria-hidden=true href=#multi-tenancy-organization--space--content>#</a></h3><p>The system has a 3-tier hierarchy. Organizations contain spaces, spaces contain content. Each space is fully isolated.</p><p><strong>Space Context Service</strong></p><p>Every request resolves its space context with eager-loaded relationships:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SpaceContextService</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Resolves and caches space context for requests.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, cache: Redis):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>cache <span style=color:#f92672>=</span> cache
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>ttl <span style=color:#f92672>=</span> <span style=color:#ae81ff>300</span>  <span style=color:#75715e># 5 minutes</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_context</span>(self, space_id: str, user_id: str) <span style=color:#f92672>-&gt;</span> SpaceContext:
+</span></span><span style=display:flex><span>        cache_key <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;space_context:</span><span style=color:#e6db74>{</span>space_id<span style=color:#e6db74>}</span><span style=color:#e6db74>:</span><span style=color:#e6db74>{</span>user_id<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Try cache first</span>
+</span></span><span style=display:flex><span>        cached <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>cache<span style=color:#f92672>.</span>get(cache_key)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> cached:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> SpaceContext<span style=color:#f92672>.</span>model_validate_json(cached)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Load from DB with eager loading</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>with</span> get_session() <span style=color:#66d9ef>as</span> session:
+</span></span><span style=display:flex><span>            result <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>execute(
+</span></span><span style=display:flex><span>                select(Space)
+</span></span><span style=display:flex><span>                <span style=color:#f92672>.</span>options(
+</span></span><span style=display:flex><span>                    selectinload(Space<span style=color:#f92672>.</span>organization),
+</span></span><span style=display:flex><span>                    selectinload(Space<span style=color:#f92672>.</span>members),
+</span></span><span style=display:flex><span>                    selectinload(Space<span style=color:#f92672>.</span>brand_settings),
+</span></span><span style=display:flex><span>                    selectinload(Space<span style=color:#f92672>.</span>integrations),
+</span></span><span style=display:flex><span>                )
+</span></span><span style=display:flex><span>                <span style=color:#f92672>.</span>where(Space<span style=color:#f92672>.</span>id <span style=color:#f92672>==</span> space_id)
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            space <span style=color:#f92672>=</span> result<span style=color:#f92672>.</span>scalar_one_or_none()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> space:
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>raise</span> SpaceNotFoundError(space_id)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Verify user access</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> self<span style=color:#f92672>.</span>_user_has_access(space, user_id):
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>raise</span> AccessDeniedError(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;User </span><span style=color:#e6db74>{</span>user_id<span style=color:#e6db74>}</span><span style=color:#e6db74> cannot access space </span><span style=color:#e6db74>{</span>space_id<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            context <span style=color:#f92672>=</span> SpaceContext(
+</span></span><span style=display:flex><span>                space_id<span style=color:#f92672>=</span>space<span style=color:#f92672>.</span>id,
+</span></span><span style=display:flex><span>                organization_id<span style=color:#f92672>=</span>space<span style=color:#f92672>.</span>organization<span style=color:#f92672>.</span>id,
+</span></span><span style=display:flex><span>                brand_voice<span style=color:#f92672>=</span>space<span style=color:#f92672>.</span>brand_settings<span style=color:#f92672>.</span>voice_profile,
+</span></span><span style=display:flex><span>                integrations<span style=color:#f92672>=</span>[i<span style=color:#f92672>.</span>type <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> space<span style=color:#f92672>.</span>integrations],
+</span></span><span style=display:flex><span>                user_role<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_get_user_role(space, user_id),
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Cache for subsequent requests</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>cache<span style=color:#f92672>.</span>setex(
+</span></span><span style=display:flex><span>                cache_key,
+</span></span><span style=display:flex><span>                self<span style=color:#f92672>.</span>ttl,
+</span></span><span style=display:flex><span>                context<span style=color:#f92672>.</span>model_dump_json()
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> context
+</span></span></code></pre></div><p><strong>Middleware Enforcement</strong></p><p>Every request validates the <code>X-Space-Id</code> header:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SpaceIsolationMiddleware</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Enforces space-level isolation for all requests.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, app: ASGIApp):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>app <span style=color:#f92672>=</span> app
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>public_paths <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;/health&#34;</span>, <span style=color:#e6db74>&#34;/auth/token&#34;</span>, <span style=color:#e6db74>&#34;/docs&#34;</span>, <span style=color:#e6db74>&#34;/openapi.json&#34;</span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__call__</span>(self, scope: Scope, receive: Receive, send: Send):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> scope[<span style=color:#e6db74>&#34;type&#34;</span>] <span style=color:#f92672>!=</span> <span style=color:#e6db74>&#34;http&#34;</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>app(scope, receive, send)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        path <span style=color:#f92672>=</span> scope[<span style=color:#e6db74>&#34;path&#34;</span>]
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> path <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>public_paths:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>app(scope, receive, send)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        headers <span style=color:#f92672>=</span> dict(scope[<span style=color:#e6db74>&#34;headers&#34;</span>])
+</span></span><span style=display:flex><span>        space_id <span style=color:#f92672>=</span> headers<span style=color:#f92672>.</span>get(<span style=color:#e6db74>b</span><span style=color:#e6db74>&#34;x-space-id&#34;</span>, <span style=color:#e6db74>b</span><span style=color:#e6db74>&#34;&#34;</span>)<span style=color:#f92672>.</span>decode()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> space_id:
+</span></span><span style=display:flex><span>            response <span style=color:#f92672>=</span> JSONResponse(
+</span></span><span style=display:flex><span>                {<span style=color:#e6db74>&#34;error&#34;</span>: <span style=color:#e6db74>&#34;X-Space-Id header required&#34;</span>},
+</span></span><span style=display:flex><span>                status_code<span style=color:#f92672>=</span><span style=color:#ae81ff>400</span>
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> response(scope, receive, send)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Validate space exists and user has access</span>
+</span></span><span style=display:flex><span>        user <span style=color:#f92672>=</span> scope<span style=color:#f92672>.</span>get(<span style=color:#e6db74>&#34;user&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            context <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>space_service<span style=color:#f92672>.</span>get_context(space_id, user<span style=color:#f92672>.</span>id)
+</span></span><span style=display:flex><span>            scope[<span style=color:#e6db74>&#34;space_context&#34;</span>] <span style=color:#f92672>=</span> context
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> (SpaceNotFoundError, AccessDeniedError) <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>            response <span style=color:#f92672>=</span> JSONResponse({<span style=color:#e6db74>&#34;error&#34;</span>: str(e)}, status_code<span style=color:#f92672>=</span><span style=color:#ae81ff>403</span>)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> response(scope, receive, send)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>app(scope, receive, send)
+</span></span></code></pre></div><p><strong>Query Isolation</strong></p><p>All database queries are scoped to the current space:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SpaceAwareRepository</span>(Generic[T]):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Base repository that enforces space isolation.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, model: type[T], session: AsyncSession):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>model <span style=color:#f92672>=</span> model
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>session <span style=color:#f92672>=</span> session
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_base_query</span>(self, space_id: str) <span style=color:#f92672>-&gt;</span> Select:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> select(self<span style=color:#f92672>.</span>model)<span style=color:#f92672>.</span>where(self<span style=color:#f92672>.</span>model<span style=color:#f92672>.</span>space_id <span style=color:#f92672>==</span> space_id)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get</span>(self, space_id: str, id: str) <span style=color:#f92672>-&gt;</span> T <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span>:
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>session<span style=color:#f92672>.</span>execute(
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>_base_query(space_id)<span style=color:#f92672>.</span>where(self<span style=color:#f92672>.</span>model<span style=color:#f92672>.</span>id <span style=color:#f92672>==</span> id)
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> result<span style=color:#f92672>.</span>scalar_one_or_none()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>list</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        space_id: str,
+</span></span><span style=display:flex><span>        filters: dict <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>        limit: int <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> list[T]:
+</span></span><span style=display:flex><span>        query <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_base_query(space_id)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> filters:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> key, value <span style=color:#f92672>in</span> filters<span style=color:#f92672>.</span>items():
+</span></span><span style=display:flex><span>                query <span style=color:#f92672>=</span> query<span style=color:#f92672>.</span>where(getattr(self<span style=color:#f92672>.</span>model, key) <span style=color:#f92672>==</span> value)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        query <span style=color:#f92672>=</span> query<span style=color:#f92672>.</span>limit(limit)
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>session<span style=color:#f92672>.</span>execute(query)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> list(result<span style=color:#f92672>.</span>scalars()<span style=color:#f92672>.</span>all())
+</span></span></code></pre></div><hr><h3 id=authentication-rs256-jwt-with-key-rotation>Authentication: RS256 JWT with Key Rotation<a hidden class=anchor aria-hidden=true href=#authentication-rs256-jwt-with-key-rotation>#</a></h3><p>Security is non-negotiable for a SaaS platform handling client data.</p><p><strong>Automated 90-Day Key Rotation</strong></p><p>JWT signing keys rotate automatically:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>JWTKeyManager</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Manages RS256 key pairs with automated rotation.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, secret_manager: SecretManagerClient):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>secret_manager <span style=color:#f92672>=</span> secret_manager
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>rotation_days <span style=color:#f92672>=</span> <span style=color:#ae81ff>90</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>keys: dict[str, RSAPrivateKey] <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>public_keys: dict[str, RSAPublicKey] <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>initialize</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Load current and previous keys for seamless rotation.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        current <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_load_or_create_key(<span style=color:#e6db74>&#34;current&#34;</span>)
+</span></span><span style=display:flex><span>        previous <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_load_key(<span style=color:#e6db74>&#34;previous&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>keys[<span style=color:#e6db74>&#34;current&#34;</span>] <span style=color:#f92672>=</span> current
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>public_keys[<span style=color:#e6db74>&#34;current&#34;</span>] <span style=color:#f92672>=</span> current<span style=color:#f92672>.</span>public_key()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> previous:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>keys[<span style=color:#e6db74>&#34;previous&#34;</span>] <span style=color:#f92672>=</span> previous
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>public_keys[<span style=color:#e6db74>&#34;previous&#34;</span>] <span style=color:#f92672>=</span> previous<span style=color:#f92672>.</span>public_key()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>rotate_if_needed</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Check if rotation is needed and perform it.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        metadata <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_get_key_metadata(<span style=color:#e6db74>&#34;current&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>_should_rotate(metadata):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_rotate_keys()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_rotate_keys</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Rotate: current -&gt; previous, generate new current.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Move current to previous</span>
+</span></span><span style=display:flex><span>        current_key <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_load_key(<span style=color:#e6db74>&#34;current&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_store_key(<span style=color:#e6db74>&#34;previous&#34;</span>, current_key)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Generate new current</span>
+</span></span><span style=display:flex><span>        new_key <span style=color:#f92672>=</span> rsa<span style=color:#f92672>.</span>generate_private_key(
+</span></span><span style=display:flex><span>            public_exponent<span style=color:#f92672>=</span><span style=color:#ae81ff>65537</span>,
+</span></span><span style=display:flex><span>            key_size<span style=color:#f92672>=</span><span style=color:#ae81ff>4096</span>,
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_store_key(<span style=color:#e6db74>&#34;current&#34;</span>, new_key)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Reload</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>initialize()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        logger<span style=color:#f92672>.</span>info(<span style=color:#e6db74>&#34;JWT signing keys rotated successfully&#34;</span>)
+</span></span></code></pre></div><p><strong>Zero-Query User Context</strong></p><p>User identity and permissions are embedded in the JWT, eliminating database lookups for auth:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TokenPayload</span>(BaseModel):
+</span></span><span style=display:flex><span>    sub: str  <span style=color:#75715e># User ID</span>
+</span></span><span style=display:flex><span>    org_id: str
+</span></span><span style=display:flex><span>    spaces: dict[str, str]  <span style=color:#75715e># space_id -&gt; role</span>
+</span></span><span style=display:flex><span>    permissions: list[str]
+</span></span><span style=display:flex><span>    exp: datetime
+</span></span><span style=display:flex><span>    iat: datetime
+</span></span><span style=display:flex><span>    jti: str  <span style=color:#75715e># Unique token ID for revocation</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AuthService</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_token</span>(self, user: User) <span style=color:#f92672>-&gt;</span> str:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Generate token with embedded permissions.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        spaces <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_get_user_spaces(user<span style=color:#f92672>.</span>id)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        payload <span style=color:#f92672>=</span> TokenPayload(
+</span></span><span style=display:flex><span>            sub<span style=color:#f92672>=</span>user<span style=color:#f92672>.</span>id,
+</span></span><span style=display:flex><span>            org_id<span style=color:#f92672>=</span>user<span style=color:#f92672>.</span>organization_id,
+</span></span><span style=display:flex><span>            spaces<span style=color:#f92672>=</span>{s<span style=color:#f92672>.</span>id: s<span style=color:#f92672>.</span>role <span style=color:#66d9ef>for</span> s <span style=color:#f92672>in</span> spaces},
+</span></span><span style=display:flex><span>            permissions<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>_compute_permissions(user, spaces),
+</span></span><span style=display:flex><span>            exp<span style=color:#f92672>=</span>datetime<span style=color:#f92672>.</span>utcnow() <span style=color:#f92672>+</span> timedelta(hours<span style=color:#f92672>=</span><span style=color:#ae81ff>24</span>),
+</span></span><span style=display:flex><span>            iat<span style=color:#f92672>=</span>datetime<span style=color:#f92672>.</span>utcnow(),
+</span></span><span style=display:flex><span>            jti<span style=color:#f92672>=</span>str(uuid4()),
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> jwt<span style=color:#f92672>.</span>encode(
+</span></span><span style=display:flex><span>            payload<span style=color:#f92672>.</span>model_dump(),
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>key_manager<span style=color:#f92672>.</span>keys[<span style=color:#e6db74>&#34;current&#34;</span>],
+</span></span><span style=display:flex><span>            algorithm<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;RS256&#34;</span>,
+</span></span><span style=display:flex><span>            headers<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;kid&#34;</span>: <span style=color:#e6db74>&#34;current&#34;</span>}
+</span></span><span style=display:flex><span>        )
+</span></span></code></pre></div><p><strong>In-Memory TTL Cache for O(1) Verification</strong></p><p>Public keys are cached for fast verification:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TokenVerifier</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, key_manager: JWTKeyManager):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>key_manager <span style=color:#f92672>=</span> key_manager
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>revoked_tokens: TTLCache <span style=color:#f92672>=</span> TTLCache(maxsize<span style=color:#f92672>=</span><span style=color:#ae81ff>10000</span>, ttl<span style=color:#f92672>=</span><span style=color:#ae81ff>86400</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>verify</span>(self, token: str) <span style=color:#f92672>-&gt;</span> TokenPayload:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Decode header to get key ID</span>
+</span></span><span style=display:flex><span>        header <span style=color:#f92672>=</span> jwt<span style=color:#f92672>.</span>get_unverified_header(token)
+</span></span><span style=display:flex><span>        kid <span style=color:#f92672>=</span> header<span style=color:#f92672>.</span>get(<span style=color:#e6db74>&#34;kid&#34;</span>, <span style=color:#e6db74>&#34;current&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get public key (O(1) lookup)</span>
+</span></span><span style=display:flex><span>        public_key <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>key_manager<span style=color:#f92672>.</span>public_keys<span style=color:#f92672>.</span>get(kid)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> public_key:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>raise</span> InvalidTokenError(<span style=color:#e6db74>&#34;Unknown key ID&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Check revocation (O(1) lookup)</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            unverified <span style=color:#f92672>=</span> jwt<span style=color:#f92672>.</span>decode(token, options<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;verify_signature&#34;</span>: <span style=color:#66d9ef>False</span>})
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> unverified<span style=color:#f92672>.</span>get(<span style=color:#e6db74>&#34;jti&#34;</span>) <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>revoked_tokens:
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>raise</span> TokenRevokedError()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> jwt<span style=color:#f92672>.</span>DecodeError:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>raise</span> InvalidTokenError(<span style=color:#e6db74>&#34;Malformed token&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Verify signature</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            payload <span style=color:#f92672>=</span> jwt<span style=color:#f92672>.</span>decode(
+</span></span><span style=display:flex><span>                token,
+</span></span><span style=display:flex><span>                public_key,
+</span></span><span style=display:flex><span>                algorithms<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;RS256&#34;</span>],
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> TokenPayload<span style=color:#f92672>.</span>model_validate(payload)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> jwt<span style=color:#f92672>.</span>ExpiredSignatureError:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>raise</span> TokenExpiredError()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> jwt<span style=color:#f92672>.</span>InvalidTokenError <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>raise</span> InvalidTokenError(str(e))
+</span></span></code></pre></div><hr><h3 id=external-integrations>External Integrations<a hidden class=anchor aria-hidden=true href=#external-integrations>#</a></h3><p>Marketing platforms need to pull data from everywhere. We integrate with major ad and analytics platforms.</p><p><strong>AgentBridge Pattern for Slack</strong></p><p>External integrations use a bridge pattern that abstracts the service:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SlackBridge</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Bridge between AI agents and Slack workspaces.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, credentials: SlackCredentials):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>client <span style=color:#f92672>=</span> AsyncWebClient(token<span style=color:#f92672>=</span>credentials<span style=color:#f92672>.</span>bot_token)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>post_content</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        channel: str,
+</span></span><span style=display:flex><span>        content: GeneratedContent,
+</span></span><span style=display:flex><span>        context: SpaceContext
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> SlackMessage:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Post AI-generated content to Slack for review.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        blocks <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_format_content_blocks(content)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        response <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>client<span style=color:#f92672>.</span>chat_postMessage(
+</span></span><span style=display:flex><span>            channel<span style=color:#f92672>=</span>channel,
+</span></span><span style=display:flex><span>            blocks<span style=color:#f92672>=</span>blocks,
+</span></span><span style=display:flex><span>            text<span style=color:#f92672>=</span>content<span style=color:#f92672>.</span>plain_text,  <span style=color:#75715e># Fallback</span>
+</span></span><span style=display:flex><span>            metadata<span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;event_type&#34;</span>: <span style=color:#e6db74>&#34;content_review&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;event_payload&#34;</span>: {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;content_id&#34;</span>: content<span style=color:#f92672>.</span>id,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;space_id&#34;</span>: context<span style=color:#f92672>.</span>space_id,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;agent_type&#34;</span>: content<span style=color:#f92672>.</span>source_agent,
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> SlackMessage(
+</span></span><span style=display:flex><span>            ts<span style=color:#f92672>=</span>response[<span style=color:#e6db74>&#34;ts&#34;</span>],
+</span></span><span style=display:flex><span>            channel<span style=color:#f92672>=</span>response[<span style=color:#e6db74>&#34;channel&#34;</span>],
+</span></span><span style=display:flex><span>            content_id<span style=color:#f92672>=</span>content<span style=color:#f92672>.</span>id
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>handle_interaction</span>(self, payload: dict) <span style=color:#f92672>-&gt;</span> InteractionResult:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Handle button clicks, approvals, etc.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        action <span style=color:#f92672>=</span> payload[<span style=color:#e6db74>&#34;actions&#34;</span>][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> action[<span style=color:#e6db74>&#34;action_id&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;approve_content&#34;</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_handle_approval(payload)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>elif</span> action[<span style=color:#e6db74>&#34;action_id&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;request_revision&#34;</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_handle_revision_request(payload)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>raise</span> UnknownActionError(action[<span style=color:#e6db74>&#34;action_id&#34;</span>])
+</span></span></code></pre></div><p><strong>OAuth2 Flow for Google Analytics 4</strong></p><p>Analytics integration uses OAuth2 with automatic token refresh:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GA4Integration</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Google Analytics 4 integration with OAuth2.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    TOKEN_URL <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;https://oauth2.googleapis.com/token&#34;</span>
+</span></span><span style=display:flex><span>    SCOPES <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;https://www.googleapis.com/auth/analytics.readonly&#34;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>exchange_code</span>(self, code: str, redirect_uri: str) <span style=color:#f92672>-&gt;</span> OAuthTokens:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Exchange authorization code for tokens.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>with</span> httpx<span style=color:#f92672>.</span>AsyncClient() <span style=color:#66d9ef>as</span> client:
+</span></span><span style=display:flex><span>            response <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> client<span style=color:#f92672>.</span>post(
+</span></span><span style=display:flex><span>                self<span style=color:#f92672>.</span>TOKEN_URL,
+</span></span><span style=display:flex><span>                data<span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;code&#34;</span>: code,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;client_id&#34;</span>: self<span style=color:#f92672>.</span>client_id,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;client_secret&#34;</span>: self<span style=color:#f92672>.</span>client_secret,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;redirect_uri&#34;</span>: redirect_uri,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;grant_type&#34;</span>: <span style=color:#e6db74>&#34;authorization_code&#34;</span>,
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            response<span style=color:#f92672>.</span>raise_for_status()
+</span></span><span style=display:flex><span>            data <span style=color:#f92672>=</span> response<span style=color:#f92672>.</span>json()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> OAuthTokens(
+</span></span><span style=display:flex><span>                access_token<span style=color:#f92672>=</span>data[<span style=color:#e6db74>&#34;access_token&#34;</span>],
+</span></span><span style=display:flex><span>                refresh_token<span style=color:#f92672>=</span>data[<span style=color:#e6db74>&#34;refresh_token&#34;</span>],
+</span></span><span style=display:flex><span>                expires_at<span style=color:#f92672>=</span>datetime<span style=color:#f92672>.</span>utcnow() <span style=color:#f92672>+</span> timedelta(seconds<span style=color:#f92672>=</span>data[<span style=color:#e6db74>&#34;expires_in&#34;</span>])
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_report</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        tokens: OAuthTokens,
+</span></span><span style=display:flex><span>        property_id: str,
+</span></span><span style=display:flex><span>        metrics: list[str],
+</span></span><span style=display:flex><span>        dimensions: list[str],
+</span></span><span style=display:flex><span>        date_range: DateRange
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> AnalyticsReport:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Fetch analytics data with automatic token refresh.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Refresh if needed</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> tokens<span style=color:#f92672>.</span>expires_at <span style=color:#f92672>&lt;</span> datetime<span style=color:#f92672>.</span>utcnow() <span style=color:#f92672>+</span> timedelta(minutes<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>):
+</span></span><span style=display:flex><span>            tokens <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_refresh_tokens(tokens)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>with</span> httpx<span style=color:#f92672>.</span>AsyncClient() <span style=color:#66d9ef>as</span> client:
+</span></span><span style=display:flex><span>            response <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> client<span style=color:#f92672>.</span>post(
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;https://analyticsdata.googleapis.com/v1beta/properties/</span><span style=color:#e6db74>{</span>property_id<span style=color:#e6db74>}</span><span style=color:#e6db74>:runReport&#34;</span>,
+</span></span><span style=display:flex><span>                headers<span style=color:#f92672>=</span>{<span style=color:#e6db74>&#34;Authorization&#34;</span>: <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Bearer </span><span style=color:#e6db74>{</span>tokens<span style=color:#f92672>.</span>access_token<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>},
+</span></span><span style=display:flex><span>                json<span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;metrics&#34;</span>: [{<span style=color:#e6db74>&#34;name&#34;</span>: m} <span style=color:#66d9ef>for</span> m <span style=color:#f92672>in</span> metrics],
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;dimensions&#34;</span>: [{<span style=color:#e6db74>&#34;name&#34;</span>: d} <span style=color:#66d9ef>for</span> d <span style=color:#f92672>in</span> dimensions],
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;dateRanges&#34;</span>: [{<span style=color:#e6db74>&#34;startDate&#34;</span>: date_range<span style=color:#f92672>.</span>start, <span style=color:#e6db74>&#34;endDate&#34;</span>: date_range<span style=color:#f92672>.</span>end}],
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            response<span style=color:#f92672>.</span>raise_for_status()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> AnalyticsReport<span style=color:#f92672>.</span>from_response(response<span style=color:#f92672>.</span>json())
+</span></span></code></pre></div><hr><h3 id=real-time-streaming>Real-Time Streaming<a hidden class=anchor aria-hidden=true href=#real-time-streaming>#</a></h3><p>Users expect to see AI responses as they generate, not after a 10-second wait.</p><p><strong>Event Persistence for Reconstruction</strong></p><p>Agent run events are persisted for replay and debugging:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AgentRunEvent</span>(Base):
+</span></span><span style=display:flex><span>    __tablename__ <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;agent_run_events&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    id: Mapped[UUID] <span style=color:#f92672>=</span> mapped_column(primary_key<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, default<span style=color:#f92672>=</span>uuid4)
+</span></span><span style=display:flex><span>    run_id: Mapped[UUID] <span style=color:#f92672>=</span> mapped_column(ForeignKey(<span style=color:#e6db74>&#34;agent_runs.id&#34;</span>), index<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>    sequence: Mapped[int]  <span style=color:#75715e># For ordering</span>
+</span></span><span style=display:flex><span>    event_type: Mapped[str]  <span style=color:#75715e># token, tool_call, tool_result, error, complete</span>
+</span></span><span style=display:flex><span>    payload: Mapped[dict] <span style=color:#f92672>=</span> mapped_column(JSONB)
+</span></span><span style=display:flex><span>    created_at: Mapped[datetime] <span style=color:#f92672>=</span> mapped_column(default<span style=color:#f92672>=</span>datetime<span style=color:#f92672>.</span>utcnow)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    __table_args__ <span style=color:#f92672>=</span> (
+</span></span><span style=display:flex><span>        Index(<span style=color:#e6db74>&#34;ix_run_events_run_seq&#34;</span>, <span style=color:#e6db74>&#34;run_id&#34;</span>, <span style=color:#e6db74>&#34;sequence&#34;</span>),
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EventPersistence</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>persist_event</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        run_id: UUID,
+</span></span><span style=display:flex><span>        event_type: str,
+</span></span><span style=display:flex><span>        payload: dict
+</span></span><span style=display:flex><span>    ):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>with</span> self<span style=color:#f92672>.</span>session() <span style=color:#66d9ef>as</span> session:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Get next sequence number</span>
+</span></span><span style=display:flex><span>            result <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>execute(
+</span></span><span style=display:flex><span>                select(func<span style=color:#f92672>.</span>coalesce(func<span style=color:#f92672>.</span>max(AgentRunEvent<span style=color:#f92672>.</span>sequence), <span style=color:#ae81ff>0</span>))
+</span></span><span style=display:flex><span>                <span style=color:#f92672>.</span>where(AgentRunEvent<span style=color:#f92672>.</span>run_id <span style=color:#f92672>==</span> run_id)
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            next_seq <span style=color:#f92672>=</span> result<span style=color:#f92672>.</span>scalar() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            event <span style=color:#f92672>=</span> AgentRunEvent(
+</span></span><span style=display:flex><span>                run_id<span style=color:#f92672>=</span>run_id,
+</span></span><span style=display:flex><span>                sequence<span style=color:#f92672>=</span>next_seq,
+</span></span><span style=display:flex><span>                event_type<span style=color:#f92672>=</span>event_type,
+</span></span><span style=display:flex><span>                payload<span style=color:#f92672>=</span>payload
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            session<span style=color:#f92672>.</span>add(event)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>commit()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>replay_events</span>(
+</span></span><span style=display:flex><span>        self,
+</span></span><span style=display:flex><span>        run_id: UUID,
+</span></span><span style=display:flex><span>        from_sequence: int <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    ) <span style=color:#f92672>-&gt;</span> AsyncIterator[AgentRunEvent]:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Replay events for a run, optionally from a sequence.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>with</span> self<span style=color:#f92672>.</span>session() <span style=color:#66d9ef>as</span> session:
+</span></span><span style=display:flex><span>            result <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>stream(
+</span></span><span style=display:flex><span>                select(AgentRunEvent)
+</span></span><span style=display:flex><span>                <span style=color:#f92672>.</span>where(AgentRunEvent<span style=color:#f92672>.</span>run_id <span style=color:#f92672>==</span> run_id)
+</span></span><span style=display:flex><span>                <span style=color:#f92672>.</span>where(AgentRunEvent<span style=color:#f92672>.</span>sequence <span style=color:#f92672>&gt;</span> from_sequence)
+</span></span><span style=display:flex><span>                <span style=color:#f92672>.</span>order_by(AgentRunEvent<span style=color:#f92672>.</span>sequence)
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>for</span> event <span style=color:#f92672>in</span> result<span style=color:#f92672>.</span>scalars():
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>yield</span> event
+</span></span></code></pre></div><p><strong>WebSocket Integration with Reconnection</strong></p><p>Clients connect via WebSocket and can reconnect to resume streams:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StreamingEndpoint</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>websocket_handler</span>(self, websocket: WebSocket):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> websocket<span style=color:#f92672>.</span>accept()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+</span></span><span style=display:flex><span>                message <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> websocket<span style=color:#f92672>.</span>receive_json()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> message[<span style=color:#e6db74>&#34;type&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;subscribe&#34;</span>:
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_handle_subscribe(websocket, message)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>elif</span> message[<span style=color:#e6db74>&#34;type&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;resume&#34;</span>:
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_handle_resume(websocket, message)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>elif</span> message[<span style=color:#e6db74>&#34;type&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;message&#34;</span>:
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_handle_message(websocket, message)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> WebSocketDisconnect:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_handle_disconnect(websocket)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_handle_resume</span>(self, websocket: WebSocket, message: dict):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Resume a stream from a specific sequence.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        run_id <span style=color:#f92672>=</span> UUID(message[<span style=color:#e6db74>&#34;run_id&#34;</span>])
+</span></span><span style=display:flex><span>        last_seq <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span>get(<span style=color:#e6db74>&#34;last_sequence&#34;</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Replay missed events</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>for</span> event <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>persistence<span style=color:#f92672>.</span>replay_events(run_id, last_seq):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> websocket<span style=color:#f92672>.</span>send_json({
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;type&#34;</span>: event<span style=color:#f92672>.</span>event_type,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;sequence&#34;</span>: event<span style=color:#f92672>.</span>sequence,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;payload&#34;</span>: event<span style=color:#f92672>.</span>payload
+</span></span><span style=display:flex><span>            })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Continue with live stream if still running</span>
+</span></span><span style=display:flex><span>        run <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>get_run(run_id)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> run<span style=color:#f92672>.</span>status <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;running&#34;</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_subscribe_to_live(websocket, run_id)
+</span></span></code></pre></div><hr><h3 id=performance-optimizations>Performance Optimizations<a hidden class=anchor aria-hidden=true href=#performance-optimizations>#</a></h3><p><strong>Session Pre-Creation</strong></p><p>LLM sessions have cold start latency. We pre-warm them:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SessionPool</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Pool of pre-warmed LLM sessions for reduced latency.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, pool_size: int <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>pool_size <span style=color:#f92672>=</span> pool_size
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>available: asyncio<span style=color:#f92672>.</span>Queue[LLMSession] <span style=color:#f92672>=</span> asyncio<span style=color:#f92672>.</span>Queue()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>in_use: set[LLMSession] <span style=color:#f92672>=</span> set()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>initialize</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Pre-create sessions on startup.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>pool_size):
+</span></span><span style=display:flex><span>            session <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_create_session()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>available<span style=color:#f92672>.</span>put(session)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>acquire</span>(self) <span style=color:#f92672>-&gt;</span> LLMSession:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Get a pre-warmed session.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            session <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>available<span style=color:#f92672>.</span>get_nowait()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> asyncio<span style=color:#f92672>.</span>QueueEmpty:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Pool exhausted, create new session</span>
+</span></span><span style=display:flex><span>            session <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>_create_session()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>in_use<span style=color:#f92672>.</span>add(session)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> session
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>release</span>(self, session: LLMSession):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Return session to pool.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>in_use<span style=color:#f92672>.</span>discard(session)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>available<span style=color:#f92672>.</span>qsize() <span style=color:#f92672>&lt;</span> self<span style=color:#f92672>.</span>pool_size:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Reset and return to pool</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>reset()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>available<span style=color:#f92672>.</span>put(session)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Pool full, close session</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>close()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_create_session</span>(self) <span style=color:#f92672>-&gt;</span> LLMSession:
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Create and warm up a new session.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        session <span style=color:#f92672>=</span> LLMSession()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Warm up with minimal prompt</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> session<span style=color:#f92672>.</span>generate(<span style=color:#e6db74>&#34;Hello&#34;</span>, max_tokens<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> session
+</span></span></code></pre></div><p><strong>Async PostgreSQL Connection Pool</strong></p><p>We use asyncpg with connection overflow handling:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sqlalchemy.ext.asyncio <span style=color:#f92672>import</span> create_async_engine, AsyncSession
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sqlalchemy.pool <span style=color:#f92672>import</span> AsyncAdaptedQueuePool
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>engine <span style=color:#f92672>=</span> create_async_engine(
+</span></span><span style=display:flex><span>    DATABASE_URL,
+</span></span><span style=display:flex><span>    poolclass<span style=color:#f92672>=</span>AsyncAdaptedQueuePool,
+</span></span><span style=display:flex><span>    pool_size<span style=color:#f92672>=</span><span style=color:#ae81ff>15</span>,
+</span></span><span style=display:flex><span>    max_overflow<span style=color:#f92672>=</span><span style=color:#ae81ff>25</span>,  <span style=color:#75715e># Allow burst to 40 total</span>
+</span></span><span style=display:flex><span>    pool_timeout<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>,
+</span></span><span style=display:flex><span>    pool_recycle<span style=color:#f92672>=</span><span style=color:#ae81ff>1800</span>,  <span style=color:#75715e># Recycle connections every 30 min</span>
+</span></span><span style=display:flex><span>    pool_pre_ping<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,  <span style=color:#75715e># Verify connections before use</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p><strong>Structured Logging with Correlation IDs</strong></p><p>Every request gets a correlation ID that flows through all log entries:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CorrelationMiddleware</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__call__</span>(self, scope: Scope, receive: Receive, send: Send):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> scope[<span style=color:#e6db74>&#34;type&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;http&#34;</span>:
+</span></span><span style=display:flex><span>            correlation_id <span style=color:#f92672>=</span> scope[<span style=color:#e6db74>&#34;headers&#34;</span>]<span style=color:#f92672>.</span>get(
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>b</span><span style=color:#e6db74>&#34;x-correlation-id&#34;</span>,
+</span></span><span style=display:flex><span>                str(uuid4())<span style=color:#f92672>.</span>encode()
+</span></span><span style=display:flex><span>            )<span style=color:#f92672>.</span>decode()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Set in context var for logging</span>
+</span></span><span style=display:flex><span>            correlation_context<span style=color:#f92672>.</span>set(correlation_id)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Add to response headers</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>send_wrapper</span>(message):
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> message[<span style=color:#e6db74>&#34;type&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;http.response.start&#34;</span>:
+</span></span><span style=display:flex><span>                    headers <span style=color:#f92672>=</span> MutableHeaders(scope<span style=color:#f92672>=</span>message)
+</span></span><span style=display:flex><span>                    headers<span style=color:#f92672>.</span>append(<span style=color:#e6db74>&#34;x-correlation-id&#34;</span>, correlation_id)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>await</span> send(message)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>app(scope, receive, send_wrapper)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> self<span style=color:#f92672>.</span>app(scope, receive, send)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Logger configuration</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CorrelationFilter</span>(logging<span style=color:#f92672>.</span>Filter):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>filter</span>(self, record):
+</span></span><span style=display:flex><span>        record<span style=color:#f92672>.</span>correlation_id <span style=color:#f92672>=</span> correlation_context<span style=color:#f92672>.</span>get(<span style=color:#e6db74>&#34;&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
+</span></span></code></pre></div><hr><h2 id=what-i-learned>What I Learned<a hidden class=anchor aria-hidden=true href=#what-i-learned>#</a></h2><p><strong>Contamination detection is essential.</strong> LLMs will faithfully execute instructions hidden in retrieved documents. You need explicit detection for prompt injection patterns, or your agents become attack vectors.</p><p><strong>Parallel retrieval changes the latency equation.</strong> When retrieval is your bottleneck, parallelizing streams has a multiplicative effect. Query enhancement adds latency but saves more by improving retrieval quality.</p><p><strong>Space-level isolation requires everywhere enforcement.</strong> Every query, every cache key, every log entry needs space scoping. A single missed scope check creates a data leak. Middleware is necessary but not sufficient—repositories and services need built-in isolation.</p><p><strong>Checkpointing is worth the complexity.</strong> Long-running AI conversations need persistence. LangGraph&rsquo;s PostgreSQL checkpointer handles this cleanly, but you still need event streaming for real-time UI and replay.</p><hr><h2 id=interested>Interested?<a hidden class=anchor aria-hidden=true href=#interested>#</a></h2><p>If you&rsquo;re building AI-powered SaaS products or want to discuss LangGraph patterns, <a href=/book-a-call/>book a call</a>.</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://mhassan.dev/tags/ai>AI</a></li><li><a href=https://mhassan.dev/tags/langgraph>LangGraph</a></li><li><a href=https://mhassan.dev/tags/fastapi>FastAPI</a></li><li><a href=https://mhassan.dev/tags/postgresql>PostgreSQL</a></li><li><a href=https://mhassan.dev/tags/rag>RAG</a></li><li><a href=https://mhassan.dev/tags/multi-tenant>Multi-Tenant</a></li><li><a href=https://mhassan.dev/tags/vertex-ai>Vertex AI</a></li></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://mhassan.dev/>Muhammad Hassan Raza</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>(function(){try{if(window.__hasLoggedConsoleBrand)return;var n=getComputedStyle(document.documentElement),e=(n.getPropertyValue("--primary")||"").trim(),t=(n.getPropertyValue("--secondary")||"").trim(),s=e?"hsl("+e+")":"#4f46e5",o=t?"hsl("+t+")":"#facc15",i="color: "+s+"; font-weight: bold; font-family: monospace; font-size: 12px; line-height: 1.2;",a="color: "+o+"; font-weight: bold; font-family: monospace; font-size: 10px;",r=`%c
+███████╗ ██████╗ ██████╗     ████████╗██╗  ██╗███████╗
+██╔════╝██╔═══██╗██╔══██╗    ╚══██╔══╝██║  ██║██╔════╝
+█████╗  ██║   ██║██████╔╝       ██║   ███████║█████╗  
+██╔══╝  ██║   ██║██╔══██╗       ██║   ██╔══██║██╔══╝  
+██║     ╚██████╔╝██║  ██║       ██║   ██║  ██║███████╗
+╚═╝      ╚═════╝ ╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝
+                                                        
+███████╗███╗   ███╗██████╗ ███████╗██████╗  ██████╗ ██████╗ 
+██╔════╝████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗
+█████╗  ██╔████╔██║██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝
+██╔══╝  ██║╚██╔╝██║██╔═══╝ ██╔══╝  ██╔══██╗██║   ██║██╔══██╗
+███████╗██║ ╚═╝ ██║██║     ███████╗██║  ██║╚██████╔╝██║  ██║
+╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+%c
+⚔️ In the grim darkness of the dev console, there is only code...`;console.log(r,i,a),window.__hasLoggedConsoleBrand=!0}catch{console.log("⚔️ In the grim darkness of the dev console, there is only code..."),window.__hasLoggedConsoleBrand=!0}})()</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
