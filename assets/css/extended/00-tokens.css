@@ -1,0 +1,168 @@
+/* =========================================
+   Design System Tokens
+   Integrates with PaperMod + Custom Brand
+   ========================================= */
+
+/* ===== Light Theme (Default) ===== */
+:root {
+  /* PaperMod Core Variables */
+  --theme: #fafafa;
+  --entry: #ffffff;
+  --primary: #b7472b;
+  --secondary: #64748b;
+  --tertiary: #e2e8f0;
+  --content: #334155;
+  --border: #e2e8f0;
+
+  /* Code */
+  --code-bg: #f1f5f9;
+  --code-block-bg: #1e293b;
+
+  /* Brand Colors (custom) */
+  --primary-color: #b7472b;
+  --secondary-color: #2F7E98;
+  --primary-color-rgb: 183, 71, 43;
+
+  /* Semantic */
+  --bg-color: var(--theme);
+  --text-color: var(--content);
+  --light-bg: #f8fafc;
+  --background-light: #f8fafc;
+
+  /* Book Colors */
+  --book-title-color: #b7472b;
+  --book-subtitle-color: #2F7E98;
+
+  /* Shadows */
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+  /* Hero */
+  --hero-text-color: #ffffff;
+  --hero-gradient-start: #b7472b;
+  --hero-gradient-end: #2F7E98;
+  --box-text-color: #fff;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+
+  --transition-speed: 0.3s;
+
+  /* Layout */
+  --main-width: 900px;
+}
+
+/* ===== Dark Theme (Pastel-Tinted) ===== */
+:root[data-theme="dark"] {
+  /* PaperMod Core Variables */
+  --theme: #0f172a;
+  --entry: #1e293b;
+  --primary: #fca5a5;
+  --secondary: #94a3b8;
+  --tertiary: #334155;
+  --content: #e2e8f0;
+  --border: #334155;
+
+  /* Code */
+  --code-bg: #1e293b;
+  --code-block-bg: #0f172a;
+
+  /* Brand Colors */
+  --primary-color: #fca5a5;
+  --secondary-color: #7dd3fc;
+  --primary-color-rgb: 252, 165, 165;
+
+  /* Semantic */
+  --bg-color: var(--theme);
+  --text-color: var(--content);
+  --light-bg: #1e293b;
+  --background-light: #1e293b;
+  --background-dark: #0f172a;
+
+  /* Book Colors */
+  --book-title-color: #fca5a5;
+  --book-subtitle-color: #7dd3fc;
+
+  /* Shadows (subtle glow) */
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-dark: rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.35);
+
+  /* Hero */
+  --hero-text-color: #f8fafc;
+  --hero-gradient-start: #7f1d1d;
+  --hero-gradient-end: #0c4a6e;
+  --box-text-color: #f8fafc;
+
+  /* Border */
+  --border-dark: #475569;
+  --text-dark: #e2e8f0;
+}
+
+/* Fallback for .dark class (backwards compatibility) */
+.dark {
+  --theme: #0f172a;
+  --entry: #1e293b;
+  --primary: #fca5a5;
+  --secondary: #94a3b8;
+  --tertiary: #334155;
+  --content: #e2e8f0;
+  --border: #334155;
+  --code-bg: #1e293b;
+  --code-block-bg: #0f172a;
+  --primary-color: #fca5a5;
+  --secondary-color: #7dd3fc;
+  --primary-color-rgb: 252, 165, 165;
+  --bg-color: var(--theme);
+  --text-color: var(--content);
+  --book-title-color: #fca5a5;
+  --book-subtitle-color: #7dd3fc;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+}
+
+/* System preference fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --theme: #0f172a;
+    --entry: #1e293b;
+    --primary: #fca5a5;
+    --secondary: #94a3b8;
+    --tertiary: #334155;
+    --content: #e2e8f0;
+    --border: #334155;
+    --code-bg: #1e293b;
+    --primary-color: #fca5a5;
+    --secondary-color: #7dd3fc;
+    --book-title-color: #fca5a5;
+    --book-subtitle-color: #7dd3fc;
+  }
+}
