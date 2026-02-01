@@ -6,7 +6,7 @@ ShowBreadCrumbs: false
 ShowToc: true
 ---
 <div style="text-align: justify;">
-I'm a <strong>Chief Product Officer</strong>, <strong>Software Engineer</strong>, and <strong>AI Specialist</strong> who's passionate about building clean, secure, and scalable software. My mantra? <strong>No technical debt.</strong> Currently leading product strategy and technical operations at Entropy and Co., where I architect cloud infrastructure with 99.9% uptime SLA and direct cross-functional teams of 8+ developers.
+I'm a <strong>CPO & Cofounder</strong> at <strong>Entropy Labs</strong>, <strong>Software Engineer</strong>, and <strong>AI Specialist</strong> who's passionate about building clean, secure, and scalable software. My mantra? <strong>No technical debt.</strong> Currently leading product strategy and technical operations at Entropy Labs, where I architect cloud infrastructure with 99.9% uptime SLA and direct cross-functional teams of 8+ developers.
 
 I specialize in full-stack development, AI/ML applications, and cloud infrastructure. I've built systems processing millions of transactions, reduced manual processing time by 80%, and optimized databases to achieve 69% performance improvements.
 
@@ -55,20 +55,20 @@ I specialize in full-stack development, AI/ML applications, and cloud infrastruc
 
 ### Development Experience
 
-- **Chief Product Officer, Entropy and Co. – Lahore, Pakistan**  
+- **CPO & Cofounder, Entropy Labs – Lahore, Pakistan**
   *Jun 2025 – Present*  
   - Leading product strategy and technical operations for data-driven marketing solutions serving 25K+ MAU  
   - Architecting cloud infrastructure with 99.9% uptime SLA on AWS ECS  
   - Directing cross-functional team of 8 developers and designers for enterprise solutions  
 
-- **Technical Product Engineering Lead, Entropy and Co. – Lahore, Pakistan**  
+- **Technical Product Engineering Lead, Entropy Labs – Lahore, Pakistan**  
   *Sep 2024 – Jun 2025*  
   - Built workflow automations with n8n/Make.com reducing manual time by 80% across 47 enterprise clients  
   - Developed AI apps with LangChain handling 2K+ daily doc requests at ~95% accuracy  
   - Created Django + Vue.js apps with WebSocket streaming supporting 500+ concurrent users  
   - Led migration to microservices, improving deployment frequency by 4×  
 
-- **Senior Software Engineer, Entropy and Co. – Lahore, Pakistan**  
+- **Senior Software Engineer, Entropy Labs – Lahore, Pakistan**  
   *Aug 2023 – Sep 2024*  
   - Delivered 15+ high-traffic apps on FastAPI/Django serving 50K+ DAU  
   - Optimized PostgreSQL queries (750ms → 230ms, 69% faster) via indexing and rewrites  

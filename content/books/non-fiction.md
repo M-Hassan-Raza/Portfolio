@@ -35,4 +35,13 @@ A critical examination of the constraints on national power and the perils of ov
 A groundbreaking exploration of how passion and perseverance drive success. Provides actionable insights on cultivating resilience in both personal and professional spheres.
 </blockquote>
 
+### <span class="book-subtitle">Thinking, Fast and Slow</span>
+<div class="book-cover">
+  <img src="/assets/thinking-fast-slow.webp" alt="Thinking, Fast and Slow Cover" width="200" height="300">
+</div>
+<p class="author">Author: Daniel Kahneman</p>
+<blockquote class="review">
+A Nobel laureate explaining why humans are gloriously irrational. Introduces <strong>System 1 and System 2 thinking</strong>—the fast, intuitive brain vs. the slow, analytical one. Essential for understanding <strong>cognitive biases, decision-making, and why users do what they do</strong>. Also makes you realize how often you're wrong about everything.
+</blockquote>
+
 </div>
