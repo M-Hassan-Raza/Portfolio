@@ -1,360 +1,544 @@
 ---
-title: "Polaris - The Ultimate POS"
+title: "Polaris ERP"
 date: 2025-02-10
-description: "A powerful and scalable Point of Sale system built with modern tech"
-tags: ["POS", "Retail", "Billing", "Business"]
-categories: ["Products"]
-showToc: false
-showReadingTime: false
+description: "Full-stack retail ERP system with race-condition-safe inventory, double-entry bookkeeping, and multi-tenant architecture"
+tags: ["Django", "Vue.js", "PostgreSQL", "ERP", "Full-Stack", "Concurrency"]
+categories: ["Projects"]
+showToc: true
+showReadingTime: true
 weight: -10
 ---
-<!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>Revolutionize Your Business with Polaris</h1>
-      <p class="hero-subtitle">The All-in-One POS System Built for Speed, Security, and Scalability</p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number">Rs. 68M+</div>
-          <div class="stat-label">Transactions</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Reliability</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">99.9%</div>
-          <div class="stat-label">Uptime</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Cloud Updates</div>
-        </div>
-      </div>
-      <a href="/book-a-call/" class="cta-button">Get Started →</a>
-    </div>
-  </section>
 
-  <!-- Value Proposition -->
-  <section class="value-section">
-    <h2>Why Polaris?</h2>
-    <div class="value-grid">
-      <div class="value-card">
-        <img src="/assets/speed.svg" alt="Speed">
-        <h3>Lightning-Fast Transactions</h3>
-        <p>Process sales instantly with our optimized system. No more waiting in lines!</p>
-      </div>
-      <div class="value-card">
-        <img src="/assets/scale.svg" alt="Scale">
-        <h3>Multi-User</h3>
-        <p>Manage multiple users seamlessly. Grow without limits.</p>
-      </div>
-      <div class="value-card">
-        <img src="/assets/analytics.svg" alt="Analytics">
-        <h3>Insightful Analytics</h3>
-        <p>Make data-driven decisions with real-time sales and customer insights.</p>
-      </div>
-    </div>
-  </section>
+Polaris is a full-stack ERP and POS system I built for retail businesses. It handles inventory, sales, customer management, and financial reporting—the kind of system where bugs cost money and downtime loses customers.
 
-  <!-- Feature Showcase -->
-<section class="feature-section">
-  <h2>Powerful Features for Your Business</h2>
-  <div class="feature-tabs">
-    <button class="tab-button active" data-tab="inventory">Inventory Management</button>
-    <button class="tab-button" data-tab="sales">Sales & Finance</button>
-    <button class="tab-button" data-tab="security">Security & Users</button>
-  </div>
-  <div class="feature-content">
-    <div id="inventory" class="tab-content active">
-      <h3>Smart Inventory Management</h3>
-      <ul>
-        <li>Real-time stock tracking</li>
-        <li>Automated low-stock alerts</li>
-        <li>Bulk import/export functionality</li>
-      </ul>
-    </div>
-    <div id="sales" class="tab-content">
-      <h3>Sales & Financial Tools</h3>
-      <ul>
-        <li>Customizable invoicing</li>
-        <li>Profit & loss calculations</li>
-        <li>Integrated payment methods</li>
-      </ul>
-    </div>
-    <div id="security" class="tab-content">
-      <h3>Advanced Security</h3>
-      <ul>
-        <li>Role-based permissions</li>
-        <li>Audit logging</li>
-        <li>End-to-end encryption</li>
-      </ul>
-    </div>
-  </div>
-</section>
+**Tech Stack:** Vue 3, Pinia, TanStack Query, Django, Django REST Framework, PostgreSQL, WeasyPrint
 
+**Source:** Private (client work) · [Book a call](/book-a-call/) to discuss
 
-<!-- Visual Overview -->
+---
+
+## The Hard Problems
+
+Building ERP software sounds straightforward until you hit the edge cases that make or break real businesses:
+
+1. **Concurrent inventory access** — Two cashiers selling the last item at the same time. Two stock clerks adjusting quantities. A sale happening while someone generates a report.
+
+2. **Financial integrity** — Customer balances that must always reconcile. Partial payments, returns, credit notes, and adjustments that all need to balance correctly.
+
+3. **Multi-tenant data isolation** — Multiple organizations sharing infrastructure where one tenant must never see another's data—not through bugs, not through clever URL manipulation, not through anything.
+
+4. **Batch costing** — Products arrive in batches at different prices. When you sell, which cost do you use? FIFO costing with full supplier traceability.
+
+---
+
+## Technical Deep Dives
+
+### Race Condition Prevention: Dual-Layer Locking
+
+The inventory system uses a dual-layer locking strategy to prevent race conditions without sacrificing performance.
+
+**Layer 1: Pessimistic Locking with Deadlock Prevention**
+
+When a transaction needs to update inventory, we acquire row-level locks in a consistent order:
+
+```python
+class InventoryService:
+    def update_quantities(self, items: list[tuple[int, Decimal]]):
+        """
+        Update multiple product quantities atomically.
+        Items: list of (product_id, quantity_delta) tuples
+        """
+        # Sort by ID to prevent deadlocks
+        sorted_items = sorted(items, key=lambda x: x[0])
+
+        with transaction.atomic():
+            for product_id, delta in sorted_items:
+                # NOWAIT fails immediately if lock unavailable
+                # Better to fail fast than queue indefinitely
+                product = (
+                    Product.objects
+                    .select_for_update(nowait=True)
+                    .get(id=product_id)
+                )
+                product.quantity += delta
+                product.save(update_fields=['quantity', 'updated_at'])
+```
+
+The `nowait=True` is critical. Without it, transactions queue up waiting for locks, creating latency spikes during busy periods. With `nowait`, we fail fast and let the application retry with exponential backoff.
+
+**Layer 2: Optimistic Locking for Frontend Sync**
+
+For the frontend, we need to detect when data has changed between read and write:
+
+```python
+class Product(models.Model):
+    version = models.PositiveIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            updated = Product.objects.filter(
+                pk=self.pk,
+                version=self.version
+            ).update(
+                version=self.version + 1,
+                **{f: getattr(self, f) for f in kwargs.get('update_fields', [])}
+            )
+            if not updated:
+                raise StaleDataError("Record modified by another user")
+        super().save(*args, **kwargs)
+```
+
+The frontend polls for version changes with a lightweight endpoint that returns ~50 bytes per product—just IDs and versions. When versions mismatch, the UI shows a conflict resolution dialog rather than silently overwriting.
+
+---
+
+### Financial System: Advisory Locks and Double-Entry Bookkeeping
+
+Customer balances are the most sensitive data in the system. A miscalculation means either overcharging customers or losing money.
+
+**PostgreSQL Advisory Locks for Balance Operations**
+
+Database row locks work for single-row updates, but balance calculations touch multiple rows. We use PostgreSQL advisory locks to serialize operations per customer:
+
+```python
+class LedgerService:
+    def credit_customer(self, customer_id: int, amount: Decimal, reason: str):
+        # Advisory lock scoped to this customer
+        lock_id = hash(f"customer_balance_{customer_id}") & 0x7FFFFFFF
+
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT pg_advisory_lock(%s)", [lock_id])
+
+        try:
+            with transaction.atomic():
+                entry = LedgerEntry.objects.create(
+                    customer_id=customer_id,
+                    entry_type=EntryType.CREDIT,
+                    amount=amount,
+                    reason=reason,
+                    running_balance=self._calculate_new_balance(customer_id, amount)
+                )
+                # Trigger recalculation signals
+                balance_changed.send(sender=self, customer_id=customer_id)
+                return entry
+        finally:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT pg_advisory_unlock(%s)", [lock_id])
+```
+
+**Double-Entry with Automatic Reversals**
+
+Every financial operation creates a reversible entry. Returns don't delete the original sale—they create a counter-entry:
+
+```python
+class LedgerEntry(models.Model):
+    entry_type = models.CharField(choices=EntryType.choices)
+    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    reversal_of = models.ForeignKey('self', null=True, on_delete=models.PROTECT)
+    reversed_by = models.ForeignKey('self', null=True, on_delete=models.PROTECT)
+
+    def reverse(self, reason: str):
+        """Create a reversal entry. Original entry remains for audit."""
+        reversal = LedgerEntry.objects.create(
+            customer=self.customer,
+            entry_type=self._inverse_type(),
+            amount=self.amount,
+            reason=f"Reversal: {reason}",
+            reversal_of=self
+        )
+        self.reversed_by = reversal
+        self.save(update_fields=['reversed_by'])
+        return reversal
+```
+
+**Tolerance-Based Financial Equality**
+
+Floating-point comparisons fail on financial data. We use tolerance-based equality:
+
+```python
+FINANCIAL_TOLERANCE = Decimal('0.01')
+
+def balances_equal(a: Decimal, b: Decimal) -> bool:
+    return abs(a - b) < FINANCIAL_TOLERANCE
+
+def validate_ledger_balance(customer_id: int):
+    """Verify running balance matches sum of entries."""
+    entries_sum = LedgerEntry.objects.filter(
+        customer_id=customer_id,
+        reversed_by__isnull=True
+    ).aggregate(total=Sum('signed_amount'))['total'] or Decimal('0')
+
+    current_balance = Customer.objects.get(id=customer_id).balance
+
+    if not balances_equal(entries_sum, current_balance):
+        raise LedgerIntegrityError(
+            f"Balance mismatch: entries={entries_sum}, stored={current_balance}"
+        )
+```
+
+---
+
+### Multi-Tenant Architecture
+
+The system serves multiple retail businesses from a single deployment. Data isolation isn't optional—it's existential.
+
+**Thread-Local Organization Context**
+
+Every request establishes an organization context that propagates through the entire call stack:
+
+```python
+_org_context = threading.local()
+
+class OrganizationMiddleware:
+    def __call__(self, request):
+        org_id = self._extract_org_id(request)
+        _org_context.organization_id = org_id
+        _org_context.organization = Organization.objects.get(id=org_id)
+
+        try:
+            response = self.get_response(request)
+        finally:
+            _org_context.organization_id = None
+            _org_context.organization = None
+
+        return response
+
+def get_current_organization():
+    return getattr(_org_context, 'organization', None)
+```
+
+**Tenant-Aware QuerySet**
+
+All models inherit from a base that automatically filters by organization:
+
+```python
+class TenantAwareQuerySet(models.QuerySet):
+    def get_queryset(self):
+        qs = super().get_queryset()
+        org = get_current_organization()
+        if org:
+            return qs.filter(organization=org)
+        return qs.none()  # Fail closed, not open
+
+class TenantAwareManager(models.Manager):
+    def get_queryset(self):
+        return TenantAwareQuerySet(self.model, using=self._db)
+
+class TenantModel(models.Model):
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    objects = TenantAwareManager()
+    all_objects = models.Manager()  # Escape hatch for admin/migrations
+
+    class Meta:
+        abstract = True
+```
+
+Every query—`Product.objects.all()`, `Customer.objects.filter(name='X')`—automatically includes the organization filter. You can't forget it because it's built into the ORM.
+
+---
+
+### Batch Inventory and FIFO Costing
+
+Products arrive in batches at different purchase prices. When calculating cost of goods sold, we use FIFO (First In, First Out):
+
+```python
+class InventoryBatch(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    purchase = models.ForeignKey(Purchase, on_delete=models.PROTECT)
+    supplier = models.ForeignKey(Supplier, on_delete=models.PROTECT)
+    quantity_received = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity_remaining = models.DecimalField(max_digits=10, decimal_places=2)
+    unit_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    received_at = models.DateTimeField(auto_now_add=True)
+
+class Product(TenantModel):
+    @property
+    def current_quantity(self):
+        """Computed from batches, not stored."""
+        return InventoryBatch.objects.filter(
+            product=self
+        ).aggregate(
+            total=Sum('quantity_remaining')
+        )['total'] or Decimal('0')
+
+    @property
+    def average_cost(self):
+        """Weighted average across remaining batches."""
+        batches = InventoryBatch.objects.filter(
+            product=self,
+            quantity_remaining__gt=0
+        )
+        total_value = sum(b.quantity_remaining * b.unit_cost for b in batches)
+        total_qty = sum(b.quantity_remaining for b in batches)
+        return total_value / total_qty if total_qty else Decimal('0')
+```
+
+When selling, we consume from oldest batches first:
+
+```python
+def consume_inventory(product_id: int, quantity: Decimal) -> list[tuple[Batch, Decimal]]:
+    """
+    FIFO consumption. Returns list of (batch, quantity_consumed) pairs
+    for cost calculation and audit trail.
+    """
+    consumed = []
+    remaining = quantity
+
+    batches = (
+        InventoryBatch.objects
+        .filter(product_id=product_id, quantity_remaining__gt=0)
+        .order_by('received_at')
+        .select_for_update()
+    )
+
+    for batch in batches:
+        if remaining <= 0:
+            break
+
+        take = min(batch.quantity_remaining, remaining)
+        batch.quantity_remaining -= take
+        batch.save(update_fields=['quantity_remaining'])
+
+        consumed.append((batch, take))
+        remaining -= take
+
+    if remaining > 0:
+        raise InsufficientInventoryError(f"Short {remaining} units")
+
+    return consumed
+```
+
+The `PROTECT` on supplier prevents orphaned batches—you can't delete a supplier while inventory from them exists. This maintains the audit trail for traceability.
+
+---
+
+### Soft Delete with Audit Trail
+
+Deleted records aren't actually deleted—they're flagged for audit and recovery:
+
+```python
+class SoftDeleteQuerySet(TenantAwareQuerySet):
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted_at__isnull=True)
+
+    def with_deleted(self):
+        return super().get_queryset()
+
+class AuditModel(TenantModel):
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='+')
+    updated_at = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='+')
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted_by = models.ForeignKey(User, null=True, on_delete=models.PROTECT, related_name='+')
+    deletion_reason = models.TextField(blank=True)
+
+    objects = SoftDeleteManager()
+    all_objects = models.Manager()
+
+    def soft_delete(self, user, reason: str):
+        self.deleted_at = timezone.now()
+        self.deleted_by = user
+        self.deletion_reason = reason
+        self.save(update_fields=['deleted_at', 'deleted_by', 'deletion_reason'])
+```
+
+This combines with tenant-awareness—`Product.objects.all()` returns non-deleted products for the current organization only.
+
+---
+
+### Frontend Architecture
+
+The Vue 3 frontend separates concerns cleanly between UI state and server state.
+
+**Composables for Everything**
+
+Over 100 composables handle different concerns:
+
+```typescript
+// useCart.ts - Cart UI state (Pinia)
+export const useCart = defineStore('cart', () => {
+  const items = ref<CartItem[]>([])
+  const customerId = ref<number | null>(null)
+
+  // Persisted to sessionStorage for recovery
+  const persistedState = useSessionStorage('cart-state', { items: [], customerId: null })
+
+  // Sync with persisted state
+  watch([items, customerId], () => {
+    persistedState.value = { items: items.value, customerId: customerId.value }
+  })
+
+  return { items, customerId, /* ... */ }
+})
+
+// useProducts.ts - Server state (TanStack Query)
+export function useProducts(filters: ProductFilters) {
+  return useQuery({
+    queryKey: ['products', filters],
+    queryFn: () => api.products.list(filters),
+    staleTime: 30_000,
+  })
+}
+
+// useProductVersions.ts - Lightweight polling for conflict detection
+export function useProductVersions(productIds: number[]) {
+  return useQuery({
+    queryKey: ['product-versions', productIds],
+    queryFn: () => api.products.versions(productIds),
+    refetchInterval: 5_000,  // 5s polling
+  })
+}
+```
+
+**Cart Recovery**
+
+Session persistence means abandoned carts survive page refreshes:
+
+```typescript
+export function useCartRecovery() {
+  const cart = useCart()
+
+  onMounted(() => {
+    const persisted = sessionStorage.getItem('cart-state')
+    if (persisted) {
+      const { items, customerId } = JSON.parse(persisted)
+      if (items.length > 0) {
+        showRecoveryDialog({ items, customerId })
+      }
+    }
+  })
+}
+```
+
+---
+
+### Real-Time Sync: Hybrid SSE + Polling
+
+We use Server-Sent Events for immediate updates with polling as fallback:
+
+```typescript
+class RealtimeSync {
+  private eventSource: EventSource | null = null
+  private pollInterval: number | null = null
+
+  connect() {
+    if (typeof EventSource !== 'undefined') {
+      this.eventSource = new EventSource('/api/events/')
+      this.eventSource.onmessage = this.handleEvent
+      this.eventSource.onerror = this.fallbackToPolling
+    } else {
+      this.fallbackToPolling()
+    }
+  }
+
+  private fallbackToPolling() {
+    this.eventSource?.close()
+    this.pollInterval = setInterval(() => this.poll(), 5000)
+  }
+
+  private handleEvent(event: MessageEvent) {
+    const { type, payload } = JSON.parse(event.data)
+
+    if (type === 'inventory_update') {
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+    } else if (type === 'version_conflict') {
+      showConflictDialog(payload)
+    }
+  }
+}
+```
+
+Optimistic UI updates show changes immediately, with server confirmation reconciling any conflicts:
+
+```typescript
+const updateQuantity = useMutation({
+  mutationFn: (data) => api.inventory.update(data),
+  onMutate: async (data) => {
+    // Cancel outgoing refetches
+    await queryClient.cancelQueries({ queryKey: ['products', data.productId] })
+
+    // Snapshot previous value
+    const previous = queryClient.getQueryData(['products', data.productId])
+
+    // Optimistically update
+    queryClient.setQueryData(['products', data.productId], (old) => ({
+      ...old,
+      quantity: old.quantity + data.delta
+    }))
+
+    return { previous }
+  },
+  onError: (err, data, context) => {
+    // Rollback on error
+    queryClient.setQueryData(['products', data.productId], context.previous)
+  },
+  onSettled: () => {
+    queryClient.invalidateQueries({ queryKey: ['products'] })
+  }
+})
+```
+
+---
+
+## Screenshots
+
 <section class="screenshots-section">
-  <h2>Visual Overview</h2>
   <div class="image-grid">
     <figure class="image-card">
       <img src="/assets/home.webp" alt="Polaris Dashboard" class="zoomable">
-      <figcaption>Real-time business insights with an intuitive dashboard.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/editingproduct.webp" alt="Editing a Product" class="zoomable">
-      <figcaption>Edit an existing product with great control</figcaption>
+      <figcaption>Dashboard with business insights</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/product-database.webp" alt="Product Database" class="zoomable">
-      <figcaption>Manage products, units, and pricing efficiently.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/low-inventory-mainpage.webp" alt="Low Inventory" class="zoomable">
-      <figcaption>Never run out of things with real-time inventory tracking.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/generate-order.webp" alt="Generate Order" class="zoomable">
-      <figcaption>Quickly create orders for your suppliers.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/returns.webp" alt="Returns Management" class="zoomable">
-      <figcaption>Minimize errors with an automated returns process.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/customer-record-mainpage.webp" alt="Customer Record" class="zoomable">
-      <figcaption>Keep detailed records of all your customers.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/customerledger.webp" alt="Customer Ledger" class="zoomable">
-      <figcaption>Track transactions and manage customer balances easily.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/singleledger.webp" alt="Detailed Customer Ledger" class="zoomable">
-      <figcaption>Manage each customer's ledger in detail.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/product-sales-report.webp" alt="Sales Report" class="zoomable">
-      <figcaption>Generate detailed reports for sales trends and business performance.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/supply-chain-mainpage.webp" alt="Supply Chain" class="zoomable">
-      <figcaption>Manage supply chain partners seamlessly.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/supplierledger.webp" alt="Supplier Ledger" class="zoomable">
-      <figcaption>Track transactions and manage supplier balances easily.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/archive-bills.webp" alt="Archive" class="zoomable">
-      <figcaption>Track daily bills, refunds, and quotations at a glance.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/notes.webp" alt="Notes" class="zoomable">
-      <figcaption>Built-in diary so you never forget anything.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/loyaltyrewards.webp" alt="Loyalty Rewards" class="zoomable">
-      <figcaption>Increase retention with an integrated loyalty program.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/addingledgerentry.webp" alt="Ledger Entry Creation" class="zoomable">
-      <figcaption>Manually add ledger entries for book keeping</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/password-protected-pages.webp" alt="Password Protected Pages" class="zoomable">
-      <figcaption>Protect sensitive pages with admin passwords</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/invoice-final-dialogue.webp" alt="Invoice Dialog" class="zoomable">
-      <figcaption>Generate Bills or Quotations with customized data</figcaption>
+      <figcaption>Product management</figcaption>
     </figure>
     <figure class="image-card">
       <img src="/assets/invoice-cart-page.png" alt="Cart Page" class="zoomable">
-      <figcaption>A clean and customizable cart page with previous price records</figcaption>
+      <figcaption>Checkout with price history</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/billpdf.webp" alt="PDF of Generated Bill" class="zoomable">
-      <figcaption>A comprehensive invoice containing previous balances.</figcaption>
+      <img src="/assets/customerledger.webp" alt="Customer Ledger" class="zoomable">
+      <figcaption>Customer balance tracking</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/customerledgerpdf.webp" alt="PDF of Customer Ledger" class="zoomable">
-      <figcaption>A comprehensive ledger containing details of all credits and debits.</figcaption>
+      <img src="/assets/product-sales-report.webp" alt="Sales Report" class="zoomable">
+      <figcaption>Sales reporting</figcaption>
     </figure>
     <figure class="image-card">
-      <img src="/assets/adding-promotions.webp" alt="Adding Promotions" class="zoomable">
-      <figcaption>Boost sales with promotional offers and discounts.</figcaption>
-    </figure>
-    <figure class="image-card">
-      <img src="/assets/promotions-mainpage.webp" alt="Promotions Main Page" class="zoomable">
-      <figcaption>Manage all promotions from a single page.</figcaption>
+      <img src="/assets/billpdf.webp" alt="Generated Invoice" class="zoomable">
+      <figcaption>Generated invoice PDF</figcaption>
     </figure>
   </div>
 </section>
 
-  <!-- Testimonials -->
-  <section class="testimonial-section">
-    <h2>What Our Customers Say</h2>
-    <div class="testimonial-carousel">
-      <div class="testimonial-card">
-        <img src="/assets/usman-ghany-customer.png" alt="Usman Ghany">
-        <p>“Polaris transformed how we manage our retail stores. Errors are down, and efficiency is up!”</p>
-        <cite>– Usman Ghany, Retail Store Owner</cite>
-      </div>
-      <div class="testimonial-card">
-        <img src="/assets/muhammad-inam-customer.png" alt="Muhammad Inam">
-        <p>“Managing suppliers and sales used to be a nightmare. Polaris saved us hours every week.”</p>
-        <cite>– Muhammad Inam, Wholesale Manager</cite>
-      </div>
-    </div>
-  </section>
+---
 
-  <!-- Pricing -->
-  <section class="pricing-section">
-    <h2>Simple, Transparent Pricing</h2>
-    <div class="pricing-cards">
-      <div class="pricing-card">
-        <h3>Starter</h3>
-        <div class="price">$49<span></span></div>
-        <ul>
-          <li>✓ Single Store</li>
-          <li>✓ Basic Reporting</li>
-          <li>✓ Email Support</li>
-        </ul>
-      </div>
-      <div class="pricing-card popular">
-        <h3>Pro</h3>
-        <div class="price">$99<span></span></div>
-        <ul>
-          <li>✓ Multi-Store</li>
-          <li>✓ Advanced Analytics</li>
-          <li>✓ Priority Support</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+## What I Learned
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <h2>Ready to Transform Your Business?</h2>
-    <p>Join tens of businesses using Polaris to streamline operations and boost sales.</p>
-    <a href="/book-a-call/" class="cta-button">Get Started →</a>
-  </section>
+**Fail closed, not open.** The tenant-aware queryset returns `.none()` when there's no organization context rather than returning everything. This default-deny approach catches bugs before they become security incidents.
 
-<!-- Modal HTML -->
-<div id="imageModal" class="modal" style="display: none;">
-  <span class="close">&times;</span>
-  <img id="fullsizeImage" class="modal-content">
-  <div class="nav-arrow left-arrow">&#10094;</div>
-  <div class="nav-arrow right-arrow">&#10095;</div>
-</div>
+**Computed vs stored quantities.** Storing inventory quantities seems simpler, but computed quantities from batch records eliminate an entire class of drift bugs. The performance cost of aggregation is worth the consistency guarantee.
 
+**Advisory locks solve coordination problems.** Row-level locks work for single-record updates, but cross-record operations need explicit coordination. PostgreSQL advisory locks are underused for application-level synchronization.
+
+**Version fields catch what transactions miss.** Transactions prevent concurrent writes, but they don't help when a user stares at stale data for 10 minutes before clicking save. Optimistic locking with version fields closes that gap.
+
+---
+
+## Interested?
+
+If you're looking for similar ERP/POS development or want to discuss the technical details, [book a call](/book-a-call/).
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("fullsizeImage");
-  const closeBtn = document.querySelector(".close");
-  const leftArrow = document.querySelector(".left-arrow");
-  const rightArrow = document.querySelector(".right-arrow");
   const zoomableImages = document.querySelectorAll(".zoomable");
 
-  // Array of image sources and a current index tracker.
-  const imageSources = Array.from(zoomableImages).map(img => img.src);
-  let currentImageIndex = 0;
-
-  // Hide modal initially.
-  modal.style.display = "none";
-
-  // Open modal when an image is clicked.
-  zoomableImages.forEach((img, index) => {
+  zoomableImages.forEach((img) => {
+    img.style.cursor = "pointer";
     img.addEventListener("click", function() {
-      modal.style.display = "flex"; // Using flex for centering.
-      modalImg.src = this.src;
-      currentImageIndex = index;
+      window.open(this.src, '_blank');
     });
   });
-
-  // Close modal on clicking the close button.
-  closeBtn.addEventListener("click", function() {
-    modal.style.display = "none";
-  });
-
-  // Close modal when clicking outside the image.
-  window.addEventListener("click", function(event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  // Keyboard navigation.
-  document.addEventListener("keydown", function(e) {
-    if (modal.style.display === "flex") {
-      if (e.key === "ArrowRight") {
-        currentImageIndex = (currentImageIndex + 1) % imageSources.length;
-        modalImg.src = imageSources[currentImageIndex];
-      } else if (e.key === "ArrowLeft") {
-        currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
-        modalImg.src = imageSources[currentImageIndex];
-      } else if (e.key === "Escape") {
-        modal.style.display = "none";
-      }
-    }
-  });
-
-  // Clickable arrows for navigation.
-  leftArrow.addEventListener("click", function() {
-    currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
-    modalImg.src = imageSources[currentImageIndex];
-  });
-
-  rightArrow.addEventListener("click", function() {
-    currentImageIndex = (currentImageIndex + 1) % imageSources.length;
-    modalImg.src = imageSources[currentImageIndex];
-  });
-
-  // Existing tab functionality remains unchanged.
-  const tabButtons = document.querySelectorAll(".tab-button");
-  const tabContents = document.querySelectorAll(".tab-content");
-
-  tabContents.forEach((content, index) => {
-    if (index !== 0) {
-      content.style.display = "none";
-    }
-  });
-
-  tabButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      tabButtons.forEach(btn => btn.classList.remove("active"));
-      tabContents.forEach(content => {
-        content.classList.remove("active");
-        content.style.display = "none";
-      });
-      button.classList.add("active");
-      const tabId = button.getAttribute("data-tab");
-      const activeContent = document.getElementById(tabId);
-      activeContent.classList.add("active");
-      activeContent.style.display = "block";
-    });
-  });
-
-  // Make figcaptions clickable to open the modal just like the image
-document.querySelectorAll('.image-card figcaption').forEach((caption) => {
-  caption.style.cursor = 'pointer';
-  caption.addEventListener('click', function(e) {
-    // Prevent any other click handlers on parent elements from firing
-    e.stopPropagation();
-    // Find the image within the same image-card container
-    const img = caption.parentElement.querySelector('img');
-    // Determine the index of the clicked image in the imageSources array
-    const index = imageSources.indexOf(img.src);
-    currentImageIndex = index > -1 ? index : 0;
-    // Open the modal with the selected image
-    modal.style.display = "flex";
-    modalImg.src = img.src;
-  });
-});
-
 });
 </script>
