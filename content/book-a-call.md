@@ -14,16 +14,20 @@ showReadingTime: false
   <div class="hero-content">
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-number">4.5+</div>
+        <div class="stat-number">6+</div>
         <div class="stat-label">Years Experience</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">13+</div>
-        <div class="stat-label">Projects</div>
+        <div class="stat-label">Projects Shipped</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Client Satisfaction</div>
+        <div class="stat-number">2.5M+</div>
+        <div class="stat-label">PKR Processed Monthly</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">9+</div>
+        <div class="stat-label">OSS Repos Fixed (That I Don't Use)</div>
       </div>
     </div>
   </div>
@@ -67,7 +71,7 @@ Choose a time that works for you to discuss:
 - Polaris demos and customization options
 - Timeline and implementation strategy
 
-<a href="https://calendly.com/hassanraza" class="cta-button">Book Your Call Now</a>
+<a href="https://cal.com/muhammad-hassan-raza/30min" class="cta-button">Book Your Call Now</a>
 
 ## What People Are Saying
 
@@ -97,9 +101,9 @@ Beyond technical skills, he possesses excellent interpersonal skills, making him
 
 I'm always excited to hear about new projects and challenges. Reach out through any of these channels:
 
-- 📧 Email: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)
-- 🌐 Portfolio: [mhassan.dev](https://mhassan.dev)
-- 💼 LinkedIn: [linkedin.com/in/hassanraza22](https://linkedin.com/in/hassanraza22)
-- 📅 Calendar: [Book a call](https://cal.com/muhammad-hassan-raza/30min)
+- Email: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com)
+- Portfolio: [mhassan.dev](https://mhassan.dev)
+- LinkedIn: [linkedin.com/in/hassanraza22](https://linkedin.com/in/hassanraza22)
+- Calendar: [Book a call](https://cal.com/muhammad-hassan-raza/30min)
 
 Whether you need a custom software solution, want to implement Polaris, or just want to discuss potential collaborations, I'm here to help turn your vision into reality.

@@ -40,63 +40,18 @@
         </ul>
         {{- end }}
 
+        {{- /* Subtle CTA for blog posts */ -}}
+        {{- if eq .Section "blog" }}
+        <p class="post-cta">Working on something similar? <a href="/book-a-call/">Book a call</a> to discuss.</p>
+        {{- end }}
+
         {{- if (.Param "ShowPostNavLinks") }}
         {{- partial "post_nav_links.html" . }}
         {{- end }}
     </footer>
 
     {{- if (.Param "showComments") }}
-    <div class="giscus-container">
-        <script src="https://giscus.app/client.js"
-            data-repo="M-Hassan-Raza/Portfolio"
-            data-repo-id="R_kgDON3Oajw"
-            data-category="General"
-            data-category-id="DIC_kwDON3Oaj84Cm3y9"
-            data-mapping="pathname"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="light"
-            data-lang="en"
-            crossorigin="anonymous"
-            async>
-        </script>
-    </div>
-    <script>
-        function getTheme() {
-            return document.body.classList.contains('dark') ? 'dark' : 'light';
-        }
-
-        function updateGiscusTheme() {
-            const iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) {
-                setTimeout(updateGiscusTheme, 300);
-                return;
-            }
-
-            const theme = getTheme();
-            iframe.contentWindow.postMessage(
-                { giscus: { setConfig: { theme: theme } } },
-                'https://giscus.app'
-            );
-        }
-
-        // Add initial theme check
-        if (localStorage.getItem("pref-theme") === "dark") {
-            updateGiscusTheme();
-        }
-
-        // Watch for theme changes on body element
-        const observer = new MutationObserver(() => {
-            updateGiscusTheme();
-        });
-
-        observer.observe(document.body, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-    </script>
+    {{- partial "giscus.html" . }}
     {{- end }}
 
 </article>

@@ -43,4 +43,3 @@ We may update this Privacy Policy periodically. Any changes will be posted on th
 
 If you have any questions or concerns about this Privacy Policy, please contact us at [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com).
 
-PSA: I created this page quickly and didn't care much about the content. You should definitely spend more time on your privacy policy tho :D

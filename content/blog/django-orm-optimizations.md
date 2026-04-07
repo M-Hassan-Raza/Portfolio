@@ -2,6 +2,7 @@
 title: "Optimizing Django ORM Queries for Large Applications"
 date: 2025-02-17T12:00:00+05:00
 draft: false
+aliases: ["/blog/django-orm-optimizaitons/"]
 tags: ["Django", "Performance", "Database Optimization", "ORM"]
 categories: ["Backend Development"]
 ShowComments: true

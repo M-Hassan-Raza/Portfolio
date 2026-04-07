@@ -1,0 +1,55 @@
+{{- with site.Params.giscus }}
+<div class="giscus-container">
+    <script src="https://giscus.app/client.js"
+        data-repo="{{ .repo }}"
+        data-repo-id="{{ .repoId }}"
+        data-category="{{ .category }}"
+        data-category-id="{{ .categoryId }}"
+        data-mapping="{{ .mapping | default "pathname" }}"
+        data-strict="0"
+        data-reactions-enabled="{{ .reactionsEnabled | default "1" }}"
+        data-emit-metadata="{{ .emitMetadata | default "0" }}"
+        data-input-position="{{ .inputPosition | default "bottom" }}"
+        data-theme="preferred_color_scheme"
+        data-lang="{{ .lang | default "en" }}"
+        crossorigin="anonymous"
+        async>
+    </script>
+</div>
+<script>
+    (function() {
+        function getTheme() {
+            return document.body.classList.contains('dark') ? 'dark' : 'light';
+        }
+
+        function updateGiscusTheme() {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) {
+                setTimeout(updateGiscusTheme, 300);
+                return;
+            }
+
+            const theme = getTheme();
+            iframe.contentWindow.postMessage(
+                { giscus: { setConfig: { theme: theme } } },
+                'https://giscus.app'
+            );
+        }
+
+        // Add initial theme check
+        if (localStorage.getItem("pref-theme") === "dark") {
+            updateGiscusTheme();
+        }
+
+        // Watch for theme changes on body element
+        const observer = new MutationObserver(function() {
+            updateGiscusTheme();
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    })();
+</script>
+{{- end }}

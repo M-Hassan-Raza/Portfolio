@@ -1,0 +1,32 @@
+{{- if (.Param "ShowBreadCrumbs") -}}
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+    <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" }}
+        {{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
+
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a itemprop="item" href="{{ "" | absLangURL }}">
+                <span itemprop="name">{{ i18n "home" | default "Home" }}</span>
+            </a>
+            <meta itemprop="position" content="1" />
+        </li>
+
+        {{- $scratch := newScratch }}
+        {{- $position := 2 }}
+        {{- range $index, $element := split $lang_url "/" }}
+            {{- $scratch.Add "path" (printf "%s/" $element )}}
+            {{- $bc_pg := site.GetPage ($scratch.Get "path") -}}
+            {{- if (and ($bc_pg) (gt (len . ) 0))}}
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span aria-hidden="true" class="breadcrumb-separator">/</span>
+                <a itemprop="item" href="{{ $bc_pg.Permalink }}">
+                    <span itemprop="name">{{ $bc_pg.Name }}</span>
+                </a>
+                <meta itemprop="position" content="{{ $position }}" />
+            </li>
+            {{- $position = add $position 1 }}
+            {{- end }}
+        {{- end -}}
+    </ol>
+</nav>
+{{- end -}}

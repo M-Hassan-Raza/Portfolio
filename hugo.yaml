@@ -25,8 +25,8 @@ params:
   ShowShareButtons: true
   ShowPostNavLinks: true
   homeInfoParams:
-    Title: "👋 Welcome to My Portfolio"
-    Content: "I'm a **Software Engineer, Teacher, and Product Developer** specializing in building scalable applications and solving complex problems."
+    Title: "Muhammad Hassan Raza"
+    Content: "I build AI systems and backends that work in production."
   assets:
     disableHLJS: true
     extendedCSS: true
@@ -56,16 +56,13 @@ params:
   profileMode:
     enabled: true
     title: "Muhammad Hassan Raza"
-    subtitle: "CPO & Cofounder at Entropy Labs | Software Engineer | AI Specialist"
+    subtitle: "I build AI systems and backends that work in production. Currently CPO at Entropy Labs."
     imageUrl: "muhammad-hassan-raza-profile.webp"
     imageTitle: "Profile Image"
     buttons:
-      - name: "Business"
-        url: "https://commitsoftware.dev/"
-        pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9v11h-20v-11h20zm2-2h-24v15h24v-15zm-15-5c-1.104 0-2 .896-2 2v2h2v-1.5c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v1.5h2v-2c0-1.104-.896-2-2-2h-6z"/></svg>'
-      # - name: "Blog"
-      #   url: "/blog/"
-      #   pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m9.134 19.319 11.587-11.588c.171-.171.279-.423.279-.684 0-.229-.083-.466-.28-.662l-3.115-3.104c-.185-.185-.429-.277-.672-.277s-.486.092-.672.277l-11.606 11.566c-.569 1.763-1.555 4.823-1.626 5.081-.02.075-.029.15-.029.224 0 .461.349.848.765.848.511 0 .991-.189 5.369-1.681zm-3.27-3.342 2.137 2.137-3.168 1.046zm.955-1.166 10.114-10.079 2.335 2.327-10.099 10.101z" fill-rule="nonzero"/></svg>'
+      - name: "Writing"
+        url: "/blog/"
+        pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m9.134 19.319 11.587-11.588c.171-.171.279-.423.279-.684 0-.229-.083-.466-.28-.662l-3.115-3.104c-.185-.185-.429-.277-.672-.277s-.486.092-.672.277l-11.606 11.566c-.569 1.763-1.555 4.823-1.626 5.081-.02.075-.029.15-.029.224 0 .461.349.848.765.848.511 0 .991-.189 5.369-1.681zm-3.27-3.342 2.137 2.137-3.168 1.046zm.955-1.166 10.114-10.079 2.335 2.327-10.099 10.101z" fill-rule="nonzero"/></svg>'
       - name: "Book a Call"
         url: "/book-a-call/"
         pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M8.26 1.289l-1.564.772c-5.793 3.02 2.798 20.944 9.31 20.944.46 0 .904-.094 1.317-.284l1.542-.755-2.898-5.594-1.54.754c-.181.087-.384.134-.597.134-2.561 0-6.841-8.204-4.241-9.596l1.546-.763-2.875-5.612zm7.746 22.711c-5.68 0-12.221-11.114-12.221-17.832 0-2.419.833-4.146 2.457-4.992l2.382-1.176 3.857 7.347-2.437 1.201c-1.439.772 2.409 8.424 3.956 7.68l2.399-1.179 3.816 7.36s-2.36 1.162-2.476 1.215c-.547.251-1.129.376-1.733.376"/></svg>'
@@ -78,6 +75,17 @@ params:
       - name: "Resources"
         url: "/resources/"
         pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.623 5.431l-4.93 3.42c-1.361.945-1.698 2.814-.754 4.175l5.131 7.394c1.165 1.68 3.034 2.58 4.935 2.58 3.264 0 5.995-2.643 5.995-6.006 0-1.18-.347-2.373-1.071-3.416l-5.131-7.394c-.945-1.36-2.814-1.698-4.175-.753zm.855 1.232c.68-.472 1.615-.302 2.088.377l1.282 1.849-3.081 2.138-2.137-3.082 1.848-1.282zm-4.93 3.42l1.85-1.283 2.137 3.081-3.08 2.138-1.283-1.849c-.472-.678-.303-1.615.376-2.087zm11.018 10.613c-2.039 1.415-4.849.908-6.264-1.131l-2.992-4.313 7.394-5.131 2.993 4.313c1.414 2.039.907 4.848-1.131 6.262zm-14.957-11.365c.353-1.73-.451-2.938-1.033-4.231-1.025-2.284 1.564-3.706 3.041-1.643l2.067 2.879 1.191-.836-2.073-2.892c-.802-1.119-1.896-1.608-2.941-1.608-2.114 0-3.592 2.2-2.665 4.565.478 1.218 1.282 2.019.985 3.474-.247 1.207-1.803 2.077-3.367 1.023l-.814 1.209c2.463 1.658 5.165.238 5.609-1.94z"/></svg>'
+
+  giscus:
+    repo: "M-Hassan-Raza/Portfolio"
+    repoId: "R_kgDON3Oajw"
+    category: "General"
+    categoryId: "DIC_kwDON3Oaj84Cm3y9"
+    mapping: "pathname"
+    reactionsEnabled: "1"
+    emitMetadata: "0"
+    inputPosition: "bottom"
+    lang: "en"
 
   socialIcons:
     - name: "github"
@@ -113,11 +121,16 @@ menu:
       name: "Book a Call"
       url: "/book-a-call/"
       weight: 1
-    # - identifier: "blog"
-    #   pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m9.134 19.319 11.587-11.588c.171-.171.279-.423.279-.684 0-.229-.083-.466-.28-.662l-3.115-3.104c-.185-.185-.429-.277-.672-.277s-.486.092-.672.277l-11.606 11.566c-.569 1.763-1.555 4.823-1.626 5.081-.02.075-.029.15-.029.224 0 .461.349.848.765.848.511 0 .991-.189 5.369-1.681zm-3.27-3.342 2.137 2.137-3.168 1.046zm.955-1.166 10.114-10.079 2.335 2.327-10.099 10.101z" fill-rule="nonzero"/></svg>'
-    #   name: "Blog"
-    #   url: "/blog/"
-    #   weight: 3
+    - identifier: "writing"
+      pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m9.134 19.319 11.587-11.588c.171-.171.279-.423.279-.684 0-.229-.083-.466-.28-.662l-3.115-3.104c-.185-.185-.429-.277-.672-.277s-.486.092-.672.277l-11.606 11.566c-.569 1.763-1.555 4.823-1.626 5.081-.02.075-.029.15-.029.224 0 .461.349.848.765.848.511 0 .991-.189 5.369-1.681zm-3.27-3.342 2.137 2.137-3.168 1.046zm.955-1.166 10.114-10.079 2.335 2.327-10.099 10.101z" fill-rule="nonzero"/></svg>'
+      name: "Writing"
+      url: "/blog/"
+      weight: 3
+    - identifier: "services"
+      pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9v11h-20v-11h20zm2-2h-24v15h24v-15zm-15-5c-1.104 0-2 .896-2 2v2h2v-1.5c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v1.5h2v-2c0-1.104-.896-2-2-2h-6z"/></svg>'
+      name: "Services"
+      url: "/services/"
+      weight: 6
 
 outputs:
   home:

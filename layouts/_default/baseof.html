@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
+{{- $theme := site.Params.defaultTheme | default "auto" }}
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="{{ $theme }}">
 
 <head>
     {{- partial "head.html" . }}
