@@ -9,9 +9,10 @@
     margin-top: 2rem;
 }
 
-.giscus-frame {
-    width: 100% !important;
-    margin: 0 !important;
+.post-content + .giscus-container .giscus-frame,
+.giscus-container .giscus-frame {
+    width: 100%;
+    margin: 0;
 }
 
 /* Ensure site footer stays at bottom */
@@ -19,20 +20,7 @@
     margin-top: auto;
 }
 
-/* Menu icon styling with hover effect */
-.menu-icon {
-    vertical-align: middle;
-    margin-right: 1px;
-    position: relative;
-    bottom: 2px;
-    transition: transform 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-}
-
-.menu-item:hover .menu-icon {
-    transform: translateY(-1px);
-}
+/* Menu icon hover effect handled in main .menu-icon definition below */
 
 /* Custom styles for footer links */
 .footer-links {
@@ -69,7 +57,7 @@
 
 .footer-links nav ul li a:hover {
     color: var(--accent-color);
-    background-color: rgba(0, 123, 255, 0.1);
+    background-color: rgba(var(--primary-color-rgb, 183, 71, 43), 0.1);
     border-radius: 4px;
 }
 
@@ -88,7 +76,7 @@
     fill: var(--content);
 }
 
-/* Menu icons - preserve their original styling */
+/* Menu icons - consolidated styling with hover effect */
 .menu-icon {
     height: 20px;
     width: 20px;
@@ -99,6 +87,15 @@
     vertical-align: middle;
     margin-right: 0.2rem;
     overflow: visible;
+    position: relative;
+    bottom: 2px;
+    display: inline-flex;
+    align-items: center;
+    transition: transform var(--duration-fast, 0.2s) var(--ease-spring, ease);
+}
+
+.menu-item:hover .menu-icon {
+    transform: translateY(-2px) rotate(-5deg);
 }
 
 
@@ -113,26 +110,41 @@
 
 /* Style EACH button (the <a> tag) */
 .profile .buttons a.button {
-    display: inline-flex; /* CRITICAL: Override display:block. Use inline-flex for icon+text alignment */
-    align-items: center;  /* Vertically align content (icon, text) within the button */
-    justify-content: center; /* Horizontally center content within the button */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     /* Reset dimensions to fit content */
-    width: auto;          /* Let the button width be determined by its content */
-    height: auto;         /* Let the button height be determined by its content + padding */
-    max-width: none;      /* Remove any potential max-width causing issues */
+    width: auto;
+    height: auto;
+    max-width: none;
 
     /* Reset margins if using gap */
     margin: 0;
 
-    /* Standard button styling (adjust padding, border, etc. to match theme) */
-    padding: 0.6em 1.2em; /* Example padding - adjust */
+    /* Standard button styling with design tokens */
+    padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm, 4px);
     text-decoration: none;
-    line-height: 1.4;     /* Ensure consistent line height */
-    white-space: nowrap;  /* Prevent text from wrapping */
-    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth hover */
+    line-height: 1.4;
+    white-space: nowrap;
+    transition:
+        transform var(--duration-fast, 0.2s) var(--ease-out-expo, ease),
+        box-shadow var(--duration-fast, 0.2s) var(--ease-out-expo, ease),
+        background-color var(--duration-normal, 0.3s) var(--ease-smooth, ease),
+        border-color var(--duration-normal, 0.3s) var(--ease-smooth, ease);
+}
+
+/* Profile buttons - subtle lift on hover */
+.profile .buttons a.button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.1));
+}
+
+.profile .buttons a.button:active {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 /* Style the inner span if needed (usually fine) */
