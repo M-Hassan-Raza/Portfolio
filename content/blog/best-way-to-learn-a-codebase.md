@@ -6,7 +6,7 @@ tags: ["Open Source", "Contributing", "Rust", "Python", "Go", "Swift", "Learning
 categories: ["Software Engineering"]
 showComments: true
 cover:
-  image: "/assets/codebase-learning.jpg"
+  image: "/assets/codebase-learning.svg"
   alt: "Learning Through Open Source"
   caption: "What reading other people's code teaches you that tutorials can't"
   relative: false

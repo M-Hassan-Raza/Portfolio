@@ -6,7 +6,7 @@ tags: ["AI", "UX", "Product", "LLM", "CPO", "Startup", "Product Development"]
 categories: ["Product Development"]
 showComments: true
 cover:
-  image: "/assets/llm-ux.jpg"
+  image: "/assets/llm-ux.svg"
   alt: "LLMs and User Experience"
   caption: "You can't GPT-wrapper your way out of a broken product"
   relative: false

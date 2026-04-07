@@ -6,7 +6,7 @@ tags: ["Software Design", "Architecture", "Python", "Django", "LangChain", "Refa
 categories: ["Software Design"]
 showComments: true
 cover:
-  image: "/assets/abstractions.jpg"
+  image: "/assets/abstractions.svg"
   alt: "Abstractions and Regrets"
   caption: "A love letter to simplicity from someone who learned the hard way"
   relative: false

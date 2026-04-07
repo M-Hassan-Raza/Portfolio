@@ -6,7 +6,7 @@ tags: ["Open Source", "Contributing", "C++", "TypeScript", "Python", "Developer 
 categories: ["Open Source"]
 showComments: true
 cover:
-  image: "/assets/open-source.jpg"
+  image: "/assets/open-source.svg"
   alt: "Open Source Drive-By Fixes"
   caption: "Against the strategic open source narrative"
   relative: false
