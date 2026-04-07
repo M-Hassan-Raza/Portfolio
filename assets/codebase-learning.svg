@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#fafafa"/>
+
+  <!-- Abstract dependency/knowledge graph -->
+  <g>
+    <!-- Nodes - circles of varying sizes representing concepts -->
+    <circle cx="600" cy="315" r="40" stroke="#b5836d" stroke-width="2" fill="#b5836d" fill-opacity="0.08"/>
+    <circle cx="380" cy="200" r="28" stroke="#d4d4d8" stroke-width="1.5" fill="none"/>
+    <circle cx="820" cy="200" r="28" stroke="#d4d4d8" stroke-width="1.5" fill="none"/>
+    <circle cx="300" cy="380" r="24" stroke="#d4d4d8" stroke-width="1.5" fill="none"/>
+    <circle cx="900" cy="400" r="24" stroke="#d4d4d8" stroke-width="1.5" fill="none"/>
+    <circle cx="480" cy="460" r="20" stroke="#d4d4d8" stroke-width="1.5" fill="none"/>
+    <circle cx="720" cy="470" r="20" stroke="#d4d4d8" stroke-width="1.5" fill="none"/>
+    <circle cx="200" cy="260" r="16" stroke="#e4e4e7" stroke-width="1" fill="none"/>
+    <circle cx="1000" cy="280" r="16" stroke="#e4e4e7" stroke-width="1" fill="none"/>
+    <circle cx="500" cy="140" r="16" stroke="#e4e4e7" stroke-width="1" fill="none"/>
+    <circle cx="700" cy="130" r="16" stroke="#e4e4e7" stroke-width="1" fill="none"/>
+    <circle cx="150" cy="440" r="12" stroke="#e4e4e7" stroke-width="1" fill="none"/>
+    <circle cx="1050" cy="420" r="12" stroke="#e4e4e7" stroke-width="1" fill="none"/>
+
+    <!-- Edges connecting nodes -->
+    <g stroke="#d4d4d8" stroke-width="1" opacity="0.5">
+      <line x1="408" y1="200" x2="560" y2="315"/>
+      <line x1="792" y1="200" x2="640" y2="315"/>
+      <line x1="324" y1="380" x2="560" y2="315"/>
+      <line x1="876" y1="400" x2="640" y2="315"/>
+      <line x1="500" y1="460" x2="580" y2="355"/>
+      <line x1="720" y1="450" x2="620" y2="355"/>
+      <line x1="216" y1="260" x2="352" y2="200"/>
+      <line x1="984" y1="280" x2="848" y2="200"/>
+      <line x1="500" y1="156" x2="380" y2="172"/>
+      <line x1="700" y1="146" x2="820" y2="172"/>
+      <line x1="166" y1="440" x2="276" y2="380"/>
+      <line x1="1034" y1="420" x2="924" y2="400"/>
+    </g>
+
+    <!-- Highlighted path through the graph (the learning journey) -->
+    <g stroke="#b5836d" stroke-width="1.5" opacity="0.4">
+      <line x1="200" y1="260" x2="380" y2="200"/>
+      <line x1="380" y1="200" x2="600" y2="315"/>
+      <line x1="600" y1="315" x2="820" y2="200"/>
+      <line x1="820" y1="200" x2="1000" y2="280"/>
+    </g>
+
+    <!-- Small dots along the highlighted path -->
+    <circle cx="290" cy="230" r="2.5" fill="#b5836d" opacity="0.5"/>
+    <circle cx="490" cy="258" r="2.5" fill="#b5836d" opacity="0.5"/>
+    <circle cx="710" cy="258" r="2.5" fill="#b5836d" opacity="0.5"/>
+    <circle cx="910" cy="240" r="2.5" fill="#b5836d" opacity="0.5"/>
+  </g>
+</svg>
