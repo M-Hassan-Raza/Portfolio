@@ -48,7 +48,7 @@ I brought that pattern back to pyscn, a Python code analyzer I contribute to tha
 
 ---
 
-## <span style="color:#FFB4A2">IBM's Code Review Taught Me More Than My CS Degree</span>
+## <span style="color:#FFB4A2">What IBM's Code Review Process Looks Like From the Outside</span>
 
 Docling is a document processing library from IBM Research. PDF parsing, OCR, LaTeX, the works. I use it at work for document ingestion pipelines, and I contribute back when I find rough edges.
 
