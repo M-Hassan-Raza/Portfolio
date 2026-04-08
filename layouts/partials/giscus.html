@@ -10,7 +10,7 @@
         data-reactions-enabled="{{ .reactionsEnabled | default "1" }}"
         data-emit-metadata="{{ .emitMetadata | default "0" }}"
         data-input-position="{{ .inputPosition | default "bottom" }}"
-        data-theme="preferred_color_scheme"
+        data-theme="transparent_dark"
         data-lang="{{ .lang | default "en" }}"
         crossorigin="anonymous"
         async>
@@ -29,7 +29,7 @@
                 return;
             }
 
-            const theme = getTheme();
+            const theme = getTheme() === 'dark' ? 'transparent_dark' : 'noborder_light';
             iframe.contentWindow.postMessage(
                 { giscus: { setConfig: { theme: theme } } },
                 'https://giscus.app'
