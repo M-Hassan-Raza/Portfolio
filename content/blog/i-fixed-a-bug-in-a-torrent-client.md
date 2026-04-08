@@ -13,8 +13,6 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 I fix things. Theme alignment in a torrent client I use daily. Ghost deployments in a PaaS that runs my projects. Middleware bugs in Django libraries I spotted just by reading the source code.
 
 The internet has a narrative for open source contributions: they're career investments. "Build your personal brand." "Get noticed by FAANG." "Strategic contributions to high-visibility projects."
@@ -23,7 +21,7 @@ I'm not doing any of that. I just open software, see something broken, and can't
 
 ---
 
-## <span style="color:#8ac7db">The qBittorrent Theme Incident</span>
+## The qBittorrent Theme Incident
 
 I use qBittorrent. It works. But the theme system bothered me. Not broken — functional. But the sidebar alignment was off, the options dialog didn't apply theme changes until restart, and switching themes at runtime left cached widgets with stale styling.
 
@@ -44,7 +42,7 @@ I have not opened qBittorrent since.
 
 ---
 
-## <span style="color:#FFB4A2">The Dokploy Ghost Jobs</span>
+## The Dokploy Ghost Jobs
 
 Dokploy is a self-hosted PaaS — like Vercel or Heroku, but you run it yourself. I use it for deploying some of my projects. While working with it, I noticed that queued deployments would sometimes become ghosts: stuck in a "queued" state forever, with no way to cancel or retry them.
 
@@ -64,7 +62,7 @@ The fix got merged upstream. I still use Dokploy. The queue doesn't ghost anymor
 
 ---
 
-## <span style="color:#8ac7db">Django Middleware Fixes (Because I Read Too Much Code)</span>
+## Django Middleware Fixes (Because I Read Too Much Code)
 
 These ones came from reading source code, not from hitting bugs in production. I was evaluating Django-Easy-Audit for audit logging in [Polaris](/projects/polaris/) and read through the middleware. Years of working with Django middleware meant the ASGI handling looked wrong immediately — it was assuming WSGI request formatting, so async deployments would log garbage IPs.
 
@@ -83,7 +81,7 @@ These are the boring contributions. No conference talk material. Just "I read th
 
 ---
 
-## <span style="color:#FFB4A2">Why I'm Not Being Strategic About This</span>
+## Why I'm Not Being Strategic About This
 
 The "strategic open source" crowd has a framework: contribute to high-visibility projects, document everything, build a narrative. It's good advice if your goal is employability signaling.
 
@@ -95,7 +93,7 @@ The barrier to open source isn't technical. It's the belief that your contributi
 
 ---
 
-## <span style="color:#8ac7db">The Unsolicited Advice</span>
+## The Unsolicited Advice
 
 If you're thinking about contributing to open source: don't start with "what project will look best on my resume." Start with "what software did I use today that annoyed me?"
 
@@ -103,4 +101,3 @@ Open the issue tracker. Read the code. You'll either find the bug and fix it, or
 
 And if you end up fixing theme alignment in a torrent client you'll never open again? That's fine. Somebody out there is looking at aligned sidebars because of you. That's enough.
 
-</div>

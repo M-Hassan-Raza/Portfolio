@@ -13,15 +13,13 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 Extended thinking isn't just "model thinks longer"—it's a fundamentally different interaction model. If you're prompting extended thinking models (Claude Opus, o1) the same way you prompt standard models, you're leaving most of the value on the table.
 
 This post is a developer's mental model for working with these systems: when to use them, how to prompt them, and what trade-offs to expect.
 
 ---
 
-## <span style="color:#8ac7db">How Extended Thinking Actually Works</span>
+## How Extended Thinking Actually Works
 
 Standard LLMs generate tokens one at a time, each token conditioned on everything before it. The model "thinks" only as fast as it speaks. Ask it to solve a complex problem, and it often commits to an approach in the first few tokens, then rationalizes that approach even if it's wrong.
 
@@ -55,7 +53,7 @@ In practice, I find Opus better for interactive development work (code review, d
 
 ---
 
-## <span style="color:#FFB4A2">When Extended Thinking Helps</span>
+## When Extended Thinking Helps
 
 Not every task benefits from extended thinking. Here's a rough heuristic:
 
@@ -81,7 +79,7 @@ Not every task benefits from extended thinking. Here's a rough heuristic:
 
 ---
 
-## <span style="color:#8ac7db">Prompting for Extended Thinking</span>
+## Prompting for Extended Thinking
 
 Here's the counterintuitive part: **stop giving step-by-step instructions.**
 
@@ -138,7 +136,7 @@ The "think step by step" prompt was designed for models that didn't think before
 
 ---
 
-## <span style="color:#FFB4A2">Real Prompt Comparison</span>
+## Real Prompt Comparison
 
 Let me show a concrete example. Task: review a Django view for potential issues.
 
@@ -180,7 +178,7 @@ The extended thinking model will likely check everything on the first list *plus
 
 ---
 
-## <span style="color:#8ac7db">Cost-Performance Trade-offs</span>
+## Cost-Performance Trade-offs
 
 Extended thinking is expensive. A complex analysis might use 10-50K tokens of thinking, plus input/output tokens. That's $0.50-2.00 per query at current Opus pricing.
 
@@ -207,7 +205,7 @@ At Entropy Labs, we route queries based on estimated complexity. Simple queries 
 
 ---
 
-## <span style="color:#FFB4A2">Practical Integration Patterns</span>
+## Practical Integration Patterns
 
 ### Fallback chains
 
@@ -251,7 +249,7 @@ me directly instead."
 
 ---
 
-## <span style="color:#8ac7db">The Bottom Line</span>
+## The Bottom Line
 
 Extended thinking is the biggest practical advance in LLMs since GPT-4. But it requires a mindset shift:
 
@@ -261,5 +259,3 @@ Extended thinking is the biggest practical advance in LLMs since GPT-4. But it r
 4. **Trust but verify.** Extended thinking is more reliable, not infallible.
 
 The models that think before they speak are finally here. Learn to let them think.
-
-</div>

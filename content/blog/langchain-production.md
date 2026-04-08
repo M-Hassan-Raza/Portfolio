@@ -13,15 +13,13 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 Every LangChain tutorial ends right where the real work begins. You see a neat 50-line script that queries a PDF, and you think, "Cool, I'll ship this by Friday." Three weeks later, you're debugging memory leaks, wondering why your chain silently returns empty strings, and questioning every decision that led you here.
 
 I've shipped LangChain-based features to production at multiple companies. Here's what I wish someone had told me before I started.
 
 ---
 
-## <span style="color:#8ac7db">When to Use LangChain (And When Not To)</span>
+## When to Use LangChain (And When Not To)
 
 Let's start with the uncomfortable truth: **you probably don't need LangChain**.
 
@@ -45,7 +43,7 @@ At Entropy Labs, we use a hybrid approach: LangChain for complex agentic workflo
 
 ---
 
-## <span style="color:#FFB4A2">LCEL: The Good Parts</span>
+## LCEL: The Good Parts
 
 LangChain Expression Language (LCEL) was a massive improvement over the legacy chain syntax. Here's a pattern that actually works well in production:
 
@@ -97,7 +95,7 @@ Simple, clean, no surprises. Until you add memory.
 
 ---
 
-## <span style="color:#8ac7db">The Problems Nobody Warns You About</span>
+## The Problems Nobody Warns You About
 
 ### 1. Memory management is a minefield
 
@@ -189,7 +187,7 @@ And read the changelogs before upgrading.
 
 ---
 
-## <span style="color:#FFB4A2">Cost Tracking and Observability</span>
+## Cost Tracking and Observability
 
 If you're not tracking costs, you're flying blind. LangSmith is the easiest path:
 
@@ -227,7 +225,7 @@ At Entropy Labs, we alert when daily spend exceeds thresholds. One runaway loop 
 
 ---
 
-## <span style="color:#8ac7db">Alternatives and When to Use Them</span>
+## Alternatives and When to Use Them
 
 ### LlamaIndex for pure RAG
 
@@ -256,7 +254,7 @@ If you need more structure than raw SDKs but less opinion than LangChain, Haysta
 
 ---
 
-## <span style="color:#FFB4A2">My Production Stack</span>
+## My Production Stack
 
 Here's what I actually deploy:
 
@@ -274,7 +272,7 @@ The theme: use LangChain where it adds value, bypass it where it adds complexity
 
 ---
 
-## <span style="color:#8ac7db">The Bottom Line</span>
+## The Bottom Line
 
 LangChain is a powerful framework with rough edges. The tutorials show the happy path; production is everything else.
 
@@ -286,5 +284,3 @@ Before adopting it:
 4. Build escape hatches for when the framework fights you
 
 The best LangChain code I've written is the code that uses it sparingly—for the problems it solves well, not for everything.
-
-</div>

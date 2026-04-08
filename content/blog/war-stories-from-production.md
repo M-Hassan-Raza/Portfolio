@@ -13,13 +13,11 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 Nobody writes blog posts about the bugs they shipped. The internet is full of "how I built X" and suspiciously empty of "how I broke X and spent 14 hours pretending it wasn't my fault." Here are mine.
 
 ---
 
-## <span style="color:#8ac7db">The Race Condition: Two Cashiers, One Item</span>
+## The Race Condition: Two Cashiers, One Item
 
 This one happened in [Polaris](/projects/polaris/), the ERP system I built for retail businesses. Real money, real transactions, real angry shop owners.
 
@@ -83,7 +81,7 @@ The bug cost the shop owner about PKR 15,000 before I caught it. Not catastrophi
 
 ---
 
-## <span style="color:#FFB4A2">The Silent Chain: 8 Hours Debugging Nothing</span>
+## The Silent Chain: 8 Hours Debugging Nothing
 
 This one happened while building AI features with LangChain at Entropy Labs.
 
@@ -133,7 +131,7 @@ The best LangChain code I've written uses it sparingly—for the problems it sol
 
 ---
 
-## <span style="color:#8ac7db">The N+1 That Made Customers "Fume a Little"</span>
+## The N+1 That Made Customers "Fume a Little"
 
 Back to Polaris. The refund API was slow. Not "hmm, that's a bit laggy" slow. "Customers are standing at the counter watching a loading spinner while a line forms behind them" slow.
 
@@ -167,7 +165,7 @@ Also: `django-debug-toolbar` in development. Always. If I'd had it enabled from 
 
 ---
 
-## <span style="color:#FFB4A2">The Advisory Lock Revelation</span>
+## The Advisory Lock Revelation
 
 The most expensive lesson from Polaris wasn't a bug—it was an architectural realization.
 
@@ -198,7 +196,7 @@ The tools you know shape the problems you can see. I spent weeks trying to solve
 
 ---
 
-## <span style="color:#8ac7db">The Django Signal Cascade</span>
+## The Django Signal Cascade
 
 Early Polaris used Django signals for everything. Stock change? Signal. Balance update? Signal. Report invalidation? Signal.
 
@@ -242,7 +240,7 @@ Django signals are great for loose coupling between apps. They're terrible for c
 
 ---
 
-## <span style="color:#FFB4A2">The Meta-Lesson</span>
+## The Meta-Lesson
 
 Every one of these bugs has the same root cause: I knew the theory but didn't respect the gap between "works in development" and "works in production." Development has one user, clean data, and no concurrency. Production has all three at once.
 
@@ -250,4 +248,3 @@ The fixes aren't clever. `nowait=True`. Input validation. `select_related`. Advi
 
 If there's one thing I'd tell past-me, it's this: the blog posts that would have actually helped me aren't the "How to Build X" posts. They're the "How X Broke and Why I Didn't See It Coming" posts. So here's mine.
 
-</div>

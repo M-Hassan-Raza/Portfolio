@@ -1,42 +1,25 @@
 ---
 title: "Resources"
 date: 2025-02-22
-description: "A collection of useful materials, including my blog archive and book recommendations."
-tags: ["Resources", "Books", "Archive"]
-categories: ["General"]
+description: "Blog archive and book recommendations."
 showToc: false
 showReadingTime: false
-comments: true
 ---
 
-<div class="resources-container">
+## Writing
 
-## Explore My Resources  
+Technical writing on AI systems, backend development, open source, and lessons from production.
 
-<p class="justified-text">
-Here, you'll find a curated collection of my past writings, book recommendations, and other useful content. Whether you're looking for in-depth articles or insightful reads, this page serves as a gateway to valuable knowledge.
-</p>
+[Read the blog](/blog/)
 
-### My Blog
-<p class="justified-text">
-Dive into my blog, where I share my thoughts on technology, software engineering, productivity, and personal growth. Explore a wide range of topics and discover new perspectives on the ever-evolving world of tech.
-</p>
+## Book Recommendations
 
-<a href="/blog" class="cta-button">Visit Blog</a>
+Books that shaped how I think about software, systems, and work.
 
-### Book Recommendations  
-<p class="justified-text">
-I’ve compiled a list of books that have significantly impacted my thinking and professional journey. These books cover a range of topics including software engineering, business, productivity, and personal growth.
-</p>
+[Browse books](/books/)
 
-<a href="/books" class="cta-button">Explore Books</a>
+## Archive
 
-### Archive  
-<p class="justified-text">
-Looking for older articles? My archive contains all my past writings on technology, business, and problem-solving. Browse through different categories and find content that resonates with your interests.
-</p>
+Full archive of all posts by date.
 
-<a href="/archives" class="cta-button">View Archive</a>
-
-</div>
-
+[View archive](/archives/)

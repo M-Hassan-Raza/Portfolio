@@ -13,8 +13,6 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 The graveyard of failed AI features is full of chatbots nobody asked for.
 
 Every product team I talk to has the same story: leadership watched a GPT demo, got excited, and mandated "we need AI in the product." Three months later, there's a chatbot in the corner of the app that 3% of users have tried and 0.5% use regularly.
@@ -23,7 +21,7 @@ As CPO at Entropy Labs, I've been on both sides of this. I've built AI features 
 
 ---
 
-## <span style="color:#8ac7db">The Chatbot Trap</span>
+## The Chatbot Trap
 
 Why does everyone default to chatbots? Because they're visible. They feel "AI-y." Stakeholders can immediately understand what changed.
 
@@ -41,7 +39,7 @@ This isn't to say chatbots are always wrong. Customer support, complex search in
 
 ---
 
-## <span style="color:#FFB4A2">AI Features That Actually Work</span>
+## AI Features That Actually Work
 
 The best AI features are invisible. They make the product smarter without making users work harder.
 
@@ -92,7 +90,7 @@ When AI knows the context—what the user is working on, what they've done befor
 
 ---
 
-## <span style="color:#8ac7db">The Build vs. Buy Calculation</span>
+## The Build vs. Buy Calculation
 
 Every AI feature has three implementation paths:
 
@@ -122,7 +120,7 @@ At Entropy Labs, 90% of our AI features are API calls with good prompting. 10% a
 
 ---
 
-## <span style="color:#FFB4A2">User Research for AI Features</span>
+## User Research for AI Features
 
 Standard user research methods break down for AI features because users don't know what they want.
 
@@ -144,7 +142,7 @@ AI features often have novelty effects. Test against holdout groups and measure 
 
 ---
 
-## <span style="color:#8ac7db">When to Kill an AI Feature</span>
+## When to Kill an AI Feature
 
 This is the hardest part. You built something cool. It took engineering months. Leadership is invested. But nobody's using it.
 
@@ -163,7 +161,7 @@ The reframe: you learned what doesn't work. That's valuable. Document it, share 
 
 ---
 
-## <span style="color:#FFB4A2">Avoiding the AI Winter Within Your Product</span>
+## Avoiding the AI Winter Within Your Product
 
 Here's a pattern I've seen multiple times:
 
@@ -185,7 +183,7 @@ This is the "AI winter" at company scale. How to avoid it:
 
 ---
 
-## <span style="color:#8ac7db">The Bottom Line</span>
+## The Bottom Line
 
 The best AI product thinking isn't "where can we add AI?" It's "where are users doing tedious cognitive work that we could automate?"
 
@@ -197,5 +195,3 @@ That reframe changes everything:
 The AI hype cycle rewards announcements. Product thinking rewards sustained value. They're often in tension.
 
 Build for the latter.
-
-</div>

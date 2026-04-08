@@ -13,15 +13,13 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 Every few months, something gets released that looks like infrastructure plumbing but turns out to matter more than the flashy launches. Model Context Protocol (MCP) is one of those things.
 
 If you're a developer working with LLMs, MCP will change how you integrate AI into your workflows. Here's an early-adopter perspective on what it is, why it matters, and how to actually use it.
 
 ---
 
-## <span style="color:#8ac7db">What Problem Does MCP Solve?</span>
+## What Problem Does MCP Solve?
 
 Today's AI tools are context-starved. You paste code into ChatGPT, upload files to Claude, manually copy database schemas into prompts. Every session starts from scratch. Every context window is a blank slate.
 
@@ -35,7 +33,7 @@ It's not magic—it's plumbing. But it's plumbing that enables magic.
 
 ---
 
-## <span style="color:#FFB4A2">MCP Architecture for Developers</span>
+## MCP Architecture for Developers
 
 MCP has three components:
 
@@ -76,7 +74,7 @@ MCP is more flexible, but requires more trust. You're giving the model keys to e
 
 ---
 
-## <span style="color:#8ac7db">Building an MCP Server</span>
+## Building an MCP Server
 
 Let's build a simple MCP server that exposes a PostgreSQL database. This is genuinely useful—suddenly Claude can query your database schema, understand relationships, and help with queries.
 
@@ -203,7 +201,7 @@ Now Claude can explore your database schema, understand table relationships, and
 
 ---
 
-## <span style="color:#FFB4A2">Use Cases That Make Sense</span>
+## Use Cases That Make Sense
 
 After building several MCP integrations, here's where they shine:
 
@@ -241,7 +239,7 @@ At Entropy Labs, we built an MCP server for our internal APIs. Now Claude can ch
 
 ---
 
-## <span style="color:#8ac7db">Current Limitations</span>
+## Current Limitations
 
 MCP is early-stage. Expect rough edges:
 
@@ -257,7 +255,7 @@ MCP is early-stage. Expect rough edges:
 
 ---
 
-## <span style="color:#FFB4A2">Security Considerations</span>
+## Security Considerations
 
 MCP gives AI models access to real systems. Take security seriously:
 
@@ -283,7 +281,7 @@ if arguments["table"] not in allowed_tables:
 
 ---
 
-## <span style="color:#8ac7db">The Bigger Picture</span>
+## The Bigger Picture
 
 MCP is part of a larger trend: AI systems becoming first-class participants in developer workflows, not just chat windows you paste into.
 
@@ -301,7 +299,7 @@ This is infrastructure work. It's not as exciting as a new model release. But it
 
 ---
 
-## <span style="color:#FFB4A2">Getting Started</span>
+## Getting Started
 
 If you want to experiment:
 
@@ -314,7 +312,7 @@ The learning curve is manageable if you've built APIs before. The mental shift i
 
 ---
 
-## <span style="color:#8ac7db">The Bottom Line</span>
+## The Bottom Line
 
 MCP solves the "context starvation" problem that limits current AI tools. It's not a product—it's infrastructure that makes better products possible.
 
@@ -327,5 +325,3 @@ For developers, the implications are:
 If you're building AI-powered developer tools, MCP is worth learning now. The ecosystem is early, but the direction is clear.
 
 And honestly? Building MCP servers is kind of fun. There's something satisfying about giving Claude access to your systems and watching it figure things out.
-
-</div>

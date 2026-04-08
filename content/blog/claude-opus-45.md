@@ -13,15 +13,13 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 I've been skeptical of every "game-changing AI release" for the past two years. Every few months, a new model drops and Twitter explodes with claims that AGI is here. Spoiler: it never is. But when Anthropic released Opus 4.5, something actually shifted in how I work. Not because it's AGI—it's decidedly not—but because it's the first model that consistently delivers on complex, multi-step reasoning without falling apart halfway through.
 
 This isn't a hype piece. This is a practitioner's field notes from someone who uses these tools daily to ship product at Entropy Labs.
 
 ---
 
-## <span style="color:#8ac7db">What Makes Opus 4.5 Different</span>
+## What Makes Opus 4.5 Different
 
 The headline feature is **extended thinking**—the model's ability to spend more compute on harder problems before responding. But that undersells what's actually happening.
 
@@ -37,7 +35,7 @@ Here's what I noticed after a month of daily use:
 
 ---
 
-## <span style="color:#FFB4A2">The Art of Context Control</span>
+## The Art of Context Control
 
 Here's the thing most people get wrong: Opus 4.5 isn't magic. It's a tool that scales with how well you wield it. The unlock isn't the model itself—it's understanding that **you need to provide context, not instructions**.
 
@@ -73,7 +71,7 @@ Most people only provide #3 and wonder why responses are generic.
 
 ---
 
-## <span style="color:#8ac7db">When It Fails (Yes, It Does)</span>
+## When It Fails (Yes, It Does)
 
 Let's be real: Opus 4.5 still hallucinates. Here are failure patterns I've observed:
 
@@ -89,7 +87,7 @@ The pattern I've learned: **trust but verify**. Use Opus for the heavy lifting o
 
 ---
 
-## <span style="color:#FFB4A2">Practical Setup with Claude Code</span>
+## Practical Setup with Claude Code
 
 Here's my actual workflow:
 
@@ -145,7 +143,7 @@ This back-and-forth is where Opus shines. It maintains context across a long ses
 
 ---
 
-## <span style="color:#8ac7db">The Bottom Line</span>
+## The Bottom Line
 
 Opus 4.5 isn't AGI. It's not going to replace engineers. But it's the first AI tool that consistently makes me *faster* at complex tasks rather than faster at generating code I need to rewrite.
 
@@ -154,5 +152,3 @@ The real unlock is treating it as a collaborator that needs explicit context, no
 If you're still prompting AI like it's a search engine, you're missing the point. These models reward investment in context the same way a good colleague rewards clear communication.
 
 Now if only it could attend my standup meetings for me.
-
-</div>

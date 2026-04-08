@@ -11,39 +11,35 @@ cover:
     relative: false
 ---
 
-<div style="text-align: justify;">
+## Introduction
 
-## <span style="color:#FFB4A2">Introduction</span>
-
-<div style="text-align: justify;">
 If you've ever found yourself digging through product manuals, company wikis, or lengthy documents just to find a simple answer, you know the pain. The fact you're reading this suggests you're interested in how **Generative AI** can make that process less painful. Stick around for a few minutes, and I'll walk you through how we built a smarter FAQ bot using Google's Gemini API, Retrieval Augmented Generation (RAG), and structured output. This isn't just another chatbot; it's designed to give **reliable, context-aware answers** based *only* on provided information, minimizing the risk of making things up (hallucination). This example uses Google Car manuals, but the principles apply anywhere you have a set of documents you need to query effectively. I'm sharing my journey building this; it's a practical demonstration, not a definitive guide, so adapt the ideas to your needs!
-</div>
 
 ---
 
-## <span style="color:#FFB4A2">The Problem: Dumb Bots and Information Overload</span>
+## The Problem: Dumb Bots and Information Overload
 
 Traditional search methods or basic chatbots often fall short when dealing with specific document sets:
 
--   **<span style="color:#8ac7db">Information Overload:</span>** Manually searching large documents is time-consuming and inefficient.
--   **<span style="color:#8ac7db">Generic LLM Limitations:</span>** Large Language Models (LLMs) are powerful, but they lack specific, up-to-date knowledge about *your* documents unless explicitly trained on them (which is often impractical).
--   **<span style="color:#8ac7db">Hallucination Risk:</span>** When asked about information outside their training data, LLMs might confidently invent answers that sound plausible but are incorrect. This is unacceptable for reliable FAQ systems.
--   **<span style="color:#8ac7db">Inconsistent Outputs:</span>** Getting answers in a usable, predictable format can be challenging with free-form text generation.
+-   **Information Overload:** Manually searching large documents is time-consuming and inefficient.
+-   **Generic LLM Limitations:** Large Language Models (LLMs) are powerful, but they lack specific, up-to-date knowledge about *your* documents unless explicitly trained on them (which is often impractical).
+-   **Hallucination Risk:** When asked about information outside their training data, LLMs might confidently invent answers that sound plausible but are incorrect. This is unacceptable for reliable FAQ systems.
+-   **Inconsistent Outputs:** Getting answers in a usable, predictable format can be challenging with free-form text generation.
 
 We need a system that answers questions accurately based *only* on a given set of documents and provides answers in a consistent, structured way.
 
 ---
 
-## <span style="color:#FFB4A2">The Solution: RAG + Gemini API</span>
+## The Solution: RAG + Gemini API
 
 Our approach combines **Retrieval Augmented Generation (RAG)** with the capabilities of the **Gemini API**:
 
--   **<span style="color:#8ac7db">RAG Pipeline:</span>** This involves three main steps:
+-   **RAG Pipeline:** This involves three main steps:
     1.  **Indexing:** Convert the source documents (Google Car manuals) into numerical representations (embeddings) using the Gemini `text-embedding-004` model and store them in a vector database (ChromaDB). This allows for efficient similarity searches.
     2.  **Retrieval:** When a user asks a question, embed the question using the same model and search the vector database to find the most relevant document chunks.
     3.  **Generation:** Pass the original question and the retrieved document chunks as context to a powerful LLM (like `gemini-2.0-flash`). Instruct the model to answer the question *based only on the provided context*.
 
--   **<span style="color:#8ac7db">Gemini API Features:</span>**
+-   **Gemini API Features:**
     *   **High-Quality Embeddings:** `text-embedding-004` provides embeddings suitable for finding semantically similar text.
     *   **Powerful Generation:** `gemini-2.0-flash` can synthesize answers based on the retrieved context.
     *   **Structured Output (JSON Mode):** We instruct Gemini to return the answer and a confidence score in a predictable JSON format, making it easy for applications to use the output.
@@ -51,11 +47,11 @@ Our approach combines **Retrieval Augmented Generation (RAG)** with the capabili
 
 ---
 
-## <span style="color:#FFB4A2">Implementation Highlights</span>
+## Implementation Highlights
 
 Here are some key code snippets demonstrating the core components:
 
-**1. <span style="color:#8ac7db">Custom Embedding Function for ChromaDB:</span>**
+**1. Custom Embedding Function for ChromaDB:**
 We need to tell ChromaDB how to generate embeddings using the Gemini API.
 
 ```python
@@ -85,7 +81,7 @@ class GeminiEmbeddingFunction(EmbeddingFunction):
             return [[] for _ in input_texts]
 ```
 
-**2. <span style="color:#8ac7db">Setting up ChromaDB and Indexing:</span>**
+**2. Setting up ChromaDB and Indexing:**
 We create a ChromaDB collection and add our documents. `get_or_create_collection` makes this idempotent.
 
 ```python
@@ -114,7 +110,7 @@ except Exception as e:
     raise SystemExit("ChromaDB setup failed. Exiting.")
 ```
 
-**3. <span style="color:#8ac7db">Retrieving Relevant Documents:</span>**
+**3. Retrieving Relevant Documents:**
 This function takes the user query, embeds it (using `document_mode=False`), and searches ChromaDB.
 
 ```python
@@ -136,7 +132,7 @@ def retrieve_documents(query: str, n_results: int = 1) -> list[str]:
         return []
 ```
 
-**4. <span style="color:#8ac7db">Generating the Structured Answer:</span>**
+**4. Generating the Structured Answer:**
 Here's the core logic combining the query, retrieved context, and instructions for the LLM, specifying JSON output with a confidence score.
 
 ```python
@@ -199,25 +195,25 @@ def generate_structured_answer(query: str, context_docs: list[str]) -> dict | No
 
 ---
 
-## <span style="color:#FFB4A2">Why Structured Output and Confidence Scores?</span>
+## Why Structured Output and Confidence Scores?
 
 Forcing the LLM to output JSON with a specific schema (using `response_mime_type` and `response_schema`) brings several advantages:
 
--   **<span style="color:#8ac7db">Reliability:</span>** The output format is predictable, making it easy to integrate into downstream applications without complex text parsing.
--   **<span style="color:#8ac7db">Consistency:</span>** Ensures the bot always provides both the answer and its confidence level.
--   **<span style="color:#8ac7db">Trustworthiness:</span>** The confidence score gives the user (or the calling application) an indication of how much to trust the answer, based on the grounding provided by the retrieved documents. A "Low" confidence answer might trigger a fallback to human support or a broader search.
+-   **Reliability:** The output format is predictable, making it easy to integrate into downstream applications without complex text parsing.
+-   **Consistency:** Ensures the bot always provides both the answer and its confidence level.
+-   **Trustworthiness:** The confidence score gives the user (or the calling application) an indication of how much to trust the answer, based on the grounding provided by the retrieved documents. A "Low" confidence answer might trigger a fallback to human support or a broader search.
 
 ---
 
-## <span style="color:#FFB4A2">Limitations and Future Work</span>
+## Limitations and Future Work
 
 This implementation is a great starting point, but it has limitations:
 
--   **<span style="color:#8ac7db">Document Quality:</span>** The RAG system's effectiveness heavily depends on the quality, relevance, and comprehensiveness of the indexed documents. Garbage in, garbage out.
--   **<span style="color:#8ac7db">Retrieval Accuracy:</span>** Simple similarity search might not always retrieve the *perfect* chunk of text, especially for complex queries. More advanced retrieval strategies (like hybrid search or re-ranking) could improve this.
--   **<span style="color:#8ac7db">Structured Output Failures:</span>** While JSON mode is robust, the LLM might occasionally fail to generate perfectly valid JSON matching the schema. More robust error handling and potentially retries could be added.
--   **<span style="color:#8ac7db">Limited Context Handling (within LLM):</span>** While RAG provides context, the LLM itself still has limits on how much context it can process *effectively* in a single generation step. Very long retrieved passages might need summarization or chunking before being sent to the LLM.
--   **<span style="color:#8ac7db">Static Knowledge:</span>** The bot only knows what's in the ChromaDB index. It doesn't learn automatically. Updates require re-indexing.
+-   **Document Quality:** The RAG system's effectiveness heavily depends on the quality, relevance, and comprehensiveness of the indexed documents. Garbage in, garbage out.
+-   **Retrieval Accuracy:** Simple similarity search might not always retrieve the *perfect* chunk of text, especially for complex queries. More advanced retrieval strategies (like hybrid search or re-ranking) could improve this.
+-   **Structured Output Failures:** While JSON mode is robust, the LLM might occasionally fail to generate perfectly valid JSON matching the schema. More robust error handling and potentially retries could be added.
+-   **Limited Context Handling (within LLM):** While RAG provides context, the LLM itself still has limits on how much context it can process *effectively* in a single generation step. Very long retrieved passages might need summarization or chunking before being sent to the LLM.
+-   **Static Knowledge:** The bot only knows what's in the ChromaDB index. It doesn't learn automatically. Updates require re-indexing.
 
 **Future Enhancements:**
 
@@ -229,21 +225,19 @@ This implementation is a great starting point, but it has limitations:
 
 ---
 
-## <span style="color:#FFB4A2">Conclusion</span>
+## Conclusion
 
 Building this FAQ bot demonstrates how combining RAG with Gemini's embedding and generation capabilities, especially its structured output mode, can create powerful and **reliable** AI-driven Q&A systems. By grounding the LLM's responses in specific source documents and requesting a confidence score, we significantly mitigate hallucination and provide a more trustworthy user experience.
 
 **Key Takeaways:**
 
--   <strong><span style="color:#8ac7db">RAG</span></strong> grounds LLM answers in your specific data.
--   <strong><span style="color:#8ac7db">Gemini Embeddings + ChromaDB</span></strong> enable efficient document retrieval.
--   <strong><span style="color:#8ac7db">Structured Output (JSON Mode)</span></strong> enhances reliability and integrability.
--   <strong><span style="color:#8ac7db">Confidence Scores</span></strong> add a layer of trustworthiness.
+-   **RAG** grounds LLM answers in your specific data.
+-   **Gemini Embeddings + ChromaDB** enable efficient document retrieval.
+-   **Structured Output (JSON Mode)** enhances reliability and integrability.
+-   **Confidence Scores** add a layer of trustworthiness.
 
 This approach is versatile and can be adapted for various knowledge bases, from customer support FAQs to internal documentation search.
 
 ---
 
 I hope this walkthrough provides a clear picture of how this smarter FAQ bot works! Feel free to **ask questions** or **leave a comment** with your thoughts or own implementations!
-
-</div>

@@ -13,15 +13,13 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 The best code I've ever written was shaped by code I didn't write. Not tutorials, not books, not conference talks — other people's production codebases, with their weird naming conventions, unexpected architectural decisions, and review comments that rewired how I think about problems.
 
 I contribute to open source projects across five languages. Not because I set out to be polyglot. Because I kept finding bugs in different ecosystems and couldn't stop myself from tracing them to the source. Along the way, I accidentally learned more about software architecture than any course ever taught me.
 
 ---
 
-## <span style="color:#8ac7db">1,092 Lines of Rust I Didn't Plan to Write</span>
+## 1,092 Lines of Rust I Didn't Plan to Write
 
 Fallow is a dead code analyzer for TypeScript and JavaScript, built in Rust. I use it on my Nuxt and Vue projects. It kept flagging false positives — Vue SFC template references as unused, `defineExpose` exports as dead code, Nuxt auto-imported composables as unreferenced.
 
@@ -48,7 +46,7 @@ I brought that pattern back to pyscn, a Python code analyzer I contribute to tha
 
 ---
 
-## <span style="color:#FFB4A2">What IBM's Code Review Process Looks Like From the Outside</span>
+## What IBM's Code Review Process Looks Like From the Outside
 
 Docling is a document processing library from IBM Research. PDF parsing, OCR, LaTeX, the works. I use it at work for document ingestion pipelines, and I contribute back when I find rough edges.
 
@@ -69,7 +67,7 @@ That's not a style nit. That's a maintainability argument I'd never considered. 
 
 ---
 
-## <span style="color:#8ac7db">What Transfers Between Languages (And What Doesn't)</span>
+## What Transfers Between Languages (And What Doesn't)
 
 I've contributed to projects in Python (Docling, Django ecosystem), C++ (qBittorrent), Rust (Fallow), Go (pyscn), and Swift (Alt-Tab, Maccy). Here's what I've noticed about cross-language contributions:
 
@@ -93,7 +91,7 @@ My first Fallow PR had Python-flavored Rust: deep nesting, mutable variables, st
 
 ---
 
-## <span style="color:#FFB4A2">The Reading-to-Writing Ratio</span>
+## The Reading-to-Writing Ratio
 
 Here's the part nobody tells you about open source contribution: the ratio of code read to code written is roughly 10:1.
 
@@ -109,7 +107,7 @@ Tutorials teach you to write code. Open source teaches you to read it. In my exp
 
 ---
 
-## <span style="color:#8ac7db">The Practical Takeaway</span>
+## The Practical Takeaway
 
 If you want to get better at software engineering faster than courses, books, or side projects alone can take you: find a project in a language you're comfortable with, pick an issue labeled "good first issue," and read the surrounding code before you touch anything.
 
@@ -120,5 +118,3 @@ And if you're feeling ambitious: try contributing to a project in a language you
 The Rust I write is better because I've read Fallow's AST pipeline. The Python I write is better because IBM's reviewers pushed back on my assumptions. The Go I write is better because I've seen how pyscn structures its analysis passes.
 
 None of that came from a tutorial. All of it came from breaking someone else's code and learning to put it back together.
-
-</div>

@@ -13,8 +13,6 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 The best code I ever deleted was a utility function called `format_response`. It accepted a response object, a format string, a fallback value, an optional transformer function, and a boolean for whether to strip whitespace. It was used in exactly one place.
 
 I wrote it because I thought I'd need it again. I didn't. It sat in `utils.py` for eight months, collecting type: ignore comments and confusing every developer who opened the file.
@@ -23,7 +21,7 @@ This is a post about the abstractions I built too early, the patterns I reached 
 
 ---
 
-## <span style="color:#8ac7db">The Generic Service Layer That Served Nobody</span>
+## The Generic Service Layer That Served Nobody
 
 Early in Polaris, I built a "generic" service layer. The idea was elegant: every model gets a service class with standard CRUD operations, validation hooks, and permission checks. Write it once, inherit everywhere.
 
@@ -61,7 +59,7 @@ The code is "less clean" by DRY standards. It's dramatically easier to understan
 
 ---
 
-## <span style="color:#FFB4A2">LangChain's Memory vs. Just Using Redis</span>
+## LangChain's Memory vs. Just Using Redis
 
 LangChain offers memory abstractions: `ConversationBufferMemory`, `ConversationSummaryMemory`, `ConversationEntityMemory`. They look elegant in tutorials. In production, they're a footgun.
 
@@ -100,7 +98,7 @@ If you can explain your solution in one sentence, you probably don't need an abs
 
 ---
 
-## <span style="color:#8ac7db">Django Signals for Everything</span>
+## Django Signals for Everything
 
 I covered [the performance cascade](/blog/war-stories-from-production/#the-django-signal-cascade) in another post, but the performance problem was actually the second-worst thing about my signal overuse. The worst was debuggability.
 
@@ -137,7 +135,7 @@ But using signals within a single app's core business logic? That's abstractions
 
 ---
 
-## <span style="color:#FFB4A2">The "Reusable" Component Library</span>
+## The "Reusable" Component Library
 
 In a frontend project, I built a component library before I had components to put in it. A `BaseCard` with 12 props. A `BaseButton` with configurable size, variant, icon position, loading state, and disabled tooltip.
 
@@ -162,7 +160,7 @@ The third button has loading state. That's one button. Not a component library.
 
 ---
 
-## <span style="color:#8ac7db">The Config-Driven Architecture</span>
+## The Config-Driven Architecture
 
 At one point, I tried to make Polaris "configurable" by externalizing business rules into configuration objects:
 
@@ -190,7 +188,7 @@ Configuration is for deployment parameters: database URLs, API keys, feature fla
 
 ---
 
-## <span style="color:#FFB4A2">The Pattern I Keep Coming Back To</span>
+## The Pattern I Keep Coming Back To
 
 Every abstraction I regret shares the same origin story: I built it because I imagined a future need, not because I had a present one. The generic service layer was for "when we have 50 models." The config-driven architecture was for "when we have multiple clients." The component library was for "when we have a design system."
 
@@ -203,5 +201,3 @@ The heuristic: **if you can't point to three existing call sites that would use 
 And deleting abstractions is harder than deleting regular code. Regular code has no dependents. An abstraction has consumers, each of which was shaped by the abstraction's API. Removing it means refactoring every consumer. The abstraction calcifies.
 
 So when you're about to create `BaseService`, `GenericHandler`, or `AbstractProcessor`: write the specific thing first. Write it again when you need it again. By the third time, you'll know what the abstraction actually is—not what you imagined it might be.
-
-</div>

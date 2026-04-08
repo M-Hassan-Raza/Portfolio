@@ -13,15 +13,13 @@ cover:
 ShowToc: true
 ---
 
-<div style="text-align: justify;">
-
 I wrote about [AI features users actually want](/blog/ai-features-users-want/) a while back. The TLDR was: stop building chatbots, start building smart defaults. That post got shared, people agreed, and then most of them went back to building chatbots.
 
 This is the sequel. The one about what happens when AI features ship and nobody uses them. When the LLM is working correctly and the product is still failing. When the problem was never the model.
 
 ---
 
-## <span style="color:#8ac7db">The Pattern I Keep Seeing</span>
+## The Pattern I Keep Seeing
 
 At Entropy Labs, I've watched this play out with our own products and with clients who come to us after their AI features underperform:
 
@@ -35,7 +33,7 @@ The AI didn't fail. The product thinking failed. The LLM did exactly what it was
 
 ---
 
-## <span style="color:#FFB4A2">Three Real Examples</span>
+## Three Real Examples
 
 ### The Search That Should Have Just Worked
 
@@ -79,7 +77,7 @@ The AI went from "do the whole thing" to "suggest which buttons to click." Usage
 
 ---
 
-## <span style="color:#8ac7db">The Latency Tax Nobody Budgets For</span>
+## The Latency Tax Nobody Budgets For
 
 Every AI feature has a latency cost. API calls take 500ms-5s depending on the model and prompt complexity. Users feel this.
 
@@ -101,7 +99,7 @@ The pattern: **move AI processing out of the user's critical path.** If they're 
 
 ---
 
-## <span style="color:#FFB4A2">The Accuracy Cliff</span>
+## The Accuracy Cliff
 
 Traditional software is either correct or broken. A button works or it doesn't. A calculation is right or wrong.
 
@@ -125,7 +123,7 @@ We killed an AI feature at Entropy Labs after 4 months because it auto-categoriz
 
 ---
 
-## <span style="color:#8ac7db">When AI Actually Fixes UX</span>
+## When AI Actually Fixes UX
 
 I'm not anti-AI. I build AI systems for a living. But the AI features that work share a pattern: **they reduce cognitive load without adding interaction complexity.**
 
@@ -153,7 +151,7 @@ The latency-to-value ratio passes the test.
 
 ---
 
-## <span style="color:#FFB4A2">The Decision Framework</span>
+## The Decision Framework
 
 Before adding an AI feature, ask:
 
@@ -174,7 +172,7 @@ Honest answer. Not "could AI solve this?" but "is AI the *best* way to solve thi
 
 ---
 
-## <span style="color:#8ac7db">The Uncomfortable Truth</span>
+## The Uncomfortable Truth
 
 Most failed AI features aren't failed AI. They're failed product thinking wearing an AI costume.
 
@@ -183,5 +181,3 @@ The search was bad before the chatbot, and the chatbot didn't fix the search—i
 If your product's UX is broken, fix the UX. Then, once the foundation is solid, look at where AI can reduce the cognitive work that users still have to do.
 
 The order matters. AI on top of good UX is powerful. AI on top of bad UX is an expensive way to make the problem worse.
-
-</div>
