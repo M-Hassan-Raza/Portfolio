@@ -15,7 +15,7 @@ cover:
 
 
 The fact that you have decided to read this behemoth of an article deserves admiration and tells me that you're serious about your academics and career (or are procrastinating on something else). Give me the next 20 mins of your life and I'll make you into a much more informed individual. Your <strong>Final Year Project (FYP)</strong> is one of the most important academic tasks in your degree. It can shape your future career, boost your portfolio, and improve your problem-solving skills.  
-This guide will help you <strong>choose the right topic, advisor, tech stack, and strategy</strong> to ensure your FYP stands out. This guide is mainly targets FASTians because of my experience, but the advice can be applied to any university. Also, I claim to be no expert in this field. I'm just a student who's been through the process and wants to help others navigate it. So take my very opinionated advice with a grain of salt.
+This guide will help you <strong>choose the right topic, advisor, tech stack, and strategy</strong> to ensure your FYP stands out. This guide mainly targets FASTians because of my experience, but the advice applies to any university. I've been through the process as a student, and now I see it from the other side as a lab instructor. So take my very opinionated advice with a grain of salt.
 
 ---
 
@@ -42,14 +42,14 @@ Below is a comparison of the pros and cons of each approach:
 
 ## How to Choose a Topic
 
-Picking the right topic is <strong>critical</strong> for a successful FYP. A good topic should be:  
+Picking the right topic makes or breaks your FYP. A good topic should be:  
 
 - **Interesting**: Choose something you're passionate about. No one wants to work on a boring project, let alone for a whole year.  
 - **Feasible**: Consider your time, skills, and available resources. Scope is one of the most important factors when it comes to your FYP. It will dictate your life for the next year. And what's more? It will be the first thing your advisor(s) and the evaluation committee will ask you about.
 - **Relevant**: Align with industry trends or research needs. As an example, I am an avid "AI" pessimist but I can't deny the fact that it's the hottest trend in the industry right now. So, if you're into AI, you might want to consider a project in that domain. Look at the recent explosion of AI Agents and Generative AI. I have many concerns about the ethical implications of these technologies but that's a topic for another day. You want a skillset that's in demand, or at the very least will allow you to have a good conversation with a potential employer. However, this is not to say that you should pick the next hottest thing and chase after it, because, by the time you're done with your project, it might not be the hottest thing anymore. You should pick something that you're passionate about and what aligns with your academic and career goals.
 - **Problem-Solving**: Your project should **address a real problem** or **offer innovation**. Please don't just build another e-commerce website or a basic recommendation system. Building a novel project will not only make you stand out but also give you a sense of accomplishment (and probably a few sleepless nights but you're a FASTian, it's your life anyway).
 
-> <strong>Tip:</strong> Browse research papers, GitHub projects, and tech blogs for inspiration.  Look at what the students from foreign universities are doing. They're not necessarily smarter than you but they have access to better resources and they're more likely to be working on cutting-edge projects. You don't have to copy them, but you should never give up on the opportunity to learn from them. A good way to shortlist a project is to do a preliminary literature review. This will give you an idea of what's already been done and what hasn't. Don't wanna jump into an overcrowded room now, do you?
+> <strong>Tip:</strong> Browse research papers, GitHub projects, and tech blogs for inspiration.  Look at what the students from foreign universities are doing. They're not necessarily smarter than you but they have access to better resources and they're more likely to be working on current research problems. You don't have to copy them, but you should never give up on the opportunity to learn from them. A good way to shortlist a project is to do a preliminary literature review. This will give you an idea of what's already been done and what hasn't. Don't wanna jump into an overcrowded room now, do you?
 
 ---
 

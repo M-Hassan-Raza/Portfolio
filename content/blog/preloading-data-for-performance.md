@@ -1,97 +1,64 @@
 ---
-title: "Advantages of Preloading Data on Page Load"
+title: "The Invoice Page That Took 4 Seconds to Search"
 date: 2025-02-11
-description: "Discover how preloading data on page load enhances performance and improves user experience, particularly for pages like the generate invoice page where product data is loaded on mount."
-tags: ["Performance", "Data Preloading", "Invoice System", "Web Development"]
+description: "How preloading product data cut search latency from 4 seconds to instant on a POS system's invoice page — and when this pattern breaks down."
+tags: ["Performance", "Vue.js", "POS", "Web Development"]
 categories: ["Performance", "Web Development"]
 showToc: true
 showComments: true
 ---
 
-## Introduction
+In [Polaris](/projects/polaris), the POS system I built for retail shops, the invoice page has a product search bar. A cashier types a product name, results appear, they click to add it to the invoice. Simple.
 
-In modern web applications, speed and responsiveness are essential for a smooth user experience. One effective strategy to achieve this is preloading data when a page loads. For example, on a generate invoice page, preloading product data upon mounting ensures that users can search through products without any noticeable delay. This article explains the benefits of preloading data and includes a practical code example.
+Except it wasn't. Every keystroke fired an API call. On a shop with 500 products, search took 3-4 seconds because each request hit the database, serialized the response, and traveled back over the network. Cashiers were waiting on every single search. During rush hours, this was painful.
 
-## Benefits of Preloading Data
+## The Fix: Load Everything on Mount
 
-Preloading data on page load offers several key advantages:
+The product catalog for a typical Polaris shop is 200-800 products. That's maybe 50KB of JSON. There's no reason to fetch it on every search when you can load it once.
 
-1. **Faster User Interactions:**  
-   With the data already available in memory, functions like search can filter through products immediately, without waiting for additional network requests.
+```vue
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useProductStore } from '@/stores/product'
 
-2. **Reduced Latency:**  
-   Eliminating extra API calls during user interactions minimizes delays, leading to a more responsive interface.
+const productStore = useProductStore()
+const searchQuery = ref('')
+const searchResults = ref([])
 
-3. **Improved Application Performance:**  
-   By consolidating data retrieval to the initial page load, network usage is optimized and subsequent operations become faster.
+onMounted(async () => {
+  await productStore.fetchProducts()
+})
 
-4. **Enhanced User Experience:**  
-   Immediate feedback during searches and other interactions creates a smoother workflow, increasing overall user satisfaction.
-
-## Code Example
-
-Below is a sample code snippet demonstrating how to preload product data on page load and perform a local search on an invoice page. This example uses a setup function (common in Vue.js with the Composition API) to initialize the product store, load products on mount, and filter the products based on a search query.
-
-```javascript
-setup() {
-  const authStore = useAuthStore();
-  const productStore = useProductStore(); // Initialize the product store
-  
-  // Define reactive references for the search query and search results
-  const searchQuery = ref('');
-  const searchResults = ref([]);
-  
-  // Function to preload products when the page loads
-  const loadProducts = async () => {
-    await productStore.fetchProducts(); // Fetch the products and store them
-  };
-  
-  // Function to search products locally based on the query
-  const searchProducts = () => {
-    if (searchQuery.value.trim() === '') {
-      searchResults.value = [];
-      return;
-    }
-    // Filter products using local data based on the search query
-    searchResults.value = productStore.products.filter(product => {
-      const productName = product.name || ''; // Default to empty string if undefined
-      const productDescription = product.description || ''; // Default to empty string if undefined
-      return productName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        productDescription.toLowerCase().includes(searchQuery.value.toLowerCase());
-    });
-  };
-  
-  // Preload products when the component is mounted
-  onMounted(() => {
-    loadProducts();
-  });
-  
-  return {
-    authStore,
-    productStore,
-    searchQuery,
-    searchResults,
-    searchProducts
-  };
-},
+function searchProducts() {
+  if (!searchQuery.value.trim()) {
+    searchResults.value = []
+    return
+  }
+  const query = searchQuery.value.toLowerCase()
+  searchResults.value = productStore.products.filter(p =>
+    p.name.toLowerCase().includes(query) ||
+    p.sku?.toLowerCase().includes(query)
+  )
+}
+</script>
 ```
 
-### Explanation of the Code
+Search went from 3-4 seconds to effectively instant. The initial page load added maybe 200ms for fetching the catalog, but that happens once while the page is rendering anyway. The cashier doesn't notice.
 
-- **Initialization:**  
-  The code initializes the authentication and product stores. Reactive references `searchQuery` and `searchResults` are declared to manage the user's search input and the results, respectively.
+## When This Breaks Down
 
-- **Preloading Data:**  
-  The `loadProducts` function asynchronously fetches products from the product store when the component mounts. This preloading ensures that all product data is available immediately after the page loads.
+This pattern has a ceiling. It works for Polaris because:
 
-- **Local Search:**  
-  The `searchProducts` function performs local filtering on the preloaded product data. If the search query is empty, it resets the results. Otherwise, it filters the product list based on whether the product's name or description contains the search query.
+- **Catalog size is bounded.** Retail shops have hundreds of products, not millions. If you're building an e-commerce platform with 50,000 SKUs, preloading everything is not an option.
+- **Data changes slowly.** Products don't update mid-transaction. If your data changes every few seconds, you'll serve stale results.
+- **Search is simple.** String matching on name and SKU. If you need fuzzy matching, relevance scoring, or faceted search, you need a server-side search engine.
 
-- **onMounted Hook:**  
-  The `onMounted` lifecycle hook calls `loadProducts`, ensuring that the data is fetched as soon as the component is rendered.
+## What To Do When It Doesn't Fit
 
-## Conclusion
+For larger catalogs, the progression is:
 
-Preloading data on page load is a powerful technique to enhance performance in web applications. By loading the necessary data upfront, applications can deliver instant feedback for operations such as searches, resulting in a more responsive and efficient user experience. This strategy not only reduces network latency but also improves overall performance by allowing local data operations.
+1. **Debounced server search** — wait 300ms after the last keystroke, then fire one API call. Eliminates the per-keystroke storm.
+2. **Server-side search with an index** — PostgreSQL trigram indexes or Elasticsearch. Required once you're past a few thousand items.
+3. **Virtual scrolling for results** — if you're showing 10,000 results in a dropdown, render only what's visible. Libraries like `vue-virtual-scroller` handle this.
 
-Implementing such techniques in your projects, especially in critical areas like the generate invoice page, can lead to faster interactions and a more satisfying user experience. Consider adopting preloading methods in your future projects to optimize performance and streamline data access.
+The right answer depends on how much data you have and how fast it changes. For Polaris, preloading 500 products on mount was the simplest fix that solved the real problem.

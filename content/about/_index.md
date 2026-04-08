@@ -18,15 +18,15 @@ My focus is on systems that actually work—not demos, not prototypes, but softw
 
 **CPO & Cofounder, Entropy Labs** (Jun 2025 – Present)
 
-Leading product strategy and technical operations for data-driven marketing solutions. I architect cloud infrastructure on AWS ECS and direct a cross-functional team of 8 developers and designers building enterprise solutions.
+Leading product strategy and technical operations for an AI-powered marketing analytics platform. I architect cloud infrastructure on AWS ECS and direct a cross-functional team of 8 developers and designers building enterprise SaaS with LangGraph agents, RAG pipelines, and real-time analytics.
 
 **Technical Product Engineering Lead, Entropy Labs** (Sep 2024 – Jun 2025)
 
-Built workflow automations with n8n and Make.com that reduced manual processing time by 80% across enterprise clients. Developed AI applications with LangChain handling document processing with high accuracy. Created Django + Vue.js apps with WebSocket streaming and led migration to microservices architecture.
+Built workflow automations with n8n and Make.com that reduced manual processing time by 80% (client onboarding that took 2 hours became 25 minutes). Developed AI applications with LangChain handling document processing with high accuracy. Created Django + Vue.js apps with WebSocket streaming and led migration to microservices architecture.
 
 **Senior Software Engineer, Entropy Labs** (Aug 2023 – Sep 2024)
 
-Delivered high-traffic applications on FastAPI and Django. Optimized PostgreSQL queries (750ms → 230ms, 69% faster) through indexing and query rewrites. Implemented Redis caching for significant performance gains and reduced database load. Built RESTful APIs with robust error handling.
+Delivered high-traffic applications on FastAPI and Django. Optimized PostgreSQL queries (750ms → 230ms, 69% faster) through composite indexing, query rewrites, and eliminating unnecessary JOINs on the reporting endpoints. Implemented Redis caching for significant performance gains and reduced database load. Built RESTful APIs with robust error handling.
 
 **Founder, Commit Software Solutions** (Mar 2020 – Present)
 
@@ -46,7 +46,7 @@ Backend for Employee Management System using Flask + BigQuery. Automated notific
 
 **Lab Instructor, FAST-NUCES** (2024 – Present)
 
-I teach lab sessions for Operating Systems, Software Construction & Development, and Web Engineering. Conducting sessions, grading assignments, and holding office hours to support students.
+I teach lab sessions for Operating Systems, Software Construction & Development, and Web Engineering. I run hands-on labs where students build real systems — process schedulers, build tools, full-stack apps — not just follow slides.
 
 **Teaching Assistant, FAST-NUCES** (2022 – 2024)
 

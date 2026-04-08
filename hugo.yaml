@@ -9,7 +9,7 @@ ignoreLogs: ["warning-partial-superfluous-prefix"]
 
 params:
   author: "Muhammad Hassan Raza"
-  description: "Muhammad Hassan Raza is a CPO & Cofounder at Entropy Labs, Software Engineer, and AI Specialist specializing in scalable applications and innovative problem-solving. Explore my portfolio for projects, blog posts, and insights."
+  description: "Muhammad Hassan Raza is a CPO & Cofounder at Entropy Labs, Software Engineer, and AI Specialist specializing in production AI systems and backend infrastructure. Explore my portfolio for projects, blog posts, and insights."
   keywords:
     [
       "Software Engineer",

@@ -1,158 +1,42 @@
 ---
-title: "Smart Dustbin with IoT: Arduino, Python, Kotlin & Azure"
+title: "Smart Dustbin: IoT with Arduino, Python, Kotlin & Azure"
 date: 2025-02-16
-description: "An in-depth look at my IoT-based smart dustbin project, built using Arduino, Python, Kotlin for Android, and Azure for real-time monitoring."
+description: "An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints."
 tags: ["IoT", "Arduino", "Kotlin", "Python", "Azure", "ThingSpeak"]
 ---
 
-## Building a Smart Dustbin with IoT
+A university project where I built a garbage bin that knows how full it is and tells you about it. An ultrasonic sensor measures the fill level, an ESP8266 sends the data over WiFi, and you can monitor it from a desktop GUI or an Android app.
 
-### Introduction
-This project involves the development of a **Smart Dustbin** using **Arduino, Python, Kotlin (Android App), and Azure IoT** to monitor and manage waste levels in real-time. By integrating sensors, cloud computing, and mobile applications, this system enhances waste management efficiency.
+## The Hardware
 
-### Components & Technologies Used
-- **Arduino Uno & ESP8266 WiFi Module** for sensor data collection.
-- **Ultrasonic Sensors** to measure garbage levels.
-- **Servo Motor** to control the bin lid.
-- **Python & Tkinter GUI** for real-time monitoring.
-- **Kotlin Android App** for mobile notifications.
-- **ThingSpeak & Azure IoT Hub** for cloud-based monitoring.
-
----
-
-## Hardware Implementation
-### Arduino Code for Garbage Level Detection & Smart Lid Control
-The Arduino Uno, paired with an **HC-SR04 ultrasonic sensor**, measures the bin’s fill level. The **servo motor** automatically opens the lid when an object is detected nearby.
+An Arduino Uno with an HC-SR04 ultrasonic sensor measures distance to the garbage surface. A servo motor opens the lid when someone approaches (second ultrasonic sensor detects proximity). The Arduino sends distance readings over serial to an ESP8266, which transmits them over WiFi.
 
 ```cpp
-#include <Servo.h>
-
-Servo s1;
-const int trigPin = 7;
-const int echoPin = 8;
-const int doorTrigPin = 11;
-const int doorEchoPin = 12;
-const int MAX_CAPACITY_CM = 22;
-const int DOOR_DISTANCE_THRESHOLD = 10;
-
-void setup() {
-  Serial.begin(9600);
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  pinMode(doorTrigPin, OUTPUT);
-  pinMode(doorEchoPin, INPUT);
-  s1.attach(10);
-}
-
-void loop() {
-  long duration, cm;
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  cm = duration / 29 / 2;
-  Serial.println(cm);
-  delay(100);
-}
+// The core measurement is simple — pulse timing to distance conversion
+long duration = pulseIn(echoPin, HIGH);
+long cm = duration / 29 / 2;
 ```
 
-### WiFi Connectivity with ESP8266
-The **ESP8266 module** enables real-time data transmission to a laptop or cloud.
+The ESP8266 connects to a laptop or cloud endpoint over TCP and forwards the readings.
 
-```cpp
-#include <ESP8266WiFi.h>
+## What Actually Worked
 
-const char* ssid = "wifi_name";
-const char* password = "12345678";
-const char* serverIP = "laptop_wifi_adapter_IP";
-const int serverPort = 1234;
-WiFiClient client;
+**The sensor accuracy was better than expected.** The HC-SR04 reliably measured garbage levels within 1-2cm accuracy in a 22cm bin. The math is basic physics (speed of sound / 2 for round trip), and it just works.
 
-void setup() {
-  Serial.begin(9600);
-  WiFi.begin(ssid, password);
-}
+**ThingSpeak for quick visualization.** Publishing sensor data to ThingSpeak via MQTT gave us a real-time dashboard with almost no code. For prototyping IoT, it's hard to beat.
 
-void loop() {
-  if (Serial.available() > 0) {
-    int distance = Serial.parseInt();
-    if (distance >= 0 && distance <= 400) {
-      sendToLaptop(distance);
-    }
-  }
-}
+**The Android app was overkill but fun.** We built a Kotlin app that shows bin status and sends notifications when it's full. In practice, a simple web dashboard would've been enough, but the exercise of piping IoT data all the way to a phone notification was worth it.
 
-void sendToLaptop(int distance) {
-  if (!client.connected()) {
-    if (!client.connect(serverIP, serverPort)) return;
-  }
-  client.println(distance);
-}
-```
+## What I'd Change
 
----
+**Power management was an afterthought.** The Arduino and ESP8266 run continuously, which drains batteries fast. A production system would need sleep modes — wake up, take a reading, transmit, sleep. We never implemented this because we had wall power during the demo.
 
-## Cloud Integration with ThingSpeak & Azure IoT Hub
-### Sending Data to ThingSpeak
-Data is published to **ThingSpeak** via MQTT.
+**WiFi reliability.** The ESP8266 drops connections silently. Our code had a basic reconnect loop, but it wasn't robust. In a real deployment, you'd want MQTT with QoS 1 (at-least-once delivery) and proper offline buffering.
 
-```python
-def send_to_thingspeak(data):
-    topic = "channels/" + CHANNEL_ID + "/publish"
-    payload = "field1=" + str(data)
-    publish.single(topic, payload, hostname=MQTT_HOST, auth={"username": MQTT_USERNAME, "password": MQTT_PASSWORD})
-```
+**The Azure IoT Hub integration was premature.** We added it because it sounded impressive for the project defense. ThingSpeak was doing everything we needed. Don't add cloud infrastructure complexity to a project that works fine without it.
 
-### Sending Data to Azure IoT Hub
-For scalable IoT integration, data is sent to **Azure IoT Hub**.
+## The Real Lesson
 
-```python
-from azure.iot.device.aio import IoTHubDeviceClient
-async def send_to_azure_iot_hub(data):
-    device_client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
-    await device_client.connect()
-    await device_client.send_message(data)
-    await device_client.disconnect()
-```
+The hardest part of IoT isn't the code — it's the physical constraints. Sensor placement matters (mount it wrong and you measure the bin wall, not the garbage). WiFi range matters (the ESP8266 has a weak antenna). Power matters. These are problems you don't encounter in pure software projects, and they taught me more than the actual code did.
 
----
-
-## GUI for Real-Time Monitoring
-### Tkinter-based Desktop App
-A Python **Tkinter** application provides a user-friendly interface to monitor bin levels.
-
-```python
-import tkinter as tk
-root = tk.Tk()
-root.title("Garbage Level Monitoring")
-garbage_label = tk.Label(root, text="Garbage Level: 0%")
-garbage_label.pack()
-root.mainloop()
-```
-
----
-
-## Android App Development (Kotlin)
-The **Kotlin-based Android app** receives real-time bin status and sends notifications when the bin is full.
-
-```kotlin
-fun checkGarbageLevel(level: Int) {
-    if (level > 80) {
-        Toast.makeText(this, "Garbage bin almost full!", Toast.LENGTH_LONG).show()
-    }
-}
-```
-
----
-
-## Future Enhancements
-- **AI-based Smart Sorting:** Automatic waste segregation.
-- **Solar-Powered Bin:** Sustainable energy source.
-- **GPS-enabled Tracking:** Optimize garbage collection routes.
-
-## Conclusion
-This smart dustbin project showcases the **power of IoT, cloud computing, and mobile app integration** in waste management. By leveraging **Arduino, Python, Kotlin, and Azure IoT**, we enhance urban sustainability.
-
-**Check out the full project on GitHub at [Here](https://github.com/M-Hassan-Raza/arduino_smart_dustbin), [Here](https://github.com/M-Hassan-Raza/esp8266_smart_dustbin), and [Here](https://github.com/M-Hassan-Raza/smart_dustbin_edge_layer)!**
+Source code: [Arduino](https://github.com/M-Hassan-Raza/arduino_smart_dustbin) | [ESP8266](https://github.com/M-Hassan-Raza/esp8266_smart_dustbin) | [Edge Layer](https://github.com/M-Hassan-Raza/smart_dustbin_edge_layer)
