@@ -99,83 +99,16 @@
 }
 
 
-.profile .buttons {
-    display: flex;         /* Use flexbox to arrange buttons */
-    flex-wrap: wrap;       /* Allow buttons to wrap onto the next line if needed */
-    justify-content: center; /* Center the buttons horizontally */
-    align-items: center;   /* Align buttons vertically in the middle */
-    gap: 0.75rem;          /* Add space between buttons (adjust as needed) */
-    margin-top: 1rem;      /* Add some space above the buttons */
-}
-
-/* Style EACH button (the <a> tag) */
-.profile .buttons a.button {
+/* Profile button icon alignment — let PaperMod handle the rest */
+.profile .buttons a.button .button-inner {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-
-    /* Reset dimensions to fit content */
-    width: auto;
-    height: auto;
-    max-width: none;
-
-    /* Reset margins if using gap */
-    margin: 0;
-
-    /* Standard button styling with design tokens */
-    padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm, 4px);
-    text-decoration: none;
-    line-height: 1.4;
-    white-space: nowrap;
-    transition:
-        transform var(--duration-fast, 0.2s) var(--ease-out-expo, ease),
-        box-shadow var(--duration-fast, 0.2s) var(--ease-out-expo, ease),
-        background-color var(--duration-normal, 0.3s) var(--ease-smooth, ease),
-        border-color var(--duration-normal, 0.3s) var(--ease-smooth, ease);
+    gap: 0.4em;
 }
 
-/* Profile buttons - subtle lift on hover */
-.profile .buttons a.button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.1));
-}
-
-.profile .buttons a.button:active {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
-}
-
-/* Style the inner span if needed (usually fine) */
-.profile .buttons a.button .button-inner {
-    display: inline-flex; /* Keep this consistent */
-    align-items: center;
-    gap: 0.4em;          /* Space between icon and text */
-}
-
-/* Style the menu icon specifically */
 .profile .buttons a.button .menu-icon {
-    /* Your existing .menu-icon styles are likely okay */
-    /* Ensure it doesn't shrink */
     flex-shrink: 0;
-    /* Adjust size/margin if needed */
-    width: 1.1em;
-    height: 1.1em;
-    margin-right: 0.4em; /* Overrides the gap if needed, or remove if gap is sufficient */
-}
-
-/* --- Optional: Style or Hide the Extra External Link SVG --- */
-
-/* Target the extra SVG added by PaperMod (often has no class) */
-.profile .buttons a.button[href^="http"] .button-inner svg:not(.menu-icon) {
-     /* Option 1: Hide it if you don't want it */
-     /* display: none; */
-
-     /* Option 2: Style it if you want to keep it */
-     width: 0.9em;          /* Make it smaller */
-     height: 0.9em;
-     opacity: 0.7;          /* Make it less prominent */
-     margin-left: 0.3em;    /* Add space before it */
-     vertical-align: middle; /* Align it better */
+    width: 1em;
+    height: 1em;
+    margin-right: 0;
 }
