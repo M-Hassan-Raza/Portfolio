@@ -1,6 +1,6 @@
 ---
 title: "How Fallow Analyzes TypeScript in Under a Second"
-date: 2025-09-15T10:00:00+05:00
+date: 2026-04-05T10:00:00+05:00
 draft: false
 tags: ["Rust", "TypeScript", "Performance", "Oxc", "Static Analysis", "Fallow"]
 showComments: true

@@ -1,6 +1,6 @@
 ---
 title: "Scoring Fraud in Legal Intake Calls"
-date: 2025-11-18T10:00:00+05:00
+date: 2026-02-20T10:00:00+05:00
 draft: false
 tags: ["AI", "Fraud Detection", "Legal Tech", "Python", "LLM", "AssemblyAI"]
 showComments: true

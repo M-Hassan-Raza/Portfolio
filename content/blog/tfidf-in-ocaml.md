@@ -1,6 +1,6 @@
 ---
 title: "TF-IDF in OCaml: When Functional Programming Clicks"
-date: 2025-05-25T10:00:00+05:00
+date: 2026-03-22T10:00:00+05:00
 draft: false
 tags: ["OCaml", "Functional Programming", "Search", "TF-IDF", "Cogitator"]
 showComments: true

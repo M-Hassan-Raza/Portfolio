@@ -1,6 +1,6 @@
 ---
 title: "How Pyscn Analyzes Python with Go and tree-sitter"
-date: 2025-07-20T10:00:00+05:00
+date: 2025-10-15T10:00:00+05:00
 draft: false
 tags: ["Go", "tree-sitter", "Static Analysis", "Python", "MCP", "Pyscn"]
 showComments: true
