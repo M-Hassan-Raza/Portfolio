@@ -1,0 +1,163 @@
+{{- define "main" }}
+<header class="page-header blog-page-header">
+    {{- partial "breadcrumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description | markdownify }}
+    </div>
+    {{- end }}
+</header>
+
+{{- $pages := .RegularPages.ByDate.Reverse }}
+{{- $paginator := .Paginate $pages 10 }}
+{{- $isFirstPage := eq $paginator.PageNumber 1 }}
+{{- $feedPages := $paginator.Pages }}
+{{- $lead := false }}
+{{- $archivePages := $feedPages }}
+
+{{- if and $isFirstPage (gt (len $feedPages) 0) }}
+    {{- $lead = index $feedPages 0 }}
+    {{- $archivePages = after 1 $feedPages }}
+{{- end }}
+
+<div class="blog-shell">
+    {{- if and $isFirstPage (or .Content .Params.startHere) }}
+    <section class="blog-intro-grid">
+        {{- if .Content }}
+        <div class="blog-intro-copy post-content">
+            <div class="blog-section-head">
+                <p class="blog-kicker">Writing</p>
+                <h2>Production notes, product judgment, code review taste, and the parts of teaching that still matter.</h2>
+            </div>
+            {{- if not (.Param "disableAnchoredHeadings") }}
+            {{- partial "anchored_headings.html" .Content -}}
+            {{- else }}{{ .Content }}{{ end }}
+        </div>
+        {{- end }}
+
+        {{- with .Params.startHere }}
+        <aside class="blog-start-panel">
+            <div class="blog-section-head">
+                <p class="blog-kicker">Start Here</p>
+                <h2>Four good entry points if you want the short version first.</h2>
+            </div>
+
+            <div class="blog-start-grid">
+                {{- range . }}
+                {{- $page := site.GetPage .page }}
+                {{- if $page }}
+                <article class="blog-start-card">
+                    {{- with $page.Params.cover.image }}
+                    <a class="blog-card-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+                        <img src="{{ . | absURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy" />
+                    </a>
+                    {{- end }}
+                    <div class="blog-card-copy">
+                        {{- with .label }}
+                        <p class="blog-card-kicker">{{ . }}</p>
+                        {{- end }}
+                        <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+                        {{- with .note }}
+                        <p class="blog-card-summary">{{ . }}</p>
+                        {{- else }}
+                        <p class="blog-card-summary">{{ $page.Description | default ($page.Summary | plainify | truncate 140) }}</p>
+                        {{- end }}
+                    </div>
+                </article>
+                {{- end }}
+                {{- end }}
+            </div>
+        </aside>
+        {{- end }}
+    </section>
+    {{- end }}
+
+    {{- with $lead }}
+    <section class="blog-lead-section">
+        <div class="blog-section-head">
+            <p class="blog-kicker">Latest Writing</p>
+            <h2>The newest essay sits up front. The rest of the archive stays easy to scan.</h2>
+        </div>
+
+        <article class="blog-lead{{ if not .Params.cover.image }} blog-lead-no-media{{ end }}">
+            {{- with .Params.cover.image }}
+            <a class="blog-card-media blog-lead-media" href="{{ $lead.RelPermalink }}" aria-label="Read {{ $lead.Title }}">
+                <img src="{{ . | absURL }}" alt="{{ $lead.Params.cover.alt | default $lead.Title }}" loading="lazy" />
+            </a>
+            {{- end }}
+            <div class="blog-card-copy blog-lead-copy">
+                {{- with (partial "blog/kicker.html" .) }}
+                <p class="blog-card-kicker">{{ . }}</p>
+                {{- end }}
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p class="blog-card-summary">{{ .Description | default (.Summary | plainify | truncate 220) }}</p>
+                {{- if not (.Param "hideMeta") }}
+                <footer class="blog-card-meta">
+                    <span>{{ .Date.Format "Jan 2006" }}</span>
+                    <span>{{ .ReadingTime }} min read</span>
+                </footer>
+                {{- end }}
+            </div>
+            <a class="blog-card-link" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}"></a>
+        </article>
+    </section>
+    {{- end }}
+
+    <section class="blog-feed-section">
+        <div class="blog-section-head">
+            <p class="blog-kicker">{{ cond $isFirstPage "Archive" "More Writing" }}</p>
+            <h2>{{ cond $isFirstPage "Essays, field notes, and technical writeups in reverse chronological order." "More essays, field notes, and technical writeups." }}</h2>
+        </div>
+
+        <div class="blog-feed-list">
+            {{- range $archivePages }}
+            {{- $page := . }}
+            <article class="blog-feed-row{{ if not .Params.cover.image }} blog-feed-row-no-media{{ end }}">
+                {{- with .Params.cover.image }}
+                <a class="blog-card-media blog-feed-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+                    <img src="{{ . | absURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy" />
+                </a>
+                {{- end }}
+                <div class="blog-card-copy blog-feed-copy">
+                    {{- with (partial "blog/kicker.html" .) }}
+                    <p class="blog-card-kicker">{{ . }}</p>
+                    {{- end }}
+                    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                    <p class="blog-card-summary">{{ .Description | default (.Summary | plainify | truncate 180) }}</p>
+                    {{- if not (.Param "hideMeta") }}
+                    <footer class="blog-card-meta">
+                        <span>{{ .Date.Format "Jan 2006" }}</span>
+                        <span>{{ .ReadingTime }} min read</span>
+                    </footer>
+                    {{- end }}
+                </div>
+            </article>
+            {{- end }}
+        </div>
+    </section>
+
+    {{- if gt $paginator.TotalPages 1 }}
+    <footer class="page-footer">
+        <nav class="pagination">
+            {{- if $paginator.HasPrev }}
+            <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+                «&nbsp;{{ i18n "prev_page" }}&nbsp;
+                {{- if (.Param "ShowPageNums") }}
+                {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
+                {{- end }}
+            </a>
+            {{- end }}
+            {{- if $paginator.HasNext }}
+            <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+                {{- i18n "next_page" }}&nbsp;
+                {{- if (.Param "ShowPageNums") }}
+                {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
+                {{- end }}&nbsp;»
+            </a>
+            {{- end }}
+        </nav>
+    </footer>
+    {{- end }}
+</div>
+{{- end }}
