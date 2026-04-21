@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F5F3EE"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FCFBF8" stroke="#DED6CA"/>
+
+  <text x="96" y="132" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="700">Optimizing Django signals</text>
+  <text x="96" y="170" fill="#667085" font-family="Manrope, Arial, sans-serif" font-size="20">Ledger recalculation without signal storms</text>
+
+  <rect x="96" y="224" width="278" height="258" rx="24" fill="#FFFFFF" stroke="#D8D0C4"/>
+  <text x="128" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Before</text>
+  <rect x="128" y="304" width="214" height="42" rx="16" fill="#FEF2F2" stroke="#F0C9C9"/>
+  <text x="154" y="331" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">save()</text>
+  <rect x="128" y="362" width="214" height="42" rx="16" fill="#FEF2F2" stroke="#F0C9C9"/>
+  <text x="154" y="389" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">signal fires</text>
+  <rect x="128" y="420" width="214" height="42" rx="16" fill="#FEF2F2" stroke="#F0C9C9"/>
+  <text x="154" y="447" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">recalc again</text>
+
+  <rect x="422" y="224" width="370" height="258" rx="24" fill="#1F2937"/>
+  <text x="454" y="266" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Optimized flow</text>
+  <rect x="454" y="304" width="306" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="480" y="331" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">mark _needs_recalc</text>
+  <rect x="454" y="362" width="306" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="480" y="389" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">wait for on_commit()</text>
+  <rect x="454" y="420" width="306" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="480" y="447" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">recalculate once</text>
+
+  <path d="M374 353H422" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="398" cy="353" r="10" fill="#B45309"/>
+
+  <rect x="840" y="224" width="260" height="258" rx="24" fill="#F8F3E8" stroke="#E2D4C1"/>
+  <text x="872" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Result</text>
+  <rect x="872" y="304" width="196" height="44" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="898" y="332" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Fewer queries</text>
+  <rect x="872" y="366" width="196" height="44" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="898" y="394" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Safer commits</text>
+  <rect x="872" y="428" width="196" height="44" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="898" y="456" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Cleaner ledger state</text>
+
+  <text x="96" y="598" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">Mark the ledger, wait for commit, and recalculate once instead of letting every save trigger work</text>
+</svg>

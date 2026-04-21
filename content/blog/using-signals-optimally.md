@@ -7,9 +7,9 @@ categories: ["Backend Development"]
 ShowToc: true
 ShowComments: true
 cover:
-    image: "/assets/ledger-opt.jpg"
-    alt: "Ledger Optimization"
-    caption: "Optimizing Django Signals Performance"
+    image: "/assets/django-signals-cover.svg"
+    alt: "Django signal optimization diagram"
+    caption: "Mark work, wait for commit, and recalculate once instead of letting every write trigger ledger churn."
     relative: false
 ---
 
@@ -89,4 +89,3 @@ With this approach, we achieve:
 ## Conclusion
 
 By intelligently managing recalculations, we significantly improve the performance of our ledger system in Django applications. This approach ensures efficiency without sacrificing data accuracy, making it ideal for high-volume financial applications.
-

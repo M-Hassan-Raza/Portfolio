@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F5F3EE"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FCFBF8" stroke="#DED6CA"/>
+
+  <text x="96" y="132" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="700">Claude Opus 4.5</text>
+  <text x="96" y="170" fill="#667085" font-family="Manrope, Arial, sans-serif" font-size="20">The quality jump came from context control, not hype</text>
+
+  <rect x="96" y="220" width="342" height="292" rx="24" fill="#FFFFFF" stroke="#D8D0C4"/>
+  <text x="128" y="262" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Context hierarchy</text>
+
+  <rect x="128" y="300" width="278" height="48" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="154" y="330" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Project context</text>
+
+  <rect x="154" y="366" width="226" height="48" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="180" y="396" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Session context</text>
+
+  <rect x="180" y="432" width="174" height="48" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="206" y="462" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Query context</text>
+
+  <rect x="484" y="220" width="298" height="292" rx="24" fill="#1F2937"/>
+  <text x="516" y="262" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Opus 4.5</text>
+  <rect x="516" y="306" width="234" height="46" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="542" y="335" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Extended thinking</text>
+
+  <rect x="516" y="372" width="234" height="46" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="542" y="401" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Edge-case reasoning</text>
+
+  <rect x="516" y="438" width="234" height="46" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="542" y="467" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Better uncertainty</text>
+
+  <path d="M438 366H484" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="462" cy="366" r="10" fill="#B45309"/>
+
+  <rect x="826" y="220" width="274" height="292" rx="24" fill="#F8F3E8" stroke="#E2D4C1"/>
+  <text x="858" y="262" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">What changed</text>
+
+  <rect x="858" y="300" width="210" height="46" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="884" y="329" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Reads the actual code</text>
+
+  <rect x="858" y="366" width="210" height="46" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="884" y="395" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Flags edge cases</text>
+
+  <rect x="858" y="432" width="210" height="46" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="884" y="461" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Needs verification</text>
+
+  <text x="96" y="598" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">Provide context, let it reason, then verify the output like you would any other collaborator</text>
+</svg>
