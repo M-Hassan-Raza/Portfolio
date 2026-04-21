@@ -5,6 +5,9 @@ draft: false
 tags: ["Logging", "AI", "Developer Tools", "TypeScript", "Nuxt", "Evlog"]
 showComments: true
 ShowToc: true
+cover:
+  image: "/assets/structured-logging-cover.svg"
+  alt: "Structured logging cover"
 ---
 
 When an AI coding assistant tries to help you debug a production issue, it reads your logs. If your logs are scattered `console.log` calls with inconsistent formatting, the AI can't help you. It doesn't know which log lines belong to the same request, what the timing was, or what the error context means.

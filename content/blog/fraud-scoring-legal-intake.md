@@ -5,6 +5,9 @@ draft: false
 tags: ["AI", "Fraud Detection", "Legal Tech", "Python", "LLM", "AssemblyAI"]
 showComments: true
 ShowToc: true
+cover:
+  image: "/assets/legal-intake-fraud-cover.svg"
+  alt: "Legal intake fraud scoring cover"
 ---
 
 I built RISQ, a fraud detection system for legal intake calls. Mass tort law firms receive thousands of calls from potential claimants, and a significant percentage are fraudulent — coached callers reading from scripts, people who never actually used the drug or product in question, or repeat callers under different names.

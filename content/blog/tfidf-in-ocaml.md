@@ -5,6 +5,9 @@ draft: false
 tags: ["OCaml", "Functional Programming", "Search", "TF-IDF", "Cogitator"]
 showComments: true
 ShowToc: true
+cover:
+  image: "/assets/tfidf-ocaml-cover.svg"
+  alt: "TF-IDF in OCaml cover"
 ---
 
 I built [Cogitator](https://github.com/M-Hassan-Raza/cogitator), a local code search engine in OCaml. It indexes code chunks using TF-IDF, ranks results by cosine similarity, and outputs them as RAG prompts for LLMs. The whole thing is about 500 lines of OCaml.
