@@ -8,9 +8,9 @@ showBreadCrumbs: true
 showReadingTime: true
 showComments: true
 cover:
-    image: "/assets/db.jpg"
-    alt: "PostgreSQL Database"
-    caption: "Optimizing Django Performance for a POS System"
+    image: "/assets/django-performance-cover.svg"
+    alt: "Django performance optimization diagram"
+    caption: "The useful work was in removing bad write patterns, signal churn, and redundant queries."
     relative: false
 ---
 
@@ -95,4 +95,3 @@ This reduced redundant database hits and significantly improved response times.
 
 ### Final Thoughts
 Performance tuning in Django requires a mix of bulk operations, query optimization, and caching. Understanding when to use Django’s ORM features efficiently can prevent unnecessary database load and keep the application responsive. This approach significantly improved the speed of a POS system handling thousands of transactions daily.
-

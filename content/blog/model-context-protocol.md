@@ -6,9 +6,9 @@ tags: ["MCP", "Anthropic", "AI", "Protocol", "Integration", "Developer Tools", "
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/mcp-protocol.jpg"
-  alt: "Model Context Protocol Architecture"
-  caption: "The protocol that lets AI tools talk to your tools"
+  image: "/assets/mcp-protocol-cover.svg"
+  alt: "Model Context Protocol diagram"
+  caption: "Hosts, servers, and the protocol layer that connects them."
   relative: false
 ShowToc: true
 ---

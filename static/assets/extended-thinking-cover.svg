@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F5F3EE"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FCFBF8" stroke="#DED6CA"/>
+
+  <text x="96" y="132" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="700">Extended thinking</text>
+  <text x="96" y="170" fill="#667085" font-family="Manrope, Arial, sans-serif" font-size="20">A different interaction model, not just slower output</text>
+
+  <rect x="96" y="224" width="462" height="258" rx="24" fill="#FFFFFF" stroke="#D8D0C4"/>
+  <text x="128" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Standard model</text>
+  <rect x="128" y="304" width="178" height="50" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="154" y="335" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Prompt</text>
+  <path d="M306 329H352" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <rect x="352" y="304" width="174" height="50" rx="16" fill="#FEF2F2" stroke="#F3C9C9"/>
+  <text x="378" y="335" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Immediate answer</text>
+  <text x="128" y="404" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">Commits early, then explains itself.</text>
+
+  <rect x="642" y="224" width="458" height="258" rx="24" fill="#1F2937"/>
+  <text x="674" y="266" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Extended thinking model</text>
+
+  <rect x="674" y="304" width="120" height="50" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="706" y="335" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Prompt</text>
+  <path d="M794 329H836" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <rect x="836" y="288" width="120" height="82" rx="18" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="860" y="320" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="16" font-weight="600">Reasoning</text>
+  <text x="871" y="344" fill="#C5D1DE" font-family="Manrope, Arial, sans-serif" font-size="14">budget</text>
+  <path d="M956 329H998" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <rect x="998" y="304" width="70" height="50" rx="16" fill="#0F172A"/>
+  <text x="1014" y="335" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Answer</text>
+  <text x="674" y="404" fill="#CBD5E1" font-family="Manrope, Arial, sans-serif" font-size="18">More room to inspect, revise, and backtrack before answering.</text>
+
+  <rect x="96" y="520" width="1004" height="18" rx="9" fill="#ECE6DB"/>
+  <rect x="96" y="520" width="276" height="18" rx="9" fill="#9CA3AF"/>
+  <rect x="372" y="520" width="492" height="18" rx="9" fill="#1D4ED8" fill-opacity="0.8"/>
+  <text x="96" y="598" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">Use it when the task needs real reasoning, not when you just need a fast answer</text>
+</svg>

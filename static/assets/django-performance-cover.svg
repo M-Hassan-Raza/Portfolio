@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F5F3EE"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FCFBF8" stroke="#DED6CA"/>
+
+  <text x="96" y="132" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="700">Optimizing Django performance</text>
+  <text x="96" y="170" fill="#667085" font-family="Manrope, Arial, sans-serif" font-size="20">Lessons from a POS system under real load</text>
+
+  <rect x="96" y="220" width="292" height="276" rx="24" fill="#FFFFFF" stroke="#D8D0C4"/>
+  <text x="128" y="262" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Bottlenecks</text>
+
+  <rect x="128" y="300" width="228" height="46" rx="14" fill="#FEF2F2" stroke="#F2C8C8"/>
+  <text x="152" y="329" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Naive writes</text>
+
+  <rect x="128" y="362" width="228" height="46" rx="14" fill="#FEF2F2" stroke="#F2C8C8"/>
+  <text x="152" y="391" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Signal overhead</text>
+
+  <rect x="128" y="424" width="228" height="46" rx="14" fill="#FEF2F2" stroke="#F2C8C8"/>
+  <text x="152" y="453" fill="#991B1B" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">Redundant queries</text>
+
+  <rect x="436" y="220" width="344" height="276" rx="24" fill="#1F2937"/>
+  <text x="468" y="262" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Fixes that mattered</text>
+
+  <rect x="468" y="300" width="280" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="494" y="327" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">bulk_update</text>
+
+  <rect x="468" y="356" width="280" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="494" y="383" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Direct updates</text>
+
+  <rect x="468" y="412" width="280" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="494" y="439" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Cache hot paths</text>
+
+  <rect x="828" y="220" width="272" height="276" rx="24" fill="#F8F3E8" stroke="#E2D4C1"/>
+  <text x="860" y="262" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Result</text>
+
+  <path d="M884 414V316" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"/>
+  <path d="M952 414V286" stroke="#B45309" stroke-width="10" stroke-linecap="round"/>
+  <path d="M1020 414V244" stroke="#1D4ED8" stroke-width="10" stroke-linecap="round"/>
+  <text x="866" y="448" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="14">Before</text>
+  <text x="932" y="448" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="14">Better</text>
+  <text x="995" y="448" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="14">Best</text>
+  <text x="860" y="474" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700">Fewer queries, faster writes</text>
+
+  <text x="96" y="598" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">Bulk operations, explicit updates, and cache discipline beat accidental ORM churn</text>
+</svg>
