@@ -3,6 +3,10 @@ title: "Multi-Agent LLM Middleware: Lessons from Marketing Accelerant"
 date: 2026-01-10T10:00:00+05:00
 draft: false
 tags: ["LangGraph", "LangChain", "AI", "Middleware", "Python", "Production"]
+cover:
+  image: "/assets/multi-agent-middleware-cover.svg"
+  alt: "Multi-agent middleware illustration"
+  caption: "The hard part was never the number of agents. It was the control layer around them."
 showComments: true
 ShowToc: true
 ---
