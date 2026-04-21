@@ -9,9 +9,9 @@ ShowToc: true
 
 I'm the CPO and cofounder at [Entropy Labs](https://entropylabs.dev). I lead product and technical work across AI systems, backend architecture, and delivery.
 
-Most of my time goes into the messy middle where roadmap, system design, failure handling, and team execution all run into each other. I still like being close to the hard parts. Slow reporting paths. Brittle workflows. LLM systems that look fine in a demo and get weird with real users. Product decisions that quietly turn into engineering debt.
+Most of my time goes into work where roadmap, system design, failure handling, and team execution start colliding. I still like being close to the hard parts. Slow reporting paths. Brittle workflows. LLM systems that look fine in a demo and get weird with real users. Product decisions that quietly turn into engineering debt.
 
-I also spent a few years teaching labs at FAST-NUCES. That still shapes how I work. I like direct explanations, real examples, and systems that survive contact with edge cases.
+I also spent a few years teaching labs at FAST-NUCES. That still shapes how I work. I like direct explanations, real examples, and systems that still hold up once the edge cases show up.
 
 [GitHub](https://github.com/m-hassan-raza) · [LinkedIn](https://linkedin.com/in/hassanraza22) · [Email](mailto:raihassanraza10@gmail.com) · <a href="/assets/muhammad-hassan-raza-resume.pdf" target="_blank">Resume (PDF)</a>
 
@@ -29,27 +29,27 @@ I also spent a few years teaching labs at FAST-NUCES. That still shapes how I wo
 
 ## Work
 
-**CPO & Cofounder, Entropy Labs** (Jun 2025 – Present)
+**CPO & Cofounder, Entropy Labs** (Jun 2025 to Present)
 
-I lead product strategy and technical operations for an AI marketing platform. That means roadmap decisions, delivery pressure, infrastructure choices, and the usual question of what should be fixed in code versus what should be fixed in product. I still stay close to the architecture and the backend paths that can do real damage when they go wrong.
+I lead product strategy and technical operations for an AI marketing platform. That means roadmap decisions, delivery pressure, infrastructure choices, and the usual question of whether the real fix belongs in the product, the system, or the way the team is working. I still stay close to the architecture and the backend paths that can do real damage when they go wrong.
 
-**Technical Product Engineering Lead, Entropy Labs** (Sep 2024 – Jun 2025)
+**Technical Product Engineering Lead, Entropy Labs** (Sep 2024 to Jun 2025)
 
 I built workflow automations that cut manual onboarding time by 80 percent. I worked on AI document-processing flows, Django and Vue applications with streaming, and the migration work needed to get parts of the system out of a monolith without making the product worse in the process.
 
-**Senior Software Engineer, Entropy Labs** (Aug 2023 – Sep 2024)
+**Senior Software Engineer, Entropy Labs** (Aug 2023 to Sep 2024)
 
 I worked on FastAPI and Django systems under real traffic. A lot of that was backend cleanup, query work, caching, and making reporting and data-heavy flows fast enough that people would trust them.
 
-**Founder, Commit Software Solutions** (Mar 2020 – Present)
+**Founder, Commit Software Solutions** (Mar 2020 to Present)
 
 I started taking on client work while I was still in university. Polaris came out of that stretch. It taught me early that enterprise and operations software is never really about the happy path. The annoying edge cases are the product.
 
-**AI Engineer, WebNoodle Co.** (Mar 2022 – Jan 2024)
+**AI Engineer, WebNoodle Co.** (Mar 2022 to Jan 2024)
 
 I built LangChain-based systems for document processing, retrieval, ranking, and model integrations. That work made me care less about prompt demos and more about rate limits, observability, cost, and what happens when the model gives you something half-right.
 
-**Software Engineer Intern, Arrivy** (Jun 2023 – Aug 2023)
+**Software Engineer Intern, Arrivy** (Jun 2023 to Aug 2023)
 
 I worked on backend systems for employee management with Flask, BigQuery, and cloud automation on GCP.
 
@@ -57,11 +57,11 @@ I worked on backend systems for employee management with Flask, BigQuery, and cl
 
 ## Teaching and Mentoring
 
-**Lab Instructor, FAST-NUCES** (2024 – 2025)
+**Lab Instructor, FAST-NUCES** (2024 to 2025)
 
 I taught labs in Operating Systems, Software Construction & Development, and Web Engineering. The useful part was never the slide deck. It was getting students to debug the thing, trace what actually happened, and explain why the system behaved the way it did.
 
-**Teaching Assistant, FAST-NUCES** (2022 – 2024)
+**Teaching Assistant, FAST-NUCES** (2022 to 2024)
 
 I supported courses including Introduction to Software Engineering, Software for Mobile Devices, Information Security, and Software Project Management.
 
@@ -77,7 +77,7 @@ Retail ERP and POS work where inventory correctness, ledger integrity, and tenan
 **[Obelisk](/projects/obelisk/)**
 AI content system with specialized agents, retrieval, checkpointing, and the guardrails needed to keep it usable.
 
-**Anatomia**
+**[Anatomia](/projects/anatomia/)**
 Healthcare workflow software with HIPAA-heavy constraints, FHIR, clinical transcription, and ugly integration realities.
 
 **[Go Load Balancer Dashboard](https://github.com/M-Hassan-Raza/go-load-balancer-dash)**
@@ -87,7 +87,7 @@ A smaller public project, but a good one if you want to see how I think about co
 
 ## What I Care About
 
-- systems that have to survive real use, not demo traffic
+- systems that have to hold up under real use, not demo traffic
 - product decisions that respect engineering reality
 - backend performance work that fixes the real bottleneck
 - AI systems with sane failure handling
@@ -97,9 +97,9 @@ A smaller public project, but a good one if you want to see how I think about co
 
 ## Education
 
-**MS in Computer Science** — FAST-NUCES, Lahore (Aug 2024 – Aug 2027)
+**MS in Computer Science** at FAST-NUCES, Lahore (Aug 2024 to Aug 2027)
 
-**BS in Software Engineering** — FAST-NUCES, Lahore (Aug 2020 – Aug 2024)
+**BS in Software Engineering** at FAST-NUCES, Lahore (Aug 2020 to Aug 2024)
 
 ---
 

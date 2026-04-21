@@ -20,7 +20,7 @@ Go to the [teaching page](/teaching/) or jump straight to the [FYP guide](/blog/
 
 ## If You Want The Reading List
 
-The [books section](/books/) is the simpler version of that. Mostly software, systems, and a few things that helped shape how I think about work.
+If you just want the reading list, go straight to the [books section](/books/). Mostly software, systems, and a few things that helped shape how I think about work.
 
 ## If You Just Want The Full Archive
 

@@ -9,7 +9,7 @@ showReadingTime: false
 
 This page is for work that already matters.
 
-If you have a production system, an AI feature that needs to stop behaving like a demo, or a technical direction problem that is starting to cost the team real time, a short call makes sense.
+If you have a production system, a shaky AI feature, or a technical direction problem that is already costing the team time, a short call makes sense.
 
 [Book 30 Minutes](https://cal.com/muhammad-hassan-raza/30min)
 
@@ -32,7 +32,7 @@ If you have a production system, an AI feature that needs to stop behaving like 
 - I tell you where I think the issue actually is
 - if there is a fit, we talk about next steps
 
-I am not interested in padding this out. The point of the call is to get to a clear read on the work quickly.
+I am not interested in padding this out. The point of the call is to figure out quickly whether there is real work here.
 
 ---
 

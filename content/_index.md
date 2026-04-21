@@ -5,7 +5,7 @@ home:
   hero:
     kicker: "CPO, technical operator, backend and AI systems"
     title: "I lead product and technical work for systems that need to hold up after the demo."
-    summary: "Most of my work sits in the ugly middle where product decisions, backend architecture, delivery pressure, and AI reliability all hit at once. I like systems with real consequences: money moving, reports people rely on, workflows teams cannot afford to babysit."
+    summary: "Most of my work starts where product, backend, delivery, and AI problems all pile up at once. I like systems with real consequences: money moving, reports people rely on, workflows teams cannot afford to babysit."
     primary:
       label: "See selected work"
       url: "/projects/"
@@ -42,7 +42,7 @@ home:
     - title: "Founders and operators"
       body: "When the product is live, the technical direction is drifting, and the next bad decision is going to get expensive."
     - title: "Engineering leaders"
-      body: "When you need someone who can audit the system, find the weak spots, and still go deep in code without turning it into theatre."
+      body: "When you need someone who can audit the system, find the weak spots, and still go deep in code without making a show of it."
     - title: "Teams shipping AI"
       body: "When the prototype works well enough for a demo, but not well enough for the people who have to live with it."
   featured_work:
@@ -70,7 +70,7 @@ home:
       note: "Why reading other people's production code teaches more than another polished tutorial."
   teaching:
     title: "Years in the lab still shape how I work."
-    body: "I spent years teaching labs at FAST-NUCES. The writing here follows the same rule the labs did: no hand-waving, no tutorial theatre, and no pretending edge cases do not count."
+    body: "I spent years teaching labs at FAST-NUCES. The writing here follows the same rule the labs did: skip the hand-waving and deal with the parts that actually break."
     primary:
       label: "See teaching notes"
       url: "/teaching/"
@@ -79,7 +79,7 @@ home:
       url: "/blog/fyp-guidance/"
   closing:
     title: "If you're dealing with a system that already matters, start there."
-    body: "I am most useful when the work is real: product pressure, delivery risk, brittle backend paths, or AI features that have to survive contact with users."
+    body: "I am most useful when the work is real: product pressure, delivery risk, brittle backend paths, or AI features that have to hold up under real use."
     primary:
       label: "Contact me"
       url: "/book-a-call/"

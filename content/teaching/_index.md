@@ -16,13 +16,13 @@ The useful part of teaching was never the slide deck. It was watching someone hi
 - Operating Systems
 - Software Construction & Development
 - Web Engineering
-- earlier TA work in software engineering, mobile development, information security, and project management
+- Earlier TA work in software engineering, mobile development, information security, and project management
 
 ## How I Tend To Teach
 
 - start from the real system, not the neat toy example
 - force the debugging step instead of skipping to the answer
-- talk about tradeoffs, not just the "correct" pattern
+- talk about tradeoffs, not just the textbook answer
 - keep the explanation plain
 - assume edge cases count
 

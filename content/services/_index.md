@@ -21,7 +21,7 @@ Sometimes the problem is not one bug. It is that the product, architecture, and 
 
 I help sort out:
 
-- what should be fixed in product and what should be fixed in code
+- which problems are really product problems and which ones need engineering work
 - which parts of the system need to be rewritten, simplified, or left alone
 - where AI actually helps and where it only adds latency and confusion
 - what the next few technical decisions should be, in order
@@ -79,7 +79,7 @@ From there, the work usually turns into one of three things:
 - a scoped cleanup or implementation pass
 - ongoing advisory and hands-on help for a team that is already shipping
 
-I work directly with founders, operators, and engineering teams. I prefer plain language, fast async communication, and focused calls when they help move the work forward.
+I work directly with founders, operators, and engineering teams. I prefer plain language, fast async communication, and focused calls when async stops being enough.
 
 ---
 
