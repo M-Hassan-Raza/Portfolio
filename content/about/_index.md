@@ -72,13 +72,13 @@ If you want the teaching side in one place, start with the [teaching page](/teac
 ## Selected Work
 
 **[Polaris ERP](/projects/polaris/)**
-Retail ERP and POS work where inventory correctness, ledger integrity, and tenant isolation all matter.
+Retail operations software where stock truth, ledgers, supplier workflows, and tenant isolation all have to stay aligned.
 
 **[Obelisk](/projects/obelisk/)**
 AI content system with specialized agents, retrieval, checkpointing, and the guardrails needed to keep it usable.
 
 **[Anatomia](/projects/anatomia/)**
-Healthcare workflow software with HIPAA-heavy constraints, FHIR, clinical transcription, and ugly integration realities.
+Care workflow software with PHI controls, callback operations, role handoffs, and the usual ugly integration realities.
 
 **[Go Load Balancer Dashboard](https://github.com/M-Hassan-Raza/go-load-balancer-dash)**
 A smaller public project, but a good one if you want to see how I think about concurrency, visibility, and systems work.

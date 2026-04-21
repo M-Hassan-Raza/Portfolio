@@ -47,14 +47,14 @@ home:
       body: "When the prototype works well enough for a demo, but not well enough for the people who have to live with it."
   featured_work:
     - page: "/projects/polaris/"
-      label: "Retail ERP"
-      note: "Inventory correctness, ledger integrity, tenant isolation."
+      label: "Retail operations platform"
+      note: "Batch stock truth, ledger integrity, and tenant-safe operations."
     - page: "/projects/obelisk/"
       label: "AI content system"
       note: "Multi-tenant agents, retrieval, reliability, and guardrails."
     - page: "/projects/anatomia/"
-      label: "Healthcare workflow"
-      note: "FHIR, HIPAA-heavy constraints, clinical data handling."
+      label: "Clinical callback workflow"
+      note: "PHI controls, nurse review, escalation paths, and voice follow-up."
   featured_writing:
     - page: "/blog/war-stories-from-production/"
       label: "Production lessons"
