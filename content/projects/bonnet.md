@@ -23,6 +23,8 @@ Bonnet is an AI brand-development product built around a clear delivery flow. A 
 
 **Source:** Private (commercial product)
 
+**My role:** Team project. I owned most of the backend execution flow, long-running job state, rerun behavior, retrieval contracts, and export plumbing.
+
 ---
 
 ## The Product Loop

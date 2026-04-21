@@ -1,7 +1,7 @@
 ---
 title: "Scoring Fraud in Legal Intake Calls"
 date: 2026-02-20T10:00:00+05:00
-description: "A walkthrough of RISQ, the intake scoring system I built to combine transcripts, external verification, and disposition gates."
+description: "A walkthrough of RISQ, the intake scoring system I worked on, combining transcripts, external verification, and disposition gates."
 draft: false
 tags: ["AI", "Fraud Detection", "Legal Tech", "Python", "LLM", "AssemblyAI"]
 showComments: true
@@ -11,7 +11,7 @@ cover:
   alt: "Legal intake fraud scoring cover"
 ---
 
-I built RISQ, a fraud detection system for legal intake calls. Mass tort law firms receive thousands of calls from potential claimants, and a significant percentage are fraudulent — coached callers reading from scripts, people who never actually used the drug or product in question, or repeat callers under different names.
+I worked on RISQ, a fraud detection system for legal intake calls. Mass tort law firms receive thousands of calls from potential claimants, and a significant percentage are fraudulent: coached callers reading from scripts, people who never actually used the drug or product in question, or repeat callers under different names.
 
 RISQ listens to these calls, scores them for authenticity, and recommends whether to transfer the caller to a closer, flag them for review, or quarantine the call.
 

@@ -15,6 +15,8 @@ I also spent a few years teaching labs at FAST-NUCES. That still shapes how I wo
 
 [GitHub](https://github.com/m-hassan-raza) · [LinkedIn](https://linkedin.com/in/hassanraza22) · [Email](mailto:raihassanraza10@gmail.com) · <a href="/assets/muhammad-hassan-raza-resume.pdf" target="_blank">Resume (PDF)</a>
 
+For private commercial work, I try to describe the part I actually owned. Some systems here were solo client builds. Some were team products where my work was concentrated in backend architecture, workflow design, and product direction.
+
 ---
 
 ## Quick Context
@@ -22,7 +24,7 @@ I also spent a few years teaching labs at FAST-NUCES. That still shapes how I wo
 - I lead product and technical work for an 8-person cross-functional team at Entropy Labs.
 - I helped cut a manual onboarding flow by 80 percent, from roughly 2 hours to 25 minutes.
 - I took a reporting path from 750ms to 230ms by cleaning up the query shape instead of piling on more hardware.
-- I have built systems in retail, healthcare, legal intake, and marketing, usually where correctness, latency, or reliability actually matter.
+- I have worked on systems in retail, healthcare, legal intake, and marketing, usually where correctness, latency, or reliability actually matter.
 - I taught labs in operating systems, software construction, and web engineering before stepping away from teaching.
 
 ---

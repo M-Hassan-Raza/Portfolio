@@ -23,6 +23,8 @@ Anatomia is a care workflow product centered on callbacks and case review. The c
 
 **Source:** Private (healthcare client)
 
+**My role:** Team project. My work was concentrated on the backend workflow layer, transcript and triage handling, case-state plumbing, and the follow-up paths that had to stay tied to the right patient record.
+
 ---
 
 ## What The Product Handles

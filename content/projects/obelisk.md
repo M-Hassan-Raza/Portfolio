@@ -17,11 +17,13 @@ projectLabel: "AI content system"
 projectFocus: "Specialized agents, retrieval, checkpointing, and strong guardrails."
 ---
 
-Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy—all within a multi-tenant SaaS architecture with space-level isolation.
+Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy, all within a multi-tenant SaaS architecture with space-level isolation.
 
 **Tech Stack:** FastAPI, LangGraph, PostgreSQL, Vertex AI, Redis, Google Cloud
 
 **Source:** Private (commercial product) · [Book a call](/book-a-call/) to discuss
+
+**My role:** Team product at Entropy Labs. I led product and backend work around agent orchestration, retrieval, checkpointing, guardrails, and multi-tenant runtime behavior.
 
 ---
 

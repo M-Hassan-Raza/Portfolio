@@ -12,7 +12,7 @@ showComments: true
 ShowToc: true
 ---
 
-Marketing Accelerant is an AI-powered marketing analytics platform I built at Entropy Labs. It runs 15+ specialized LLM agents — Brand Voice, Creative Content, CMO Strategy, SEO, Email Campaigns, Google Ads, Meta Ads, Video Studio, and more — all serving enterprise clients through a single FastAPI backend.
+Marketing Accelerant is an AI-powered marketing analytics platform I worked on at Entropy Labs. It runs 15+ specialized LLM agents for Brand Voice, Creative Content, CMO Strategy, SEO, Email Campaigns, Google Ads, Meta Ads, Video Studio, and more, all serving enterprise clients through a single FastAPI backend.
 
 The agents themselves aren't the hard part. The hard part is everything around them: model selection, context management, cost control, error recovery, and human approval. This post covers the middleware architecture that makes it work in production.
 
