@@ -2,6 +2,11 @@
 title: "Bonnet AI"
 date: 2025-01-15
 description: "AI brand-development platform that turns a creative brief into research, strategy, creative direction, moodboards, and exportable deliverables."
+images: ["/assets/bonnet-cover.svg"]
+cover:
+  image: "/assets/bonnet-cover.svg"
+  alt: "Bonnet brand workflow illustration"
+  caption: "The product was most useful when the brief, the execution state, and the final deliverables all stayed connected."
 tags: ["AI", "Next.js", "Django", "OpenRouter", "Supabase", "Creative Tools"]
 categories: ["Projects"]
 showToc: true
@@ -31,6 +36,7 @@ The output is more structured than a generic assistant chat:
 - creative concepts and visual direction
 - moodboards and linked assets
 - PDF exports with citations and supporting material
+
 
 ## The Hard Parts
 

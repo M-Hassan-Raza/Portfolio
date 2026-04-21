@@ -2,6 +2,11 @@
 title: "Anatomia Healthcare"
 date: 2025-01-10
 description: "Care workflow platform for nurse callbacks, case review, encrypted transcripts, and voice follow-up."
+images: ["/assets/anatomia-cover.svg"]
+cover:
+  image: "/assets/anatomia-cover.svg"
+  alt: "Anatomia callback workflow illustration"
+  caption: "The work was less about generic health-tech polish and more about carrying patient context safely through review, escalation, and follow-up."
 tags: ["Healthcare", "FastAPI", "React", "AWS", "Vapi", "AI"]
 categories: ["Projects"]
 showToc: true
@@ -29,6 +34,7 @@ The product code points to a workflow with:
 - call transcripts, AI analysis, urgency scoring, and suggested follow-up language
 - outbound voice follow-up through Vapi
 - analytics and case state tracking across several workflow stages
+
 
 ## The Hard Parts
 

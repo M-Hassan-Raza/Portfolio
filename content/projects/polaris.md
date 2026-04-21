@@ -2,7 +2,11 @@
 title: "Polaris ERP"
 date: 2025-02-10
 description: "Retail operations platform covering POS, stock, ledgers, supplier workflows, reporting, and tenant-safe APIs."
-images: ["/assets/home.webp"]
+images: ["/assets/polaris-cover.svg"]
+cover:
+  image: "/assets/polaris-cover.svg"
+  alt: "Polaris retail operations illustration"
+  caption: "A simplified view of the operational seams that mattered most: inventory, billing, ledgers, supplier imports, and tenant-safe flows."
 tags: ["Django", "Vue.js", "PostgreSQL", "ERP", "Full-Stack", "Concurrency"]
 categories: ["Projects"]
 showToc: true
@@ -33,6 +37,7 @@ This is not just a billing screen with some inventory tables behind it. The code
 - ratelist imports that have to digest CSV, Excel, and PDF files from suppliers who do not care about your schema
 
 That breadth matters because the difficult bugs usually live between modules, not inside one screen.
+
 
 ## The Hard Parts
 
