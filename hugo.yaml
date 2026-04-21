@@ -24,10 +24,25 @@ params:
   ShowPostNavLinks: true
   assets:
     disableHLJS: true
-    extendedCSS: true
     favicon: assets/favicon.svg
     favicon16x16: assets/favicon.svg
     favicon32x32: assets/favicon.svg
+    apple_touch_icon: assets/favicon.svg
+    safari_pinned_tab: assets/favicon.svg
+
+  analytics:
+    umami:
+      scriptUrl: "https://cloud.umami.is/script.js"
+      websiteId: "30c7d9d6-abac-4c52-b85a-c0234f863d22"
+
+  schema:
+    publisherType: "Person"
+    jobTitle: "CPO and technical operator"
+    sameAs:
+      - "https://github.com/m-hassan-raza"
+      - "https://linkedin.com/in/hassanraza22"
+      - "https://stackoverflow.com/users/14460053/m-hassan-raza"
+      - "https://medium.com/@raihassanraza10"
 
   # Show blog posts on the homepage (if any)
   mainSections: ["blog"]
