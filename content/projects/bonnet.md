@@ -7,6 +7,9 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -9
+featured: true
+projectLabel: "Creative workflow platform"
+projectFocus: "RAG, multi-persona flows, and commercial AI product design."
 ---
 
 Bonnet is a SaaS platform that automates the research-to-mood-board workflow for creative agencies. It uses AI to match designers with clients based on portfolio analysis and provides multi-persona AI assistants for different stages of the creative process.

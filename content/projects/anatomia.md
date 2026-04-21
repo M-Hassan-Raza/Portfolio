@@ -7,6 +7,9 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -8
+featured: true
+projectLabel: "Healthcare workflow"
+projectFocus: "FHIR, HIPAA-heavy constraints, and clinical data handling."
 ---
 
 Anatomia is a healthcare communication platform that handles patient-provider interactions with HIPAA compliance baked in. It integrates real-time transcription, AI-powered clinical decision support, and standardized healthcare data exchange through FHIR.

@@ -7,6 +7,9 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -8
+featured: true
+projectLabel: "AI content system"
+projectFocus: "Specialized agents, retrieval, checkpointing, and strong guardrails."
 ---
 
 Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy—all within a multi-tenant SaaS architecture with space-level isolation.

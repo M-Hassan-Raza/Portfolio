@@ -7,6 +7,9 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -10
+featured: true
+projectLabel: "Retail ERP"
+projectFocus: "Inventory correctness, ledger integrity, and multi-tenant isolation."
 ---
 
 Polaris is a full-stack ERP and POS system I built for retail businesses. It handles inventory, sales, customer management, and financial reporting—the kind of system where bugs cost money and downtime loses customers.
