@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F5F3EE"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FCFBF8" stroke="#DDD6CB"/>
+
+  <text x="96" y="132" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="700">Pyscn</text>
+  <text x="96" y="170" fill="#667085" font-family="Manrope, Arial, sans-serif" font-size="20">Python analysis with Go, tree-sitter, and MCP</text>
+
+  <rect x="96" y="224" width="240" height="266" rx="24" fill="#1F2937"/>
+  <text x="128" y="266" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Parse</text>
+  <rect x="128" y="316" width="176" height="40" rx="14" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="152" y="342" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">tree-sitter CST</text>
+  <rect x="128" y="372" width="176" height="40" rx="14" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="152" y="398" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Go walkers</text>
+
+  <path d="M360 356H428" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="394" cy="356" r="10" fill="#1D4ED8"/>
+
+  <rect x="444" y="224" width="360" height="266" rx="24" fill="#FFFFFF" stroke="#D8D0C4"/>
+  <text x="476" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Analyze</text>
+  <rect x="476" y="312" width="296" height="40" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="512" y="338" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Control flow graphs</text>
+  <rect x="476" y="368" width="296" height="40" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="512" y="394" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Clone types 1 to 4</text>
+  <rect x="476" y="424" width="296" height="40" rx="16" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="512" y="450" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">LSH acceleration</text>
+
+  <path d="M828 356H896" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="862" cy="356" r="10" fill="#B45309"/>
+
+  <rect x="912" y="224" width="188" height="266" rx="24" fill="#F8F3E8" stroke="#E0D4C1"/>
+  <text x="944" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Output</text>
+  <rect x="944" y="316" width="124" height="40" rx="14" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="974" y="342" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">CLI</text>
+  <rect x="944" y="372" width="124" height="40" rx="14" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="974" y="398" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">MCP</text>
+  <rect x="944" y="428" width="124" height="28" rx="14" fill="#FEF3C7"/>
+  <text x="976" y="446" fill="#92400E" font-family="Manrope, Arial, sans-serif" font-size="13" font-weight="700">100k+ lines/s</text>
+
+  <text x="96" y="598" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">A fast analyzer that turns parsed Python into dead code, clone, and complexity signals</text>
+</svg>

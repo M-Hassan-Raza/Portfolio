@@ -6,6 +6,9 @@ tags: ["Performance", "Vue.js", "POS", "Web Development"]
 categories: ["Performance", "Web Development"]
 showToc: true
 showComments: true
+cover:
+  image: "/assets/invoice-search-performance-cover.svg"
+  alt: "Invoice search performance cover"
 ---
 
 In [Polaris](/projects/polaris), the POS system I built for retail shops, the invoice page has a product search bar. A cashier types a product name, results appear, they click to add it to the invoice. Simple.
