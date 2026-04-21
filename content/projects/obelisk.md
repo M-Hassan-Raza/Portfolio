@@ -2,6 +2,7 @@
 title: "Obelisk"
 date: 2025-01-20
 description: "AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture"
+images: ["/assets/RAG-Flow.png"]
 tags: ["AI", "LangGraph", "FastAPI", "PostgreSQL", "RAG", "Multi-Tenant", "Vertex AI"]
 categories: ["Projects"]
 showToc: true

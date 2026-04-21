@@ -15,6 +15,9 @@
   {{- with site.Params.schema.jobTitle }}
     {{- $person = merge $person (dict "jobTitle" .) -}}
   {{- end }}
+  {{- with site.Params.schema.image }}
+    {{- $person = merge $person (dict "image" (. | absURL)) -}}
+  {{- end }}
   {{- with site.Params.schema.sameAs }}
     {{- $person = merge $person (dict "sameAs" .) -}}
   {{- end }}

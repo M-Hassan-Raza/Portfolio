@@ -38,11 +38,15 @@ params:
   schema:
     publisherType: "Person"
     jobTitle: "CPO and technical operator"
+    image: "/muhammad-hassan-raza-profile.webp"
     sameAs:
       - "https://github.com/m-hassan-raza"
       - "https://linkedin.com/in/hassanraza22"
       - "https://stackoverflow.com/users/14460053/m-hassan-raza"
       - "https://medium.com/@raihassanraza10"
+
+  images:
+    - "/muhammad-hassan-raza-profile.webp"
 
   # Show blog posts on the homepage (if any)
   mainSections: ["blog"]

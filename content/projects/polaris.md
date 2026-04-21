@@ -2,6 +2,7 @@
 title: "Polaris ERP"
 date: 2025-02-10
 description: "Full-stack retail ERP system with race-condition-safe inventory, double-entry bookkeeping, and multi-tenant architecture"
+images: ["/assets/home.webp"]
 tags: ["Django", "Vue.js", "PostgreSQL", "ERP", "Full-Stack", "Concurrency"]
 categories: ["Projects"]
 showToc: true
