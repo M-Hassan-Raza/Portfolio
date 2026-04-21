@@ -72,11 +72,11 @@ home:
     title: "Years in the lab still shape how I work."
     body: "I spent years teaching labs at FAST-NUCES. The writing here follows the same rule the labs did: no hand-waving, no tutorial theatre, and no pretending edge cases do not count."
     primary:
+      label: "See teaching notes"
+      url: "/teaching/"
+    secondary:
       label: "Read the FYP guide"
       url: "/blog/fyp-guidance/"
-    secondary:
-      label: "Browse resources"
-      url: "/resources/"
   closing:
     title: "If you're dealing with a system that already matters, start there."
     body: "I am most useful when the work is real: product pressure, delivery risk, brittle backend paths, or AI features that have to survive contact with users."

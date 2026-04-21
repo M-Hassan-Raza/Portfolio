@@ -1,67 +1,90 @@
 ---
 title: "Services"
 date: 2025-01-01
-description: "AI systems, backend development, and architecture consulting"
+description: "Help with production systems, AI delivery, and technical direction."
 ShowBreadCrumbs: false
 ShowToc: false
 draft: false
 ---
 
-I take on select projects in AI systems, backend development, and architecture consulting. Here's what that typically looks like.
+If the work is still at pitch-deck stage, I am probably not the right person.
+
+I am most useful once the system already matters and the wrong technical call is going to cost time, money, or trust.
 
 ---
 
-## AI Systems
+## Where I Usually Help
 
-Building production AI applications—not demos. This includes:
+### 1. Fix the technical direction
 
-- **RAG pipelines** — Document processing, embedding strategies, retrieval optimization
-- **LLM integrations** — OpenAI, Anthropic, and other providers with proper rate limiting and cost controls
-- **AI agents** — LangChain, LangGraph, and multi-agent orchestration
-- **Production concerns** — Monitoring, evaluation, cost management, failure handling
+Sometimes the problem is not one bug. It is that the product, architecture, and delivery plan are pulling in different directions.
 
-I've built AI systems processing thousands of documents daily for enterprise clients. The focus is always on reliability and cost-effectiveness, not just getting something working in a notebook.
+I help sort out:
+
+- what should be fixed in product and what should be fixed in code
+- which parts of the system need to be rewritten, simplified, or left alone
+- where AI actually helps and where it only adds latency and confusion
+- what the next few technical decisions should be, in order
+
+### 2. Get an AI system into shape
+
+This is usually not prompt work. It is the rest of the system around the model:
+
+- retrieval and context quality
+- agent workflow design
+- approvals and guardrails
+- failure handling
+- evals and operator visibility
+- cost and response-time pressure
+
+I have worked on AI products where the real work was not making the model answer once. It was making the whole thing reliable enough that a team could live with it.
+
+### 3. Clean up backend pressure points
+
+This is the unglamorous work that tends to matter most:
+
+- slow reporting paths
+- brittle integrations
+- race conditions and multi-user correctness problems
+- background-job sprawl
+- caching that is hiding a deeper design problem
+- database queries that got bad one endpoint at a time
 
 ---
 
-## Backend Development
+## Good Fit
 
-Python backends with Django or FastAPI. Typical work includes:
+- the product is already live
+- the team needs a second set of eyes on system design or technical direction
+- the backend is under strain and the real bottleneck is unclear
+- the AI feature works in demos but is shaky in production
+- you want hands-on help, not a slide deck full of filler
 
-- **API design and implementation** — RESTful APIs, GraphQL, WebSockets
-- **Database work** — PostgreSQL optimization, Redis caching, data modeling
-- **System integrations** — Third-party APIs, payment processors, healthcare standards (FHIR, HL7)
-- **Performance optimization** — Query optimization, caching strategies, load handling
+## Not A Great Fit
 
-I've built systems serving enterprise clients with high availability requirements. The work is usually with existing codebases that need improvement, not greenfield projects.
-
----
-
-## Architecture Consulting
-
-Sometimes you don't need someone to write code—you need someone to help figure out the right approach. This includes:
-
-- **Technical architecture review** — Evaluating existing systems, identifying bottlenecks
-- **AI strategy** — Figuring out where AI actually helps vs. where it's hype
-- **Production readiness** — Getting from prototype to production-grade
-- **Team guidance** — Helping teams level up on new technologies
-
-I can review your architecture, provide recommendations, and help your team implement them.
+- quick marketing sites
+- vague "add AI" projects with no actual user problem behind them
+- huge strategy engagements with no interest in implementation
+- work where nobody wants to touch the hard parts yet
 
 ---
 
 ## How I Work
 
-**Typical engagement:** Most projects are ongoing retainers or fixed-scope projects. I work directly with technical teams and stakeholders.
+I usually start with a short audit. I look at the product flow, the code paths that matter, and the point where the current approach is leaking time or reliability.
 
-**Communication:** Regular async updates, available for calls when needed. I use Linear for project tracking and Slack/Discord for communication.
+From there, the work usually turns into one of three things:
 
-**Location:** Based in Lahore, Pakistan (PKT/GMT+5). I've worked with teams across US, Europe, and Asia timezones.
+- a concrete technical plan
+- a scoped cleanup or implementation pass
+- ongoing advisory and hands-on help for a team that is already shipping
+
+I work directly with founders, operators, and engineering teams. I prefer plain language, fast async communication, and focused calls when they help move the work forward.
 
 ---
 
-## Get Started
+## Start Here
 
-If you have a project in mind, [book a call](/book-a-call/) and we can discuss whether it's a good fit.
+If you think I might be useful, [book a call](/book-a-call/).
 
-You can also email me directly at [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com).
+If it is about a role, a workshop, or something that does not need a call yet, email me at [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com).
