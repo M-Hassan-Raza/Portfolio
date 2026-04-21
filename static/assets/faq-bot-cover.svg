@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F5F3EE"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FCFBF8" stroke="#DED6CA"/>
+
+  <text x="96" y="132" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="700">Smarter FAQ bot</text>
+  <text x="96" y="170" fill="#667085" font-family="Manrope, Arial, sans-serif" font-size="20">Gemini, RAG, ChromaDB, and structured output</text>
+
+  <rect x="96" y="224" width="210" height="258" rx="24" fill="#FFFFFF" stroke="#D8D0C4"/>
+  <text x="126" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Documents</text>
+  <rect x="126" y="306" width="150" height="40" rx="14" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="156" y="332" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Manuals</text>
+  <rect x="126" y="362" width="150" height="40" rx="14" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="156" y="388" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Wiki pages</text>
+  <rect x="126" y="418" width="150" height="40" rx="14" fill="#EEF2F7" stroke="#D8E0E8"/>
+  <text x="156" y="444" fill="#374151" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">FAQs</text>
+
+  <rect x="344" y="224" width="462" height="258" rx="24" fill="#1F2937"/>
+  <text x="376" y="266" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">RAG pipeline</text>
+
+  <rect x="376" y="304" width="150" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="404" y="331" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Embeddings</text>
+  <text x="390" y="355" fill="#C5D1DE" font-family="Manrope, Arial, sans-serif" font-size="14">text-embedding-004</text>
+
+  <path d="M526 326H566" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <rect x="566" y="304" width="120" height="42" rx="16" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="591" y="331" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">ChromaDB</text>
+
+  <path d="M686 326H726" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <rect x="376" y="386" width="350" height="52" rx="18" fill="#F8FAFC" fill-opacity="0.08" stroke="#9CA3AF" stroke-opacity="0.24"/>
+  <text x="404" y="417" fill="#F8FAFC" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">Retrieved context only</text>
+
+  <rect x="844" y="224" width="256" height="258" rx="24" fill="#F8F3E8" stroke="#E2D4C1"/>
+  <text x="876" y="266" fill="#1F2937" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">Answer</text>
+
+  <rect x="876" y="304" width="192" height="44" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="902" y="332" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">gemini-2.0-flash</text>
+
+  <rect x="876" y="366" width="192" height="44" rx="16" fill="#FFFFFF" stroke="#E5D8C5"/>
+  <text x="902" y="394" fill="#9A3412" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="700">JSON output</text>
+
+  <rect x="876" y="428" width="120" height="28" rx="14" fill="#FEF3C7"/>
+  <text x="904" y="446" fill="#92400E" font-family="Manrope, Arial, sans-serif" font-size="13" font-weight="700">Confidence</text>
+
+  <text x="96" y="598" fill="#6B7280" font-family="Manrope, Arial, sans-serif" font-size="18">Index, retrieve, answer from context, and return something structured enough to trust</text>
+</svg>

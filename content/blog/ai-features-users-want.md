@@ -6,9 +6,9 @@ tags: ["AI", "Product", "UX", "Features", "Startup", "Product Development", "CPO
 categories: ["Product Development"]
 showComments: true
 cover:
-  image: "/assets/ai-product.jpg"
-  alt: "AI Product Features"
-  caption: "The graveyard of AI features is full of chatbots nobody asked for"
+  image: "/assets/ai-features-cover.svg"
+  alt: "AI features users actually want diagram"
+  caption: "The useful work is usually in defaults, summaries, alerts, and contextual help, not another chatbot."
   relative: false
 ShowToc: true
 ---

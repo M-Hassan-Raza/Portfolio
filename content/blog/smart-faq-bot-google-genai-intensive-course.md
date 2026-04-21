@@ -5,9 +5,9 @@ draft: true
 tags: ["FAQ Bot", "RAG", "Retrieval Augmented Generation", "Gemini API", "ChromaDB", "Embeddings", "Structured Output", "Vector Store", "Python", "AI Agents"]
 showComments: true
 cover:
-    image: "/assets/faq-bot-cover.jpg" # Placeholder - replace with an actual image path
-    alt: "Intelligent FAQ Bot"
-    caption: "Creating a reliable Q&A system using Retrieval Augmented Generation and Google's Gemini API. Photo by Pixabay: https://www.pexels.com/photo/white-robot-on-grey-surface-3861958/"
+    image: "/assets/faq-bot-cover.svg"
+    alt: "FAQ bot RAG pipeline diagram"
+    caption: "A simple RAG pipeline: index documents, retrieve context, and return structured answers with a confidence signal."
     relative: false
 ---
 
