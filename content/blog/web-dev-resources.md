@@ -5,9 +5,9 @@ draft: false
 tags: ["Web Development", "Free Courses", "Learn to Code", "freeCodeCamp", "The Odin Project", "Full Stack Open"]
 showComments: true
 cover:
-    image: "/assets/web-dev.jpg"
-    alt: "Laptop showing code editor with web development concepts"
-    caption: "Photo by cottonbro studio: https://www.pexels.com/photo/workstation-computer-monitor-with-html-editor-6804613/"
+    image: "/assets/web-dev-resources-cover.svg"
+    alt: "Web development learning resources comparison diagram"
+    caption: "Pick one path, finish it, and then prove the learning with your own projects."
     relative: false
 ---
 
