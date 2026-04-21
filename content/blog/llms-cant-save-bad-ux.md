@@ -1,6 +1,7 @@
 ---
 title: "LLMs Can't Save Bad UX"
 date: 2026-03-18T10:00:00+05:00
+description: "If the product flow is weak, adding an LLM usually just adds latency, opacity, and a fancier way to disappoint users."
 draft: false
 tags: ["AI", "UX", "Product", "LLM", "CPO", "Startup", "Product Development"]
 categories: ["Product Development"]

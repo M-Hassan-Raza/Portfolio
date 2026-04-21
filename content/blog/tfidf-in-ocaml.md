@@ -1,6 +1,7 @@
 ---
 title: "TF-IDF in OCaml: When Functional Programming Clicks"
 date: 2026-03-22T10:00:00+05:00
+description: "Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps."
 draft: false
 tags: ["OCaml", "Functional Programming", "Search", "TF-IDF", "Cogitator"]
 showComments: true

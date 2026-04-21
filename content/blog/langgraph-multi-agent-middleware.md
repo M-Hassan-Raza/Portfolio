@@ -1,6 +1,7 @@
 ---
 title: "Multi-Agent LLM Middleware: Lessons from Marketing Accelerant"
 date: 2026-01-10T10:00:00+05:00
+description: "What it took to make a multi-agent AI stack survive production: model routing, approval gates, retries, cost control, and sane control flow."
 draft: false
 tags: ["LangGraph", "LangChain", "AI", "Middleware", "Python", "Production"]
 cover:

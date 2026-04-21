@@ -1,6 +1,7 @@
 ---
 title: "I Shipped a Race Condition That Double-Charged Customers (And Other War Stories)"
 date: 2025-11-15T10:00:00+05:00
+description: "The production bugs I actually shipped, how they failed in the real world, and what fixed them."
 draft: false
 tags: ["Production", "Django", "PostgreSQL", "Concurrency", "Python", "Debugging", "Backend Development"]
 categories: ["Backend Development"]
@@ -247,4 +248,3 @@ Every one of these bugs has the same root cause: I knew the theory but didn't re
 The fixes aren't clever. `nowait=True`. Input validation. `select_related`. Advisory locks. Explicit service calls. These are boring solutions to expensive problems.
 
 If there's one thing I'd tell past-me, it's this: the blog posts that would have actually helped me aren't the "How to Build X" posts. They're the "How X Broke and Why I Didn't See It Coming" posts. So here's mine.
-

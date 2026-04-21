@@ -1,6 +1,7 @@
 ---
 title: "Structured Logging for AI Debugging"
 date: 2026-03-05T10:00:00+05:00
+description: "Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs."
 draft: false
 tags: ["Logging", "AI", "Developer Tools", "TypeScript", "Nuxt", "Evlog"]
 showComments: true

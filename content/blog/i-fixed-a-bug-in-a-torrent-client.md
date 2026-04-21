@@ -1,6 +1,7 @@
 ---
 title: "I Fixed a Bug in a Torrent Client I've Never Used"
 date: 2025-12-10T10:00:00+05:00
+description: "A piece on drive-by open source fixes, why I keep chasing them, and what that habit has taught me."
 draft: false
 tags: ["Open Source", "Contributing", "C++", "TypeScript", "Python", "Developer Culture"]
 categories: ["Open Source"]
@@ -100,4 +101,3 @@ If you're thinking about contributing to open source: don't start with "what pro
 Open the issue tracker. Read the code. You'll either find the bug and fix it, or you'll understand why it's harder than you thought. Both outcomes make you a better engineer.
 
 And if you end up fixing theme alignment in a torrent client you'll never open again? That's fine. Somebody out there is looking at aligned sidebars because of you. That's enough.
-
