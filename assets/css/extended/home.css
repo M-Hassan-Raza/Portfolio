@@ -1,0 +1,345 @@
+.main {
+  max-width: min(1160px, calc(100vw - 2rem));
+}
+
+.nav {
+  align-items: center;
+}
+
+.logo a {
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.75rem);
+  letter-spacing: -0.03em;
+}
+
+#menu {
+  gap: 0.35rem;
+}
+
+#menu li + li {
+  margin-inline-start: 0;
+}
+
+#menu a {
+  padding: 0 0.8rem;
+  border-radius: 999px;
+}
+
+#menu .active {
+  border-bottom: 0;
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.home-shell {
+  display: grid;
+  gap: clamp(3rem, 5vw, 5rem);
+  padding-block: clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem);
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.9fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.home-kicker,
+.home-section-kicker,
+.feature-label,
+.writing-label {
+  margin: 0 0 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.home-title {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(2.8rem, 6vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.home-summary {
+  margin: 1.35rem 0 0;
+  max-width: 64ch;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--secondary);
+}
+
+.home-cta-row,
+.home-inline-links,
+.home-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.home-cta-row,
+.home-quick-links {
+  margin-top: 1.5rem;
+}
+
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--duration-fast, 0.2s) ease, background-color var(--duration-fast, 0.2s) ease;
+}
+
+.home-button:hover,
+.home-button:focus-visible {
+  transform: translateY(-1px);
+}
+
+.home-button-primary {
+  background: var(--content);
+  color: var(--theme);
+}
+
+.home-button-secondary {
+  background: color-mix(in srgb, var(--primary) 10%, var(--entry));
+  color: var(--content);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+}
+
+.home-text-link {
+  color: var(--content);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-text-link:hover,
+.home-text-link:focus-visible {
+  color: var(--primary);
+}
+
+.home-quick-links a,
+.footer-inline-nav a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.home-quick-links a:hover,
+.home-quick-links a:focus-visible,
+.footer-inline-nav a:hover,
+.footer-inline-nav a:focus-visible {
+  color: var(--content);
+}
+
+.home-portrait-card {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--entry) 92%, var(--primary) 8%), var(--entry));
+  box-shadow: var(--shadow-lg);
+}
+
+.home-portrait {
+  display: block;
+  width: min(100%, 360px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.home-portrait-card figcaption {
+  position: static;
+  width: auto;
+  padding: 0;
+  transform: none;
+  background: none;
+  color: var(--secondary);
+  text-align: left;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.home-section {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.home-section-head {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 72ch;
+}
+
+.home-section-head h2,
+.home-closing h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.home-section-head p,
+.home-closing p {
+  margin: 0;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+.proof-grid,
+.audience-grid,
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.proof-card,
+.audience-card,
+.feature-card {
+  grid-column: span 4;
+  padding: 1.25rem;
+  border-radius: 24px;
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
+  background: color-mix(in srgb, var(--entry) 94%, var(--primary) 6%);
+}
+
+.proof-value {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.proof-card h3,
+.audience-card h3,
+.feature-card h3,
+.writing-row h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.proof-card p,
+.audience-card p,
+.feature-card p,
+.writing-row p {
+  margin: 0.8rem 0 0;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+.feature-card h3 a,
+.writing-row h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.feature-card h3 a:hover,
+.feature-card h3 a:focus-visible,
+.writing-row h3 a:hover,
+.writing-row h3 a:focus-visible {
+  color: var(--primary);
+}
+
+.feature-note {
+  font-weight: 600;
+  color: var(--content) !important;
+}
+
+.writing-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.writing-row {
+  padding: 1.15rem 0 1.3rem;
+  border-top: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
+}
+
+.writing-row:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
+}
+
+.home-section-split,
+.home-closing {
+  grid-template-columns: minmax(0, 1.2fr) auto;
+  align-items: end;
+}
+
+.home-closing {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--primary) 8%, var(--entry));
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+}
+
+.footer-custom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.footer-inline-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.95rem;
+}
+
+@media (max-width: 960px) {
+  .home-hero,
+  .home-section-split,
+  .home-closing {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-card,
+  .audience-card,
+  .feature-card {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 680px) {
+  .main {
+    max-width: calc(100vw - 1.2rem);
+    padding-inline: 0.6rem;
+  }
+
+  .proof-grid,
+  .audience-grid,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-card,
+  .audience-card,
+  .feature-card {
+    grid-column: auto;
+  }
+
+  .home-title {
+    max-width: 100%;
+  }
+
+  #menu a {
+    padding: 0 0.55rem;
+  }
+
+  .footer-custom {
+    align-items: flex-start;
+  }
+}

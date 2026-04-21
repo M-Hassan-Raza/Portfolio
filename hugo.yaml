@@ -9,24 +9,19 @@ ignoreLogs: ["warning-partial-superfluous-prefix"]
 
 params:
   author: "Muhammad Hassan Raza"
-  description: "Muhammad Hassan Raza is a CPO & Cofounder at Entropy Labs, Software Engineer, and AI Specialist specializing in production AI systems and backend infrastructure. Explore my portfolio for projects, blog posts, and insights."
+  description: "Muhammad Hassan Raza is a CPO and technical operator who leads product and engineering work for AI systems and backend platforms. He writes about production failures, architecture, and software judgment."
   keywords:
     [
-      "Software Engineer",
-      "Teacher",
-      "Product Developer",
-      "Portfolio",
-      "Projects",
-      "Blog",
-      "FAST",
-      "FAST NUCES",
+      "technical leadership",
+      "backend architecture",
+      "AI systems",
+      "product engineering",
+      "production engineering",
+      "software writing",
       "Lahore",
     ]
   ShowShareButtons: true
   ShowPostNavLinks: true
-  homeInfoParams:
-    Title: "Muhammad Hassan Raza"
-    Content: "I build AI systems and backends that work in production."
   assets:
     disableHLJS: true
     extendedCSS: true
@@ -48,24 +43,6 @@ params:
   search:
     enabled: true
     placeholder: "Search posts, projects, and more..."
-
-  # Profile avatar and social links
-  profileMode:
-    enabled: true
-    title: "Muhammad Hassan Raza"
-    subtitle: "I build AI systems and backends that work in production. Currently CPO at Entropy Labs."
-    imageUrl: "muhammad-hassan-raza-profile.webp"
-    imageTitle: "Profile Image"
-    buttons:
-      - name: "Writing"
-        url: "/blog/"
-        pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>'
-      - name: "Projects"
-        url: "/projects/"
-        pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>'
-      - name: "Book a Call"
-        url: "/book-a-call/"
-        pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
 
   giscus:
     repo: "M-Hassan-Raza/Portfolio"
@@ -92,36 +69,26 @@ params:
 
 menu:
   main:
+    - identifier: "work"
+      pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>'
+      name: "Work"
+      url: "/projects/"
+      weight: 1
     - identifier: "writing"
       pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>'
       name: "Writing"
       url: "/blog/"
-      weight: 1
-    - identifier: "projects"
-      pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>'
-      name: "Projects"
-      url: "/projects/"
       weight: 2
     - identifier: "about"
       pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>'
       name: "About"
       url: "/about/"
       weight: 3
-    - identifier: "services"
-      pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>'
-      name: "Services"
-      url: "/services/"
-      weight: 4
-    - identifier: "book-a-call"
+    - identifier: "contact"
       pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
-      name: "Book a Call"
+      name: "Contact"
       url: "/book-a-call/"
-      weight: 5
-    - identifier: "search"
-      pre: '<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>'
-      name: "Search"
-      url: "/search/"
-      weight: 6
+      weight: 4
 
 outputs:
   home:
