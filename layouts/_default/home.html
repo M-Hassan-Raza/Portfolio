@@ -14,69 +14,49 @@
 
             <div class="home-cta-row">
                 <a class="home-button home-button-primary" href="{{ $hero.primary.url }}">{{ $hero.primary.label }}</a>
-                <a class="home-button home-button-secondary" href="{{ $hero.secondary.url }}">{{ $hero.secondary.label }}</a>
-                <a class="home-text-link" href="{{ $hero.tertiary.url }}">{{ $hero.tertiary.label }}</a>
             </div>
 
-            {{- with $hero.quick_links }}
-            <div class="home-quick-links">
+            {{- with $hero.stats }}
+            <ul class="home-stats">
                 {{- range . }}
-                <a href="{{ .url }}"{{ if findRE "^https?://" .url }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .label }}</a>
+                <li>{{ . }}</li>
                 {{- end }}
-            </div>
+            </ul>
             {{- end }}
         </div>
 
         <aside class="home-hero-aside">
             <figure class="home-portrait-card">
                 <img src="{{ $hero.image | absURL }}" alt="{{ $hero.image_alt }}" class="home-portrait" />
-                <figcaption>{{ $hero.note }}</figcaption>
+                {{- with $hero.note }}<figcaption>{{ . }}</figcaption>{{- end }}
             </figure>
         </aside>
     </section>
 
     <section class="home-section">
         <div class="home-section-head">
-            <p class="home-section-kicker">Selected proof</p>
-            <h2>Some fast context before you dig through the rest.</h2>
+            <h2>Recent work</h2>
         </div>
-        <div class="proof-grid">
-            {{- range $home.proof }}
-            <article class="proof-card">
-                <p class="proof-value">{{ .value }}</p>
-                <h3>{{ .label }}</h3>
-                <p>{{ .detail }}</p>
-            </article>
-            {{- end }}
-        </div>
-    </section>
 
-    <section class="home-section">
-        <div class="home-section-head">
-            <p class="home-section-kicker">Who I help</p>
-            <h2>I am usually brought in once the work stops being clean.</h2>
-        </div>
-        <div class="audience-grid">
-            {{- range $home.audiences }}
-            <article class="audience-card">
-                <h3>{{ .title }}</h3>
-                <p>{{ .body }}</p>
-            </article>
-            {{- end }}
-        </div>
-    </section>
+        {{- with $home.featured_lead }}
+        {{- $page := site.GetPage .page }}
+        {{- if $page }}
+        <article class="feature-lead">
+            {{- partial "blog/cover-link.html" (dict "page" $page "class" "feature-lead-media") }}
+            <div class="feature-lead-copy">
+                <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+                <p class="feature-note">{{ .note }}</p>
+                <p>{{ $page.Description }}</p>
+            </div>
+        </article>
+        {{- end }}
+        {{- end }}
 
-    <section class="home-section">
-        <div class="home-section-head">
-            <p class="home-section-kicker">Featured work</p>
-            <h2>Three systems that show the kind of problems I like dealing with.</h2>
-        </div>
         <div class="feature-grid">
-            {{- range $home.featured_work }}
+            {{- range $home.featured_compact }}
             {{- $page := site.GetPage .page }}
             {{- if $page }}
             <article class="feature-card">
-                <p class="feature-label">{{ .label }}</p>
                 <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
                 <p class="feature-note">{{ .note }}</p>
                 <p>{{ $page.Description }}</p>
@@ -88,8 +68,7 @@
 
     <section class="home-section">
         <div class="home-section-head">
-            <p class="home-section-kicker">Selected writing</p>
-            <h2>The writing is where the judgment shows up.</h2>
+            <h2>Recent writing</h2>
         </div>
         <div class="writing-list">
             {{- range $home.featured_writing }}
@@ -98,37 +77,12 @@
             <article class="writing-row">
                 {{- partial "blog/cover-link.html" (dict "page" $page "class" "writing-row-media") }}
                 <div class="writing-row-copy">
-                    <p class="writing-label">{{ .label }}</p>
                     <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
                     <p>{{ .note }}</p>
                 </div>
             </article>
             {{- end }}
             {{- end }}
-        </div>
-    </section>
-
-    <section class="home-section home-section-split">
-        <div class="home-section-head">
-            <p class="home-section-kicker">Teaching and mentoring</p>
-            <h2>{{ $home.teaching.title }}</h2>
-            <p>{{ $home.teaching.body }}</p>
-        </div>
-        <div class="home-inline-links">
-            <a class="home-button home-button-secondary" href="{{ $home.teaching.primary.url }}">{{ $home.teaching.primary.label }}</a>
-            <a class="home-text-link" href="{{ $home.teaching.secondary.url }}">{{ $home.teaching.secondary.label }}</a>
-        </div>
-    </section>
-
-    <section class="home-closing">
-        <div>
-            <p class="home-section-kicker">Next step</p>
-            <h2>{{ $home.closing.title }}</h2>
-            <p>{{ $home.closing.body }}</p>
-        </div>
-        <div class="home-inline-links">
-            <a class="home-button home-button-primary" href="{{ $home.closing.primary.url }}">{{ $home.closing.primary.label }}</a>
-            <a class="home-text-link" href="{{ $home.closing.secondary.url }}">{{ $home.closing.secondary.label }}</a>
         </div>
     </section>
 </div>
