@@ -1,10 +1,14 @@
 ---
 title: "TF-IDF in OCaml: When Functional Programming Clicks"
 date: 2026-03-22T10:00:00+05:00
+description: "Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps."
 draft: false
 tags: ["OCaml", "Functional Programming", "Search", "TF-IDF", "Cogitator"]
 showComments: true
 ShowToc: true
+cover:
+  ascii: "engineering"
+  alt: "TF-IDF in OCaml cover"
 ---
 
 I built [Cogitator](https://github.com/M-Hassan-Raza/cogitator), a local code search engine in OCaml. It indexes code chunks using TF-IDF, ranks results by cosine similarity, and outputs them as RAG prompts for LLMs. The whole thing is about 500 lines of OCaml.

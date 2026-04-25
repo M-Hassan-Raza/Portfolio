@@ -1,0 +1,78 @@
+{{- define "main" }}
+<header class="page-header">
+    {{- partial "breadcrumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description | markdownify }}
+    </div>
+    {{- end }}
+</header>
+
+{{- if .Content }}
+<div class="post-content">
+    {{- if not (.Param "disableAnchoredHeadings") }}
+    {{- partial "anchored_headings.html" .Content -}}
+    {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- $pages := .RegularPages.ByWeight }}
+{{- $featured := where $pages "Params.featured" true }}
+{{- $archive := where $pages "Params.featured" "!=" true }}
+
+{{- if gt (len $featured) 0 }}
+<section class="project-collection">
+    <div class="project-section-head">
+        <p class="home-section-kicker">Flagship work</p>
+        <h2>Commercial and operator-heavy systems first.</h2>
+        <p>These are the projects closest to the kind of work I want to be judged on.</p>
+    </div>
+
+    <div class="feature-grid project-feature-grid">
+        {{- range $featured }}
+        <article class="feature-card project-feature-card">
+            {{- with .Params.projectLabel }}
+            <p class="feature-label">{{ . }}</p>
+            {{- end }}
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{- with .Params.projectFocus }}
+            <p class="feature-note">{{ . }}</p>
+            {{- end }}
+            <p>{{ .Description }}</p>
+            <footer class="project-card-meta">
+                <span>{{ .Date.Format "2006" }}</span>
+                {{- with .Params.tags }}
+                <span>{{ delimit (first 3 .) ", " }}</span>
+                {{- end }}
+            </footer>
+        </article>
+        {{- end }}
+    </div>
+</section>
+{{- end }}
+
+{{- if gt (len $archive) 0 }}
+<section class="project-collection">
+    <div class="project-section-head">
+        <p class="home-section-kicker">Archive</p>
+        <h2>Older work, lab projects, and smaller experiments.</h2>
+        <p>I still keep these around because they show range and how I learned. They are not the main story anymore.</p>
+    </div>
+
+    <div class="project-archive-list">
+        {{- range $archive }}
+        <article class="project-archive-item">
+            <div class="project-archive-copy">
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p>{{ .Description | default (.Summary | plainify | truncate 180) }}</p>
+            </div>
+            <div class="project-archive-meta">
+                <span>{{ .Date.Format "2006" }}</span>
+            </div>
+        </article>
+        {{- end }}
+    </div>
+</section>
+{{- end }}
+{{- end }}

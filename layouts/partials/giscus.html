@@ -10,7 +10,7 @@
         data-reactions-enabled="{{ .reactionsEnabled | default "1" }}"
         data-emit-metadata="{{ .emitMetadata | default "0" }}"
         data-input-position="{{ .inputPosition | default "bottom" }}"
-        data-theme="transparent_dark"
+        data-theme="preferred_color_scheme"
         data-lang="{{ .lang | default "en" }}"
         crossorigin="anonymous"
         async>
@@ -19,37 +19,61 @@
 <script>
     (function() {
         function getTheme() {
-            return document.body.classList.contains('dark') ? 'dark' : 'light';
+            const storedTheme = localStorage.getItem('pref-theme');
+            if (storedTheme === 'dark' || storedTheme === 'light') {
+                return storedTheme;
+            }
+
+            const currentTheme = document.documentElement.dataset.theme;
+            if (currentTheme === 'dark' || currentTheme === 'light') {
+                return currentTheme;
+            }
+
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
 
         function updateGiscusTheme() {
             const iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) {
-                setTimeout(updateGiscusTheme, 300);
+            if (!iframe || !iframe.contentWindow) {
                 return;
             }
 
             const theme = getTheme() === 'dark' ? 'transparent_dark' : 'noborder_light';
             iframe.contentWindow.postMessage(
-                { giscus: { setConfig: { theme: theme } } },
+                { giscus: { setConfig: { theme } } },
                 'https://giscus.app'
             );
         }
 
-        // Add initial theme check
-        if (localStorage.getItem("pref-theme") === "dark") {
+        function bindGiscusFrame() {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) {
+                return;
+            }
+
+            iframe.addEventListener('load', updateGiscusTheme, { once: true });
             updateGiscusTheme();
         }
 
-        // Watch for theme changes on body element
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bindGiscusFrame, { once: true });
+        } else {
+            bindGiscusFrame();
+        }
+
         const observer = new MutationObserver(function() {
             updateGiscusTheme();
         });
 
-        observer.observe(document.body, {
+        observer.observe(document.documentElement, {
             attributes: true,
-            attributeFilter: ['class']
+            attributeFilter: ['data-theme']
         });
+
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener('change', updateGiscusTheme);
+        }
     })();
 </script>
 {{- end }}

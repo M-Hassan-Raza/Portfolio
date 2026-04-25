@@ -1,10 +1,14 @@
 ---
 title: "Structured Logging for AI Debugging"
 date: 2026-03-05T10:00:00+05:00
+description: "Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs."
 draft: false
 tags: ["Logging", "AI", "Developer Tools", "TypeScript", "Nuxt", "Evlog"]
 showComments: true
 ShowToc: true
+cover:
+  ascii: "ai"
+  alt: "Structured logging cover"
 ---
 
 When an AI coding assistant tries to help you debug a production issue, it reads your logs. If your logs are scattered `console.log` calls with inconsistent formatting, the AI can't help you. It doesn't know which log lines belong to the same request, what the timing was, or what the error context means.

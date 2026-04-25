@@ -1,72 +1,65 @@
 ---
 title: "Bonnet AI"
 date: 2025-01-15
-description: "AI-powered creative platform with RAG and multi-persona agents"
-tags: ["AI", "LangChain", "RAG", "Next.js", "Django", "OpenRouter"]
+description: "AI brand-development platform that turns a creative brief into research, strategy, creative direction, moodboards, and exportable deliverables."
+images: ["/assets/bonnet-cover.svg"]
+cover:
+  image: "/assets/bonnet-cover.svg"
+  alt: "Bonnet brand workflow illustration"
+  caption: "The product was most useful when the brief, the execution state, and the final deliverables all stayed connected."
+tags: ["AI", "Next.js", "Django", "OpenRouter", "Supabase", "Creative Tools"]
 categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -9
+featured: true
+projectLabel: "AI brand workflow"
+projectFocus: "Staged execution, realtime progress, reruns, and deliverable generation."
 ---
 
-Bonnet is a SaaS platform that automates the research-to-mood-board workflow for creative agencies. It uses AI to match designers with clients based on portfolio analysis and provides multi-persona AI assistants for different stages of the creative process.
+Bonnet is an AI brand-development product built around a clear delivery flow. A user starts with a creative brief, then the system pushes that work through research, strategy, creative direction, moodboards, and exportable outputs. The interesting part is not chat. It is the orchestration needed to turn a messy brief into something a team can actually review and ship.
 
-**Tech Stack:** Next.js, Django, OpenRouter, LangChain, PostgreSQL, pgvector, Stripe
+**Tech Stack:** Next.js, React, Django, Channels, PostgreSQL, OpenRouter, Supabase
 
 **Source:** Private (commercial product)
 
----
-
-## The Problem
-
-Creative agencies spend significant time on the discovery phase: understanding client needs, researching competitors, gathering inspiration, and matching the right designer to the project. This process is valuable but repetitive—the same research patterns apply across different clients.
-
-The goal was to automate the mechanical parts while preserving the creative judgment that makes agencies valuable.
+**My role:** Team project. I owned most of the backend execution flow, long-running job state, rerun behavior, retrieval contracts, and export plumbing.
 
 ---
 
-## Technical Approach
+## The Product Loop
 
-### Multi-Persona AI System
+The frontend intake asks for the real inputs that shape brand work: business context, audience, competitors, goals, values, tone, and maturity. From there the product kicks off a comprehensive execution flow and keeps the user inside one long-running project instead of bouncing them through disconnected tools.
 
-Different stages of the creative workflow need different AI behaviors. A research assistant should be thorough and factual. A brainstorming assistant should be creative and exploratory. A client communication assistant should be professional and clear.
+The output is more structured than a generic assistant chat:
 
-I implemented this with configurable personas that modify the system prompts and model parameters. Each persona has its own temperature, context window usage, and retrieval settings. The frontend lets users switch between personas seamlessly, maintaining conversation context while changing the AI's behavior.
+- research and category analysis
+- strategic framing and narrative direction
+- creative concepts and visual direction
+- moodboards and linked assets
+- PDF exports with citations and supporting material
 
-OpenRouter handles the model routing, which lets us use different models for different personas based on their strengths—Claude for nuanced communication, GPT-4 for research, and faster models for simple queries.
 
-### Designer-Client Matching
+## The Hard Parts
 
-Matching designers to projects based on portfolio analysis required building a semantic understanding of visual styles.
+### Long-Running AI Work Has To Feel Trackable
 
-The system processes designer portfolios by extracting visual features and project descriptions, then embedding them into a vector space using pgvector. When a new project comes in, we embed the project requirements and find designers whose portfolio embeddings are closest in that space.
+This product is built around executions that take time, stream progress, and sometimes need to be rerun. That means the backend has to manage step state, websocket updates, cancellation, reruns, and asset linkage without losing the thread of the project.
 
-This isn't perfect—visual style is subjective—but it provides a useful starting point that humans can refine. The system learns from successful matches over time by adjusting embedding weights.
+### Output Cleanup Is Real Product Work
 
-### RAG Knowledge Base
+AI output does not arrive in one clean shape. The frontend spends real effort cleaning mixed markdown, structured fragments, and generated content so it can render properly, stay readable, and export cleanly to PDF. If you skip that layer, the product feels broken even when the model technically answered the prompt.
 
-Each agency builds up institutional knowledge: client preferences, brand guidelines, past project outcomes. We store this in a RAG system that the AI can query during conversations.
+### Retrieval Needed To Stay Narrow And Useful
 
-The implementation uses LangChain for the retrieval pipeline. Documents are chunked, embedded, and stored in pgvector. During conversations, relevant chunks are retrieved and injected into the context. The tricky part was balancing retrieval relevance with conversation coherence—too much context clutters the AI's responses.
+The retrieval layer is not a broad knowledge base bolted on for marketing copy. It is closer to targeted vector lookup over case-study style material that helps the research stage stay grounded. That narrower contract is easier to reason about and easier to keep useful.
 
-### Payment Integration
+### Asset Workflows Matter As Much As Text Workflows
 
-Credits are handled through Stripe. Users purchase credit packs that get consumed as they use AI features. Different operations cost different amounts based on their computational cost.
-
-The billing logic handles edge cases: partial refunds, failed operations that shouldn't charge, and concurrent requests that might over-consume credits. All credit transactions are logged for audit purposes.
-
----
+Moodboards, reports, and creative assets all have to survive the trip from generation to storage to review to export. That means local file handling, uploads, metadata, and frontend-compatible asset shapes all have to line up.
 
 ## What I Learned
 
-**Persona design is harder than prompt engineering.** Getting consistent, useful behavior from different personas requires careful tuning. Small changes to system prompts can dramatically change the AI's output style.
+The hardest part of products like this is rarely the model call. It is keeping a long execution understandable, interruptible, and worth trusting. If the user cannot tell what stage they are in, what changed on a rerun, or where the output lives, the system does not feel serious.
 
-**Vector search is a starting point.** Semantic matching gets you 80% of the way there, but the remaining 20% requires human judgment. Building interfaces that support human review rather than replace it leads to better outcomes.
-
-**Rate limiting for AI is different.** Unlike traditional APIs, AI costs scale with token usage. Implementing cost controls that prevent runaway spending while keeping the product usable required careful design.
-
----
-
-## Interested?
-
-If you're building AI-powered SaaS products or want to discuss RAG implementations, [book a call](/book-a-call/).
+Bonnet is a good example of that tradeoff. The product only starts feeling coherent once execution state, retrieval, assets, and exports all agree on what the project actually is.

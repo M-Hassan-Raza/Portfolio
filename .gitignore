@@ -2,3 +2,9 @@
 # Ignore Hugo generated files
 public/
 resources/
+.hugo_build.lock
+.nojekyll
+.playwright-cli/
+isabelFastRender/
+isableFastRender/
+output/

@@ -4,6 +4,9 @@ date: 2025-02-15T14:00:00+05:00
 description: "The full cost breakdown of running a developer portfolio — what's free, what's paid, and what tradeoffs I made."
 tags: [Hugo, GitHub Pages, Portfolio, Web Development]
 showComments: true
+cover:
+  ascii: "craft"
+  alt: "Portfolio hosting cost breakdown cover"
 ---
 
 My portfolio costs me about $8/year. That's the domain. Everything else is free.

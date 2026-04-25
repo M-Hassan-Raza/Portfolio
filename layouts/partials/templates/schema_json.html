@@ -1,0 +1,145 @@
+{{- $personID := printf "%s#person" site.Home.Permalink -}}
+{{- $websiteID := printf "%s#website" site.Home.Permalink -}}
+{{- $authorName := site.Params.author | default site.Title -}}
+{{- $siteDescription := site.Params.description | plainify | truncate 180 -}}
+{{- $author := dict "@type" "Person" "@id" $personID "name" $authorName -}}
+
+{{- if .IsHome }}
+  {{- $person := dict
+    "@type" "Person"
+    "@id" $personID
+    "name" $authorName
+    "url" site.Home.Permalink
+    "description" $siteDescription
+  -}}
+  {{- with site.Params.schema.jobTitle }}
+    {{- $person = merge $person (dict "jobTitle" .) -}}
+  {{- end }}
+  {{- with site.Params.schema.image }}
+    {{- $person = merge $person (dict "image" (. | absURL)) -}}
+  {{- end }}
+  {{- with site.Params.schema.sameAs }}
+    {{- $person = merge $person (dict "sameAs" .) -}}
+  {{- end }}
+
+  {{- $website := dict
+    "@type" "WebSite"
+    "@id" $websiteID
+    "url" site.Home.Permalink
+    "name" site.Title
+    "description" $siteDescription
+    "publisher" (dict "@id" $personID)
+  -}}
+
+  {{- $schema := dict
+    "@context" "https://schema.org"
+    "@graph" (slice $person $website)
+  -}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+{{- else if (or .IsPage .IsSection) }}
+  {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" -}}
+  {{- $langURL := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
+  {{- $breadcrumbParts := split $langURL "/" -}}
+  {{- $scratch := newScratch -}}
+  {{- $crumbs := slice -}}
+
+  {{- range $index, $element := $breadcrumbParts }}
+    {{- $scratch.Add "path" (printf "%s/" $element) -}}
+    {{- $crumbPage := site.GetPage ($scratch.Get "path") -}}
+    {{- if and $crumbPage (gt (len .) 0) }}
+      {{- $crumbs = $crumbs | append (dict
+        "@type" "ListItem"
+        "position" (add 1 $index)
+        "name" $crumbPage.Name
+        "item" $crumbPage.Permalink
+      ) -}}
+    {{- end }}
+  {{- end }}
+
+  {{- $crumbs = $crumbs | append (dict
+    "@type" "ListItem"
+    "position" (len $breadcrumbParts)
+    "name" .Name
+    "item" .Permalink
+  ) -}}
+
+  {{- $breadcrumbSchema := dict
+    "@context" "https://schema.org"
+    "@type" "BreadcrumbList"
+    "itemListElement" $crumbs
+  -}}
+<script type="application/ld+json">{{ $breadcrumbSchema | jsonify | safeJS }}</script>
+
+  {{- $description := "" -}}
+  {{- with .Description }}
+    {{- $description = . | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- else }}
+    {{- $description = .Summary | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- end }}
+
+  {{- $keywords := .Params.keywords | default .Params.tags -}}
+  {{- $pageType := "WebPage" -}}
+  {{- if and .IsSection (eq .Section "about") }}
+    {{- $pageType = "ProfilePage" -}}
+  {{- else if and .IsSection (or (eq .Section "blog") (eq .Section "projects") (eq .Section "teaching")) }}
+    {{- $pageType = "CollectionPage" -}}
+  {{- else if and .IsPage (eq .Section "blog") }}
+    {{- $pageType = "BlogPosting" -}}
+  {{- else if and .IsPage (eq .Section "projects") }}
+    {{- $pageType = "CreativeWork" -}}
+  {{- end }}
+
+  {{- $pageSchema := dict
+    "@context" "https://schema.org"
+    "@type" $pageType
+    "name" (.Title | plainify)
+    "url" .Permalink
+    "description" $description
+    "isPartOf" (dict "@id" $websiteID)
+  -}}
+
+  {{- if .IsPage }}
+    {{- $pageSchema = merge $pageSchema (dict
+      "author" $author
+      "datePublished" (.PublishDate.Format "2006-01-02T15:04:05Z07:00")
+      "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    ) -}}
+  {{- end }}
+
+  {{- if $keywords }}
+    {{- $pageSchema = merge $pageSchema (dict "keywords" $keywords) -}}
+  {{- end }}
+
+  {{- $image := "" -}}
+  {{- if .Params.cover.image }}
+    {{- if ne .Params.cover.relative true }}
+      {{- $image = .Params.cover.image | absURL -}}
+    {{- else }}
+      {{- $image = (path.Join .RelPermalink .Params.cover.image) | absURL -}}
+    {{- end }}
+  {{- else }}
+    {{- $images := partial "templates/_funcs/get-page-images" . -}}
+    {{- with index $images 0 }}
+      {{- $image = .Permalink -}}
+    {{- end }}
+  {{- end }}
+
+  {{- with $image }}
+    {{- $pageSchema = merge $pageSchema (dict "image" .) -}}
+  {{- end }}
+
+  {{- if eq $pageType "BlogPosting" }}
+    {{- $pageSchema = merge $pageSchema (dict
+      "headline" (.Title | plainify)
+      "publisher" $author
+      "wordCount" .WordCount
+    ) -}}
+  {{- else if eq $pageType "ProfilePage" }}
+    {{- $pageSchema = merge $pageSchema (dict
+      "mainEntity" $author
+    ) -}}
+  {{- end }}
+
+<script type="application/ld+json">{{ $pageSchema | jsonify | safeJS }}</script>
+{{- end }}

@@ -6,10 +6,9 @@ tags: ["LangChain", "Python", "AI", "Production", "RAG", "LLM", "Backend Develop
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/langchain-prod.jpg"
-  alt: "LangChain Production Architecture"
-  caption: "The gap between tutorials and production is wider than you think"
-  relative: false
+  ascii: "ai"
+  alt: "LangChain production workflow diagram"
+  caption: "The production work sits around the chain: memory, retries, validation, tracing, and version control."
 ShowToc: true
 ---
 

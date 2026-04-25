@@ -1,15 +1,15 @@
 ---
 title: "The Best Way to Learn a Codebase Is to Break Someone Else's"
 date: 2026-01-08T10:00:00+05:00
+description: "Open source bug-fixing taught me more about architecture, frameworks, and review taste than tutorials ever did."
 draft: false
 tags: ["Open Source", "Contributing", "Rust", "Python", "Go", "Swift", "Learning", "Software Engineering"]
 categories: ["Software Engineering"]
 showComments: true
 cover:
-  image: "/assets/codebase-learning.svg"
+  ascii: "craft"
   alt: "Learning Through Open Source"
   caption: "What reading other people's code teaches you that tutorials can't"
-  relative: false
 ShowToc: true
 ---
 

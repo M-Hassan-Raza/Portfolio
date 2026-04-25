@@ -1,0 +1,101 @@
+.project-collection {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.project-section-head {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 72ch;
+}
+
+.project-section-head h2 {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.project-section-head p {
+  margin: 0;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+.project-feature-grid {
+  margin-top: 0.4rem;
+}
+
+.project-feature-card {
+  min-height: 100%;
+}
+
+.project-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: var(--secondary);
+  font-size: 0.92rem;
+}
+
+.project-card-meta span + span::before {
+  content: "•";
+  margin-right: 0.75rem;
+  color: color-mix(in srgb, var(--secondary) 70%, transparent);
+}
+
+.project-archive-list {
+  display: grid;
+  gap: 0;
+}
+
+.project-archive-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 1.15rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
+}
+
+.project-archive-item:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 10%, var(--border));
+}
+
+.project-archive-copy h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.project-archive-copy h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-archive-copy h3 a:hover,
+.project-archive-copy h3 a:focus-visible {
+  color: var(--primary);
+}
+
+.project-archive-copy p {
+  margin: 0.55rem 0 0;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+.project-archive-meta {
+  color: var(--secondary);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .project-archive-item {
+    grid-template-columns: 1fr;
+  }
+
+  .project-archive-meta {
+    white-space: normal;
+  }
+}

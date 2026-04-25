@@ -1,15 +1,15 @@
 ---
 title: "AI Features Your Users Actually Want (Hint: Not Another Chatbot)"
 date: 2025-08-10T10:00:00+05:00
+description: "The AI features users keep rewarding in real products tend to be the ones that remove work instead of asking for another chat prompt."
 draft: false
 tags: ["AI", "Product", "UX", "Features", "Startup", "Product Development", "CPO"]
 categories: ["Product Development"]
 showComments: true
 cover:
-  image: "/assets/ai-product.jpg"
-  alt: "AI Product Features"
-  caption: "The graveyard of AI features is full of chatbots nobody asked for"
-  relative: false
+  ascii: "ai"
+  alt: "AI features users actually want diagram"
+  caption: "The useful work is usually in defaults, summaries, alerts, and contextual help, not another chatbot."
 ShowToc: true
 ---
 

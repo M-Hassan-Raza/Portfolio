@@ -17,10 +17,9 @@ tags:
   ]
 showComments: true
 cover:
-  image: "/assets/faq-bot.jpg"
-  alt: "Intelligent FAQ Bot"
-  caption: "Creating a reliable Q&A system using Retrieval Augmented Generation and Google's Gemini API. Photo by Pixabay: https://www.pexels.com/photo/white-robot-on-grey-surface-3861958/"
-  relative: false
+  ascii: "ai"
+  alt: "FAQ bot RAG pipeline diagram"
+  caption: "Index documents, retrieve context, and return structured answers with a confidence signal."
 ---
 
 ## Introduction

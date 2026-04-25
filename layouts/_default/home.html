@@ -1,24 +1,135 @@
 {{- define "main" }}
+{{- $home := .Params.home }}
+{{- $hero := $home.hero }}
 
-{{- if .Site.Params.profileMode.enabled }}
-<div class="profile">
-    {{- partial "index_profile.html" . }}
+<div class="home-shell">
+    <section class="home-hero">
+        <div class="home-hero-copy">
+            {{- with $hero.kicker }}
+            <p class="home-kicker">{{ . }}</p>
+            {{- end }}
+
+            <h1 class="home-title">{{ $hero.title }}</h1>
+            <p class="home-summary">{{ $hero.summary }}</p>
+
+            <div class="home-cta-row">
+                <a class="home-button home-button-primary" href="{{ $hero.primary.url }}">{{ $hero.primary.label }}</a>
+                <a class="home-button home-button-secondary" href="{{ $hero.secondary.url }}">{{ $hero.secondary.label }}</a>
+                <a class="home-text-link" href="{{ $hero.tertiary.url }}">{{ $hero.tertiary.label }}</a>
+            </div>
+
+            {{- with $hero.quick_links }}
+            <div class="home-quick-links">
+                {{- range . }}
+                <a href="{{ .url }}"{{ if findRE "^https?://" .url }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .label }}</a>
+                {{- end }}
+            </div>
+            {{- end }}
+        </div>
+
+        <aside class="home-hero-aside">
+            <figure class="home-portrait-card">
+                <img src="{{ $hero.image | absURL }}" alt="{{ $hero.image_alt }}" class="home-portrait" />
+                <figcaption>{{ $hero.note }}</figcaption>
+            </figure>
+        </aside>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-head">
+            <p class="home-section-kicker">Selected proof</p>
+            <h2>Some fast context before you dig through the rest.</h2>
+        </div>
+        <div class="proof-grid">
+            {{- range $home.proof }}
+            <article class="proof-card">
+                <p class="proof-value">{{ .value }}</p>
+                <h3>{{ .label }}</h3>
+                <p>{{ .detail }}</p>
+            </article>
+            {{- end }}
+        </div>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-head">
+            <p class="home-section-kicker">Who I help</p>
+            <h2>I am usually brought in once the work stops being clean.</h2>
+        </div>
+        <div class="audience-grid">
+            {{- range $home.audiences }}
+            <article class="audience-card">
+                <h3>{{ .title }}</h3>
+                <p>{{ .body }}</p>
+            </article>
+            {{- end }}
+        </div>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-head">
+            <p class="home-section-kicker">Featured work</p>
+            <h2>Three systems that show the kind of problems I like dealing with.</h2>
+        </div>
+        <div class="feature-grid">
+            {{- range $home.featured_work }}
+            {{- $page := site.GetPage .page }}
+            {{- if $page }}
+            <article class="feature-card">
+                <p class="feature-label">{{ .label }}</p>
+                <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+                <p class="feature-note">{{ .note }}</p>
+                <p>{{ $page.Description }}</p>
+            </article>
+            {{- end }}
+            {{- end }}
+        </div>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-head">
+            <p class="home-section-kicker">Selected writing</p>
+            <h2>The writing is where the judgment shows up.</h2>
+        </div>
+        <div class="writing-list">
+            {{- range $home.featured_writing }}
+            {{- $page := site.GetPage .page }}
+            {{- if $page }}
+            <article class="writing-row">
+                {{- partial "blog/cover-link.html" (dict "page" $page "class" "writing-row-media") }}
+                <div class="writing-row-copy">
+                    <p class="writing-label">{{ .label }}</p>
+                    <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+                    <p>{{ .note }}</p>
+                </div>
+            </article>
+            {{- end }}
+            {{- end }}
+        </div>
+    </section>
+
+    <section class="home-section home-section-split">
+        <div class="home-section-head">
+            <p class="home-section-kicker">Teaching and mentoring</p>
+            <h2>{{ $home.teaching.title }}</h2>
+            <p>{{ $home.teaching.body }}</p>
+        </div>
+        <div class="home-inline-links">
+            <a class="home-button home-button-secondary" href="{{ $home.teaching.primary.url }}">{{ $home.teaching.primary.label }}</a>
+            <a class="home-text-link" href="{{ $home.teaching.secondary.url }}">{{ $home.teaching.secondary.label }}</a>
+        </div>
+    </section>
+
+    <section class="home-closing">
+        <div>
+            <p class="home-section-kicker">Next step</p>
+            <h2>{{ $home.closing.title }}</h2>
+            <p>{{ $home.closing.body }}</p>
+        </div>
+        <div class="home-inline-links">
+            <a class="home-button home-button-primary" href="{{ $home.closing.primary.url }}">{{ $home.closing.primary.label }}</a>
+            <a class="home-text-link" href="{{ $home.closing.secondary.url }}">{{ $home.closing.secondary.label }}</a>
+        </div>
+    </section>
 </div>
-{{- end }}
-
-<div class="post-content">
-    {{- if .Content }}
-        {{ .Content }}
-    {{- end }}
-</div>
-
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- if .Site.Params.ShowAllPosts }}
-{{- $pages = site.RegularPages }}
-{{- end }}
-
-{{- if .Site.Params.ShowLatestPosts }}
-{{- partial "posts.html" . }}
-{{- end }}
-
 {{- end }}

@@ -6,6 +6,9 @@ tags: ["Vue.js", "Components", "Architecture", "Best Practices"]
 categories: ["Vue.js", "Web Development"]
 showToc: true
 showComments: true
+cover:
+  ascii: "engineering"
+  alt: "Component extraction cover"
 ---
 
 Early in building [Polaris](/projects/polaris), I extracted a `ConfirmDialog` component after using it exactly once. I figured I'd need it everywhere — deletes, password changes, dangerous actions. Classic foresight.

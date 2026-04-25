@@ -1,13 +1,18 @@
 ---
 title: "Multi-Agent LLM Middleware: Lessons from Marketing Accelerant"
 date: 2026-01-10T10:00:00+05:00
+description: "What it took to make a multi-agent AI stack survive production: model routing, approval gates, retries, cost control, and sane control flow."
 draft: false
 tags: ["LangGraph", "LangChain", "AI", "Middleware", "Python", "Production"]
+cover:
+  ascii: "ai"
+  alt: "Multi-agent middleware illustration"
+  caption: "The hard part was never the number of agents. It was the control layer around them."
 showComments: true
 ShowToc: true
 ---
 
-Marketing Accelerant is an AI-powered marketing analytics platform I built at Entropy Labs. It runs 15+ specialized LLM agents — Brand Voice, Creative Content, CMO Strategy, SEO, Email Campaigns, Google Ads, Meta Ads, Video Studio, and more — all serving enterprise clients through a single FastAPI backend.
+Marketing Accelerant is an AI-powered marketing analytics platform I worked on at Entropy Labs. It runs 15+ specialized LLM agents for Brand Voice, Creative Content, CMO Strategy, SEO, Email Campaigns, Google Ads, Meta Ads, Video Studio, and more, all serving enterprise clients through a single FastAPI backend.
 
 The agents themselves aren't the hard part. The hard part is everything around them: model selection, context management, cost control, error recovery, and human approval. This post covers the middleware architecture that makes it work in production.
 

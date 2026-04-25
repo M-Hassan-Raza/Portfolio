@@ -1,10 +1,14 @@
 ---
 title: "How Fallow Analyzes TypeScript in Under a Second"
 date: 2026-04-05T10:00:00+05:00
+description: "How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and leaning on Rust."
 draft: false
 tags: ["Rust", "TypeScript", "Performance", "Oxc", "Static Analysis", "Fallow"]
 showComments: true
 ShowToc: true
+cover:
+  ascii: "engineering"
+  alt: "Fallow TypeScript analysis cover"
 ---
 
 [Fallow](https://github.com/fallow-rs/fallow) is a codebase analyzer written in Rust for TypeScript and JavaScript projects, created by [Bart Waardenburg](https://github.com/BartWaardenburg). I'm an [open source contributor](https://github.com/M-Hassan-Raza/fallow) to the project. It finds unused files, dead exports, unlisted dependencies, code duplication, circular dependencies, and complexity hotspots. It's a Rust alternative to [Knip](https://github.com/webpro-nl/knip).

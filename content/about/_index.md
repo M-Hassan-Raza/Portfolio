@@ -2,121 +2,109 @@
 title: "About"
 date: 2024-01-28T12:00:00+05:00
 draft: false
+description: "CPO, technical operator, former instructor, and hands-on builder working across AI systems, backend platforms, and product delivery."
 ShowBreadCrumbs: false
 ShowToc: true
 ---
 
-I'm the CPO and Cofounder at [Entropy Labs](https://entropylabs.dev), where I lead product strategy and technical operations. Before that, I spent years building production systems across AI, backend infrastructure, and full-stack development.
+I'm the CPO and cofounder at [Entropy Labs](https://entropylabs.dev). I lead product and technical work across AI systems, backend architecture, and delivery.
 
-My focus is on systems that actually work—not demos, not prototypes, but software that handles real traffic, real users, and real edge cases.
+Most of my time goes into work where roadmap, system design, failure handling, and team execution start colliding. I still like being close to the hard parts. Slow reporting paths. Brittle workflows. LLM systems that look fine in a demo and get weird with real users. Product decisions that quietly turn into engineering debt.
 
-[GitHub](https://github.com/m-hassan-raza) ·  [LinkedIn](https://linkedin.com/in/hassanraza22) · [Email](mailto:raihassanraza10@gmail.com) · <a href="/assets/muhammad-hassan-raza-resume.pdf" target="_blank">Resume (PDF)</a>
+I also spent a few years teaching labs at FAST-NUCES. That still shapes how I work. I like direct explanations, real examples, and systems that still hold up once the edge cases show up.
 
----
+[GitHub](https://github.com/m-hassan-raza) · [LinkedIn](https://linkedin.com/in/hassanraza22) · [Email](mailto:raihassanraza10@gmail.com) · <a href="/assets/muhammad-hassan-raza-resume.pdf" target="_blank">Resume (PDF)</a>
 
-## Work Experience
-
-**CPO & Cofounder, Entropy Labs** (Jun 2025 – Present)
-
-Leading product strategy and technical operations for an AI-powered marketing analytics platform. I architect cloud infrastructure on AWS ECS and direct a cross-functional team of 8 developers and designers building enterprise SaaS with LangGraph agents, RAG pipelines, and real-time analytics.
-
-**Technical Product Engineering Lead, Entropy Labs** (Sep 2024 – Jun 2025)
-
-Built workflow automations with n8n and Make.com that reduced manual processing time by 80% (client onboarding that took 2 hours became 25 minutes). Developed AI applications with LangChain handling document processing with high accuracy. Created Django + Vue.js apps with WebSocket streaming and led migration to microservices architecture.
-
-**Senior Software Engineer, Entropy Labs** (Aug 2023 – Sep 2024)
-
-Delivered high-traffic applications on FastAPI and Django. Optimized PostgreSQL queries (750ms → 230ms, 69% faster) through composite indexing, query rewrites, and eliminating unnecessary JOINs on the reporting endpoints. Implemented Redis caching for significant performance gains and reduced database load. Built RESTful APIs with robust error handling.
-
-**Founder, Commit Software Solutions** (Mar 2020 – Present)
-
-Started while in university. Built Polaris POS/ERP system for retail operations. Created automation systems with Python and Django. Learned that client work has constraints academic projects don't—you can't just restart the database when something goes wrong.
-
-**AI Engineer, WebNoodle Co.** (Mar 2022 – Jan 2024)
-
-Built LangChain applications processing documents using embeddings and vector databases. Integrated OpenAI, Anthropic, and Perplexity with rate limiting and cost controls. Designed RAG pipelines with custom ranking and productionized AI systems with monitoring and A/B testing.
-
-**Software Engineer Intern, Arrivy** (Jun 2023 – Aug 2023)
-
-Backend for Employee Management System using Flask + BigQuery. Automated notifications via GCP Cloud Functions. Delivered REST APIs with graceful failure handling.
+For private commercial work, I try to describe the part I actually owned. Some systems here were solo client builds. Some were team products where my work was concentrated in backend architecture, workflow design, and product direction.
 
 ---
 
-## Teaching
+## Quick Context
 
-**Lab Instructor, FAST-NUCES** (2024 – Present)
+- I lead product and technical work for an 8-person cross-functional team at Entropy Labs.
+- I helped cut a manual onboarding flow by 80 percent, from roughly 2 hours to 25 minutes.
+- I took a reporting path from 750ms to 230ms by cleaning up the query shape instead of piling on more hardware.
+- I have worked on systems in retail, healthcare, legal intake, and marketing, usually where correctness, latency, or reliability actually matter.
+- I taught labs in operating systems, software construction, and web engineering before stepping away from teaching.
 
-I teach lab sessions for Operating Systems, Software Construction & Development, and Web Engineering. I run hands-on labs where students build real systems — process schedulers, build tools, full-stack apps — not just follow slides.
+---
 
-**Teaching Assistant, FAST-NUCES** (2022 – 2024)
+## Work
 
-Assisted courses including Introduction to Software Engineering, Software for Mobile Devices, Information Security, and Software Project Management.
+**CPO & Cofounder, Entropy Labs** (Jun 2025 to Present)
+
+I lead product strategy and technical operations for an AI marketing platform. That means roadmap decisions, delivery pressure, infrastructure choices, and the usual question of whether the real fix belongs in the product, the system, or the way the team is working. I still stay close to the architecture and the backend paths that can do real damage when they go wrong.
+
+**Technical Product Engineering Lead, Entropy Labs** (Sep 2024 to Jun 2025)
+
+I built workflow automations that cut manual onboarding time by 80 percent. I worked on AI document-processing flows, Django and Vue applications with streaming, and the migration work needed to get parts of the system out of a monolith without making the product worse in the process.
+
+**Senior Software Engineer, Entropy Labs** (Aug 2023 to Sep 2024)
+
+I worked on FastAPI and Django systems under real traffic. A lot of that was backend cleanup, query work, caching, and making reporting and data-heavy flows fast enough that people would trust them.
+
+**Founder, Commit Software Solutions** (Mar 2020 to Present)
+
+I started taking on client work while I was still in university. Polaris came out of that stretch. It taught me early that enterprise and operations software is never really about the happy path. The annoying edge cases are the product.
+
+**AI Engineer, WebNoodle Co.** (Mar 2022 to Jan 2024)
+
+I built LangChain-based systems for document processing, retrieval, ranking, and model integrations. That work made me care less about prompt demos and more about rate limits, observability, cost, and what happens when the model gives you something half-right.
+
+**Software Engineer Intern, Arrivy** (Jun 2023 to Aug 2023)
+
+I worked on backend systems for employee management with Flask, BigQuery, and cloud automation on GCP.
+
+---
+
+## Teaching and Mentoring
+
+**Lab Instructor, FAST-NUCES** (2024 to 2025)
+
+I taught labs in Operating Systems, Software Construction & Development, and Web Engineering. The useful part was never the slide deck. It was getting students to debug the thing, trace what actually happened, and explain why the system behaved the way it did.
+
+**Teaching Assistant, FAST-NUCES** (2022 to 2024)
+
+I supported courses including Introduction to Software Engineering, Software for Mobile Devices, Information Security, and Software Project Management.
+
+If you want the teaching side in one place, start with the [teaching page](/teaching/) or the [FYP guide](/blog/fyp-guidance/).
+
+---
+
+## Selected Work
+
+**[Polaris ERP](/projects/polaris/)**
+Retail operations software where stock truth, ledgers, supplier workflows, and tenant isolation all have to stay aligned.
+
+**[Obelisk](/projects/obelisk/)**
+AI content system with specialized agents, retrieval, checkpointing, and the guardrails needed to keep it usable.
+
+**[Anatomia](/projects/anatomia/)**
+Care workflow software with PHI controls, callback operations, role handoffs, and the usual ugly integration realities.
+
+**[Go Load Balancer Dashboard](https://github.com/M-Hassan-Raza/go-load-balancer-dash)**
+A smaller public project, but a good one if you want to see how I think about concurrency, visibility, and systems work.
+
+---
+
+## What I Care About
+
+- systems that have to hold up under real use, not demo traffic
+- product decisions that respect engineering reality
+- backend performance work that fixes the real bottleneck
+- AI systems with sane failure handling
+- code that stays understandable after the rush is over
 
 ---
 
 ## Education
 
-**MS in Computer Science** — FAST-NUCES, Lahore (Aug 2024 – Aug 2027)
+**MS in Computer Science** at FAST-NUCES, Lahore (Aug 2024 to Aug 2027)
 
-**BS in Software Engineering** — FAST-NUCES, Lahore (Aug 2020 – Aug 2024)
-
----
-
-## Key Projects
-
-**[Go Load Balancer Dashboard](https://github.com/M-Hassan-Raza/go-load-balancer-dash)**
-High-performance load balancer in Go with real-time dashboard. Weighted round-robin and least-connections algorithms with health checks and automated failover.
-
-**Bonnet – AI-Powered Creative Platform**
-SaaS automating research-to-mood-board workflow using Next.js + Django. Multi-persona AI via OpenRouter with designer-client matching via portfolio analysis and RAG knowledge base.
-
-**Anatomia – Healthcare Platform**
-HIPAA-compliant workflows using FastAPI, React, and AWS HealthLake (FHIR R4). Real-time transcription with AWS Transcribe Medical and AI clinical decision support. HL7/FHIR integrations for referrals and diagnostics.
-
-**[Polaris ERP System](/projects/polaris)**
-Full-stack ERP (Vue.js + Django) managing retail operations with real-time inventory. Reporting engine with PDF export for business insights.
-
-**Portus Orchestration Platform** (WIP)
-AI brand-identity pipeline with Pydantic, WebSockets, LangGraph, and MCP. SmartGraph via LangGraph StateGraph for autonomous agent selection.
-
----
-
-## Leadership
-
-**Vice President Operations, SOFTEC** (Sep 2023 – Jul 2024)
-
-Managed operations across 10 departments for Pakistan's largest annual tech competition. Directed logistics, infrastructure, and ceremonies for 6,300+ attendees.
-
-**VIP Services Coordinator Team Lead, Future Fest** (Jan 2023)
-
-Led volunteers managing VIP services and high-profile guest coordination.
-
----
-
-## Current Interests
-
-- **AI agents and orchestration** — LangGraph, MCP protocol, multi-agent systems
-- **Performance engineering** — Understanding why systems are slow and fixing the right problems
-- **Systems programming** — Go for load balancers and concurrent systems
-
----
-
-## Skills
-
-**Languages:** Python, Go, TypeScript, JavaScript, C++, SQL
-
-**Backend:** Django, FastAPI, Flask, Django REST Framework, WebSockets, Channels, Celery
-
-**Frontend:** Vue.js, Next.js, React, Vite, Tailwind CSS
-
-**Cloud:** AWS (EC2, HealthLake, Transcribe, Lambda, S3), GCP, Azure, DigitalOcean, Docker, Nginx
-
-**AI/ML:** LangChain, LangGraph, OpenAI API, Claude AI, OpenRouter, Vector Databases, RAG
-
-**Databases:** PostgreSQL, Redis, BigQuery, Supabase
+**BS in Software Engineering** at FAST-NUCES, Lahore (Aug 2020 to Aug 2024)
 
 ---
 
 ## Get in Touch
 
-If you're working on something interesting or want to discuss AI systems, backend architecture, or any of the above — [book a call](/book-a-call/).
+If you're dealing with a production system, a messy AI rollout, or a backend path that has become a drag on the product, [contact me](/book-a-call/).

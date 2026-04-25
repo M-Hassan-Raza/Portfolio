@@ -5,10 +5,9 @@ draft: false
 tags: ["FYP", "Final Year Project", "Students", "Guidance", "Tech Stack", "Advisor", "Research", "Development", "Project Management", "Career"]
 showComments: true
 cover:
-    image: "/assets/fyp-guide.jpg"
-    alt: "FYP Guidance"
-    caption: "How to Choose, Plan, and Execute Your Final Year ProjectPhoto by Download a pic Donate a buck! ^: https://www.pexels.com/photo/silhouette-of-person-sitting-beside-body-of-water-54379/"
-    relative: false
+    ascii: "craft"
+    alt: "Final year project planning diagram"
+    caption: "The real work is choosing a good topic, controlling scope, and executing steadily."
 ---
 
 ## Introduction

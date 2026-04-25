@@ -1,15 +1,15 @@
 ---
 title: "Model Context Protocol: Why This Matters More Than You Think"
 date: 2025-11-15T10:00:00+05:00
+description: "Why MCP matters less as hype and more as a clean way to give models tools, resources, and context without brittle copy-paste."
 draft: false
 tags: ["MCP", "Anthropic", "AI", "Protocol", "Integration", "Developer Tools", "Claude", "API"]
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/mcp-protocol.jpg"
-  alt: "Model Context Protocol Architecture"
-  caption: "The protocol that lets AI tools talk to your tools"
-  relative: false
+  ascii: "ai"
+  alt: "Model Context Protocol diagram"
+  caption: "Hosts, servers, and the protocol layer that connects them."
 ShowToc: true
 ---
 

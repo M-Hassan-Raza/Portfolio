@@ -5,6 +5,9 @@ draft: false
 tags: ["Go", "tree-sitter", "Static Analysis", "Python", "MCP", "Pyscn"]
 showComments: true
 ShowToc: true
+cover:
+  ascii: "engineering"
+  alt: "Pyscn tree-sitter analysis cover"
 ---
 
 [Pyscn](https://github.com/ludo-technologies/pyscn) is a code quality analyzer for Python built by [DaisukeYoda](https://github.com/DaisukeYoda) at ludo-technologies. It finds dead code, code clones, coupling issues, and complexity hotspots. It's written in Go, uses tree-sitter for parsing, and processes over 100,000 lines per second.

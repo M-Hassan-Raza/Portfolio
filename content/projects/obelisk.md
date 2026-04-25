@@ -2,18 +2,28 @@
 title: "Obelisk"
 date: 2025-01-20
 description: "AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture"
+images: ["/assets/obelisk-cover.svg"]
+cover:
+  image: "/assets/obelisk-cover.svg"
+  alt: "Obelisk AI content system illustration"
+  caption: "The useful part of the system was not just the agents. It was the retrieval, checkpointing, and guardrail layer around them."
 tags: ["AI", "LangGraph", "FastAPI", "PostgreSQL", "RAG", "Multi-Tenant", "Vertex AI"]
 categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -8
+featured: true
+projectLabel: "AI content system"
+projectFocus: "Specialized agents, retrieval, checkpointing, and strong guardrails."
 ---
 
-Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy—all within a multi-tenant SaaS architecture with space-level isolation.
+Obelisk is an AI-powered marketing platform that helps teams create content with brand consistency. It orchestrates specialized AI agents for SEO, email marketing, brand voice analysis, and strategy, all within a multi-tenant SaaS architecture with space-level isolation.
 
 **Tech Stack:** FastAPI, LangGraph, PostgreSQL, Vertex AI, Redis, Google Cloud
 
 **Source:** Private (commercial product) · [Book a call](/book-a-call/) to discuss
+
+**My role:** Team product at Entropy Labs. I led product and backend work around agent orchestration, retrieval, checkpointing, guardrails, and multi-tenant runtime behavior.
 
 ---
 

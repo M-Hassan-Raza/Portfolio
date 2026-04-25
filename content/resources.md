@@ -1,25 +1,27 @@
 ---
-title: "Resources"
+title: "Start Here"
 date: 2025-02-22
-description: "Blog archive and book recommendations."
+description: "A short path through the writing, teaching notes, books, and archive."
 showToc: false
 showReadingTime: false
 ---
 
-## Writing
+## If You Want The Best Read On How I Think
 
-Technical writing on AI systems, backend development, open source, and lessons from production.
+Start with the [writing index](/blog/). If you want a shorter path, read:
 
-[Read the blog](/blog/)
+- [War stories from production](/blog/war-stories-from-production/)
+- [LLMs Can't Save Bad UX](/blog/llms-cant-save-bad-ux/)
+- [Multi-Agent LLM Middleware](/blog/langgraph-multi-agent-middleware/)
 
-## Book Recommendations
+## If You Care About The Teaching Side
 
-Books that shaped how I think about software, systems, and work.
+Go to the [teaching page](/teaching/) or jump straight to the [FYP guide](/blog/fyp-guidance/).
 
-[Browse books](/books/)
+## If You Want The Reading List
 
-## Archive
+If you just want the reading list, go straight to the [books section](/books/). Mostly software, systems, and a few things that helped shape how I think about work.
 
-Full archive of all posts by date.
+## If You Just Want The Full Archive
 
-[View archive](/archives/)
+Use the [archives page](/archives/).

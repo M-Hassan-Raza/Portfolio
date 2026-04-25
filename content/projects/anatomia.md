@@ -1,76 +1,63 @@
 ---
 title: "Anatomia Healthcare"
 date: 2025-01-10
-description: "HIPAA-compliant healthcare platform with AI clinical decision support"
-tags: ["Healthcare", "HIPAA", "FastAPI", "React", "AWS", "FHIR", "AI"]
+description: "Care workflow platform for nurse callbacks, case review, encrypted transcripts, and voice follow-up."
+images: ["/assets/anatomia-cover.svg"]
+cover:
+  image: "/assets/anatomia-cover.svg"
+  alt: "Anatomia callback workflow illustration"
+  caption: "The work was less about generic health-tech polish and more about carrying patient context safely through review, escalation, and follow-up."
+tags: ["Healthcare", "FastAPI", "React", "AWS", "Vapi", "AI"]
 categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -8
+featured: true
+projectLabel: "Clinical callback workflow"
+projectFocus: "PHI controls, nurse review, escalation paths, and voice follow-up."
 ---
 
-Anatomia is a healthcare communication platform that handles patient-provider interactions with HIPAA compliance baked in. It integrates real-time transcription, AI-powered clinical decision support, and standardized healthcare data exchange through FHIR.
+Anatomia is a care workflow product centered on callbacks and case review. The core loop is not a general healthcare record system. It is a nurse-facing workflow where calls, transcripts, AI triage, patient context, follow-up work, and escalations all have to move cleanly between staff roles.
 
-**Tech Stack:** FastAPI, React, AWS HealthLake, AWS Transcribe Medical, AWS Comprehend Medical, Vapi
+**Tech Stack:** FastAPI, React, PostgreSQL, AWS Cognito, AWS S3, AWS KMS, Redis, OpenAI, Vapi
 
 **Source:** Private (healthcare client)
 
----
-
-## The Problem
-
-Healthcare providers needed a platform that could:
-- Handle real-time patient consultations with transcription
-- Provide clinical decision support during consultations
-- Exchange data with other healthcare systems (referrals, diagnostics)
-- Meet HIPAA requirements without slowing down workflows
-
-The challenge was building something that felt fast and modern while meeting the strict compliance requirements healthcare demands.
+**My role:** Team project. My work was concentrated on the backend workflow layer, transcript and triage handling, case-state plumbing, and the follow-up paths that had to stay tied to the right patient record.
 
 ---
 
-## Technical Approach
+## What The Product Handles
 
-### HIPAA Compliance Architecture
+The product code points to a workflow with:
 
-HIPAA compliance isn't just encryption—it's a set of requirements around access control, audit logging, data handling, and breach notification. The architecture had to support all of this from the ground up.
+- nurse review, callback response, and doctor escalation
+- patient context including medications, allergies, conditions, labs, vitals, imaging, and consultation history
+- call transcripts, AI analysis, urgency scoring, and suggested follow-up language
+- outbound voice follow-up through Vapi
+- analytics and case state tracking across several workflow stages
 
-I used AWS services designed for healthcare: HealthLake for FHIR-compliant data storage, and the Medical variants of Transcribe and Comprehend that are covered under AWS's BAA. All data in transit and at rest is encrypted. Access is logged at every level.
 
-The application layer enforces role-based access control. Different user types (providers, nurses, administrators) see different data based on their role and their relationship to the patient. Every data access is logged with timestamp, user, and reason.
+## The Hard Parts
 
-### Real-Time Transcription
+### PHI Handling Changes The Whole Shape Of The System
 
-Patient consultations are transcribed in real-time using AWS Transcribe Medical. The medical variant is important—it's trained on healthcare terminology and produces more accurate transcriptions of clinical conversations.
+The interesting work here is not just calling an LLM on a transcript. The product has to treat transcripts, recordings, and patient-linked data as sensitive by default. That pushes encryption, access control, audit logging, retention, and search constraints into the center of the architecture instead of leaving them as a later compliance pass.
 
-The transcription feeds into the clinical decision support system, which highlights relevant information as the conversation happens. If a patient mentions symptoms that might indicate a specific condition, the system surfaces relevant clinical guidelines.
+### Triage Has To Stay Useful Without Pretending To Be Magic
 
-### FHIR Integration
+The AI layer is doing concrete, bounded work: transcript analysis, urgency scoring, priority labeling, and callback drafting. That is a better fit for a real workflow than pretending the model is making clinical decisions on its own.
 
-Healthcare data exchange happens through FHIR R4, the industry standard. The platform can send and receive referrals, lab results, and patient summaries in a format other healthcare systems understand.
+### Role Handoffs Are The Product
 
-AWS HealthLake handles the FHIR server implementation. I built adapters that translate between our internal data models and FHIR resources. This abstraction means the application code doesn't need to think about FHIR directly—it just works with domain objects.
+The frontend workflow is explicitly staged across nurse review, doctor review, waiting states, and completion. That matters because a care workflow breaks down quickly if assignment, escalation, and patient context are not carried through in a consistent way.
 
-HL7 integration handles legacy systems that haven't adopted FHIR yet. The platform can receive HL7 messages and translate them to FHIR resources.
+### Voice Follow-Up Has To Connect Back To The Case
 
-### Voice Agent for Follow-Ups
-
-Patient follow-ups are handled by a Vapi-powered voice agent. It can call patients to check on recovery, remind them of appointments, and escalate to human staff when needed.
-
-The voice agent integrates with the clinical record, so it knows the patient's context. It can reference recent visits and ask relevant follow-up questions. All interactions are transcribed and added to the patient record.
-
----
+The outbound voice assistant is not interesting on its own. It becomes useful when the callback, the recording, the transcript, and the follow-up state all stay tied to the right case and the right staff workflow.
 
 ## What I Learned
 
-**Compliance is a feature, not a burden.** HIPAA requirements forced good practices: audit logging, access control, encryption. These make the system more robust even beyond the compliance benefits.
+Products like this get judged on trust long before they get judged on polish. If access rules are fuzzy, if audit trails are thin, or if callbacks lose context between roles, people stop trusting the system.
 
-**Medical AI requires careful framing.** Clinical decision support should augment providers, not replace their judgment. The UI presents suggestions as information to consider, not instructions to follow.
-
-**Healthcare interoperability is hard.** FHIR helps, but every healthcare system has its own quirks. Building robust adapters that handle edge cases took significant effort.
-
----
-
-## Interested?
-
-If you're building healthcare software or need help with HIPAA-compliant architecture, [book a call](/book-a-call/).
+That is what makes Anatomia worth including here. It is a reminder that sensitive workflows usually fail on operational details first, not on lack of cleverness.

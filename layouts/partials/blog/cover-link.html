@@ -1,0 +1,11 @@
+{{- $page := .page -}}
+{{- $class := .class | default "blog-card-media" -}}
+{{- if or $page.Params.cover.ascii $page.Params.cover.image -}}
+<a class="{{ $class }}" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+    {{- if $page.Params.cover.ascii -}}
+        {{- partial "ascii-cover.html" (dict "page" $page) -}}
+    {{- else -}}
+        <img src="{{ $page.Params.cover.image | absURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy" />
+    {{- end -}}
+</a>
+{{- end -}}

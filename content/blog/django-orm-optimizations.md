@@ -7,10 +7,9 @@ tags: ["Django", "Performance", "Database Optimization", "ORM"]
 categories: ["Backend Development"]
 ShowComments: true
 cover:
-    image: "/assets/django-orm.jpg"
-    alt: "Django ORM Optimization"
-    caption: "Photo by Nino Souza: https://www.pexels.com/photo/white-ring-bill-alarm-clock-2277923/"
-    relative: false
+    ascii: "engineering"
+    alt: "Django ORM optimization diagram"
+    caption: "The main gains came from query shape, relation loading, and bulk writes under billing load."
 ---
 
 ## Introduction
@@ -120,4 +119,3 @@ After implementing these optimizations, the refund API saw **a 70% reduction in 
 ## Conclusion
 
 Optimizing Django ORM queries is crucial for scaling large applications. By leveraging `select_related`, `prefetch_related`, bulk operations, and profiling tools, I was able to fine-tune my APIs for high performance. If you're experiencing slow database operations, consider these strategies to improve efficiency and responsiveness in your Django projects. These techniques ended up saving my business from potential losses (customer were fuming a little ngl) due to poor user experience, and I'm confident they can help you too.
-

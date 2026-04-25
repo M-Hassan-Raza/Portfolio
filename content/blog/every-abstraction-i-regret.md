@@ -1,15 +1,15 @@
 ---
 title: "Every Abstraction I Regret"
 date: 2026-02-20T10:00:00+05:00
+description: "A short list of abstractions I added too early, why they got worse over time, and the heuristics I use now to avoid repeating it."
 draft: false
 tags: ["Software Design", "Architecture", "Python", "Django", "LangChain", "Refactoring", "Backend Development"]
 categories: ["Software Design"]
 showComments: true
 cover:
-  image: "/assets/abstractions.svg"
+  ascii: "craft"
   alt: "Abstractions and Regrets"
   caption: "A love letter to simplicity from someone who learned the hard way"
-  relative: false
 ShowToc: true
 ---
 
