@@ -6,10 +6,9 @@ tags: ["Claude", "Anthropic", "AI", "Opus 4.5", "Prompt Engineering", "LLM", "De
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/claude-opus-cover.svg"
+  ascii: "ai"
   alt: "Claude Opus 4.5 context hierarchy diagram"
   caption: "The workflow shift came from better reasoning with better context, not from hype alone."
-  relative: false
 ShowToc: true
 ---
 

@@ -7,10 +7,9 @@ tags: ["Production", "Django", "PostgreSQL", "Concurrency", "Python", "Debugging
 categories: ["Backend Development"]
 showComments: true
 cover:
-  image: "/assets/war-stories.svg"
+  ascii: "engineering"
   alt: "Production War Stories"
   caption: "Every senior engineer has a 2am story. Here are mine."
-  relative: false
 ShowToc: true
 ---
 

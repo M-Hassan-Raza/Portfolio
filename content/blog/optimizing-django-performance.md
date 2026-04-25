@@ -8,10 +8,9 @@ showBreadCrumbs: true
 showReadingTime: true
 showComments: true
 cover:
-    image: "/assets/django-performance-cover.svg"
+    ascii: "engineering"
     alt: "Django performance optimization diagram"
     caption: "The useful work was in removing bad write patterns, signal churn, and redundant queries."
-    relative: false
 ---
 
 

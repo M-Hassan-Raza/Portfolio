@@ -5,10 +5,9 @@ draft: false
 tags: ["Web Development", "Free Courses", "Learn to Code", "freeCodeCamp", "The Odin Project", "Full Stack Open"]
 showComments: true
 cover:
-    image: "/assets/web-dev-resources-cover.svg"
+    ascii: "craft"
     alt: "Web development learning resources comparison diagram"
     caption: "Pick one path, finish it, and then prove the learning with your own projects."
-    relative: false
 ---
 
 I get asked this a lot as a lab instructor: "Where should I learn web development?" Here's what I actually recommend, and why.

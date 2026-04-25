@@ -7,7 +7,7 @@ tags: ["AI", "Fraud Detection", "Legal Tech", "Python", "LLM", "AssemblyAI"]
 showComments: true
 ShowToc: true
 cover:
-  image: "/assets/legal-intake-fraud-cover.svg"
+  ascii: "engineering"
   alt: "Legal intake fraud scoring cover"
 ---
 

@@ -7,7 +7,7 @@ tags: ["OCaml", "Functional Programming", "Search", "TF-IDF", "Cogitator"]
 showComments: true
 ShowToc: true
 cover:
-  image: "/assets/tfidf-ocaml-cover.svg"
+  ascii: "engineering"
   alt: "TF-IDF in OCaml cover"
 ---
 

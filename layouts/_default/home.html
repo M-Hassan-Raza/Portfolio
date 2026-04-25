@@ -96,11 +96,7 @@
             {{- $page := site.GetPage .page }}
             {{- if $page }}
             <article class="writing-row">
-                {{- with $page.Params.cover.image }}
-                <a class="writing-row-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
-                    <img src="{{ . | absURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy" />
-                </a>
-                {{- end }}
+                {{- partial "blog/cover-link.html" (dict "page" $page "class" "writing-row-media") }}
                 <div class="writing-row-copy">
                     <p class="writing-label">{{ .label }}</p>
                     <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>

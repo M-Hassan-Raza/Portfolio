@@ -7,10 +7,9 @@ tags: ["Django", "Performance", "Database Optimization", "ORM"]
 categories: ["Backend Development"]
 ShowComments: true
 cover:
-    image: "/assets/django-orm-cover.svg"
+    ascii: "engineering"
     alt: "Django ORM optimization diagram"
     caption: "The main gains came from query shape, relation loading, and bulk writes under billing load."
-    relative: false
 ---
 
 ## Introduction

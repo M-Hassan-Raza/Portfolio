@@ -1,0 +1,16 @@
+{{- $page := .page | default . -}}
+{{- with $page.Params.cover.ascii -}}
+  {{- $key := . -}}
+  {{- $rendered := false -}}
+  {{- with resources.Get (printf "ascii-covers/%s.txt" $key) -}}
+    <pre class="ascii-cover-art" aria-hidden="true">{{ .Content }}</pre>
+    <span class="sr-only">{{ $page.Params.cover.alt | default $page.Title }}</span>
+    {{- $rendered = true -}}
+  {{- end -}}
+  {{- if not $rendered -}}
+    {{- with index hugo.Data.ascii_covers $key -}}
+      <pre class="ascii-cover-art" aria-hidden="true">{{ delimit .lines "\n" }}</pre>
+      <span class="sr-only">{{ $page.Params.cover.alt | default $page.Title }}</span>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

@@ -276,21 +276,28 @@
 .writing-row-media {
   display: block;
   overflow: hidden;
+  aspect-ratio: 16 / 10;
   border-radius: 22px;
   background: color-mix(in srgb, var(--entry) 92%, var(--primary) 8%);
+  container-type: inline-size;
 }
 
-.writing-row-media img {
+.writing-row-media img,
+.writing-row-media .ascii-cover-art {
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
   transition: transform 0.45s ease;
 }
 
+.writing-row-media img {
+  object-fit: cover;
+}
+
 .writing-row:hover .writing-row-media img,
-.writing-row:focus-within .writing-row-media img {
+.writing-row:hover .writing-row-media .ascii-cover-art,
+.writing-row:focus-within .writing-row-media img,
+.writing-row:focus-within .writing-row-media .ascii-cover-art {
   transform: scale(1.03);
 }
 

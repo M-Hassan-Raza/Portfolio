@@ -7,7 +7,7 @@ tags: ["Rust", "TypeScript", "Performance", "Oxc", "Static Analysis", "Fallow"]
 showComments: true
 ShowToc: true
 cover:
-  image: "/assets/fallow-typescript-cover.svg"
+  ascii: "engineering"
   alt: "Fallow TypeScript analysis cover"
 ---
 

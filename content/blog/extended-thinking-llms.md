@@ -6,10 +6,9 @@ tags: ["AI", "LLM", "Extended Thinking", "Claude", "o1", "Developer Tools", "Rea
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/extended-thinking-cover.svg"
+  ascii: "ai"
   alt: "Extended thinking interaction model diagram"
   caption: "It is a different interaction model, not just a slower one."
-  relative: false
 ShowToc: true
 ---
 

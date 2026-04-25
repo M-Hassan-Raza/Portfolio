@@ -7,7 +7,7 @@ categories: ["Vue.js", "Web Development"]
 showToc: true
 showComments: true
 cover:
-  image: "/assets/component-extraction-cover.svg"
+  ascii: "engineering"
   alt: "Component extraction cover"
 ---
 

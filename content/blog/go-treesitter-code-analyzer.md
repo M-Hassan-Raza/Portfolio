@@ -6,7 +6,7 @@ tags: ["Go", "tree-sitter", "Static Analysis", "Python", "MCP", "Pyscn"]
 showComments: true
 ShowToc: true
 cover:
-  image: "/assets/pyscn-treesitter-cover.svg"
+  ascii: "engineering"
   alt: "Pyscn tree-sitter analysis cover"
 ---
 

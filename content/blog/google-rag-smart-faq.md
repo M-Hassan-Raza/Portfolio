@@ -17,10 +17,9 @@ tags:
   ]
 showComments: true
 cover:
-  image: "/assets/faq-bot-cover.svg"
+  ascii: "ai"
   alt: "FAQ bot RAG pipeline diagram"
   caption: "Index documents, retrieve context, and return structured answers with a confidence signal."
-  relative: false
 ---
 
 ## Introduction

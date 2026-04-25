@@ -48,11 +48,7 @@
                 {{- $page := site.GetPage .page }}
                 {{- if $page }}
                 <article class="blog-start-card">
-                    {{- with $page.Params.cover.image }}
-                    <a class="blog-card-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
-                        <img src="{{ . | absURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy" />
-                    </a>
-                    {{- end }}
+                    {{- partial "blog/cover-link.html" (dict "page" $page "class" "blog-card-media") }}
                     <div class="blog-card-copy">
                         {{- with .label }}
                         <p class="blog-card-kicker">{{ . }}</p>
@@ -80,12 +76,8 @@
             <h2>The newest essay sits up front. The rest of the archive stays easy to scan.</h2>
         </div>
 
-        <article class="blog-lead{{ if not .Params.cover.image }} blog-lead-no-media{{ end }}">
-            {{- with .Params.cover.image }}
-            <a class="blog-card-media blog-lead-media" href="{{ $lead.RelPermalink }}" aria-label="Read {{ $lead.Title }}">
-                <img src="{{ . | absURL }}" alt="{{ $lead.Params.cover.alt | default $lead.Title }}" loading="lazy" />
-            </a>
-            {{- end }}
+        <article class="blog-lead{{ if not (or .Params.cover.ascii .Params.cover.image) }} blog-lead-no-media{{ end }}">
+            {{- partial "blog/cover-link.html" (dict "page" $lead "class" "blog-card-media blog-lead-media") }}
             <div class="blog-card-copy blog-lead-copy">
                 {{- with (partial "blog/kicker.html" .) }}
                 <p class="blog-card-kicker">{{ . }}</p>
@@ -113,12 +105,8 @@
         <div class="blog-feed-list">
             {{- range $archivePages }}
             {{- $page := . }}
-            <article class="blog-feed-row{{ if not .Params.cover.image }} blog-feed-row-no-media{{ end }}">
-                {{- with .Params.cover.image }}
-                <a class="blog-card-media blog-feed-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
-                    <img src="{{ . | absURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy" />
-                </a>
-                {{- end }}
+            <article class="blog-feed-row{{ if not (or .Params.cover.ascii .Params.cover.image) }} blog-feed-row-no-media{{ end }}">
+                {{- partial "blog/cover-link.html" (dict "page" $page "class" "blog-card-media blog-feed-media") }}
                 <div class="blog-card-copy blog-feed-copy">
                     {{- with (partial "blog/kicker.html" .) }}
                     <p class="blog-card-kicker">{{ . }}</p>

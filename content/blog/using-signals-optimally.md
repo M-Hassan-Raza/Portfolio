@@ -7,10 +7,9 @@ categories: ["Backend Development"]
 ShowToc: true
 ShowComments: true
 cover:
-    image: "/assets/django-signals-cover.svg"
+    ascii: "engineering"
     alt: "Django signal optimization diagram"
     caption: "Mark work, wait for commit, and recalculate once instead of letting every write trigger ledger churn."
-    relative: false
 ---
 
 ## Introduction

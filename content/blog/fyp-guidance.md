@@ -5,10 +5,9 @@ draft: false
 tags: ["FYP", "Final Year Project", "Students", "Guidance", "Tech Stack", "Advisor", "Research", "Development", "Project Management", "Career"]
 showComments: true
 cover:
-    image: "/assets/fyp-guidance-cover.svg"
+    ascii: "craft"
     alt: "Final year project planning diagram"
     caption: "The real work is choosing a good topic, controlling scope, and executing steadily."
-    relative: false
 ---
 
 ## Introduction

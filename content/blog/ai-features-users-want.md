@@ -7,10 +7,9 @@ tags: ["AI", "Product", "UX", "Features", "Startup", "Product Development", "CPO
 categories: ["Product Development"]
 showComments: true
 cover:
-  image: "/assets/ai-features-cover.svg"
+  ascii: "ai"
   alt: "AI features users actually want diagram"
   caption: "The useful work is usually in defaults, summaries, alerts, and contextual help, not another chatbot."
-  relative: false
 ShowToc: true
 ---
 

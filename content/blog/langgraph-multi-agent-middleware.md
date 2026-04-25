@@ -5,7 +5,7 @@ description: "What it took to make a multi-agent AI stack survive production: mo
 draft: false
 tags: ["LangGraph", "LangChain", "AI", "Middleware", "Python", "Production"]
 cover:
-  image: "/assets/multi-agent-middleware-cover.svg"
+  ascii: "ai"
   alt: "Multi-agent middleware illustration"
   caption: "The hard part was never the number of agents. It was the control layer around them."
 showComments: true

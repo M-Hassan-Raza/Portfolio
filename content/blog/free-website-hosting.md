@@ -5,7 +5,7 @@ description: "The full cost breakdown of running a developer portfolio — what'
 tags: [Hugo, GitHub Pages, Portfolio, Web Development]
 showComments: true
 cover:
-  image: "/assets/portfolio-hosting-cost-cover.svg"
+  ascii: "craft"
   alt: "Portfolio hosting cost breakdown cover"
 ---
 

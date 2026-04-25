@@ -7,7 +7,7 @@ categories: ["Performance", "Web Development"]
 showToc: true
 showComments: true
 cover:
-  image: "/assets/invoice-search-performance-cover.svg"
+  ascii: "engineering"
   alt: "Invoice search performance cover"
 ---
 

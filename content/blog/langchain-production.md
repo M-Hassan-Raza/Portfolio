@@ -6,10 +6,9 @@ tags: ["LangChain", "Python", "AI", "Production", "RAG", "LLM", "Backend Develop
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/langchain-production-cover.svg"
+  ascii: "ai"
   alt: "LangChain production workflow diagram"
   caption: "The production work sits around the chain: memory, retries, validation, tracing, and version control."
-  relative: false
 ShowToc: true
 ---
 

@@ -7,10 +7,9 @@ tags: ["MCP", "Anthropic", "AI", "Protocol", "Integration", "Developer Tools", "
 categories: ["AI Development"]
 showComments: true
 cover:
-  image: "/assets/mcp-protocol-cover.svg"
+  ascii: "ai"
   alt: "Model Context Protocol diagram"
   caption: "Hosts, servers, and the protocol layer that connects them."
-  relative: false
 ShowToc: true
 ---
 

@@ -7,7 +7,7 @@ tags: ["Logging", "AI", "Developer Tools", "TypeScript", "Nuxt", "Evlog"]
 showComments: true
 ShowToc: true
 cover:
-  image: "/assets/structured-logging-cover.svg"
+  ascii: "ai"
   alt: "Structured logging cover"
 ---
 
