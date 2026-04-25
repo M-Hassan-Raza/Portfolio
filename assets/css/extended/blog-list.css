@@ -157,17 +157,15 @@
 .ascii-cover-art {
   margin: 0;
   box-sizing: border-box;
+  display: block;
   overflow: hidden;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--entry) 96%, var(--primary) 4%), color-mix(in srgb, var(--theme) 88%, var(--primary) 12%));
   color: color-mix(in srgb, var(--content) 78%, var(--secondary));
   font-family: "SFMono-Regular", "Cascadia Mono", "Liberation Mono", Menlo, Consolas, monospace;
-  font-size: 0.93cqw;
-  line-height: 1.0;
+  font-size: 0.595cqw;
+  line-height: 1.2;
   letter-spacing: 0;
   white-space: pre;
 }
