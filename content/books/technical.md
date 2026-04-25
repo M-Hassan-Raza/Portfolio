@@ -10,7 +10,7 @@ ShowComments: true
 
 ### <span class="book-subtitle">Database Internals: A Deep Dive into How Distributed Data Systems Work</span>
 <div class="book-cover">
-  <img src="/assets/designing-db-internals.webp" alt="Database Internals Cover" width="200" height="300">
+  {{< ascii-cover "designing-db-internals" "Database Internals Cover" "portrait" >}}
 </div>
 <p class="author">Author: Alex Petrov</p>
 <blockquote class="review">
@@ -19,7 +19,7 @@ A comprehensive guide to the internal workings of distributed data systems. Cove
 
 ### <span class="book-subtitle">Designing Data-Intensive Applications</span>
 <div class="book-cover">
-  <img src="/assets/designing-data-intensive-applications.webp" alt="Designing Data-Intensive Applications Cover" width="200" height="300">
+  {{< ascii-cover "designing-data-intensive-applications" "Designing Data-Intensive Applications Cover" "portrait" >}}
 </div>
 <p class="author">Author: Martin Kleppmann</p>
 <blockquote class="review">
@@ -28,7 +28,7 @@ It's all about data these days. It's the new <strong>elixir of life</strong>. Co
 
 ### <span class="book-subtitle">Crafting Interpreters</span>
 <div class="book-cover">
-  <img src="/assets/crafting-interpreters.webp" alt="Crafting Interpreters Cover" width="200" height="300">
+  {{< ascii-cover "crafting-interpreters" "Crafting Interpreters Cover" "portrait" >}}
 </div>
 <p class="author">Author: Robert Nystrom</p>
 <blockquote class="review">
@@ -37,7 +37,7 @@ Most don't care about how their code gets executed, but they should. This book t
 
 ### <span class="book-subtitle">Clean Code: A Handbook of Agile Software Craftsmanship</span>
 <div class="book-cover">
-  <img src="/assets/cleancode.webp" alt="Clean Code Cover" width="200" height="300">
+  {{< ascii-cover "cleancode" "Clean Code Cover" "portrait" >}}
 </div>
 <p class="author">Author: Robert C. Martin</p>
 <blockquote class="review">
@@ -46,7 +46,7 @@ A definitive guide to writing code that is both <strong>elegant and maintainable
 
 ### <span class="book-subtitle">Design Patterns: Elements of Reusable Object-Oriented Software</span>
 <div class="book-cover">
-  <img src="/assets/designpatterns.webp" alt="Design Patterns Cover" width="200" height="300">
+  {{< ascii-cover "designpatterns" "Design Patterns Cover" "portrait" >}}
 </div>
 <p class="author">Authors: Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</p>
 <blockquote class="review">
@@ -55,7 +55,7 @@ The <strong>daddy</strong> of all design pattern books. Introduces concepts like
 
 ### <span class="book-subtitle">The Clean Coder: A Code of Conduct for Professional Programmers</span>
 <div class="book-cover">
-  <img src="/assets/cleancoder.webp" alt="The Clean Coder Cover" width="200" height="300">
+  {{< ascii-cover "cleancoder" "The Clean Coder Cover" "portrait" >}}
 </div>
 <p class="author">Author: Robert C. Martin</p>
 <blockquote class="review">
@@ -64,7 +64,7 @@ A call to <strong>professional discipline and ethical behavior</strong>. Talks a
 
 ### <span class="book-subtitle">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</span>
 <div class="book-cover">
-  <img src="/assets/hands-on-ml.webp" alt="Hands-On Machine Learning Cover" width="200" height="300">
+  {{< ascii-cover "hands-on-ml" "Hands-On Machine Learning Cover" "portrait" >}}
 </div>
 <p class="author">Author: Aurelien Geron</p>
 <blockquote class="review">
@@ -73,7 +73,7 @@ The <strong>Swiss Army knife</strong> for anyone serious about ML. Takes you fro
 
 ### <span class="book-subtitle">The Staff Engineer's Path</span>
 <div class="book-cover">
-  <img src="/assets/staff-engineer.webp" alt="The Staff Engineer's Path Cover" width="200" height="300">
+  {{< ascii-cover "staff-engineer" "The Staff Engineer's Path Cover" "portrait" >}}
 </div>
 <p class="author">Author: Tanya Reilly</p>
 <blockquote class="review">
@@ -82,7 +82,7 @@ Finally, a book that explains what happens after <strong>senior engineer</strong
 
 ### <span class="book-subtitle">Natural Language Processing with Transformers</span>
 <div class="book-cover">
-  <img src="/assets/nlp-transformers.webp" alt="NLP with Transformers Cover" width="200" height="300">
+  {{< ascii-cover "nlp-transformers" "NLP with Transformers Cover" "portrait" >}}
 </div>
 <p class="author">Authors: Lewis Tunstall, Leandro von Werra, Thomas Wolf</p>
 <blockquote class="review">

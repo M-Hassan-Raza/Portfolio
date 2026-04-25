@@ -10,7 +10,7 @@ ShowComments: true
 
 ### <span class="book-subtitle">The Sole Spokesman: Jinnah, the Muslim League, and the Demand for Pakistan</span>
 <div class="book-cover">
-  <img src="/assets/sole.webp" alt="The Sole Spokesman Cover" width="200" height="300">
+  {{< ascii-cover "sole" "The Sole Spokesman Cover" "portrait" >}}
 </div>
 <p class="author">Author: Ayesha Jalal</p>
 <blockquote class="review">
@@ -19,7 +19,7 @@ A penetrating analysis of the role of a singular spokesperson in shaping public 
 
 ### <span class="book-subtitle">The Making of Pakistan: A Study in Nationalism</span>
 <div class="book-cover">
-  <img src="/assets/makingofpakistan.webp" alt="The Making of Pakistan Cover" width="200" height="300">
+  {{< ascii-cover "makingofpakistan" "The Making of Pakistan Cover" "portrait" >}}
 </div>
 <p class="author">Author: K.K. Aziz</p>
 <blockquote class="review">

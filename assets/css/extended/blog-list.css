@@ -181,6 +181,30 @@
   text-align: left;
 }
 
+.book-cover {
+  container-type: inline-size;
+  width: clamp(180px, 36vw, 260px);
+  margin-inline: auto;
+}
+
+.book-cover .ascii-cover-art {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.profile-ascii {
+  container-type: inline-size;
+  width: clamp(140px, 18vw, 200px);
+  margin-inline: auto 1.2rem;
+  display: block;
+}
+
+.profile-ascii .ascii-cover-art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
 .blog-start-card:hover .blog-card-media img,
 .blog-start-card:hover .blog-card-media .ascii-cover-art,
 .blog-start-card:focus-within .blog-card-media img,

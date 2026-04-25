@@ -2,9 +2,8 @@
 title: "Polaris ERP"
 date: 2025-02-10
 description: "Retail operations platform covering POS, stock, ledgers, supplier workflows, reporting, and tenant-safe APIs."
-images: ["/assets/polaris-cover.svg"]
 cover:
-  image: "/assets/polaris-cover.svg"
+  ascii: "polaris-cover"
   alt: "Polaris retail operations illustration"
   caption: "A simplified view of the operational seams that mattered most: inventory, billing, ledgers, supplier imports, and tenant-safe flows."
 tags: ["Django", "Vue.js", "PostgreSQL", "ERP", "Full-Stack", "Concurrency"]

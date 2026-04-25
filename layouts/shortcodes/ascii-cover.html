@@ -1,0 +1,7 @@
+{{- $key := .Get 0 -}}
+{{- $alt := .Get 1 | default "" -}}
+{{- $variant := .Get 2 | default "" -}}
+{{- with resources.Get (printf "ascii-covers/%s.txt" $key) -}}
+<pre class="ascii-cover-art{{ with $variant }} ascii-cover-{{ . }}{{ end }}" aria-hidden="true">{{ .Content }}</pre>
+{{- with $alt }}<span class="sr-only">{{ . }}</span>{{ end -}}
+{{- end -}}

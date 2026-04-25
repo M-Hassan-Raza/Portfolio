@@ -2,9 +2,8 @@
 title: "Obelisk"
 date: 2025-01-20
 description: "AI-powered marketing platform with LangGraph agents, parallel RAG, and multi-tenant architecture"
-images: ["/assets/obelisk-cover.svg"]
 cover:
-  image: "/assets/obelisk-cover.svg"
+  ascii: "obelisk-cover"
   alt: "Obelisk AI content system illustration"
   caption: "The useful part of the system was not just the agents. It was the retrieval, checkpointing, and guardrail layer around them."
 tags: ["AI", "LangGraph", "FastAPI", "PostgreSQL", "RAG", "Multi-Tenant", "Vertex AI"]

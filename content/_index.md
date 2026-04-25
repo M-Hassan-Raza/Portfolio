@@ -9,7 +9,6 @@ home:
     primary:
       label: "See selected work"
       url: "/projects/"
-    image: "/muhammad-hassan-raza-profile.webp"
     image_alt: "Muhammad Hassan Raza"
     note: "Currently CPO at Entropy Labs."
     stats:

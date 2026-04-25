@@ -10,7 +10,7 @@ ShowComments: true
 
 ### <span class="book-subtitle">The Brothers Karamazov</span>
 <div class="book-cover">
-  <img src="/assets/brotherskaramazov.webp" alt="The Brothers Karamazov Cover" width="200" height="300">
+  {{< ascii-cover "brotherskaramazov" "The Brothers Karamazov Cover" "portrait" >}}
 </div>
 <p class="author">Author: Fyodor Dostoevsky</p>
 <blockquote class="review">
@@ -19,7 +19,7 @@ A masterpiece that delves deep into human nature, morality, and faith. Features 
 
 ### <span class="book-subtitle">The Sword of Kaigen</span>
 <div class="book-cover">
-  <img src="/assets/swordofkaigen.webp" alt="The Sword of Kaigen Cover" width="200" height="300">
+  {{< ascii-cover "swordofkaigen" "The Sword of Kaigen Cover" "portrait" >}}
 </div>
 <p class="author">Author: M.L. Wang</p>
 <blockquote class="review">
@@ -28,7 +28,7 @@ A gripping tale of family, honor, and magic set in a war-torn world. Combines in
 
 ### <span class="book-subtitle">The Will of the Many</span>
 <div class="book-cover">
-  <img src="/assets/thewillofthemany.webp" alt="The Will of the Many Cover" width="200" height="300">
+  {{< ascii-cover "thewillofthemany" "The Will of the Many Cover" "portrait" >}}
 </div>
 <p class="author">Author: James Islington</p>
 <blockquote class="review">
@@ -37,7 +37,7 @@ An epic blend of political intrigue and high fantasy that leaves you craving mor
 
 ### <span class="book-subtitle">Mistborn Saga: Complete Trilogy</span>
 <div class="book-cover">
-  <img src="/assets/mistborn.webp" alt="Mistborn Saga Cover" width="200" height="300">
+  {{< ascii-cover "mistborn" "Mistborn Saga Cover" "portrait" >}}
 </div>
 <p class="author">Author: Brandon Sanderson</p>
 <blockquote class="review">
@@ -46,7 +46,7 @@ Peak fiction right here. Masterfully blends intricate magic systems with dynamic
 
 ### <span class="book-subtitle">Angels & Demons</span>
 <div class="book-cover">
-  <img src="/assets/angelsdemon.webp" alt="Angels & Demons Cover" width="200" height="300">
+  {{< ascii-cover "angelsdemon" "Angels & Demons Cover" "portrait" >}}
 </div>
 <p class="author">Author: Dan Brown</p>
 <blockquote class="review">
@@ -55,7 +55,7 @@ A riveting adventure pitting ancient secrets against modern science. Fast-paced 
 
 ### <span class="book-subtitle">1984</span>
 <div class="book-cover">
-  <img src="/assets/1984.webp" alt="1984 Cover" width="200" height="300">
+  {{< ascii-cover "1984" "1984 Cover" "portrait" >}}
 </div>
 <p class="author">Author: George Orwell</p>
 <blockquote class="review">
@@ -64,7 +64,7 @@ A chilling dystopian vision of totalitarianism that remains alarmingly relevant.
 
 ### <span class="book-subtitle">Project Hail Mary</span>
 <div class="book-cover">
-  <img src="/assets/hailmary.webp" alt="Project Hail Mary Cover" width="200" height="300">
+  {{< ascii-cover "hailmary" "Project Hail Mary Cover" "portrait" >}}
 </div>
 <p class="author">Author: Andy Weir</p>
 <blockquote class="review">

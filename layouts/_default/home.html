@@ -27,7 +27,12 @@
 
         <aside class="home-hero-aside">
             <figure class="home-portrait-card">
-                <img src="{{ $hero.image | absURL }}" alt="{{ $hero.image_alt }}" class="home-portrait" />
+                {{- with resources.Get "ascii-covers/profile.txt" }}
+                <div class="home-portrait">
+                    <pre class="ascii-cover-art" aria-hidden="true">{{ .Content }}</pre>
+                    <span class="sr-only">{{ $hero.image_alt }}</span>
+                </div>
+                {{- end }}
                 {{- with $hero.note }}<figcaption>{{ . }}</figcaption>{{- end }}
             </figure>
         </aside>
