@@ -6,6 +6,7 @@ How It Works The approach is deliberately simple: append the executable bytes to
 def obfuscate_images(image_blob_name, executable_blob_name): image_data = image_blob_client.download_blob().readall() executable_data = executable_blob_client.download_blob().readall() delimiter = b"---EXECUTABLE_BOUNDARY---" obfuscated_data = image_data + delimiter + executable_data obfuscated_blob_client.upload_blob(obfuscated_data, overwrite=True) Image formats like JPEG and PNG store their data length in headers. Most viewers stop reading at the image data boundary, so the appended executable bytes are invisible when you open the file as an image. Deobfuscation finds the delimiter and splits the bytes back apart.
 ...</p></div><footer class=entry-footer><span title='2025-02-16 00:00:00 +0000 UTC'>February 16, 2025</span>&nbsp;·&nbsp;<span>2 min</span>&nbsp;·&nbsp;<span>Muhammad Hassan Raza</span></footer><a class=entry-link aria-label="post link to PixelCryptor: Hiding Executables Inside Images" href=https://mhassan.dev/projects/pixelcryptor/></a></article></main><footer class="footer footer-custom"><span>&copy; 2026 <a href=https://mhassan.dev/>Muhammad Hassan Raza</a></span><nav class=footer-inline-nav aria-label="Footer links"><a href=https://mhassan.dev/projects/>Work</a>
 <a href=https://mhassan.dev/blog/>Writing</a>
+<a href=https://mhassan.dev/books/>Books</a>
 <a href=https://mhassan.dev/about/>About</a>
 <a href=https://mhassan.dev/book-a-call/>Contact</a>
 <a href=https://github.com/m-hassan-raza target=_blank rel="noopener noreferrer">GitHub</a>
