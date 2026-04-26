@@ -1,6 +1,7 @@
 ---
 title: "Building a Smarter FAQ Bot (with Gemini, RAG, and Structured Output)"
 date: 2025-04-20T10:00:00+05:00
+description: "A practical FAQ bot walkthrough using Gemini, RAG, ChromaDB, embeddings, and structured output for grounded answers."
 draft: false
 tags:
   [
@@ -46,7 +47,7 @@ We need a system that answers questions accurately based *only* on a given set o
 Our approach combines **Retrieval Augmented Generation (RAG)** with the capabilities of the **Gemini API**. At a high level, the user interacts with the system like this:
 
 <figure>
-  <img src="/assets/RAG-Flow.webp" alt="High-Level RAG Flow Diagram: User Query -> RAG System -> Grounded Answer" />
+  <img src="/assets/RAG-Flow.png" alt="High-Level RAG Flow Diagram: User Query -> RAG System -> Grounded Answer" />
   <figcaption>Figure 1: High-Level RAG Interaction Flow.</figcaption>
 </figure>
 
@@ -55,14 +56,14 @@ This involves three main steps in the underlying RAG pipeline:
 **1. Indexing:** Convert the source documents (Google Car manuals) into numerical representations (embeddings) using the Gemini `text-embedding-004` model and store them in a vector database (ChromaDB). This allows for efficient similarity searches. This setup process is crucial for enabling fast retrieval later.
 
 <figure>
-  <img src="/assets/Indexing-Flow.webp" alt="Indexing Flow Diagram: Documents -> Gemini Embedding -> Vector Embeddings -> ChromaDB Vector Store" />
+  <img src="/assets/Indexing-Flow.png" alt="Indexing Flow Diagram: Documents -> Gemini Embedding -> Vector Embeddings -> ChromaDB Vector Store" />
   <figcaption>Figure 2: The Document Indexing Flow.</figcaption>
 </figure>
 
 **2. Retrieval:** When a user asks a question, embed the question using the same model and search the vector database to find the most relevant document chunks based on semantic similarity.
 
 <figure>
-  <img src="/assets/Retreival Flow.webp" alt="Retrieval Flow Diagram: User Query -> Gemini Embedding -> Query Vector -> ChromaDB -> Relevant Document Chunks" />
+  <img src="/assets/Retreival-Flow.png" alt="Retrieval Flow Diagram: User Query -> Gemini Embedding -> Query Vector -> ChromaDB -> Relevant Document Chunks" />
   <figcaption>Figure 3: The Query Retrieval Flow.</figcaption>
 </figure>
 

@@ -2,5 +2,6 @@
 title: "Archive"
 layout: "archives"
 url: "/archives/"
-summary: archives
+description: "A chronological archive of writing, project notes, and selected work from mhassan.dev."
+summary: "A chronological archive of writing, project notes, and selected work from mhassan.dev."
 ---

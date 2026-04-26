@@ -1,0 +1,11 @@
+{{- $description := "" -}}
+{{- with .Description -}}
+  {{- $description = . | plainify | htmlUnescape | strings.TrimSpace -}}
+{{- else -}}
+  {{- with .Summary -}}
+    {{- $description = . | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- else -}}
+    {{- $description = site.Params.description | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- end -}}
+{{- end -}}
+{{- $description | replaceRE `\s+` " " | truncate 155 -}}

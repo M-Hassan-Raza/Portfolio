@@ -1,6 +1,7 @@
 ---
 title: "LangChain in Production: What the Tutorials Don't Tell You"
 date: 2025-06-20T10:00:00+05:00
+description: "What LangChain production work needs beyond tutorials: persistence, retries, validation, tracing, deployment, and cost control."
 draft: false
 tags: ["LangChain", "Python", "AI", "Production", "RAG", "LLM", "Backend Development", "LCEL"]
 categories: ["AI Development"]

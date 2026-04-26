@@ -1,6 +1,7 @@
 ---
 title: "Optimizing Django ORM Queries for Large Applications"
 date: 2025-02-17T12:00:00+05:00
+description: "Django ORM query fixes that improved billing performance by reducing relation loading mistakes, repeated writes, and inefficient loops."
 draft: false
 aliases: ["/blog/django-orm-optimizaitons/"]
 tags: ["Django", "Performance", "Database Optimization", "ORM"]

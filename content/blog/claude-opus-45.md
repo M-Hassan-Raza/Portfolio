@@ -1,6 +1,7 @@
 ---
 title: "Claude Opus 4.5: When an AI Finally Gets It"
 date: 2025-05-15T10:00:00+05:00
+description: "Why Claude Opus 4.5 felt useful in real coding work because of stronger reasoning, context handling, and workflow fit."
 draft: false
 tags: ["Claude", "Anthropic", "AI", "Opus 4.5", "Prompt Engineering", "LLM", "Developer Tools", "Claude Code"]
 categories: ["AI Development"]

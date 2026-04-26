@@ -1,6 +1,7 @@
 ---
 title: "How Pyscn Analyzes Python with Go and tree-sitter"
 date: 2025-10-15T10:00:00+05:00
+description: "How Pyscn uses Go and tree-sitter to analyze Python code quickly for dead code, clone detection, and dependency insight."
 draft: false
 tags: ["Go", "tree-sitter", "Static Analysis", "Python", "MCP", "Pyscn"]
 showComments: true

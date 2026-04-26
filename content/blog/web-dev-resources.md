@@ -1,6 +1,7 @@
 ---
 title: "Free Web Dev Platforms That Are Actually Worth Your Time"
 date: 2025-01-04T17:27:00+05:00
+description: "A practical shortlist of free web development learning platforms and how to use them without getting stuck in tutorials."
 draft: false
 tags: ["Web Development", "Free Courses", "Learn to Code", "freeCodeCamp", "The Odin Project", "Full Stack Open"]
 showComments: true

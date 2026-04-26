@@ -1,6 +1,7 @@
 ---
 title: "Extended Thinking in LLMs: A Mental Model for Developers"
 date: 2025-09-25T10:00:00+05:00
+description: "A practical mental model for extended-thinking LLMs, where slower reasoning changes interaction design and developer workflows."
 draft: false
 tags: ["AI", "LLM", "Extended Thinking", "Claude", "o1", "Developer Tools", "Reasoning", "Prompt Engineering"]
 categories: ["AI Development"]

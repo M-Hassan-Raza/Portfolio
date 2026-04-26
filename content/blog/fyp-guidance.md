@@ -1,6 +1,7 @@
 ---
 title: "Final Year Project (FYP) Guide for Students"
 date: 2025-02-17T12:00:00+05:00
+description: "A practical final year project guide for choosing scope, building steadily, avoiding weak ideas, and presenting work clearly."
 draft: false
 tags: ["FYP", "Final Year Project", "Students", "Guidance", "Tech Stack", "Advisor", "Research", "Development", "Project Management", "Career"]
 showComments: true

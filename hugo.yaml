@@ -3,6 +3,7 @@ title: "Muhammad Hassan Raza"
 theme: "PaperMod"
 defaultContentLanguage: "en"
 languageCode: "en-us"
+enableRobotsTXT: true
 
 # Add this line to ignore the warning about the missing partial template
 ignoreLogs: ["warning-partial-superfluous-prefix"]
@@ -29,6 +30,7 @@ params:
     favicon32x32: assets/favicon.svg
     apple_touch_icon: assets/favicon.svg
     safari_pinned_tab: assets/favicon.svg
+    social_image: assets/social-card.png
 
   analytics:
     umami:
@@ -38,6 +40,7 @@ params:
   schema:
     publisherType: "Person"
     jobTitle: "CIO and technical operator"
+    image: assets/social-card.png
     sameAs:
       - "https://github.com/m-hassan-raza"
       - "https://linkedin.com/in/hassanraza22"

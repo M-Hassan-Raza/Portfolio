@@ -1,7 +1,7 @@
 ---
-title: "Go Load Balancer"
+title: "Go Load Balancer Dashboard"
 date: 2025-01-05
-description: "High-performance load balancer with real-time dashboard"
+description: "A Go load balancer with health checks, round-robin routing, concurrency handling, and a real-time dashboard."
 tags: ["Go", "Systems Programming", "Networking", "Concurrency"]
 categories: ["Projects"]
 showToc: true

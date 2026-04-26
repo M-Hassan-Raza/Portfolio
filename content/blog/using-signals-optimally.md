@@ -1,6 +1,7 @@
 ---
 title: "Optimizing Django Signals for Efficient Ledger Recalculations"
 date: 2025-02-15T12:00:00+05:00
+description: "A Django signals cleanup pattern for ledger recalculation that batches work after commit instead of triggering redundant writes."
 draft: false
 tags: ["Django", "Performance", "Ledger", "Optimization"]
 categories: ["Backend Development"]

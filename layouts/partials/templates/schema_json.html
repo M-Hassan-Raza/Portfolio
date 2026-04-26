@@ -1,8 +1,11 @@
 {{- $personID := printf "%s#person" site.Home.Permalink -}}
 {{- $websiteID := printf "%s#website" site.Home.Permalink -}}
 {{- $authorName := site.Params.author | default site.Title -}}
-{{- $siteDescription := site.Params.description | plainify | truncate 180 -}}
+{{- $siteDescription := site.Params.description | plainify | htmlUnescape | strings.TrimSpace | replaceRE `\s+` " " | truncate 155 -}}
 {{- $author := dict "@type" "Person" "@id" $personID "name" $authorName -}}
+{{- with site.Params.schema.image }}
+  {{- $author = merge $author (dict "image" (. | absURL)) -}}
+{{- end }}
 
 {{- if .IsHome }}
   {{- $person := dict
@@ -70,12 +73,7 @@
   -}}
 <script type="application/ld+json">{{ $breadcrumbSchema | jsonify | safeJS }}</script>
 
-  {{- $description := "" -}}
-  {{- with .Description }}
-    {{- $description = . | plainify | htmlUnescape | strings.TrimSpace -}}
-  {{- else }}
-    {{- $description = .Summary | plainify | htmlUnescape | strings.TrimSpace -}}
-  {{- end }}
+  {{- $description := partial "seo/description.html" . -}}
 
   {{- $keywords := .Params.keywords | default .Params.tags -}}
   {{- $pageType := "WebPage" -}}
@@ -111,19 +109,7 @@
     {{- $pageSchema = merge $pageSchema (dict "keywords" $keywords) -}}
   {{- end }}
 
-  {{- $image := "" -}}
-  {{- if .Params.cover.image }}
-    {{- if ne .Params.cover.relative true }}
-      {{- $image = .Params.cover.image | absURL -}}
-    {{- else }}
-      {{- $image = (path.Join .RelPermalink .Params.cover.image) | absURL -}}
-    {{- end }}
-  {{- else }}
-    {{- $images := partial "templates/_funcs/get-page-images" . -}}
-    {{- with index $images 0 }}
-      {{- $image = .Permalink -}}
-    {{- end }}
-  {{- end }}
+  {{- $image := partial "seo/image.html" . -}}
 
   {{- with $image }}
     {{- $pageSchema = merge $pageSchema (dict "image" .) -}}

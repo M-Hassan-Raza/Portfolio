@@ -1,0 +1,18 @@
+{{- $image := "" -}}
+{{- with .Params.cover.image -}}
+  {{- if ne $.Params.cover.relative true -}}
+    {{- $image = . | absURL -}}
+  {{- else -}}
+    {{- $image = (path.Join $.RelPermalink .) | absURL -}}
+  {{- end -}}
+{{- else -}}
+  {{- $images := partial "templates/_funcs/get-page-images" . -}}
+  {{- with index $images 0 -}}
+    {{- $image = .Permalink -}}
+  {{- else -}}
+    {{- with site.Params.assets.social_image -}}
+      {{- $image = . | absURL -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $image -}}
