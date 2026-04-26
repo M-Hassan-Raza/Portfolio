@@ -5,6 +5,10 @@ draft: false
 description: "Books that explore the history, politics, and identity of Pakistan."
 slug: "books-pakistan"
 ShowComments: true
+kicker: "Pakistan"
+cover:
+  ascii: "sole"
+  alt: "The Sole Spokesman cover"
 ---
 <div class="book-container">
 

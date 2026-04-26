@@ -5,6 +5,10 @@ draft: false
 description: "Essential books on software craftsmanship, coding principles, and system design."
 slug: "books-technical"
 ShowComments: true
+kicker: "Technical"
+cover:
+  ascii: "designing-data-intensive-applications"
+  alt: "Designing Data-Intensive Applications cover"
 ---
 <div class="book-container">
 

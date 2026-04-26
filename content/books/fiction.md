@@ -5,6 +5,10 @@ draft: false
 description: "A collection of immersive and thought-provoking fiction books spanning various genres."
 slug: "books-fiction"
 ShowComments: true
+kicker: "Fiction"
+cover:
+  ascii: "brotherskaramazov"
+  alt: "The Brothers Karamazov cover"
 ---
 <div class="book-container">
 

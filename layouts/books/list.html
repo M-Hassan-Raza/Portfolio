@@ -1,0 +1,33 @@
+{{- define "main" }}
+<header class="page-header blog-page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+
+{{- $pages := .RegularPages.ByTitle }}
+
+<div class="blog-shell">
+  <section class="blog-feed-section">
+    <div class="blog-feed-list">
+      {{- range $pages }}
+      {{- $page := . }}
+      <article class="blog-feed-row{{ if not (or .Params.cover.ascii .Params.cover.image) }} blog-feed-row-no-media{{ end }}">
+        {{- partial "blog/cover-link.html" (dict "page" $page "class" "blog-card-media blog-feed-media") }}
+        <div class="blog-card-copy blog-feed-copy">
+          {{- with .Params.kicker }}
+          <p class="blog-card-kicker">{{ . }}</p>
+          {{- end }}
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="blog-card-summary">{{ .Description }}</p>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+</div>
+{{- end }}

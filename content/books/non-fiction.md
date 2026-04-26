@@ -5,6 +5,10 @@ draft: false
 description: "A selection of thought-provoking non-fiction books covering politics, history, and personal development."
 slug: "books-non-fiction"
 ShowComments: true
+kicker: "Non-Fiction"
+cover:
+  ascii: "thinking-fast-slow"
+  alt: "Thinking, Fast and Slow cover"
 ---
 <div class="book-container">
 
