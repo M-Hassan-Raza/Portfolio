@@ -3,7 +3,7 @@ title: "AI Features Your Users Actually Want (Hint: Not Another Chatbot)"
 date: 2025-08-10T10:00:00+05:00
 description: "The AI features users keep rewarding in real products tend to be the ones that remove work instead of asking for another chat prompt."
 draft: false
-tags: ["AI", "Product", "UX", "Features", "Startup", "Product Development", "CPO"]
+tags: ["AI", "Product", "UX", "Features", "Startup", "Product Development", "CIO"]
 categories: ["Product Development"]
 showComments: true
 cover:
@@ -17,7 +17,7 @@ The graveyard of failed AI features is full of chatbots nobody asked for.
 
 Every product team I talk to has the same story: leadership watched a GPT demo, got excited, and mandated "we need AI in the product." Three months later, there's a chatbot in the corner of the app that 3% of users have tried and 0.5% use regularly.
 
-As CPO at Entropy Labs, I've been on both sides of this. I've built AI features that users loved and killed features that seemed brilliant in demos but died in production. Here's what I've learned about the difference.
+As CIO at Entropy Labs, I've been on both sides of this. I've built AI features that users loved and killed features that seemed brilliant in demos but died in production. Here's what I've learned about the difference.
 
 ---
 

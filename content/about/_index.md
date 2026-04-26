@@ -2,12 +2,12 @@
 title: "About"
 date: 2024-01-28T12:00:00+05:00
 draft: false
-description: "CPO, technical operator, former instructor, and hands-on builder working across AI systems, backend platforms, and product delivery."
+description: "CIO, technical operator, former instructor, and hands-on builder working across AI systems, backend platforms, and product delivery."
 ShowBreadCrumbs: false
 ShowToc: true
 ---
 
-I'm the CPO and cofounder at [Entropy Labs](https://entropylabs.dev). I lead product and technical work across AI systems, backend architecture, and delivery.
+I'm the CIO and cofounder at [Entropy Labs](https://entropylabs.dev). I lead product and technical work across AI systems, backend architecture, and delivery.
 
 Most of my time goes into work where roadmap, system design, failure handling, and team execution start colliding. I still like being close to the hard parts. Slow reporting paths. Brittle workflows. LLM systems that look fine in a demo and get weird with real users. Product decisions that quietly turn into engineering debt.
 
@@ -31,7 +31,7 @@ For private commercial work, I try to describe the part I actually owned. Some s
 
 ## Work
 
-**CPO & Cofounder, Entropy Labs** (Jun 2025 to Present)
+**CIO & Cofounder, Entropy Labs** (Jun 2025 to Present)
 
 I lead product strategy and technical operations for an AI marketing platform. That means roadmap decisions, delivery pressure, infrastructure choices, and the usual question of whether the real fix belongs in the product, the system, or the way the team is working. I still stay close to the architecture and the backend paths that can do real damage when they go wrong.
 

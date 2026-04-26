@@ -1,16 +1,15 @@
 ---
 title: "Muhammad Hassan Raza"
-description: "CPO and technical operator working across product, backend systems, and AI delivery."
+description: "CIO and technical operator working across product, backend systems, and AI delivery."
 home:
   hero:
-    kicker: "CPO, technical operator, backend and AI systems"
+    kicker: "CIO, technical operator, backend and AI systems"
     title: "I lead product and technical work on systems that have to hold up in production."
     summary: "Most of my work sits where product, backend, delivery, and AI problems overlap — money moving through systems, reports teams rely on, workflows that can't afford to fail."
     primary:
       label: "See selected work"
       url: "/projects/"
     image_alt: "Muhammad Hassan Raza"
-    note: "Currently CPO at Entropy Labs."
     stats:
       - "2-hour onboarding cut to 25 min"
       - "Reporting endpoints from 750ms to 230ms"

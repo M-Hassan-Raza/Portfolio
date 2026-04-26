@@ -9,7 +9,7 @@ ignoreLogs: ["warning-partial-superfluous-prefix"]
 
 params:
   author: "Muhammad Hassan Raza"
-  description: "Muhammad Hassan Raza is a CPO and technical operator who leads product and engineering work for AI systems and backend platforms. He writes about production failures, architecture, and software judgment."
+  description: "Muhammad Hassan Raza is a CIO and technical operator who leads product and engineering work for AI systems and backend platforms. He writes about production failures, architecture, and software judgment."
   keywords:
     [
       "technical leadership",
@@ -37,7 +37,7 @@ params:
 
   schema:
     publisherType: "Person"
-    jobTitle: "CPO and technical operator"
+    jobTitle: "CIO and technical operator"
     sameAs:
       - "https://github.com/m-hassan-raza"
       - "https://linkedin.com/in/hassanraza22"
