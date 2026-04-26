@@ -20,13 +20,23 @@
 }
 
 #menu a {
+  display: inline-flex;
+  align-items: center;
+  height: 2.1rem;
   padding: 0 0.8rem;
   border-radius: 999px;
+  line-height: 1;
+}
+
+#menu a:has(.active) {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
 }
 
 #menu .active {
   border-bottom: 0;
-  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  background: none;
+  font-weight: 600;
+  color: var(--primary);
 }
 
 .home-shell {
