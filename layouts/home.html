@@ -1,93 +1,121 @@
 {{- define "main" }}
 {{- $home := .Params.home }}
 {{- $hero := $home.hero }}
+{{- $profile := hugo.Data.profile }}
+{{- $oss := hugo.Data.oss }}
 
-<div class="home-shell">
-    <section class="home-hero">
+<div class="home">
+    <section class="home-hero" aria-labelledby="home-title">
         <div class="home-hero-copy">
-            {{- with $hero.kicker }}
-            <p class="home-kicker">{{ . }}</p>
-            {{- end }}
-
-            <h1 class="home-title">{{ $hero.title }}</h1>
+            <p class="kicker">{{ $profile.now.role }}, <a href="{{ $profile.now.url }}" rel="noopener" target="_blank">{{ $profile.now.org }}</a></p>
+            <h1 id="home-title" class="home-title">{{ $hero.title }}</h1>
             <p class="home-summary">{{ $hero.summary }}</p>
-
-            <div class="home-cta-row">
-                <a class="home-button home-button-primary" href="{{ $hero.primary.url }}">{{ $hero.primary.label }}</a>
+            <div class="button-row">
+                <a class="button button-primary" href="{{ "/projects/" | relLangURL }}">See the work</a>
+                <a class="button button-quiet" href="{{ "/contact/" | relLangURL }}">Work with me</a>
             </div>
-
-            {{- with $hero.stats }}
-            <ul class="home-stats">
-                {{- range . }}
-                <li>{{ . }}</li>
-                {{- end }}
-            </ul>
-            {{- end }}
         </div>
 
-        <aside class="home-hero-aside">
-            <figure class="home-portrait-card">
-                {{- with resources.Get "ascii-covers/profile.txt" }}
-                <div class="home-portrait">
-                    <pre class="ascii-cover-art" aria-hidden="true">{{ .Content }}</pre>
-                    <span class="sr-only">{{ $hero.image_alt }}</span>
-                </div>
-                {{- end }}
-                {{- with $hero.note }}<figcaption>{{ . }}</figcaption>{{- end }}
-            </figure>
-        </aside>
+        <figure class="home-portrait">
+            {{- with resources.Get "ascii-covers/profile.txt" }}
+            <pre class="ascii-cover-art" aria-hidden="true">{{ .Content }}</pre>
+            {{- end }}
+            <figcaption class="sr-only">{{ $hero.image_alt }}</figcaption>
+        </figure>
     </section>
 
-    <section class="home-section">
-        <div class="home-section-head">
-            <h2>Recent work</h2>
-        </div>
+    <section class="proof" aria-label="Proof points">
+        <dl class="proof-grid">
+            {{- with $oss }}
+            <div class="proof-item">
+                <dt>{{ .merged }}</dt>
+                <dd>merged PRs in kitty, calibre, libtorrent and {{ sub (len .projects) 3 }} other projects</dd>
+            </div>
+            {{- end }}
+            {{- range $profile.proof }}
+            <div class="proof-item">
+                <dt>{{ .value }}</dt>
+                <dd>{{ .label }}</dd>
+            </div>
+            {{- end }}
+        </dl>
+        <p class="proof-note">
+            <span class="proof-note-label">Entropy Labs</span>
+            {{ delimit $profile.recognition " · " }}
+        </p>
+    </section>
 
-        {{- with $home.featured_lead }}
-        {{- $page := site.GetPage .page }}
-        {{- if $page }}
-        <article class="feature-lead">
-            {{- partial "blog/cover-link.html" (dict "page" $page "class" "feature-lead-media") }}
-            <div class="feature-lead-copy">
-                <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
-                <p class="feature-note">{{ .note }}</p>
-                <p>{{ $page.Description }}</p>
+    <section class="home-section" aria-labelledby="work-title">
+        <header class="section-head">
+            <h2 id="work-title">Selected work</h2>
+            <a class="section-link" href="{{ "/projects/" | relLangURL }}">All work</a>
+        </header>
+
+        {{- with $home.work.lead }}
+        {{- with site.GetPage .page }}
+        <article class="work-lead">
+            {{- partial "blog/cover-link.html" (dict "page" . "class" "work-lead-media") }}
+            <div class="work-lead-copy">
+                {{- with .Params.projectLabel }}<p class="kicker">{{ . }}</p>{{ end }}
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p>{{ $home.work.lead.note }}</p>
             </div>
         </article>
         {{- end }}
         {{- end }}
 
-        <div class="feature-grid">
-            {{- range $home.featured_compact }}
-            {{- $page := site.GetPage .page }}
-            {{- if $page }}
-            <article class="feature-card">
-                <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
-                <p class="feature-note">{{ .note }}</p>
-                <p>{{ $page.Description }}</p>
+        <div class="work-grid">
+            {{- range $home.work.more }}
+            {{- $note := .note }}
+            {{- with site.GetPage .page }}
+            <article class="work-card">
+                {{- with .Params.projectLabel }}<p class="kicker">{{ . }}</p>{{ end }}
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p>{{ $note }}</p>
             </article>
             {{- end }}
             {{- end }}
         </div>
     </section>
 
-    <section class="home-section">
-        <div class="home-section-head">
-            <h2>Recent writing</h2>
-        </div>
-        <div class="writing-list">
-            {{- range $home.featured_writing }}
-            {{- $page := site.GetPage .page }}
-            {{- if $page }}
-            <article class="writing-row">
-                {{- partial "blog/cover-link.html" (dict "page" $page "class" "writing-row-media") }}
-                <div class="writing-row-copy">
-                    <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
-                    <p>{{ .note }}</p>
-                </div>
-            </article>
+    {{- with $oss }}
+    <section class="home-section" aria-labelledby="oss-title">
+        <header class="section-head">
+            <h2 id="oss-title">Patches in tools I use</h2>
+            <a class="section-link" href="{{ "/open-source/" | relLangURL }}">All {{ .merged }} PRs</a>
+        </header>
+        <p class="section-intro">When something I rely on breaks, I read the source and send the fix. A few of the ones I'd point to:</p>
+        {{- partial "oss/highlights.html" (dict "limit" 3) }}
+    </section>
+    {{- end }}
+
+    <section class="home-section" aria-labelledby="writing-title">
+        <header class="section-head">
+            <h2 id="writing-title">Writing</h2>
+            <a class="section-link" href="{{ "/blog/" | relLangURL }}">Everything</a>
+        </header>
+        <ol class="entry-list">
+            {{- range $home.writing }}
+            {{- $note := .note }}
+            {{- with site.GetPage .page }}
+            <li class="entry-row">
+                <a class="entry-row-link" href="{{ .RelPermalink }}">
+                    <span class="entry-row-title">{{ .Title }}</span>
+                    <span class="entry-row-note">{{ $note }}</span>
+                </a>
+                <time class="entry-row-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+            </li>
             {{- end }}
             {{- end }}
+        </ol>
+    </section>
+
+    <section class="home-closing" aria-labelledby="closing-title">
+        <h2 id="closing-title">Got a system that has to hold up?</h2>
+        <p>I take on a small amount of outside work: architecture and AI reviews, hands-on builds, and advisory for teams shipping something real. I also taught university labs for a few years and still <a href="{{ "/teaching/" | relLangURL }}">help students</a> when I can.</p>
+        <div class="button-row">
+            <a class="button button-primary" href="{{ "/contact/" | relLangURL }}">How I work</a>
+            <a class="button button-quiet" href="mailto:{{ $profile.email }}">{{ $profile.email }}</a>
         </div>
     </section>
 </div>

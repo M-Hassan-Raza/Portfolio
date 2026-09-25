@@ -11,7 +11,7 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -9
-featured: true
+tier: flagship
 projectLabel: "AI brand workflow"
 projectFocus: "Staged execution, realtime progress, reruns, and deliverable generation."
 ---

@@ -1,0 +1,17 @@
+{{- $limit := .limit | default 100 }}
+{{- $projects := dict }}
+{{- range hugo.Data.oss.projects }}{{ $projects = merge $projects (dict .repo .) }}{{ end }}
+<ul class="oss-highlights">
+    {{- range first $limit hugo.Data.oss_highlights }}
+    {{- $repo := .repo }}
+    {{- $project := index $projects $repo }}
+    <li class="oss-highlight">
+        <p class="oss-highlight-repo">
+            <a href="{{ with $project }}{{ .url }}{{ else }}https://github.com/{{ $repo }}{{ end }}" rel="noopener" target="_blank">{{ with $project }}{{ .name }}{{ else }}{{ .repo }}{{ end }}</a>
+            <span>#{{ .number }}</span>
+        </p>
+        <h3><a href="https://github.com/{{ .repo }}/pull/{{ .number }}" rel="noopener" target="_blank">{{ .title }}</a></h3>
+        <p>{{ .note }}</p>
+    </li>
+    {{- end }}
+</ul>

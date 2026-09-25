@@ -1,4 +1,5 @@
 ---
+tier: early
 title: "Smart Dustbin: IoT with Arduino, Python, Kotlin & Azure"
 date: 2025-02-16
 description: "An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints."

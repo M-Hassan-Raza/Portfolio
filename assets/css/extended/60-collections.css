@@ -1,0 +1,282 @@
+/* Index pages (Work, Writing, Open source) and the lists they share with the homepage. */
+
+.collection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.collection-intro {
+  max-width: 68ch;
+}
+
+.collection-intro p:first-child {
+  margin-top: 0;
+}
+
+.collection-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.collection-section > h2 {
+  margin: 0;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.year-heading {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.collection-footnote {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.collection-footnote a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.collection-footnote a:hover {
+  color: var(--accent);
+}
+
+/* Text rows: title, one-line note, date on the right. */
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.entry-row-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.entry-row-title {
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-strong);
+  transition: color var(--duration-fast) ease;
+}
+
+.entry-row-link:hover .entry-row-title {
+  color: var(--accent);
+}
+
+.entry-row-note {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.entry-row-date {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* Work index cards with covers */
+
+.work-grid-wide {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-5);
+}
+
+.work-card-media {
+  padding: 0;
+  overflow: hidden;
+}
+
+.work-card-cover {
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+}
+
+.work-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+
+.work-card-body p {
+  margin: 0;
+}
+
+.work-card-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
+
+/* Open source */
+
+.oss-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.oss-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+}
+
+.oss-highlight h3 {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.4;
+}
+
+.oss-highlight h3 a {
+  color: var(--text-strong);
+}
+
+.oss-highlight h3 a:hover {
+  color: var(--accent);
+}
+
+.oss-highlight p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.oss-highlight .oss-highlight-repo {
+  display: flex;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
+
+.oss-highlight-repo a {
+  color: var(--accent);
+}
+
+.oss-projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.oss-project {
+  border-bottom: 1px solid var(--line);
+}
+
+.oss-project summary {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.oss-project summary::-webkit-details-marker {
+  display: none;
+}
+
+.oss-project-name {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.oss-project summary:hover .oss-project-name {
+  color: var(--accent);
+}
+
+.oss-project-blurb {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.oss-project-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.oss-pr-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.oss-pr-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.oss-pr-list a {
+  color: var(--text);
+}
+
+.oss-pr-list a:hover {
+  color: var(--accent);
+}
+
+.oss-pr-list time {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
+
+@media (max-width: 640px) {
+  .entry-row {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .oss-project summary {
+    grid-template-columns: 1fr auto;
+  }
+
+  .oss-project-blurb {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}

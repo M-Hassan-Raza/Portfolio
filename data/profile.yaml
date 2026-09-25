@@ -1,0 +1,96 @@
+# Single source of truth for facts about me. The homepage, About, Contact
+# and Resume read from this file, so a fact changes here and nowhere else.
+
+name: "Muhammad Hassan Raza"
+location: "Lahore, Pakistan"
+email: "hi@mhassan.dev"
+links:
+  github: "https://github.com/m-hassan-raza"
+  linkedin: "https://linkedin.com/in/hassanraza22"
+
+now:
+  role: "Cofounder and CIO"
+  org: "Entropy Labs"
+  url: "https://entropylabs.dev"
+  since: "2025"
+  scope: "I run product and engineering for a team of about a dozen, across Obelisk, October and client work."
+
+# Company-level recognition. These belong to Entropy Labs, not to me alone.
+recognition:
+  - "Ignite acceleration round winner"
+  - "Financing approved under Accelerate Prosperity"
+  - "Exhibited at GITEX Global 2025"
+  - "Exhibited at LEAP 2026"
+
+# Short, defensible proof points. Every one must survive an interview question.
+proof:
+  - value: "2 h to 25 min"
+    label: "manual onboarding flow, after the automation work at Entropy"
+  - value: "750 to 230 ms"
+    label: "reporting endpoint, from reshaping the query rather than adding hardware"
+  - value: "15+"
+    label: "specialist agents running in Obelisk"
+
+experience:
+  - title: "Cofounder and CIO"
+    org: "Entropy Labs"
+    start: "Jun 2025"
+    end: "Present"
+    summary: "Product and engineering for a team of about a dozen. Roadmap, architecture and delivery across Obelisk (AI marketing), October (creator campaigns) and client work. The company won Ignite's acceleration round, had financing approved under Accelerate Prosperity, and exhibited at GITEX 2025 and LEAP 2026."
+  - title: "Technical Product Engineering Lead"
+    org: "Entropy Labs"
+    start: "Sep 2024"
+    end: "Jun 2025"
+    summary: "Workflow automation that cut a two-hour manual onboarding flow to 25 minutes. AI document processing, streaming Django and Vue apps, and pulling services out of a monolith without breaking the product."
+  - title: "Senior Software Engineer"
+    org: "Entropy Labs"
+    start: "Aug 2023"
+    end: "Sep 2024"
+    summary: "FastAPI and Django services under real traffic: query work, caching, and reporting paths fast enough that people trusted them. One reporting endpoint went from 750 ms to 230 ms."
+  - title: "Engineering for a YC-backed insurance startup"
+    org: "Contract"
+    start: "Mar 2026"
+    end: "Present"
+    summary: "Internal operations tooling: admin APIs, reporting, and diagnostics for the team running the platform day to day."
+  - title: "Founder"
+    org: "Commit Software Solutions"
+    start: "2020"
+    end: "Present"
+    summary: "Client software for businesses that run on it daily. Polaris, a retail operations platform, came out of here and is still in use in retail shops."
+
+early_roles: "Before 2024, mostly alongside university: AI engineering at WebNoodle (LangChain document pipelines), a backend internship at Arrivy (Flask, BigQuery, GCP), and teaching assistant work at FAST-NUCES."
+
+teaching:
+  - title: "Lab Instructor"
+    org: "FAST-NUCES"
+    start: "2024"
+    end: "2025"
+    summary: "Operating Systems, Software Construction and Development, and Web Engineering labs."
+  - title: "Teaching Assistant"
+    org: "FAST-NUCES"
+    start: "2022"
+    end: "2024"
+    summary: "Software Engineering, Mobile Development, Information Security and Software Project Management."
+
+education:
+  - degree: "MS Computer Science"
+    school: "FAST-NUCES, Lahore"
+    dates: "Started 2024, on hold"
+  - degree: "BS Software Engineering"
+    school: "FAST-NUCES, Lahore"
+    dates: "2020 to 2024"
+    note: "Dean's List, Fall 2023 and Spring 2024"
+
+awards:
+  - "3rd place, NaSCon '22 Code Studio"
+  - "4th place, NaSCon '23 UI/UX competition"
+
+skills:
+  - group: "Backend"
+    items: ["Python", "Django", "FastAPI", "PostgreSQL", "Redis", "Celery", "Go"]
+  - group: "AI systems"
+    items: ["LangGraph", "LangChain", "RAG pipelines", "Agent evaluation", "Vertex AI", "OpenAI and Anthropic APIs"]
+  - group: "Frontend"
+    items: ["Vue", "Nuxt", "React", "Next.js", "TypeScript"]
+  - group: "Infrastructure"
+    items: ["GCP", "AWS", "Docker", "GitHub Actions"]

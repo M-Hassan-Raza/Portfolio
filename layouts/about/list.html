@@ -1,0 +1,55 @@
+{{- define "main" }}
+{{- $p := hugo.Data.profile }}
+<article class="post-single about">
+    <header class="post-header">
+        <h1 class="post-title">{{ .Title }}</h1>
+        {{- with .Description }}<p class="post-description">{{ . }}</p>{{ end }}
+    </header>
+
+    <div class="post-content md-content">
+        {{ .Content }}
+
+        <h2 id="work">Work</h2>
+        <ol class="timeline">
+            {{- range $p.experience }}
+            <li class="timeline-item">
+                <p class="timeline-dates">{{ .start }} to {{ .end }}</p>
+                <div>
+                    <h3>{{ .title }}<span>{{ .org }}</span></h3>
+                    <p>{{ .summary }}</p>
+                </div>
+            </li>
+            {{- end }}
+        </ol>
+        <p>{{ $p.early_roles }}</p>
+
+        <h2 id="teaching">Teaching</h2>
+        <ol class="timeline">
+            {{- range $p.teaching }}
+            <li class="timeline-item">
+                <p class="timeline-dates">{{ .start }} to {{ .end }}</p>
+                <div>
+                    <h3>{{ .title }}<span>{{ .org }}</span></h3>
+                    <p>{{ .summary }}</p>
+                </div>
+            </li>
+            {{- end }}
+        </ol>
+        <p>More on that on the <a href="{{ "/teaching/" | relLangURL }}">teaching page</a>.</p>
+
+        <h2 id="education">Education</h2>
+        <ul class="plain-list">
+            {{- range $p.education }}
+            <li><strong>{{ .degree }}</strong>, {{ .school }}. {{ .dates }}{{ with .note }}. {{ . }}{{ end }}.</li>
+            {{- end }}
+        </ul>
+
+        <p class="about-links">
+            <a href="mailto:{{ $p.email }}">{{ $p.email }}</a> ·
+            <a href="{{ $p.links.github }}" rel="me noopener" target="_blank">GitHub</a> ·
+            <a href="{{ $p.links.linkedin }}" rel="me noopener" target="_blank">LinkedIn</a> ·
+            <a href="{{ "/resume/" | relLangURL }}">Resume</a>
+        </p>
+    </div>
+</article>
+{{- end }}

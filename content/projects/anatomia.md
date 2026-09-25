@@ -11,7 +11,7 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -8
-featured: true
+tier: flagship
 projectLabel: "Clinical callback workflow"
 projectFocus: "PHI controls, nurse review, escalation paths, and voice follow-up."
 ---

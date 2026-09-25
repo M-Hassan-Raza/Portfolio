@@ -1,0 +1,210 @@
+/* Resume page, including its print layout (the PDF is printed from it). */
+
+.resume {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+}
+
+.resume-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--line);
+}
+
+.resume-head h1 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+}
+
+.resume-role {
+  margin: var(--space-1) 0 0;
+  color: var(--text-muted);
+}
+
+.resume-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+  text-align: right;
+}
+
+.resume-contact a,
+.resume a {
+  color: var(--accent);
+}
+
+.resume-summary {
+  margin: 0;
+}
+
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.resume-section h2 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+
+.resume-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.resume-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.resume-item h3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-2);
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--text-strong);
+}
+
+.resume-item h3 span {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.resume-item p,
+.resume-section > p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.resume-dates {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
+
+.resume-early {
+  color: var(--text-muted);
+}
+
+.resume-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.resume-columns > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.resume-skills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.resume-skills dt {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.resume-skills dd {
+  margin: 0;
+}
+
+.resume-awards {
+  margin: 0;
+  padding-left: var(--space-5);
+  font-size: var(--text-sm);
+}
+
+.resume-download {
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 640px) {
+  .resume-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-contact {
+    text-align: left;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  :root,
+  :root[data-theme="dark"] {
+    --surface-page: #ffffff;
+    --text-strong: #111111;
+    --text: #222222;
+    --text-muted: #555555;
+    --text-faint: #6b6b6b;
+    --accent: #6e452e;
+    --line: #dddddd;
+    --text-base: 10pt;
+    --text-sm: 9pt;
+    --text-xs: 7.5pt;
+    --text-2xl: 20pt;
+  }
+
+  .header,
+  .site-footer,
+  .top-link,
+  .no-print {
+    display: none;
+  }
+
+  .main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .resume {
+    gap: 12pt;
+    padding: 0;
+  }
+
+  .resume-item,
+  .resume-section {
+    break-inside: avoid;
+  }
+
+  .resume a {
+    text-decoration: none;
+  }
+}

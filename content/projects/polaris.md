@@ -11,7 +11,7 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -10
-featured: true
+tier: flagship
 projectLabel: "Retail operations platform"
 projectFocus: "Batch stock truth, ledger integrity, and tenant-safe operations."
 ---

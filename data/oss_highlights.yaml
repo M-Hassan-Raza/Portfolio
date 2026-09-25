@@ -1,0 +1,30 @@
+# Hand-picked merged PRs for the homepage and /open-source/.
+# Facts here come from the PR descriptions; keep them that way.
+- repo: docling-project/docling
+  number: 3380
+  title: "Speed up layout and table cell matching"
+  note: "Swapped a scan of every text cell per table cell for an R-tree lookup. Table text matching went from 2.4 s to 0.03 s on the benchmark in the PR."
+- repo: ludo-technologies/pyscn
+  number: 695
+  title: "Make dependency analysis scale"
+  note: "Replaced exhaustive path enumeration with one SCC-condensed pass. Django's 908 files now analyze in about 1.2 seconds."
+- repo: kovidgoyal/calibre
+  number: 3148
+  title: "Protect rooted file paths from traversal"
+  note: "One shared guard that keeps user-supplied paths inside the library root, used by the content server and extra-file operations."
+- repo: arvidn/libtorrent
+  number: 8389
+  title: "Fix mmap disk jobs stranded behind fences"
+  note: "Jobs released by a fence could land on a queue with no threads and stall. Now they route to a live pool or run inline."
+- repo: kovidgoyal/kitty
+  number: 10038
+  title: "Avoid interpolating SSH login shell paths"
+  note: "The SSH bootstrap built little Python and Perl programs by pasting paths into them. Now the paths travel as arguments."
+- repo: tw93/Mole
+  number: 905
+  title: "Make Trash delete mode fail closed"
+  note: "If moving to Trash failed, uninstall quietly fell through to permanent deletion. Now it leaves the file alone and says so."
+- repo: fallow-rs/fallow
+  number: 60
+  title: "Harden Vue and Nuxt framework edge cases"
+  note: "The PR that started it: Fallow kept calling live Nuxt and Vue code dead. About 1,100 lines across 44 files to teach it the framework conventions."

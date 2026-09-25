@@ -1,34 +1,29 @@
 ---
 title: "Muhammad Hassan Raza"
-description: "CIO and technical operator working across product, backend systems, and AI delivery."
+description: "Cofounder and CIO at Entropy Labs. I build the backend and AI systems that are expensive to get wrong, and fix things in open-source tools on the side."
 home:
   hero:
-    kicker: "CIO, technical operator, backend and AI systems"
-    title: "I lead product and technical work on systems that have to hold up in production."
-    summary: "Most of my work sits where product, backend, delivery, and AI problems overlap — money moving through systems, reports teams rely on, workflows that can't afford to fail."
-    primary:
-      label: "See selected work"
-      url: "/projects/"
-    image_alt: "Muhammad Hassan Raza"
-    stats:
-      - "2-hour onboarding cut to 25 min"
-      - "Reporting endpoints from 750ms to 230ms"
-      - "15+ specialist agents in production"
-  featured_lead:
-    page: "/projects/polaris/"
-    note: "Batch stock truth, ledger integrity, and tenant-safe operations."
-  featured_compact:
-    - page: "/projects/obelisk/"
-      note: "Multi-tenant agents, retrieval, reliability, and guardrails."
-    - page: "/projects/anatomia/"
-      note: "PHI controls, nurse review, escalation paths, and voice follow-up."
-  featured_writing:
+    title: "I still write the code that's expensive to get wrong."
+    summary: "I run product and engineering at Entropy Labs, a team of about a dozen. Most of my time goes to backend and AI systems where a small mistake turns into a wrong balance, a leaked tenant, or an agent doing something costly. On the side, I fix things in the open-source tools I use every day."
+    image_alt: "Halftone portrait of Muhammad Hassan Raza"
+  work:
+    lead:
+      page: "/projects/obelisk/"
+      note: "AI marketing platform with 15+ specialist agents. I lead product and the backend around them."
+    more:
+      - page: "/projects/polaris/"
+        note: "Retail operations software, in daily use by shops since 2024."
+      - page: "/projects/october/"
+        note: "Campaigns between brands, agencies and creators, from brief to report."
+      - page: "/projects/anatomia/"
+        note: "Nurse callbacks and case review, with patient data handled like it matters."
+  writing:
     - page: "/blog/war-stories-from-production/"
-      note: "What broke in production, what it cost, and the boring fixes that actually held."
-    - page: "/blog/llms-cant-save-bad-ux/"
-      note: "Why most AI features fail when the underlying product problem is still sitting there."
+      note: "Oversold stock, silent chains, and the locks that fixed them."
     - page: "/blog/langgraph-multi-agent-middleware/"
-      note: "How a large multi-agent setup stays usable once cost, context, failure handling, and approvals become real."
+      note: "What kept a many-agent system cheap, recoverable and under control."
+    - page: "/blog/llms-cant-save-bad-ux/"
+      note: "Most failed AI features were failed product decisions first."
     - page: "/blog/best-way-to-learn-a-codebase/"
-      note: "Why reading other people's production code teaches more than another polished tutorial."
+      note: "What 170 merged PRs in other people's code taught me."
 ---

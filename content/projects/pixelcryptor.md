@@ -1,4 +1,5 @@
 ---
+tier: early
 title: "PixelCryptor: Hiding Executables Inside Images"
 date: 2025-02-16
 description: "A Django project that embeds executable files within images using delimiter-based concatenation — and why real steganography is harder than this."

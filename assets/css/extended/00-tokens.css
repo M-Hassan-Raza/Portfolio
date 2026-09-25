@@ -1,169 +1,164 @@
-/* =========================================
-   Design System Tokens
-   Neutral Base + Warm Terracotta Accent
-   Inspired by Stripe, Mercury, Notion
-   ========================================= */
+/*
+ * Design tokens. Every color, size, layer and duration used by the site
+ * lives here. Components reference these names only; light and dark
+ * differ by redefining the same names, never by per-component overrides.
+ */
 
-/* ===== Light Theme (Default) ===== */
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cascadia Code";
+  src: url("/fonts/CascadiaCode.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
-  /* PaperMod Core Variables */
-  --theme: #fafafa;
-  --entry: #ffffff;
-  --primary: #b5836d;
-  --secondary: #71717a;
-  --tertiary: #e4e4e7;
-  --content: #18181b;
-  --border: #e4e4e7;
+  /* Surfaces */
+  --surface-page: #f7f5f2;
+  --surface-raised: #ffffff;
+  --surface-sunken: #eeeae4;
+  --surface-accent: #f2e8e0;
+  --surface-code: #1d1c1a;
+  --surface-portrait: #1d1b19;
 
-  /* Code */
-  --code-bg: #f4f4f5;
-  --code-block-bg: #27272a;
+  /* Text */
+  --text-strong: #1b1916;
+  --text: #2d2a26;
+  --text-muted: #625b53;
+  --text-faint: #857d74;
+  --text-on-code: #e8e3dc;
+  --text-on-portrait: #d8d1c7;
+  --text-on-accent: #fbf7f3;
 
-  /* Brand Colors (custom) */
-  --primary-color: #b5836d;
-  --secondary-color: #71717a;
-  --primary-color-rgb: 181, 131, 109;
+  /* Accent (terracotta) */
+  --accent: #8a5a3e;
+  --accent-hover: #6e452e;
+  --accent-soft: #c49a7c;
 
-  /* Semantic */
-  --bg-color: var(--theme);
-  --text-color: var(--content);
-  --light-bg: #f4f4f5;
-  --background-light: #f4f4f5;
+  /* Lines */
+  --line: #e2dcd4;
+  --line-strong: #cfc6bb;
+  --focus: #8a5a3e;
 
-  /* Book Colors */
-  --book-title-color: #b5836d;
-  --book-subtitle-color: #71717a;
+  /* Shadow */
+  --shadow-card: 0 1px 2px #1b19160d, 0 8px 24px -12px #1b19161f;
 
-  /* Shadows (subtle, neutral) */
-  --shadow-light: rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.08);
+  /* Type */
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  --text-display: clamp(2.5rem, 1.2rem + 5vw, 4.6rem);
+  --leading-tight: 1.15;
+  --leading-body: 1.7;
 
-  /* Hero (subtle gradient) */
-  --hero-text-color: #ffffff;
-  --hero-gradient-start: #b5836d;
-  --hero-gradient-end: #8b7355;
-  --box-text-color: #fff;
-
-  /* Spacing */
+  /* Space */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: clamp(3.5rem, 2.5rem + 4vw, 6rem);
 
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-full: 9999px;
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
 
-  /* Animation */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Layers */
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 50;
+  --z-floating: 90;
 
-  --duration-instant: 100ms;
-  --duration-fast: 200ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
-  --duration-slower: 700ms;
-
-  --transition-speed: 0.3s;
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
 
   /* Layout */
-  --main-width: 900px;
+  --wide-width: 1080px;
+
+  /* PaperMod layout variables */
+  --gap: 20px;
+  --content-gap: 20px;
+  --nav-width: var(--wide-width);
+  --main-width: 720px;
+  --header-height: 64px;
+  --radius: var(--radius-md);
 }
 
-/* ===== Dark Theme (Notion-Style) ===== */
 :root[data-theme="dark"] {
-  /* PaperMod Core Variables */
-  --theme: #191919;
-  --entry: #252525;
-  --primary: #d4a574;
-  --secondary: #a1a1aa;
-  --tertiary: #3f3f46;
-  --content: #e4e4e7;
-  --border: #3f3f46;
+  --surface-page: #181715;
+  --surface-raised: #211f1d;
+  --surface-sunken: #12110f;
+  --surface-accent: #2a221c;
+  --surface-code: #12110f;
 
-  /* Code */
-  --code-bg: #252525;
-  --code-block-bg: #191919;
+  --text-strong: #f3efe9;
+  --text: #ddd6ce;
+  --text-muted: #a69d92;
+  --text-faint: #7f776e;
+  --text-on-accent: #181715;
 
-  /* Brand Colors */
-  --primary-color: #d4a574;
-  --secondary-color: #a1a1aa;
-  --primary-color-rgb: 212, 165, 116;
+  --accent: #d6a878;
+  --accent-hover: #e8c29a;
+  --accent-soft: #8f6c4f;
 
-  /* Semantic */
-  --bg-color: var(--theme);
-  --text-color: var(--content);
-  --light-bg: #252525;
-  --background-light: #252525;
-  --background-dark: #191919;
+  --line: #302d29;
+  --line-strong: #45403a;
+  --focus: #d6a878;
 
-  /* Book Colors */
-  --book-title-color: #d4a574;
-  --book-subtitle-color: #a1a1aa;
-
-  /* Shadows (subtle) */
-  --shadow-light: rgba(0, 0, 0, 0.2);
-  --shadow-dark: rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.25);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
-
-  /* Hero */
-  --hero-text-color: #fafafa;
-  --hero-gradient-start: #8b6b4a;
-  --hero-gradient-end: #5c4d3d;
-  --box-text-color: #fafafa;
-
-  /* Border */
-  --border-dark: #52525b;
-  --text-dark: #e4e4e7;
+  --shadow-card: 0 1px 2px #0000004d, 0 12px 28px -14px #00000080;
 }
 
-/* Fallback for .dark class (backwards compatibility) */
-.dark {
-  --theme: #191919;
-  --entry: #252525;
-  --primary: #d4a574;
-  --secondary: #a1a1aa;
-  --tertiary: #3f3f46;
-  --content: #e4e4e7;
-  --border: #3f3f46;
-  --code-bg: #252525;
-  --code-block-bg: #191919;
-  --primary-color: #d4a574;
-  --secondary-color: #a1a1aa;
-  --primary-color-rgb: 212, 165, 116;
-  --bg-color: var(--theme);
-  --text-color: var(--content);
-  --book-title-color: #d4a574;
-  --book-subtitle-color: #a1a1aa;
-  --shadow-light: rgba(0, 0, 0, 0.2);
-}
-
-/* System preference fallback */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --theme: #191919;
-    --entry: #252525;
-    --primary: #d4a574;
-    --secondary: #a1a1aa;
-    --tertiary: #3f3f46;
-    --content: #e4e4e7;
-    --border: #3f3f46;
-    --code-bg: #252525;
-    --primary-color: #d4a574;
-    --secondary-color: #a1a1aa;
-    --book-title-color: #d4a574;
-    --book-subtitle-color: #a1a1aa;
-  }
+/*
+ * PaperMod's theme-vars.css sets these under [data-theme="dark"] with the
+ * same specificity as ours, so the mapping has to be restated for both themes.
+ */
+:root,
+:root[data-theme="dark"] {
+  --theme: var(--surface-page);
+  --entry: var(--surface-raised);
+  --primary: var(--text-strong);
+  --secondary: var(--text-muted);
+  --tertiary: var(--line);
+  --content: var(--text);
+  --border: var(--line);
+  --code-bg: var(--surface-sunken);
+  --code-block-bg: var(--surface-code);
 }

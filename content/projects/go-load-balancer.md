@@ -6,7 +6,8 @@ tags: ["Go", "Systems Programming", "Networking", "Concurrency"]
 categories: ["Projects"]
 showToc: true
 showReadingTime: true
-weight: -7
+weight: 20
+tier: side
 ---
 
 A load balancer written in Go with a real-time monitoring dashboard. It supports multiple balancing algorithms, health checks, and automatic failover. This was a learning project to understand Go's concurrency model and network programming.

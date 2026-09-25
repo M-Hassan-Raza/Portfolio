@@ -1,0 +1,150 @@
+/* Header, footer, breadcrumbs, back-to-top. */
+
+.header {
+  border-bottom: 1px solid var(--line);
+}
+
+.header-nav {
+  align-items: center;
+}
+
+.logo a {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-strong);
+}
+
+.theme-toggle {
+  color: var(--text-muted);
+}
+
+.theme-toggle:hover {
+  color: var(--text-strong);
+}
+
+#menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  overflow-x: auto;
+}
+
+#menu li + li {
+  margin-inline-start: 0;
+}
+
+#menu a {
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+#menu a:hover {
+  color: var(--text-strong);
+}
+
+#menu a:has(.active) {
+  background: var(--surface-accent);
+  color: var(--text-strong);
+}
+
+#menu .active {
+  border-bottom: 0;
+  font-weight: 600;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4) var(--space-6);
+  max-width: calc(var(--wide-width) + var(--gap) * 2);
+  margin-top: var(--space-8);
+  padding: var(--space-6) var(--gap) var(--space-7);
+  border-top: 1px solid var(--line);
+  text-align: left;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.site-footer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.site-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.site-footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--text-strong);
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent);
+}
+
+.breadcrumbs svg {
+  width: 14px;
+  height: 14px;
+}
+
+.top-link {
+  z-index: var(--z-floating);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-card);
+}
+
+.top-link:hover {
+  color: var(--text-strong);
+}
+
+@media (max-width: 720px) {
+  .header-nav {
+    row-gap: 0;
+  }
+
+  #menu {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+    padding-bottom: var(--space-2);
+  }
+
+  #menu a {
+    padding: 0 var(--space-1);
+    font-size: var(--text-sm);
+  }
+}

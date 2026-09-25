@@ -1,0 +1,84 @@
+{{- define "main" }}
+{{- $p := hugo.Data.profile }}
+{{- $oss := hugo.Data.oss }}
+<article class="resume">
+    <header class="resume-head">
+        <div>
+            <h1>{{ $p.name }}</h1>
+            <p class="resume-role">{{ $p.now.role }}, {{ $p.now.org }} · {{ $p.location }}</p>
+        </div>
+        <ul class="resume-contact">
+            <li><a href="mailto:{{ $p.email }}">{{ $p.email }}</a></li>
+            <li><a href="{{ site.BaseURL }}">{{ site.BaseURL | strings.TrimPrefix "https://" | strings.TrimSuffix "/" }}</a></li>
+            <li><a href="{{ $p.links.github }}">{{ $p.links.github | strings.TrimPrefix "https://" }}</a></li>
+            <li><a href="{{ $p.links.linkedin }}">{{ $p.links.linkedin | strings.TrimPrefix "https://" }}</a></li>
+        </ul>
+    </header>
+
+    <p class="resume-summary">{{ $p.now.scope }} I build backend and AI systems where correctness, latency and failure handling matter{{ with $oss }}, and I've had {{ .merged }} pull requests merged into open-source projects including kitty, calibre, libtorrent and Docling{{ end }}.</p>
+
+    <section class="resume-section">
+        <h2>Experience</h2>
+        {{- range $p.experience }}
+        <div class="resume-item">
+            <div class="resume-item-head">
+                <h3>{{ .title }}<span>{{ .org }}</span></h3>
+                <p class="resume-dates">{{ .start }} to {{ .end }}</p>
+            </div>
+            <p>{{ .summary }}</p>
+        </div>
+        {{- end }}
+        <p class="resume-early">{{ $p.early_roles }}</p>
+    </section>
+
+    {{- with $oss }}
+    <section class="resume-section">
+        <h2>Open source</h2>
+        <p>{{ .merged }} merged pull requests across {{ len .projects }} projects since 2026:
+            {{- $names := slice }}
+            {{- range first 8 .projects }}{{ $names = $names | append (printf "%s (%d)" .name .merged) }}{{ end }}
+            {{ delimit $names ", " }}.</p>
+    </section>
+    {{- end }}
+
+    <section class="resume-section">
+        <h2>Teaching</h2>
+        {{- range $p.teaching }}
+        <div class="resume-item">
+            <div class="resume-item-head">
+                <h3>{{ .title }}<span>{{ .org }}</span></h3>
+                <p class="resume-dates">{{ .start }} to {{ .end }}</p>
+            </div>
+            <p>{{ .summary }}</p>
+        </div>
+        {{- end }}
+    </section>
+
+    <section class="resume-section resume-columns">
+        <div>
+            <h2>Education</h2>
+            {{- range $p.education }}
+            <div class="resume-item">
+                <h3>{{ .degree }}<span>{{ .school }}</span></h3>
+                <p class="resume-dates">{{ .dates }}</p>
+                {{- with .note }}<p>{{ . }}</p>{{ end }}
+            </div>
+            {{- end }}
+        </div>
+        <div>
+            <h2>Skills</h2>
+            <dl class="resume-skills">
+                {{- range $p.skills }}
+                <div><dt>{{ .group }}</dt><dd>{{ delimit .items ", " }}</dd></div>
+                {{- end }}
+            </dl>
+            <h2>Awards</h2>
+            <ul class="resume-awards">
+                {{- range $p.awards }}<li>{{ . }}</li>{{ end }}
+            </ul>
+        </div>
+    </section>
+
+    <p class="resume-download no-print"><a href="{{ "/assets/muhammad-hassan-raza-resume.pdf" | relURL }}">Download as PDF</a></p>
+</article>
+{{- end }}

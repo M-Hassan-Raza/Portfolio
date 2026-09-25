@@ -1,4 +1,5 @@
 ---
+tier: early
 title: "mhassan.dev — This Portfolio"
 date: 2025-02-10
 description: "Hugo + PaperMod with custom partials, Giscus comments, and a GitHub Actions deploy pipeline. How the site is built."

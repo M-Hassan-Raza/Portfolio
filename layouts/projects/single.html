@@ -1,0 +1,38 @@
+{{- define "main" }}
+<article class="post-single case-study">
+    <header class="post-header">
+        {{ partial "breadcrumbs.html" . }}
+        {{- with .Params.projectLabel }}<p class="kicker">{{ . }}</p>{{ end }}
+        <h1 class="post-title">{{ .Title }}</h1>
+        {{- with .Description }}<p class="post-description">{{ . }}</p>{{ end }}
+    </header>
+
+    {{- with .Params.facts }}
+    <dl class="case-facts">
+        {{- with .role }}<div><dt>My role</dt><dd>{{ . }}</dd></div>{{ end }}
+        {{- with .team }}<div><dt>Team</dt><dd>{{ . }}</dd></div>{{ end }}
+        {{- with .timeline }}<div><dt>When</dt><dd>{{ . }}</dd></div>{{ end }}
+        {{- with .status }}<div><dt>Status</dt><dd>{{ . }}</dd></div>{{ end }}
+        {{- with .stack }}<div class="case-facts-wide"><dt>Stack</dt><dd>{{ delimit . ", " }}</dd></div>{{ end }}
+        {{- with .source }}<div class="case-facts-wide"><dt>Source</dt><dd>{{ . | markdownify }}</dd></div>{{ end }}
+    </dl>
+    {{- end }}
+
+    {{- with .Params.outcomes }}
+    <ul class="case-outcomes">
+        {{- range . }}<li>{{ . | markdownify }}</li>{{ end }}
+    </ul>
+    {{- end }}
+
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" false) }}
+
+    <div class="post-content md-content">
+        {{- partial "anchored_headings.html" .Content -}}
+    </div>
+
+    <footer class="post-footer">
+        <p class="post-cta">Have a problem shaped like this one? <a href="mailto:{{ site.Params.email }}">Email me</a> or read <a href="{{ "/contact/" | relLangURL }}">how I work</a>.</p>
+        {{- partial "post_nav_links.html" . }}
+    </footer>
+</article>
+{{- end }}

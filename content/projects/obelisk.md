@@ -11,7 +11,7 @@ categories: ["Projects"]
 showToc: true
 showReadingTime: true
 weight: -8
-featured: true
+tier: flagship
 projectLabel: "AI content system"
 projectFocus: "Specialized agents, retrieval, checkpointing, and strong guardrails."
 ---

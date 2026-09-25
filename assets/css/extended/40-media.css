@@ -1,0 +1,51 @@
+/* Halftone ASCII art: covers, portrait, book covers. */
+
+.ascii-cover-art {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.595cqw;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: pre;
+  border-radius: var(--radius-md);
+}
+
+.entry-cover .ascii-cover-art {
+  min-height: clamp(220px, 40vw, 400px);
+}
+
+/* The portrait is always a dark "screen", in both themes. */
+.home-portrait .ascii-cover-art {
+  aspect-ratio: 1 / 1;
+  background: var(--surface-portrait);
+  color: var(--text-on-portrait);
+  border-radius: var(--radius-lg);
+}
+
+/* Covers inside cards fill their frame. */
+.work-lead-media,
+.work-card-cover {
+  display: block;
+  overflow: hidden;
+  container-type: inline-size;
+  border-radius: var(--radius-md);
+}
+
+.work-lead-media .ascii-cover-art,
+.work-card-cover .ascii-cover-art {
+  height: 100%;
+  border-radius: 0;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.work-lead:hover .ascii-cover-art,
+.work-card-media:hover .ascii-cover-art {
+  transform: scale(1.02);
+}

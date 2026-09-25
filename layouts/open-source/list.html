@@ -1,0 +1,47 @@
+{{- define "main" }}
+{{- $oss := hugo.Data.oss }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="post-description">{{ . }}</p>{{ end }}
+</header>
+
+<div class="collection">
+    {{- with .Content }}
+    <div class="post-content collection-intro">{{ . }}</div>
+    {{- end }}
+
+    <dl class="proof-grid proof-grid-compact">
+        <div class="proof-item"><dt>{{ $oss.merged }}</dt><dd>merged pull requests</dd></div>
+        <div class="proof-item"><dt>{{ len $oss.projects }}</dt><dd>projects</dd></div>
+        <div class="proof-item"><dt>{{ (time $oss.generated).Format "Jan 2006" }}</dt><dd>last refreshed from GitHub</dd></div>
+    </dl>
+
+    <section class="collection-section" aria-labelledby="highlights-title">
+        <h2 id="highlights-title">The ones I'd point to</h2>
+        {{- partial "oss/highlights.html" (dict) }}
+    </section>
+
+    <section class="collection-section" aria-labelledby="all-title">
+        <h2 id="all-title">Everything, by project</h2>
+        <div class="oss-projects">
+            {{- range $oss.projects }}
+            <details class="oss-project">
+                <summary>
+                    <span class="oss-project-name">{{ .name }}</span>
+                    <span class="oss-project-blurb">{{ .blurb | default .repo }}</span>
+                    <span class="oss-project-count">{{ .merged }} merged</span>
+                </summary>
+                <ol class="oss-pr-list">
+                    {{- range .prs }}
+                    <li>
+                        <a href="{{ .url }}" rel="noopener" target="_blank">{{ .title }}</a>
+                        <time datetime="{{ .merged }}">{{ (time .merged).Format "Jan 2006" }}</time>
+                    </li>
+                    {{- end }}
+                </ol>
+            </details>
+            {{- end }}
+        </div>
+    </section>
+</div>
+{{- end }}

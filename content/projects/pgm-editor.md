@@ -1,4 +1,5 @@
 ---
+tier: early
 title: "Building a C++ Image Editor"
 date: 2025-02-16
 description: "A deep dive into my university project - a simple yet powerful image editor built with C++."

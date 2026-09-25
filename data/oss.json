@@ -1,0 +1,1182 @@
+{
+  "generated": "2026-09-25",
+  "merged": 170,
+  "projects": [
+    {
+      "fork": false,
+      "language": "Rust",
+      "name": "fallow",
+      "repo": "fallow-rs/fallow",
+      "stars": 4881,
+      "url": "https://github.com/fallow-rs/fallow",
+      "blurb": "Dead-code and dependency analysis for TypeScript and JavaScript",
+      "merged": 33,
+      "prs": [
+        {
+          "title": "fix(graph): resolve effective barrel exports",
+          "url": "https://github.com/fallow-rs/fallow/pull/2210",
+          "number": 2210,
+          "merged": "2026-08-13"
+        },
+        {
+          "title": "feat(plugins): expand declarative manifest entries",
+          "url": "https://github.com/fallow-rs/fallow/pull/2165",
+          "number": 2165,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "fix(health): respect mocked modules in test reachability",
+          "url": "https://github.com/fallow-rs/fallow/pull/2068",
+          "number": 2068,
+          "merged": "2026-08-01"
+        },
+        {
+          "title": "fix: preserve knip ignore semantics",
+          "url": "https://github.com/fallow-rs/fallow/pull/2003",
+          "number": 2003,
+          "merged": "2026-07-27"
+        },
+        {
+          "title": "fix: handle re-export resolver source edges",
+          "url": "https://github.com/fallow-rs/fallow/pull/666",
+          "number": 666,
+          "merged": "2026-05-25"
+        },
+        {
+          "title": "fix: reduce Wrangler, Content Collections, and loader false positives",
+          "url": "https://github.com/fallow-rs/fallow/pull/596",
+          "number": 596,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "fix: barrel re-export member propagation",
+          "url": "https://github.com/fallow-rs/fallow/pull/427",
+          "number": 427,
+          "merged": "2026-05-20"
+        },
+        {
+          "title": "fix: tighten runtime coverage mapping",
+          "url": "https://github.com/fallow-rs/fallow/pull/376",
+          "number": 376,
+          "merged": "2026-05-16"
+        },
+        {
+          "title": "Fix workspace dependency ownership",
+          "url": "https://github.com/fallow-rs/fallow/pull/343",
+          "number": 343,
+          "merged": "2026-05-12"
+        },
+        {
+          "title": "fix: handle broken tsconfig fallback and audit base config",
+          "url": "https://github.com/fallow-rs/fallow/pull/299",
+          "number": 299,
+          "merged": "2026-05-06"
+        },
+        {
+          "title": "fix: support Prisma config schema paths",
+          "url": "https://github.com/fallow-rs/fallow/pull/291",
+          "number": 291,
+          "merged": "2026-05-06"
+        },
+        {
+          "title": "feat: support TanStack virtual route configs",
+          "url": "https://github.com/fallow-rs/fallow/pull/223",
+          "number": 223,
+          "merged": "2026-04-29"
+        },
+        {
+          "title": "feat: add MCP trace tools",
+          "url": "https://github.com/fallow-rs/fallow/pull/176",
+          "number": 176,
+          "merged": "2026-04-24"
+        },
+        {
+          "title": "fix: support windows arm64 binaries",
+          "url": "https://github.com/fallow-rs/fallow/pull/171",
+          "number": 171,
+          "merged": "2026-04-23"
+        },
+        {
+          "title": "fix: make health baselines resilient to line churn",
+          "url": "https://github.com/fallow-rs/fallow/pull/169",
+          "number": 169,
+          "merged": "2026-04-23"
+        },
+        {
+          "title": "feat: add a Zed extension",
+          "url": "https://github.com/fallow-rs/fallow/pull/164",
+          "number": 164,
+          "merged": "2026-04-23"
+        },
+        {
+          "title": "fix: track class members used through interface types",
+          "url": "https://github.com/fallow-rs/fallow/pull/162",
+          "number": 162,
+          "merged": "2026-04-21"
+        },
+        {
+          "title": "fix(react-router): honor config-driven route modules",
+          "url": "https://github.com/fallow-rs/fallow/pull/161",
+          "number": 161,
+          "merged": "2026-04-21"
+        },
+        {
+          "title": "feat: add scoped usedClassMembers rules",
+          "url": "https://github.com/fallow-rs/fallow/pull/129",
+          "number": 129,
+          "merged": "2026-04-17"
+        },
+        {
+          "title": "Improve Docusaurus convention coverage",
+          "url": "https://github.com/fallow-rs/fallow/pull/91",
+          "number": 91,
+          "merged": "2026-04-10"
+        },
+        {
+          "title": "feat: add Expo Router and TanStack Router convention coverage",
+          "url": "https://github.com/fallow-rs/fallow/pull/88",
+          "number": 88,
+          "merged": "2026-04-09"
+        },
+        {
+          "title": "feat: expand framework convention coverage across Astro, React Router, Remix, Gatsby, and VitePress",
+          "url": "https://github.com/fallow-rs/fallow/pull/84",
+          "number": 84,
+          "merged": "2026-04-08"
+        },
+        {
+          "title": "feat: harden Vue and Nuxt framework edge cases",
+          "url": "https://github.com/fallow-rs/fallow/pull/60",
+          "number": 60,
+          "merged": "2026-04-07"
+        },
+        {
+          "title": "feat: expand framework convention and template coverage",
+          "url": "https://github.com/fallow-rs/fallow/pull/59",
+          "number": 59,
+          "merged": "2026-04-06"
+        },
+        {
+          "title": "feat: track template-visible import usage in SFCs",
+          "url": "https://github.com/fallow-rs/fallow/pull/58",
+          "number": 58,
+          "merged": "2026-04-06"
+        },
+        {
+          "title": "feat: add static coverage gaps to health",
+          "url": "https://github.com/fallow-rs/fallow/pull/53",
+          "number": 53,
+          "merged": "2026-04-06"
+        },
+        {
+          "title": "fix: keep unreachable subtrees dead in unused file analysis",
+          "url": "https://github.com/fallow-rs/fallow/pull/51",
+          "number": 51,
+          "merged": "2026-04-06"
+        },
+        {
+          "title": "fix: keep boundaries opt-in in list output",
+          "url": "https://github.com/fallow-rs/fallow/pull/49",
+          "number": 49,
+          "merged": "2026-04-05"
+        },
+        {
+          "title": "fix: harden ecosystem runner output",
+          "url": "https://github.com/fallow-rs/fallow/pull/48",
+          "number": 48,
+          "merged": "2026-04-05"
+        },
+        {
+          "title": "fix: label combined metrics line",
+          "url": "https://github.com/fallow-rs/fallow/pull/46",
+          "number": 46,
+          "merged": "2026-04-05"
+        },
+        {
+          "title": "fix: include plugin entry points in list mode",
+          "url": "https://github.com/fallow-rs/fallow/pull/45",
+          "number": 45,
+          "merged": "2026-04-05"
+        },
+        {
+          "title": "docs: fix cargo run examples",
+          "url": "https://github.com/fallow-rs/fallow/pull/44",
+          "number": 44,
+          "merged": "2026-04-05"
+        },
+        {
+          "title": "fix: align init hook CLI names",
+          "url": "https://github.com/fallow-rs/fallow/pull/43",
+          "number": 43,
+          "merged": "2026-04-05"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Go",
+      "name": "pyscn",
+      "repo": "ludo-technologies/pyscn",
+      "stars": 1083,
+      "url": "https://github.com/ludo-technologies/pyscn",
+      "blurb": "Code-quality analyzer for Python, written in Go",
+      "merged": 31,
+      "prs": [
+        {
+          "title": "Build aggregate analysis from one project snapshot",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/704",
+          "number": 704,
+          "merged": "2026-08-25"
+        },
+        {
+          "title": "Report class-body complexity in its own scope",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/709",
+          "number": 709,
+          "merged": "2026-08-25"
+        },
+        {
+          "title": "fix: make dependency analysis scale",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/695",
+          "number": 695,
+          "merged": "2026-07-30"
+        },
+        {
+          "title": "Add per-directory complexity rollups",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/687",
+          "number": 687,
+          "merged": "2026-07-27"
+        },
+        {
+          "title": "Add per-module quality hotspot metrics",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/686",
+          "number": 686,
+          "merged": "2026-07-26"
+        },
+        {
+          "title": "Reuse prepared clone features for LSH",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/505",
+          "number": 505,
+          "merged": "2026-06-02"
+        },
+        {
+          "title": "Fix module import branch traversal",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/502",
+          "number": 502,
+          "merged": "2026-05-31"
+        },
+        {
+          "title": "Fix DFA compound statement use contracts",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/498",
+          "number": 498,
+          "merged": "2026-05-31"
+        },
+        {
+          "title": "Fix nested function CFG collection",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/497",
+          "number": 497,
+          "merged": "2026-05-30"
+        },
+        {
+          "title": "Fix analyzer import and report contracts",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/495",
+          "number": 495,
+          "merged": "2026-05-30"
+        },
+        {
+          "title": "Fix CBO dependency identity",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/474",
+          "number": 474,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Clarify large-tree APTED heuristic",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/467",
+          "number": 467,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "Fix complexity metric source consistency",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/466",
+          "number": 466,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "Fix large-tree APTED distance handling",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/454",
+          "number": 454,
+          "merged": "2026-05-20"
+        },
+        {
+          "title": "Speed up analysis pipeline",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/438",
+          "number": 438,
+          "merged": "2026-05-17"
+        },
+        {
+          "title": "Fix Type-4 semantic clone detection",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/435",
+          "number": 435,
+          "merged": "2026-05-16"
+        },
+        {
+          "title": "fix: honor analyze config flags",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/425",
+          "number": 425,
+          "merged": "2026-05-12"
+        },
+        {
+          "title": "fix: tighten Type-2 clone classification",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/411",
+          "number": 411,
+          "merged": "2026-05-07"
+        },
+        {
+          "title": "feat: add main sequence architecture metrics",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/407",
+          "number": 407,
+          "merged": "2026-05-05"
+        },
+        {
+          "title": "fix: make clone trees expression-aware",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/401",
+          "number": 401,
+          "merged": "2026-04-29"
+        },
+        {
+          "title": "fix: require text match for type1 clones",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/399",
+          "number": 399,
+          "merged": "2026-04-29"
+        },
+        {
+          "title": "feat: add package responsibility analysis",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/398",
+          "number": 398,
+          "merged": "2026-04-29"
+        },
+        {
+          "title": "test: add clone detector benchmarks",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/393",
+          "number": 393,
+          "merged": "2026-04-28"
+        },
+        {
+          "title": "perf: optimize complete-linkage grouping",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/391",
+          "number": 391,
+          "merged": "2026-04-19"
+        },
+        {
+          "title": "fix: make grouping clone-type tie breaks deterministic",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/389",
+          "number": 389,
+          "merged": "2026-04-18"
+        },
+        {
+          "title": "refactor: reuse visited state in reachability",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/385",
+          "number": 385,
+          "merged": "2026-04-14"
+        },
+        {
+          "title": "fix: honor clone show_content config in analyze",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/384",
+          "number": 384,
+          "merged": "2026-04-12"
+        },
+        {
+          "title": "refactor: remove internal/config import from AnalyzeUseCase",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/383",
+          "number": 383,
+          "merged": "2026-04-10"
+        },
+        {
+          "title": "honor complexity config settings in analyze",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/382",
+          "number": 382,
+          "merged": "2026-04-09"
+        },
+        {
+          "title": "add raw code metrics to complexity analysis",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/380",
+          "number": 380,
+          "merged": "2026-04-08"
+        },
+        {
+          "title": "refactor: use system analysis in check",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/379",
+          "number": 379,
+          "merged": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "C++",
+      "name": "libtorrent",
+      "repo": "arvidn/libtorrent",
+      "stars": 6073,
+      "url": "https://github.com/arvidn/libtorrent",
+      "blurb": "The BitTorrent library under qBittorrent and Deluge",
+      "merged": 22,
+      "prs": [
+        {
+          "title": "Fix redirects with query and fragment paths",
+          "url": "https://github.com/arvidn/libtorrent/pull/8813",
+          "number": 8813,
+          "merged": "2026-08-30"
+        },
+        {
+          "title": "fix pread pre-allocation after priority changes",
+          "url": "https://github.com/arvidn/libtorrent/pull/8797",
+          "number": 8797,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "reject existing destinations in pread storage renames",
+          "url": "https://github.com/arvidn/libtorrent/pull/8792",
+          "number": 8792,
+          "merged": "2026-08-26"
+        },
+        {
+          "title": "Speed up sparse bitfield refcount updates",
+          "url": "https://github.com/arvidn/libtorrent/pull/8723",
+          "number": 8723,
+          "merged": "2026-08-14"
+        },
+        {
+          "title": "Fix short writes in copy file fallbacks",
+          "url": "https://github.com/arvidn/libtorrent/pull/8716",
+          "number": 8716,
+          "merged": "2026-08-10"
+        },
+        {
+          "title": "Fix Fast Extension piece validation after metadata",
+          "url": "https://github.com/arvidn/libtorrent/pull/8664",
+          "number": 8664,
+          "merged": "2026-07-28"
+        },
+        {
+          "title": "Fix wrapped packet buffer range checks",
+          "url": "https://github.com/arvidn/libtorrent/pull/8658",
+          "number": 8658,
+          "merged": "2026-07-26"
+        },
+        {
+          "title": "Fix DHT upload quota zero limit",
+          "url": "https://github.com/arvidn/libtorrent/pull/8456",
+          "number": 8456,
+          "merged": "2026-06-07"
+        },
+        {
+          "title": "Fix SOCKS5 auth request bounds",
+          "url": "https://github.com/arvidn/libtorrent/pull/8441",
+          "number": 8441,
+          "merged": "2026-06-03"
+        },
+        {
+          "title": "Fix whole-piece prefetch overflow",
+          "url": "https://github.com/arvidn/libtorrent/pull/8436",
+          "number": 8436,
+          "merged": "2026-05-31"
+        },
+        {
+          "title": "Fix DH xor mask secret padding",
+          "url": "https://github.com/arvidn/libtorrent/pull/8434",
+          "number": 8434,
+          "merged": "2026-05-31"
+        },
+        {
+          "title": "Fix reject piece request iteration",
+          "url": "https://github.com/arvidn/libtorrent/pull/8432",
+          "number": 8432,
+          "merged": "2026-05-30"
+        },
+        {
+          "title": "Fix deprecated pair piece priorities",
+          "url": "https://github.com/arvidn/libtorrent/pull/8430",
+          "number": 8430,
+          "merged": "2026-05-30"
+        },
+        {
+          "title": "Tighten HTTP tracker peer parsing",
+          "url": "https://github.com/arvidn/libtorrent/pull/8423",
+          "number": 8423,
+          "merged": "2026-05-28"
+        },
+        {
+          "title": "Match DHT RPC replies by full endpoint",
+          "url": "https://github.com/arvidn/libtorrent/pull/8410",
+          "number": 8410,
+          "merged": "2026-05-27"
+        },
+        {
+          "title": "Fix mmap disk jobs stranded behind fences",
+          "url": "https://github.com/arvidn/libtorrent/pull/8389",
+          "number": 8389,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Fix peer class bandwidth channel capacity",
+          "url": "https://github.com/arvidn/libtorrent/pull/8388",
+          "number": 8388,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "Handle short reads from part files",
+          "url": "https://github.com/arvidn/libtorrent/pull/8381",
+          "number": 8381,
+          "merged": "2026-05-17"
+        },
+        {
+          "title": "Fix UPnP content-type checks",
+          "url": "https://github.com/arvidn/libtorrent/pull/8370",
+          "number": 8370,
+          "merged": "2026-05-17"
+        },
+        {
+          "title": "Return partial byte count from pwrite_all on error",
+          "url": "https://github.com/arvidn/libtorrent/pull/8380",
+          "number": 8380,
+          "merged": "2026-05-15"
+        },
+        {
+          "title": "Fix bandwidth channel iteration",
+          "url": "https://github.com/arvidn/libtorrent/pull/8374",
+          "number": 8374,
+          "merged": "2026-05-15"
+        },
+        {
+          "title": "Fix quoted I2P SAM values",
+          "url": "https://github.com/arvidn/libtorrent/pull/8369",
+          "number": 8369,
+          "merged": "2026-05-15"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Python",
+      "name": "calibre",
+      "repo": "kovidgoyal/calibre",
+      "stars": 26010,
+      "url": "https://github.com/kovidgoyal/calibre",
+      "blurb": "The e-book manager most people use",
+      "merged": 22,
+      "prs": [
+        {
+          "title": "Centralize viewer chrome styling",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3174",
+          "number": 3174,
+          "merged": "2026-06-02"
+        },
+        {
+          "title": "Unify viewer sidebar setting",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3172",
+          "number": 3172,
+          "merged": "2026-06-01"
+        },
+        {
+          "title": "Clean up viewer overlay controls",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3170",
+          "number": 3170,
+          "merged": "2026-05-31"
+        },
+        {
+          "title": "Improve webui scrollbar contrast",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3169",
+          "number": 3169,
+          "merged": "2026-05-31"
+        },
+        {
+          "title": "Refresh saved virtual libraries on library switch",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3168",
+          "number": 3168,
+          "merged": "2026-05-30"
+        },
+        {
+          "title": "Rename custom categories to saved virtual libraries",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3163",
+          "number": 3163,
+          "merged": "2026-05-29"
+        },
+        {
+          "title": "Tighten series cover stack spacing",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3162",
+          "number": 3162,
+          "merged": "2026-05-28"
+        },
+        {
+          "title": "Show custom icons for browse categories",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3161",
+          "number": 3161,
+          "merged": "2026-05-28"
+        },
+        {
+          "title": "Add browse field settings",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3159",
+          "number": 3159,
+          "merged": "2026-05-28"
+        },
+        {
+          "title": "Add custom columns to webui browse",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3157",
+          "number": 3157,
+          "merged": "2026-05-27"
+        },
+        {
+          "title": "Clean up custom category helpers",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3156",
+          "number": 3156,
+          "merged": "2026-05-27"
+        },
+        {
+          "title": "Simplify webui top bar",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3155",
+          "number": 3155,
+          "merged": "2026-05-27"
+        },
+        {
+          "title": "Move book list quick actions to top bar",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3153",
+          "number": 3153,
+          "merged": "2026-05-26"
+        },
+        {
+          "title": "Move cover size control into list toolbar",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3152",
+          "number": 3152,
+          "merged": "2026-05-25"
+        },
+        {
+          "title": "Search all downloaded books offline",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3151",
+          "number": 3151,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Fix archive cover paths",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3150",
+          "number": 3150,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Confine extra file globs",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3149",
+          "number": 3149,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Protect rooted file paths from traversal",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3148",
+          "number": 3148,
+          "merged": "2026-05-23"
+        },
+        {
+          "title": "Parse Connection header tokens",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3146",
+          "number": 3146,
+          "merged": "2026-05-23"
+        },
+        {
+          "title": "Reject invalid HTTP Content-Length framing",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3145",
+          "number": 3145,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "Fix ignored duplicate moves in content server",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3144",
+          "number": 3144,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "Respect content server book restrictions in FTS and data file endpoints",
+          "url": "https://github.com/kovidgoyal/calibre/pull/3143",
+          "number": 3143,
+          "merged": "2026-05-22"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Python",
+      "name": "kitty",
+      "repo": "kovidgoyal/kitty",
+      "stars": 35067,
+      "url": "https://github.com/kovidgoyal/kitty",
+      "blurb": "GPU-accelerated terminal emulator",
+      "merged": 18,
+      "prs": [
+        {
+          "title": "Fix session discovery with goto_session options",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10419",
+          "number": 10419,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix alpha-mask leak when growing the font canvas",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10418",
+          "number": 10418,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix EOF handling for empty DnD transfers",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10417",
+          "number": 10417,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix explicit stdin sources in the DnD kitten",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10416",
+          "number": 10416,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix empty hints selection handling",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10415",
+          "number": 10415,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix notification close mode",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10414",
+          "number": 10414,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Restore hints named-group program arguments",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10413",
+          "number": 10413,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Add an independent DnD copy mode",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10412",
+          "number": 10412,
+          "merged": "2026-08-27"
+        },
+        {
+          "title": "Fix composed animation frame metadata",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10410",
+          "number": 10410,
+          "merged": "2026-08-27"
+        },
+        {
+          "title": "Fix builtin kitten development guide",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10359",
+          "number": 10359,
+          "merged": "2026-08-14"
+        },
+        {
+          "title": "Fix Bash SSH hostname detection",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10358",
+          "number": 10358,
+          "merged": "2026-08-14"
+        },
+        {
+          "title": "Document last non-empty get-text extent",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10357",
+          "number": 10357,
+          "merged": "2026-08-13"
+        },
+        {
+          "title": "Skip disabled Bash command hook",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10354",
+          "number": 10354,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Complete session file completion",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10353",
+          "number": 10353,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Relink when linker commands change",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10350",
+          "number": 10350,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Quote choose-files shell output",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10348",
+          "number": 10348,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Avoid interpolating SSH login shell paths in fallback helpers",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10038",
+          "number": 10038,
+          "merged": "2026-05-20"
+        },
+        {
+          "title": "Quote SSH bootstrap symlink moves",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10035",
+          "number": 10035,
+          "merged": "2026-05-19"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Shell",
+      "name": "Mole",
+      "repo": "tw93/Mole",
+      "stars": 68394,
+      "url": "https://github.com/tw93/Mole",
+      "blurb": "Command-line cleanup and maintenance tool for macOS",
+      "merged": 17,
+      "prs": [
+        {
+          "title": "Fix purge cancellation and speed up project navigation",
+          "url": "https://github.com/tw93/Mole/pull/1545",
+          "number": 1545,
+          "merged": "2026-09-08"
+        },
+        {
+          "title": "Speed up clean and purge scans",
+          "url": "https://github.com/tw93/Mole/pull/1464",
+          "number": 1464,
+          "merged": "2026-08-27"
+        },
+        {
+          "title": "Group purge artifacts by project",
+          "url": "https://github.com/tw93/Mole/pull/1420",
+          "number": 1420,
+          "merged": "2026-08-15"
+        },
+        {
+          "title": "fix(analyze): cancel live scans end to end",
+          "url": "https://github.com/tw93/Mole/pull/1407",
+          "number": 1407,
+          "merged": "2026-08-15"
+        },
+        {
+          "title": "Track optimize task outcomes explicitly",
+          "url": "https://github.com/tw93/Mole/pull/1293",
+          "number": 1293,
+          "merged": "2026-07-31"
+        },
+        {
+          "title": "Centralize optimize task catalog",
+          "url": "https://github.com/tw93/Mole/pull/1291",
+          "number": 1291,
+          "merged": "2026-07-26"
+        },
+        {
+          "title": "Avoid recursive container stub cleanup",
+          "url": "https://github.com/tw93/Mole/pull/1113",
+          "number": 1113,
+          "merged": "2026-06-13"
+        },
+        {
+          "title": "Paint mo status from fast metrics first",
+          "url": "https://github.com/tw93/Mole/pull/1013",
+          "number": 1013,
+          "merged": "2026-06-01"
+        },
+        {
+          "title": "Fix mo update target path",
+          "url": "https://github.com/tw93/Mole/pull/1008",
+          "number": 1008,
+          "merged": "2026-05-30"
+        },
+        {
+          "title": "Fix installer deletion reporting",
+          "url": "https://github.com/tw93/Mole/pull/990",
+          "number": 990,
+          "merged": "2026-05-28"
+        },
+        {
+          "title": "Add mo history for recent cleanup activity",
+          "url": "https://github.com/tw93/Mole/pull/967",
+          "number": 967,
+          "merged": "2026-05-25"
+        },
+        {
+          "title": "Harden deletion path validation",
+          "url": "https://github.com/tw93/Mole/pull/950",
+          "number": 950,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Fix stable channel update switch",
+          "url": "https://github.com/tw93/Mole/pull/957",
+          "number": 957,
+          "merged": "2026-05-24"
+        },
+        {
+          "title": "Fix available memory shown in status",
+          "url": "https://github.com/tw93/Mole/pull/947",
+          "number": 947,
+          "merged": "2026-05-23"
+        },
+        {
+          "title": "Cover shared Go code and install script in checks",
+          "url": "https://github.com/tw93/Mole/pull/948",
+          "number": 948,
+          "merged": "2026-05-23"
+        },
+        {
+          "title": "Fix uninstall dry-run leftover warnings",
+          "url": "https://github.com/tw93/Mole/pull/923",
+          "number": 923,
+          "merged": "2026-05-22"
+        },
+        {
+          "title": "Make Trash delete mode fail closed",
+          "url": "https://github.com/tw93/Mole/pull/905",
+          "number": 905,
+          "merged": "2026-05-18"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Python",
+      "name": "docling",
+      "repo": "docling-project/docling",
+      "stars": 67903,
+      "url": "https://github.com/docling-project/docling",
+      "blurb": "Document conversion for AI pipelines, started at IBM Research",
+      "merged": 10,
+      "prs": [
+        {
+          "title": "fix(uspto): accept CRLF patent headers",
+          "url": "https://github.com/docling-project/docling/pull/4111",
+          "number": 4111,
+          "merged": "2026-09-01"
+        },
+        {
+          "title": "fix: avoid pipeline option cache key collisions",
+          "url": "https://github.com/docling-project/docling/pull/4076",
+          "number": 4076,
+          "merged": "2026-08-26"
+        },
+        {
+          "title": "perf: speed up layout and table cell matching",
+          "url": "https://github.com/docling-project/docling/pull/3380",
+          "number": 3380,
+          "merged": "2026-08-24"
+        },
+        {
+          "title": "feat(cli): fetch HTML images",
+          "url": "https://github.com/docling-project/docling/pull/3506",
+          "number": 3506,
+          "merged": "2026-06-03"
+        },
+        {
+          "title": "fix(cli): avoid generating images for non-image exports",
+          "url": "https://github.com/docling-project/docling/pull/3127",
+          "number": 3127,
+          "merged": "2026-03-23"
+        },
+        {
+          "title": "fix: honor picture description batching and scale options",
+          "url": "https://github.com/docling-project/docling/pull/3132",
+          "number": 3132,
+          "merged": "2026-03-23"
+        },
+        {
+          "title": "test: fix picture checks in shared verifier",
+          "url": "https://github.com/docling-project/docling/pull/3130",
+          "number": 3130,
+          "merged": "2026-03-16"
+        },
+        {
+          "title": "chore: address stale TODO comments across codebase",
+          "url": "https://github.com/docling-project/docling/pull/3108",
+          "number": 3108,
+          "merged": "2026-03-14"
+        },
+        {
+          "title": "fix: correct typos in log messages and add missing error log",
+          "url": "https://github.com/docling-project/docling/pull/3097",
+          "number": 3097,
+          "merged": "2026-03-11"
+        },
+        {
+          "title": "test: fix missing assert in page_count tests",
+          "url": "https://github.com/docling-project/docling/pull/3102",
+          "number": 3102,
+          "merged": "2026-03-11"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "C++",
+      "name": "qBittorrent",
+      "repo": "qbittorrent/qBittorrent",
+      "stars": 40295,
+      "url": "https://github.com/qbittorrent/qBittorrent",
+      "blurb": "Open-source BitTorrent client",
+      "merged": 6,
+      "prs": [
+        {
+          "title": "Fix Comment area background mismatch in Add New Torrent dialog",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23916",
+          "number": 23916,
+          "merged": "2026-03-15"
+        },
+        {
+          "title": "Fix LineEdit dark corner artifacts on macOS",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23909",
+          "number": 23909,
+          "merged": "2026-03-08"
+        },
+        {
+          "title": "Fix macOS delete shortcuts to match platform conventions",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23908",
+          "number": 23908,
+          "merged": "2026-03-08"
+        },
+        {
+          "title": "Fix About dialog text cutoff on macOS",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23906",
+          "number": 23906,
+          "merged": "2026-03-08"
+        },
+        {
+          "title": "Replace invisible toolbar spacers with visible separators on macOS",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23905",
+          "number": 23905,
+          "merged": "2026-03-08"
+        },
+        {
+          "title": "Fix priority text overlap when editor is active  ",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23896",
+          "number": 23896,
+          "merged": "2026-03-08"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "C++",
+      "name": "libtorrent-webui",
+      "repo": "arvidn/libtorrent-webui",
+      "stars": 58,
+      "url": "https://github.com/arvidn/libtorrent-webui",
+      "blurb": null,
+      "merged": 4,
+      "prs": [
+        {
+          "title": "Move WebSocket response buffers",
+          "url": "https://github.com/arvidn/libtorrent-webui/pull/81",
+          "number": 81,
+          "merged": "2026-05-10"
+        },
+        {
+          "title": "Remove file downloader debug output",
+          "url": "https://github.com/arvidn/libtorrent-webui/pull/80",
+          "number": 80,
+          "merged": "2026-05-10"
+        },
+        {
+          "title": "implement delta tracking for get-peers-updates",
+          "url": "https://github.com/arvidn/libtorrent-webui/pull/59",
+          "number": 59,
+          "merged": "2026-05-10"
+        },
+        {
+          "title": "Make torrent history snapshots return a consistent frame",
+          "url": "https://github.com/arvidn/libtorrent-webui/pull/57",
+          "number": 57,
+          "merged": "2026-04-22"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Python",
+      "name": "django-health-check",
+      "repo": "codingjoe/django-health-check",
+      "stars": 1424,
+      "url": "https://github.com/codingjoe/django-health-check",
+      "blurb": null,
+      "merged": 3,
+      "prs": [
+        {
+          "title": "Fix Atlassian incident checks",
+          "url": "https://github.com/codingjoe/django-health-check/pull/731",
+          "number": 731,
+          "merged": "2026-05-15"
+        },
+        {
+          "title": "Update deprecated redis_url test case",
+          "url": "https://github.com/codingjoe/django-health-check/pull/726",
+          "number": 726,
+          "merged": "2026-04-20"
+        },
+        {
+          "title": "Clean up storage probe files when validation fails",
+          "url": "https://github.com/codingjoe/django-health-check/pull/717",
+          "number": 717,
+          "merged": "2026-04-18"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "TypeScript",
+      "name": "evlog",
+      "repo": "evloghq/evlog",
+      "stars": 1871,
+      "url": "https://github.com/evloghq/evlog",
+      "blurb": null,
+      "merged": 2,
+      "prs": [
+        {
+          "title": "fix: skip unnecessary Nitro adapter probes",
+          "url": "https://github.com/evloghq/evlog/pull/298",
+          "number": 298,
+          "merged": "2026-04-27"
+        },
+        {
+          "title": "docs: fix Cloudflare Workers setup imports",
+          "url": "https://github.com/evloghq/evlog/pull/260",
+          "number": 260,
+          "merged": "2026-04-11"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Python",
+      "name": "django-hijack",
+      "repo": "django-hijack/django-hijack",
+      "stars": 1747,
+      "url": "https://github.com/django-hijack/django-hijack",
+      "blurb": null,
+      "merged": 1,
+      "prs": [
+        {
+          "title": "Fix #823 -- Prevent stale request.user copy in hijack middleware",
+          "url": "https://github.com/django-hijack/django-hijack/pull/893",
+          "number": 893,
+          "merged": "2026-04-19"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "JavaScript",
+      "name": "fallow-skills",
+      "repo": "fallow-rs/fallow-skills",
+      "stars": 124,
+      "url": "https://github.com/fallow-rs/fallow-skills",
+      "blurb": null,
+      "merged": 1,
+      "prs": [
+        {
+          "title": "chore: sync Fallow skill contract",
+          "url": "https://github.com/fallow-rs/fallow-skills/pull/20",
+          "number": 20,
+          "merged": "2026-07-27"
+        }
+      ]
+    }
+  ]
+}
