@@ -27,4 +27,12 @@
 - repo: fallow-rs/fallow
   number: 60
   title: "Harden Vue and Nuxt framework edge cases"
-  note: "The PR that started it: Fallow kept calling live Nuxt and Vue code dead. About 1,100 lines across 44 files to teach it the framework conventions."
+  note: "My biggest early one: Fallow kept calling live Nuxt and Vue code dead. About 1,100 lines across 44 files to teach it the framework conventions."
+- repo: kovidgoyal/kitty
+  number: 10412
+  title: "Add an independent DnD copy mode"
+  note: "I thought hard-linked copies were a bug. They were a deliberate performance choice, so the fix became an opt-in mode instead."
+- repo: arvidn/libtorrent
+  number: 8723
+  title: "Speed up sparse bitfield refcount updates"
+  note: "Faster piece-picker bookkeeping when only a few pieces are set. The maintainer benchmarked it and suggested going word-at-a-time next."

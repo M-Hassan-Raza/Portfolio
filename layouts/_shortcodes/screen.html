@@ -1,0 +1,11 @@
+{{- /* Halftone screenshot inside an article: {{< screen "key" "Caption text" >}} */ -}}
+{{- $key := .Get 0 -}}
+{{- $caption := .Get 1 -}}
+<figure class="ascii-figure">
+    {{- with resources.Get (printf "ascii-covers/%s.txt" $key) }}
+    <pre class="ascii-cover-art" aria-hidden="true">{{ .Content }}</pre>
+    {{- else }}
+    {{- errorf "screen shortcode: ascii cover %q not found in %s" $key $.Page.File.Path }}
+    {{- end }}
+    {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

@@ -1,23 +1,21 @@
 ---
 title: "TF-IDF in OCaml: When Functional Programming Clicks"
-date: 2026-03-22T10:00:00+05:00
+date: 2026-04-08T10:00:00+05:00
 description: "Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps."
-draft: false
 tags: ["OCaml", "Functional Programming", "Search", "TF-IDF", "Cogitator"]
-showComments: true
 ShowToc: true
 cover:
-  ascii: "engineering"
+  ascii: "post-ocaml"
   alt: "TF-IDF in OCaml cover"
 ---
 
 I built [Cogitator](https://github.com/M-Hassan-Raza/cogitator), a local code search engine in OCaml. It indexes code chunks using TF-IDF, ranks results by cosine similarity, and outputs them as RAG prompts for LLMs. The whole thing is about 500 lines of OCaml.
 
-I didn't pick OCaml because it was the obvious choice. I picked it because I wanted to learn it. But the language ended up being genuinely good for this problem in ways I didn't expect.
+I didn't pick OCaml because it was the obvious choice. I picked it because I wanted to learn it. It turned out to suit the problem in ways I didn't expect.
 
 ## The Tokenization Pipeline
 
-The core of any search engine is tokenization — turning raw text into searchable terms. In Cogitator, the pipeline is:
+The core of any search engine is tokenization: turning raw text into searchable terms. In Cogitator, the pipeline is:
 
 ```
 raw text → split punctuation → split camelCase → split snake_case → lowercase → stem → remove stopwords
@@ -68,7 +66,7 @@ let split_camel s =
     go [] 1
 ```
 
-`"getUserName"` becomes `["get"; "User"; "Name"]`. The recursive `go` function with accumulator is idiomatic OCaml — it's a fold over characters, building the result list as it goes.
+`"getUserName"` becomes `["get"; "User"; "Name"]`. The recursive `go` function with accumulator is idiomatic OCaml: a fold over characters, building the result list as it goes.
 
 ## TF-IDF: Maps All the Way Down
 
@@ -90,7 +88,7 @@ let term_frequency tokens =
   StringMap.map (fun count -> float_of_int count /. total) counts
 ```
 
-Inverse document frequency follows the same shape — fold over the corpus, count documents containing each term, take the log:
+Inverse document frequency follows the same shape: fold over the corpus, count documents containing each term, take the log:
 
 ```ocaml
 let inverse_document_frequency corpus =
@@ -112,11 +110,11 @@ let inverse_document_frequency corpus =
   StringMap.map (fun df -> log (n_docs /. float_of_int df)) doc_counts
 ```
 
-Every intermediate value is immutable. The `StringMap.add` call returns a new map — the old one is untouched. In Python with dictionaries, you'd mutate in place and hope nobody else holds a reference. Here, immutability is the default and the compiler enforces it.
+Every intermediate value is immutable. The `StringMap.add` call returns a new map and leaves the old one untouched. In Python with dictionaries, you'd mutate in place and hope nobody else holds a reference. Here, immutability is the default and the compiler enforces it.
 
 ## Fuzzy Matching via Edit Distance
 
-Search queries contain typos. Cogitator handles this with Levenshtein edit distance — if a query term isn't in the IDF vocabulary, it finds the closest match within edit distance 2:
+Search queries contain typos. Cogitator handles this with Levenshtein edit distance. If a query term isn't in the IDF vocabulary, it finds the closest match within edit distance 2:
 
 ```ocaml
 let fuzzy_expand query_tokens idf =
@@ -160,6 +158,6 @@ Every `match` on this type must handle all three cases. When I added `Markdown` 
 
 **The type system made refactoring fearless.** When I changed the `search_result` type from a tuple to a record, the compiler caught every usage that needed updating. I didn't need to grep for call sites or run the test suite to find breakage.
 
-The codebase is small — about 500 lines of library code. But it handles tokenization, stemming, TF-IDF indexing, cosine similarity search, fuzzy matching, result merging, cache persistence, and a REPL. In Python, that same feature set would be significantly more code, and I'd have less confidence that it all fits together correctly.
+The codebase is small, about 500 lines of library code. But it handles tokenization, stemming, TF-IDF indexing, cosine similarity search, fuzzy matching, result merging, cache persistence, and a REPL. In Python, that same feature set would be significantly more code, and I'd have less confidence that it all fits together correctly.
 
 OCaml isn't the right tool for everything. But for data transformation pipelines where correctness matters and the domain is well-defined, it's hard to beat.

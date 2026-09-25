@@ -1,19 +1,17 @@
 ---
 title: "How Pyscn Analyzes Python with Go and tree-sitter"
-date: 2025-10-15T10:00:00+05:00
+date: 2026-04-08T10:00:00+05:00
 description: "How Pyscn uses Go and tree-sitter to analyze Python code quickly for dead code, clone detection, and dependency insight."
-draft: false
 tags: ["Go", "tree-sitter", "Static Analysis", "Python", "MCP", "Pyscn"]
-showComments: true
 ShowToc: true
 cover:
-  ascii: "engineering"
+  ascii: "post-pyscn"
   alt: "Pyscn tree-sitter analysis cover"
 ---
 
-[Pyscn](https://github.com/ludo-technologies/pyscn) is a code quality analyzer for Python built by [DaisukeYoda](https://github.com/DaisukeYoda) at ludo-technologies. It finds dead code, code clones, coupling issues, and complexity hotspots. It's written in Go, uses tree-sitter for parsing, and processes over 100,000 lines per second.
+[Pyscn](https://github.com/ludo-technologies/pyscn) is a code quality analyzer for Python built by [DaisukeYoda](https://github.com/DaisukeYoda) at ludo-technologies. It finds dead code, code clones, coupling issues, and complexity hotspots. It's written in Go, uses tree-sitter for parsing, and the project reports processing over 100,000 lines per second.
 
-I've been studying its internals and the engineering decisions are worth writing about: how it detects dead code through control flow analysis, finds duplicated code across clone types 1-4 with LSH acceleration, and integrates with AI coding assistants via MCP.
+I contribute to it ([my pull requests](https://github.com/ludo-technologies/pyscn/pulls?q=author%3AM-Hassan-Raza), including [the one that made dependency analysis scale](https://github.com/ludo-technologies/pyscn/pull/695)), and its engineering decisions are worth writing about: how it detects dead code through control flow analysis, finds duplicated code across clone types 1-4 with LSH acceleration, and integrates with AI coding assistants via MCP.
 
 ## Why Go + tree-sitter
 
@@ -21,7 +19,7 @@ Python has excellent AST modules (`ast`, `astroid`), but they're slow for large 
 
 tree-sitter is a parser generator used by editors like Neovim, Helix, and Zed. Its Go binding (`go-tree-sitter`) lets you parse Python source files into concrete syntax trees, then walk those trees with Go's speed.
 
-The tradeoff: tree-sitter produces CSTs (concrete syntax trees), not ASTs. You get every token including whitespace and punctuation. This means more node types to handle, but it also means you can reconstruct exact source locations — useful for reporting the exact lines of dead code.
+The tradeoff: tree-sitter produces CSTs (concrete syntax trees), not ASTs. You get every token including whitespace and punctuation. This means more node types to handle, but it also means you can reconstruct exact source locations, which is useful for reporting the exact lines of dead code.
 
 ## Dead Code via Control Flow Graphs
 
@@ -66,9 +64,9 @@ Code duplication isn't binary. Pyscn classifies clones into four types:
 
 Types 1-2 are detected by normalizing the AST (stripping identifiers, replacing literals with type markers) and hashing the result. Identical hashes mean identical structure.
 
-Type 3 detection uses a similarity threshold on the normalized token sequences. This is where it gets expensive — naive pairwise comparison is O(n^2) in the number of code blocks.
+Type 3 detection uses a similarity threshold on the normalized token sequences. This is where it gets expensive: naive pairwise comparison is O(n^2) in the number of code blocks.
 
-Pyscn uses Locality-Sensitive Hashing (LSH) to accelerate this. Instead of comparing every pair of code blocks, it hashes each block into multiple buckets using MinHash signatures. Blocks that land in the same bucket are likely similar. This reduces the comparison space dramatically — only blocks that share a bucket get compared directly.
+Pyscn uses Locality-Sensitive Hashing (LSH) to accelerate this. Instead of comparing every pair of code blocks, it hashes each block into multiple buckets using MinHash signatures. Blocks that land in the same bucket are likely similar. This reduces the comparison space dramatically, since only blocks that share a bucket get compared directly.
 
 Type 4 is the hardest. Same logic, different syntax. Pyscn handles this through semantic normalization: both `[x for x in items if x > 0]` and the equivalent `for` loop get normalized to a similar token sequence before comparison.
 
@@ -92,4 +90,4 @@ The 100K+ lines/sec number comes from two factors:
 1. **Go's concurrency model.** File parsing happens concurrently across goroutines. Each file is independent, so the analysis parallelizes naturally.
 2. **tree-sitter's parsing speed.** tree-sitter parsers are generated C code called through Go's FFI. The parsing itself is native speed, not interpreted.
 
-The architecture — Go for the analysis engine, Python wrapper for distribution, MCP for AI integration — lets each layer play to its strengths. Go handles the performance-critical work. Python handles the ecosystem integration. MCP bridges the gap to AI tooling.
+The architecture (Go for the analysis engine, a Python wrapper for distribution, MCP for AI integration) lets each layer play to its strengths. Go handles the performance-critical work. Python handles the ecosystem integration. MCP bridges the gap to AI tooling.

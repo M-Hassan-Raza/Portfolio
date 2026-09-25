@@ -7,11 +7,14 @@
 }
 
 .collection-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
   max-width: 68ch;
 }
 
-.collection-intro p:first-child {
-  margin-top: 0;
+.collection-intro p {
+  margin: 0;
 }
 
 .collection-section {

@@ -2,7 +2,7 @@
 title: "Technical Books"
 date: "2025-02-15T12:00:00Z"
 draft: false
-description: "Essential books on software craftsmanship, coding principles, and system design."
+description: "The books behind how I think about software, data systems and craft."
 slug: "books-technical"
 ShowComments: true
 kicker: "Technical"

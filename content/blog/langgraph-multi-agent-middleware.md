@@ -1,178 +1,90 @@
 ---
-title: "Multi-Agent LLM Middleware: Lessons from Marketing Accelerant"
-date: 2026-01-10T10:00:00+05:00
-description: "What it took to make a multi-agent AI stack survive production: model routing, approval gates, retries, cost control, and sane control flow."
-draft: false
-tags: ["LangGraph", "LangChain", "AI", "Middleware", "Python", "Production"]
-cover:
-  ascii: "ai"
-  alt: "Multi-agent middleware illustration"
-  caption: "The hard part was never the number of agents. It was the control layer around them."
-showComments: true
+title: "Agent Middleware: What Kept Obelisk's Agents in Line"
+date: 2026-04-08T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work."
+tags: ["LangChain", "LangGraph", "AI", "Agents", "Production"]
+categories: ["AI systems"]
 ShowToc: true
+cover:
+  ascii: "post-middleware"
+  alt: "Agent middleware"
 ---
 
-Marketing Accelerant is an AI-powered marketing analytics platform I worked on at Entropy Labs. It runs 15+ specialized LLM agents for Brand Voice, Creative Content, CMO Strategy, SEO, Email Campaigns, Google Ads, Meta Ads, Video Studio, and more, all serving enterprise clients through a single FastAPI backend.
+[Obelisk](/projects/obelisk/) is the AI marketing platform we build at Entropy Labs. It runs more than fifteen specialist agents: brand voice, SEO, email, paid ads, strategy and so on, all behind one API.
 
-The agents themselves aren't the hard part. The hard part is everything around them: model selection, context management, cost control, error recovery, and human approval. This post covers the middleware architecture that makes it work in production.
+Writing an agent turned out to be the easy part. The hard part was everything wrapped around each model call: which model to use, what to do when the conversation gets long, how to stop an agent calling the same tool forever, when to ask a human before spending money, and what to do when something fails. Early on, each agent handled those things its own way. That didn't last.
 
-## The Middleware Stack
+What worked was pulling every one of those concerns into middleware: small, separate layers that run around every model and tool call, which each agent opts in or out of. LangChain's agent middleware gave us the hooks. The decisions below are the ones that mattered. I've left out our actual thresholds and routing rules, because those are ours, but the shape is the useful part.
 
-Every agent in Marketing Accelerant runs through a composable middleware chain. The chain is built per-request from a set of flags:
+## One concern per layer
 
-```python
-def build_agent_middleware(
-    configurable: dict | None = None,
-    *,
-    agent_slug: str | None = None,
-    include_summarization: bool = True,
-    include_todo: bool = True,
-    include_tool_selector: bool = False,
-    include_approval: bool = True,
-    include_retry: bool = True,
-    include_error_handler: bool = True,
-    include_loop_guard: bool = False,
-    # ...
-) -> list:
-```
+Each middleware does one thing: pick the model, trim the context, cap the calls, gate the dangerous tools, recover from errors. An agent declares which ones it wants. The SEO agent, which uses a handful of tools, doesn't need tool filtering. The strategy agent, which can reach dozens of tools, does.
 
-The order matters. Here's the full chain, top to bottom:
+Order matters more than I expected. Model selection has to run first, so every later layer knows which model it's dealing with. Context trimming has to run before the call-limit check, or a long conversation burns its budget on retries. Approval gates have to sit close to the tool call, so nothing downstream can reroute around them. We found most of those orderings by getting them wrong.
 
-1. **Runtime model selection** — picks the LLM provider based on request config
-2. **Workflow middleware** — agent-specific workflow state management
-3. **Auto-summarization** — compresses context when it gets too long
-4. **Todo list** — tracks multi-step task progress
-5. **Tool selector** — filters 100+ tools down to the 24 most relevant
-6. **Model retry** — retries on transient failures (rate limits, timeouts)
-7. **Model call limit** — caps at 8 LLM calls per run
-8. **Prompt caching** — one middleware per provider (Anthropic, OpenAI, Google, Bedrock)
-9. **Tool loop guard** — detects and breaks tool call loops
-10. **Research tool limits** — per-tool call caps (KB search: 4, web search: 4, deep research: 2)
-11. **Human-in-the-loop** — approval gates for destructive tools
-12. **Error handler** — catches and recovers from tool failures
-13. **Tool contract enforcement** — validates tool inputs/outputs match contracts
+## Choose the model per request, not per agent
 
-Each middleware is a standalone concern. An agent opts in or out via flags on its class definition:
+Obelisk supports several model providers. The model is chosen when a request arrives, not when the agent is built. The same agent can run on one provider for one customer and another for a customer with a different contract or their own keys.
 
-```python
-class FrameworkMarketingAgent(BaseAgent[T]):
-    include_todo_middleware = True
-    include_tool_selector = False
-    include_brand_voice = True
-    include_approval_middleware = True
-    include_loop_guard = False
-    tool_selector_always_include: list[str] = []
-```
+That was painful to build, because every provider streams, counts tokens and reports errors a little differently. It paid off three ways: cheap models for cheap jobs like summarizing, customer-supplied keys, and a fallback when one provider has a bad afternoon.
 
-The CMO Strategy agent enables the tool selector (because it orchestrates other agents and needs access to many tools). The Brand Voice agent disables it (it only needs KB search and content generation). Each agent gets exactly the middleware it needs.
+## Summarize before the smallest window fills up
 
-## Request-Scoped Model Selection
+Long sessions with tool calls and research results fill context windows faster than you'd think. When a conversation gets close to a threshold, a summarization layer compresses the older messages with a cheap model and keeps the recent ones as they are.
 
-Marketing Accelerant supports OpenAI, Anthropic, Google Gemini, and AWS Bedrock. The model is selected at request time, not at agent initialization. This means a single agent can run on Claude for one client and GPT-4 for another, depending on their configuration.
+Two details made it work. The threshold is set well below the *smallest* context window we support, not the largest, so switching models mid-conversation never overflows. And every summarization is recorded: when it fired, how much it compressed. When an agent "forgets" something, that record is the first thing we check.
 
-The first middleware in the chain — `runtime_model_selection_middleware` — reads the request config and injects the appropriate LLM. Every downstream middleware sees the model that was selected for this specific request. No global state, no singletons.
+## Give each request only the tools it needs
 
-This was painful to build. Each provider has different API shapes, different token counting, different streaming behavior. But it means we can:
-- Route to cheaper models for simple tasks (summarization uses a utility model at temperature 0.3)
-- Let enterprise clients bring their own API keys
-- Fall back to a different provider if one is down
+Obelisk has a lot of tools. Handing all of them to every call is a bad idea: the model spends tokens reading descriptions it won't use, and a longer menu means more wrong picks. For agents with large toolsets, a cheap classifier picks a small relevant subset per request, with a few tools, like knowledge-base search, always included.
 
-## Auto-Summarization at 120K Tokens
+The effect was obvious in the logs: fewer irrelevant tool calls and a lot less prompt spent on tool descriptions.
 
-Long conversations eat context windows. Marketing Accelerant agents can run for dozens of turns with tool calls, research results, and user feedback. Without management, you hit the context limit and the agent crashes.
+## Ask a human before spending money
 
-The summarization middleware fires automatically:
-
-```python
-TrackingSummarizationMiddleware(
-    model=utility_model,  # cheap model, temperature 0.3
-    trigger=[("tokens", 120_000), ("messages", 100)],
-    keep=("messages", 20),
-    trim_tokens_to_summarize=32_000,
-)
-```
-
-When the conversation hits 120K tokens or 100 messages (whichever comes first), it:
-1. Keeps the 20 most recent messages intact
-2. Takes up to 32K tokens of older messages
-3. Summarizes them using the utility model
-4. Replaces the old messages with the summary
-
-The trigger threshold of 120K is set at ~70% of the smallest context window we support (Haiku's 200K). This leaves room for the system prompt, tools, and the next response without risking a context overflow.
-
-The "tracking" in `TrackingSummarizationMiddleware` means it records when summarization fired, how many tokens were compressed, and how much context was preserved — we use this to debug quality issues when an agent "forgets" something from earlier in the conversation.
-
-## Tool Selector: 100+ Tools, 24 Per Request
-
-Marketing Accelerant has over 100 tools — knowledge base search, web search, URL fetching, analytics queries, email sending, ad management, content generation, calendar scheduling, and more. Giving every tool to every agent is a bad idea: the LLM wastes tokens reading tool descriptions it won't use, and it sometimes picks the wrong tool from a too-large menu.
-
-The `RequestScopedToolSelectorMiddleware` uses a lightweight classifier LLM to select the 24 most relevant tools for each request:
-
-```python
-RequestScopedToolSelectorMiddleware(
-    agent_slug="cmo",
-    model=create_classifier_llm_for_selection(selection),
-    max_tools=max(24, len(always_include) + 8),
-    always_include=["knowledge_base_search", "web_search"],
-)
-```
-
-Some tools are always included (like KB search). The rest are selected based on the agent type and the user's message. The CMO agent asking about campaign performance gets analytics and reporting tools. The same agent discussing brand strategy gets content and research tools.
-
-This cut irrelevant tool calls by roughly 40% and reduced token usage on tool descriptions by ~60%.
-
-## Human-in-the-Loop with Spend Warnings
-
-Some tools are destructive — sending emails, publishing ads, modifying campaigns. These require human approval before execution:
+Anything that sends, publishes or spends goes through an approval gate. The agent proposes the call, the graph pauses, and the person sees exactly what's about to happen, including a spend warning when there's money involved. They can approve it, edit the arguments, or reject it.
 
 ```python
 HumanInTheLoopMiddleware(
     interrupt_on={
-        tool_name: {
-            "allowed_decisions": ["approve", "edit", "reject"],
-            "description": _approval_description,
-        }
-        for tool_name in TOOLS_REQUIRING_APPROVAL
+        "send_campaign_email": {"allowed_decisions": ["approve", "edit", "reject"]},
+        "publish_ad": {"allowed_decisions": ["approve", "reject"]},
+        "search_knowledge_base": False,
     },
 )
 ```
 
-The approval prompt includes a spend warning if the tool involves money (ad spend, email sends). The user can approve as-is, edit the tool arguments, or reject entirely. This is LangGraph's `interrupt()` pattern — the graph pauses, sends the tool call to the frontend, and resumes when the user responds.
+This needs a checkpointer, because the conversation has to survive the pause, sometimes for hours. It's also the single feature that made people comfortable letting agents touch real accounts.
 
-## Error Recovery That Doesn't Retry Blindly
+## Retry what can be retried, and nothing else
 
-The default approach to tool errors is "retry 3 times and hope." That's fine for network glitches but terrible for business logic errors (you don't want to retry sending a malformed email).
+The default instinct with errors is "retry three times and hope". That's fine for a timeout and terrible for a malformed email, which you'd just send malformed three times.
 
-Marketing Accelerant uses contract-aware retries instead of blanket retries. The `enforce_tool_contracts` middleware validates tool inputs against their Pydantic schemas before execution and classifies errors into retriable (network, rate limit) vs. non-retriable (validation, auth). Only retriable errors get retried, with exponential backoff starting at 750ms.
+So errors get classified first. Timeouts and rate limits get retried with backoff. Validation and auth failures don't. When retries run out, the agent gets the error as a message and decides what to do (try something else, ask the user, say it failed) instead of the whole conversation crashing.
 
 ```python
-DEFAULT_MODEL_RETRY = ModelRetryMiddleware(
-    max_retries=2,
-    retry_on=_should_retry_model_error,
-    on_failure="continue",  # don't crash the agent
-    initial_delay=0.75,
-    max_delay=8.0,
-)
+@wrap_tool_call
+def retry_transient(request, handler):
+    for attempt in range(MAX_ATTEMPTS):
+        try:
+            return handler(request)
+        except TransientError:
+            if attempt == MAX_ATTEMPTS - 1:
+                raise
+            sleep(backoff(attempt))
 ```
 
-The `on_failure="continue"` is important: if all retries fail, the agent gets an error message and can decide what to do (try a different approach, ask the user, or report the failure). It doesn't crash the entire conversation.
+Tool inputs are validated against their schemas before the call, so a bad argument fails fast and cleanly instead of halfway through a side effect.
 
-## Why 15 Agents, Not 1
+## Many small agents beat one big one
 
-The first version of Marketing Accelerant had a single general-purpose agent. It was terrible. It would try to write ad copy when asked for analytics. It would start a research workflow when the user wanted a quick answer. The system prompt was 4,000 tokens of instructions trying to cover every use case.
+The first version had one general agent with a very long system prompt that tried to cover every job. It wrote ad copy when asked for analytics and started research when someone wanted a quick answer.
 
-Splitting into specialized agents solved this:
-- Each agent has a focused system prompt (200-500 tokens instead of 4,000)
-- Tool selection is scoped per agent
-- Persona and formatting rules are agent-specific (the SEO agent outputs structured audits, the Creative agent outputs prose)
-- Failures are isolated (a bug in the Email agent doesn't break Brand Voice)
+Splitting it up fixed most of that. Each agent has a short prompt, its own tools and its own output style, and a bug in one doesn't break the others. We route to agents directly from the product, since the UI already knows which kind of conversation it's in. We don't use an agent to pick agents. That's simpler to debug and one less model call deciding what the next model call should be.
 
-The routing happens at the API layer — the frontend knows which agent to call based on the conversation type. We don't use an "orchestrator agent" that routes to sub-agents. Direct routing is simpler, faster, and easier to debug.
+## What I'd do differently
 
-## What I'd Do Differently
-
-If starting from scratch:
-
-1. **Build the middleware stack first.** We bolted middleware onto existing agents over months. Building it as a first-class abstraction from day one would have saved significant refactoring.
-2. **Invest in structured logging earlier.** Debugging a 15-agent system with `print()` statements doesn't scale. We added structured JSON logging with request correlation IDs after too many production debugging sessions that took hours.
-3. **Don't build an orchestrator agent.** The temptation is strong. Resist it. Direct routing with a good middleware stack is simpler and more predictable than an LLM deciding which LLM to call.
+1. **Build the middleware first.** We bolted it onto working agents over several months. Treating it as the foundation from day one would have saved a lot of refactoring.
+2. **Log structured events from the start.** Debugging a many-agent system with print statements does not scale. Request IDs on every event came later than they should have. There's a post on [structured logging](/blog/structured-logging-ai-debugging/) about what we do now.
+3. **Resist the orchestrator agent.** It's tempting. Direct routing plus good middleware is more predictable than a model deciding which model to call.

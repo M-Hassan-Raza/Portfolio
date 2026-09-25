@@ -1,7 +1,7 @@
 {{- $page := .page | default . -}}
 {{- with $page.Params.cover.ascii -}}
   {{- with resources.Get (printf "ascii-covers/%s.txt" .) -}}
-    <pre class="ascii-cover-art" aria-hidden="true">{{ .Content }}</pre>
+    <pre class="ascii-cover-art{{ if $page.Params.cover.screen }} ascii-screen{{ end }}" aria-hidden="true">{{ .Content }}</pre>
     <span class="sr-only">{{ $page.Params.cover.alt | default $page.Title }}</span>
   {{- else -}}
     {{- errorf "ascii cover %q not found for %s" . $page.File.Path -}}

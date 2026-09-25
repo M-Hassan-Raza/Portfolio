@@ -9,7 +9,7 @@
         </div>
         <ul class="resume-contact">
             <li><a href="mailto:{{ $p.email }}">{{ $p.email }}</a></li>
-            <li><a href="{{ site.BaseURL }}">{{ site.BaseURL | strings.TrimPrefix "https://" | strings.TrimSuffix "/" }}</a></li>
+            <li><a href="https://{{ $p.links.site }}">{{ $p.links.site }}</a></li>
             <li><a href="{{ $p.links.github }}">{{ $p.links.github | strings.TrimPrefix "https://" }}</a></li>
             <li><a href="{{ $p.links.linkedin }}">{{ $p.links.linkedin | strings.TrimPrefix "https://" }}</a></li>
         </ul>
@@ -36,7 +36,7 @@
         <h2>Open source</h2>
         <p>{{ .merged }} merged pull requests across {{ len .projects }} projects since 2026:
             {{- $names := slice }}
-            {{- range first 8 .projects }}{{ $names = $names | append (printf "%s (%d)" .name .merged) }}{{ end }}
+            {{- range first 8 .projects }}{{ $names = $names | append (printf "%s (%d)" .name (int .merged)) }}{{ end }}
             {{ delimit $names ", " }}.</p>
     </section>
     {{- end }}

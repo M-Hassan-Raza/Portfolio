@@ -25,6 +25,7 @@ rules=(
   "\bgenuinely\b :: 'genuinely' is almost always filler."
   "^#+ *(what i learned|the meta-lesson|key takeaways?|conclusion|the bottom line|final thoughts)\s*$ :: Boilerplate heading. Name the actual lesson."
   "^[A-Z][a-z']+\. [A-Z][a-z']+\.$ :: Two-word dramatic fragment."
+  "\[(FACT|STORY)\?\] :: Unconfirmed fact marker. Resolve before publishing."
 )
 
 errors=0
@@ -37,6 +38,7 @@ strip_prose() {
     fm               { next }
     /^```/           { code=!code; next }
     code             { next }
+    /book-subtitle/  { next }  # quoted book titles are not my prose
     { print NR ":" $0 }
   ' "$1"
 }
@@ -59,6 +61,13 @@ for f in "${files[@]}"; do
       errors=$((errors + 1))
     done < <(printf '%s\n' "$prose" | grep -iE "$match" | cut -d: -f1)
   done
+
+  # Front matter is skipped above, so check it for unresolved markers separately.
+  while IFS= read -r line; do
+    [ -z "$line" ] && continue
+    echo "$f:${line%%:*}: Unconfirmed fact marker in front matter."
+    errors=$((errors + 1))
+  done < <(awk 'NR==1 && /^---$/ {fm=1; next} fm && /^---$/ {exit} fm {print NR ":" $0}' "$f" | grep -E '\[(FACT|STORY)\?\]' | cut -d: -f1)
 
   dashes=$(printf '%s\n' "$prose" | grep -o '—' | wc -l | tr -d ' ')
   if [ "$dashes" -gt 3 ]; then

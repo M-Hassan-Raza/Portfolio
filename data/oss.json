@@ -559,7 +559,7 @@
       "language": "Python",
       "name": "calibre",
       "repo": "kovidgoyal/calibre",
-      "stars": 26010,
+      "stars": 26009,
       "url": "https://github.com/kovidgoyal/calibre",
       "blurb": "The e-book manager most people use",
       "merged": 22,
@@ -703,7 +703,7 @@
       "language": "Python",
       "name": "kitty",
       "repo": "kovidgoyal/kitty",
-      "stars": 35067,
+      "stars": 35068,
       "url": "https://github.com/kovidgoyal/kitty",
       "blurb": "GPU-accelerated terminal emulator",
       "merged": 18,
@@ -823,7 +823,7 @@
       "language": "Shell",
       "name": "Mole",
       "repo": "tw93/Mole",
-      "stars": 68394,
+      "stars": 68398,
       "url": "https://github.com/tw93/Mole",
       "blurb": "Command-line cleanup and maintenance tool for macOS",
       "merged": 17,
@@ -937,7 +937,7 @@
       "language": "Python",
       "name": "docling",
       "repo": "docling-project/docling",
-      "stars": 67903,
+      "stars": 67908,
       "url": "https://github.com/docling-project/docling",
       "blurb": "Document conversion for AI pipelines, started at IBM Research",
       "merged": 10,
@@ -1059,7 +1059,7 @@
       "repo": "arvidn/libtorrent-webui",
       "stars": 58,
       "url": "https://github.com/arvidn/libtorrent-webui",
-      "blurb": null,
+      "blurb": "Web interface for libtorrent",
       "merged": 4,
       "prs": [
         {
@@ -1095,7 +1095,7 @@
       "repo": "codingjoe/django-health-check",
       "stars": 1424,
       "url": "https://github.com/codingjoe/django-health-check",
-      "blurb": null,
+      "blurb": "Health checks for Django apps",
       "merged": 3,
       "prs": [
         {
@@ -1125,7 +1125,7 @@
       "repo": "evloghq/evlog",
       "stars": 1871,
       "url": "https://github.com/evloghq/evlog",
-      "blurb": null,
+      "blurb": "Structured, one-event-per-request logging",
       "merged": 2,
       "prs": [
         {
@@ -1149,7 +1149,7 @@
       "repo": "django-hijack/django-hijack",
       "stars": 1747,
       "url": "https://github.com/django-hijack/django-hijack",
-      "blurb": null,
+      "blurb": "Log in as another user in Django, for support and debugging",
       "merged": 1,
       "prs": [
         {
@@ -1167,7 +1167,7 @@
       "repo": "fallow-rs/fallow-skills",
       "stars": 124,
       "url": "https://github.com/fallow-rs/fallow-skills",
-      "blurb": null,
+      "blurb": "Agent skills for working with Fallow",
       "merged": 1,
       "prs": [
         {

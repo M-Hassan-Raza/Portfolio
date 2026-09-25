@@ -1,63 +1,63 @@
 ---
-title: "Polaris ERP"
+title: "Polaris"
 date: 2025-02-10
-description: "Retail operations platform covering POS, stock, ledgers, supplier workflows, reporting, and tenant-safe APIs."
-cover:
-  ascii: "polaris-cover"
-  alt: "Polaris retail operations illustration"
-  caption: "A simplified view of the operational seams that mattered most: inventory, billing, ledgers, supplier imports, and tenant-safe flows."
-tags: ["Django", "Vue.js", "PostgreSQL", "ERP", "Full-Stack", "Concurrency"]
-categories: ["Projects"]
-showToc: true
-showReadingTime: true
-weight: -10
+lastmod: 2026-09-25T10:00:00+05:00
+description: "Retail operations software for shops that bill all day: invoices, refunds, batch stock, supplier orders and customer ledgers that have to agree with each other."
 tier: flagship
+weight: 2
 projectLabel: "Retail operations platform"
-projectFocus: "Batch stock truth, ledger integrity, and tenant-safe operations."
+facts:
+  role: "Built it, end to end [FACT?]"
+  team: "Commit Software Solutions [FACT?]"
+  timeline: "2024 to now"
+  status: "In daily use by retail shops"
+  stack: ["Django", "Django REST Framework", "PostgreSQL", "Redis", "Celery", "Vue 3", "Pinia", "TanStack Query"]
+  source: "Private, client work"
+outcomes:
+  - "Billing, refunds, stock and ledgers stay consistent with several cashiers working at once"
+  - "Every organization's data isolated in the database, not just in the app"
+  - "Supplier price lists imported from CSV, Excel and PDF files as they arrive"
+tags: ["Django", "Vue", "PostgreSQL", "Concurrency", "ERP"]
+cover:
+  ascii: "polaris-invoice"
+  screen: true
+  alt: "Polaris invoice screen, halftone"
+  caption: "The invoice screen. Screens here are halftoned on purpose, so no customer data survives."
 ---
 
-Polaris is a retail operations system that covers the parts teams touch all day: invoices, quotations, refunds, stock, customer credit, supplier purchasing, reporting, and the admin surface around all of that. It is the kind of product where a small mistake can turn into a stock problem, a bad balance, or a support mess by the end of the day.
+Polaris started as client work through Commit Software and turned into the system several retail shops run their day on. It covers the parts a shop touches constantly: invoices and quotations, refunds, stock, customer credit, supplier purchasing, expenses, reports, and the admin around all of it.
 
-**Tech Stack:** Vue 3, Pinia, TanStack Query, Django, Django REST Framework, PostgreSQL, Redis, Celery
+It's the project that taught me the edge cases are the product. A billing screen is easy. A billing screen that stays right when two cashiers sell the last item, a customer returns half an order on credit, and a supplier's price list arrives as a scanned PDF is the actual job.
 
-**Source:** Private (client work) · [Book a call](/book-a-call/) to discuss
+{{< screen "polaris-modules" "The home screen. Every tile is a workflow that has to agree with the others." >}}
 
----
+## Stock comes from batches, never from a loose number
 
-## What The System Covers
+A product's quantity is always derived from batch records, never typed in: what came in, from whom, at what cost, and what's left. That rule made every other module stricter. Billing, restocking, cycle counts and supplier returns all have to go through the same contract, and none of them can "just fix the number".
 
-This is not just a billing screen with some inventory tables behind it. The codebase covers:
+It's more work up front. It's also why stock counts in Polaris can be trusted at the end of the day.
 
-- POS and billing flows for invoices, quotations, returns, payments, and customer balances
-- supplier operations including purchase orders, returns, stock intake, and three-way matching
-- batch-based inventory, cycle counts, replenishment, barcode handling, and bundle logic
-- customer and supplier ledgers, accounting paths, tax reporting, and scheduled exports
-- tenant-safe APIs, scoped webhooks, and mobile-facing endpoints
-- ratelist imports that have to digest CSV, Excel, and PDF files from suppliers who do not care about your schema
+## Correct with more than one person working
 
-That breadth matters because the difficult bugs usually live between modules, not inside one screen.
+The race conditions came first, as they do. Two cashiers selling the last unit took stock negative, and two operations on one customer could leave a balance that matched neither. The [war stories post](/blog/war-stories-from-production/) has the details. The fixes that stuck:
 
+- row locks that fail fast instead of queueing, with a short retry, so a cashier sees a blip instead of a spinner
+- version checks, so a stale form can't overwrite newer edits
+- per-customer and per-supplier advisory locks for ledger work, with keys that mean the same thing on every worker process
+- tests that pin those contracts down, including one that checks lock keys come out the same under different hash seeds
 
-## The Hard Parts
+## Tenants separated in the database
 
-### Batch Stock Has To Be The Source Of Truth
+Polaris is multi-tenant. The organization is set once per request and carried down into the database session, so the separation doesn't depend on every query remembering a filter. That kind of isolation is invisible when it works, and it should stay that way.
 
-Product quantity is derived from batch state, not casually edited as a loose field. That forces a cleaner contract across billing, restocking, counting, and supplier flows. It also means you cannot get away with hand-wavy updates when two people touch the same stock at once.
+## Supplier files arrive however suppliers like
 
-### Concurrency Is Not An Edge Case
+Price lists come as CSV, Excel and PDF, with inconsistent names, missing units and layouts that change without warning. The import path extracts, normalizes and matches them against the catalogue, with aliases for the names suppliers insist on using. It locks around anything that can change purchasing, because a half-applied price list is worse than none.
 
-The backend uses row locking, ordered locking, optimistic version checks, and advisory locks in the places where money or stock can drift. That shows up in billing, refund paths, customer ledgers, and inventory updates. The point is simple: the system has to stay correct when multiple people are working at once, not just when one admin is clicking around a test database.
+{{< screen "polaris-reorder" "Generating a supplier order from low-stock items." >}}
 
-### Tenant Isolation Has To Be Boring And Hard To Break
+## What I'd do differently
 
-Polaris runs as a multi-tenant system. Organization context is established in middleware and pushed through query behavior and database state so one business does not leak into another. This is the kind of thing that only feels invisible when it is done right.
-
-### Supplier Data Rarely Arrives Clean
-
-The ratelist import flow turned into its own serious problem space. Supplier files come in mixed formats, inconsistent naming, missing units, and messy layouts. The import layer has to extract, normalize, alias, and lock around work that can affect downstream purchasing and catalog decisions.
-
-## What This Project Actually Shows
-
-Polaris is useful as a case study because it is not one clever feature. It is a wide system with enough operational surface area that the real work becomes contract discipline, state correctness, and keeping shared truth intact across modules.
-
-That is also why I still point to it. It is a better signal of engineering judgment than a cleaner, narrower app would be.
+- **Explicit services before signals.** Early versions spread business rules across Django signals. They're now plain service functions you can read top to bottom. The [performance log](/blog/optimizing-django-performance/) covers that and the other early mistakes.
+- **Concurrency tests on day one.** Every serious bug in Polaris was a concurrency bug that a two-thread test would have caught.
+- **A written contract for every module boundary.** The worst bugs lived between modules, not inside them.

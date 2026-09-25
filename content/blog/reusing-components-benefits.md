@@ -5,9 +5,8 @@ description: "The 3-usage-sites heuristic for component extraction, a premature 
 tags: ["Vue.js", "Components", "Architecture", "Best Practices"]
 categories: ["Vue.js", "Web Development"]
 showToc: true
-showComments: true
 cover:
-  ascii: "engineering"
+  ascii: "post-components"
   alt: "Component extraction cover"
 ---
 
@@ -19,7 +18,7 @@ I'd have been better off copy-pasting the original 20 lines and tweaking each on
 
 ## The 3-Usage-Sites Rule
 
-I now follow a simple heuristic: **don't extract until you have 3 call sites that genuinely share the same behavior.** Not 3 places that look similar — 3 places that would all benefit from a single change.
+I now follow a simple heuristic: **don't extract until three call sites would all benefit from the same change.** Looking similar doesn't count.
 
 Two similar components might diverge tomorrow. Three that stay identical for a few weeks probably share real structure worth abstracting.
 
@@ -67,4 +66,4 @@ That's the test: **would a change here fix a real inconsistency across the app?*
 - Three or more call sites pass the same props in the same pattern.
 - A formatting rule (dates, currencies, statuses) should be consistent but you've implemented it slightly differently in each place.
 
-The goal isn't to have fewer files. It's to have the right seams. Sometimes that means a shared component. Sometimes it means three similar-looking blocks of code that happen to serve different purposes.
+The goal is the right seams, not fewer files. Sometimes that means a shared component. Sometimes it means three similar-looking blocks of code that happen to serve different purposes.

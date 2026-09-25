@@ -1,19 +1,17 @@
 ---
 title: "Structured Logging for AI Debugging"
-date: 2026-03-05T10:00:00+05:00
+date: 2026-04-08T10:00:00+05:00
 description: "Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs."
-draft: false
 tags: ["Logging", "AI", "Developer Tools", "TypeScript", "Nuxt", "Evlog"]
-showComments: true
 ShowToc: true
 cover:
-  ascii: "ai"
+  ascii: "post-logging"
   alt: "Structured logging cover"
 ---
 
 When an AI coding assistant tries to help you debug a production issue, it reads your logs. If your logs are scattered `console.log` calls with inconsistent formatting, the AI can't help you. It doesn't know which log lines belong to the same request, what the timing was, or what the error context means.
 
-[Evlog](https://github.com/HugoRCD/evlog) is a structured logging library by [Hugo Richard](https://github.com/HugoRCD), designed around the "wide event" pattern. One structured event per request, with all context attached. I've been using it in my projects and it's particularly useful when you're debugging with AI tools, because the log output is machine-readable by design.
+[Evlog](https://github.com/evloghq/evlog) is a structured logging library by [Hugo Richard](https://github.com/HugoRCD), designed around the "wide event" pattern. One structured event per request, with all context attached. I've been using it in my projects and it's particularly useful when you're debugging with AI tools, because the log output is machine-readable by design.
 
 ## The Problem with console.log
 
@@ -30,7 +28,7 @@ A typical Node.js app logs like this:
 
 Six log lines for one request. To understand what happened, you need to mentally stitch them together, match the timing, and figure out which lines belong to which request when there are 50 concurrent users.
 
-An AI assistant reading these logs has the same problem, but worse — it can't infer the causal chain between lines without explicit correlation.
+An AI assistant reading these logs has the same problem, but worse: it can't infer the causal chain between lines without explicit correlation.
 
 ## One Event Per Request
 
@@ -75,7 +73,7 @@ When the request finishes, evlog emits one structured JSON event:
 }
 ```
 
-Every field is on the same event. Duration is automatic. The AI assistant can read one JSON object and understand the entire request — who made it, what happened, how long it took, and what was unusual.
+Every field is on the same event. Duration is automatic. The AI assistant can read one JSON object and understand the entire request: who made it, what happened, how long it took, and what was unusual.
 
 ## Self-Documenting Errors
 
@@ -97,7 +95,7 @@ When an AI reads this error in a log, it has three things it usually lacks:
 2. **Why it happened** (root cause, not just the symptom)
 3. **How to fix it** (actionable next step, not just "check the docs")
 
-This is the difference between an AI saying "there's an error on line 47" and "the GitHub sync failed because you've exceeded the rate limit — you can either wait an hour or switch to a different API token."
+This is the difference between an AI saying "there's an error on line 47" and "the GitHub sync failed because you've exceeded the rate limit: you can either wait an hour or switch to a different API token."
 
 ## Automatic Context Injection
 
@@ -120,12 +118,14 @@ export default defineNuxtConfig({
 })
 ```
 
-Every server route automatically gets a request logger with duration tracking. You don't need to import anything or set up middleware — the module injects it.
+Every server route automatically gets a request logger with duration tracking. You don't need to import anything or set up middleware: the module injects it.
 
 ## Why This Matters for AI-Assisted Debugging
 
-The trend is clear: developers are using AI tools to debug production issues. They paste logs into Claude or ChatGPT and ask "what went wrong?" The quality of the answer depends entirely on the quality of the logs.
+Most of us now paste logs into a model and ask what went wrong. The answer is only as good as the logs.
 
 Structured events with correlation, timing, and self-documenting errors give the AI everything it needs to reason about the problem. Scattered console.log calls force the AI to guess at relationships between log lines, often incorrectly.
 
-The logging format you choose isn't just about human readability anymore. It's about machine readability too. JSON events with consistent structure, automatic context, and explicit error causation are the format that works for both.
+Logs now have two readers, you and the model you paste them into. One JSON event per request, with context attached and errors that explain themselves, works for both.
+
+I liked it enough to send a couple of small fixes upstream: [a docs fix](https://github.com/evloghq/evlog/pull/260) for the Cloudflare Workers setup and [one that skips unnecessary Nitro adapter probes](https://github.com/evloghq/evlog/pull/298).

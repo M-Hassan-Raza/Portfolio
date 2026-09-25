@@ -1,120 +1,54 @@
 ---
 title: "The Best Way to Learn a Codebase Is to Break Someone Else's"
-date: 2026-01-08T10:00:00+05:00
-description: "Open source bug-fixing taught me more about architecture, frameworks, and review taste than tutorials ever did."
-draft: false
-tags: ["Open Source", "Contributing", "Rust", "Python", "Go", "Swift", "Learning", "Software Engineering"]
-categories: ["Software Engineering"]
-showComments: true
-cover:
-  ascii: "craft"
-  alt: "Learning Through Open Source"
-  caption: "What reading other people's code teaches you that tutorials can't"
+date: 2026-04-08T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "What maintainers of kitty, calibre, libtorrent and Fallow taught me in review threads, usually by explaining why my fix was wrong in a way I hadn't considered."
+tags: ["Open Source", "Code Review", "Learning"]
+categories: ["Engineering"]
 ShowToc: true
+cover:
+  ascii: "post-codebase"
+  alt: "Learning through open source"
 ---
 
-The best code I've ever written was shaped by code I didn't write. Not tutorials, not books, not conference talks — other people's production codebases, with their weird naming conventions, unexpected architectural decisions, and review comments that rewired how I think about problems.
+I started sending pull requests to open-source projects in March 2026, mostly to tools I use every day. At the time of writing that's {{< oss-count >}} merged, across Python, C++, Rust, Go and shell. (The [full list](/open-source/) is generated from GitHub, so it can't flatter me.)
 
-I contribute to open source projects across five languages. Not because I set out to be polyglot. Because I kept finding bugs in different ecosystems and couldn't stop myself from tracing them to the source. Along the way, I accidentally learned more about software architecture than any course ever taught me.
+I learned more from the review threads than from the code I wrote. Most of what I learned came from maintainers telling me, politely, that I'd missed something about their project that nobody could have told me in advance.
 
----
+## The bug that was a decision
 
-## 1,092 Lines of Rust I Didn't Plan to Write
+In kitty's drag-and-drop kitten, local copies used hard links when they could. That looked like a bug to me: edit the destination and you've edited the source too. I wrote it up as a fix.
 
-Fallow is a dead code analyzer for TypeScript and JavaScript, built in Rust. I use it on my Nuxt and Vue projects. It kept flagging false positives — Vue SFC template references as unused, `defineExpose` exports as dead code, Nuxt auto-imported composables as unreferenced.
+Kovid Goyal's answer was that he'd chosen hard links deliberately, for performance, and that for a move they were always right. For a copy it was debatable, so perhaps an option. The PR became [an opt-in independent copy mode](https://github.com/kovidgoyal/kitty/pull/10412) with the default left alone, and it merged.
 
-I opened an issue. Then I read the detection logic. Then I understood *why* it was wrong — the analyzer was treating source files as standalone modules without understanding framework conventions. A Vue component that exports via `defineExpose` isn't dead code. A Nuxt composable in `composables/` isn't unused just because nothing explicitly imports it.
+The lesson I keep coming back to: before "fixing" something odd in a mature codebase, find out whether it's odd on purpose. Usually the git blame or the maintainer knows.
 
-What started as "fix this one false positive" became a 1,092-line PR across 44 files:
+## The fix that was too expensive
 
-```
-f6e0040 - feat: harden Vue and Nuxt framework edge cases
-```
+In calibre I wrote [a shared guard](https://github.com/kovidgoyal/calibre/pull/3148) to keep user-supplied paths inside the library root. My first version resolved every path with `realpath()`.
 
-The work included:
-- Vue SFC template-aware analysis that understands `<template>` refs
-- Nuxt runtime path detection for auto-imported composables
-- Next.js App Router and Pages Router convention awareness
-- Config alias parsing for Vite, Nuxt, and SvelteKit
-- 170+ integration tests
+The review pointed out that `realpath()` does filesystem I/O, and that many of the paths I'd touched didn't need it. Inside calibre's own library directory you can assume there are no symlinks, because calibre doesn't create them. A security fix that slows down every path check isn't free, and knowing which invariants a codebase already guarantees is what lets you make it cheap.
 
-### What I Actually Learned
+## The optimization that could go further
 
-Not Rust syntax — I already knew enough Rust to be dangerous. What I learned was how the Fallow maintainers think about static analysis. Their approach to AST walking is different from how I'd have done it. More defensive. More layered. They build up a "usage graph" before making any dead-code determination, which means false positives from incomplete graphs are caught structurally rather than with special-case patches.
+In libtorrent I [sped up the piece picker's bitfield updates](https://github.com/arvidn/libtorrent/pull/8723) for sparse bitfields. Arvid Norberg benchmarked it and called it a significant improvement to piece-picker performance, then suggested going further: make the visitor a member of the bitfield type so it can skip zeroes a word at a time instead of a byte at a time. He also caught that I'd used `std::countl_zero` without including `<bit>`, which only showed up when the installed headers were compiled on their own. Both points were things I didn't know to look for.
 
-I brought that pattern back to pyscn, a Python code analyzer I contribute to that's written in Go. Instead of checking "is this function called anywhere?" (fragile), I build a usage graph first and then query it (robust). Same principle, different language, learned by reading someone else's code.
+## Maintainers are people with too little time
 
----
+Two threads changed how I contribute more than any code review.
 
-## What IBM's Code Review Process Looks Like From the Outside
+In Docling I opened a PR for an issue someone else had already fixed the night before. The maintainer thanked me anyway and asked that next time I comment on the issue before starting, so they could assign it. Obvious in hindsight. I do open source in the gaps around a day job, and claiming the issue first is how you stop two people spending those gaps on the same thing.
 
-Docling is a document processing library from IBM Research. PDF parsing, OCR, LaTeX, the works. I use it at work for document ingestion pipelines, and I contribute back when I find rough edges.
+In Fallow, one of my PRs sat for a while with a failing check I had no way to fix myself. When it merged, Bart Waardenburg apologized for the wait and explained exactly what that check was, so it wouldn't look like my problem next time. On another PR he pushed his own review fixes to my branch and noted that my newest commits had replaced his local versions of the same fixes. Being on the receiving end of that kind of care is a good education in how to run a project.
 
-```
-516c5a9 - feat(cli): add page break placeholder
-5473e07 - fix(cli): avoid generating images for non-image exports
-9abf0fd - fix: honor picture description batching and scale options
-8bb637f - fix(cli): clarify image export mode help text
-```
+## What transfers, and what doesn't
 
-The contributions themselves are straightforward. The review process is where the learning happens.
+**What transfers:** reading before writing. For my first large Fallow PR, which taught it to understand Vue and Nuxt conventions (about 1,100 lines across 44 files), I read the whole analysis pipeline before changing anything: the graph builder, the import resolver, the framework detection. The fix was the easy part. Understanding what the codebase assumed was the work.
 
-IBM's review standards are stringent. Every PR needs tests — not "add a test that proves your change works," but "add tests that prove your change doesn't break the contract the existing code assumes." That's a different bar. My first PR got pushed back because my test validated output. Their test framework validates *behavior* — the test should pass even if the output format changes, as long as the semantic contract holds.
+**What doesn't:** idioms. [STORY?] My early Rust had Python in it: deep nesting, mutable state, strings where the codebase used enums. Nobody rewrote it for me. They showed the idiomatic version and why it was preferred, which is the only way it stuck.
 
-They also push back on patterns that technically work but don't match the codebase conventions. I submitted a fix using Python's `pathlib` for file handling. Technically correct. But the existing codebase uses `os.path` consistently. The reviewer didn't say "use os.path." They said "this codebase predates pathlib adoption and mixing the two creates cognitive overhead for the next contributor." 
+## If you want to start
 
-That's not a style nit. That's a maintainability argument I'd never considered. In my own projects, I'd have just used whichever felt right. In a codebase with dozens of contributors, consistency *is* the feature.
+Pick a tool you use every day and wait for it to annoy you. Read the issue tracker to see whether someone's already on it, say you're taking it, and read the surrounding code before you touch anything. The fix might take an hour. Understanding the code well enough to make it might take a day, and that day is where the learning happens.
 
----
-
-## What Transfers Between Languages (And What Doesn't)
-
-I've contributed to projects in Python (Docling, Django ecosystem), C++ (qBittorrent), Rust (Fallow), Go (pyscn), and Swift (Alt-Tab, Maccy). Here's what I've noticed about cross-language contributions:
-
-### What Transfers
-
-**Architectural patterns.** The observer pattern in qBittorrent's Qt signals is the same concept as Django signals, which is the same concept as Rust's trait-based event handling. Different syntax, same idea: decoupled notification. Once you've seen it in three languages, you understand the *pattern*, not just the implementation.
-
-**Debugging methodology.** "Read the error, trace the call stack, check the inputs" works in every language. The tools differ (lldb vs. pdb vs. delve) but the thinking is identical.
-
-**Testing philosophy.** Test behavior, not implementation. Mock at boundaries, not internally. These principles don't care what language you're in.
-
-### What Doesn't Transfer
-
-**Idioms.** Pythonic code and idiomatic Rust are completely different beasts. Writing Python-style Rust (mutable state everywhere, `unwrap()` on every Result) compiles but produces code that Rust developers hate reviewing. Writing Rust-style Python (obsessive type narrowing, Result-pattern-matching with match/case) is technically correct and culturally wrong.
-
-My first Fallow PR had Python-flavored Rust: deep nesting, mutable variables, string formatting where Rust developers would use enums. The reviewer didn't rewrite my code. They showed me the idiomatic version and explained *why* it's preferred — ownership semantics, exhaustive pattern matching, compiler-assisted refactoring. The "why" is what made it stick.
-
-**Concurrency models.** Go's goroutines and channels are fundamentally different from Python's asyncio, which is fundamentally different from Rust's ownership-based thread safety. Reaching for the wrong concurrency primitive in the wrong language produces technically functional but architecturally confusing code.
-
-**Error handling.** Python's try/except, Go's `if err != nil`, Rust's `Result<T, E>` — these aren't just syntax differences. They shape how you structure entire functions. In Rust, error handling is part of the type signature. In Python, it's a runtime concern. In Go, it's a control flow pattern. You can't bring one language's error philosophy to another without friction.
-
----
-
-## The Reading-to-Writing Ratio
-
-Here's the part nobody tells you about open source contribution: the ratio of code read to code written is roughly 10:1.
-
-For the Fallow PR, I read the entire analysis pipeline before writing a single line. The usage graph builder, the import resolver, the framework detection heuristics, the test infrastructure. I needed to understand how the pieces fit before I could extend one.
-
-For Docling, I read the CLI pipeline, the export system, and the image handling chain. My changes touched maybe 50 lines of production code. I read thousands.
-
-This is the actual skill open source develops: reading unfamiliar code quickly and building a mental model of how it works. Not "how does this function work?" but "what does this codebase assume about its inputs, its environment, and its users?"
-
-That skill transfers to everything. Reading a new team's codebase when you join a company. Debugging a library you didn't write. Evaluating a dependency before adopting it. The faster you can build a mental model of unfamiliar code, the more effective you are as an engineer.
-
-Tutorials teach you to write code. Open source teaches you to read it. In my experience, reading is the harder and more valuable skill.
-
----
-
-## The Practical Takeaway
-
-If you want to get better at software engineering faster than courses, books, or side projects alone can take you: find a project in a language you're comfortable with, pick an issue labeled "good first issue," and read the surrounding code before you touch anything.
-
-The fix might take an hour. Understanding the codebase well enough to make the fix might take a day. That day is where the growth happens.
-
-And if you're feeling ambitious: try contributing to a project in a language you *don't* write professionally. The friction of fighting unfamiliar idioms while trying to match an existing codebase's conventions is uncomfortable. It's also the fastest way to stop writing code that only works in one ecosystem.
-
-The Rust I write is better because I've read Fallow's AST pipeline. The Python I write is better because IBM's reviewers pushed back on my assumptions. The Go I write is better because I've seen how pyscn structures its analysis passes.
-
-None of that came from a tutorial. All of it came from breaking someone else's code and learning to put it back together.
+And when a maintainer says no, read the reason twice. It's usually the most useful thing in the thread.

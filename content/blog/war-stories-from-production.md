@@ -1,249 +1,96 @@
 ---
-title: "I Shipped a Race Condition That Double-Charged Customers (And Other War Stories)"
-date: 2025-11-15T10:00:00+05:00
-description: "The production bugs I actually shipped, how they failed in the real world, and what fixed them."
-draft: false
-tags: ["Production", "Django", "PostgreSQL", "Concurrency", "Python", "Debugging", "Backend Development"]
-categories: ["Backend Development"]
-showComments: true
-cover:
-  ascii: "engineering"
-  alt: "Production War Stories"
-  caption: "Every senior engineer has a 2am story. Here are mine."
+title: "I Shipped a Race Condition That Oversold Stock (And Other War Stories)"
+date: 2026-04-08T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the unexciting fixes that held."
+tags: ["Production", "Django", "PostgreSQL", "Concurrency", "Polaris"]
+categories: ["Backend"]
 ShowToc: true
+cover:
+  ascii: "post-war-stories"
+  alt: "Production war stories"
 ---
 
-Nobody writes blog posts about the bugs they shipped. The internet is full of "how I built X" and suspiciously empty of "how I broke X and spent 14 hours pretending it wasn't my fault." Here are mine.
+Most engineering blogs are about things that worked. This one is about things I broke, mostly in [Polaris](/projects/polaris/), the retail system I built for shops that bill all day, and one in an AI pipeline at Entropy Labs. These happened between 2024 and 2026.
 
----
+## Two cashiers, one item
 
-## The Race Condition: Two Cashiers, One Item
+Two cashiers at different counters scan the same product. The shop has one left. Both press "Complete sale" within a fraction of a second of each other.
 
-This one happened in [Polaris](/projects/polaris/), the ERP system I built for retail businesses. Real money, real transactions, real angry shop owners.
+What should happen: one sale goes through, the other gets told the item is gone.
 
-The setup: two cashiers at different terminals. Both scan the same product. Both hit "Complete Sale" within 200ms of each other. The inventory says there's one left.
+What happened: both went through, and stock went to -1. The shop had sold something it didn't have, and someone had to explain that to a customer.
 
-What should happen: one sale succeeds, the other fails gracefully.
+The code wrapped the sale in `transaction.atomic()`, which I had quietly been treating as "safe". It isn't, for this. Both transactions read `quantity = 1`, both passed the `quantity > 0` check, and both committed. Atomic means all-or-nothing, not one-at-a-time.
 
-What actually happened: both sales completed. Inventory went to -1. The customer who got the phantom item got charged. The shop owner lost money on a product they didn't have.
-
-### Why It Happened
-
-I was using Django's default transaction behavior. `transaction.atomic()` wraps the block in a database transaction, sure. But two concurrent transactions can both read `quantity = 1`, both pass the `if quantity > 0` check, and both commit. Classic read-then-write race.
-
-The fix I reached for first was `select_for_update()`:
+The textbook fix is a row lock:
 
 ```python
-product = (
-    Product.objects
-    .select_for_update()  # Acquire row-level lock
-    .get(id=product_id)
+product = Product.objects.select_for_update().get(id=product_id)
+```
+
+That's correct, and at rush hour it meant cashiers staring at a spinner while one sale waited for another. So the lock became `select_for_update(nowait=True)`: the second transaction fails immediately instead of queueing, the app retries it with a short backoff, and the cashier sees a blip instead of a hang.
+
+A separate version check catches a slower cousin of the same bug: someone opens a product, goes to lunch, comes back and saves over three edits that happened in the meantime.
+
+```python
+updated = Product.objects.filter(pk=product.pk, version=product.version).update(
+    stock=new_stock,
+    version=F("version") + 1,
+)
+if not updated:
+    raise StaleDataError("Someone else changed this product. Reload and try again.")
+```
+
+The lesson I keep relearning: `transaction.atomic()` gives you consistency. It doesn't give you isolation from the other cashier.
+
+## A chain that returned nothing, politely
+
+At Entropy Labs I had a LangChain retrieval chain that worked in tests and in staging, and in production returned an empty string. No exception, no error, no log line. Just a polite nothing.
+
+I checked the model config, the keys and the rate limits, then added logging to every step. Everything ran. The problem was upstream of all of it: under certain inputs the prompt template rendered an empty message list. The model received nothing, replied with nothing, and the chain passed that along as a successful result.
+
+The fix was a boring guard in front of the call:
+
+```python
+messages = prompt.format_messages(**inputs)
+if not messages or all(not m.content.strip() for m in messages):
+    raise ValueError(f"Prompt rendered empty for inputs: {sorted(inputs)}")
+```
+
+A direct API call would have failed loudly on an empty prompt. The framework's helpfulness turned a five-minute bug into a long afternoon. I still use LangChain, but I validate what goes into it and what comes out, and I don't assume silence means success. More on that in [LangChain in production](/blog/langchain-production/).
+
+## A lock that only worked on one process
+
+Customer balances in Polaris come from a ledger: every sale, payment and return is an entry, and the balance is derived from them. Two operations on the same customer at once can each read the entries, compute a balance and write a new one, and you end up with a balance that matches neither.
+
+Row locks don't help much when the operation reads many rows, so the ledger code took a PostgreSQL advisory lock per customer: a named lock that isn't tied to any row, held while the balance work runs. That part was right. The key was not:
+
+```python
+lock_id = abs(hash(f"customer_{customer_id}")) % 2147483647
+cursor.execute("SELECT pg_advisory_lock(%s)", [lock_id])
+```
+
+Python salts `hash()` for strings differently in every process. Gunicorn runs several. So two requests for the same customer, landing on different workers, computed different lock IDs and happily ran side by side. The lock only serialized requests that happened to share a process.
+
+I found it in May 2026 while hardening the refund paths, which is an embarrassingly long time for that line to have lived. The replacement uses PostgreSQL's two-integer form with a fixed namespace, and takes the transaction-scoped variant so the lock can't outlive the transaction:
+
+```python
+class AdvisoryLockNamespace(IntEnum):
+    LEDGER_CUSTOMER = 10_001
+    LEDGER_SUPPLIER = 10_002
+
+
+cursor.execute(
+    "SELECT pg_advisory_xact_lock(%s, %s)",
+    [AdvisoryLockNamespace.LEDGER_CUSTOMER, customer_id],
 )
 ```
 
-This works. One transaction acquires the lock, the other waits. But in a busy retail environment, "waits" means cashiers staring at a spinner during rush hour. The queuing created latency spikes that were almost as bad as the original bug.
+It came with a test that computes the key under different `PYTHONHASHSEED` values and fails if they disagree. That test looks silly until you remember it would have caught this on day one.
 
-### The Actual Fix
+## What the three have in common
 
-Dual-layer locking. Pessimistic locks with `nowait=True` at the database level, optimistic locking with version fields at the application level:
+Each bug lived in the gap between one user on my laptop and many users in a shop. Development has one process, one cashier and clean data. Production has several of each, at the same time, all the time.
 
-```python
-# Layer 1: Fail fast at the DB level
-product = (
-    Product.objects
-    .select_for_update(nowait=True)
-    .get(id=product_id)
-)
-```
-
-`nowait=True` is the key. Instead of queuing, the second transaction gets an immediate `DatabaseError`. The application catches it, waits a beat with exponential backoff, and retries. The cashier sees a sub-second delay instead of a 5-second hang.
-
-```python
-# Layer 2: Catch stale reads at the application level
-class Product(models.Model):
-    version = models.PositiveIntegerField(default=0)
-
-    def save(self, *args, **kwargs):
-        if self.pk:
-            updated = Product.objects.filter(
-                pk=self.pk,
-                version=self.version
-            ).update(version=self.version + 1, ...)
-            if not updated:
-                raise StaleDataError("Record modified by another user")
-```
-
-Layer 2 catches a different class of bug: the cashier who opens a product page, goes to lunch, comes back, and hits save on data that's been modified three times since.
-
-### What I Learned
-
-The bug cost the shop owner about PKR 15,000 before I caught it. Not catastrophic, but enough to earn a phone call I don't want to repeat. The lesson: `transaction.atomic()` is not a concurrency solution. It's a consistency solution. Two very different things.
-
----
-
-## The Silent Chain: 8 Hours Debugging Nothing
-
-This one happened while building AI features with LangChain at Entropy Labs.
-
-I had a chain that processed user queries through a RAG pipeline. It worked in testing. It worked in staging. In production, it returned empty strings. No error. No exception. No log entry. Just... nothing.
-
-```python
-result = await chain.ainvoke({"query": user_input})
-# result = ""
-# No error. No exception. Nothing.
-```
-
-I spent 8 hours on this. I checked the model configuration. I checked the API keys. I checked rate limits. I added logging at every step of the chain. The logs showed the chain executing perfectly—right up until the prompt template rendered an empty message list.
-
-### The Cause
-
-A malformed prompt template that, under specific input conditions, produced an empty message array. The LLM received nothing. The LLM returned nothing. LangChain passed the empty response through without complaint.
-
-No validation. No warning. No "hey, you just sent an empty prompt to a model that charges per token." Just a silent empty string propagated through three layers of abstraction.
-
-### The Fix
-
-I stopped trusting the framework to validate my inputs:
-
-```python
-class ValidatedChain:
-    def invoke(self, inputs: dict) -> str:
-        messages = self.prompt.format_messages(**inputs)
-
-        if not messages:
-            raise ValueError(
-                f"Empty message list from inputs: {list(inputs.keys())}"
-            )
-
-        if all(not m.content.strip() for m in messages):
-            raise ValueError("All messages are empty after formatting")
-
-        return self.chain.invoke(inputs)
-```
-
-Boring. Obvious. Would have saved me 8 hours.
-
-### What I Learned
-
-Abstractions that swallow errors are worse than no abstraction at all. A raw API call to Anthropic would have returned a 400 error on an empty prompt. LangChain's "helpful" passthrough behavior turned a 5-minute fix into a day-long investigation.
-
-The best LangChain code I've written uses it sparingly—for the problems it solves well, not for everything.
-
----
-
-## The N+1 That Made Customers "Fume a Little"
-
-Back to Polaris. The refund API was slow. Not "hmm, that's a bit laggy" slow. "Customers are standing at the counter watching a loading spinner while a line forms behind them" slow.
-
-```python
-for item_data in refund_items_data:
-    bill_item = BillItem.objects.get(id=item_data["bill_item_id"])
-    product = bill_item.product  # Separate query each iteration
-```
-
-Classic N+1. Each refund item triggered two queries: one for the bill item, one for its related product. A 10-item refund meant 20+ queries. On a busy Friday evening with a loaded database, that meant seconds of latency per refund.
-
-I'm going to be honest: I knew about N+1 queries. I'd read about them. I'd fixed them in other people's code. But when I wrote this code, I was in a rush, the loop was "just a few iterations," and I moved on.
-
-### The Fix
-
-```python
-bill_items = (
-    BillItem.objects
-    .filter(id__in=[item["bill_item_id"] for item in refund_items_data])
-    .select_related('product')
-)
-```
-
-One query. Joins included. 70% reduction in query execution time. Customers stopped fuming.
-
-### What I Learned
-
-"I'll optimize later" is a debt with compound interest. The N+1 was invisible in development with 3 test products. In production with 5,000 products and a loaded database, it was the difference between a usable app and an angry phone call.
-
-Also: `django-debug-toolbar` in development. Always. If I'd had it enabled from day one, I would have seen the query count on the first manual test.
-
----
-
-## The Advisory Lock Revelation
-
-The most expensive lesson from Polaris wasn't a bug—it was an architectural realization.
-
-Customer balances in Polaris are computed from a ledger. Every sale, payment, return, and adjustment creates an entry. The balance is the sum. Simple enough, until two operations on the same customer happen concurrently.
-
-Row-level locks (`select_for_update`) work for single-row operations. But balance calculations touch multiple rows—you need to read all existing entries, compute the sum, and create a new entry with the correct running balance. If two transactions do this simultaneously, you get inconsistent balances.
-
-The solution was PostgreSQL advisory locks:
-
-```python
-lock_id = hash(f"customer_balance_{customer_id}") & 0x7FFFFFFF
-
-with connection.cursor() as cursor:
-    cursor.execute("SELECT pg_advisory_lock(%s)", [lock_id])
-```
-
-Advisory locks are application-level locks managed by PostgreSQL but not tied to any row or table. They serialize operations per logical entity (in this case, per customer's balance) without blocking unrelated operations.
-
-### Why This Was a Revelation
-
-I'd been using PostgreSQL for years. I'd read the docs. I'd used `select_for_update`. But advisory locks solve a fundamentally different problem: coordinating operations that span multiple rows or even multiple tables. They're the database equivalent of an application-level mutex, but with the database managing the lifecycle.
-
-After implementing advisory locks for balances, I started seeing the pattern everywhere. Any time you have a "read-compute-write" cycle across multiple records for a single logical entity, advisory locks are the answer.
-
-### What I Learned
-
-The tools you know shape the problems you can see. I spent weeks trying to solve a coordination problem with row-level locks because that's what I knew. Advisory locks were in the PostgreSQL docs the entire time.
-
----
-
-## The Django Signal Cascade
-
-Early Polaris used Django signals for everything. Stock change? Signal. Balance update? Signal. Report invalidation? Signal.
-
-```python
-@receiver(post_save, sender=Sale)
-def update_inventory(sender, instance, **kwargs):
-    product = instance.product
-    product.stock -= instance.quantity
-    product.save()  # This triggers another post_save...
-```
-
-The problem wasn't any single signal. It was the cascade. A sale triggered an inventory update, which triggered a stock-level check, which triggered a reorder alert, which triggered a supplier notification. Each `save()` in the chain fired more signals.
-
-With high transaction volumes, this became a performance cliff. Bulk operations—importing 500 products, running end-of-day reconciliation—would trigger thousands of cascading signals.
-
-### The Fix
-
-Replaced the signal chain with explicit service calls and a recalculation flag pattern:
-
-```python
-class Product(models.Model):
-    needs_recalculation = models.BooleanField(default=False)
-
-# Bulk updates skip the cascade
-Product.objects.filter(
-    id__in=updated_ids
-).update(needs_recalculation=True)
-
-# Periodic task handles recalculation in batch
-@periodic_task
-def recalculate_flagged_products():
-    products = Product.objects.filter(needs_recalculation=True)
-    # Batch recalculation instead of per-item cascade
-```
-
-Bulk updates went from seconds to milliseconds. The signal chain was elegant in theory and a landmine in practice.
-
-### What I Learned
-
-Django signals are great for loose coupling between apps. They're terrible for core business logic that needs to be fast, predictable, and debuggable. When you can't `grep` for signal handlers and immediately understand the execution flow, you've lost more than you've gained.
-
----
-
-## The Meta-Lesson
-
-Every one of these bugs has the same root cause: I knew the theory but didn't respect the gap between "works in development" and "works in production." Development has one user, clean data, and no concurrency. Production has all three at once.
-
-The fixes aren't clever. `nowait=True`. Input validation. `select_related`. Advisory locks. Explicit service calls. These are boring solutions to expensive problems.
-
-If there's one thing I'd tell past-me, it's this: the blog posts that would have actually helped me aren't the "How to Build X" posts. They're the "How X Broke and Why I Didn't See It Coming" posts. So here's mine.
+None of the fixes are clever: fail fast instead of queueing, check the prompt before sending it, use a key that means the same thing everywhere. The earlier and smaller mistakes, like refunds that queried once per line item, are in the [Polaris performance log](/blog/optimizing-django-performance/).

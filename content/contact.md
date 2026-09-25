@@ -1,53 +1,42 @@
 ---
-title: "Contact"
-date: 2025-02-11
-description: "Talk through a production system, AI rollout, or technical/product mess."
-summary: "Talk through a production system, AI rollout, or technical/product mess."
-showToc: false
-showReadingTime: false
+title: "How I work"
+description: "Architecture and AI reviews, hands-on builds, and product and technical advice, alongside my work at Entropy Labs."
+aliases:
+  - /book-a-call/
+  - /services/
+ShowBreadCrumbs: false
 ---
 
-This page is for work that already matters.
+I run product and engineering at Entropy Labs, and I take on a small amount of outside work next to it. It's usually one of three shapes.
 
-If you have a production system, a shaky AI feature, or a technical direction problem that is already costing the team time, a short call makes sense.
+## Reviews
 
-[Book 30 Minutes](https://cal.com/muhammad-hassan-raza/30min)
+A fixed, short look at something that already exists: an architecture that's getting harder to change, an AI feature that demos well and wobbles in production, a backend path that's become the bottleneck. You get a written read on where the real problem is, what to do first, and what to leave alone.
 
----
+## Builds
 
-## Good Reasons To Reach Out
+Hands-on work on the parts that are expensive to get wrong: backend services, data models that have to stay correct under concurrency, AI workflows with proper failure handling and approvals, or a product from first version to something people rely on. I write the code, and I leave it in a state your team can own.
 
-- the product is live and the system is getting harder to trust
-- the team is split on what to fix first
-- an AI workflow is shaky, slow, or expensive
-- reporting, data, or backend paths are becoming a bottleneck
-- you want someone who can both audit the situation and get hands-on if needed
+## Advice
 
----
+Ongoing product and technical direction for a team that's already shipping: which problems are product problems and which are engineering ones, what the next few decisions should be, and where AI helps versus where it adds latency and confusion.
 
-## What Happens On The Call
+## Where I'm useful
 
-- you give me the short version of the problem
-- I ask enough questions to find the real pressure point
-- I tell you where I think the issue actually is
-- if there is a fit, we talk about next steps
+- The product is live, or close to it, and the stakes are real.
+- Correctness, latency or reliability matter more than another feature.
+- You want someone who can both diagnose it and fix it.
 
-I am not interested in padding this out. The point of the call is to figure out quickly whether there is real work here.
+I'm probably not your person for quick marketing sites, "add AI somewhere" projects without a user problem behind them, or strategy work with no interest in implementation.
 
----
+## What I bring
 
-## Recent Context
+{{< proof-list >}}
 
-- I lead product and technical work at Entropy Labs across AI systems, backend architecture, and delivery.
-- I helped cut a manual onboarding flow by 80 percent.
-- I took a reporting path from 750ms to 230ms.
-- I have built systems in retail, healthcare, legal intake, and marketing.
-- I spent several years teaching labs in operating systems, software construction, and web engineering.
+The details are in the [case studies](/projects/) and the [writing](/blog/), and the [open-source record](/open-source/) is public if you'd like to read my code before we talk.
 
----
+## Starting a conversation
 
-## If A Call Is Not The Right First Step
+Email is best: [hi@mhassan.dev](mailto:hi@mhassan.dev). A few lines on what you're building and where it hurts is plenty. If a call is easier, [book 30 minutes](https://cal.com/muhammad-hassan-raza/30min). On the call I'll ask enough questions to find the real pressure point and tell you honestly whether I'm the right person for it.
 
-If this is about a role, teaching, a talk, or something lighter-weight, email usually works better.
-
-[raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com) · [LinkedIn](https://linkedin.com/in/hassanraza22)
+For roles, talks, workshops or student questions, email works too.

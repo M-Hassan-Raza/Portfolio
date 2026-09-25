@@ -8,7 +8,7 @@
   padding: 0;
   overflow: hidden;
   background: var(--surface-sunken);
-  color: var(--text-muted);
+  color: var(--text);
   font-family: var(--font-mono);
   font-size: 0.595cqw;
   line-height: 1.2;
@@ -48,4 +48,33 @@
 .work-lead:hover .ascii-cover-art,
 .work-card-media:hover .ascii-cover-art {
   transform: scale(1.02);
+}
+
+/* Halftone screenshots inside case studies */
+.ascii-figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-6) 0;
+  container-type: inline-size;
+}
+
+.post-content .ascii-figure .ascii-cover-art {
+  padding: 0;
+  font-size: 0.595cqw;
+  line-height: 1.2;
+  background: var(--surface-portrait);
+  color: var(--text-on-portrait);
+  border-radius: var(--radius-md);
+}
+
+.ascii-figure figcaption {
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+}
+
+/* Covers that are screenshots render as a dark screen in both themes. */
+.ascii-cover-art.ascii-screen {
+  background: var(--surface-portrait);
+  color: var(--text-on-portrait);
 }

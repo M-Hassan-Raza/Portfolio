@@ -2,7 +2,7 @@
 title: "Non-Fiction Books"
 date: "2025-02-15T12:00:00Z"
 draft: false
-description: "A selection of thought-provoking non-fiction books covering politics, history, and personal development."
+description: "Geopolitics, psychology, and a couple of books about why people do what they do."
 slug: "books-non-fiction"
 ShowComments: true
 kicker: "Non-Fiction"

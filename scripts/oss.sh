@@ -16,7 +16,12 @@ blurbs='{
   "ludo-technologies/pyscn": "Code-quality analyzer for Python, written in Go",
   "tw93/Mole": "Command-line cleanup and maintenance tool for macOS",
   "docling-project/docling": "Document conversion for AI pipelines, started at IBM Research",
-  "qbittorrent/qBittorrent": "Open-source BitTorrent client"
+  "qbittorrent/qBittorrent": "Open-source BitTorrent client",
+  "arvidn/libtorrent-webui": "Web interface for libtorrent",
+  "codingjoe/django-health-check": "Health checks for Django apps",
+  "evloghq/evlog": "Structured, one-event-per-request logging",
+  "django-hijack/django-hijack": "Log in as another user in Django, for support and debugging",
+  "fallow-rs/fallow-skills": "Agent skills for working with Fallow"
 }'
 
 prs=$(gh search prs --author "$author" --merged --visibility public --limit 1000 \

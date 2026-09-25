@@ -2,7 +2,7 @@
 title: "Fiction Books"
 date: "2025-02-15T12:00:00Z"
 draft: false
-description: "A collection of immersive and thought-provoking fiction books spanning various genres."
+description: "Fantasy, science fiction and a few classics I keep pressing on people."
 slug: "books-fiction"
 ShowComments: true
 kicker: "Fiction"

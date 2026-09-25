@@ -4,7 +4,6 @@ title: "Building a C++ Image Editor"
 date: 2025-02-16
 description: "A deep dive into my university project - a simple yet powerful image editor built with C++."
 tags: ["C++", "Image Processing", "University Project", "Programming"]
-ShowComments: true
 ---
 ### Introduction
 During my university coursework, I developed a C++-based grayscale image editor capable of performing fundamental image processing tasks. This project was an exploration into file handling, image manipulation, and efficient data structures in C++.
@@ -89,7 +88,7 @@ While this project successfully implements several essential image processing fu
 - Implementing more advanced filters (e.g., Gaussian blur, edge detection).
 - Providing a GUI using a library like Qt or OpenCV.
 
-### Conclusion
+### Looking back
 This C++ image editor was a great learning experience in working with image data, file I/O, and algorithm optimization. It’s a stepping stone towards more advanced image processing applications.
 
 Check out the full source code on my [GitHub](https://github.com/M-Hassan-Raza/PGMImageEditor)!

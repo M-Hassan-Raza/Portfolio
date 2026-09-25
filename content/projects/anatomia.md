@@ -1,62 +1,48 @@
 ---
-title: "Anatomia Healthcare"
-date: 2025-01-10
-description: "Care workflow platform for nurse callbacks, case review, encrypted transcripts, and voice follow-up."
+title: "Anatomia"
+date: 2026-04-08T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "A nurse callback and case review product where transcripts, AI triage and follow-up calls all have to stay attached to the right patient."
+tier: flagship
+weight: 4
+projectLabel: "Clinical callback workflow"
+facts:
+  role: "[FACT?] Backend workflow and parts of the frontend"
+  team: "Entropy Labs team, for a healthcare client"
+  timeline: "2025"
+  status: "[FACT?]"
+  stack: ["FastAPI", "React", "PostgreSQL", "AWS Cognito", "AWS S3", "AWS KMS", "Redis", "OpenAI", "Vapi"]
+  source: "Private, client work"
+outcomes:
+  - "Transcripts and recordings encrypted and access-controlled by default, not as a later compliance pass"
+  - "AI limited to bounded jobs: summarizing, urgency scoring and drafting, with a nurse deciding"
+  - "Callbacks, recordings and follow-ups tied to one case across every role handoff"
+tags: ["Healthcare", "FastAPI", "React", "AWS", "AI"]
 cover:
   ascii: "anatomia-cover"
-  alt: "Anatomia callback workflow illustration"
-  caption: "The work was less about generic health-tech polish and more about carrying patient context safely through review, escalation, and follow-up."
-tags: ["Healthcare", "FastAPI", "React", "AWS", "Vapi", "AI"]
-categories: ["Projects"]
-showToc: true
-showReadingTime: true
-weight: -8
-tier: flagship
-projectLabel: "Clinical callback workflow"
-projectFocus: "PHI controls, nurse review, escalation paths, and voice follow-up."
+  alt: "Anatomia, halftone illustration"
 ---
 
-Anatomia is a care workflow product centered on callbacks and case review. The core loop is not a general healthcare record system. It is a nurse-facing workflow where calls, transcripts, AI triage, patient context, follow-up work, and escalations all have to move cleanly between staff roles.
+Anatomia is a care workflow product built around callbacks. A patient calls, the call is transcribed and analyzed, a nurse reviews the case, escalates to a doctor when needed, and a follow-up goes out, sometimes by an automated voice call. The product is the loop between a call coming in and a patient being looked after; the health records live elsewhere.
 
-**Tech Stack:** FastAPI, React, PostgreSQL, AWS Cognito, AWS S3, AWS KMS, Redis, OpenAI, Vapi
+It was a team project for a healthcare client. My part was mostly the backend workflow: case state, transcript and triage handling, and the follow-up paths that have to land on the right patient.
 
-**Source:** Private (healthcare client)
+## Sensitive by default
 
-**My role:** Team project. My work was concentrated on the backend workflow layer, transcript and triage handling, case-state plumbing, and the follow-up paths that had to stay tied to the right patient record.
+Transcripts, recordings and anything linked to a patient are treated as sensitive from the start. Encryption with managed keys, role-based access, audit logging and retention rules are part of the core design, because adding them after the fact means finding every place the data already leaked to.
 
----
+## AI that assists without deciding
 
-## What The Product Handles
+The AI does specific, checkable jobs: summarizing a transcript, scoring urgency, labeling priority and drafting the callback. A nurse reviews every case. That split is what makes the AI useful in a clinical setting: it saves reading time without anyone pretending the model is making clinical decisions.
 
-The product code points to a workflow with:
+## Handoffs are the product
 
-- nurse review, callback response, and doctor escalation
-- patient context including medications, allergies, conditions, labs, vitals, imaging, and consultation history
-- call transcripts, AI analysis, urgency scoring, and suggested follow-up language
-- outbound voice follow-up through Vapi
-- analytics and case state tracking across several workflow stages
+A case moves through nurse review, doctor review, waiting states and completion. Most of the ways a care workflow fails are handoff failures: the doctor sees the case without the context the nurse had, or a follow-up goes out against the wrong record. So the case carries its context with it (medications, allergies, history, the call itself) through every stage, and every state change is recorded.
 
+## Follow-up calls that know where they belong
 
-## The Hard Parts
+Outbound voice follow-up only helps if the call, its recording, its transcript and the resulting state all end up on the right case. Most of that work was plumbing, and all of it was necessary.
 
-### PHI Handling Changes The Whole Shape Of The System
+## What I took away
 
-The interesting work here is not just calling an LLM on a transcript. The product has to treat transcripts, recordings, and patient-linked data as sensitive by default. That pushes encryption, access control, audit logging, retention, and search constraints into the center of the architecture instead of leaving them as a later compliance pass.
-
-### Triage Has To Stay Useful Without Pretending To Be Magic
-
-The AI layer is doing concrete, bounded work: transcript analysis, urgency scoring, priority labeling, and callback drafting. That is a better fit for a real workflow than pretending the model is making clinical decisions on its own.
-
-### Role Handoffs Are The Product
-
-The frontend workflow is explicitly staged across nurse review, doctor review, waiting states, and completion. That matters because a care workflow breaks down quickly if assignment, escalation, and patient context are not carried through in a consistent way.
-
-### Voice Follow-Up Has To Connect Back To The Case
-
-The outbound voice assistant is not interesting on its own. It becomes useful when the callback, the recording, the transcript, and the follow-up state all stay tied to the right case and the right staff workflow.
-
-## What I Learned
-
-Products like this get judged on trust long before they get judged on polish. If access rules are fuzzy, if audit trails are thin, or if callbacks lose context between roles, people stop trusting the system.
-
-That is what makes Anatomia worth including here. It is a reminder that sensitive workflows usually fail on operational details first, not on lack of cleverness.
+Products like this are judged on trust long before polish. If access rules are fuzzy, audit trails thin, or context gets lost between roles, people stop relying on the system, however good the AI is.

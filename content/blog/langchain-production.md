@@ -1,286 +1,58 @@
 ---
-title: "LangChain in Production: What the Tutorials Don't Tell You"
-date: 2025-06-20T10:00:00+05:00
-description: "What LangChain production work needs beyond tutorials: persistence, retries, validation, tracing, deployment, and cost control."
-draft: false
-tags: ["LangChain", "Python", "AI", "Production", "RAG", "LLM", "Backend Development", "LCEL"]
-categories: ["AI Development"]
-showComments: true
-cover:
-  ascii: "ai"
-  alt: "LangChain production workflow diagram"
-  caption: "The production work sits around the chain: memory, retries, validation, tracing, and version control."
+title: "LangChain in Production: What the Tutorials Leave Out"
+date: 2026-02-01T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions."
+tags: ["LangChain", "LangGraph", "Python", "AI", "Production"]
+categories: ["AI systems"]
 ShowToc: true
+cover:
+  ascii: "post-langchain"
+  alt: "LangChain in production"
 ---
 
-Every LangChain tutorial ends right where the real work begins. You see a neat 50-line script that queries a PDF, and you think, "Cool, I'll ship this by Friday." Three weeks later, you're debugging memory leaks, wondering why your chain silently returns empty strings, and questioning every decision that led you here.
+Every LangChain tutorial ends where the real work starts. A tidy script queries a PDF, you think you'll ship it by Friday, and a few weeks later you're working out why a chain returns an empty string with no error.
 
-I've shipped LangChain-based features to production at multiple companies. Here's what I wish someone had told me before I started.
+I've shipped LangChain-based features at WebNoodle and at Entropy Labs, and we still use it for Obelisk's agents. So this is about where I've found it pays for itself, and what I now do by default when it does.
 
----
+## Use it where it saves you work
 
-## When to Use LangChain (And When Not To)
+LangChain is worth it when there's real orchestration: several model calls, tools, branching, approvals, state that has to survive a pause. The agent and middleware layer handles a lot of plumbing you'd otherwise write badly yourself, and the tracing integration is good.
 
-Let's start with the uncomfortable truth: **you probably don't need LangChain**.
+It isn't worth it for "summarize this text". A direct SDK call is shorter, easier to debug and one less dependency to upgrade. At Entropy we do both: the framework for agent workflows, the provider SDK for simple completions.
 
-LangChain is an abstraction layer. Abstractions are great when they simplify common patterns and terrible when they obscure what's actually happening. For LangChain, it depends entirely on your use case.
+## Always set a timeout, and retry only what's safe
 
-### Use LangChain when:
-
-- You're building complex chains with multiple LLM calls, tools, and conditional logic
-- You need observability and tracing (LangSmith integration is genuinely good)
-- You're prototyping rapidly and might switch LLM providers
-- Your team is already familiar with the framework
-
-### Skip LangChain when:
-
-- You're making simple API calls to one model
-- You need fine-grained control over request/response handling
-- Your use case doesn't fit LangChain's mental model
-- Bundle size or cold start time matters (serverless)
-
-At Entropy Labs, we use a hybrid approach: LangChain for complex agentic workflows, raw SDK calls for simple completions. The overhead isn't worth it for a straightforward "summarize this text" endpoint.
-
----
-
-## LCEL: The Good Parts
-
-LangChain Expression Language (LCEL) was a massive improvement over the legacy chain syntax. Here's a pattern that actually works well in production:
+A model call without a timeout will eventually hang a worker. Set one on every model you construct, and put retries on the calls that can safely be repeated:
 
 ```python
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_anthropic import ChatAnthropic
-from langchain_core.runnables import RunnablePassthrough
-
-# Clean, composable chain
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a technical writer. Be concise."),
-    ("human", "{input}")
-])
-
-model = ChatAnthropic(
-    model="claude-sonnet-4-20250514",
-    max_tokens=1024,
-    timeout=30.0,  # Always set timeouts
-)
-
-chain = (
-    {"input": RunnablePassthrough()}
-    | prompt
-    | model
-    | StrOutputParser()
-)
-
-# With retry logic
-from langchain_core.runnables import RunnableRetry
-
-robust_chain = chain.with_retry(
-    stop_after_attempt=3,
-    wait_exponential_jitter=True
-)
+model = init_chat_model(MODEL_NAME, timeout=30, max_retries=2)
 ```
 
-The pipe syntax makes composition clear. You can see data flow. That's the good part.
+Be careful what "retry" means once tools are involved. Retrying a timeout is fine. Retrying a tool call that sent an email means sending it twice. In agents, retries belong in middleware that knows which errors are transient; I wrote about that in [agent middleware](/blog/langgraph-multi-agent-middleware/).
 
-### Streaming that actually works
+## Validate the input and the output
 
-```python
-async def stream_response(query: str):
-    async for chunk in chain.astream(query):
-        yield chunk
-```
+The worst LangChain bug I shipped didn't raise anything. A prompt template rendered an empty message list, the model returned nothing, and the chain reported success. The [war stories](/blog/war-stories-from-production/) have the details. Since then, two checks go around anything important: the rendered prompt isn't empty before the call, and the result is non-empty and parses into the shape you expected after it. Structured output with a schema does most of the second part for you.
 
-Simple, clean, no surprises. Until you add memory.
+## Keep conversation state out of the process
 
----
+The old in-memory conversation helpers were convenient and wrong for production. State vanished on restart, grew without limit and wasn't safe across concurrent requests. They've since moved to the legacy package in LangChain 1.0, which says enough.
 
-## The Problems Nobody Warns You About
+Persist state somewhere that outlives a deploy. For agents that means a checkpointer backed by PostgreSQL, keyed by a thread ID, so a conversation can pause for a human approval and pick up hours later. For plain chat history, Redis with an expiry is fine. Either way, you decide how long history lives and when it's trimmed, not the framework.
 
-### 1. Memory management is a minefield
+## Trace everything from day one
 
-LangChain's conversation memory abstractions look elegant in docs. In production, they're a footgun.
+You can't fix what you can't see. Turn tracing on before the first user, not after the first incident: every call with its latency, token counts, inputs and outputs. LangSmith is the easy path. We also send our own structured events with a request ID, so a trace, a log line and a user's complaint can be matched to each other. And alert on spend. A tool loop that nobody caps will find your budget before you do.
 
-```python
-# This looks innocent
-from langchain.memory import ConversationBufferMemory
+## Pin versions and read the changelog
 
-memory = ConversationBufferMemory()
-chain = ConversationChain(llm=llm, memory=memory)
-```
+LangChain moves quickly. Import paths change, classes move between packages, defaults shift. Pin exact versions, upgrade on purpose, read the release notes, and keep a small smoke test that runs a real chain end to end, so an upgrade breaks in CI instead of in production.
 
-Problems:
-- Memory is stored in-process by default. Restart your server? Gone.
-- No TTL. Chat histories grow unbounded.
-- The memory object isn't thread-safe. Concurrent requests? Corruption.
+## The short version
 
-What we actually use:
-
-```python
-from langchain_community.chat_message_histories import RedisChatMessageHistory
-from langchain_core.runnables.history import RunnableWithMessageHistory
-
-def get_session_history(session_id: str):
-    return RedisChatMessageHistory(
-        session_id,
-        url=settings.REDIS_URL,
-        ttl=3600  # 1 hour TTL
-    )
-
-chain_with_history = RunnableWithMessageHistory(
-    chain,
-    get_session_history,
-    input_messages_key="input",
-    history_messages_key="history",
-)
-```
-
-Redis handles persistence, TTL, and concurrency. LangChain's memory abstractions are just wrappers.
-
-### 2. Silent failures everywhere
-
-This one cost me 8 hours of debugging:
-
-```python
-# Looks fine, right?
-result = await chain.ainvoke({"query": user_input})
-```
-
-The chain returned an empty string. No error. No exception. Nothing in logs.
-
-The cause? A malformed prompt template that resulted in an empty message list. The LLM received nothing, returned nothing. LangChain happily passed it through.
-
-**Always validate chain outputs:**
-
-```python
-result = await chain.ainvoke({"query": user_input})
-if not result or not result.strip():
-    logger.error(f"Empty response for query: {user_input[:100]}")
-    raise ValueError("LLM returned empty response")
-```
-
-### 3. Version churn is exhausting
-
-LangChain's API changes frequently. Code that worked in 0.1.x might not compile in 0.2.x. Import paths move. Classes get renamed.
-
-```python
-# v0.1.x
-from langchain.chat_models import ChatAnthropic
-
-# v0.2.x
-from langchain_anthropic import ChatAnthropic
-
-# v0.3.x
-# Who knows? Check the migration guide.
-```
-
-**Pin your versions aggressively:**
-
-```toml
-# pyproject.toml
-langchain = "==0.2.14"
-langchain-core = "==0.2.33"
-langchain-anthropic = "==0.1.23"
-```
-
-And read the changelogs before upgrading.
-
----
-
-## Cost Tracking and Observability
-
-If you're not tracking costs, you're flying blind. LangSmith is the easiest path:
-
-```python
-import os
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_API_KEY"] = "your-key"
-os.environ["LANGCHAIN_PROJECT"] = "production"
-```
-
-Every chain execution gets traced. You see latency, token counts, and costs. The callback system also lets you build custom tracking:
-
-```python
-from langchain_core.callbacks import BaseCallbackHandler
-from typing import Any
-
-class CostTracker(BaseCallbackHandler):
-    def __init__(self):
-        self.total_tokens = 0
-        self.total_cost = 0.0
-
-    def on_llm_end(self, response: Any, **kwargs):
-        usage = response.llm_output.get("token_usage", {})
-        input_tokens = usage.get("prompt_tokens", 0)
-        output_tokens = usage.get("completion_tokens", 0)
-
-        # Claude Sonnet pricing (example)
-        cost = (input_tokens * 0.003 + output_tokens * 0.015) / 1000
-        self.total_cost += cost
-
-        logger.info(f"LLM call cost: ${cost:.4f}")
-```
-
-At Entropy Labs, we alert when daily spend exceeds thresholds. One runaway loop can burn through hundreds of dollars.
-
----
-
-## Alternatives and When to Use Them
-
-### LlamaIndex for pure RAG
-
-If your use case is "query documents and return answers," LlamaIndex is more focused. Less abstraction, more batteries included for retrieval.
-
-### Direct SDK calls
-
-For simple use cases, the Anthropic/OpenAI SDKs are cleaner:
-
-```python
-from anthropic import Anthropic
-
-client = Anthropic()
-response = client.messages.create(
-    model="claude-sonnet-4-20250514",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": query}]
-)
-```
-
-No framework, no magic, full control.
-
-### Haystack
-
-If you need more structure than raw SDKs but less opinion than LangChain, Haystack hits a middle ground. Worth evaluating for production RAG pipelines.
-
----
-
-## My Production Stack
-
-Here's what I actually deploy:
-
-```
-Simple completions: Anthropic SDK directly
-Complex chains: LangChain + LCEL
-Retrieval: LlamaIndex or custom (depending on scale)
-Memory: Redis with manual management
-Observability: LangSmith + custom Prometheus metrics
-Rate limiting: Redis-based token bucket
-Caching: Response caching for deterministic queries
-```
-
-The theme: use LangChain where it adds value, bypass it where it adds complexity.
-
----
-
-## The Bottom Line
-
-LangChain is a powerful framework with rough edges. The tutorials show the happy path; production is everything else.
-
-Before adopting it:
-
-1. Understand what abstraction you're buying and what control you're giving up
-2. Set up observability from day one
-3. Plan for version upgrades (they're frequent and breaking)
-4. Build escape hatches for when the framework fights you
-
-The best LangChain code I've written is the code that uses it sparingly—for the problems it solves well, not for everything.
+- Use the framework where there's orchestration to do, and the SDK where there isn't.
+- Timeouts everywhere, retries only where repeating is harmless.
+- Check the prompt before sending it and the answer before trusting it.
+- State lives in a database, not in memory.
+- Trace from day one, and pin your versions.

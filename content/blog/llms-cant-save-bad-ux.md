@@ -1,183 +1,88 @@
 ---
 title: "LLMs Can't Save Bad UX"
-date: 2026-03-18T10:00:00+05:00
-description: "If the product flow is weak, adding an LLM usually just adds latency, opacity, and a fancier way to disappoint users."
-draft: false
-tags: ["AI", "UX", "Product", "LLM", "CIO", "Startup", "Product Development"]
-categories: ["Product Development"]
-showComments: true
-cover:
-  ascii: "ai"
-  alt: "LLMs and User Experience"
-  caption: "You can't GPT-wrapper your way out of a broken product"
+date: 2026-04-08T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "When an AI feature flops, the model is rarely the problem. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt."
+aliases:
+  - /blog/ai-features-users-want/
+tags: ["AI", "Product", "UX", "LLM"]
+categories: ["Product"]
 ShowToc: true
+cover:
+  ascii: "post-bad-ux"
+  alt: "LLMs and user experience"
 ---
 
-I wrote about [AI features users actually want](/blog/ai-features-users-want/) a while back. The TLDR was: stop building chatbots, start building smart defaults. That post got shared, people agreed, and then most of them went back to building chatbots.
+Every team I've worked with has shipped at least one AI feature that nobody used. The post-mortem usually lands on "users don't want AI". In the cases I've seen up close, at Entropy Labs and with clients who came to us after a launch went quiet, that was the wrong conclusion. Users didn't want a slower version of the same problem.
 
-This is the sequel. The one about what happens when AI features ship and nobody uses them. When the LLM is working correctly and the product is still failing. When the problem was never the model.
+The pattern goes like this. The product has a UX problem: search is bad, onboarding is long, reporting is manual. Someone adds an AI layer on top. The original problem is still there, now with latency and the occasional confident mistake. Users try it once, go back to their workaround, and the team decides AI was the mistake.
 
----
+## Three features that failed for boring reasons
 
-## The Pattern I Keep Seeing
+### The search chatbot that should have been a search box
 
-At Entropy Labs, I've watched this play out with our own products and with clients who come to us after their AI features underperform:
+A client had an internal knowledge base with truly bad search: keyword matching, no ranking, no tolerance for typos. People hated it, so they built a semantic search chatbot.
 
-1. Product has a UX problem. Search is bad. Onboarding is confusing. Reporting is manual and tedious.
-2. Team adds an AI layer on top. "Ask our AI assistant to find what you need." "Let AI guide you through setup." "Generate reports with natural language."
-3. The UX problem is still there, now with an additional layer of latency and unpredictability.
-4. Users try the AI feature once, get a mediocre result, and go back to manually working around the original UX problem.
-5. Team concludes "users don't want AI" when the real conclusion is "users don't want a slower version of the same problem."
+The chatbot understood questions well. Ask "how do we handle refunds for enterprise clients?" and it found the right document. But it took a few seconds to answer, it replied with a paragraph instead of a list, and when the paragraph was wrong there was nothing to browse instead. People couldn't scan results; they could only read a summary and hope.
 
-The AI didn't fail. The product thinking failed. The LLM did exactly what it was told—it just didn't matter because the problem was upstream.
+What they needed was Meilisearch or Typesense: fuzzy matching and ranking, answers in tens of milliseconds, a list you can skim. It was cheaper to run, too, since the chatbot came with a monthly API bill that the original problem never deserved. The AI version was the more impressive build and the worse product.
 
----
+### The onboarding assistant for a twelve-step setup
 
-## Three Real Examples
+Another team had a twelve-step setup flow that most new users abandoned. Their fix was an assistant that walked people through the steps in conversation. It remembered where you left off and answered questions about each step. It was well built.
 
-### The Search That Should Have Just Worked
+Completion went down.
 
-A client had an internal knowledge base with terrible search. Keyword matching, no ranking, no typo tolerance. Users hated it. The solution: an AI-powered "semantic search" chatbot.
+The problem was never that people didn't understand step seven. The problem was that step seven existed. When the flow was cut to four steps, with sensible defaults filling in the rest, completion roughly doubled. The assistant was retired.
 
-The chatbot was genuinely good at understanding queries. You could ask "how do we handle refunds for enterprise clients?" and it would find the right document. But:
+### The report builder that taught people not to trust it
 
-- It took 3-4 seconds to respond (embedding → vector search → LLM synthesis)
-- It returned a conversational paragraph instead of a list of documents
-- Users couldn't scan the results—they had to read a generated summary
-- When the summary was wrong, users had no way to browse alternatives
+This one was ours. We added a natural-language report builder: "revenue by product category for Q3, excluding returns". It demoed beautifully.
 
-What they actually needed: Typesense or Meilisearch. Sub-50ms fuzzy search with typo tolerance and relevance ranking. No AI, no latency, no generated text. Just a search bar that works.
+In real use, people generated a report, checked it against the numbers they already trusted, found a small discrepancy from rounding or an edge case in a filter, and stopped trusting the feature. Not that report, the feature. Finance people need exact numbers, and "almost right" is a failure state for them.
 
-**Cost of the AI approach:** $2,000/month in API calls + 3-4s latency per query.
-**Cost of the actual fix:** Self-hosted Meilisearch, $0/month, 30ms per query.
+We replaced it with a guided form where AI does one small job: pre-selecting the filters you probably want, based on what you ran recently. Usage went from barely anyone to a solid share of people who build reports. The AI went from doing the whole thing to suggesting which buttons to press, and that's when people used it.
 
-The AI solution was technically impressive and practically worse.
+## Latency is a cost you pay on every click
 
-### The Onboarding Wizard That Nobody Asked
+Every model call costs time, usually somewhere between half a second and several seconds. People notice. Search and e-commerce teams have measured for years that even a couple of hundred milliseconds changes behavior, and LLM features routinely add whole seconds.
 
-Another client had a complex SaaS product with a 12-step setup flow. Completion rate was 34%. Their fix: an AI assistant that walks users through setup via conversation.
+The way I think about it: an AI feature has to pay back its wait. Saving someone ten seconds of manual work in exchange for four seconds of waiting is a win. Saving two seconds in exchange for four is a regression that happens to use a model.
 
-The AI assistant understood context. It remembered where you left off. It could answer questions about each step. It was, by any technical measure, a well-built feature.
+The easiest way to pay it back is to take the work out of the user's path entirely:
 
-Completion rate went to 31%. Down.
+- a document is uploaded, entities are extracted in the background, and the tags are there when someone opens it
+- data changes overnight, a summary is written before anyone asks, and it's on the dashboard in the morning
+- a form opens already filled in from the person's history
 
-Why? The problem was never "users don't understand the steps." The problem was "there are 12 steps." Users didn't need an AI to explain step 7—they needed step 7 to not exist.
+If people are waiting for it, it had better be worth the wait.
 
-After killing the AI assistant and collapsing the setup flow from 12 steps to 4 (with smart defaults filling the rest), completion rate went to 78%. The fix was UX surgery, not AI wallpaper.
+## Almost right is worse than you think
 
-### The Report Generator That Generated Distrust
+Normal software is right or broken. A button works or it doesn't. AI features are right most of the time, wrong some of the time, and occasionally wrong with total confidence. The confident mistakes are what kill trust: a made-up number in a report, the wrong customer name in a drafted email.
 
-This one is from our own product. We added a natural language report builder: "Show me revenue by product category for Q3, excluding returns." Impressive in demos.
+Once people have to check everything a feature produces, it has added a step instead of saving one.
 
-In production, users would generate a report, cross-reference it with the actual numbers in the data tables, find a 2-3% discrepancy (rounding, filter edge cases), and lose trust in the entire feature. Once a user catches an AI-generated report being slightly wrong, they stop trusting it entirely—even when it's right.
+So every AI feature needs a way out: the pre-filled form can be edited, the drafted reply can be rewritten, the ranked results can be sorted another way. The suggestion is a suggestion. The moment it becomes a decision, like auto-send, auto-file or auto-approve, the accuracy bar goes way up, and you probably aren't there.
 
-The issue: financial users need exact numbers. "Approximately correct" isn't a valid state for revenue reporting. We replaced the natural language builder with a guided form that uses AI for one thing: pre-selecting likely filters based on the user's recent activity.
+We learned that one directly. We ran an AI feature that auto-filed incoming documents into categories for about four months before turning it off. It was right most of the time. The misfiled ones included some that mattered, and people ended up checking its work more carefully than they would have done the filing themselves.
 
-The AI went from "do the whole thing" to "suggest which buttons to click." Usage went from 8% to 41%.
+## Where AI has earned its place for us
 
----
+The features that stuck all share one thing: they remove thinking without adding interaction.
 
-## The Latency Tax Nobody Budgets For
+- **Pre-filled fields.** No new UI, no chat, no "AI" badge. The form is mostly done when it opens. People didn't notice a feature; they noticed the product got less tedious.
+- **Anomalies worth interrupting for.** "Mobile checkout conversion dropped sharply after yesterday's deploy" is useful because nobody had to ask. The trick is filtering out the expected changes (seasonality, promotions) so the alert is rare enough to read.
+- **Transformation you can check.** Summaries, translations, format conversion. The input and output are clear, the person can verify the result at a glance, and a few seconds of waiting buys back half an hour of reading.
 
-Every AI feature has a latency cost. API calls take 500ms-5s depending on the model and prompt complexity. Users feel this.
+## What I ask before anyone writes a prompt
 
-Google's research says a 200ms delay in search results reduces engagement. Amazon found every 100ms of latency costs 1% of sales. These numbers are about *milliseconds*—and we're adding *seconds* of latency and calling it an improvement.
+1. **What does the user do today without it?** If the answer is "click three buttons", the AI version has to beat three buttons.
+2. **What happens when it's wrong?** "They fix it in two seconds" is fine. "Nobody notices until it's downstream" is not.
+3. **Is the wait proportional to the value?** Four seconds for a summary of a long document, yes. Four seconds for a search that a keyword index answers instantly, no.
+4. **Does it remove a step or add one?** If people have to review the output before acting, you've added one.
+5. **Would plain good UX solve it?** A date picker beats a natural-language date parser. A fast search box beats a search chatbot.
 
-The mental model should be: **AI latency is UX debt.** Every second of LLM processing time needs to be paid back by a proportional improvement in the user's outcome. If the AI saves them 10 seconds of manual work but adds 4 seconds of waiting, the net gain is 6 seconds. If the AI saves 2 seconds but adds 4 seconds of waiting, you've made the product worse.
+And once it ships, judge it by behavior, not by what people say in interviews. Watch adoption for weeks, because curiosity isn't usage. Measure whether tasks get done faster, not whether people like the suggestions. The complaint "it always gets company names wrong" is worth more than a dozen "this is cool"s.
 
-Most AI features I evaluate don't pass this test. The latency is real, measurable, and felt by every user on every interaction. The benefit is theoretical, variable, and felt by some users some of the time.
-
-### When Latency Is Acceptable
-
-Background processing. If the AI does its work before the user asks for the result, there's no perceived latency:
-
-- Document uploaded → AI extracts entities in the background → user opens document and entities are already tagged
-- Data changes → AI generates summary overnight → user opens dashboard and insights are waiting
-- Form opened → AI pre-fills fields based on history → user sees populated form instantly
-
-The pattern: **move AI processing out of the user's critical path.** If they're waiting for it, it better be worth the wait.
-
----
-
-## The Accuracy Cliff
-
-Traditional software is either correct or broken. A button works or it doesn't. A calculation is right or wrong.
-
-AI features exist in a probabilistic middle ground. They're right 85% of the time, wrong 10% of the time, and confidently wrong 5% of the time. Users can tolerate the 10%. The 5% is what kills trust.
-
-When an AI feature confidently presents wrong information—a hallucinated number in a report, an incorrect customer name in a generated email, a wrong date in a summary—the user has to decide: do I trust this feature, or do I verify everything it produces?
-
-If they're verifying everything, you haven't saved them time. You've added a step.
-
-### The Escape Hatch Principle
-
-Every AI feature needs an escape hatch: a way for the user to fall back to manual control without friction. This isn't a failure mode—it's the design.
-
-- AI pre-fills a form → user can edit every field
-- AI suggests a response → user can rewrite it
-- AI ranks search results → user can switch to chronological or alphabetical
-
-The AI is a suggestion, not a decision. The moment it becomes a decision (auto-send, auto-file, auto-approve), you need 99%+ accuracy. And you probably don't have it.
-
-We killed an AI feature at Entropy Labs after 4 months because it auto-categorized incoming documents. 92% accuracy sounds good until you realize 8% of documents are misfiled, some of them important. Users spent more time checking the AI's work than they would have spent categorizing manually.
-
----
-
-## When AI Actually Fixes UX
-
-I'm not anti-AI. I build AI systems for a living. But the AI features that work share a pattern: **they reduce cognitive load without adding interaction complexity.**
-
-### Smart Defaults
-
-The highest-ROI AI feature is almost always pre-populated fields. No new UI. No chatbot. No "AI-powered" badge. Just a form that's already mostly filled in when you open it.
-
-At Entropy Labs, AI-driven field pre-population reduced form completion time by 40%. Users didn't know AI was involved. They just thought the product got smarter. That's the right user experience for AI.
-
-### Anomaly Surfacing
-
-Don't make users ask for insights. Surface them proactively. "Revenue dropped 18% in mobile checkout after deploy #1234" is useful because the user didn't have to ask. The AI found the pattern, correlated it with a likely cause, and presented it before anyone noticed.
-
-This works because the AI is doing work the user couldn't easily do (correlating metrics across systems) rather than work the user could do faster without AI (clicking a date picker).
-
-### Content Transformation
-
-Summarization, translation, format conversion—tasks where the input and output are clearly defined and the user can immediately verify the result. "Summarize this 50-page document" is a legitimate AI use case because:
-
-- The user can scan the summary and check it against their knowledge
-- A 90% accurate summary of a 50-page document is still more useful than reading 50 pages
-- The latency (a few seconds) is proportional to the value (saving 30+ minutes of reading)
-
-The latency-to-value ratio passes the test.
-
----
-
-## The Decision Framework
-
-Before adding an AI feature, ask:
-
-**1. What is the user doing right now without AI?**
-If the answer is "nothing—this is a new capability," AI might be the right tool. If the answer is "clicking three buttons," you need to prove AI is faster than three buttons.
-
-**2. What happens when the AI is wrong?**
-If the answer is "the user corrects it in 2 seconds," acceptable. If the answer is "the user doesn't notice until the data is downstream," dangerous.
-
-**3. Is the latency proportional to the value?**
-4 seconds of latency for 30 minutes of saved reading? Yes. 4 seconds of latency for a search result that keyword search returns in 50ms? No.
-
-**4. Does this eliminate a step or add a step?**
-If the user now has to review AI output before acting, you've added a step. The feature needs to save more time than the review costs.
-
-**5. Would better traditional UX solve the same problem?**
-Honest answer. Not "could AI solve this?" but "is AI the *best* way to solve this?" A date picker beats a natural language date parser. A type-ahead search beats a semantic search chatbot. Boring solutions that work beat impressive solutions that don't.
-
----
-
-## The Uncomfortable Truth
-
-Most failed AI features aren't failed AI. They're failed product thinking wearing an AI costume.
-
-The search was bad before the chatbot, and the chatbot didn't fix the search—it added a natural language layer on top of bad search. The onboarding was too long before the AI assistant, and the AI assistant didn't shorten the onboarding—it narrated the same 12 steps with more words. The reports were confusing before the generator, and the generator didn't make them clearer—it made them probabilistically wrong.
-
-If your product's UX is broken, fix the UX. Then, once the foundation is solid, look at where AI can reduce the cognitive work that users still have to do.
-
-The order matters. AI on top of good UX is powerful. AI on top of bad UX is an expensive way to make the problem worse.
+If the product's UX is broken, fix the UX first. AI on top of a good product can be great. AI on top of a bad one is an expensive way to make the problem easier to notice.

@@ -1,0 +1,9 @@
+{{- /* Proof points and company recognition from data/profile.yaml, as a list. */ -}}
+{{- $p := hugo.Data.profile }}
+<ul>
+    {{- range $p.proof }}
+    <li><strong>{{ .value }}</strong>: {{ .label }}.</li>
+    {{- end }}
+    <li><strong>{{ hugo.Data.oss.merged }}</strong> merged pull requests in open-source tools like kitty, calibre and libtorrent.</li>
+    <li>Entropy Labs: {{ delimit $p.recognition "; " }}.</li>
+</ul>

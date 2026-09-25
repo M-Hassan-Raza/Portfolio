@@ -24,7 +24,7 @@ To file a notice of claimed infringement, please include the following informati
 
 ## How to Submit Your Notice
 
-Send your DMCA notice to the following email address: [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com). We will review your notice and take appropriate action in accordance with the Digital Millennium Copyright Act.
+Send your DMCA notice to the following email address: [hi@mhassan.dev](mailto:hi@mhassan.dev). We will review your notice and take appropriate action in accordance with the Digital Millennium Copyright Act.
 
 ## Counter-Notification
 
@@ -36,6 +36,6 @@ Please note that this DMCA Notice is provided for informational purposes only an
 
 ## Contact
 
-If you have any questions regarding our DMCA policy, please contact us at [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com).
+If you have any questions regarding our DMCA policy, please contact us at [hi@mhassan.dev](mailto:hi@mhassan.dev).
 
 PSA: Again, I'm just adding this page for the sake of completeness. You should definitely consult with a legal professional to ensure your DMCA policy is compliant with the law. Also, don't steal content. It's not based at all.

@@ -2,7 +2,7 @@
 title: "Books on Pakistan"
 date: "2025-02-15T12:00:00Z"
 draft: false
-description: "Books that explore the history, politics, and identity of Pakistan."
+description: "History, politics and identity: books that helped me understand where I live."
 slug: "books-pakistan"
 ShowComments: true
 kicker: "Pakistan"

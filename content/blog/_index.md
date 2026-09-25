@@ -1,25 +1,23 @@
 ---
-date: '2025-02-10T22:06:25+05:00'
-draft: false
+title: "Writing"
+description: "Production mistakes, AI product judgment, open source, and the occasional note for students."
+aliases:
+  - /resources/
+  - /blog/claude-opus-45/
+  - /blog/extended-thinking-llms/
+  - /blog/model-context-protocol/
+  - /blog/google-rag-smart-faq/
 cascade:
   comments: true
-title: 'Writing'
-description: "Notes on production failures, AI product decisions, software design, open source, and teaching."
 startHere:
   - page: "/blog/war-stories-from-production/"
-    label: "Production failures"
-    note: "Race conditions, refunds, ledgers, and the expensive lessons that come with real systems."
+    note: "Bugs I shipped in a retail system and an AI pipeline, and the unexciting fixes that held."
   - page: "/blog/llms-cant-save-bad-ux/"
-    label: "Product judgment"
-    note: "Why bolting AI onto a weak product usually makes the weakness easier to notice."
-  - page: "/blog/langgraph-multi-agent-middleware/"
-    label: "AI systems"
-    note: "What actually mattered once a multi-agent stack had to survive cost, failure, and control problems."
+    note: "Why most AI features that flop were product decisions first."
   - page: "/blog/best-way-to-learn-a-codebase/"
-    label: "Code review taste"
-    note: "Why reading and breaking real code teaches more than another tidy tutorial ever will."
+    note: "What maintainers taught me by explaining why my fix was wrong."
+  - page: "/blog/langgraph-multi-agent-middleware/"
+    note: "The control layer that made fifteen-odd agents manageable."
 ---
 
-I write about production failures, AI product decisions, software design, open source, and teaching.
-
-If you are new here, start with the essays in the `Start Here` section below. They get close to how I think: direct, a little skeptical, and more interested in what survives contact with reality than what sounds clever in a thread.
+I write when something broke in an interesting way, when I changed my mind about something, or when I've explained the same thing to three people and would rather send a link.

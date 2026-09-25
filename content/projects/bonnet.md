@@ -1,64 +1,46 @@
 ---
-title: "Bonnet AI"
-date: 2025-01-15
-description: "AI brand-development platform that turns a creative brief into research, strategy, creative direction, moodboards, and exportable deliverables."
+title: "Bonnet"
+date: 2026-04-08T10:00:00+05:00
+lastmod: 2026-09-25T10:00:00+05:00
+description: "An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can actually use."
+tier: flagship
+weight: 6
+projectLabel: "AI brand workflow"
+facts:
+  role: "Backend execution flow and much of the frontend"
+  team: "Entropy Labs team, for a client"
+  timeline: "2025"
+  status: "[FACT?]"
+  stack: ["Django", "Channels", "PostgreSQL", "Next.js", "React", "OpenRouter", "Supabase"]
+  source: "Private, client work"
+outcomes:
+  - "Long-running generation you can watch, cancel and rerun step by step"
+  - "Research grounded in a narrow, relevant library rather than a general knowledge base"
+  - "Exports that come out clean, with citations, however messy the model output was"
+tags: ["AI", "Next.js", "Django", "Creative Tools"]
 cover:
   ascii: "bonnet-cover"
-  alt: "Bonnet brand workflow illustration"
-  caption: "The product was most useful when the brief, the execution state, and the final deliverables all stayed connected."
-tags: ["AI", "Next.js", "Django", "OpenRouter", "Supabase", "Creative Tools"]
-categories: ["Projects"]
-showToc: true
-showReadingTime: true
-weight: -9
-tier: flagship
-projectLabel: "AI brand workflow"
-projectFocus: "Staged execution, realtime progress, reruns, and deliverable generation."
+  alt: "Bonnet, halftone illustration"
 ---
 
-Bonnet is an AI brand-development product built around a clear delivery flow. A user starts with a creative brief, then the system pushes that work through research, strategy, creative direction, moodboards, and exportable outputs. The interesting part is not chat. It is the orchestration needed to turn a messy brief into something a team can actually review and ship.
+Bonnet takes a creative brief (business, audience, competitors, goals, tone) and runs it through research, strategy, creative direction and moodboards, ending in a document a brand team can review and hand on. It was a team project for a client. I owned most of the backend execution flow and a good part of the frontend.
 
-**Tech Stack:** Next.js, React, Django, Channels, PostgreSQL, OpenRouter, Supabase
+## Long jobs that stay understandable
 
-**Source:** Private (commercial product)
+A full run takes a while. The backend treats it as a series of steps with their own state, streams progress to the browser over websockets, and supports cancelling and rerunning a single step without starting over. The goal was that someone watching it always knows what stage it's in, what changed on a rerun, and where the output lives.
 
-**My role:** Team project. I owned most of the backend execution flow, long-running job state, rerun behavior, retrieval contracts, and export plumbing.
+## Cleaning up model output is product work
 
----
+Model output doesn't arrive in one tidy shape. It mixes markdown, half-structured fragments and generated text, and that has to be normalized before it can be shown and exported. Skip that layer and the product looks broken even when the model technically answered.
 
-## The Product Loop
+## Narrow retrieval
 
-The frontend intake asks for the real inputs that shape brand work: business context, audience, competitors, goals, values, tone, and maturity. From there the product kicks off a comprehensive execution flow and keeps the user inside one long-running project instead of bouncing them through disconnected tools.
+The research step searches a focused library of case-study material, not a general knowledge base. The narrower contract is easier to reason about and keeps the research grounded in examples that matter for brand work.
 
-The output is more structured than a generic assistant chat:
+## Assets are half the product
 
-- research and category analysis
-- strategic framing and narrative direction
-- creative concepts and visual direction
-- moodboards and linked assets
-- PDF exports with citations and supporting material
+Moodboards, reports and images have to survive the trip from generation to storage to review to PDF export. File handling, metadata and asset shapes that the frontend can rely on took as much care as the text pipeline.
 
+## What I took away
 
-## The Hard Parts
-
-### Long-Running AI Work Has To Feel Trackable
-
-This product is built around executions that take time, stream progress, and sometimes need to be rerun. That means the backend has to manage step state, websocket updates, cancellation, reruns, and asset linkage without losing the thread of the project.
-
-### Output Cleanup Is Real Product Work
-
-AI output does not arrive in one clean shape. The frontend spends real effort cleaning mixed markdown, structured fragments, and generated content so it can render properly, stay readable, and export cleanly to PDF. If you skip that layer, the product feels broken even when the model technically answered the prompt.
-
-### Retrieval Needed To Stay Narrow And Useful
-
-The retrieval layer is not a broad knowledge base bolted on for marketing copy. It is closer to targeted vector lookup over case-study style material that helps the research stage stay grounded. That narrower contract is easier to reason about and easier to keep useful.
-
-### Asset Workflows Matter As Much As Text Workflows
-
-Moodboards, reports, and creative assets all have to survive the trip from generation to storage to review to export. That means local file handling, uploads, metadata, and frontend-compatible asset shapes all have to line up.
-
-## What I Learned
-
-The hardest part of products like this is rarely the model call. It is keeping a long execution understandable, interruptible, and worth trusting. If the user cannot tell what stage they are in, what changed on a rerun, or where the output lives, the system does not feel serious.
-
-Bonnet is a good example of that tradeoff. The product only starts feeling coherent once execution state, retrieval, assets, and exports all agree on what the project actually is.
+The hard part of products like this is rarely the model call. It's keeping a long run understandable, interruptible and worth trusting. The product only felt coherent once execution state, retrieval, assets and exports all agreed on what a project actually was.

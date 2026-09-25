@@ -4,7 +4,6 @@ title: "PixelCryptor: Hiding Executables Inside Images"
 date: 2025-02-16
 description: "A Django project that embeds executable files within images using delimiter-based concatenation — and why real steganography is harder than this."
 tags: ["Django", "Azure", "Security", "Steganography"]
-ShowComments: true
 ---
 
 PixelCryptor is a Django app that lets you embed an executable file inside an image. Upload both files, it concatenates them with a delimiter, and stores the result on Azure Blob Storage. You can later extract the original files back out.

@@ -1,15 +1,12 @@
 ---
 title: "Every Abstraction I Regret"
-date: 2026-02-20T10:00:00+05:00
+date: 2026-04-08T10:00:00+05:00
 description: "A short list of abstractions I added too early, why they got worse over time, and the heuristics I use now to avoid repeating it."
-draft: false
-tags: ["Software Design", "Architecture", "Python", "Django", "LangChain", "Refactoring", "Backend Development"]
+tags: ["Software Design", "Architecture", "Python", "Django", "Refactoring", "Backend Development"]
 categories: ["Software Design"]
-showComments: true
 cover:
-  ascii: "craft"
+  ascii: "post-abstractions"
   alt: "Abstractions and Regrets"
-  caption: "A love letter to simplicity from someone who learned the hard way"
 ShowToc: true
 ---
 
@@ -49,7 +46,7 @@ class BaseService:
 
 Every subclass overrode every method. `ProductService._validate` had nothing in common with `CustomerService._validate`. The "shared" base class was just an empty method contract that added indirection without reducing duplication.
 
-Worse: when I needed behavior that didn't fit the create/read/update/delete pattern—like Polaris's FIFO inventory consumption or double-entry ledger operations—the service layer fought me. The abstraction assumed all operations are CRUD. Financial operations aren't.
+Worse: when I needed behavior that didn't fit the create/read/update/delete pattern, like Polaris's FIFO inventory consumption or double-entry ledger operations, the service layer fought me. The abstraction assumed all operations are CRUD. Financial operations aren't.
 
 ### What Replaced It
 
@@ -59,50 +56,11 @@ The code is "less clean" by DRY standards. It's dramatically easier to understan
 
 ---
 
-## LangChain's Memory vs. Just Using Redis
-
-LangChain offers memory abstractions: `ConversationBufferMemory`, `ConversationSummaryMemory`, `ConversationEntityMemory`. They look elegant in tutorials. In production, they're a footgun.
-
-Problems I hit at Entropy Labs:
-
-- **Memory is in-process by default.** Restart your server? All conversation history is gone.
-- **No TTL.** Chat histories grow unbounded. One power user with a 200-message conversation is now consuming meaningful memory.
-- **The memory object isn't thread-safe.** Concurrent requests to the same conversation? Corruption.
-- **Serialization is fragile.** Switching model providers breaks deserialization because message formats differ.
-
-The fix was embarrassingly simple:
-
-```python
-import redis
-
-r = redis.Redis()
-
-def get_history(session_id: str, max_messages: int = 50) -> list[dict]:
-    raw = r.lrange(f"chat:{session_id}", -max_messages, -1)
-    return [json.loads(m) for m in raw]
-
-def add_message(session_id: str, role: str, content: str):
-    r.rpush(f"chat:{session_id}", json.dumps({
-        "role": role, "content": content
-    }))
-    r.expire(f"chat:{session_id}", 86400)  # 24h TTL
-```
-
-Fifteen lines. Survives restarts. Has TTL. Is thread-safe. Serializes predictably.
-
-I spent a week debugging LangChain memory issues before writing this. The abstraction didn't save me time—it cost me time, because the failure modes were hidden behind three layers of class inheritance.
-
-### The Principle
-
-If you can explain your solution in one sentence, you probably don't need an abstraction layer. "Store messages in a Redis list with a TTL" is one sentence. `ConversationSummaryBufferMemory(llm=llm, max_token_limit=2000, return_messages=True)` is a configuration surface area with hidden semantics.
-
----
-
 ## Django Signals for Everything
 
-I covered [the performance cascade](/blog/war-stories-from-production/#the-django-signal-cascade) in another post, but the performance problem was actually the second-worst thing about my signal overuse. The worst was debuggability.
+The [performance log](/blog/optimizing-django-performance/) covers what signals did to Polaris's speed. The worse problem was debugging them.
 
-At one point, Polaris had 23 signal handlers across 8 files. Creating a sale triggered:
+At one point, creating a sale in Polaris triggered a chain like this:
 
 1. `post_save` on `Sale` → update inventory
 2. `post_save` on `Product` (from #1) → recalculate stock alerts
@@ -145,7 +103,7 @@ The button was worse. I added a `tooltipPosition` prop because one button needed
 
 ### What I Do Now
 
-I start with the raw HTML elements. When I have three genuinely similar components that share non-trivial logic, I extract the shared part. Not before.
+I start with the raw HTML elements. When I have three truly similar components that share non-trivial logic, I extract the shared part. Not before.
 
 ```vue
 <!-- Three similar buttons? Copy-paste is fine until it isn't. -->
@@ -176,15 +134,15 @@ INVENTORY_CONFIG = {
 
 The idea: different clients could customize behavior without code changes. Just update the config!
 
-In practice, every "configuration" eventually needed code changes anyway. "Allow negative stock" sounds like a boolean, but the business logic for negative stock is fundamentally different from positive-stock-only logic. It's not a flag flip—it's a different code path with different validation, different reporting, and different financial implications.
+In practice, every "configuration" eventually needed code changes anyway. "Allow negative stock" sounds like a boolean, but the business logic for negative stock is fundamentally different from positive-stock-only logic. It needs its own code path, with different validation, different reporting, and different financial implications.
 
-I ended up with code riddled with `if settings.INVENTORY_CONFIG["allow_negative_stock"]:` branches, each one tested independently, each one a potential bug surface. The config didn't eliminate complexity—it distributed it across every function that read it.
+I ended up with code riddled with `if settings.INVENTORY_CONFIG["allow_negative_stock"]:` branches, each one tested independently, each one a potential bug surface. The config spread the complexity across every function that read it instead of removing it.
 
 ### What Replaced It
 
 Hard-coded business rules that match the actual client's requirements. When a new client needs different behavior, I evaluate whether it's a genuine variation or a different product. Usually, it's a different product.
 
-Configuration is for deployment parameters: database URLs, API keys, feature flags for A/B tests. Business rules are code. They deserve tests, type checking, and code review—none of which work well on JSON objects.
+Configuration is for deployment parameters: database URLs, API keys, feature flags for A/B tests. Business rules are code. They deserve tests, type checking, and code review, none of which work well on JSON objects.
 
 ---
 
@@ -200,4 +158,4 @@ The heuristic: **if you can't point to three existing call sites that would use 
 
 And deleting abstractions is harder than deleting regular code. Regular code has no dependents. An abstraction has consumers, each of which was shaped by the abstraction's API. Removing it means refactoring every consumer. The abstraction calcifies.
 
-So when you're about to create `BaseService`, `GenericHandler`, or `AbstractProcessor`: write the specific thing first. Write it again when you need it again. By the third time, you'll know what the abstraction actually is—not what you imagined it might be.
+So when you're about to create `BaseService`, `GenericHandler`, or `AbstractProcessor`: write the specific thing first. Write it again when you need it again. By the third time, you'll know what the abstraction actually is, not what you imagined it might be.

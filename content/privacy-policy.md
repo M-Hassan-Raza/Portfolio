@@ -1,45 +1,17 @@
 ---
-title: "Privacy Policy"
-date: 2025-02-12
-description: "This Privacy Policy outlines how we collect, use, and protect your personal information on our website."
-tags: ["Privacy", "Legal"]
-categories: ["Legal"]
-showToc: true
+title: "Privacy"
+description: "What this site collects, which is very little."
+ShowBreadCrumbs: false
 ---
 
-## Introduction
+This is a personal site. It doesn't sell anything, run ads or keep a mailing list, so there isn't much to say, but here's all of it.
 
-Your privacy is important to us. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website. By using our site, you consent to the practices described in this policy.
+**Analytics.** Page views are counted with [Umami](https://umami.is), which doesn't use cookies or track you across sites. I see which pages are read and roughly where visitors come from, never who you are.
 
-## Information We Collect
+**Comments.** Posts use [Giscus](https://giscus.app), which stores comments as GitHub Discussions. If you comment, you do it with your GitHub account under GitHub's privacy terms. If you don't, Giscus loads but learns nothing about you.
 
-- **Personal Information:** We may collect your name, email address, and other contact details when you subscribe to our newsletter or contact us.
-- **Usage Data:** We automatically collect information about how you interact with our website, including pages visited, time spent on pages, and browser details.
+**Booking a call.** The booking link goes to [Cal.com](https://cal.com). Whatever you enter there is handled by them and shared with me so the meeting can happen.
 
-## How We Use Your Information
+**Email.** If you write to [hi@mhassan.dev](mailto:hi@mhassan.dev), I keep the conversation like any other email and don't share it.
 
-We use your data to:
-- Improve website functionality and user experience.
-- Respond to inquiries and provide customer support.
-- Send periodic updates or newsletters (if you have opted in).
-
-## Data Protection
-
-We implement reasonable security measures to protect your personal information from unauthorized access, disclosure, or alteration. However, no data transmission over the internet is entirely secure, so please exercise caution when sharing sensitive information online.
-
-## Third-Party Disclosure
-
-We do not sell or share your personal information with third parties, except as necessary to comply with legal obligations or protect our rights.
-
-## Cookies
-
-Our website uses cookies to enhance your experience. Cookies help us understand how visitors interact with our site so we can improve its functionality. You can control cookie settings through your browser.
-
-## Changes to This Policy
-
-We may update this Privacy Policy periodically. Any changes will be posted on this page with an updated effective date. Please review this policy regularly.
-
-## Contact Us
-
-If you have any questions or concerns about this Privacy Policy, please contact us at [raihassanraza10@gmail.com](mailto:raihassanraza10@gmail.com).
-
+That's it. No cookies of my own, no tracking pixels, no data sold or passed on. Questions go to the same address.

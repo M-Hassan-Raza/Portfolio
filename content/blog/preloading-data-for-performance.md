@@ -1,13 +1,12 @@
 ---
 title: "The Invoice Page That Took 4 Seconds to Search"
-date: 2025-02-11
-description: "How preloading product data cut search latency from 4 seconds to instant on a POS system's invoice page — and when this pattern breaks down."
+date: 2025-02-12T10:00:00+05:00
+description: "How preloading product data cut search latency from 4 seconds to instant on a POS invoice page, and when this pattern breaks down."
 tags: ["Performance", "Vue.js", "POS", "Web Development"]
 categories: ["Performance", "Web Development"]
 showToc: true
-showComments: true
 cover:
-  ascii: "engineering"
+  ascii: "post-preloading"
   alt: "Invoice search performance cover"
 ---
 
