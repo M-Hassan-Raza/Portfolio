@@ -1,6 +1,8 @@
 ---
 date: '2025-02-10T22:06:25+05:00'
 draft: false
+cascade:
+  comments: true
 title: 'Writing'
 description: "Notes on production failures, AI product decisions, software design, open source, and teaching."
 startHere:

@@ -8,3 +8,6 @@ resources/
 isabelFastRender/
 isableFastRender/
 output/
+
+# Local-only source material (client screenshots etc.), never published
+private/

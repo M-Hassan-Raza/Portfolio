@@ -1,141 +1,30 @@
-# Portfolio Website
+# mhassan.dev
 
-This repository contains the source code for my personal portfolio website. The website is built using Hugo and the PaperMod theme.
+Source for [mhassan.dev](https://mhassan.dev): Hugo with the PaperMod theme, deployed to GitHub Pages on every push to `main`.
 
-## Table of Contents
-
-- Installation
-- Usage
-- Configuration
-- Features
-- Contributing
-- License
-
-## Installation
-
-To set up the project locally, follow these steps:
-
-1. **Clone the repository:**
-
-    ```sh
-    git clone https://github.com/m-hassan-raza/Portfolio.git
-    cd Portfolio
-    ```
-
-2. **Install Hugo:**
-
-    Follow the [Hugo installation guide](https://gohugo.io/getting-started/installing/) to install Hugo on your machine.
-
-3. **Run the development server:**
-
-    ```sh
-    hugo server
-    ```
-
-    The website should now be accessible at `http://localhost:1313`.
-
-## Usage
-
-### Building the Site
-
-To build the site for production, run:
+## Run it
 
 ```sh
-hugo
+git clone --recurse-submodules git@github.com:M-Hassan-Raza/Portfolio.git
+cd Portfolio
+hugo server
 ```
 
-The generated static files will be located in the public directory.
+Needs Hugo extended 0.166 or newer. CI pins the exact version in `.github/workflows/deploy.yml`.
 
-### Deployment
+## Where things live
 
-You can deploy the site to any static hosting service. For example, to deploy to GitHub Pages, follow the [Hugo GitHub Pages deployment guide](https://gohugo.io/hosting-and-deployment/hosting-on-github/).
+| Path | What it holds |
+| --- | --- |
+| `data/profile.yaml` | Roles, dates, proof points. The homepage, About, Contact and Resume all read from here, so update facts once. |
+| `data/oss.yaml` | Merged open-source PRs. Generated, do not edit by hand. |
+| `content/` | Pages, case studies (`projects/`) and writing (`blog/`). |
+| `layouts/` | Overrides and additions on top of PaperMod. |
+| `assets/css/extended/` | Design tokens and component styles. |
+| `assets/ascii-covers/` | Halftone cover art, generated with the `ascii-cover` skill. |
+| `private/` | Local-only source material such as unscrubbed client screenshots. Gitignored. |
 
-## Configuration
+## Scripts
 
-The main configuration file for the site is hugo.yaml. Here are some key configuration options:
-
-- **Site Metadata:**
-
-    ```yaml
-    baseURL: "https://mhassan.dev/"
-    title: "Muhammad Hassan Raza"
-    theme: "PaperMod"
-    defaultContentLanguage: "en"
-    languageCode: "en-us"
-    ```
-
-- **Author Information:**
-
-    ```yaml
-    params:
-      author: "Muhammad Hassan Raza"
-      ShowShareButtons: true
-      ShowPostNavLinks: true
-    ```
-
-- **Menu Configuration:**
-
-    ```yaml
-    menu:
-      main:
-        - identifier: "search"
-          name: "Search"
-          url: "/search/"
-          weight: 5
-        - identifier: "about"
-          name: "About"
-          url: "/about/"
-          weight: 1
-        - identifier: "projects"
-          name: "Projects"
-          url: "/projects/"
-          weight: 2
-        - identifier: "blog"
-          name: "Blog"
-          url: "/blog/"
-          weight: 3
-    ```
-
-- **Security Settings:**
-
-    ```yaml
-    security:
-      funcs:
-        getenv:
-          - ^UMAMI_BEACON_TOKEN$
-      http:
-        methods:
-          - ^GET$
-          - ^POST$
-        csp:
-          default-src: "'self' https: 'unsafe-inline'"
-    ```
-
-## Features
-
-- **Responsive Design:** The site is fully responsive and works on all devices.
-- **SEO Friendly:** The site is optimized for search engines.
-- **Dark/Light Theme:** Automatic theme switch based on browser settings.
-- **Search Functionality:** Powered by Fuse.js for fast and accurate search results.
-- **Social Media Integration:** Links to GitHub, LinkedIn, and email.
-- **Code Block Copy Buttons:** Easily copy code snippets with a single click.
-- **Breadcrumb Navigation:** Navigate through the site with ease.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add new feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
----
-
-For more details, visit the [PaperMod Wiki](https://github.com/adityatelange/hugo-PaperMod/wiki).
+- `scripts/oss.sh` refreshes `data/oss.yaml` from GitHub. Needs an authenticated `gh`.
+- `scripts/lint-copy.sh` flags stock phrasing in prose. CI runs it on every push.

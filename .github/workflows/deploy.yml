@@ -1,9 +1,11 @@
 name: Publish to GH Pages
+
 on:
   push:
     branches:
       - main
   pull_request:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,19 +13,24 @@ jobs:
       contents: write
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
-          submodules: true
-          recursive: true
+          submodules: recursive
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.160.0'
+          hugo-version: '0.166.0'
           extended: true
+
       - name: Build
         run: |
-          hugo --minify
+          hugo --minify --panicOnWarning
           touch public/.nojekyll
+
+      - name: Check copy
+        run: ./scripts/lint-copy.sh
+
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
