@@ -24,7 +24,7 @@ Then I got ambitious. The options dialog says interface changes need a restart, 
 
 It was. A restart once in a while is a small cost. A pile of new signal plumbing in a codebase that other people maintain for free is a big one. The PR was closed, and that was the right call.
 
-[STORY?] Another PR I opened described a desktop menu that, as a maintainer pointed out, doesn't exist. He was right, and it was closed. The lesson there is shorter: check your own PR description as carefully as the diff.
+Another PR I opened described a desktop menu that, as a maintainer pointed out, doesn't exist. He was right, and it was closed. The lesson there is shorter: check your own PR description as carefully as the diff.
 
 ## Dokploy: a queue that lost deployments
 

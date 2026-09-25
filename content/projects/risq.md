@@ -6,10 +6,10 @@ tier: flagship
 weight: 5
 projectLabel: "Legal intake fraud scoring"
 facts:
-  role: "[FACT?] Your role on RISQ"
-  team: "Entropy Labs, for a legal-intake client"
-  timeline: "2025 to 2026"
-  status: "[FACT?]"
+  role: "One of the two core engineers"
+  team: "A small team, for a legal-intake client"
+  timeline: "2025 to now"
+  status: "Actively developed"
   stack: ["Python", "Speech-to-text with speaker separation", "LLM claim extraction", "Vision model checks", "NPI and CMS registries", "SMS webhooks"]
   source: "Private, client work"
 outcomes:
@@ -17,6 +17,9 @@ outcomes:
   - "Each recommendation shows the gate that produced it, so a reviewer can check the reasoning"
   - "New campaigns are configuration, not code"
 tags: ["AI", "Fraud Detection", "Legal Tech"]
+cover:
+  ascii: "risq-cover"
+  alt: "RISQ, typographic cover"
 ---
 
 Mass tort firms take a lot of calls from people who might qualify for a case. Some callers are coached, some never used the product, some call back under another name. RISQ listens to each intake call and recommends whether to send the caller on to a closer, flag them for review, or quarantine the call.

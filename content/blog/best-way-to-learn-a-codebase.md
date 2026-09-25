@@ -45,7 +45,7 @@ In Fallow, one of my PRs sat for a while with a failing check I had no way to fi
 
 **What transfers:** reading before writing. For my first large Fallow PR, which taught it to understand Vue and Nuxt conventions (about 1,100 lines across 44 files), I read the whole analysis pipeline before changing anything: the graph builder, the import resolver, the framework detection. The fix was the easy part. Understanding what the codebase assumed was the work.
 
-**What doesn't:** idioms. [STORY?] My early Rust had Python in it: deep nesting, mutable state, strings where the codebase used enums. Nobody rewrote it for me. They showed the idiomatic version and why it was preferred, which is the only way it stuck.
+**What doesn't:** idioms. My early Rust had Python in it: deep nesting, mutable state, strings where the codebase used enums. Nobody rewrote it for me. They showed the idiomatic version and why it was preferred, which is the only way it stuck.
 
 ## If you want to start
 

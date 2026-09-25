@@ -7,10 +7,9 @@ tier: flagship
 weight: 4
 projectLabel: "Clinical callback workflow"
 facts:
-  role: "[FACT?] Backend workflow and parts of the frontend"
+  role: "Led the product and backend design"
   team: "Entropy Labs team, for a healthcare client"
   timeline: "2025"
-  status: "[FACT?]"
   stack: ["FastAPI", "React", "PostgreSQL", "AWS Cognito", "AWS S3", "AWS KMS", "Redis", "OpenAI", "Vapi"]
   source: "Private, client work"
 outcomes:
@@ -25,7 +24,7 @@ cover:
 
 Anatomia is a care workflow product built around callbacks. A patient calls, the call is transcribed and analyzed, a nurse reviews the case, escalates to a doctor when needed, and a follow-up goes out, sometimes by an automated voice call. The product is the loop between a call coming in and a patient being looked after; the health records live elsewhere.
 
-It was a team project for a healthcare client. My part was mostly the backend workflow: case state, transcript and triage handling, and the follow-up paths that have to land on the right patient.
+It was a team project for a healthcare client. I led the product and the backend design: how a case moves between roles, how transcripts and triage are handled, and how follow-ups land on the right patient. The team built it with me.
 
 ## Sensitive by default
 

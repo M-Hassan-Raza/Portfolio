@@ -7,8 +7,8 @@ tier: flagship
 weight: 2
 projectLabel: "Retail operations platform"
 facts:
-  role: "Built it, end to end [FACT?]"
-  team: "Commit Software Solutions [FACT?]"
+  role: "Built it end to end"
+  team: "Just me, through Commit Software"
   timeline: "2024 to now"
   status: "In daily use by retail shops"
   stack: ["Django", "Django REST Framework", "PostgreSQL", "Redis", "Celery", "Vue 3", "Pinia", "TanStack Query"]

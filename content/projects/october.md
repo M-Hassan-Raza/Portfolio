@@ -9,7 +9,7 @@ facts:
   role: "Product and engineering lead, wrote most of the code"
   team: "Entropy Labs, a small team"
   timeline: "2025 to now"
-  status: "[FACT?] Launched / in beta"
+  status: "Launched, in use"
   stack: ["Django", "PostgreSQL", "Redis", "Next.js", "React", "TypeScript", "Supabase Auth", "WebSockets"]
   source: "Private, Entropy Labs product"
 outcomes:
@@ -17,6 +17,9 @@ outcomes:
   - "Analytics and exports built from verified records, not estimates"
   - "Realtime messaging and dashboards over authenticated WebSocket connections"
 tags: ["Django", "Next.js", "Multi-Party", "Analytics"]
+cover:
+  ascii: "october-cover"
+  alt: "October, typographic cover"
 ---
 
 October is where brands, agencies and creators run influencer campaigns together. A brand or its agency sets up a campaign, brings in creators, agrees on deliverables, tracks the posts as they go live and ends up with a report. I lead the product and wrote most of the backend and frontend.

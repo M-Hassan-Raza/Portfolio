@@ -15,7 +15,7 @@ facts:
   source: "Private, Entropy Labs product"
 outcomes:
   - "More than fifteen specialist agents in production, each with its own tools and guardrails"
-  - "Time to first token cut from about 22 seconds to 8 to 10 by running retrieval in parallel [FACT?]"
+  - "First responses several times faster once retrieval ran in parallel"
   - "Spend and send actions always pass through a human approval step"
 tags: ["AI", "LangGraph", "Multi-Tenant", "RAG"]
 cover:

@@ -10,7 +10,6 @@ facts:
   role: "Backend execution flow and much of the frontend"
   team: "Entropy Labs team, for a client"
   timeline: "2025"
-  status: "[FACT?]"
   stack: ["Django", "Channels", "PostgreSQL", "Next.js", "React", "OpenRouter", "Supabase"]
   source: "Private, client work"
 outcomes:
