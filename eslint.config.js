@@ -22,8 +22,6 @@ export default [
       ".output/**",
       ".tanstack/**",
       ".content-collections/**",
-      "themes/**",
-      "public/**",
       "private/**",
       "output/**",
       ".claude/**",

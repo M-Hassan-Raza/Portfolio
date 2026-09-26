@@ -8,7 +8,6 @@ pnpm-lock.yaml
 /content
 assets
 static
-public
 private
 output
 .playwright-cli

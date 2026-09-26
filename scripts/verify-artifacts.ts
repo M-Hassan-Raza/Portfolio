@@ -14,7 +14,9 @@ const artifactPath = (path: string) =>
   join(output, path.endsWith("/") ? `${path}index.html` : path)
 const requiredPaths = z
   .array(z.string())
-  .parse(JSON.parse(readFileSync("tests/fixtures/hugo-paths.json", "utf8")))
+  .parse(
+    JSON.parse(readFileSync("tests/fixtures/published-paths.json", "utf8"))
+  )
 for (const path of requiredPaths)
   assert(existsSync(artifactPath(path)), `Missing published URL: ${path}`)
 for (const item of [...mainNavigation, ...footerNavigation])

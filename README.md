@@ -20,23 +20,23 @@ pnpm preview
 
 ## Ownership
 
-| Path                             | Owner                                                                                      |
-| -------------------------------- | ------------------------------------------------------------------------------------------ |
-| `content/`                       | Authored MDX, canonical paths, aliases, and metadata.                                      |
-| `src/lib/content/schema.ts`      | Strict content and data contracts; generated types are inferred from these schemas.        |
-| `content-collections.ts`         | Validation, MDX compilation, headings, reading time, and exclusion of unpublished content. |
-| `data/profile.yaml`              | Shared profile facts for home, About, Contact, and Resume.                                 |
-| `data/oss.json`                  | Generated open-source records; refresh with `scripts/oss.sh` and authenticated `gh`.       |
-| `data/oss_highlights.yaml`       | Curated references into the open-source records.                                           |
-| `src/lib/content/`               | Published catalog, ordering, taxonomy paths, redirects, and search projection.             |
-| `src/routes/`                    | TanStack route contracts and URL state.                                                    |
-| `src/components/`                | Page presentation and accessible controls.                                                 |
-| `src/styles.css`                 | Theme tokens, typography, and shared styles.                                               |
-| `assets/ascii-covers/`           | Cover art loaded as separate modules.                                                      |
-| `static/`                        | Public files copied to the artifact.                                                       |
-| `scripts/static-output.tsx`      | Feeds, sitemap, aliases, search index, and standalone 404.                                 |
-| `tests/fixtures/hugo-paths.json` | Fresh Hugo baseline of 379 published paths.                                                |
-| `private/`                       | Ignored local source material; never published.                                            |
+| Path                                  | Owner                                                                                      |
+| ------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `content/`                            | Authored MDX, canonical paths, aliases, and metadata.                                      |
+| `src/lib/content/schema.ts`           | Strict content and data contracts; generated types are inferred from these schemas.        |
+| `content-collections.ts`              | Validation, MDX compilation, headings, reading time, and exclusion of unpublished content. |
+| `data/profile.yaml`                   | Shared profile facts for home, About, Contact, and Resume.                                 |
+| `data/oss.json`                       | Generated open-source records; refresh with `scripts/oss.sh` and authenticated `gh`.       |
+| `data/oss_highlights.yaml`            | Curated references into the open-source records.                                           |
+| `src/lib/content/`                    | Published catalog, ordering, taxonomy paths, redirects, and search projection.             |
+| `src/routes/`                         | TanStack route contracts and URL state.                                                    |
+| `src/components/`                     | Page presentation and accessible controls.                                                 |
+| `src/styles.css`                      | Theme tokens, typography, and shared styles.                                               |
+| `assets/ascii-covers/`                | Cover art loaded as separate modules.                                                      |
+| `static/`                             | Public files copied to the artifact.                                                       |
+| `scripts/static-output.tsx`           | Feeds, sitemap, aliases, search index, and standalone 404.                                 |
+| `tests/fixtures/published-paths.json` | Published URL contract: 379 paths.                                                         |
+| `private/`                            | Ignored local source material; never published.                                            |
 
 Keep the schemas and profile facts canonical. Use TanStack packages for needs they own; add dependencies when a feature needs them. Add shadcn controls using the Base UI configuration in `components.json`.
 
