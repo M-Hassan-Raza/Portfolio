@@ -1,3 +1,4 @@
+import { ThemeToggle } from "./theme-toggle"
 import { profile } from "#content"
 import { mainNavigation, footerNavigation } from "@/lib/site"
 import { PageLink } from "./content/page-link"
@@ -17,6 +18,7 @@ export function SiteHeader() {
           ))}
         </ul>
       </nav>
+      <ThemeToggle />
     </header>
   )
 }

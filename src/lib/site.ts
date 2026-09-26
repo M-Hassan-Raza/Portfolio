@@ -14,7 +14,7 @@ export const site = {
     category: "General",
     categoryId: "DIC_kwDON3Oaj84Cm3y9",
   },
-}
+} as const
 export const mainNavigation = [
   { label: "Work", path: "/projects/" },
   { label: "Writing", path: "/blog/" },

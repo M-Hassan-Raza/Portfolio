@@ -1,3 +1,5 @@
+import { ThemeProvider } from "next-themes"
+import { site } from "@/lib/site"
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import type { ReactNode } from "react"
 import { SiteHeader, SiteFooter } from "@/components/site-chrome"
@@ -22,29 +24,45 @@ export const Route = createRootRoute({
     ],
   }),
   notFoundComponent: () => (
-    <main className="mx-auto max-w-5xl p-6">
+    <section className="space-y-6">
       <h1>Page not found</h1>
       <a href="/">Return home</a>
-    </main>
+    </section>
   ),
   shellComponent: RootDocument,
 })
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        <a href="#main-content" className="sr-only focus:not-sr-only">
-          Skip to content
-        </a>
-        <SiteHeader />
-        <main id="main-content" className="mx-auto max-w-5xl px-6 py-12">
-          {children}
-        </main>
-        <SiteFooter />
+        <ThemeProvider
+          attribute="class"
+          storageKey="pref-theme"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <a href="#main-content" className="sr-only focus:not-sr-only">
+            Skip to content
+          </a>
+          <SiteHeader />
+          <main id="main-content" className="mx-auto max-w-5xl px-6 py-12">
+            {children}
+          </main>
+          <SiteFooter />
+        </ThemeProvider>
+        {import.meta.env.PROD && (
+          <script
+            defer
+            src={site.umami.scriptUrl}
+            data-website-id={site.umami.websiteId}
+            data-domains={new URL(site.url).hostname}
+          />
+        )}
         <Scripts />
       </body>
     </html>

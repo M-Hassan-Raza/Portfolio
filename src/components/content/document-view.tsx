@@ -1,3 +1,4 @@
+import { Comments } from "./comments"
 import { taxonomyPath } from "@/lib/content/taxonomies"
 import type { ReactNode } from "react"
 import type { Document } from "#content"
@@ -135,6 +136,7 @@ export function DocumentView({
           ))}
         </footer>
       )}
+      {document.comments && <Comments path={document.path} />}
     </article>
   )
 }
