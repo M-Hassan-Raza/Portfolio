@@ -5,7 +5,7 @@ dist
 .content-collections
 src/routeTree.gen.ts
 pnpm-lock.yaml
-content
+/content
 assets
 static
 layouts

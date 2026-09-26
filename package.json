@@ -4,14 +4,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "vite build",
+    "build": "pnpm content:build && vite build",
     "preview": "vite preview --port 3000",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "pnpm content:build && tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "check:format": "prettier --check .",
     "check:copy": "./scripts/lint-copy.sh",
-    "verify": "pnpm typecheck && pnpm lint && pnpm check:format && pnpm check:copy && pnpm build"
+    "verify": "pnpm typecheck && pnpm lint && pnpm check:format && pnpm check:copy && pnpm build",
+    "content:build": "content-collections build"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
