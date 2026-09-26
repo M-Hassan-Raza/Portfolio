@@ -6,13 +6,14 @@
     "dev": "vite dev --port 3000",
     "build": "pnpm content:build && vite build",
     "preview": "vite preview --port 3000",
-    "typecheck": "pnpm content:build && tsc --noEmit",
+    "typecheck": "pnpm content:build && pnpm routes:build && tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "check:format": "prettier --check .",
     "check:copy": "./scripts/lint-copy.sh",
     "verify": "pnpm typecheck && pnpm lint && pnpm check:format && pnpm check:copy && pnpm build",
-    "content:build": "content-collections build"
+    "content:build": "content-collections build",
+    "routes:build": "tsr generate"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -36,6 +37,7 @@
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4",
     "@tanstack/eslint-config": "^0.4.0",
+    "@tanstack/router-cli": "^1.167.38",
     "@types/node": "^24.13.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -52,6 +54,7 @@
     "remark-gfm": "^4.0.1",
     "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
+    "schema-dts": "^2.0.0",
     "shadcn": "^4.21.0",
     "shiki": "^4.4.3",
     "tailwindcss": "^4",

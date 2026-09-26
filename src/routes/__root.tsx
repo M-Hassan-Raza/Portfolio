@@ -1,5 +1,6 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import type { ReactNode } from "react"
+import { SiteHeader, SiteFooter } from "@/components/site-chrome"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRoute({
@@ -27,7 +28,14 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <main className="mx-auto max-w-5xl px-6 py-12">{children}</main>
+        <a href="#main-content" className="sr-only focus:not-sr-only">
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main-content" className="mx-auto max-w-5xl px-6 py-12">
+          {children}
+        </main>
+        <SiteFooter />
         <Scripts />
       </body>
     </html>
