@@ -1,16 +1,23 @@
 ---
-title: "Scoring Fraud in Legal Intake Calls"
-date: 2026-04-08T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
-description: "Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller."
-tags: ["AI", "Fraud Detection", "Legal Tech", "LLM"]
-categories: ["AI systems"]
-ShowToc: true
+kind: article
+path: /blog/fraud-scoring-legal-intake/
+title: Scoring Fraud in Legal Intake Calls
+description: Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.
+publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - AI
+  - Fraud Detection
+  - Legal Tech
+  - LLM
+categories:
+  - AI systems
 cover:
-  ascii: "post-fraud"
-  alt: "Legal intake fraud scoring"
+  ascii: post-fraud
+  alt: Legal intake fraud scoring
+comments: true
+toc: true
 ---
-
 Mass tort firms run intake lines that take a lot of calls from people who may qualify for a case: they took a certain drug, had a certain device implanted, lived near a certain plant. Some share of those callers aren't who they say they are. Some are coached and reading from a script. Some never used the product. Some call back under a different name.
 
 [RISQ](/projects/risq/) listens to those calls, scores them, and recommends one of three things: send the caller on to a closer, flag them for a human to review, or quarantine the call. This post is about how the scoring works in principle. The actual weights and thresholds belong to the client, so they're not here.

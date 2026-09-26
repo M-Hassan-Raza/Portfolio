@@ -1,16 +1,24 @@
 ---
+kind: article
+path: /blog/langgraph-multi-agent-middleware/
 title: "Agent Middleware: What Kept Obelisk's Agents in Line"
-date: 2026-04-08T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
-description: "Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work."
-tags: ["LangChain", "LangGraph", "AI", "Agents", "Production"]
-categories: ["AI systems"]
-ShowToc: true
+description: Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work.
+publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - LangChain
+  - LangGraph
+  - AI
+  - Agents
+  - Production
+categories:
+  - AI systems
 cover:
-  ascii: "post-middleware"
-  alt: "Agent middleware"
+  ascii: post-middleware
+  alt: Agent middleware
+comments: true
+toc: true
 ---
-
 [Obelisk](/projects/obelisk/) is the AI marketing platform we build at Entropy Labs. It runs more than fifteen specialist agents: brand voice, SEO, email, paid ads, strategy and so on, all behind one API.
 
 Writing an agent turned out to be the easy part. The hard part was everything wrapped around each model call: which model to use, what to do when the conversation gets long, how to stop an agent calling the same tool forever, when to ask a human before spending money, and what to do when something fails. Early on, each agent handled those things its own way. That didn't last.

@@ -1,14 +1,22 @@
 ---
-title: "How Pyscn Analyzes Python with Go and tree-sitter"
-date: 2026-04-08T10:00:00+05:00
-description: "How Pyscn uses Go and tree-sitter to analyze Python code quickly for dead code, clone detection, and dependency insight."
-tags: ["Go", "tree-sitter", "Static Analysis", "Python", "MCP", "Pyscn"]
-ShowToc: true
+kind: article
+path: /blog/go-treesitter-code-analyzer/
+title: How Pyscn Analyzes Python with Go and tree-sitter
+description: How Pyscn uses Go and tree-sitter to analyze Python code quickly for dead code, clone detection, and dependency insight.
+publishedAt: 2026-04-08T05:00:00.000Z
+tags:
+  - Go
+  - tree-sitter
+  - Static Analysis
+  - Python
+  - MCP
+  - Pyscn
 cover:
-  ascii: "post-pyscn"
-  alt: "Pyscn tree-sitter analysis cover"
+  ascii: post-pyscn
+  alt: Pyscn tree-sitter analysis cover
+comments: true
+toc: true
 ---
-
 [Pyscn](https://github.com/ludo-technologies/pyscn) is a code quality analyzer for Python built by [DaisukeYoda](https://github.com/DaisukeYoda) at ludo-technologies. It finds dead code, code clones, coupling issues, and complexity hotspots. It's written in Go, uses tree-sitter for parsing, and the project reports processing over 100,000 lines per second.
 
 I contribute to it ([my pull requests](https://github.com/ludo-technologies/pyscn/pulls?q=author%3AM-Hassan-Raza), including [the one that made dependency analysis scale](https://github.com/ludo-technologies/pyscn/pull/695)), and its engineering decisions are worth writing about: how it detects dead code through control flow analysis, finds duplicated code across clone types 1-4 with LSH acceleration, and integrates with AI coding assistants via MCP.

@@ -1,15 +1,23 @@
 ---
-title: "The Invoice Page That Took 4 Seconds to Search"
-date: 2025-02-12T10:00:00+05:00
-description: "How preloading product data cut search latency from 4 seconds to instant on a POS invoice page, and when this pattern breaks down."
-tags: ["Performance", "Vue.js", "POS", "Web Development"]
-categories: ["Performance", "Web Development"]
-showToc: true
+kind: article
+path: /blog/preloading-data-for-performance/
+title: The Invoice Page That Took 4 Seconds to Search
+description: How preloading product data cut search latency from 4 seconds to instant on a POS invoice page, and when this pattern breaks down.
+publishedAt: 2025-02-12T05:00:00.000Z
+tags:
+  - Performance
+  - Vue.js
+  - POS
+  - Web Development
+categories:
+  - Performance
+  - Web Development
 cover:
-  ascii: "post-preloading"
-  alt: "Invoice search performance cover"
+  ascii: post-preloading
+  alt: Invoice search performance cover
+comments: true
+toc: true
 ---
-
 In [Polaris](/projects/polaris), the POS system I built for retail shops, the invoice page has a product search bar. A cashier types a product name, results appear, they click to add it to the invoice. Simple.
 
 Except it wasn't. Every keystroke fired an API call. On a shop with 500 products, search took 3-4 seconds because each request hit the database, serialized the response, and traveled back over the network. Cashiers were waiting on every single search. During rush hours, this was painful.

@@ -1,20 +1,27 @@
 ---
+kind: article
+path: /blog/optimizing-django-performance/
 title: "Polaris Performance Log: The Django Mistakes I Made First"
-date: 2025-02-10T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
-description: "Refunds that queried once per line item, stock updated one row at a time, and signals that recalculated ledgers nobody asked about. What I changed in Polaris, and what I'd tell myself earlier."
+description: Refunds that queried once per line item, stock updated one row at a time, and signals that recalculated ledgers nobody asked about. What I changed in Polaris, and what I'd tell myself earlier.
+publishedAt: 2025-02-10T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
 aliases:
   - /blog/django-orm-optimizations/
   - /blog/django-orm-optimizaitons/
   - /blog/using-signals-optimally/
-tags: ["Django", "PostgreSQL", "Performance", "Polaris"]
-categories: ["Backend"]
-ShowToc: true
+tags:
+  - Django
+  - PostgreSQL
+  - Performance
+  - Polaris
+categories:
+  - Backend
 cover:
-  ascii: "post-django-log"
-  alt: "Django performance notes"
+  ascii: post-django-log
+  alt: Django performance notes
+comments: true
+toc: true
 ---
-
 [Polaris](/projects/polaris/) is the retail operations system I built for shops that bill all day: invoices, refunds, stock, customer ledgers. The first version was correct and slow in the places cashiers notice most. Checkout dragged, refunds dragged, and customers standing at the counter were, to put it politely, fuming a little.
 
 None of what follows is clever. It's a log of the Django habits that looked fine with three test products and fell over with a real catalogue.

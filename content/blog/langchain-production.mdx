@@ -1,16 +1,24 @@
 ---
+kind: article
+path: /blog/langchain-production/
 title: "LangChain in Production: What the Tutorials Leave Out"
-date: 2026-02-01T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
 description: "Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions."
-tags: ["LangChain", "LangGraph", "Python", "AI", "Production"]
-categories: ["AI systems"]
-ShowToc: true
+publishedAt: 2026-02-01T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - LangChain
+  - LangGraph
+  - Python
+  - AI
+  - Production
+categories:
+  - AI systems
 cover:
-  ascii: "post-langchain"
-  alt: "LangChain in production"
+  ascii: post-langchain
+  alt: LangChain in production
+comments: true
+toc: true
 ---
-
 Every LangChain tutorial ends where the real work starts. A tidy script queries a PDF, you think you'll ship it by Friday, and a few weeks later you're working out why a chain returns an empty string with no error.
 
 I've shipped LangChain-based features at WebNoodle and at Entropy Labs, and we still use it for Obelisk's agents. So this is about where I've found it pays for itself, and what I now do by default when it does.

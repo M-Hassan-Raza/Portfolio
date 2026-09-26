@@ -1,16 +1,24 @@
 ---
-title: "I Shipped a Race Condition That Oversold Stock (And Other War Stories)"
-date: 2026-04-08T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
-description: "Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the unexciting fixes that held."
-tags: ["Production", "Django", "PostgreSQL", "Concurrency", "Polaris"]
-categories: ["Backend"]
-ShowToc: true
+kind: article
+path: /blog/war-stories-from-production/
+title: I Shipped a Race Condition That Oversold Stock (And Other War Stories)
+description: Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the unexciting fixes that held.
+publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - Production
+  - Django
+  - PostgreSQL
+  - Concurrency
+  - Polaris
+categories:
+  - Backend
 cover:
-  ascii: "post-war-stories"
-  alt: "Production war stories"
+  ascii: post-war-stories
+  alt: Production war stories
+comments: true
+toc: true
 ---
-
 Most engineering blogs are about things that worked. This one is about things I broke, mostly in [Polaris](/projects/polaris/), the retail system I built for shops that bill all day, and one in an AI pipeline at Entropy Labs. These happened between 2024 and 2026.
 
 ## Two cashiers, one item

@@ -1,15 +1,23 @@
 ---
-title: "When to Extract a Component (and When to Just Copy-Paste)"
-date: 2025-02-12
-description: "The 3-usage-sites heuristic for component extraction, a premature ConfirmDialog that cost me time, and why copy-paste is sometimes the right call in Vue."
-tags: ["Vue.js", "Components", "Architecture", "Best Practices"]
-categories: ["Vue.js", "Web Development"]
-showToc: true
+kind: article
+path: /blog/reusing-components-benefits/
+title: When to Extract a Component (and When to Just Copy-Paste)
+description: The 3-usage-sites heuristic for component extraction, a premature ConfirmDialog that cost me time, and why copy-paste is sometimes the right call in Vue.
+publishedAt: 2025-02-12T00:00:00.000Z
+tags:
+  - Vue.js
+  - Components
+  - Architecture
+  - Best Practices
+categories:
+  - Vue.js
+  - Web Development
 cover:
-  ascii: "post-components"
-  alt: "Component extraction cover"
+  ascii: post-components
+  alt: Component extraction cover
+comments: true
+toc: true
 ---
-
 Early in building [Polaris](/projects/polaris), I extracted a `ConfirmDialog` component after using it exactly once. I figured I'd need it everywhere — deletes, password changes, dangerous actions. Classic foresight.
 
 Then the second use case needed a text input inside the dialog. The third needed two buttons with custom labels instead of "Confirm/Cancel". The fourth needed async validation before confirming. Within a month, my clean `ConfirmDialog` had 8 props, 3 slots, and a `mode` prop that changed its behavior entirely.
