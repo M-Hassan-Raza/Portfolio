@@ -5,7 +5,12 @@ import type { Document } from "#content"
 import { AboutDetails, ResumeDetails } from "@/components/views/profile"
 import { OpenSourceView } from "@/components/views/open-source"
 import { EntryList } from "./entry-list"
-import { documents, getDocument } from "@/lib/content/catalog"
+import {
+  articles,
+  projects,
+  documents,
+  getDocument,
+} from "@/lib/content/catalog"
 import { CollectionView } from "@/components/views/collections"
 import { ContentBody } from "./body"
 import { AsciiCover } from "./ascii-cover"
@@ -20,13 +25,24 @@ export function DocumentView({
 }) {
   const parentPath = `/${document.path.split("/").filter(Boolean).slice(0, -1).join("/")}/`
   const parent = getDocument(parentPath)
+  const siblings =
+    document.kind === "article"
+      ? articles
+      : document.kind === "project"
+        ? projects
+        : []
+  const index = siblings.findIndex((entry) => entry.path === document.path)
+  const previous = siblings[index - 1]
+  const next = siblings[index + 1]
   return (
     <article className="space-y-8">
       <header className="space-y-4">
         {document.breadcrumbs && document.path !== "/" && (
           <nav aria-label="Breadcrumb" className="flex gap-3 text-sm">
             <PageLink path="/">Home</PageLink>
-            {parent && <PageLink path={parent.path}>{parent.title}</PageLink>}
+            {parent && parent.path !== "/" && (
+              <PageLink path={parent.path}>{parent.title}</PageLink>
+            )}
           </nav>
         )}
         {document.kind === "project" && document.projectLabel && (
@@ -137,6 +153,17 @@ export function DocumentView({
         </footer>
       )}
       {document.comments && <Comments path={document.path} />}
+      {(previous || next) && (
+        <nav
+          aria-label="More to read"
+          className="flex flex-wrap justify-between gap-6 border-t pt-6"
+        >
+          {previous && (
+            <PageLink path={previous.path}>Previous: {previous.title}</PageLink>
+          )}
+          {next && <PageLink path={next.path}>Next: {next.title}</PageLink>}
+        </nav>
+      )}
     </article>
   )
 }

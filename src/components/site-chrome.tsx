@@ -39,6 +39,7 @@ export function SiteFooter() {
         <a href={profile.links.github}>GitHub</a>
         <a href={profile.links.linkedin}>LinkedIn</a>
         <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a href="#main-content">Back to top</a>
       </p>
     </footer>
   )
