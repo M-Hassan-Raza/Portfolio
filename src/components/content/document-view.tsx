@@ -1,3 +1,4 @@
+import { taxonomyPath } from "@/lib/content/taxonomies"
 import type { ReactNode } from "react"
 import type { Document } from "#content"
 import { AboutDetails, ResumeDetails } from "@/components/views/profile"
@@ -121,7 +122,9 @@ export function DocumentView({ document }: { document: Document }) {
       {document.tags.length > 0 && (
         <footer className="flex flex-wrap gap-3">
           {document.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
+            <PageLink key={tag} path={taxonomyPath("tags", tag)}>
+              {tag}
+            </PageLink>
           ))}
         </footer>
       )}
