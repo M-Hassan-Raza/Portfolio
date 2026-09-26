@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "pnpm content:build && vite dev --port 3000",
     "build": "pnpm content:build && vite build && tsx scripts/static-output.tsx",
     "preview": "http-server dist/client -p 3000 -c-1",
     "typecheck": "pnpm content:build && pnpm routes:build && tsc --noEmit",

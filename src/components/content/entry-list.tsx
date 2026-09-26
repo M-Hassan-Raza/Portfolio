@@ -1,5 +1,5 @@
+import { Link } from "@tanstack/react-router"
 import type { Document } from "#content"
-import { PageLink } from "./page-link"
 
 export function EntryList({ entries }: { entries: readonly Document[] }) {
   return (
@@ -7,7 +7,7 @@ export function EntryList({ entries }: { entries: readonly Document[] }) {
       {entries.map((entry) => (
         <li key={entry.path} className="space-y-2 py-5">
           <h3 className="text-xl font-medium">
-            <PageLink path={entry.path}>{entry.title}</PageLink>
+            <Link to={entry.path}>{entry.title}</Link>
           </h3>
           <p className="text-muted-foreground">{entry.description}</p>
           {entry.publishedAt && (

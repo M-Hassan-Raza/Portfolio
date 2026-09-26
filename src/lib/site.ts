@@ -29,4 +29,6 @@ export const footerNavigation = [
   { label: "Resume", path: "/resume/" },
   { label: "Search", path: "/search/" },
   { label: "Archive", path: "/archives/" },
+  { label: "Privacy", path: "/privacy-policy/" },
+  { label: "DMCA", path: "/dmca/" },
 ]

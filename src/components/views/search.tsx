@@ -1,6 +1,6 @@
+import { Link } from "@tanstack/react-router"
 import Fuse from "fuse.js"
 import { searchEntries } from "@/lib/content/search"
-import { PageLink } from "@/components/content/page-link"
 import { Input } from "@/components/ui/input"
 
 const index = new Fuse(searchEntries, {
@@ -10,9 +10,11 @@ const index = new Fuse(searchEntries, {
 })
 export function SearchView({
   query,
+  placeholder,
   onQueryChange,
 }: {
   query: string
+  placeholder: string
   onQueryChange: (query: string) => void
 }) {
   const results = query.trim() ? index.search(query) : []
@@ -27,7 +29,7 @@ export function SearchView({
           type="search"
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
-          placeholder="Search posts, projects, and more…"
+          placeholder={placeholder}
         />
       </div>
       <p role="status">
@@ -37,7 +39,7 @@ export function SearchView({
         {results.map(({ item }) => (
           <li key={item.path}>
             <h2 className="text-xl font-medium">
-              <PageLink path={item.path}>{item.title}</PageLink>
+              <Link to={item.path}>{item.title}</Link>
             </h2>
             <p>{item.description}</p>
           </li>

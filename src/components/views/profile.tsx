@@ -1,6 +1,6 @@
+import { Link } from "@tanstack/react-router"
 import { profile, openSource } from "#content"
 import type { Profile } from "#content"
-import { PageLink } from "@/components/content/page-link"
 
 function ExperienceList({ entries }: { entries: Profile["experience"] }) {
   return (
@@ -49,7 +49,9 @@ export function AboutDetails() {
           Teaching
         </h2>
         <ExperienceList entries={profile.teaching} />
-        <PageLink path="/teaching/">More on teaching</PageLink>
+        <Link to="/$/" params={{ _splat: "teaching" }}>
+          More on teaching
+        </Link>
       </section>
       <section className="space-y-5">
         <h2 className="text-2xl font-semibold" id="education">
@@ -57,7 +59,9 @@ export function AboutDetails() {
         </h2>
         <Education />
       </section>
-      <PageLink path="/resume/">Resume</PageLink>
+      <Link to="/$/" params={{ _splat: "resume" }}>
+        Resume
+      </Link>
     </div>
   )
 }
@@ -92,7 +96,9 @@ export function ResumeDetails() {
           {openSource.merged} merged pull requests across{" "}
           {openSource.projects.length} projects.
         </p>
-        <PageLink path="/open-source/">The full record</PageLink>
+        <Link to="/$/" params={{ _splat: "open-source" }}>
+          The full record
+        </Link>
       </section>
       <section className="space-y-5">
         <h2 className="text-2xl font-semibold">Teaching</h2>

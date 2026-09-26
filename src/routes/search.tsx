@@ -15,10 +15,14 @@ function SearchPage() {
   const { q } = Route.useSearch()
   const hydrated = useHydrated()
   const navigate = Route.useNavigate()
+  const document = Route.useLoaderData()
+  if (document.kind !== "search")
+    throw new Error("Search route requires search content")
   return (
-    <DocumentView document={Route.useLoaderData()}>
+    <DocumentView document={document}>
       <SearchView
         query={hydrated ? q : ""}
+        placeholder={document.placeholder}
         onQueryChange={(query) => {
           void navigate({ search: { q: query }, replace: true })
         }}

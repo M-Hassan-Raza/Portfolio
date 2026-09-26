@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router"
 import { Comments } from "./comments"
 import { taxonomyPath } from "@/lib/content/taxonomies"
 import type { ReactNode } from "react"
@@ -14,7 +15,6 @@ import {
 import { CollectionView } from "@/components/views/collections"
 import { ContentBody } from "./body"
 import { AsciiCover } from "./ascii-cover"
-import { PageLink } from "./page-link"
 
 export function DocumentView({
   document,
@@ -37,11 +37,14 @@ export function DocumentView({
   return (
     <article className="space-y-8">
       <header className="space-y-4">
+        {document.kind === "page" && document.kicker && (
+          <p>{document.kicker}</p>
+        )}
         {document.breadcrumbs && document.path !== "/" && (
           <nav aria-label="Breadcrumb" className="flex gap-3 text-sm">
-            <PageLink path="/">Home</PageLink>
+            <Link to="/">Home</Link>
             {parent && parent.path !== "/" && (
-              <PageLink path={parent.path}>{parent.title}</PageLink>
+              <Link to={parent.path}>{parent.title}</Link>
             )}
           </nav>
         )}
@@ -146,9 +149,9 @@ export function DocumentView({
       {document.tags.length > 0 && (
         <footer className="flex flex-wrap gap-3">
           {document.tags.map((tag) => (
-            <PageLink key={tag} path={taxonomyPath("tags", tag)}>
+            <Link key={tag} to={taxonomyPath("tags", tag)}>
               {tag}
-            </PageLink>
+            </Link>
           ))}
         </footer>
       )}
@@ -159,9 +162,9 @@ export function DocumentView({
           className="flex flex-wrap justify-between gap-6 border-t pt-6"
         >
           {previous && (
-            <PageLink path={previous.path}>Previous: {previous.title}</PageLink>
+            <Link to={previous.path}>Previous: {previous.title}</Link>
           )}
-          {next && <PageLink path={next.path}>Next: {next.title}</PageLink>}
+          {next && <Link to={next.path}>Next: {next.title}</Link>}
         </nav>
       )}
     </article>

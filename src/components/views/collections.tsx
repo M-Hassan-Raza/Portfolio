@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router"
 import type { Document } from "#content"
 import {
   articles,
@@ -6,7 +7,6 @@ import {
   requireDocument,
 } from "@/lib/content/catalog"
 import { EntryList } from "@/components/content/entry-list"
-import { PageLink } from "@/components/content/page-link"
 
 export function CollectionView({
   document,
@@ -24,9 +24,9 @@ export function CollectionView({
                 {document.startHere.map((reference) => (
                   <li key={reference.page}>
                     <h3 className="text-xl">
-                      <PageLink path={reference.page}>
+                      <Link to={reference.page}>
                         {requireDocument(reference.page).title}
-                      </PageLink>
+                      </Link>
                     </h3>
                     <p>{reference.note}</p>
                   </li>

@@ -1,19 +1,19 @@
+import { Link } from "@tanstack/react-router"
 import { ThemeToggle } from "./theme-toggle"
 import { profile } from "#content"
 import { mainNavigation, footerNavigation } from "@/lib/site"
-import { PageLink } from "./content/page-link"
 
 export function SiteHeader() {
   return (
     <header className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-5 px-6 py-6 print:hidden">
-      <PageLink path="/" className="font-semibold">
+      <Link to="/" className="font-semibold">
         {profile.name}
-      </PageLink>
+      </Link>
       <nav aria-label="Main">
         <ul className="flex flex-wrap gap-5">
           {mainNavigation.map((item) => (
             <li key={item.path}>
-              <PageLink path={item.path}>{item.label}</PageLink>
+              <Link to={item.path}>{item.label}</Link>
             </li>
           ))}
         </ul>
@@ -29,7 +29,7 @@ export function SiteFooter() {
         <ul className="flex flex-wrap gap-5">
           {footerNavigation.map((item) => (
             <li key={item.path}>
-              <PageLink path={item.path}>{item.label}</PageLink>
+              <Link to={item.path}>{item.label}</Link>
             </li>
           ))}
         </ul>

@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router"
 import { profile, openSource } from "#content"
 import type { Document } from "#content"
 import { requireDocument } from "@/lib/content/catalog"
-import { PageLink } from "@/components/content/page-link"
 import { AsciiCover } from "@/components/content/ascii-cover"
 import { Button } from "@/components/ui/button"
 import { OpenSourceHighlights } from "./oss-highlights"
@@ -59,20 +58,24 @@ export function HomeView({
           {[home.work.lead, ...home.work.more].map((reference) => (
             <li key={reference.page} className="space-y-2">
               <h3 className="text-xl font-medium">
-                <PageLink path={reference.page}>
+                <Link to={reference.page}>
                   {requireDocument(reference.page).title}
-                </PageLink>
+                </Link>
               </h3>
               <p>{reference.note}</p>
             </li>
           ))}
         </ul>
-        <PageLink path="/projects/">All work</PageLink>
+        <Link to="/$/" params={{ _splat: "projects" }}>
+          All work
+        </Link>
       </section>
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold">Patches in tools I use</h2>
         <OpenSourceHighlights limit={3} />
-        <PageLink path="/open-source/">All {openSource.merged} PRs</PageLink>
+        <Link to="/$/" params={{ _splat: "open-source" }}>
+          All {openSource.merged} PRs
+        </Link>
       </section>
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold">Writing</h2>
@@ -80,15 +83,17 @@ export function HomeView({
           {home.writing.map((reference) => (
             <li key={reference.page}>
               <h3 className="text-xl font-medium">
-                <PageLink path={reference.page}>
+                <Link to={reference.page}>
                   {requireDocument(reference.page).title}
-                </PageLink>
+                </Link>
               </h3>
               <p>{reference.note}</p>
             </li>
           ))}
         </ul>
-        <PageLink path="/blog/">Everything</PageLink>
+        <Link to="/$/" params={{ _splat: "blog" }}>
+          Everything
+        </Link>
       </section>
       <section className="space-y-5">
         <h2 className="text-2xl font-semibold">
@@ -98,7 +103,9 @@ export function HomeView({
           I take on a small amount of outside work: architecture and AI reviews,
           hands-on builds, and advisory for teams shipping something real.
         </p>
-        <PageLink path="/contact/">How I work</PageLink>
+        <Link to="/$/" params={{ _splat: "contact" }}>
+          How I work
+        </Link>
       </section>
     </div>
   )

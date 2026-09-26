@@ -1,5 +1,3 @@
-import { topics } from "./src/lib/content/taxonomies"
-import { documents } from "./src/lib/content/catalog"
 import { defineConfig } from "vite"
 import contentCollections from "@content-collections/vite"
 import tsconfigPaths from "vite-tsconfig-paths"
@@ -14,19 +12,12 @@ export default defineConfig({
     tsconfigPaths(),
     tailwindcss(),
     tanstackStart({
-      prerender: { enabled: true, crawlLinks: false, failOnError: true },
-      pages: [
-        ...documents
-          .filter((document) => document.kind !== "not-found")
-          .map((document) => ({
-            path: document.path,
-            prerender: { enabled: true },
-          })),
-        ...topics.map((topic) => ({
-          path: topic.path,
-          prerender: { enabled: true },
-        })),
-      ],
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+        failOnError: true,
+        filter: ({ path }) => !/\.[^/]+$/.test(path),
+      },
     }),
     viteReact(),
   ],
