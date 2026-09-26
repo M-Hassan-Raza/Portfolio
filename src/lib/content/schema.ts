@@ -33,7 +33,7 @@ export const documentSchema = z.discriminatedUnion("kind", [
       hero: z.strictObject({
         title: z.string(),
         summary: z.string(),
-        image_alt: z.string(),
+        imageAlt: z.string(),
       }),
       work: z.strictObject({ lead: reference, more: z.array(reference) }),
       writing: z.array(reference),
