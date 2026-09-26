@@ -1,11 +1,7 @@
 import { allDocuments } from "#content"
 import type { Document } from "#content"
 
-export const documents = allDocuments.filter(
-  (document) =>
-    !document.draft &&
-    (!document.publishedAt || Date.parse(document.publishedAt) <= Date.now())
-)
+export const documents = allDocuments
 const byPath = new Map<string, Document>()
 export const redirects = new Map<string, string>()
 for (const document of documents) {

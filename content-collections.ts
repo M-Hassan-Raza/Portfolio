@@ -28,6 +28,11 @@ const documents = defineCollection({
   include: "**/*.mdx",
   schema: documentSchema,
   transform: async (document, context) => {
+    if (
+      document.draft ||
+      (document.publishedAt && Date.parse(document.publishedAt) > Date.now())
+    )
+      return context.skip("Unpublished content")
     const tree = unified()
       .use(remarkParse)
       .use(remarkMdx)
