@@ -11,7 +11,7 @@ export type Topic = {
   entries: Document[]
 }
 export function taxonomyPath(kind: TaxonomyKind, label: string) {
-  return `/${kind}/${slugify(label, { preserveCharacters: ["+", "."] })}/`
+  return `/${kind}/${slugify(label, { preserveCharacters: ["+", "."], decamelize: false })}/`
 }
 const byPath = new Map<string, Topic>()
 for (const document of documents) {

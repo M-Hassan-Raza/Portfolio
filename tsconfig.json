@@ -3,7 +3,7 @@
     "src",
     "vite.config.ts",
     "content-collections.ts",
-    "scripts/*.ts",
+    "scripts",
     "tests/*.ts"
   ],
   "compilerOptions": {

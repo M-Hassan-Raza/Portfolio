@@ -1,6 +1,7 @@
 import { documentHead } from "@/lib/metadata"
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router"
-import { getDocument, redirects } from "@/lib/content/catalog"
+import { getDocument } from "@/lib/content/catalog"
+import { redirects } from "@/lib/content/redirects"
 import { DocumentView } from "@/components/content/document-view"
 
 export const Route = createFileRoute("/$")({

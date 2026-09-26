@@ -1,6 +1,8 @@
 import { z } from "zod"
 
-export const sitePath = z.string().regex(/^\/(?:[a-z0-9.-]+\/)*$|^\/404\.html$/)
+export const sitePath = z
+  .string()
+  .regex(/^\/(?:[a-z0-9]+(?:[.-][a-z0-9]+)*\/)*$|^\/404\.html$/)
 const reference = z.strictObject({ page: sitePath, note: z.string() })
 const cover = z.strictObject({
   ascii: z.string().regex(/^[a-z0-9-]+$/),
@@ -15,6 +17,7 @@ const metadata = z.strictObject({
   path: sitePath,
   content: z.string(),
   draft: z.boolean().default(false),
+  feed: z.boolean().default(false),
   publishedAt: z.iso.datetime({ offset: true }).optional(),
   updatedAt: z.iso.datetime({ offset: true }).optional(),
   aliases: z.array(sitePath).default([]),
