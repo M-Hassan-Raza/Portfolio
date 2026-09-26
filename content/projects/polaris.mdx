@@ -1,35 +1,51 @@
 ---
-title: "Polaris"
-date: 2025-02-10
-lastmod: 2026-09-25T10:00:00+05:00
+kind: project
+path: /projects/polaris/
+title: Polaris
 description: "Retail operations software for shops that bill all day: invoices, refunds, batch stock, supplier orders and customer ledgers that have to agree with each other."
 tier: flagship
-weight: 2
-projectLabel: "Retail operations platform"
-facts:
-  role: "Built it end to end"
-  team: "Just me, through Commit Software"
-  timeline: "2024 to now"
-  status: "In daily use by retail shops"
-  stack: ["Django", "Django REST Framework", "PostgreSQL", "Redis", "Celery", "Vue 3", "Pinia", "TanStack Query"]
-  source: "Private, client work"
-outcomes:
-  - "Billing, refunds, stock and ledgers stay consistent with several cashiers working at once"
-  - "Every organization's data isolated in the database, not just in the app"
-  - "Supplier price lists imported from CSV, Excel and PDF files as they arrive"
-tags: ["Django", "Vue", "PostgreSQL", "Concurrency", "ERP"]
+toc: true
+publishedAt: 2025-02-10T00:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - Django
+  - Vue
+  - PostgreSQL
+  - Concurrency
+  - ERP
 cover:
-  ascii: "polaris-invoice"
+  ascii: polaris-invoice
   screen: true
-  alt: "Polaris invoice screen, halftone"
-  caption: "The invoice screen. Screens here are halftoned on purpose, so no customer data survives."
+  alt: Polaris invoice screen, halftone
+  caption: The invoice screen. Screens here are halftoned on purpose, so no customer data survives.
+weight: 2
+projectLabel: Retail operations platform
+outcomes:
+  - Billing, refunds, stock and ledgers stay consistent with several cashiers working at once
+  - Every organization's data isolated in the database, not just in the app
+  - Supplier price lists imported from CSV, Excel and PDF files as they arrive
+facts:
+  role: Built it end to end
+  team: Just me, through Commit Software
+  timeline: 2024 to now
+  status: In daily use by retail shops
+  stack:
+    - Django
+    - Django REST Framework
+    - PostgreSQL
+    - Redis
+    - Celery
+    - Vue 3
+    - Pinia
+    - TanStack Query
+  source:
+    label: Private, client work
 ---
-
 Polaris started as client work through Commit Software and turned into the system several retail shops run their day on. It covers the parts a shop touches constantly: invoices and quotations, refunds, stock, customer credit, supplier purchasing, expenses, reports, and the admin around all of it.
 
 It's the project that taught me the edge cases are the product. A billing screen is easy. A billing screen that stays right when two cashiers sell the last item, a customer returns half an order on credit, and a supplier's price list arrives as a scanned PDF is the actual job.
 
-{{< screen "polaris-modules" "The home screen. Every tile is a workflow that has to agree with the others." >}}
+<Screen asset="polaris-modules" caption="The home screen. Every tile is a workflow that has to agree with the others." />
 
 ## Stock comes from batches, never from a loose number
 
@@ -54,7 +70,7 @@ Polaris is multi-tenant. The organization is set once per request and carried do
 
 Price lists come as CSV, Excel and PDF, with inconsistent names, missing units and layouts that change without warning. The import path extracts, normalizes and matches them against the catalogue, with aliases for the names suppliers insist on using. It locks around anything that can change purchasing, because a half-applied price list is worse than none.
 
-{{< screen "polaris-reorder" "Generating a supplier order from low-stock items." >}}
+<Screen asset="polaris-reorder" caption="Generating a supplier order from low-stock items." />
 
 ## What I'd do differently
 

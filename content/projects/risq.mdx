@@ -1,27 +1,39 @@
 ---
-title: "RISQ"
-date: 2026-09-25T10:00:00+05:00
+kind: project
+path: /projects/risq/
+title: RISQ
 description: "Scoring intake calls for mass tort firms: separating real claimants from coached callers, with evidence a reviewer can follow."
 tier: flagship
+toc: true
+publishedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - AI
+  - Fraud Detection
+  - Legal Tech
+cover:
+  ascii: risq-cover
+  alt: RISQ, typographic cover
 weight: 5
-projectLabel: "Legal intake fraud scoring"
-facts:
-  role: "One of the two core engineers"
-  team: "A small team, for a legal-intake client"
-  timeline: "2025 to now"
-  status: "Actively developed"
-  stack: ["Python", "Speech-to-text with speaker separation", "LLM claim extraction", "Vision model checks", "NPI and CMS registries", "SMS webhooks"]
-  source: "Private, client work"
+projectLabel: Legal intake fraud scoring
 outcomes:
   - "Every call ends in one of three recommendations: transfer, review or quarantine"
-  - "Each recommendation shows the gate that produced it, so a reviewer can check the reasoning"
-  - "New campaigns are configuration, not code"
-tags: ["AI", "Fraud Detection", "Legal Tech"]
-cover:
-  ascii: "risq-cover"
-  alt: "RISQ, typographic cover"
+  - Each recommendation shows the gate that produced it, so a reviewer can check the reasoning
+  - New campaigns are configuration, not code
+facts:
+  role: One of the two core engineers
+  team: A small team, for a legal-intake client
+  timeline: 2025 to now
+  status: Actively developed
+  stack:
+    - Python
+    - Speech-to-text with speaker separation
+    - LLM claim extraction
+    - Vision model checks
+    - NPI and CMS registries
+    - SMS webhooks
+  source:
+    label: Private, client work
 ---
-
 Mass tort firms take a lot of calls from people who might qualify for a case. Some callers are coached, some never used the product, some call back under another name. RISQ listens to each intake call and recommends whether to send the caller on to a closer, flag them for review, or quarantine the call.
 
 The interesting parts are how it scores, and why the score that matters most measures the interviewer rather than the caller. I've written that up in detail in [Scoring fraud in legal intake calls](/blog/fraud-scoring-legal-intake/). Here's the short version.

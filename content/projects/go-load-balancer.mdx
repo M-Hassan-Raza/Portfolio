@@ -1,19 +1,29 @@
 ---
-title: "Go Load Balancer"
-date: 2026-04-08T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
-description: "A small HTTP load balancer and dashboard in Go, built to understand what a reverse proxy actually does before trusting one."
+kind: project
+path: /projects/go-load-balancer/
+title: Go Load Balancer
+description: A small HTTP load balancer and dashboard in Go, built to understand what a reverse proxy actually does before trusting one.
 tier: side
+toc: true
+publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - Go
+  - Networking
+  - Concurrency
 weight: 20
 facts:
-  role: "Built it to learn"
+  role: Built it to learn
   timeline: "2025"
-  status: "Public, finished"
-  stack: ["Go", "net/http", "httputil"]
-  source: "[github.com/M-Hassan-Raza/go-load-balancer-dash](https://github.com/M-Hassan-Raza/go-load-balancer-dash)"
-tags: ["Go", "Networking", "Concurrency"]
+  status: Public, finished
+  stack:
+    - Go
+    - net/http
+    - httputil
+  source:
+    label: github.com/M-Hassan-Raza/go-load-balancer-dash
+    url: https://github.com/M-Hassan-Raza/go-load-balancer-dash
 ---
-
 I'd used load balancers for years without building one. This is the smallest version I could write that still does the real jobs: spread requests across backends, notice when one dies, and stop sending it traffic.
 
 It has three parts: the balancer, a toy backend server, and a dashboard for watching and poking at both.

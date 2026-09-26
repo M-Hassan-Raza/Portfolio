@@ -1,27 +1,44 @@
 ---
-title: "Anatomia"
-date: 2026-04-08T10:00:00+05:00
-lastmod: 2026-09-25T10:00:00+05:00
-description: "A nurse callback and case review product where transcripts, AI triage and follow-up calls all have to stay attached to the right patient."
+kind: project
+path: /projects/anatomia/
+title: Anatomia
+description: A nurse callback and case review product where transcripts, AI triage and follow-up calls all have to stay attached to the right patient.
 tier: flagship
-weight: 4
-projectLabel: "Clinical callback workflow"
-facts:
-  role: "Led the product and backend design"
-  team: "Entropy Labs team, for a healthcare client"
-  timeline: "2025"
-  stack: ["FastAPI", "React", "PostgreSQL", "AWS Cognito", "AWS S3", "AWS KMS", "Redis", "OpenAI", "Vapi"]
-  source: "Private, client work"
-outcomes:
-  - "Transcripts and recordings encrypted and access-controlled by default, not as a later compliance pass"
-  - "AI limited to bounded jobs: summarizing, urgency scoring and drafting, with a nurse deciding"
-  - "Callbacks, recordings and follow-ups tied to one case across every role handoff"
-tags: ["Healthcare", "FastAPI", "React", "AWS", "AI"]
+toc: true
+publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-09-25T05:00:00.000Z
+tags:
+  - Healthcare
+  - FastAPI
+  - React
+  - AWS
+  - AI
 cover:
-  ascii: "anatomia-cover"
-  alt: "Anatomia, halftone illustration"
+  ascii: anatomia-cover
+  alt: Anatomia, halftone illustration
+weight: 4
+projectLabel: Clinical callback workflow
+outcomes:
+  - Transcripts and recordings encrypted and access-controlled by default, not as a later compliance pass
+  - "AI limited to bounded jobs: summarizing, urgency scoring and drafting, with a nurse deciding"
+  - Callbacks, recordings and follow-ups tied to one case across every role handoff
+facts:
+  role: Led the product and backend design
+  team: Entropy Labs team, for a healthcare client
+  timeline: "2025"
+  stack:
+    - FastAPI
+    - React
+    - PostgreSQL
+    - AWS Cognito
+    - AWS S3
+    - AWS KMS
+    - Redis
+    - OpenAI
+    - Vapi
+  source:
+    label: Private, client work
 ---
-
 Anatomia is a care workflow product built around callbacks. A patient calls, the call is transcribed and analyzed, a nurse reviews the case, escalates to a doctor when needed, and a follow-up goes out, sometimes by an automated voice call. The product is the loop between a call coming in and a patient being looked after; the health records live elsewhere.
 
 It was a team project for a healthcare client. I led the product and the backend design: how a case moves between roles, how transcripts and triage are handled, and how follow-ups land on the right patient. The team built it with me.
