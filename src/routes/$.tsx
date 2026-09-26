@@ -1,3 +1,4 @@
+import { documentHead } from "@/lib/metadata"
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router"
 import { getDocument, redirects } from "@/lib/content/catalog"
 import { DocumentView } from "@/components/content/document-view"
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/$")({
     if (!document) throw notFound()
     return document
   },
+  head: ({ loaderData }) => (loaderData ? documentHead(loaderData) : {}),
   component: ContentPage,
 })
 function ContentPage() {

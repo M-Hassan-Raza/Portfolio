@@ -10,7 +10,16 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Muhammad Hassan Raza" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/assets/favicon.svg", type: "image/svg+xml" },
+      {
+        rel: "alternate",
+        href: "/index.xml",
+        type: "application/rss+xml",
+        title: "Muhammad Hassan Raza",
+      },
+    ],
   }),
   notFoundComponent: () => (
     <main className="mx-auto max-w-5xl p-6">
