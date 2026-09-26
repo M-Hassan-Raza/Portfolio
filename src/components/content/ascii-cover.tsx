@@ -12,9 +12,14 @@ const covers = new Map(
       ?.replace(/\.txt$/, ""),
     lazy(async () => {
       const text = await load()
+      const columns = Math.max(...text.split("\n").map((line) => line.length))
       return {
         default: () => (
-          <pre aria-hidden="true" className="ascii-art">
+          <pre
+            aria-hidden="true"
+            className="ascii-art"
+            style={{ fontSize: `${100 / (columns * 0.6)}cqw` }}
+          >
             {text}
           </pre>
         ),

@@ -1,3 +1,4 @@
+import { CodeBlock } from "./code-block"
 import { MDXContent } from "@content-collections/mdx/react"
 import { profile, openSource } from "#content"
 import { AsciiCover, Screen } from "./ascii-cover"
@@ -21,7 +22,7 @@ function ProofList() {
     </ul>
   )
 }
-const components = { AsciiCover, Screen, OssCount, ProofList }
+const components = { AsciiCover, Screen, OssCount, ProofList, pre: CodeBlock }
 
 export function ContentBody({ code }: { code: string }) {
   return (
