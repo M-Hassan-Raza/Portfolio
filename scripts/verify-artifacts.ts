@@ -6,6 +6,7 @@ import { z } from "zod"
 import { documents } from "../src/lib/content/catalog"
 import { topics } from "../src/lib/content/taxonomies"
 import { redirects } from "../src/lib/content/redirects"
+import { searchEntries } from "../src/lib/content/search"
 import { mainNavigation, footerNavigation, site } from "../src/lib/site"
 
 const output = "dist/client"
@@ -99,6 +100,37 @@ for (const [path, target] of redirects) {
   )
   assert(existsSync(artifactPath(target)), `Redirect target missing: ${target}`)
 }
+const feedPaths = requiredPaths.filter((path) => path.endsWith("index.xml"))
+for (const path of feedPaths) {
+  const $ = load(readFileSync(artifactPath(path), "utf8"), { xmlMode: true })
+  assert.equal($("rss").attr("version"), "2.0", `Invalid RSS: ${path}`)
+  assert($("channel > title").text(), `Missing feed title: ${path}`)
+  $("item > link").each((_, element) => {
+    const target = new URL($(element).text())
+    assert.equal(target.origin, site.url, `Wrong feed origin: ${path}`)
+    assert(
+      existsSync(artifactPath(decodeURIComponent(target.pathname))),
+      `Missing feed target: ${target.href}`
+    )
+  })
+}
+const sitemap = load(readFileSync(artifactPath("/sitemap.xml"), "utf8"), {
+  xmlMode: true,
+})
+assert.deepEqual(
+  new Set(
+    sitemap("url > loc")
+      .map((_, element) => sitemap(element).text())
+      .get()
+  ),
+  new Set(canonicalPaths.map((path) => `${site.url}${path}`)),
+  "Sitemap must contain exactly the canonical public pages"
+)
+assert.deepEqual(
+  JSON.parse(readFileSync(artifactPath("/index.json"), "utf8")),
+  searchEntries,
+  "Search artifact must match the public catalog"
+)
 const missing = load(readFileSync(artifactPath("/404.html"), "utf8"))
 assert.equal(missing("meta[name=robots]").attr("content"), "noindex")
 assert.equal(
@@ -115,5 +147,5 @@ assert(
   "Private source material must stay local"
 )
 console.log(
-  `Verified ${requiredPaths.length} preserved URLs, ${canonicalPaths.length} canonical pages, local links/assets, metadata, redirects and static 404`
+  `Verified ${requiredPaths.length} preserved URLs, ${canonicalPaths.length} canonical pages, ${feedPaths.length} feeds, sitemap, search, local links/assets, metadata, redirects and static 404`
 )
