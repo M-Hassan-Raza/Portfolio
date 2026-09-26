@@ -1,5 +1,5 @@
-import { allDocuments } from "content-collections"
-import type { Document } from "content-collections"
+import { allDocuments } from "#content"
+import type { Document } from "#content"
 
 export const documents = allDocuments.filter(
   (document) =>

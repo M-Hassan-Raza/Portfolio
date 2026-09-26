@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { Button } from "@/components/ui/button"
+import { documents } from "@/lib/content/catalog"
+import { HomeView } from "@/components/views/home"
 
-export const Route = createFileRoute("/")({ component: Home })
-
+export const Route = createFileRoute("/")({
+  loader: () => {
+    const home = documents.find((document) => document.kind === "home")
+    if (!home) throw new Error("Missing homepage content")
+    return home
+  },
+  component: Home,
+})
 function Home() {
-  return (
-    <main className="mx-auto max-w-5xl space-y-6 p-6">
-      <h1 className="text-3xl font-semibold">Muhammad Hassan Raza</h1>
-      <p>Product, engineering, and software that has to hold up.</p>
-      <Button render={<a href="mailto:hi@mhassan.dev" />}>Get in touch</Button>
-    </main>
-  )
+  return <HomeView document={Route.useLoaderData()} />
 }

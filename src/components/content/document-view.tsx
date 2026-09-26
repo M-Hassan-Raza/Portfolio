@@ -1,9 +1,13 @@
 import type { ReactNode } from "react"
-import type { Document } from "content-collections"
+import type { Document } from "#content"
+import { AboutDetails, ResumeDetails } from "@/components/views/profile"
+import { OpenSourceView } from "@/components/views/open-source"
+import { EntryList } from "./entry-list"
+import { documents, getDocument } from "@/lib/content/catalog"
+import { CollectionView } from "@/components/views/collections"
 import { ContentBody } from "./body"
 import { AsciiCover } from "./ascii-cover"
 import { PageLink } from "./page-link"
-import { getDocument } from "@/lib/content/catalog"
 
 export function DocumentView({ document }: { document: Document }) {
   const parentPath = `/${document.path.split("/").filter(Boolean).slice(0, -1).join("/")}/`
@@ -101,6 +105,19 @@ export function DocumentView({ document }: { document: Document }) {
         </>
       )}
       <ContentBody code={document.mdx} />
+      {document.kind === "about" && <AboutDetails />}
+      {document.kind === "resume" && <ResumeDetails />}
+      {document.kind === "open-source" && <OpenSourceView />}
+      {document.kind === "archive" && (
+        <EntryList
+          entries={documents
+            .filter((entry) => entry.publishedAt)
+            .sort((a, b) =>
+              (b.publishedAt ?? "").localeCompare(a.publishedAt ?? "")
+            )}
+        />
+      )}
+      {document.kind === "collection" && <CollectionView document={document} />}
       {document.tags.length > 0 && (
         <footer className="flex flex-wrap gap-3">
           {document.tags.map((tag) => (

@@ -1,3 +1,4 @@
+import { documents } from "./src/lib/content/catalog"
 import { defineConfig } from "vite"
 import contentCollections from "@content-collections/vite"
 import tsconfigPaths from "vite-tsconfig-paths"
@@ -11,7 +12,15 @@ export default defineConfig({
     contentCollections(),
     tsconfigPaths(),
     tailwindcss(),
-    tanstackStart({ prerender: { enabled: true, crawlLinks: false } }),
+    tanstackStart({
+      prerender: { enabled: true, crawlLinks: false, failOnError: true },
+      pages: documents
+        .filter((document) => document.kind !== "not-found")
+        .map((document) => ({
+          path: document.path,
+          prerender: { enabled: true },
+        })),
+    }),
     viteReact(),
   ],
 })

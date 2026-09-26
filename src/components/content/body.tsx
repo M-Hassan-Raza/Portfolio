@@ -1,5 +1,5 @@
 import { MDXContent } from "@content-collections/mdx/react"
-import { profile, openSource } from "content-collections"
+import { profile, openSource } from "#content"
 import { AsciiCover, Screen } from "./ascii-cover"
 
 function OssCount() {
