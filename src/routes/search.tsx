@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, useHydrated } from "@tanstack/react-router"
 import { z } from "zod"
 import { requireDocument } from "@/lib/content/catalog"
 import { documentHead } from "@/lib/metadata"
@@ -13,11 +13,12 @@ export const Route = createFileRoute("/search")({
 })
 function SearchPage() {
   const { q } = Route.useSearch()
+  const hydrated = useHydrated()
   const navigate = Route.useNavigate()
   return (
     <DocumentView document={Route.useLoaderData()}>
       <SearchView
-        query={q}
+        query={hydrated ? q : ""}
         onQueryChange={(query) => {
           void navigate({ search: { q: query }, replace: true })
         }}
