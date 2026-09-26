@@ -8,8 +8,6 @@ pnpm-lock.yaml
 /content
 assets
 static
-layouts
-themes
 public
 private
 output
@@ -17,6 +15,3 @@ output
 .claude
 
 data
-archetypes
-README.md
-.github/workflows/deploy.yml

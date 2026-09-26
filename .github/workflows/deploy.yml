@@ -14,27 +14,27 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
         with:
-          submodules: recursive
+          node-version: 24
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
         with:
-          hugo-version: '0.166.0'
-          extended: true
+          cache: true
 
-      - name: Build
-        run: |
-          hugo --minify --panicOnWarning
-          touch public/.nojekyll
+      - name: Install
+        run: pnpm install --frozen-lockfile
 
-      - name: Check copy
-        run: ./scripts/lint-copy.sh
+      - name: Verify static site
+        run: pnpm verify
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./dist/client
           cname: mhassan.dev
