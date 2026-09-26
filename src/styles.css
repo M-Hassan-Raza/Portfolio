@@ -128,3 +128,26 @@
     @apply font-sans;
   }
 }
+
+@plugin "@tailwindcss/typography";
+
+.ascii-cover {
+  overflow: hidden;
+  max-width: 100%;
+}
+.ascii-art {
+  font-family: monospace;
+  font-size: clamp(2px, 0.7vw, 8px);
+  line-height: 1.05;
+  white-space: pre;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+.ascii-cover-portrait {
+  max-width: 18rem;
+}
+.ascii-cover-portrait .ascii-art {
+  font-size: 4px;
+}

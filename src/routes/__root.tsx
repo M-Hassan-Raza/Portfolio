@@ -27,7 +27,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <main className="mx-auto max-w-5xl px-6 py-12">{children}</main>
         <Scripts />
       </body>
     </html>
