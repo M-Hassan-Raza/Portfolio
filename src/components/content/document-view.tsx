@@ -10,7 +10,13 @@ import { ContentBody } from "./body"
 import { AsciiCover } from "./ascii-cover"
 import { PageLink } from "./page-link"
 
-export function DocumentView({ document }: { document: Document }) {
+export function DocumentView({
+  document,
+  children,
+}: {
+  document: Document
+  children?: ReactNode
+}) {
   const parentPath = `/${document.path.split("/").filter(Boolean).slice(0, -1).join("/")}/`
   const parent = getDocument(parentPath)
   return (
@@ -106,6 +112,7 @@ export function DocumentView({ document }: { document: Document }) {
         </>
       )}
       <ContentBody code={document.mdx} />
+      {children}
       {document.kind === "about" && <AboutDetails />}
       {document.kind === "resume" && <ResumeDetails />}
       {document.kind === "open-source" && <OpenSourceView />}
