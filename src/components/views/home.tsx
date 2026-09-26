@@ -3,7 +3,7 @@ import { profile, openSource } from "#content"
 import type { Document } from "#content"
 import { requireDocument } from "@/lib/content/catalog"
 import { AsciiCover } from "@/components/content/ascii-cover"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { OpenSourceHighlights } from "./oss-highlights"
 
 export function HomeView({
@@ -24,15 +24,19 @@ export function HomeView({
           </h1>
           <p className="text-lg text-muted-foreground">{home.hero.summary}</p>
           <div className="flex gap-3">
-            <Button render={<Link to="/$/" params={{ _splat: "projects" }} />}>
+            <Link
+              to="/$/"
+              params={{ _splat: "projects" }}
+              className={buttonVariants()}
+            >
               See the work
-            </Button>
-            <Button
-              variant="outline"
-              render={<a href={`mailto:${profile.email}`} />}
+            </Link>
+            <a
+              className={buttonVariants({ variant: "outline" })}
+              href={`mailto:${profile.email}`}
             >
               Get in touch
-            </Button>
+            </a>
           </div>
         </div>
         <AsciiCover asset="profile" alt={home.hero.imageAlt} />
