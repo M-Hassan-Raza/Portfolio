@@ -1,30 +1,103 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./theme.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Plumbing only. Every color, font and texture value lives in theme.css;
+ * this file maps those names into Tailwind and holds shared mechanics.
+ */
+
+/* Stacking tiers. Components use z-sticky, z-modal ... never raw numbers. */
+@theme static {
+  --z-index-base: 0;
+  --z-index-raised: 10;
+  --z-index-sticky: 100;
+  --z-index-dropdown: 200;
+  --z-index-overlay: 300;
+  --z-index-modal: 310;
+  --z-index-popover: 400;
+  --z-index-toast: 500;
+  --z-index-tooltip: 600;
+  --z-index-skip-link: 700;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+}
+
 @theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: "Manrope", sans-serif;
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
+  --z-index-toast-stack: calc(100 - var(--toast-index, 0));
+
+  --font-sans: var(--font-sans-family);
+  --font-heading: var(--font-heading-family);
+  --font-serif: var(--font-serif-family);
+  --font-mono: var(--font-mono-family);
+
   --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-soft: var(--muted-soft);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ghost-hover: var(--ghost-hover);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-tint-hover: var(--destructive-tint-hover);
+  --color-destructive-ring: var(--destructive-ring);
+  --color-destructive-border: var(--destructive-border);
+  --color-destructive-soft-foreground: var(--destructive-soft-foreground);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-border-strong: var(--border-strong);
+  --color-hairline: var(--hairline);
+  --color-outline-border: var(--outline-border);
+  --color-input: var(--input);
+  --color-input-tint: var(--input-tint);
+  --color-input-tint-hover: var(--input-tint-hover);
+  --color-input-disabled: var(--input-disabled);
+  --color-input-border-soft: var(--input-border-soft);
+  --color-ring: var(--ring);
+  --color-ring-soft: var(--ring-soft);
+  --color-overlay: var(--overlay);
+  --color-tab-active: var(--tab-active);
+  --color-tab-active-border: var(--tab-active-border);
+  --color-kbd-inverse: var(--kbd-inverse);
+  --color-tooltip: var(--tooltip);
+  --color-tooltip-foreground: var(--tooltip-foreground);
+
+  /* Brand signal: the one chromatic color, used for links, focus and proof. */
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-signal-hover: var(--signal-hover);
+  --color-signal-tint: var(--signal-tint);
+  --color-signal-tint-foreground: var(--signal-tint-foreground);
+
+  --color-selection: var(--selection);
+  --color-grid-line: var(--grid-line);
+  --color-code-surface: var(--code-surface);
+  --color-code-foreground: var(--code-foreground);
+  --color-ascii-ink: var(--ascii-ink);
+  --color-ascii-ink-accent: var(--ascii-ink-accent);
+  --color-ascii-faint: var(--ascii-faint);
+  --color-ascii-plate: var(--ascii-plate);
+  --color-ascii-plate-ink: var(--ascii-plate-ink);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -34,107 +107,196 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --radius: 0.625rem;
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-}
-
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+    @apply border-border outline-ring-soft;
   }
   html {
     @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background text-foreground;
+    position: relative;
+  }
+  ::selection {
+    background: var(--selection);
+    color: var(--foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
 @plugin "@tailwindcss/typography";
 
-.ascii-cover {
-  overflow: hidden;
+/* ── ASCII art ─────────────────────────────────────────────────────────── */
+@font-face {
+  /* Variable Cascadia subset: ink ramp + scramble glyphs, no GSUB, 7 KB. */
+  font-family: "Ascii Ink";
+  src: url("/fonts/ascii-ink.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: block;
+}
+@font-face {
+  /* Metric-matched fallback so the grid never overflows while swapping. */
+  font-family: "Ascii Ink Fallback";
+  src: local("Menlo"), local("Consolas"), local("DejaVu Sans Mono");
+  size-adjust: 97.3%;
+}
+.ascii-frame {
+  --ascii-adv: 0.5859375;
+  position: relative;
   max-width: 100%;
   container-type: inline-size;
+  aspect-ratio: var(--ascii-cols) / calc(var(--ascii-rows) * 2);
+  overflow: clip;
+  content-visibility: auto;
+  contain-intrinsic-size: auto none;
+  color: var(--ascii-ink);
+  mask-image: var(--ascii-mask);
+  -webkit-user-select: none;
+  user-select: none;
+  transition: color 400ms var(--ease-out-quint);
 }
 .ascii-art {
-  font-family: "Cascadia Code", monospace;
-  line-height: 1.05;
-  white-space: pre;
   margin: 0;
+  padding: 0;
   background: transparent;
   color: inherit;
-  padding: 0;
+  font-family: "Ascii Ink", "Ascii Ink Fallback", ui-monospace, monospace;
+  font-size: calc(100cqi / (var(--ascii-cols) * var(--ascii-adv)));
+  line-height: calc(var(--ascii-adv) * 2);
+  font-variation-settings: "wght" var(--ascii-wght);
+  font-variant-ligatures: none;
+  font-feature-settings:
+    "calt" 0,
+    "liga" 0;
+  font-kerning: none;
+  font-synthesis: none;
+  letter-spacing: 0;
+  text-rendering: optimizeSpeed;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  white-space: pre;
+  overflow: clip;
 }
-.ascii-cover-portrait {
-  max-width: 18rem;
+.ascii-art-fx {
+  position: absolute;
+  inset: 0;
+}
+.ascii-art-fx > span {
+  display: block;
+}
+.ascii-frame[data-fx="live"] > .ascii-art:not(.ascii-art-fx),
+.ascii-frame[data-fx="armed"] > .ascii-art {
+  visibility: hidden;
+}
+/* Photo covers are jp2a positives for a dark ground, so they always print on a plate. */
+.ascii-frame[data-tone="photo"] {
+  background: var(--ascii-plate);
+  color: var(--ascii-plate-ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-js] .ascii-frame[data-reveal]:not([data-fx]) > .ascii-art {
+    visibility: hidden;
+    animation: ascii-failsafe 0s linear 2.5s forwards;
+  }
+}
+@keyframes ascii-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+@media print {
+  .ascii-frame {
+    display: none;
+  }
 }
 
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
+.scramble {
+  position: relative;
+  display: inline-block;
 }
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-display: swap;
+.scramble-glyphs {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  white-space: inherit;
+  pointer-events: none;
 }
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-display: swap;
+.scramble[data-scramble="live"] > .scramble-text {
+  color: transparent;
 }
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
+
+/* ── Motion ────────────────────────────────────────────────────────────── */
+:root {
+  --dur-instant: 90ms;
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-slow: 480ms;
+  --dur-reveal: 900ms;
+  --rise: 10px;
 }
-@font-face {
-  font-family: "Cascadia Code";
-  src: url("/fonts/CascadiaCode.woff2") format("woff2");
-  font-display: swap;
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rise: 0px;
+    --dur-slow: 1ms;
+    --dur-reveal: 1ms;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Router page transitions (TanStack defaultViewTransition). */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out var(--dur-fast) var(--ease-out-quint) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in var(--dur-slow) var(--ease-out-quint) both;
+  }
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise));
+  }
+}
+
+/* ── Prose ─────────────────────────────────────────────────────────────── */
+/* Typography plugin colors bound to tokens, so articles flip with the theme. */
+.prose-site {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-lead: var(--muted-foreground);
+  --tw-prose-links: var(--signal);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--border-strong);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: transparent;
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-kbd: var(--foreground);
+  --tw-prose-kbd-shadows: var(--border-strong);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-pre-code: var(--code-foreground);
+  --tw-prose-pre-bg: var(--code-surface);
+  --tw-prose-th-borders: var(--border-strong);
+  --tw-prose-td-borders: var(--border);
+}
+[data-rehype-pretty-code-figure] code [data-line] {
+  color: var(--shiki-foreground);
 }

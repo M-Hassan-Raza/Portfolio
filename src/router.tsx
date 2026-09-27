@@ -9,6 +9,10 @@ export function getRouter() {
     trailingSlash: "always",
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
+    // Cross-fade between pages; hash-only jumps (TOC links) stay instant.
+    defaultViewTransition: {
+      types: ({ pathChanged }) => (pathChanged ? ["page"] : false),
+    },
   })
 
   return router

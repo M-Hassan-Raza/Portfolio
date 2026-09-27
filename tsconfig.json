@@ -4,7 +4,8 @@
     "vite.config.ts",
     "content-collections.ts",
     "scripts",
-    "tests/*.ts"
+    "tests/*.ts",
+    "vite-plugin-ascii.ts"
   ],
   "compilerOptions": {
     "target": "ES2022",

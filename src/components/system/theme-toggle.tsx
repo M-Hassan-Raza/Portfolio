@@ -1,7 +1,7 @@
 import { useTheme } from "next-themes"
 import { useHydrated } from "@tanstack/react-router"
 import { Moon, Sun } from "lucide-react"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()

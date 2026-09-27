@@ -26,7 +26,7 @@ const components = { AsciiCover, Screen, OssCount, ProofList, pre: CodeBlock }
 
 export function ContentBody({ code }: { code: string }) {
   return (
-    <div className="prose max-w-none prose-neutral dark:prose-invert">
+    <div className="prose-site prose max-w-none">
       <MDXContent code={code} components={components} />
     </div>
   )

@@ -11,6 +11,7 @@ import remarkGfm from "remark-gfm"
 import rehypeSlug from "rehype-slug"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode from "rehype-pretty-code"
+import { createCssVariablesTheme } from "shiki"
 import { toString } from "mdast-util-to-string"
 import { visit } from "unist-util-visit"
 import GithubSlugger from "github-slugger"
@@ -21,6 +22,13 @@ import {
   openSourceSchema,
   highlightsSchema,
 } from "./src/lib/content/schema"
+
+// Syntax colors come from --shiki-* tokens in src/theme.css, so code follows the site theme.
+const codeTheme = createCssVariablesTheme({
+  name: "site",
+  variablePrefix: "--shiki-",
+  fontStyle: true,
+})
 
 const documents = defineCollection({
   name: "documents",
@@ -50,7 +58,7 @@ const documents = defineCollection({
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
-        [rehypePrettyCode, { theme: "github-dark", keepBackground: false }],
+        [rehypePrettyCode, { theme: codeTheme, keepBackground: false }],
       ],
     })
     return {

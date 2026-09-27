@@ -1,8 +1,9 @@
 import { ThemeProvider } from "next-themes"
-import { site } from "@/lib/site"
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import type { ReactNode } from "react"
-import { SiteHeader, SiteFooter } from "@/components/site-chrome"
+import { site } from "@/lib/site"
+import { SiteFooter, SiteHeader } from "@/components/site-chrome"
+import { SiteProviders } from "@/components/system/providers"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRoute({
@@ -14,6 +15,13 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      {
+        rel: "preload",
+        href: "/fonts/ascii-ink.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       { rel: "icon", href: "/assets/favicon.svg", type: "image/svg+xml" },
       {
         rel: "alternate",
@@ -24,7 +32,7 @@ export const Route = createRootRoute({
     ],
   }),
   notFoundComponent: () => (
-    <section className="space-y-6">
+    <section className="flex flex-col gap-6">
       <h1>Page not found</h1>
       <a href="/">Return home</a>
     </section>
@@ -36,6 +44,12 @@ function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Lets CSS tell "JS will run" from no-JS before first paint, so ASCII reveals never flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.dataset.js=''",
+          }}
+        />
         <HeadContent />
       </head>
       <body>
@@ -46,14 +60,21 @@ function RootDocument({ children }: { children: ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          <a href="#main-content" className="sr-only focus:not-sr-only">
-            Skip to content
-          </a>
-          <SiteHeader />
-          <main id="main-content" className="mx-auto max-w-5xl px-6 py-12">
-            {children}
-          </main>
-          <SiteFooter />
+          <SiteProviders>
+            <div className="isolate flex min-h-dvh flex-col">
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-skip-link focus:bg-background focus:px-3 focus:py-2"
+              >
+                Skip to content
+              </a>
+              <SiteHeader />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <SiteFooter />
+            </div>
+          </SiteProviders>
         </ThemeProvider>
         {import.meta.env.PROD && (
           <script

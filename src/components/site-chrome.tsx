@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemeToggle } from "./system/theme-toggle"
 import { profile } from "#content"
 import { mainNavigation, footerNavigation } from "@/lib/site"
 

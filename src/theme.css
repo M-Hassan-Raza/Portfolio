@@ -1,0 +1,159 @@
+/*
+ * Direction: Cobalt Plate (baseline).
+ * The whole visual identity lives here: fonts, palette for light and dark,
+ * texture and ASCII inking. Components only reference these names.
+ */
+@import "@fontsource-variable/instrument-sans/wght.css";
+@import "@fontsource-variable/geist-mono/wght.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+
+:root {
+  --font-sans-family:
+    "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading-family: var(--font-sans-family);
+  --font-serif-family: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono-family:
+    "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius: 0.125rem;
+
+  --background: oklch(0.984 0.003 95);
+  --foreground: oklch(0.205 0.006 265);
+  --card: oklch(0.996 0.0015 95);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: var(--foreground);
+  --primary-foreground: var(--background);
+  --primary-hover: oklch(0.34 0.008 265);
+  --secondary: oklch(0.955 0.003 95);
+  --secondary-foreground: var(--foreground);
+  --secondary-hover: oklch(0.93 0.004 95);
+  --muted: oklch(0.955 0.003 95);
+  --muted-foreground: oklch(0.505 0.008 265);
+  --muted-soft: oklch(0.97 0.003 95);
+  --accent: oklch(0.955 0.003 95);
+  --accent-foreground: var(--foreground);
+  --ghost-hover: oklch(0.955 0.003 95);
+
+  --destructive: oklch(0.577 0.245 27);
+  --destructive-foreground: var(--background);
+  --destructive-tint: oklch(0.97 0.02 27);
+  --destructive-tint-hover: oklch(0.94 0.04 27);
+  --destructive-ring: oklch(0.88 0.08 27);
+  --destructive-border: oklch(0.78 0.12 27);
+  --destructive-soft-foreground: oklch(0.52 0.2 27);
+
+  --border: oklch(0.905 0.004 95);
+  --border-soft: oklch(0.935 0.003 95);
+  --border-strong: oklch(0.8 0.006 265);
+  --hairline: oklch(0.905 0.004 95);
+  --outline-border: oklch(0.87 0.005 265);
+  --input: oklch(0.645 0.008 265);
+  --input-tint: transparent;
+  --input-tint-hover: oklch(0.955 0.003 95);
+  --input-disabled: oklch(0.95 0.003 95);
+  --input-border-soft: oklch(0.9 0.004 265);
+  --ring: oklch(0.55 0.2 264);
+  --ring-soft: oklch(0.89 0.05 262);
+  --overlay: oklch(0.205 0.006 265 / 0.45);
+  --tab-active: var(--background);
+  --tab-active-border: var(--border);
+  --kbd-inverse: oklch(0.35 0.008 265);
+  --tooltip: var(--foreground);
+  --tooltip-foreground: var(--background);
+
+  --signal: oklch(0.49 0.215 264);
+  --signal-foreground: oklch(0.984 0.003 95);
+  --signal-hover: oklch(0.43 0.195 264);
+  --signal-tint: oklch(0.95 0.02 262);
+  --signal-tint-foreground: oklch(0.42 0.19 264);
+
+  --selection: oklch(0.89 0.05 262);
+  --grid-line: oklch(0.93 0.003 95);
+  --code-surface: oklch(0.965 0.003 95);
+  --code-foreground: var(--foreground);
+
+  --shiki-foreground: var(--code-foreground);
+  --shiki-background: var(--code-surface);
+  --shiki-token-comment: var(--muted-foreground);
+  --shiki-token-keyword: var(--signal);
+  --shiki-token-constant: oklch(0.47 0.14 250);
+  --shiki-token-string: oklch(0.42 0.06 160);
+  --shiki-token-string-expression: oklch(0.42 0.06 160);
+  --shiki-token-function: var(--foreground);
+  --shiki-token-parameter: oklch(0.45 0.02 265);
+  --shiki-token-punctuation: var(--muted-foreground);
+  --shiki-token-link: var(--signal);
+
+  --ascii-ink: oklch(0.34 0.01 265);
+  --ascii-ink-accent: var(--signal);
+  --ascii-faint: oklch(0.72 0.006 265);
+  --ascii-plate: oklch(0.205 0.006 265);
+  --ascii-plate-ink: oklch(0.86 0.005 95);
+  --ascii-wght: 330;
+  --ascii-mask: radial-gradient(
+    130% 110% at 50% 45%,
+    black 62%,
+    transparent 100%
+  );
+}
+
+.dark {
+  --background: oklch(0.165 0.004 265);
+  --foreground: oklch(0.935 0.004 95);
+  --card: oklch(0.19 0.005 265);
+  --primary-hover: oklch(0.85 0.004 95);
+  --secondary: oklch(0.215 0.005 265);
+  --secondary-hover: oklch(0.25 0.006 265);
+  --muted: oklch(0.215 0.005 265);
+  --muted-foreground: oklch(0.705 0.008 265);
+  --muted-soft: oklch(0.19 0.005 265);
+  --accent: oklch(0.215 0.005 265);
+  --ghost-hover: oklch(0.215 0.005 265);
+
+  --destructive: oklch(0.704 0.191 22);
+  --destructive-tint: oklch(0.24 0.05 22);
+  --destructive-tint-hover: oklch(0.28 0.07 22);
+  --destructive-ring: oklch(0.35 0.1 22);
+  --destructive-border: oklch(0.45 0.13 22);
+  --destructive-soft-foreground: oklch(0.78 0.14 22);
+
+  --border: oklch(0.28 0.006 265);
+  --border-soft: oklch(0.23 0.005 265);
+  --border-strong: oklch(0.38 0.008 265);
+  --hairline: oklch(0.28 0.006 265);
+  --outline-border: oklch(0.34 0.008 265);
+  --input: oklch(0.5 0.008 265);
+  --input-tint: oklch(0.19 0.005 265);
+  --input-tint-hover: oklch(0.23 0.006 265);
+  --input-disabled: oklch(0.2 0.005 265);
+  --input-border-soft: oklch(0.3 0.006 265);
+  --ring: oklch(0.72 0.135 262);
+  --ring-soft: oklch(0.36 0.1 264);
+  --overlay: oklch(0.08 0.004 265 / 0.72);
+  --tab-active: oklch(0.23 0.006 265);
+  --tab-active-border: var(--border-strong);
+  --kbd-inverse: oklch(0.8 0.004 95);
+
+  --signal: oklch(0.72 0.135 262);
+  --signal-foreground: oklch(0.165 0.004 265);
+  --signal-hover: oklch(0.79 0.105 262);
+  --signal-tint: oklch(0.26 0.06 264);
+  --signal-tint-foreground: oklch(0.84 0.07 262);
+
+  --selection: oklch(0.36 0.1 264);
+  --grid-line: oklch(0.22 0.005 265);
+  --code-surface: oklch(0.195 0.005 265);
+
+  --shiki-token-constant: oklch(0.8 0.1 240);
+  --shiki-token-string: oklch(0.8 0.07 160);
+  --shiki-token-string-expression: oklch(0.8 0.07 160);
+  --shiki-token-parameter: oklch(0.78 0.02 265);
+
+  --ascii-ink: oklch(0.8 0.006 95);
+  --ascii-faint: oklch(0.42 0.006 265);
+  --ascii-plate: oklch(0.19 0.005 265);
+  --ascii-wght: 400;
+}
