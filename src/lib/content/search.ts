@@ -30,8 +30,8 @@ export const searchEntries: SearchEntry[] = documents.flatMap((document) =>
           description: document.description,
           text: document.text,
           kind: kindOf[document.kind],
-          date: document.publishedAt,
-          cover: document.cover?.ascii,
+          ...(document.publishedAt && { date: document.publishedAt }),
+          ...(document.cover && { cover: document.cover.ascii }),
         },
       ]
     : []

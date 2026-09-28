@@ -1,6 +1,7 @@
+import { Check, Copy } from "lucide-react"
 import { useRef, useState } from "react"
 import type { ComponentProps } from "react"
-import { Button } from "@/components/ui/button"
+import { PillButton } from "@/components/studio/pill"
 
 export function CodeBlock(props: ComponentProps<"pre">) {
   const ref = useRef<HTMLPreElement>(null)
@@ -15,19 +16,29 @@ export function CodeBlock(props: ComponentProps<"pre">) {
     }
   }
   return (
-    <div className="not-prose space-y-2">
-      <div className="flex items-center justify-end gap-3">
-        <span role="status" className="text-sm">
+    <div className="not-prose relative flex flex-col rounded-md bg-code-surface">
+      <div className="flex items-center justify-end gap-3 px-2 pt-2">
+        <span role="status" className="text-sm font-medium text-ink-soft">
           {status}
         </span>
-        <Button variant="outline" size="sm" onClick={copy}>
+        <PillButton
+          variant="soft"
+          size="sm"
+          onClick={copy}
+          className="h-8 px-3 text-xs"
+        >
+          {status === "Copied" ? (
+            <Check aria-hidden="true" />
+          ) : (
+            <Copy aria-hidden="true" />
+          )}
           Copy code
-        </Button>
+        </PillButton>
       </div>
       <pre
         {...props}
         ref={ref}
-        className="overflow-x-auto rounded-md border border-border p-4"
+        className="overflow-x-auto px-5 pt-2 pb-5 font-mono text-[0.8125rem] leading-[1.7]"
       />
     </div>
   )

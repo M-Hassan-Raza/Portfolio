@@ -20,7 +20,7 @@ import {
   useMemo,
   useState,
 } from "react"
-import type { ReactNode } from "react"
+import type { ComponentProps, ReactNode } from "react"
 import { profile } from "#content"
 import {
   Command,
@@ -40,6 +40,8 @@ import {
 import type { SearchEntry } from "@/lib/content/search"
 import { yearOf } from "@/lib/format"
 import { mainNavigation, footerNavigation } from "@/lib/site"
+import { hueForPath } from "@/lib/studio"
+import type { Hue } from "@/lib/studio"
 import { useCopy } from "./copy"
 
 type PaletteState = { open: boolean; setOpen: (open: boolean) => void }
@@ -139,40 +141,49 @@ function CommandPalette({ open, setOpen }: PaletteState) {
       onOpenChange={(next) => (next ? setOpen(true) : close())}
       title="Search the site"
       description="Jump to writing, work, pull requests or an action."
+      className="top-[14vh] max-w-[calc(100%-2rem)] rounded-[24px]! border-[1.5px] border-ink bg-paper-raised shadow-rest ring-0 sm:max-w-xl"
     >
-      <Command shouldFilter={false} loop>
+      <Command
+        shouldFilter={false}
+        loop
+        className="rounded-[24px]! bg-paper-raised p-2"
+      >
         <CommandInput
           value={query}
           onValueChange={setQuery}
           placeholder="Search essays, case studies, pull requests..."
         />
-        <CommandList data-slot="palette-list">
-          <CommandEmpty>
-            Nothing matches “{trimmed}”. Try a project name.
+        <CommandList
+          data-slot="palette-list"
+          className="max-h-[min(26rem,60vh)] px-1 pb-1"
+        >
+          <CommandEmpty className="flex flex-col items-center gap-2 py-10 text-center">
+            <span className="type-annotation text-lg text-ink-soft">
+              Nothing matches “{trimmed}”. Try a project name.
+            </span>
           </CommandEmpty>
           {trimmed ? (
             <CommandGroup heading={`${results.length} results`}>
               {results.map(({ item }) => {
                 const Icon = kindIcon[item.kind]
                 return (
-                  <CommandItem
+                  <PaletteItem
                     key={item.path}
                     value={item.path}
                     onSelect={() => go(item)}
-                    data-kind={item.kind}
+                    hue={kindHue[item.kind]}
+                    icon={<Icon aria-hidden="true" />}
+                    meta={`${searchKindLabel[item.kind]}${item.date ? ` · ${yearOf(item.date)}` : ""}`}
                   >
-                    <Icon aria-hidden="true" />
                     <span className="flex min-w-0 flex-1 flex-col">
-                      <span className="truncate">{item.title}</span>
-                      <span className="truncate text-xs text-muted-foreground">
+                      <span className="truncate font-semibold">
+                        {item.title}
+                      </span>
+                      <span className="truncate text-xs text-ink-soft">
                         {item.description}
                       </span>
                     </span>
-                    <CommandShortcut data-slot="palette-meta">
-                      {searchKindLabel[item.kind]}
-                      {item.date ? ` · ${yearOf(item.date)}` : ""}
-                    </CommandShortcut>
-                  </CommandItem>
+                  </PaletteItem>
                 )
               })}
             </CommandGroup>
@@ -180,74 +191,121 @@ function CommandPalette({ open, setOpen }: PaletteState) {
             <>
               <CommandGroup heading="Go to">
                 {pages.map((page) => (
-                  <CommandItem
+                  <PaletteItem
                     key={page.path}
                     value={`page ${page.label}`}
                     onSelect={() => go(page)}
+                    hue={hueForPath(page.path)}
+                    icon={<ArrowUpRight aria-hidden="true" />}
                   >
-                    <ArrowUpRight aria-hidden="true" />
                     {page.label}
-                  </CommandItem>
+                  </PaletteItem>
                 ))}
               </CommandGroup>
               <CommandGroup heading="Actions">
-                <CommandItem
+                <PaletteItem
                   value="action copy email"
+                  hue="rose"
+                  icon={<AtSign aria-hidden="true" />}
+                  meta={profile.email}
                   onSelect={() => {
                     close()
                     void copy(profile.email, "Email copied")
                   }}
                 >
-                  <AtSign aria-hidden="true" />
                   Copy email address
-                  <CommandShortcut>{profile.email}</CommandShortcut>
-                </CommandItem>
-                <CommandItem
+                </PaletteItem>
+                <PaletteItem
                   value="action copy link"
+                  hue="sky"
+                  icon={<Link2 aria-hidden="true" />}
                   onSelect={() => {
                     close()
                     void copy(window.location.href, "Link copied")
                   }}
                 >
-                  <Link2 aria-hidden="true" />
                   Copy link to this page
-                </CommandItem>
-                <CommandItem
+                </PaletteItem>
+                <PaletteItem
                   value="action theme"
+                  hue="butter"
+                  icon={
+                    resolvedTheme === "dark" ? (
+                      <Sun aria-hidden="true" />
+                    ) : (
+                      <Moon aria-hidden="true" />
+                    )
+                  }
                   onSelect={() => {
                     close()
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
                   }}
                 >
-                  {resolvedTheme === "dark" ? (
-                    <Sun aria-hidden="true" />
-                  ) : (
-                    <Moon aria-hidden="true" />
-                  )}
                   Switch to {resolvedTheme === "dark" ? "light" : "dark"} theme
-                </CommandItem>
-                <CommandItem
+                </PaletteItem>
+                <PaletteItem
                   value="action github"
+                  hue="mint"
+                  icon={<GitPullRequest aria-hidden="true" />}
                   onSelect={() => go({ path: profile.links.github })}
                 >
-                  <GitPullRequest aria-hidden="true" />
                   Open GitHub profile
-                </CommandItem>
-                <CommandItem
+                </PaletteItem>
+                <PaletteItem
                   value="action rss"
+                  hue="peach"
+                  icon={<Rss aria-hidden="true" />}
                   onSelect={() => {
                     close()
                     window.location.assign("/index.xml")
                   }}
                 >
-                  <Rss aria-hidden="true" />
                   RSS feed
-                </CommandItem>
+                </PaletteItem>
               </CommandGroup>
             </>
           )}
         </CommandList>
       </Command>
     </CommandDialog>
+  )
+}
+
+const kindHue: Record<SearchEntry["kind"], Hue> = {
+  essay: "peach",
+  project: "lilac",
+  page: "sky",
+  "pull-request": "mint",
+}
+
+/** A result row: a small hue tile with an icon; selected rows take that hue's tint. */
+function PaletteItem({
+  hue,
+  icon,
+  meta,
+  children,
+  ...props
+}: Omit<ComponentProps<typeof CommandItem>, "children"> & {
+  hue: Hue
+  icon: ReactNode
+  meta?: string
+  children: ReactNode
+}) {
+  return (
+    <CommandItem
+      data-hue={hue}
+      className="gap-3 rounded-[14px]! px-2.5 py-2 text-[0.9375rem] text-ink data-selected:bg-hue-tint"
+      {...props}
+    >
+      <span className="grid size-7 shrink-0 place-items-center rounded-[9px] bg-hue text-on-pastel [&_svg]:size-3.5!">
+        {icon}
+      </span>
+      {children}
+      {meta && (
+        <CommandShortcut className="tracking-normal text-ink-faint">
+          {meta}
+        </CommandShortcut>
+      )}
+    </CommandItem>
   )
 }

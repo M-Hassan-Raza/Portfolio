@@ -1,159 +1,239 @@
 /*
- * Direction: Cobalt Plate (baseline).
- * The whole visual identity lives here: fonts, palette for light and dark,
- * texture and ASCII inking. Components only reference these names.
+ * Direction: Sticker Studio.
+ * Warm cream paper, cocoa ink, six pastels in three named steps, one pop.
+ * Every colour the site uses is a name in this file. Components never see a value.
  */
-@import "@fontsource-variable/instrument-sans/wght.css";
-@import "@fontsource-variable/geist-mono/wght.css";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/bricolage-grotesque/standard.css";
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/fraunces/full-italic.css";
 
 :root {
   --font-sans-family:
-    "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+    "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-heading-family: var(--font-sans-family);
-  --font-serif-family: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-serif-family: "Fraunces Variable", ui-serif, Georgia, serif;
+  /* Code blocks only. The design itself never sets mono. */
   --font-mono-family:
-    "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
-  --radius: 0.125rem;
+  --radius: 1.125rem;
 
-  --background: oklch(0.984 0.003 95);
-  --foreground: oklch(0.205 0.006 265);
-  --card: oklch(0.996 0.0015 95);
-  --card-foreground: var(--foreground);
-  --popover: var(--card);
-  --popover-foreground: var(--foreground);
-  --primary: var(--foreground);
-  --primary-foreground: var(--background);
-  --primary-hover: oklch(0.34 0.008 265);
-  --secondary: oklch(0.955 0.003 95);
-  --secondary-foreground: var(--foreground);
-  --secondary-hover: oklch(0.93 0.004 95);
-  --muted: oklch(0.955 0.003 95);
-  --muted-foreground: oklch(0.505 0.008 265);
-  --muted-soft: oklch(0.97 0.003 95);
-  --accent: oklch(0.955 0.003 95);
-  --accent-foreground: var(--foreground);
-  --ghost-hover: oklch(0.955 0.003 95);
+  /* ── Paper and ink ─────────────────────────────────────────────── */
+  --paper: oklch(0.975 0.014 85);
+  --paper-raised: oklch(0.995 0.006 85);
+  --paper-sunk: oklch(0.945 0.02 80);
+  --paper-hover: oklch(0.955 0.018 82);
+  --ink: oklch(0.27 0.03 40);
+  --ink-hover: oklch(0.35 0.035 40);
+  --ink-soft: oklch(0.45 0.03 45);
+  --ink-faint: oklch(0.62 0.025 50);
+  --line: oklch(0.88 0.02 70);
+  --line-strong: oklch(0.8 0.025 65);
 
-  --destructive: oklch(0.577 0.245 27);
-  --destructive-foreground: var(--background);
-  --destructive-tint: oklch(0.97 0.02 27);
-  --destructive-tint-hover: oklch(0.94 0.04 27);
-  --destructive-ring: oklch(0.88 0.08 27);
-  --destructive-border: oklch(0.78 0.12 27);
-  --destructive-soft-foreground: oklch(0.52 0.2 27);
+  /* ── Pastels: tint (field) / base (shape) / deep (text on tint) ── */
+  --peach-tint: oklch(0.94 0.04 55);
+  --peach: oklch(0.84 0.1 50);
+  --peach-deep: oklch(0.52 0.14 40);
+  --butter-tint: oklch(0.96 0.05 95);
+  --butter: oklch(0.9 0.13 95);
+  --butter-deep: oklch(0.55 0.11 80);
+  --lilac-tint: oklch(0.94 0.035 300);
+  --lilac: oklch(0.8 0.1 300);
+  --lilac-deep: oklch(0.45 0.15 295);
+  --mint-tint: oklch(0.95 0.04 160);
+  --mint: oklch(0.85 0.09 160);
+  --mint-deep: oklch(0.45 0.09 165);
+  --sky-tint: oklch(0.95 0.03 230);
+  --sky: oklch(0.83 0.08 230);
+  --sky-deep: oklch(0.45 0.11 245);
+  --rose-tint: oklch(0.94 0.04 10);
+  --rose: oklch(0.82 0.1 10);
+  --rose-deep: oklch(0.5 0.15 15);
 
-  --border: oklch(0.905 0.004 95);
-  --border-soft: oklch(0.935 0.003 95);
-  --border-strong: oklch(0.8 0.006 265);
-  --hairline: oklch(0.905 0.004 95);
-  --outline-border: oklch(0.87 0.005 265);
-  --input: oklch(0.645 0.008 265);
-  --input-tint: transparent;
-  --input-tint-hover: oklch(0.955 0.003 95);
-  --input-disabled: oklch(0.95 0.003 95);
-  --input-border-soft: oklch(0.9 0.004 265);
-  --ring: oklch(0.55 0.2 264);
-  --ring-soft: oklch(0.89 0.05 262);
-  --overlay: oklch(0.205 0.006 265 / 0.45);
-  --tab-active: var(--background);
-  --tab-active-border: var(--border);
-  --kbd-inverse: oklch(0.35 0.008 265);
-  --tooltip: var(--foreground);
-  --tooltip-foreground: var(--background);
+  /* Text that sits on a base-colour shape (spines, stamps). */
+  --on-pastel: oklch(0.27 0.03 40);
 
-  --signal: oklch(0.49 0.215 264);
-  --signal-foreground: oklch(0.984 0.003 95);
-  --signal-hover: oklch(0.43 0.195 264);
-  --signal-tint: oklch(0.95 0.02 262);
-  --signal-tint-foreground: oklch(0.42 0.19 264);
+  /* The one saturated accent: scribbles, focus, active nav dot. */
+  --pop: oklch(0.66 0.19 35);
+  --ring-soft: oklch(0.9 0.06 40);
+  --sticker-shade: oklch(0.27 0.03 40);
+  --soft-shade: oklch(0.27 0.03 40 / 0.14);
+  --float-shade: oklch(0.27 0.03 40 / 0.1);
+  --overlay: oklch(0.27 0.03 40 / 0.35);
 
-  --selection: oklch(0.89 0.05 262);
-  --grid-line: oklch(0.93 0.003 95);
-  --code-surface: oklch(0.965 0.003 95);
-  --code-foreground: var(--foreground);
+  /* Photos and ASCII join the palette through blending, not recolouring. */
+  --photo-blend: multiply;
+  --photo-filter: saturate(0.92) contrast(1.02);
+
+  /* ── shadcn semantic names, bound to the studio palette ───────── */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-raised);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-raised);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --primary-hover: var(--ink-hover);
+  --secondary: var(--paper-sunk);
+  --secondary-foreground: var(--ink);
+  --secondary-hover: var(--paper-hover);
+  --muted: var(--paper-sunk);
+  --muted-foreground: var(--ink-soft);
+  --muted-soft: var(--paper-sunk);
+  --accent: var(--paper-sunk);
+  --accent-foreground: var(--ink);
+  --ghost-hover: var(--paper-sunk);
+
+  --destructive: oklch(0.55 0.19 25);
+  --destructive-foreground: var(--paper);
+  --destructive-tint: var(--rose-tint);
+  --destructive-tint-hover: oklch(0.91 0.055 10);
+  --destructive-ring: var(--rose);
+  --destructive-border: var(--rose);
+  --destructive-soft-foreground: var(--rose-deep);
+
+  --border: var(--line);
+  --border-soft: var(--line);
+  --border-strong: var(--line-strong);
+  --hairline: var(--line);
+  --outline-border: var(--ink);
+  --input: var(--line-strong);
+  --input-tint: var(--paper-sunk);
+  --input-tint-hover: var(--paper-hover);
+  --input-disabled: var(--paper-sunk);
+  --input-border-soft: var(--line);
+  --ring: var(--pop);
+  --tab-active: var(--paper-raised);
+  --tab-active-border: var(--ink);
+  --kbd-inverse: var(--ink-hover);
+  --tooltip: var(--ink);
+  --tooltip-foreground: var(--paper);
+
+  --signal: var(--pop);
+  --signal-foreground: var(--paper);
+  --signal-hover: var(--peach-deep);
+  --signal-tint: var(--peach-tint);
+  --signal-tint-foreground: var(--peach-deep);
+
+  --selection: var(--butter);
+  --grid-line: var(--line);
+  --code-surface: var(--paper-sunk);
+  --code-foreground: var(--ink);
 
   --shiki-foreground: var(--code-foreground);
   --shiki-background: var(--code-surface);
-  --shiki-token-comment: var(--muted-foreground);
-  --shiki-token-keyword: var(--signal);
-  --shiki-token-constant: oklch(0.47 0.14 250);
-  --shiki-token-string: oklch(0.42 0.06 160);
-  --shiki-token-string-expression: oklch(0.42 0.06 160);
-  --shiki-token-function: var(--foreground);
-  --shiki-token-parameter: oklch(0.45 0.02 265);
-  --shiki-token-punctuation: var(--muted-foreground);
-  --shiki-token-link: var(--signal);
+  --shiki-token-comment: var(--ink-faint);
+  --shiki-token-keyword: var(--lilac-deep);
+  --shiki-token-constant: var(--sky-deep);
+  --shiki-token-string: var(--mint-deep);
+  --shiki-token-string-expression: var(--mint-deep);
+  --shiki-token-function: var(--peach-deep);
+  --shiki-token-parameter: var(--ink-soft);
+  --shiki-token-punctuation: var(--ink-faint);
+  --shiki-token-link: var(--pop);
 
-  --ascii-ink: oklch(0.34 0.01 265);
-  --ascii-ink-accent: var(--signal);
-  --ascii-faint: oklch(0.72 0.006 265);
-  --ascii-plate: oklch(0.205 0.006 265);
-  --ascii-plate-ink: oklch(0.86 0.005 95);
-  --ascii-wght: 330;
-  --ascii-mask: radial-gradient(
-    130% 110% at 50% 45%,
-    black 62%,
-    transparent 100%
-  );
+  --ascii-ink: var(--ink);
+  --ascii-ink-accent: var(--pop);
+  --ascii-faint: var(--ink-faint);
+  --ascii-plate: var(--ink);
+  --ascii-plate-ink: var(--paper-sunk);
+  --ascii-wght: 360;
+  --ascii-blend: multiply;
+  --ascii-mask: none;
 }
 
+/* Cocoa night: warm, low-chroma fields; pastels stay recognisable. */
 .dark {
-  --background: oklch(0.165 0.004 265);
-  --foreground: oklch(0.935 0.004 95);
-  --card: oklch(0.19 0.005 265);
-  --primary-hover: oklch(0.85 0.004 95);
-  --secondary: oklch(0.215 0.005 265);
-  --secondary-hover: oklch(0.25 0.006 265);
-  --muted: oklch(0.215 0.005 265);
-  --muted-foreground: oklch(0.705 0.008 265);
-  --muted-soft: oklch(0.19 0.005 265);
-  --accent: oklch(0.215 0.005 265);
-  --ghost-hover: oklch(0.215 0.005 265);
+  --paper: oklch(0.2 0.02 45);
+  --paper-raised: oklch(0.25 0.022 45);
+  --paper-sunk: oklch(0.17 0.018 45);
+  --paper-hover: oklch(0.28 0.024 45);
+  --ink: oklch(0.95 0.015 85);
+  --ink-hover: oklch(0.88 0.02 85);
+  --ink-soft: oklch(0.78 0.02 70);
+  --ink-faint: oklch(0.62 0.02 60);
+  --line: oklch(0.33 0.02 45);
+  --line-strong: oklch(0.42 0.022 45);
 
-  --destructive: oklch(0.704 0.191 22);
-  --destructive-tint: oklch(0.24 0.05 22);
-  --destructive-tint-hover: oklch(0.28 0.07 22);
-  --destructive-ring: oklch(0.35 0.1 22);
-  --destructive-border: oklch(0.45 0.13 22);
-  --destructive-soft-foreground: oklch(0.78 0.14 22);
+  --peach-tint: oklch(0.31 0.05 50);
+  --peach: oklch(0.78 0.11 50);
+  --peach-deep: oklch(0.9 0.06 55);
+  --butter-tint: oklch(0.32 0.05 90);
+  --butter: oklch(0.86 0.13 95);
+  --butter-deep: oklch(0.93 0.07 95);
+  --lilac-tint: oklch(0.3 0.06 300);
+  --lilac: oklch(0.76 0.11 300);
+  --lilac-deep: oklch(0.89 0.05 300);
+  --mint-tint: oklch(0.3 0.045 160);
+  --mint: oklch(0.8 0.1 160);
+  --mint-deep: oklch(0.9 0.05 160);
+  --sky-tint: oklch(0.3 0.045 235);
+  --sky: oklch(0.78 0.09 230);
+  --sky-deep: oklch(0.9 0.04 230);
+  --rose-tint: oklch(0.3 0.055 10);
+  --rose: oklch(0.78 0.11 10);
+  --rose-deep: oklch(0.9 0.05 10);
 
-  --border: oklch(0.28 0.006 265);
-  --border-soft: oklch(0.23 0.005 265);
-  --border-strong: oklch(0.38 0.008 265);
-  --hairline: oklch(0.28 0.006 265);
-  --outline-border: oklch(0.34 0.008 265);
-  --input: oklch(0.5 0.008 265);
-  --input-tint: oklch(0.19 0.005 265);
-  --input-tint-hover: oklch(0.23 0.006 265);
-  --input-disabled: oklch(0.2 0.005 265);
-  --input-border-soft: oklch(0.3 0.006 265);
-  --ring: oklch(0.72 0.135 262);
-  --ring-soft: oklch(0.36 0.1 264);
-  --overlay: oklch(0.08 0.004 265 / 0.72);
-  --tab-active: oklch(0.23 0.006 265);
-  --tab-active-border: var(--border-strong);
-  --kbd-inverse: oklch(0.8 0.004 95);
+  --on-pastel: oklch(0.22 0.025 40);
 
-  --signal: oklch(0.72 0.135 262);
-  --signal-foreground: oklch(0.165 0.004 265);
-  --signal-hover: oklch(0.79 0.105 262);
-  --signal-tint: oklch(0.26 0.06 264);
-  --signal-tint-foreground: oklch(0.84 0.07 262);
+  --pop: oklch(0.74 0.17 40);
+  --ring-soft: oklch(0.38 0.08 40);
+  --sticker-shade: oklch(0.12 0.015 45);
+  --soft-shade: oklch(0.08 0.01 45 / 0.45);
+  --float-shade: oklch(0.08 0.01 45 / 0.35);
+  --overlay: oklch(0.1 0.015 45 / 0.62);
 
-  --selection: oklch(0.36 0.1 264);
-  --grid-line: oklch(0.22 0.005 265);
-  --code-surface: oklch(0.195 0.005 265);
+  --photo-blend: normal;
+  --photo-filter: saturate(0.85) brightness(0.94);
 
-  --shiki-token-constant: oklch(0.8 0.1 240);
-  --shiki-token-string: oklch(0.8 0.07 160);
-  --shiki-token-string-expression: oklch(0.8 0.07 160);
-  --shiki-token-parameter: oklch(0.78 0.02 265);
+  --destructive: oklch(0.72 0.16 25);
+  --destructive-tint-hover: oklch(0.34 0.07 10);
 
-  --ascii-ink: oklch(0.8 0.006 95);
-  --ascii-faint: oklch(0.42 0.006 265);
-  --ascii-plate: oklch(0.19 0.005 265);
-  --ascii-wght: 400;
+  --signal-foreground: var(--paper-sunk);
+
+  --ascii-ink: var(--ink);
+  --ascii-plate: var(--paper-sunk);
+  --ascii-plate-ink: var(--ink-soft);
+  --ascii-wght: 420;
+  --ascii-blend: screen;
+}
+
+/*
+ * Hue worlds. Any element with data-hue="…" re-points the generic hue tokens,
+ * so a card, band or stamp says bg-hue / bg-hue-tint / text-hue-deep and gets
+ * its section colour. Hue means content type:
+ * lilac work, peach writing, sky books, mint open source, rose about/contact,
+ * butter stats and "now".
+ */
+:root,
+[data-hue="peach"] {
+  --hue-tint: var(--peach-tint);
+  --hue: var(--peach);
+  --hue-deep: var(--peach-deep);
+}
+[data-hue="butter"] {
+  --hue-tint: var(--butter-tint);
+  --hue: var(--butter);
+  --hue-deep: var(--butter-deep);
+}
+[data-hue="lilac"] {
+  --hue-tint: var(--lilac-tint);
+  --hue: var(--lilac);
+  --hue-deep: var(--lilac-deep);
+}
+[data-hue="mint"] {
+  --hue-tint: var(--mint-tint);
+  --hue: var(--mint);
+  --hue-deep: var(--mint-deep);
+}
+[data-hue="sky"] {
+  --hue-tint: var(--sky-tint);
+  --hue: var(--sky);
+  --hue-deep: var(--sky-deep);
+}
+[data-hue="rose"] {
+  --hue-tint: var(--rose-tint);
+  --hue: var(--rose);
+  --hue-deep: var(--rose-deep);
 }

@@ -4,6 +4,7 @@ import type { ReactNode } from "react"
 import { site } from "@/lib/site"
 import { SiteFooter, SiteHeader } from "@/components/site-chrome"
 import { SiteProviders } from "@/components/system/providers"
+import { NotFoundView } from "@/components/views/not-found"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRoute({
@@ -31,12 +32,7 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  notFoundComponent: () => (
-    <section className="flex flex-col gap-6">
-      <h1>Page not found</h1>
-      <a href="/">Return home</a>
-    </section>
-  ),
+  notFoundComponent: NotFoundView,
   shellComponent: RootDocument,
 })
 
@@ -64,12 +60,12 @@ function RootDocument({ children }: { children: ReactNode }) {
             <div className="isolate flex min-h-dvh flex-col">
               <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-skip-link focus:bg-background focus:px-3 focus:py-2"
+                className="sr-only rounded-full focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-skip-link focus:bg-ink focus:px-5 focus:py-3 focus:font-semibold focus:text-paper"
               >
                 Skip to content
               </a>
               <SiteHeader />
-              <main id="main-content" className="flex-1">
+              <main id="main-content" className="flex flex-1 flex-col">
                 {children}
               </main>
               <SiteFooter />
