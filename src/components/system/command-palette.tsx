@@ -40,8 +40,8 @@ import {
 import type { SearchEntry } from "@/lib/content/search"
 import { yearOf } from "@/lib/format"
 import { mainNavigation, footerNavigation } from "@/lib/site"
-import { hueForPath } from "@/lib/studio"
-import type { Hue } from "@/lib/studio"
+import { blockFor, blockForSection } from "@/lib/studio"
+import type { Surface } from "@/lib/studio"
 import { useCopy } from "./copy"
 
 type PaletteState = { open: boolean; setOpen: (open: boolean) => void }
@@ -141,7 +141,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
       onOpenChange={(next) => (next ? setOpen(true) : close())}
       title="Search the site"
       description="Jump to writing, work, pull requests or an action."
-      className="top-[14vh] max-w-[calc(100%-2rem)] rounded-[24px]! border-[1.5px] border-ink bg-paper-raised shadow-rest ring-0 sm:max-w-xl"
+      className="top-[14vh] max-w-[calc(100%-2rem)] rounded-[24px]! border-2 border-ink bg-paper-raised shadow-rest ring-0 sm:max-w-xl"
     >
       <Command
         shouldFilter={false}
@@ -171,7 +171,13 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                     key={item.path}
                     value={item.path}
                     onSelect={() => go(item)}
-                    hue={kindHue[item.kind]}
+                    hue={
+                      item.kind === "pull-request"
+                        ? "grass"
+                        : item.kind === "page"
+                          ? blockForSection(item.path)
+                          : blockFor(item.path)
+                    }
                     icon={<Icon aria-hidden="true" />}
                     meta={`${searchKindLabel[item.kind]}${item.date ? ` · ${yearOf(item.date)}` : ""}`}
                   >
@@ -195,7 +201,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                     key={page.path}
                     value={`page ${page.label}`}
                     onSelect={() => go(page)}
-                    hue={hueForPath(page.path)}
+                    hue={blockForSection(page.path)}
                     icon={<ArrowUpRight aria-hidden="true" />}
                   >
                     {page.label}
@@ -205,7 +211,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
               <CommandGroup heading="Actions">
                 <PaletteItem
                   value="action copy email"
-                  hue="rose"
+                  hue="ink"
                   icon={<AtSign aria-hidden="true" />}
                   meta={profile.email}
                   onSelect={() => {
@@ -217,7 +223,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                 </PaletteItem>
                 <PaletteItem
                   value="action copy link"
-                  hue="sky"
+                  hue="ink"
                   icon={<Link2 aria-hidden="true" />}
                   onSelect={() => {
                     close()
@@ -228,7 +234,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                 </PaletteItem>
                 <PaletteItem
                   value="action theme"
-                  hue="butter"
+                  hue="ink"
                   icon={
                     resolvedTheme === "dark" ? (
                       <Sun aria-hidden="true" />
@@ -245,7 +251,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                 </PaletteItem>
                 <PaletteItem
                   value="action github"
-                  hue="mint"
+                  hue="ink"
                   icon={<GitPullRequest aria-hidden="true" />}
                   onSelect={() => go({ path: profile.links.github })}
                 >
@@ -253,7 +259,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                 </PaletteItem>
                 <PaletteItem
                   value="action rss"
-                  hue="peach"
+                  hue="ink"
                   icon={<Rss aria-hidden="true" />}
                   onSelect={() => {
                     close()
@@ -271,14 +277,7 @@ function CommandPalette({ open, setOpen }: PaletteState) {
   )
 }
 
-const kindHue: Record<SearchEntry["kind"], Hue> = {
-  essay: "peach",
-  project: "lilac",
-  page: "sky",
-  "pull-request": "mint",
-}
-
-/** A result row: a small hue tile with an icon; selected rows take that hue's tint. */
+/** A result row: an outlined icon tile; the selected row floods with its destination's colour. */
 function PaletteItem({
   hue,
   icon,
@@ -286,23 +285,23 @@ function PaletteItem({
   children,
   ...props
 }: Omit<ComponentProps<typeof CommandItem>, "children"> & {
-  hue: Hue
+  hue: Surface
   icon: ReactNode
   meta?: string
   children: ReactNode
 }) {
   return (
     <CommandItem
-      data-hue={hue}
-      className="gap-3 rounded-[14px]! px-2.5 py-2 text-[0.9375rem] text-ink data-selected:bg-hue-tint"
+      data-block={hue}
+      className="gap-3 rounded-[12px]! px-2.5 py-2 text-[0.9375rem] text-ink data-selected:bg-block data-selected:text-on-block [&[data-selected]_*]:text-on-block"
       {...props}
     >
-      <span className="grid size-7 shrink-0 place-items-center rounded-[9px] bg-hue text-on-pastel [&_svg]:size-3.5!">
+      <span className="grid size-7 shrink-0 place-items-center rounded-[9px] border-[1.5px] border-current [&_svg]:size-3.5!">
         {icon}
       </span>
       {children}
       {meta && (
-        <CommandShortcut className="tracking-normal text-ink-faint">
+        <CommandShortcut className="tracking-normal text-ink-soft">
           {meta}
         </CommandShortcut>
       )}

@@ -1,23 +1,21 @@
 import { page } from "@/lib/studio"
-import { ArrowRight, Award, Sparkles, Star, Trophy } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { openSource, profile } from "#content"
 import type { Document } from "#content"
 import { requireDocument } from "@/lib/content/catalog"
 import { allBooks } from "@/lib/content/books"
-import { EssayRow, ProjectCard } from "@/components/content/cards"
-import { BubbleLink, BubbleStack } from "@/components/studio/bubble-stack"
-import { PortraitDisc } from "@/components/studio/characters"
+import { ProjectCard, entryRow } from "@/components/content/cards"
+import { FitText } from "@/components/studio/fit-text"
+import { IndexList } from "@/components/studio/index-list"
 import { Settle } from "@/components/studio/motion"
-import { BandArc } from "@/components/studio/page-hero"
-import { PillLink } from "@/components/studio/pill"
-import { SectionHeading, ArrowLink } from "@/components/studio/section-heading"
-import { ShapeField } from "@/components/studio/shape-field"
-import { homeShapes } from "@/components/studio/shape-presets"
+import { PillLink, PillAnchor } from "@/components/studio/pill"
+import { Portrait } from "@/components/studio/portrait"
+import { Scribble } from "@/components/studio/scribble"
+import { ArrowLink } from "@/components/studio/section-heading"
 import { Shelf } from "@/components/studio/shelf"
 import { StatBlock } from "@/components/studio/stat-block"
-import { Sticker } from "@/components/studio/sticker"
-import { SwappedWord } from "@/components/studio/swapped-word"
-import { WavyEdge } from "@/components/studio/wavy-edge"
+import { TiltCard } from "@/components/studio/tilt-card"
+import { cn } from "@/lib/utils"
 
 function requireProject(path: string) {
   const document = requireDocument(path)
@@ -25,21 +23,11 @@ function requireProject(path: string) {
   return document
 }
 
-/** Splits the hero title so one word can be swapped into the pill. */
-function HeroTitle({ title }: { title: string }) {
-  const word = "expensive"
-  const at = title.indexOf(word)
-  if (at < 0) return <>{title}</>
-  return (
-    <>
-      {title.slice(0, at)}
-      <SwappedWord hue="lilac">{word}</SwappedWord>
-      {title.slice(at + word.length)}
-    </>
-  )
-}
-
-const recognitionIcons = [Trophy, Sparkles, Star, Award]
+const offers = [
+  "Architecture and AI reviews",
+  "Hands-on builds",
+  "Advisory for teams shipping something real",
+]
 
 export function HomeView({
   document,
@@ -47,74 +35,74 @@ export function HomeView({
   document: Extract<Document, { kind: "home" }>
 }) {
   const { home } = document
-  const workRefs = [home.work.lead, ...home.work.more]
-  const works = workRefs.map((reference) => ({
+  const works = [home.work.lead, ...home.work.more].map((reference) => ({
     project: requireProject(reference.page),
     note: reference.note,
   }))
   const [lead, ...rest] = works
   const agents = profile.proof.find((proof) => proof.value.includes("15"))
   const otherProof = profile.proof.filter((proof) => proof !== agents)
-  const shelfPicks = [0, 3, 9, 13, 17, 20]
+  const shelfPicks = [0, 3, 9, 13, 17, 20, 6]
     .map((index) => allBooks[index])
     .filter((book) => book !== undefined)
 
   return (
     <div className="flex flex-col">
-      {/* Hero: peach field, four cut shapes, the waving portrait. */}
+      {/* Hero: the name fills the width; one small portrait; one headline. */}
       <section
-        data-hue="peach"
-        className="flex flex-col"
         aria-labelledby="home-title"
+        className="frame flex flex-col gap-8 pt-28 pb-20 sm:gap-10 sm:pt-32 sm:pb-28"
       >
-        <div className="relative isolate overflow-clip bg-hue-tint">
-          <ShapeField shapes={homeShapes} />
-          <div className="relative frame flex flex-col items-center gap-8 pt-32 pb-16 text-center sm:pt-36 sm:pb-20">
-            <div className="flex flex-col items-center gap-4 sm:flex-row">
-              <PortraitDisc className="size-20 sm:size-22" />
-              <a
-                href={profile.now.url}
-                className="pressable inline-flex items-center gap-2 rounded-full bg-paper-raised px-4 py-1.5 text-sm font-medium text-ink-soft shadow-soft hover:text-ink"
-              >
-                <span
-                  aria-hidden="true"
-                  data-hue="mint"
-                  className="size-2 rounded-full bg-hue"
-                />
-                {profile.now.role}, {profile.now.org}
-              </a>
-            </div>
-            <h1
-              id="home-title"
-              className="max-w-[15ch] text-[clamp(2.9rem,5.2vw+1rem,6.25rem)] leading-[0.95] font-[740] tracking-[-0.032em] text-balance text-ink [font-stretch:94%]"
-              style={{ fontVariationSettings: '"opsz" 96' }}
-            >
-              <HeroTitle title={home.hero.title} />
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 type-label">
+          <a
+            href={profile.now.url}
+            className="relative underline-offset-4 hover:underline"
+          >
+            {profile.now.role}, {profile.now.org}
+            <Scribble
+              variant="underline"
+              delay={900}
+              className="absolute -right-1 -bottom-2.5 left-[58%] h-2.5 text-ink"
+            />
+          </a>
+          <span>{profile.location}</span>
+        </div>
+        <p className="-mt-2">
+          <FitText text="Hassan Raza" rise />
+        </p>
+        <div className="grid gap-10 md:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] md:gap-14 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,14rem)]">
+          <Portrait
+            tilt={-4}
+            className="w-40 self-start sm:w-48 md:-mt-4 md:w-full"
+          />
+          <div className="flex max-w-3xl flex-col gap-6">
+            <h1 id="home-title" className="type-display">
+              {home.hero.title}
             </h1>
-            <p className="max-w-[46rem] type-lede text-[clamp(1.1rem,0.5vw+1rem,1.3rem)] text-ink-soft">
+            <p className="max-w-[40rem] type-lede text-ink-soft">
               {home.hero.summary}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <PillLink to={page("/blog/")} size="lg">
-                Read the essays
-                <ArrowRight aria-hidden="true" strokeWidth={2.4} />
-              </PillLink>
-              <PillLink to={page("/projects/")} size="lg" variant="paper">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <PillLink to={page("/projects/")} size="lg">
                 See the work
+                <ArrowRight aria-hidden="true" strokeWidth={2.6} />
+              </PillLink>
+              <PillLink to={page("/blog/")} size="lg" variant="paper">
+                Read the essays
               </PillLink>
             </div>
           </div>
         </div>
-        <BandArc />
       </section>
 
-      <div className="flex flex-col gap-20 pt-16 sm:gap-32 sm:pt-20">
-        {/* Selected work: tilted sticker cards. */}
-        <section
-          aria-labelledby="work-heading"
-          className="frame flex flex-col gap-12"
-        >
-          <SectionHeading
+      {/* Work: a tomato block of tilted cards. */}
+      <section
+        data-block="tomato"
+        aria-labelledby="work-heading"
+        className="surface-block"
+      >
+        <div className="frame flex flex-col gap-12 py-20 sm:gap-16 sm:py-28">
+          <SectionTitle
             id="work-heading"
             title="Selected work"
             aside="Mostly products where a small mistake costs someone real money."
@@ -141,163 +129,176 @@ export function HomeView({
               </Settle>
             ))}
           </ul>
-        </section>
+        </div>
+      </section>
 
-        {/* Latest writing: stamp rows. */}
-        <section
-          aria-labelledby="writing-heading"
-          data-hue="peach"
-          className="frame grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16"
-        >
-          <div className="flex flex-col items-start gap-5 lg:sticky lg:top-28 lg:self-start">
-            <h2 id="writing-heading" className="type-h2 text-ink">
-              Latest writing
-            </h2>
-            <p className="type-annotation text-lg text-ink-soft">
-              Bugs I shipped, fixes that held, and a few opinions I changed my
-              mind about.
-            </p>
-            <ArrowLink to={page("/blog/")}>Everything I’ve written</ArrowLink>
+      {/* Writing: rows that flood with each essay's colour. */}
+      <section
+        aria-labelledby="writing-heading"
+        className="frame grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.1fr)] lg:gap-16"
+      >
+        <SectionTitle
+          id="writing-heading"
+          title="Latest writing"
+          aside="Bugs I shipped, fixes that held, and a few opinions I changed my mind about."
+          link={{ to: "/blog/", label: "Everything I’ve written" }}
+          stacked
+          className="lg:sticky lg:top-28 lg:self-start"
+        />
+        <IndexList
+          size="compact"
+          rows={home.writing.map((reference) =>
+            entryRow(requireDocument(reference.page), reference.note)
+          )}
+        />
+      </section>
+
+      {/* Numbers: grass block, counting numerals and the shape grid. */}
+      <section
+        data-block="grass"
+        aria-labelledby="numbers-heading"
+        className="surface-block"
+      >
+        <div className="frame flex flex-col gap-14 py-20 sm:py-28">
+          <SectionTitle
+            id="numbers-heading"
+            title="A few honest numbers"
+            aside="Each one survives a follow-up question."
+          />
+          <div className="grid gap-16 md:grid-cols-2 md:gap-12">
+            <StatBlock
+              value={openSource.merged}
+              label="merged pull requests in tools I use every day"
+            >
+              <ArrowLink to={page("/open-source/")} className="self-start">
+                See every one
+              </ArrowLink>
+            </StatBlock>
+            {agents && (
+              <StatBlock
+                value={Number.parseInt(agents.value, 10)}
+                suffix="+"
+                label={agents.label}
+              />
+            )}
           </div>
-          <ul className="flex flex-col gap-4">
-            {home.writing.map((reference, index) => (
-              <Settle as="li" key={reference.page} index={index}>
-                <EssayRow
-                  entry={requireDocument(reference.page)}
-                  note={reference.note}
-                />
-              </Settle>
+          <ul className="grid gap-6 sm:grid-cols-2">
+            {otherProof.map((proof, index) => (
+              <li key={proof.label}>
+                <TiltCard
+                  tilt={index % 2 === 0 ? -1.25 : 1}
+                  className="flex h-full flex-col gap-2 bg-paper-raised p-6 text-ink sm:p-7"
+                >
+                  <span className="type-h2 tabular">{proof.value}</span>
+                  <span className="font-serif text-[1.05rem] text-ink-soft">
+                    {proof.label}
+                  </span>
+                </TiltCard>
+              </li>
             ))}
           </ul>
-        </section>
+        </div>
+      </section>
 
-        {/* Stats band: butter tint, numerals and shape grids. */}
-        <section
-          data-hue="butter"
-          aria-labelledby="numbers-heading"
-          className="flex flex-col"
-        >
-          <WavyEdge className="text-hue-tint" />
-          <div className="bg-hue-tint">
-            <div className="frame flex flex-col gap-14 py-14 sm:py-20">
-              <div className="flex flex-col gap-2">
-                <h2 id="numbers-heading" className="type-h2 text-ink">
-                  A few honest numbers
-                </h2>
-                <p className="type-annotation text-lg text-ink-soft">
-                  Each one survives a follow-up question.
-                </p>
-              </div>
-              <div className="grid gap-16 md:grid-cols-2 md:gap-20">
-                <StatBlock
-                  value={openSource.merged}
-                  label="merged pull requests in tools I use every day"
-                >
-                  <ArrowLink to={page("/open-source/")} className="self-start">
-                    See every one
-                  </ArrowLink>
-                </StatBlock>
-                {agents && (
-                  <StatBlock
-                    value={Number.parseInt(agents.value, 10)}
-                    suffix="+"
-                    label={agents.label}
-                  />
-                )}
-              </div>
-              <ul className="grid gap-4 sm:grid-cols-2">
-                {otherProof.map((proof) => (
-                  <li
-                    key={proof.label}
-                    className="flex flex-col gap-2 rounded-lg bg-paper-raised p-6 sm:p-7"
-                  >
-                    <span className="type-serif-title text-[clamp(1.9rem,2.6vw+1rem,2.75rem)] leading-none tracking-[-0.03em] text-ink tabular">
-                      {proof.value}
-                    </span>
-                    <span className="text-ink-soft">{proof.label}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col gap-4">
-                <p className="type-label text-hue-deep">
-                  Entropy Labs, for the record
-                </p>
-                <ul className="flex flex-wrap gap-4">
-                  {profile.recognition.map((item, index) => (
-                    <li key={item}>
-                      <Sticker
-                        icon={recognitionIcons[index % recognitionIcons.length]}
-                        hue={
-                          (["peach", "lilac", "mint", "sky"] as const)[
-                            index % 4
-                          ] ?? "peach"
-                        }
-                        rotate={[-3, 2.5, -1.5, 3][index % 4]}
-                        className="px-4 py-2 text-[0.8125rem]"
-                      >
-                        {item}
-                      </Sticker>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <WavyEdge className="text-hue-tint" flip />
-        </section>
+      {/* On the shelf: spines on paper, in tones of lemon. */}
+      <section
+        data-block="lemon"
+        aria-labelledby="shelf-heading"
+        className="frame grid items-end gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16"
+      >
+        <SectionTitle
+          id="shelf-heading"
+          title="On the shelf"
+          aside="Hover a spine, or tap one, for the one-line verdict."
+          link={{ to: "/books/", label: "All the shelves" }}
+          stacked
+        />
+        <Shelf books={shelfPicks} />
+      </section>
 
-        {/* Now reading: spines on a shelf. */}
-        <section
-          aria-labelledby="shelf-heading"
-          data-hue="sky"
-          className="frame grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16"
-        >
-          <div className="flex flex-col items-start gap-5">
-            <h2 id="shelf-heading" className="type-h2 text-ink">
-              On the shelf
+      {/* Contact: pink block, type and three tilted cards. */}
+      <section
+        data-block="pink"
+        aria-labelledby="contact-heading"
+        className="surface-block"
+      >
+        <div className="frame grid items-center gap-14 py-20 sm:py-28 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+          <div className="flex flex-col gap-6">
+            <h2
+              id="contact-heading"
+              className="type-display-xl text-block-deep"
+            >
+              Got a system that has to hold up?
             </h2>
-            <p className="type-annotation text-lg text-ink-soft">
-              Hover a spine for the one-line verdict. The long versions live on
-              the books page.
+            <p className="max-w-xl type-lede">
+              I take on a small amount of outside work: architecture and AI
+              reviews, hands-on builds, and advisory for teams shipping
+              something real.
             </p>
-            <ArrowLink to="/books/">All the shelves</ArrowLink>
-          </div>
-          <Shelf books={shelfPicks} />
-        </section>
-
-        {/* Contact: rose band with a thought cloud. */}
-        <section
-          data-hue="rose"
-          aria-labelledby="contact-heading"
-          className="flex flex-col"
-        >
-          <WavyEdge className="text-hue-tint" />
-          <div className="bg-hue-tint">
-            <div className="frame grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
-              <div className="flex flex-col gap-5">
-                <h2 id="contact-heading" className="type-h2 text-ink">
-                  Got a system that has to hold up?
-                </h2>
-                <p className="max-w-md type-lede text-ink-soft">
-                  I take on a small amount of outside work: architecture and AI
-                  reviews, hands-on builds, and advisory for teams shipping
-                  something real.
-                </p>
-              </div>
-              <BubbleStack
-                lines={[
-                  "Architecture and AI reviews",
-                  "Hands-on builds",
-                  "Advisory for teams shipping something real",
-                ]}
-                action={
-                  <BubbleLink to={page("/contact/")}>How I work</BubbleLink>
-                }
-              />
+            <div className="flex flex-wrap gap-3 pt-2">
+              <PillLink to={page("/contact/")} size="lg">
+                How I work
+                <ArrowRight aria-hidden="true" strokeWidth={2.6} />
+              </PillLink>
+              <PillAnchor
+                href={`mailto:${profile.email}`}
+                size="lg"
+                variant="paper"
+              >
+                {profile.email}
+              </PillAnchor>
             </div>
           </div>
-        </section>
+          <ol className="flex flex-col gap-5">
+            {offers.map((offer, index) => (
+              <li key={offer}>
+                <TiltCard
+                  tilt={[-2, 1.5, -1][index]}
+                  className="flex items-baseline gap-5 bg-paper-raised px-6 py-5 text-ink"
+                >
+                  <span className="type-label tabular">0{index + 1}</span>
+                  <span className="type-h3 text-[1.5rem]">{offer}</span>
+                </TiltCard>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function SectionTitle({
+  id,
+  title,
+  aside,
+  link,
+  stacked = false,
+  className,
+}: {
+  id: string
+  title: string
+  aside?: string
+  link?: { to: string; label: string }
+  stacked?: boolean
+  className?: string
+}) {
+  return (
+    <div
+      className={cn(
+        stacked
+          ? "flex flex-col items-start gap-5"
+          : "flex flex-wrap items-end justify-between gap-x-10 gap-y-5",
+        className
+      )}
+    >
+      <div className="flex max-w-3xl flex-col gap-4">
+        <h2 id={id} className="type-display">
+          {title}
+        </h2>
+        {aside && <p className="max-w-xl type-lede">{aside}</p>}
       </div>
+      {link && <ArrowLink to={link.to}>{link.label}</ArrowLink>}
     </div>
   )
 }

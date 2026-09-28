@@ -101,38 +101,3 @@ export function Shape({
     </svg>
   )
 }
-
-/** Two dots and a small curve. Only for the 404, the footer peek and empty states. */
-export function Face({
-  className,
-  mood = "calm",
-}: {
-  className?: string
-  mood?: "calm" | "happy" | "puzzled"
-}) {
-  return (
-    <svg
-      viewBox="0 0 60 30"
-      aria-hidden="true"
-      className={cn("block overflow-visible text-on-pastel", className)}
-    >
-      <g className="blink" fill="currentColor">
-        <circle cx="18" cy="9" r="3.4" />
-        <circle cx="42" cy="9" r="3.4" />
-      </g>
-      <path
-        d={
-          mood === "happy"
-            ? "M22 19 Q30 27 38 19"
-            : mood === "puzzled"
-              ? "M23 22 Q28 18 32 21 T39 20"
-              : "M24 20 Q30 24 36 20"
-        }
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}

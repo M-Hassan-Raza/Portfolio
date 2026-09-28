@@ -3,7 +3,7 @@ import type { Document } from "#content"
 import { cn } from "@/lib/utils"
 
 /**
- * A sticky rail of headings. Each dot fills in the section's hue once you've
+ * A sticky rail of headings. Each dot fills in the piece's colour once you've
  * reached it; the current one grows a little. No left bar.
  */
 export function TableOfContents({
@@ -43,7 +43,7 @@ export function TableOfContents({
       aria-label="On this page"
       className={cn("flex flex-col gap-4", className)}
     >
-      <p className="type-label text-ink-faint">On this page</p>
+      <p className="type-label text-ink-soft">On this page</p>
       <ol className="flex flex-col gap-1">
         {items.map((heading, index) => (
           <li key={heading.id}>
@@ -58,7 +58,7 @@ export function TableOfContents({
                 aria-hidden="true"
                 className="flex h-[1lh] shrink-0 items-center"
               >
-                <span className="toc-dot size-2 rounded-full bg-line-strong" />
+                <span className="toc-dot size-2.5 rounded-full border-[1.5px] border-ink" />
               </span>
               {heading.title}
             </a>

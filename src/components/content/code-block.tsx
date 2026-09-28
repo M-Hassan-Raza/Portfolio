@@ -16,13 +16,13 @@ export function CodeBlock(props: ComponentProps<"pre">) {
     }
   }
   return (
-    <div className="not-prose relative flex flex-col rounded-md bg-code-surface">
+    <div className="not-prose relative flex flex-col rounded-lg border-2 border-ink bg-code-surface">
       <div className="flex items-center justify-end gap-3 px-2 pt-2">
         <span role="status" className="text-sm font-medium text-ink-soft">
           {status}
         </span>
         <PillButton
-          variant="soft"
+          variant="paper"
           size="sm"
           onClick={copy}
           className="h-8 px-3 text-xs"

@@ -1,47 +1,52 @@
 import { Home } from "lucide-react"
 import type { ReactNode } from "react"
-import { BlobCreature } from "@/components/studio/characters"
+import { FitText } from "@/components/studio/fit-text"
 import { pillVariants } from "@/components/studio/pill"
 import { Scribble } from "@/components/studio/scribble"
-import { SwappedWord } from "@/components/studio/swapped-word"
 
 /**
- * A rose blob thinking hard about where your page went. Plain anchors, so the
- * same markup also works in the standalone, script-free 404.html.
+ * A tomato block, a 404 as wide as the page, and one ink circle drawing
+ * itself round it. Plain anchors and a CSS-only draw, so the same markup
+ * works in the standalone, script-free 404.html.
  */
 export function NotFoundView({ body }: { body?: ReactNode }) {
   return (
-    <section className="frame flex flex-1 flex-col items-center justify-center gap-8 pt-36 pb-16 text-center">
-      <div className="relative w-44 sm:w-52">
-        <BlobCreature className="w-full" />
-        <Scribble
-          variant="sparkle"
-          className="absolute -top-2 -right-8 size-10"
-          delay={500}
-        />
-      </div>
-      <div className="flex flex-col items-center gap-4">
-        <h1 className="type-display text-ink">
-          This page <SwappedWord hue="rose">wandered off</SwappedWord>.
-        </h1>
-        <p className="type-annotation text-xl text-ink-soft">
-          The creature is looking into it.
-        </p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-3 pt-2">
-        <a href="/" className={pillVariants({ size: "lg" })}>
-          <Home aria-hidden="true" />
-          Take me home
-        </a>
-        <a
-          href="/projects/"
-          className={pillVariants({ size: "lg", variant: "paper" })}
-        >
-          See the work
-        </a>
-      </div>
-      <div className="w-full max-w-read rounded-2xl bg-paper-raised p-6 text-left sm:p-9">
-        {body}
+    <section data-block="tomato" className="surface-block flex flex-1 flex-col">
+      <div className="frame flex flex-col gap-10 pt-32 pb-20 sm:pt-36">
+        <div className="relative px-[4%] text-block-deep">
+          <FitText text="404" rise />
+          <Scribble
+            variant="circle"
+            css
+            strokeWidth={5}
+            className="absolute -inset-x-[1%] -top-[12%] -bottom-[16%] h-[128%] w-[102%] text-ink-fixed"
+          />
+        </div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
+          <div className="flex flex-col gap-5">
+            <h1 className="type-display">This page wandered off.</h1>
+            <p className="max-w-xl type-lede">
+              Nothing lives at this address. One of these probably does.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a href="/" className={pillVariants({ size: "lg" })}>
+                <Home aria-hidden="true" />
+                Take me home
+              </a>
+              <a
+                href="/projects/"
+                className={pillVariants({ size: "lg", variant: "paper" })}
+              >
+                See the work
+              </a>
+            </div>
+          </div>
+          {body && (
+            <div className="-rotate-1 rounded-xl border-2 border-ink bg-paper-raised p-6 text-ink shadow-rest sm:p-8">
+              {body}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )

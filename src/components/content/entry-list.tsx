@@ -1,17 +1,16 @@
 import type { Document } from "#content"
-import { hueForPath } from "@/lib/studio"
-import { Settle } from "@/components/studio/motion"
-import { EssayRow } from "./cards"
+import { IndexList } from "@/components/studio/index-list"
+import { entryRow } from "./cards"
 
-/** Any list of documents, as stamp rows. Only the first six animate in. */
-export function EntryList({ entries }: { entries: readonly Document[] }) {
+/** Any list of documents, as hover-flood rows. */
+export function EntryList({
+  entries,
+  size = "compact",
+}: {
+  entries: readonly Document[]
+  size?: "large" | "compact"
+}) {
   return (
-    <ul className="flex flex-col gap-3">
-      {entries.map((entry, index) => (
-        <Settle as="li" key={entry.path} index={index < 6 ? index : 0}>
-          <EssayRow entry={entry} hue={hueForPath(entry.path)} />
-        </Settle>
-      ))}
-    </ul>
+    <IndexList rows={entries.map((entry) => entryRow(entry))} size={size} />
   )
 }

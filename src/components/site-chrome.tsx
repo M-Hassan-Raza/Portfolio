@@ -1,30 +1,39 @@
-import { page, hueForPath } from "@/lib/studio"
+import { page, blockForSection } from "@/lib/studio"
 import { Link, useRouterState } from "@tanstack/react-router"
-import { ArrowUp, Menu, Search, X } from "lucide-react"
+import { ArrowUp, ArrowUpRight, Menu, Search, X } from "lucide-react"
 import { motion } from "motion/react"
 import { useState } from "react"
 import { profile } from "#content"
-import type { Hue } from "@/lib/studio"
+import type { Surface } from "@/lib/studio"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./system/theme-toggle"
 import { useCommandPalette } from "./system/command-palette"
 import { MenuSheet, MenuSheetClose } from "./system/overlays"
-import { Monogram, PeekCreature } from "./studio/characters"
+import { FitText } from "./studio/fit-text"
 import { PillAnchor, PillLink } from "./studio/pill"
-import { Scribble } from "./studio/scribble"
 import { springs } from "./studio/motion"
-import { WavyEdge } from "./studio/wavy-edge"
 
-const navItems: { label: string; path: string; hue: Hue }[] = [
-  { label: "Work", path: "/projects/", hue: "lilac" },
-  { label: "Writing", path: "/blog/", hue: "peach" },
-  { label: "Books", path: "/books/", hue: "sky" },
-  { label: "Open source", path: "/open-source/", hue: "mint" },
-  { label: "About", path: "/about/", hue: "rose" },
+const navItems: { label: string; path: string; block: Surface }[] = [
+  { label: "Work", path: "/projects/", block: "tomato" },
+  { label: "Writing", path: "/blog/", block: "ultramarine" },
+  { label: "Open source", path: "/open-source/", block: "grass" },
+  { label: "Books", path: "/books/", block: "lemon" },
+  { label: "About", path: "/about/", block: "violet" },
 ]
 
 function useActivePath() {
   return useRouterState({ select: (state) => state.location.pathname })
+}
+
+function Wordmark() {
+  return (
+    <span
+      className="text-[1.3rem] leading-none font-extrabold tracking-[-0.045em] [font-stretch:90%]"
+      style={{ fontVariationSettings: '"opsz" 48' }}
+    >
+      Hassan Raza
+    </span>
+  )
 }
 
 function SearchButton({ className }: { className?: string }) {
@@ -36,12 +45,12 @@ function SearchButton({ className }: { className?: string }) {
       aria-label="Search the site"
       aria-keyshortcuts="Meta+K"
       className={cn(
-        "pressable flex h-9 cursor-pointer items-center gap-2 rounded-full bg-paper-sunk pr-2 pl-3 text-sm font-medium text-ink-soft hover:bg-paper-hover hover:text-ink",
+        "pressable-flat flex h-9 cursor-pointer items-center gap-2 rounded-full border-[1.5px] border-ink pr-1.5 pl-3 text-sm font-semibold text-ink hover:bg-paper-sunk",
         className
       )}
     >
-      <Search aria-hidden="true" className="size-4" strokeWidth={2.2} />
-      <kbd className="rounded-full bg-paper-raised px-2 py-0.5 font-sans text-xs font-semibold text-ink-soft">
+      <Search aria-hidden="true" className="size-4" strokeWidth={2.4} />
+      <kbd className="rounded-full bg-ink px-2 py-0.5 font-sans text-xs font-bold text-paper">
         ⌘K
       </kbd>
     </button>
@@ -53,16 +62,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-sticky h-0 print:hidden">
       <div className="frame pt-3">
-        <div className="flex h-14 items-center justify-between gap-4 rounded-full bg-paper-raised py-2 pr-2 pl-2 shadow-float">
+        <div className="flex h-15 items-center justify-between gap-4 rounded-full border-2 border-ink bg-paper-raised py-2 pr-2 pl-5 text-ink shadow-rest">
           <Link
             to="/"
             aria-label={`${profile.name}, home`}
-            className="group flex items-center gap-3 rounded-full pr-2"
+            className="rounded-full"
           >
-            <Monogram />
-            <span className="hidden text-[0.95rem] font-bold tracking-[-0.02em] sm:inline lg:hidden xl:inline">
-              Hassan Raza
-            </span>
+            <Wordmark />
           </Link>
           <nav aria-label="Main" className="hidden md:block">
             <ul className="flex items-center gap-1">
@@ -72,33 +78,18 @@ export function SiteHeader() {
                   <li key={item.path}>
                     <Link
                       to={item.path}
-                      data-hue={item.hue}
+                      data-block={item.block}
                       aria-current={active ? "page" : undefined}
-                      className="group relative flex h-10 items-center gap-2 rounded-full px-3.5 text-[0.9375rem] font-medium text-ink-soft transition-colors hover:bg-hue-tint hover:text-ink aria-[current=page]:text-ink"
+                      className="flex h-10 items-center rounded-full border-2 border-transparent px-3.5 text-[0.9375rem] font-semibold text-ink transition-colors hover:border-ink aria-[current=page]:border-ink aria-[current=page]:bg-block aria-[current=page]:text-on-block"
                     >
-                      <span
-                        aria-hidden="true"
-                        className={cn(
-                          "size-1.5 rounded-full bg-hue transition-transform duration-300 ease-(--ease-pop) group-hover:scale-150",
-                          active && "scale-[1.6]"
-                        )}
-                      />
                       {item.label}
-                      {active && (
-                        <Scribble
-                          key={pathname}
-                          variant="underline"
-                          delay={120}
-                          className="absolute right-3 -bottom-0.5 left-6 h-2"
-                        />
-                      )}
                     </Link>
                   </li>
                 )
               })}
             </ul>
           </nav>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <SearchButton className="hidden sm:flex" />
             <ThemeToggle />
             <PillLink
@@ -121,7 +112,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
   const { setOpen: openPalette } = useCommandPalette()
   const items = [
     ...navItems,
-    { label: "How I work", path: "/contact/", hue: "rose" as const },
+    { label: "How I work", path: "/contact/", block: "pink" as const },
   ]
   return (
     <MenuSheet
@@ -133,57 +124,54 @@ function MobileMenu({ pathname }: { pathname: string }) {
         <button
           type="button"
           aria-label="Open menu"
-          className="pressable grid size-9 cursor-pointer place-items-center rounded-full bg-ink text-paper md:hidden"
+          className="pressable-flat grid size-10 cursor-pointer place-items-center rounded-full bg-ink text-paper md:hidden"
         >
-          <Menu aria-hidden="true" className="size-4" strokeWidth={2.4} />
+          <Menu aria-hidden="true" className="size-4" strokeWidth={2.6} />
         </button>
       }
     >
-      <div className="flex flex-col gap-8 px-5 pt-5 pb-7">
-        <div className="flex items-center justify-between">
-          <Link
-            to="/"
-            onClick={() => setOpen(false)}
-            className="group flex items-center gap-3 rounded-full"
-          >
-            <Monogram />
-            <span className="font-bold tracking-[-0.02em]">Hassan Raza</span>
+      <div className="flex flex-col gap-6 px-4 pt-4 pb-6">
+        <div className="flex h-12 items-center justify-between pl-2">
+          <Link to="/" onClick={() => setOpen(false)} className="rounded-full">
+            <Wordmark />
           </Link>
           <MenuSheetClose
             render={
               <button
                 type="button"
                 aria-label="Close menu"
-                className="pressable grid size-10 cursor-pointer place-items-center rounded-full bg-paper-sunk text-ink"
+                className="pressable-flat grid size-11 cursor-pointer place-items-center rounded-full border-2 border-ink text-ink"
               />
             }
           >
-            <X aria-hidden="true" className="size-4" strokeWidth={2.4} />
+            <X aria-hidden="true" className="size-4" strokeWidth={2.6} />
           </MenuSheetClose>
         </div>
         <nav aria-label="Mobile">
-          <ul className="flex flex-col">
+          <ul className="flex flex-col border-t-2 border-ink">
             {items.map((item, index) => (
               <motion.li
                 key={item.path}
-                initial={{ opacity: 0, y: -14 }}
+                initial={{ opacity: 0, y: -12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...springs.settle, delay: 0.04 * index + 0.05 }}
+                transition={{ ...springs.settle, delay: 0.035 * index + 0.05 }}
+                data-block={item.block}
+                className="border-b-2 border-ink"
               >
                 <Link
                   to={item.path}
                   onClick={() => setOpen(false)}
-                  data-hue={item.hue}
                   aria-current={
                     pathname.startsWith(item.path) ? "page" : undefined
                   }
-                  className="flex items-center gap-4 rounded-md px-2 py-2 text-[2.5rem] leading-[1.1] font-bold tracking-[-0.035em] [font-stretch:92%] hover:bg-hue-tint aria-[current=page]:bg-hue-tint"
+                  className="wipe flex items-center justify-between px-2 py-3 text-[2.4rem] leading-none font-extrabold tracking-[-0.045em] [font-stretch:88%] aria-[current=page]:bg-block aria-[current=page]:text-on-block"
                 >
-                  <span
+                  <span>{item.label}</span>
+                  <ArrowUpRight
                     aria-hidden="true"
-                    className="size-3.5 shrink-0 rounded-full bg-hue"
+                    className="size-6"
+                    strokeWidth={2.4}
                   />
-                  {item.label}
                 </Link>
               </motion.li>
             ))}
@@ -196,12 +184,12 @@ function MobileMenu({ pathname }: { pathname: string }) {
               setOpen(false)
               openPalette(true)
             }}
-            className="pressable flex h-11 flex-1 cursor-pointer items-center gap-2 rounded-full bg-paper-sunk px-4 font-medium text-ink-soft"
+            className="pressable flex h-12 flex-1 cursor-pointer items-center gap-2 rounded-full border-2 border-ink bg-paper-raised px-4 font-semibold text-ink"
           >
-            <Search aria-hidden="true" className="size-4" />
+            <Search aria-hidden="true" className="size-4" strokeWidth={2.4} />
             Search the site
           </button>
-          <ThemeToggle className="size-11" />
+          <ThemeToggle className="size-12" />
         </div>
       </div>
     </MenuSheet>
@@ -217,8 +205,8 @@ const footerGroups: {
     links: [
       { label: "Work", path: "/projects/" },
       { label: "Writing", path: "/blog/" },
-      { label: "Books", path: "/books/" },
       { label: "Open source", path: "/open-source/" },
+      { label: "Books", path: "/books/" },
     ],
   },
   {
@@ -244,93 +232,74 @@ const footerGroups: {
 
 export function SiteFooter() {
   const pathname = useActivePath()
-  const hue = hueForPath(pathname)
+  const section = blockForSection(pathname)
   return (
-    <footer className="relative isolate flex flex-col overflow-clip pt-20 print:hidden">
-      <div className="relative frame h-0">
-        <PeekCreature className="absolute right-[8%] -bottom-10 w-32 sm:right-[14%] sm:-bottom-12 sm:w-44" />
-      </div>
-      <WavyEdge className="text-paper-sunk" />
-      <div className="flex flex-col gap-16 bg-paper-sunk pt-10">
-        <div className="frame grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div className="flex flex-col items-start gap-5">
-            <p className="max-w-xs type-lede text-ink">
-              Thanks for scrolling all the way down. The inbox is the fastest
-              way to reach me.
-            </p>
-            <PillAnchor
-              href={`mailto:${profile.email}`}
-              variant="paper"
-              size="sm"
-            >
-              {profile.email}
-            </PillAnchor>
-            <div className="flex gap-4 text-sm font-medium text-ink-soft">
-              <a className="hover:text-ink" href={profile.links.github}>
-                GitHub
-              </a>
-              <a className="hover:text-ink" href={profile.links.linkedin}>
-                LinkedIn
-              </a>
-              <a className="hover:text-ink" href="/index.xml">
-                RSS
-              </a>
-            </div>
-          </div>
-          {footerGroups.map((group) => (
-            <nav
-              key={group.title}
-              aria-label={group.title}
-              className="flex flex-col gap-4"
-            >
-              <h2 className="type-label text-ink-faint">{group.title}</h2>
-              <ul className="flex flex-col gap-2.5">
-                {group.links.map((link) => (
-                  <li key={link.path}>
-                    <Link
-                      to={link.path}
-                      data-hue={hueForPath(link.path)}
-                      className="group inline-flex items-center gap-2 text-[0.95rem] font-medium text-ink hover:text-ink-soft"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="size-1.5 rounded-full bg-hue transition-transform duration-300 ease-(--ease-pop) group-hover:scale-[1.8]"
-                      />
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
-        </div>
-        <div className="frame flex flex-wrap items-center justify-between gap-4 text-sm text-ink-soft">
-          <p>
-            Made with care in Lahore. Set in Bricolage Grotesque and Fraunces.
+    <footer
+      data-block={section === "ink" ? "tomato" : section}
+      className="print-scope flex flex-col gap-14 border-t-2 border-footer-rule bg-ink-fixed pt-16 text-paper-fixed print:hidden"
+    >
+      <div className="frame grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <div className="flex flex-col items-start gap-5">
+          <p className="max-w-xs type-h3 text-[1.6rem]">
+            Thanks for scrolling all the way down. The inbox is the fastest way
+            to reach me.
           </p>
-          <a
-            href="#main-content"
-            className="group inline-flex items-center gap-1.5 font-medium hover:text-ink"
+          <PillAnchor
+            href={`mailto:${profile.email}`}
+            variant="block"
+            size="md"
           >
-            Back to top
-            <ArrowUp
-              aria-hidden="true"
-              className="size-4 transition-transform duration-300 ease-(--ease-pop) group-hover:-translate-y-1"
-            />
-          </a>
+            {profile.email}
+          </PillAnchor>
+          <div className="flex gap-4 text-sm font-semibold">
+            <a className="hover:underline" href={profile.links.github}>
+              GitHub
+            </a>
+            <a className="hover:underline" href={profile.links.linkedin}>
+              LinkedIn
+            </a>
+            <a className="hover:underline" href="/index.xml">
+              RSS
+            </a>
+          </div>
         </div>
-        <div
-          aria-hidden="true"
-          data-hue={hue}
-          className="frame flex h-[12vw] items-start overflow-clip select-none"
+        {footerGroups.map((group) => (
+          <nav
+            key={group.title}
+            aria-label={group.title}
+            className="flex flex-col gap-4"
+          >
+            <h2 className="type-label text-paper-fixed">{group.title}</h2>
+            <ul className="flex flex-col gap-2">
+              {group.links.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-[1.05rem] font-semibold underline-offset-4 hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
+      <div className="frame flex flex-wrap items-center justify-between gap-4 text-sm">
+        <p>Made in Lahore. Set in Bricolage Grotesque and Fraunces.</p>
+        <a
+          href="#main-content"
+          className="group inline-flex items-center gap-1.5 font-semibold hover:underline"
         >
-          <span
-            className="text-[15.5vw] leading-[0.8] font-extrabold tracking-[-0.055em] whitespace-nowrap text-hue [font-stretch:88%]"
-            style={{ fontVariationSettings: '"opsz" 96' }}
-          >
-            Hassan Raza
-          </span>
-        </div>
+          Back to top
+          <ArrowUp
+            aria-hidden="true"
+            className="size-4 transition-transform duration-300 ease-(--ease-pop) group-hover:-translate-y-1"
+          />
+        </a>
+      </div>
+      <div aria-hidden="true" className="frame overflow-clip text-block">
+        <FitText text="Hassan Raza" className="-mb-[0.14em] select-none" />
       </div>
     </footer>
   )

@@ -5,24 +5,25 @@ import type { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Pills are the only buttons. Primary is an ink pill; secondary is raised
- * paper with an ink outline. A pastel is never the colour of a button.
+ * Pills are the only buttons: ink outline, hard offset shadow, and they
+ * press into the page on click. Ink is the primary; paper the secondary;
+ * block takes the colour of the section it sits in.
  */
 export const pillVariants = cva(
-  "pressable inline-flex shrink-0 items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        ink: "bg-ink text-paper hover:bg-ink-hover",
+        ink: "pressable border-2 border-ink bg-ink text-paper hover:bg-ink-hover",
         paper:
-          "border-[1.5px] border-ink bg-paper-raised text-ink hover:bg-paper-hover",
-        ghost: "text-ink hover:bg-paper-sunk",
-        soft: "bg-paper-raised text-ink shadow-soft hover:bg-paper-hover",
+          "pressable border-2 border-ink bg-paper-raised text-ink hover:bg-paper-hover",
+        block: "pressable border-2 border-ink bg-block text-on-block",
+        ghost: "pressable-flat text-ink hover:bg-paper-sunk",
       },
       size: {
         sm: "h-9 px-4 text-sm [&_svg]:size-4",
         md: "h-11 px-5 text-[0.9375rem] [&_svg]:size-4",
-        lg: "h-14 px-7 text-base [&_svg]:size-5",
+        lg: "h-13 px-6 text-base [&_svg]:size-5",
         icon: "size-10 [&_svg]:size-[1.1rem]",
       },
     },

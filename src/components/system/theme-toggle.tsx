@@ -17,7 +17,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-pressed={dark}
       onClick={() => setTheme(dark ? "light" : "dark")}
       className={cn(
-        "pressable relative grid size-9 cursor-pointer place-items-center overflow-hidden rounded-full bg-paper-sunk text-ink hover:bg-butter-tint",
+        "pressable-flat relative grid size-9 cursor-pointer place-items-center overflow-hidden rounded-full border-[1.5px] border-ink text-ink hover:bg-paper-sunk",
         className
       )}
     >

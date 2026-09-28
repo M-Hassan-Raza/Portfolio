@@ -47,10 +47,6 @@ export function DocumentView({
         return <ShelfPage document={document} />
       return <GenericPage document={document}>{children}</GenericPage>
     default:
-      return (
-        <GenericPage document={document} variant={1}>
-          {children}
-        </GenericPage>
-      )
+      return <GenericPage document={document}>{children}</GenericPage>
   }
 }

@@ -6,20 +6,19 @@ import { profile } from "#content"
 import { articles, getDocument } from "@/lib/content/catalog"
 import { taxonomyPath } from "@/lib/content/taxonomies"
 import { formatDate, formatReadingTime } from "@/lib/format"
+import { blockFor } from "@/lib/studio"
+import type { Surface } from "@/lib/studio"
 import { cn } from "@/lib/utils"
 import { ContentBody } from "@/components/content/body"
 import { Comments } from "@/components/content/comments"
-import { EssayRow } from "@/components/content/cards"
 import { TableOfContents } from "@/components/content/toc"
-import { CoverMat } from "@/components/studio/cover-mat"
-import { Band } from "@/components/studio/page-hero"
+import { CoverFrame } from "@/components/studio/cover-card"
 import { PillAnchor } from "@/components/studio/pill"
-import { Scribble } from "@/components/studio/scribble"
-import { MetaPill } from "@/components/studio/sticker"
+import { MetaPill } from "@/components/studio/tag"
 
 type Article = Extract<Document, { kind: "article" }>
 
-/** A back link to the parent collection. */
+/** A back link to the parent collection: a small paper pill. */
 export function BackLink({
   to,
   children,
@@ -30,7 +29,7 @@ export function BackLink({
   return (
     <Link
       to={to}
-      className="group inline-flex items-center gap-2 self-start rounded-full bg-paper-raised py-1.5 pr-4 pl-1.5 text-sm font-semibold text-ink shadow-soft"
+      className="pressable group inline-flex h-10 items-center gap-2 self-start rounded-full border-2 border-ink bg-paper-raised pr-4 pl-1.5 text-sm font-semibold text-ink"
     >
       <span className="grid size-7 place-items-center rounded-full bg-ink text-paper transition-transform duration-300 ease-(--ease-pop) group-hover:-translate-x-0.5">
         <ArrowLeft aria-hidden="true" className="size-3.5" strokeWidth={2.6} />
@@ -40,7 +39,7 @@ export function BackLink({
   )
 }
 
-/** Tags as small paper pills that lead to their topic pages. */
+/** Tags as outlined pills that lead to their topic pages. */
 export function TagRow({
   tags,
   className,
@@ -55,7 +54,7 @@ export function TagRow({
         <li key={tag}>
           <Link
             to={taxonomyPath("tags", tag)}
-            className="pressable inline-flex h-9 items-center rounded-full bg-paper-sunk px-4 text-sm font-medium text-ink-soft hover:bg-hue-tint hover:text-ink"
+            className="pressable-flat inline-flex h-9 items-center rounded-full border-2 border-ink px-4 text-sm font-semibold text-ink hover:bg-block hover:text-on-block"
           >
             {tag}
           </Link>
@@ -100,10 +99,82 @@ export function ReadingLayout({
         )}
       >
         {children}
-        <ContentBody code={document.mdx} />
+        {document.content.trim() && <ContentBody code={document.mdx} />}
         {after}
       </div>
     </div>
+  )
+}
+
+/**
+ * The next piece, as a full block in its own colour: one big title and an
+ * arrow. The obvious next click at the end of a page.
+ */
+export function NextBlock({ kind, next }: { kind: string; next: Document }) {
+  return (
+    <Link
+      to={next.path}
+      data-block={blockFor(next.path)}
+      className="surface-block group block"
+    >
+      <span className="frame flex flex-col gap-6 py-16 sm:py-24">
+        <span className="flex items-center justify-between gap-4 type-label">
+          <span>{kind}</span>
+          <span className="grid size-12 place-items-center rounded-full border-2 border-ink-fixed bg-paper-fixed-raised text-ink-fixed shadow-small transition-transform duration-300 ease-(--ease-pop) group-hover:translate-x-1.5">
+            <ArrowRight
+              aria-hidden="true"
+              className="size-5"
+              strokeWidth={2.6}
+            />
+          </span>
+        </span>
+        <span className="max-w-[18ch] type-display-xl text-block-deep">
+          {next.title}
+        </span>
+        <span className="max-w-2xl type-lede">{next.description}</span>
+      </span>
+    </Link>
+  )
+}
+
+/** A piece's header: its own colour block, straight edges, cover breaking out. */
+export function PieceHeader({
+  block,
+  back,
+  meta,
+  title,
+  lede,
+  cover,
+  children,
+}: {
+  block: Surface
+  back: ReactNode
+  meta: ReactNode
+  title: ReactNode
+  lede: ReactNode
+  cover?: ReactNode
+  children?: ReactNode
+}) {
+  return (
+    <header data-block={block} className="surface-block">
+      <div
+        className={cn(
+          "frame grid gap-10 pt-28 sm:pt-36",
+          cover
+            ? "pb-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-end lg:pb-0"
+            : "pb-16 sm:pb-20"
+        )}
+      >
+        <div className={cn("flex min-w-0 flex-col gap-6", cover && "lg:pb-16")}>
+          {back}
+          <div className="flex flex-wrap items-center gap-2">{meta}</div>
+          <h1 className="type-title">{title}</h1>
+          <p className="max-w-2xl type-lede">{lede}</p>
+          {children}
+        </div>
+        {cover && <div className="lg:-mb-20 lg:translate-y-0">{cover}</div>}
+      </div>
+    </header>
   )
 }
 
@@ -112,133 +183,69 @@ export function ArticleView({ document }: { document: Article }) {
   const next = articles[index + 1] ?? articles[0]
   const topic = document.categories[0] ?? document.tags[0]
   const parent = getDocument("/blog/")
+  const block = blockFor(document.path)
+  const cover = document.cover && !document.cover.hidden ? document.cover : null
   return (
-    <article data-hue="peach" className="flex flex-col gap-16 pb-8 sm:gap-20">
-      <Band hue="peach">
-        <div
-          className={cn(
-            "grid items-center gap-10",
-            document.cover &&
-              !document.cover.hidden &&
-              "lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-14"
-          )}
-        >
-          <header className="flex flex-col gap-5">
-            <BackLink to="/blog/">{parent?.title ?? "Writing"}</BackLink>
-            <h1 className="type-title text-ink">{document.title}</h1>
-            <p className="max-w-2xl type-lede text-ink-soft">
-              {document.description}
-            </p>
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className="flex items-center gap-2 pr-2 text-sm font-semibold text-ink">
-                <img
-                  src="/assets/portrait-480.jpg"
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="size-8 rounded-full border-2 border-paper-raised object-cover object-[50%_18%]"
-                />
-                {profile.name}
-              </span>
-              {document.publishedAt && (
-                <MetaPill>
-                  <time dateTime={document.publishedAt}>
-                    {formatDate(document.publishedAt)}
-                  </time>
-                </MetaPill>
-              )}
+    <article className="flex flex-col gap-16 sm:gap-28">
+      <PieceHeader
+        block={block}
+        back={<BackLink to="/blog/">{parent?.title ?? "Writing"}</BackLink>}
+        meta={
+          <>
+            {document.publishedAt && (
               <MetaPill>
-                {formatReadingTime(document.readingMinutes)} read
+                <time dateTime={document.publishedAt}>
+                  {formatDate(document.publishedAt)}
+                </time>
               </MetaPill>
-              {topic && <MetaPill tone="hue">{topic}</MetaPill>}
+            )}
+            <MetaPill>
+              {formatReadingTime(document.readingMinutes)} read
+            </MetaPill>
+            {topic && <MetaPill>{topic}</MetaPill>}
+          </>
+        }
+        title={document.title}
+        lede={document.description}
+        cover={
+          cover && (
+            <div className="rotate-2 rounded-xl border-2 border-ink bg-paper-raised p-2 shadow-rest">
+              <CoverFrame asset={cover.ascii} alt={cover.alt} />
             </div>
-          </header>
-          {document.cover && !document.cover.hidden && (
-            <CoverMat
-              asset={document.cover.ascii}
-              alt={document.cover.alt}
-              seed={document.path}
-              hue="peach"
-              className="rotate-[2deg]"
-            />
-          )}
-        </div>
-      </Band>
-
-      <ReadingLayout
-        document={document}
-        after={
-          <div className="flex flex-col gap-14">
-            <TagRow tags={document.tags} />
-            <ThanksCard next={next !== document ? next : undefined} />
-            {document.comments && <Comments path={document.path} />}
-          </div>
+          )
         }
       />
+
+      <div data-block={block}>
+        <ReadingLayout
+          document={document}
+          after={
+            <div className="flex flex-col gap-12">
+              <div className="flex flex-col gap-5 border-t-2 border-ink pt-6">
+                <p className="type-h3">End. Thanks for reading.</p>
+                <TagRow tags={document.tags} />
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <PillAnchor
+                    href={`mailto:${profile.email}`}
+                    variant="paper"
+                    size="sm"
+                  >
+                    <Mail aria-hidden="true" />
+                    Reply by email
+                  </PillAnchor>
+                  <PillAnchor href="/blog/index.xml" variant="ghost" size="sm">
+                    <Rss aria-hidden="true" />
+                    Follow by RSS
+                  </PillAnchor>
+                </div>
+              </div>
+              {document.comments && <Comments path={document.path} />}
+            </div>
+          }
+        />
+      </div>
+
+      {next && next !== document && <NextBlock kind="Next essay" next={next} />}
     </article>
-  )
-}
-
-function ThanksCard({ next }: { next?: Document }) {
-  return (
-    <section
-      aria-labelledby="thanks"
-      data-hue="butter"
-      className="flex flex-col gap-6 rounded-2xl bg-hue-tint p-6 sm:p-9"
-    >
-      <div className="flex items-start justify-between gap-6">
-        <div className="flex flex-col gap-2">
-          <h2 id="thanks" className="type-h2 text-ink">
-            Thanks for reading
-          </h2>
-          <p className="type-annotation text-lg text-ink-soft">
-            If it was useful, the next one might be too.
-          </p>
-        </div>
-        <Scribble
-          variant="heart"
-          className="size-14 shrink-0 rotate-6"
-          delay={300}
-          strokeWidth={3}
-        />
-      </div>
-      {next && <EssayRow entry={next} />}
-      <div className="flex flex-wrap gap-3">
-        <PillAnchor href={`mailto:${profile.email}`} variant="paper" size="sm">
-          <Mail aria-hidden="true" />
-          Reply by email
-        </PillAnchor>
-        <PillAnchor href="/blog/index.xml" variant="ghost" size="sm">
-          <Rss aria-hidden="true" />
-          Follow by RSS
-        </PillAnchor>
-      </div>
-    </section>
-  )
-}
-
-export function NextLink({
-  to,
-  label,
-  title,
-}: {
-  to: string
-  label: string
-  title: string
-}) {
-  return (
-    <Link
-      to={to}
-      className="group flex flex-col gap-1 rounded-lg bg-paper-raised p-5 hover:shadow-soft"
-    >
-      <span className="type-label text-ink-faint">{label}</span>
-      <span className="flex items-center gap-2 type-serif-title text-lg text-ink">
-        {title}
-        <ArrowRight
-          aria-hidden="true"
-          className="size-4 shrink-0 transition-transform duration-300 ease-(--ease-pop) group-hover:translate-x-1"
-        />
-      </span>
-    </Link>
   )
 }

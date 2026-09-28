@@ -1,10 +1,12 @@
-import { page, hueForPath } from "@/lib/studio"
+import { page, blockForSection } from "@/lib/studio"
 import { Link } from "@tanstack/react-router"
 import {
   ArrowRight,
   ArrowUpRight,
   AtSign,
   CalendarDays,
+  Check,
+  Copy,
   Download,
   MapPin,
 } from "lucide-react"
@@ -14,41 +16,39 @@ import { openSource, profile } from "#content"
 import { documents } from "@/lib/content/catalog"
 import { shelves } from "@/lib/content/books"
 import { groupBy, yearOf } from "@/lib/format"
+import { cn } from "@/lib/utils"
 import { ContentBody } from "@/components/content/body"
-import { EssayRow } from "@/components/content/cards"
 import { Comments } from "@/components/content/comments"
-import { BubbleMail, BubbleStack } from "@/components/studio/bubble-stack"
-import { CopyEmail } from "@/components/studio/copy-email"
-import { Settle } from "@/components/studio/motion"
-import { Band, PageHero } from "@/components/studio/page-hero"
+import { EntryList } from "@/components/content/entry-list"
+import { useCopy } from "@/components/system/copy"
+import { BlockHero } from "@/components/studio/block-hero"
 import { PillAnchor } from "@/components/studio/pill"
-import { bandShapes } from "@/components/studio/shape-presets"
-import { Shelf } from "@/components/studio/shelf"
-import { MetaPill, Sticker } from "@/components/studio/sticker"
-import { SwappedWord } from "@/components/studio/swapped-word"
 import { SectionHeading } from "@/components/studio/section-heading"
+import { Shelf } from "@/components/studio/shelf"
+import { MetaPill, Stamp } from "@/components/studio/tag"
+import {
+  TiltCard,
+  TiltCardAnchor,
+  TiltCardLink,
+} from "@/components/studio/tilt-card"
 import { ReadingLayout } from "./article"
-import { headlineFor } from "./headlines"
 
-/** Any plain page: a tinted band and a calm reading column. */
+/** Any plain page: a block in its section's colour and a calm reading column. */
 export function GenericPage({
   document,
   children,
-  variant = 0,
 }: {
   document: Document
   children?: ReactNode
-  variant?: number
 }) {
-  const hue = hueForPath(document.path)
+  const block = blockForSection(document.path)
   return (
-    <div data-hue={hue} className="flex flex-col gap-16 pb-8 sm:gap-20">
-      <PageHero
-        hue={hue}
+    <div data-block={block} className="flex flex-col gap-16 pb-24 sm:gap-20">
+      <BlockHero
+        block={block}
         title={document.title}
-        headline={headlineFor(document.path, document.title)}
+        size={document.title.length > 9 ? "l" : "xl"}
         lede={document.description}
-        shapes={bandShapes(hue, variant)}
       />
       {document.content.trim() ? (
         <ReadingLayout
@@ -71,99 +71,102 @@ export function GenericPage({
 
 /* ── Contact ("How I work") ─────────────────────────────────────────── */
 
-export function ContactView({ document }: { document: Document }) {
-  const [before, last] = splitLast(document.title)
+function CopyEmail({ email }: { email: string }) {
+  const { copied, copy } = useCopy()
   return (
-    <div data-hue="rose" className="flex flex-col gap-16 pb-8 sm:gap-20">
-      <Band hue="rose" innerClassName="pb-16 sm:pb-24">
-        <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-          <div className="flex flex-col gap-4">
-            <p className="inline-flex items-center gap-2.5 type-label text-sm text-hue-deep">
-              <span
-                aria-hidden="true"
-                className="size-2.5 rounded-full bg-hue"
-              />
-              Contact
-            </p>
-            <h1 className="type-display text-ink">
-              {before}
-              <SwappedWord hue="rose">{last}</SwappedWord>
-            </h1>
-            <p className="max-w-xl type-lede text-ink-soft">
-              {document.description}
-            </p>
-          </div>
-          <BubbleStack
-            lines={[
-              "Building something thoughtful?",
-              "Want to talk founders, agents or books?",
-            ]}
-            action={
-              <BubbleMail href={`mailto:${profile.email}`}>
-                Say hello
-              </BubbleMail>
-            }
-          />
-        </div>
-      </Band>
-      <ReadingLayout
-        document={document}
-        after={
-          <section
-            aria-labelledby="reach"
-            data-hue="rose"
-            className="flex flex-col gap-6 rounded-2xl bg-hue-tint p-6 sm:p-9"
-          >
-            <h2 id="reach" className="type-h3 text-ink">
-              The fastest way in
-            </h2>
-            <CopyEmail email={profile.email} />
-            <div className="flex flex-wrap gap-2 pt-2">
-              <PillAnchor
-                href="https://cal.com/muhammad-hassan-raza/30min"
-                variant="paper"
-                size="sm"
-              >
-                <CalendarDays aria-hidden="true" />
-                Book 30 minutes
-              </PillAnchor>
-              <PillAnchor href={profile.links.github} variant="ghost" size="sm">
-                <ArrowUpRight aria-hidden="true" />
-                GitHub
-              </PillAnchor>
-              <PillAnchor
-                href={profile.links.linkedin}
-                variant="ghost"
-                size="sm"
-              >
-                <ArrowUpRight aria-hidden="true" />
-                LinkedIn
-              </PillAnchor>
-            </div>
-          </section>
-        }
-      />
+    <div className="flex flex-wrap items-center gap-4">
+      <a
+        href={`mailto:${email}`}
+        className="text-[clamp(2rem,5vw+0.5rem,4.25rem)] leading-none font-extrabold tracking-[-0.045em] [font-stretch:90%] underline decoration-[0.08em] underline-offset-[0.14em] hover:decoration-[0.16em]"
+      >
+        {email}
+      </a>
+      <button
+        type="button"
+        onClick={() => void copy(email, "Email copied")}
+        className="pressable grid size-13 cursor-pointer place-items-center rounded-full border-2 border-ink bg-paper-raised text-ink"
+        aria-label={copied ? "Email copied" : "Copy email address"}
+      >
+        {copied ? (
+          <Check aria-hidden="true" className="size-5" strokeWidth={2.8} />
+        ) : (
+          <Copy aria-hidden="true" className="size-5" strokeWidth={2.4} />
+        )}
+      </button>
     </div>
   )
 }
 
-function splitLast(title: string): [string, string] {
-  const at = title.lastIndexOf(" ")
-  return at < 0 ? ["", title] : [title.slice(0, at + 1), title.slice(at + 1)]
+const elsewhere = [
+  {
+    label: "Book 30 minutes",
+    note: "A call, if writing it down is harder.",
+    href: "https://cal.com/muhammad-hassan-raza/30min",
+    icon: CalendarDays,
+  },
+  {
+    label: "GitHub",
+    note: "The code, and the pull requests.",
+    href: profile.links.github,
+    icon: ArrowUpRight,
+  },
+  {
+    label: "LinkedIn",
+    note: "The formal version.",
+    href: profile.links.linkedin,
+    icon: ArrowUpRight,
+  },
+]
+
+export function ContactView({ document }: { document: Document }) {
+  return (
+    <div data-block="pink" className="flex flex-col gap-16 pb-24 sm:gap-24">
+      <BlockHero
+        block="pink"
+        title={document.title}
+        size="xl"
+        lede={document.description}
+      />
+      <section aria-labelledby="reach" className="frame flex flex-col gap-10">
+        <div className="flex flex-col gap-4">
+          <h2 id="reach" className="type-label text-ink-soft">
+            The fastest way in
+          </h2>
+          <CopyEmail email={profile.email} />
+        </div>
+        <ul className="grid gap-6 sm:grid-cols-3">
+          {elsewhere.map((item, index) => (
+            <li key={item.label}>
+              <TiltCardAnchor
+                href={item.href}
+                tiltIndex={index}
+                className="flex h-full items-start justify-between gap-4 bg-paper-raised p-6 text-ink"
+              >
+                <span className="flex flex-col gap-1.5">
+                  <span className="type-h3">{item.label}</span>
+                  <span className="font-serif text-ink-soft">{item.note}</span>
+                </span>
+                <item.icon
+                  aria-hidden="true"
+                  className="size-5 shrink-0"
+                  strokeWidth={2.4}
+                />
+              </TiltCardAnchor>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <ReadingLayout document={document} />
+    </div>
+  )
 }
 
 /* ── Resume ─────────────────────────────────────────────────────────── */
 
 export function ResumeView({ document }: { document: Document }) {
   return (
-    <div data-hue="rose" className="flex flex-col gap-16 pb-8 sm:gap-20">
-      <PageHero
-        hue="rose"
-        title={document.title}
-        headline={headlineFor(document.path, document.title)}
-        lede={profile.now.scope}
-        shapes={bandShapes("rose", 1)}
-      >
+    <div data-block="violet" className="flex flex-col gap-16 pb-24 sm:gap-20">
+      <BlockHero block="violet" title={document.title} lede={profile.now.scope}>
         <PillAnchor
           href="/assets/muhammad-hassan-raza-resume.pdf"
           size="lg"
@@ -175,90 +178,88 @@ export function ResumeView({ document }: { document: Document }) {
         <PillAnchor href={`mailto:${profile.email}`} size="lg" variant="paper">
           {profile.email}
         </PillAnchor>
-      </PageHero>
+      </BlockHero>
       <div className="frame grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
-        <aside className="flex flex-col gap-4 lg:sticky lg:top-28 lg:self-start">
-          <div className="flex flex-col gap-4 rounded-lg bg-paper-sunk p-6">
-            <p className="type-h3 text-ink">{profile.name}</p>
-            <p className="text-ink-soft">
+        <aside className="lg:sticky lg:top-28 lg:self-start">
+          <TiltCard
+            tilt={-1}
+            className="flex flex-col gap-4 bg-paper-raised p-6 text-ink"
+          >
+            <p className="type-h3">{profile.name}</p>
+            <p className="font-serif text-ink-soft">
               {profile.now.role}, {profile.now.org}
             </p>
-            <ul className="flex flex-col gap-2.5 text-sm font-medium text-ink">
+            <ul className="flex flex-col gap-2.5 text-sm font-semibold">
               <li className="flex items-center gap-2.5">
-                <MapPin aria-hidden="true" className="size-4 text-ink-faint" />
+                <MapPin aria-hidden="true" className="size-4" />
                 {profile.location}
               </li>
               <li>
                 <a
                   href={`mailto:${profile.email}`}
-                  className="flex items-center gap-2.5 hover:text-ink-soft"
+                  className="flex items-center gap-2.5 hover:underline"
                 >
-                  <AtSign
-                    aria-hidden="true"
-                    className="size-4 text-ink-faint"
-                  />
+                  <AtSign aria-hidden="true" className="size-4" />
                   {profile.email}
                 </a>
               </li>
               <li>
                 <a
                   href={profile.links.github}
-                  className="flex items-center gap-2.5 hover:text-ink-soft"
+                  className="flex items-center gap-2.5 hover:underline"
                 >
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="size-4 text-ink-faint"
-                  />
+                  <ArrowUpRight aria-hidden="true" className="size-4" />
                   GitHub
                 </a>
               </li>
               <li>
                 <a
                   href={profile.links.linkedin}
-                  className="flex items-center gap-2.5 hover:text-ink-soft"
+                  className="flex items-center gap-2.5 hover:underline"
                 >
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="size-4 text-ink-faint"
-                  />
+                  <ArrowUpRight aria-hidden="true" className="size-4" />
                   LinkedIn
                 </a>
               </li>
             </ul>
-          </div>
+          </TiltCard>
         </aside>
         <div className="flex min-w-0 flex-col gap-14">
-          {document.content.trim() && <ReadingLayout document={document} />}
+          {document.content.trim() && (
+            <div className="max-w-read">
+              <ContentBody code={document.mdx} />
+            </div>
+          )}
           <ResumeSection title="Experience">
-            <ol className="flex flex-col gap-4">
+            <ol className="flex flex-col border-t-2 border-ink">
               {profile.experience.map((entry) => (
                 <li
                   key={`${entry.title}-${entry.start}`}
-                  className="grid gap-2 rounded-lg bg-paper-raised p-6 sm:grid-cols-[9rem_1fr] sm:gap-6"
+                  className="grid gap-2 border-b-2 border-ink py-5 sm:grid-cols-[9rem_1fr] sm:gap-6"
                 >
-                  <p className="type-label text-hue-deep tabular">
+                  <p className="type-label text-ink-soft tabular">
                     {entry.start} to {entry.end}
                   </p>
                   <div className="flex flex-col gap-1.5">
-                    <h3 className="font-semibold text-ink">
+                    <h3 className="type-h3">
                       {entry.title}, {entry.org}
                     </h3>
-                    <p className="leading-relaxed text-ink-soft">
+                    <p className="font-serif leading-relaxed text-ink-soft">
                       {entry.summary}
                     </p>
                   </div>
                 </li>
               ))}
             </ol>
-            <p className="text-ink-soft">{profile.early_roles}</p>
+            <p className="font-serif text-ink-soft">{profile.early_roles}</p>
           </ResumeSection>
           <ResumeSection title="Open source">
-            <p className="text-ink-soft">
+            <p className="font-serif text-ink-soft">
               {openSource.merged} merged pull requests across{" "}
               {openSource.projects.length} projects.{" "}
               <Link
                 to={page("/open-source/")}
-                className="font-semibold text-ink underline decoration-mint-deep decoration-2 underline-offset-4"
+                className="font-sans font-bold text-ink underline decoration-2 underline-offset-4"
               >
                 The full record
               </Link>
@@ -271,11 +272,11 @@ export function ResumeView({ document }: { document: Document }) {
                   key={entry.title}
                   className="grid gap-2 sm:grid-cols-[9rem_1fr] sm:gap-6"
                 >
-                  <p className="type-label text-hue-deep tabular">
+                  <p className="type-label text-ink-soft tabular">
                     {entry.start} to {entry.end}
                   </p>
-                  <p className="text-ink-soft">
-                    <span className="font-semibold text-ink">
+                  <p className="font-serif text-ink-soft">
+                    <span className="font-sans font-bold text-ink">
                       {entry.title}, {entry.org}.
                     </span>{" "}
                     {entry.summary}
@@ -291,9 +292,9 @@ export function ResumeView({ document }: { document: Document }) {
                   key={entry.degree}
                   className="grid gap-2 sm:grid-cols-[9rem_1fr] sm:gap-6"
                 >
-                  <p className="type-label text-hue-deep">{entry.dates}</p>
-                  <p className="text-ink-soft">
-                    <span className="font-semibold text-ink">
+                  <p className="type-label text-ink-soft">{entry.dates}</p>
+                  <p className="font-serif text-ink-soft">
+                    <span className="font-sans font-bold text-ink">
                       {entry.degree}, {entry.school}.
                     </span>{" "}
                     {entry.note}
@@ -306,12 +307,10 @@ export function ResumeView({ document }: { document: Document }) {
             <dl className="grid gap-5 sm:grid-cols-2">
               {profile.skills.map((skill) => (
                 <div key={skill.group} className="flex flex-col gap-2.5">
-                  <dt className="font-semibold text-ink">{skill.group}</dt>
+                  <dt className="font-bold">{skill.group}</dt>
                   <dd className="flex flex-wrap gap-1.5">
                     {skill.items.map((item) => (
-                      <MetaPill key={item} tone="sunk">
-                        {item}
-                      </MetaPill>
+                      <MetaPill key={item}>{item}</MetaPill>
                     ))}
                   </dd>
                 </div>
@@ -322,13 +321,7 @@ export function ResumeView({ document }: { document: Document }) {
             <ul className="flex flex-wrap gap-4">
               {profile.awards.map((award, index) => (
                 <li key={award}>
-                  <Sticker
-                    hue={index % 2 === 0 ? "butter" : "lilac"}
-                    rotate={index % 2 === 0 ? -3 : 2.5}
-                    className="px-4 py-2"
-                  >
-                    {award}
-                  </Sticker>
+                  <Stamp rotate={index % 2 === 0 ? -2.5 : 2}>{award}</Stamp>
                 </li>
               ))}
             </ul>
@@ -348,7 +341,7 @@ function ResumeSection({
 }) {
   return (
     <section className="flex flex-col gap-5">
-      <h2 className="type-h2 text-ink">{title}</h2>
+      <h2 className="type-h2">{title}</h2>
       {children}
     </section>
   )
@@ -360,14 +353,19 @@ export function ShelfPage({ document }: { document: Document }) {
   const shelf = shelves.find((entry) => entry.shelf.path === document.path)
   const others = shelves.filter((entry) => entry.shelf.path !== document.path)
   return (
-    <div data-hue="sky" className="flex flex-col gap-16 pb-8 sm:gap-20">
-      <PageHero
-        hue="sky"
+    <div data-block="lemon" className="flex flex-col gap-16 pb-24 sm:gap-20">
+      <BlockHero
+        block="lemon"
+        kicker={shelf ? `${shelf.books.length} books` : "Books"}
         title={document.title}
-        headline={headlineFor(document.path, document.title)}
+        size="l"
         lede={document.description}
-        aside={shelf && <Shelf books={shelf.books} className="lg:pb-4" />}
       />
+      {shelf && (
+        <div className="frame">
+          <Shelf books={shelf.books} />
+        </div>
+      )}
       <div className="frame flex flex-col gap-16">
         <ContentBody code={document.mdx} />
         {document.comments && (
@@ -375,26 +373,27 @@ export function ShelfPage({ document }: { document: Document }) {
             <Comments path={document.path} />
           </div>
         )}
-        <nav aria-label="Other shelves" className="flex flex-col gap-6">
+        <nav aria-label="Other shelves" className="flex flex-col gap-8">
           <SectionHeading title="Other shelves" />
-          <ul className="grid gap-4 sm:grid-cols-3">
-            {others.map(({ shelf: other, books }) => (
+          <ul className="grid gap-6 sm:grid-cols-3">
+            {others.map(({ shelf: other, books }, index) => (
               <li key={other.path}>
-                <Link
+                <TiltCardLink
                   to={other.path}
-                  className="group flex h-full flex-col gap-2 rounded-lg bg-paper-raised p-6 transition-transform duration-300 ease-(--ease-settle) hover:-translate-y-1 hover:shadow-soft"
+                  tiltIndex={index}
+                  className="flex h-full flex-col gap-2 bg-paper-raised p-6 text-ink"
                 >
-                  <span className="type-label text-hue-deep">
+                  <span className="type-label text-ink-soft">
                     {books.length} books
                   </span>
-                  <span className="flex items-center justify-between gap-2 type-h3 text-ink">
+                  <span className="flex items-center justify-between gap-2 type-h3">
                     {other.title}
                     <ArrowRight
                       aria-hidden="true"
                       className="size-5 transition-transform duration-300 ease-(--ease-pop) group-hover:translate-x-1"
                     />
                   </span>
-                </Link>
+                </TiltCardLink>
               </li>
             ))}
           </ul>
@@ -412,27 +411,21 @@ export function ArchiveView({ document }: { document: Document }) {
     .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
   const years = groupBy(dated, (entry) => yearOf(entry.publishedAt ?? ""))
   return (
-    <GenericPage document={document} variant={2}>
+    <GenericPage document={document}>
       <div className="flex flex-col gap-16">
         {years.map(([year, entries]) => (
           <section
             key={year}
             aria-labelledby={`year-${year}`}
-            className="grid gap-6 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-12"
+            className={cn("flex flex-col gap-4")}
           >
             <h2
               id={`year-${year}`}
-              className="type-numeral text-[clamp(3.5rem,6vw,5.5rem)] text-ink lg:sticky lg:top-28 lg:self-start"
+              className="type-numeral text-[clamp(3.5rem,6vw,5.5rem)]"
             >
               {year}
             </h2>
-            <ul className="flex flex-col gap-3">
-              {entries.map((entry, index) => (
-                <Settle as="li" key={entry.path} index={index < 6 ? index : 0}>
-                  <EssayRow entry={entry} hue={hueForPath(entry.path)} />
-                </Settle>
-              ))}
-            </ul>
+            <EntryList entries={entries} />
           </section>
         ))}
       </div>

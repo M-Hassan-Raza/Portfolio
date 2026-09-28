@@ -3,6 +3,8 @@ import { MDXContent } from "@content-collections/mdx/react"
 import { profile, openSource } from "#content"
 import { AsciiCover, Screen } from "./ascii-cover"
 import { cn } from "@/lib/utils"
+import { coverAsset } from "@/components/studio/cover-card"
+import type { ComponentProps } from "react"
 
 function OssCount() {
   return openSource.merged
@@ -23,7 +25,17 @@ function ProofList() {
     </ul>
   )
 }
-const components = { AsciiCover, Screen, OssCount, ProofList, pre: CodeBlock }
+/** Authored covers print at card size, so they use the legible half-density art. */
+function ProseCover(props: ComponentProps<typeof AsciiCover>) {
+  return <AsciiCover {...props} asset={coverAsset(props.asset)} />
+}
+const components = {
+  AsciiCover: ProseCover,
+  Screen,
+  OssCount,
+  ProofList,
+  pre: CodeBlock,
+}
 
 export function ContentBody({
   code,

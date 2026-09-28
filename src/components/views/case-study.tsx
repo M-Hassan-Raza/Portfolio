@@ -1,187 +1,182 @@
-import { ArrowUpRight, Rocket, Sparkles } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import { ArrowUpRight } from "lucide-react"
+import type { ReactNode } from "react"
 import type { Document } from "#content"
 import { projects } from "@/lib/content/catalog"
-import { ProjectCard, matHueAt } from "@/components/content/cards"
+import { padIndex, yearOf } from "@/lib/format"
+import { blockFor, page } from "@/lib/studio"
+import { cn } from "@/lib/utils"
 import { Comments } from "@/components/content/comments"
-import { CoverMat } from "@/components/studio/cover-mat"
+import { Corners } from "@/components/studio/corners"
+import { CoverFrame } from "@/components/studio/cover-card"
+import { FitText } from "@/components/studio/fit-text"
 import { Settle } from "@/components/studio/motion"
-import { Band } from "@/components/studio/page-hero"
-import { PillAnchor } from "@/components/studio/pill"
-import { Shape, shapeNames } from "@/components/studio/shape"
-import { MetaPill, Sticker } from "@/components/studio/sticker"
-import { BackLink, ReadingLayout, TagRow } from "./article"
+import { TiltCard } from "@/components/studio/tilt-card"
+import { NextBlock, ReadingLayout, TagRow } from "./article"
 
 type Project = Extract<Document, { kind: "project" }>
 
+/**
+ * A case study opens like a magazine cover: the project's own block, its name
+ * poured edge to edge in tone-on-tone, facts in the four corners, and the
+ * cover breaking out of the bottom as a tilted card.
+ */
 export function CaseStudyView({ document }: { document: Project }) {
+  const block = blockFor(document.path)
   const index = projects.findIndex((entry) => entry.path === document.path)
-  const next = projects[index + 1] ?? projects[0]
+  const next = projects[(index + 1) % projects.length]
   const facts = document.facts
-  const status = facts?.status
-  const live = status ? /production|use|live/i.test(status) : false
   const slug = document.path.split("/")[2] ?? "x"
+  const cover = document.cover && !document.cover.hidden ? document.cover : null
+  const short = document.title.length <= 12
+  const year = document.publishedAt ? yearOf(document.publishedAt) : ""
   return (
-    <article data-hue="lilac" className="flex flex-col gap-16 pb-8 sm:gap-20">
-      <Band hue="lilac" innerClassName="gap-10 pb-16 sm:pb-20">
-        <header className="flex max-w-4xl flex-col gap-5">
-          <BackLink to="/projects/">All work</BackLink>
-          {document.projectLabel && (
-            <p className="type-label text-sm text-hue-deep">
-              {document.projectLabel}
-            </p>
+    <article className="flex flex-col">
+      <header data-block={block} className="surface-block">
+        <div
+          className={cn(
+            "frame flex flex-col gap-10 pt-28 sm:pt-32",
+            cover ? "pb-0" : "pb-16"
           )}
-          <h1 className="type-display text-ink">{document.title}</h1>
-          <p className="max-w-2xl type-lede text-ink-soft">
-            {document.description}
-          </p>
-          <div className="flex flex-wrap items-center gap-2 pt-2">
-            {facts?.role && <MetaPill>{facts.role}</MetaPill>}
-            {facts?.timeline && <MetaPill>{facts.timeline}</MetaPill>}
-            {facts?.team && <MetaPill>{facts.team}</MetaPill>}
-            {status && (
-              <Sticker
-                icon={live ? Rocket : Sparkles}
-                hue={live ? "mint" : "butter"}
-                rotate={-4}
+        >
+          <Corners
+            top={[
+              <Link
+                key="back"
+                to={page("/projects/")}
+                className="underline-offset-4 hover:underline"
               >
-                {status}
-              </Sticker>
-            )}
-            {facts?.source?.url && (
-              <PillAnchor href={facts.source.url} size="sm">
-                {facts.source.label}
-                <ArrowUpRight aria-hidden="true" />
-              </PillAnchor>
-            )}
-          </div>
-        </header>
-        {document.cover && !document.cover.hidden && (
-          <div className="relative">
-            <CoverMat
-              asset={document.cover.ascii}
-              alt={document.cover.alt}
-              seed={document.path}
-              hue={matHueAt(Math.max(index, 0))}
-              aspect="aspect-[16/10] sm:aspect-[21/9]"
-              transitionName={`cover-${slug}`}
-              className="-rotate-1 border-[1.5px] border-ink bg-paper-raised shadow-rest"
-            />
-            {document.cover.caption && (
-              <p className="pt-4 text-sm text-ink-soft">
-                {document.cover.caption}
+                Case study {padIndex(index + 1)}, all work
+              </Link>,
+              document.projectLabel ?? "Project",
+            ]}
+            bottom={[facts?.timeline ?? year, facts?.status ?? "Shipped"]}
+          >
+            <h1 className="text-block-deep">
+              {short ? (
+                <FitText text={document.title} rise />
+              ) : (
+                <span className="block type-display-xl text-[clamp(3.5rem,9vw,9rem)]">
+                  {document.title}
+                </span>
+              )}
+            </h1>
+          </Corners>
+          <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:items-end">
+            <p className="max-w-[36rem] type-lede">{document.description}</p>
+            {facts?.role && (
+              <p className="flex flex-col gap-1 md:items-end md:text-right">
+                <span className="type-label">Role</span>
+                <span className="type-h3">{facts.role}</span>
               </p>
             )}
           </div>
-        )}
-      </Band>
+          {cover && (
+            <div className="grid md:grid-cols-12">
+              <figure className="-mb-20 rotate-[-1.5deg] rounded-xl border-2 border-ink bg-paper-raised p-2 shadow-rest md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
+                <CoverFrame
+                  asset={cover.ascii}
+                  alt={cover.alt}
+                  tone="deep"
+                  dense={!!cover.screen}
+                  aspect={cover.screen ? "aspect-[16/9]" : "aspect-[16/10]"}
+                  transitionName={`cover-${slug}`}
+                />
+              </figure>
+            </div>
+          )}
+        </div>
+      </header>
+      {cover?.caption && (
+        <p className="frame pt-24 text-center font-serif text-[0.95rem] text-ink-soft">
+          {cover.caption}
+        </p>
+      )}
 
-      {(document.outcomes.length > 0 || facts) && (
-        <section
-          aria-label="At a glance"
-          className="frame grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
-        >
-          {document.outcomes.length > 0 && (
-            <ul
-              data-hue="butter"
-              className="grid gap-4 rounded-2xl bg-hue-tint p-6 sm:grid-cols-3 sm:p-8"
-            >
-              <li className="flex flex-col gap-1 sm:col-span-3">
-                <h2 className="type-h3 text-ink">What changed</h2>
-              </li>
-              {document.outcomes.map((outcome, position) => (
-                <Settle
-                  as="li"
-                  key={outcome}
-                  index={position}
-                  className="flex flex-col gap-4 rounded-lg bg-paper-raised p-5"
-                >
-                  <span
-                    data-hue={
-                      (["peach", "lilac", "mint"] as const)[position % 3]
-                    }
-                    className="block size-10 text-hue"
+      <div
+        data-block={block}
+        className={cn(
+          "flex flex-col gap-16 pb-24 sm:gap-20",
+          cover && !cover.caption ? "pt-32" : "pt-14"
+        )}
+      >
+        {facts && (
+          <dl className="frame grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-4">
+            <Fact label="Team">{facts.team}</Fact>
+            <Fact label="Timeline">{facts.timeline}</Fact>
+            <Fact label="Stack">{facts.stack?.join(", ")}</Fact>
+            <Fact label="Source">
+              {facts.source &&
+                (facts.source.url ? (
+                  <a
+                    href={facts.source.url}
+                    className="inline-flex items-center gap-1 underline decoration-2 underline-offset-4"
                   >
-                    <Shape
-                      name={
-                        shapeNames[(position * 3 + 1) % shapeNames.length] ??
-                        "circle"
-                      }
-                      className="size-full"
-                    />
-                  </span>
-                  <span className="text-[0.975rem] leading-relaxed text-ink">
-                    {outcome}
-                  </span>
+                    {facts.source.label}
+                    <ArrowUpRight className="size-4" aria-hidden="true" />
+                  </a>
+                ) : (
+                  facts.source.label
+                ))}
+            </Fact>
+          </dl>
+        )}
+
+        {document.outcomes.length > 0 && (
+          <section
+            aria-labelledby="outcomes"
+            className="frame flex flex-col gap-8"
+          >
+            <h2 id="outcomes" className="type-h2">
+              What came of it
+            </h2>
+            <ol className="grid gap-6 md:grid-cols-3">
+              {document.outcomes.map((outcome, position) => (
+                <Settle as="li" key={outcome} index={position}>
+                  <TiltCard
+                    tiltIndex={position}
+                    className="flex h-full flex-col gap-4 bg-paper-raised p-6 text-ink"
+                  >
+                    <span className="type-numeral text-[3.5rem] text-block-text">
+                      {padIndex(position + 1)}
+                    </span>
+                    <span className="font-serif text-[1.1rem] leading-snug">
+                      {outcome}
+                    </span>
+                  </TiltCard>
                 </Settle>
               ))}
-            </ul>
-          )}
-          {facts && (
-            <dl className="flex flex-col gap-5 rounded-2xl bg-paper-sunk p-6 sm:p-8">
-              {facts.stack && facts.stack.length > 0 && (
-                <div className="flex flex-col gap-3">
-                  <dt className="type-label text-ink-faint">Stack</dt>
-                  <dd className="flex flex-wrap gap-2">
-                    {facts.stack.map((item) => (
-                      <MetaPill key={item}>{item}</MetaPill>
-                    ))}
-                  </dd>
-                </div>
-              )}
-              {facts.source && (
-                <div className="flex flex-col gap-2">
-                  <dt className="type-label text-ink-faint">Source</dt>
-                  <dd className="font-medium text-ink">
-                    {facts.source.url ? (
-                      <a
-                        href={facts.source.url}
-                        className="underline decoration-hue-deep decoration-2 underline-offset-4"
-                      >
-                        {facts.source.label}
-                      </a>
-                    ) : (
-                      facts.source.label
-                    )}
-                  </dd>
-                </div>
-              )}
-              {facts.team && (
-                <div className="flex flex-col gap-2">
-                  <dt className="type-label text-ink-faint">Team</dt>
-                  <dd className="font-medium text-ink">{facts.team}</dd>
-                </div>
-              )}
-            </dl>
-          )}
-        </section>
-      )}
+            </ol>
+          </section>
+        )}
 
-      <ReadingLayout
-        document={document}
-        after={
-          <div className="flex flex-col gap-14">
-            <TagRow tags={document.tags} />
-            {document.comments && <Comments path={document.path} />}
-          </div>
-        }
-      />
+        <ReadingLayout
+          document={document}
+          after={
+            <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-5 border-t-2 border-ink pt-6">
+                <p className="type-h3">End of case study.</p>
+                <TagRow tags={document.tags} />
+              </div>
+              {document.comments && <Comments path={document.path} />}
+            </div>
+          }
+        />
+      </div>
 
-      {next && next !== document && (
-        <section
-          aria-labelledby="next-project"
-          className="frame flex flex-col gap-8"
-        >
-          <div className="flex flex-col gap-2">
-            <p className="type-label text-hue-deep">Up next</p>
-            <h2 id="next-project" className="type-h2 text-ink">
-              Another thing I built
-            </h2>
-          </div>
-          <Settle>
-            <ProjectCard project={next} index={index + 1} lead />
-          </Settle>
-        </section>
+      {next && next.path !== document.path && (
+        <NextBlock kind="Next project" next={next} />
       )}
     </article>
+  )
+}
+
+function Fact({ label, children }: { label: string; children: ReactNode }) {
+  if (!children) return null
+  return (
+    <div className="flex flex-col gap-1.5 border-t-2 border-ink pt-3">
+      <dt className="type-label text-ink-soft">{label}</dt>
+      <dd className="font-semibold">{children}</dd>
+    </div>
   )
 }

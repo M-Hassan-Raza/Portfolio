@@ -44,7 +44,7 @@ export function NotePopover({
         side={side}
         sideOffset={14}
         className={cn(
-          "w-72 gap-3 rounded-lg border-[1.5px] border-ink bg-paper-raised p-5 text-ink shadow-float ring-0",
+          "w-72 gap-3 rounded-lg border-2 border-ink bg-paper-raised p-5 text-ink shadow-rest ring-0",
           className
         )}
       >
@@ -76,7 +76,7 @@ export function MenuSheet({
       <SheetContent
         side="top"
         showCloseButton={false}
-        className="max-h-dvh gap-0 overflow-y-auto rounded-b-[28px] border-0 bg-paper-raised text-ink shadow-float"
+        className="max-h-dvh gap-0 overflow-y-auto border-0 border-b-2 border-ink bg-paper text-ink"
       >
         <SheetTitle className="sr-only">{title}</SheetTitle>
         <SheetDescription className="sr-only">{description}</SheetDescription>
