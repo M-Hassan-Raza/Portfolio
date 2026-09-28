@@ -5,6 +5,7 @@ import { ArticleView } from "@/components/views/article"
 import { CaseStudyView } from "@/components/views/case-study"
 import { CollectionView } from "@/components/views/collections"
 import { NotFoundView } from "@/components/views/not-found"
+import { ContentBody } from "./body"
 import { OpenSourceView } from "@/components/views/open-source"
 import {
   ArchiveView,
@@ -38,7 +39,7 @@ export function DocumentView({
     case "archive":
       return <ArchiveView document={document} />
     case "not-found":
-      return <NotFoundView />
+      return <NotFoundView body={<ContentBody code={document.mdx} />} />
     case "page":
       if (document.path === "/contact/")
         return <ContactView document={document} />

@@ -1,7 +1,7 @@
-import { mkdir, writeFile } from "node:fs/promises"
+import { MDXContent } from "@content-collections/mdx/react"
+import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { join, dirname } from "node:path"
 import { renderToStaticMarkup } from "react-dom/server"
-import { MDXContent } from "@content-collections/mdx/react"
 import { Feed } from "feed"
 import { SitemapStream, streamToPromise } from "sitemap"
 import { profile } from "#content"
@@ -11,6 +11,7 @@ import { topics } from "../src/lib/content/taxonomies"
 import { redirects } from "../src/lib/content/redirects"
 import { searchEntries } from "../src/lib/content/search"
 import { site } from "../src/lib/site"
+import { NotFoundView } from "../src/components/views/not-found"
 
 const output = "dist/client"
 async function write(path: string, content: string | Buffer) {
@@ -108,6 +109,9 @@ for (const [path, target] of redirects) {
   )
 }
 const missing = requireDocument("/404.html")
+const stylesheet = /<link rel="stylesheet" href="([^"]+)"/.exec(
+  await readFile(join(output, "index.html"), "utf8")
+)?.[1]
 await write(
   "/404.html",
   `<!doctype html>${renderToStaticMarkup(
@@ -117,18 +121,18 @@ await write(
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex" />
         <title>{`${missing.title} | ${profile.name}`}</title>
+        {stylesheet && <link rel="stylesheet" href={stylesheet} />}
+        <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
       </head>
-      <body
-        style={{
-          fontFamily: "system-ui",
-          maxWidth: "48rem",
-          margin: "4rem auto",
-          padding: "0 1.5rem",
-        }}
-      >
-        <main>
-          <h1>{missing.title}</h1>
-          <MDXContent code={missing.mdx} />
+      <body>
+        <main className="flex min-h-dvh flex-col">
+          <NotFoundView
+            body={
+              <div className="prose-site prose max-w-none">
+                <MDXContent code={missing.mdx} />
+              </div>
+            }
+          />
         </main>
       </body>
     </html>

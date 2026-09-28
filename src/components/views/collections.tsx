@@ -316,7 +316,7 @@ function FeaturedEssay({ entry }: { entry: Document }) {
         asset={entry.cover?.ascii}
         alt={entry.cover?.alt ?? entry.title}
         seed={entry.path}
-        hue="peach"
+        hue="butter"
         className="rotate-[1.5deg] transition-transform duration-500 ease-(--ease-settle) group-hover:rotate-0"
       />
     </Link>

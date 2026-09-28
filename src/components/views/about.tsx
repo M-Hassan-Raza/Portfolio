@@ -237,7 +237,7 @@ function PortraitArch() {
 function Letter({ children }: { children: ReactNode }) {
   return (
     <div className="relative flex w-full max-w-[52rem] flex-col items-center">
-      <Settle className="relative w-full" tilt={-1}>
+      <Settle className="relative w-full" tilt={0}>
         <div className="relative flex flex-col gap-6 rounded-lg bg-paper-raised px-6 pt-10 pb-24 shadow-float sm:px-14 sm:pt-14 sm:pb-28">
           <p className="type-label text-hue-deep">A note from Hassan</p>
           {children}
@@ -337,7 +337,7 @@ function Road({ entries }: { entries: Profile["experience"] }) {
             >
               <Settle
                 index={index}
-                tilt={tiltAt(index) * 0.6}
+                tilt={tiltAt(index) * 0.35}
                 className="w-full md:w-[46%]"
               >
                 <div

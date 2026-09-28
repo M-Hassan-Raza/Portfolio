@@ -5,6 +5,8 @@ import { site } from "@/lib/site"
 import { SiteFooter, SiteHeader } from "@/components/site-chrome"
 import { SiteProviders } from "@/components/system/providers"
 import { NotFoundView } from "@/components/views/not-found"
+import { ContentBody } from "@/components/content/body"
+import { requireDocument } from "@/lib/content/catalog"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRoute({
@@ -32,7 +34,11 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  notFoundComponent: NotFoundView,
+  notFoundComponent: () => (
+    <NotFoundView
+      body={<ContentBody code={requireDocument("/404.html").mdx} />}
+    />
+  ),
   shellComponent: RootDocument,
 })
 

@@ -935,82 +935,6 @@
   color: var(--shiki-foreground);
 }
 
-/* Books pages keep their authored HTML; the studio groups it into cards. */
-.book-entry {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-.book-entry .book-cover {
-  border-radius: 1.5rem;
-  background: var(--hue);
-  padding: 12px;
-  transform: rotate(var(--book-tilt, -1.5deg));
-  transition: transform 420ms var(--ease-settle);
-}
-.book-entry:nth-child(3n + 2) .book-cover {
-  --book-tilt: 1.5deg;
-}
-.book-entry:nth-child(3n) .book-cover {
-  --book-tilt: -0.75deg;
-}
-.book-entry:hover .book-cover {
-  transform: rotate(0deg) translateY(-4px);
-}
-.book-entry .book-cover > .ascii-frame {
-  border-radius: 1.125rem;
-  border: 1.5px solid var(--ink);
-  background: var(--hue-tint);
-  --ascii-wght: 600;
-}
-.book-entry .book-cover > .ascii-frame .ascii-art {
-  mix-blend-mode: var(--ascii-blend);
-}
-.book-entry .ascii-frame[data-tone="photo"] {
-  background: var(--hue-tint);
-  color: var(--ink);
-}
-.book-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.book-text h3 {
-  font-family: var(--font-serif-family);
-  font-size: 1.35rem;
-  font-weight: 500;
-  font-variation-settings:
-    "SOFT" 100,
-    "WONK" 0;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  color: var(--ink);
-  scroll-margin-top: 6rem;
-}
-.book-text h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-.book-text .author {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--hue-deep);
-}
-.book-text .review {
-  font-family: var(--font-serif-family);
-  font-size: 1.02rem;
-  line-height: 1.55;
-  color: var(--ink-soft);
-  font-variation-settings:
-    "SOFT" 100,
-    "WONK" 0;
-}
-.book-text .review strong {
-  color: var(--ink);
-  font-weight: 600;
-}
-
 /* Without JavaScript, entrance animations never run: show everything as-is. */
 :root:not([data-js]) .settle {
   opacity: 1 !important;
@@ -1052,4 +976,68 @@
   border-radius: 1.25rem;
   background: var(--paper-raised);
   box-shadow: var(--shadow-rest);
+}
+
+/*
+ * Books pages keep their authored HTML (a flat run of title, cover, author,
+ * review). A dense grid pins each cover to the left of its own text.
+ */
+.prose-site .book-container {
+  display: grid;
+  grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  column-gap: 1.5rem;
+  @media (width >= 40rem) {
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+    column-gap: 2.75rem;
+  }
+}
+.prose-site .book-container > h3 {
+  grid-column: 2;
+  margin: 3.5rem 0 0.25rem;
+  font-family: var(--font-serif-family);
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+}
+.prose-site .book-container > .book-cover {
+  grid-column: 1;
+  grid-row: span 3;
+  align-self: start;
+  margin-top: 3.5rem;
+  border-radius: 1.25rem;
+  background: var(--hue);
+  padding: 10px;
+  transform: rotate(-2deg);
+  transition: transform 420ms var(--ease-settle);
+}
+.prose-site .book-container > .book-cover:nth-of-type(2n) {
+  transform: rotate(1.75deg);
+}
+.prose-site .book-container > .book-cover:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+.prose-site .book-container > .book-cover .ascii-frame {
+  --ascii-wght: 560;
+  border-radius: 0.875rem;
+  border: 1.5px solid var(--ink);
+  background: var(--hue-tint);
+  color: var(--ink);
+}
+.prose-site .book-container > .book-cover .ascii-art {
+  mix-blend-mode: var(--ascii-blend);
+}
+.prose-site .book-container > .author {
+  grid-column: 2;
+  margin: 0;
+  font-family: var(--font-sans-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--hue-deep);
+}
+.prose-site .book-container > .review {
+  grid-column: 2;
+  margin: 1rem 0 0;
+  font-size: 1.1rem;
+  align-self: start;
 }
