@@ -358,11 +358,11 @@
 .group:is(:hover, :focus-visible) .cover-print .ascii-frame[data-tone="photo"] {
   background: var(--block-deep);
   color: var(--block);
-  --ascii-wght: 420;
+  --ascii-wght: 600;
 }
 .cover-print .ascii-frame[data-tone="photo"] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--ascii-plate);
+  color: var(--ascii-plate-ink);
   --ascii-wght: 420;
 }
 

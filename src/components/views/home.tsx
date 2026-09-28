@@ -73,7 +73,7 @@ export function HomeView({
         <div className="grid gap-10 md:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] md:gap-14 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,14rem)]">
           <Portrait
             tilt={-4}
-            className="w-40 self-start sm:w-48 md:-mt-4 md:w-full"
+            className="-mt-2 w-36 self-start justify-self-end sm:w-48 md:-mt-4 md:w-full md:justify-self-auto"
           />
           <div className="flex max-w-3xl flex-col gap-6">
             <h1 id="home-title" className="type-display">
