@@ -5,7 +5,6 @@ import type { Document } from "#content"
 import { ContentBody } from "@/components/content/body"
 import { Settle } from "@/components/studio/motion"
 import { PillAnchor, PillLink } from "@/components/studio/pill"
-import { Portrait } from "@/components/studio/portrait"
 import { SectionHeading } from "@/components/studio/section-heading"
 import { TiltCard } from "@/components/studio/tilt-card"
 
@@ -38,7 +37,7 @@ export function AboutView({
   return (
     <div data-block="violet" className="flex flex-col gap-20 pb-24 sm:gap-28">
       <header className="surface-block">
-        <div className="frame grid items-end gap-12 pt-32 pb-14 sm:pt-40 sm:pb-20 md:grid-cols-[minmax(0,1fr)_minmax(0,14rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,16rem)] lg:gap-20">
+        <div className="frame flex flex-col pt-32 pb-14 sm:pt-40 sm:pb-20">
           <div className="flex flex-col gap-6">
             <h1 className="type-label">{document.title}</h1>
             <p
@@ -61,10 +60,6 @@ export function AboutView({
               </PillLink>
             </div>
           </div>
-          <Portrait
-            tilt={3}
-            className="w-44 justify-self-start sm:w-52 md:w-full md:justify-self-end"
-          />
         </div>
       </header>
 

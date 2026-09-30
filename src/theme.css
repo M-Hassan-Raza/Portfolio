@@ -84,10 +84,6 @@
   /* The footer is always ink; at night it needs a rule to part from the page. */
   --footer-rule: var(--ink-fixed);
 
-  /* Portrait lab: grain and paper-print tones. */
-  --grain: oklch(0.19 0.008 55 / 0.22);
-  --print-warm: oklch(0.42 0.1 45);
-
   /* ── shadcn semantic names, bound to paper and ink ─────────────────── */
   --background: var(--paper);
   --foreground: var(--ink);
@@ -204,8 +200,6 @@
   --pop: var(--ink);
   --ring-soft: var(--line);
   --footer-rule: var(--line-strong);
-  --grain: oklch(0.945 0.014 84 / 0.16);
-  --print-warm: oklch(0.72 0.09 55);
 
   --destructive: oklch(0.7 0.19 33);
   --destructive-tint-hover: oklch(0.28 0.08 33);

@@ -9,7 +9,6 @@ import { FitText } from "@/components/studio/fit-text"
 import { IndexList } from "@/components/studio/index-list"
 import { Settle } from "@/components/studio/motion"
 import { PillLink, PillAnchor } from "@/components/studio/pill"
-import { Portrait } from "@/components/studio/portrait"
 import { Scribble } from "@/components/studio/scribble"
 import { ArrowLink } from "@/components/studio/section-heading"
 import { Shelf } from "@/components/studio/shelf"
@@ -48,7 +47,7 @@ export function HomeView({
 
   return (
     <div className="flex flex-col">
-      {/* Hero: the name fills the width; one small portrait; one headline. */}
+      {/* Hero: the name fills the width, then one headline. */}
       <section
         aria-labelledby="home-title"
         className="frame flex flex-col gap-8 pt-28 pb-20 sm:gap-10 sm:pt-32 sm:pb-28"
@@ -70,12 +69,8 @@ export function HomeView({
         <p className="-mt-2">
           <FitText text="Hassan Raza" rise />
         </p>
-        <div className="grid gap-10 md:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] md:gap-14 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,14rem)]">
-          <Portrait
-            tilt={-4}
-            className="-mt-2 w-36 self-start justify-self-end sm:w-48 md:-mt-4 md:w-full md:justify-self-auto"
-          />
-          <div className="flex max-w-3xl flex-col gap-6">
+        <div className="grid md:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] md:gap-14 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,14rem)]">
+          <div className="flex max-w-3xl flex-col gap-6 md:col-start-2">
             <h1 id="home-title" className="type-display">
               {home.hero.title}
             </h1>

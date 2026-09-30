@@ -692,38 +692,6 @@
   background: var(--block);
 }
 
-/* ── Portrait treatments (see /lab/portrait/) ──────────────────────────── */
-.portrait {
-  position: relative;
-  isolation: isolate;
-  display: block;
-}
-.portrait > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* A mask plate: a pre-processed alpha image, inked with a token. */
-.portrait-plate {
-  position: absolute;
-  inset: 0;
-  background: var(--plate, var(--ink));
-  mask-image: var(--plate-src);
-  mask-size: cover;
-  mask-position: center;
-  mask-repeat: no-repeat;
-}
-.portrait-grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--grain);
-  mask-image: url("/assets/portrait/grain.png");
-  mask-size: 180px 180px;
-  pointer-events: none;
-}
-
 /* ── Motion ────────────────────────────────────────────────────────────── */
 :root {
   --dur-instant: 90ms;
