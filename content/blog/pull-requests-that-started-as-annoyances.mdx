@@ -4,7 +4,7 @@ path: /blog/pull-requests-that-started-as-annoyances/
 title: Most of My Pull Requests Started as an Annoyance
 description: "Drive-by fixes in qBittorrent, Dokploy and django-hijack: which ones merged, which didn't, and what the rejections taught me about scope."
 publishedAt: 2026-04-08T05:00:00.000Z
-updatedAt: 2026-09-25T05:00:00.000Z
+updatedAt: 2026-09-30T05:00:00.000Z
 aliases:
   - /blog/i-fixed-a-bug-in-a-torrent-client/
 tags:
@@ -23,9 +23,9 @@ There's a popular way to do open source: pick high-visibility projects, choose i
 
 That approach has a good merge rate for small things and a bad one for anything ambitious. Here's an honest tally from three projects.
 
-## qBittorrent: six merged, several closed
+## qBittorrent: eight merged, several closed
 
-I use qBittorrent on a Mac, and the macOS build had small, visible rough edges. Those fixes merged: text cut off in the About dialog, dark corner artifacts on line edits, delete shortcuts that didn't match platform conventions, invisible toolbar spacers replaced with visible separators, overlapping text in the priority editor, a background mismatch in the Add New Torrent dialog.
+I use qBittorrent on a Mac, and the macOS build had small, visible rough edges. Those fixes merged: text cut off in the About dialog, dark corner artifacts on line edits, delete shortcuts that didn't match platform conventions, invisible toolbar spacers replaced with visible separators, overlapping text in the priority editor, a background mismatch in the Add New Torrent dialog. Two later ones merged too: the RSS settings warning and the disabled speed graphs warning are now clickable.
 
 Then I got ambitious. The options dialog says interface changes need a restart, so I set out to make theme settings apply at runtime: refresh icons, repaint cached widgets, keep the layout aligned. I spent days on it in whatever time I had after work, covering edge case after edge case. One maintainer's review found real regressions. Another asked a simple question: isn't this too much burden for such a minor goal?
 
