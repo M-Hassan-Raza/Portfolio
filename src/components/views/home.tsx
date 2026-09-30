@@ -5,7 +5,6 @@ import type { Document } from "#content"
 import { requireDocument } from "@/lib/content/catalog"
 import { allBooks } from "@/lib/content/books"
 import { ProjectCard, entryRow } from "@/components/content/cards"
-import { FitText } from "@/components/studio/fit-text"
 import { IndexList } from "@/components/studio/index-list"
 import { Settle } from "@/components/studio/motion"
 import { PillLink, PillAnchor } from "@/components/studio/pill"
@@ -47,7 +46,7 @@ export function HomeView({
 
   return (
     <div className="flex flex-col">
-      {/* Hero: the name fills the width, then one headline. */}
+      {/* Hero: one headline, what it covers, and two ways in. */}
       <section
         aria-labelledby="home-title"
         className="frame flex flex-col gap-8 pt-28 pb-20 sm:gap-10 sm:pt-32 sm:pb-28"
@@ -66,26 +65,21 @@ export function HomeView({
           </a>
           <span>{profile.location}</span>
         </div>
-        <p className="-mt-2">
-          <FitText text="Hassan Raza" rise />
-        </p>
-        <div className="grid md:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] md:gap-14 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,14rem)]">
-          <div className="flex max-w-3xl flex-col gap-6 md:col-start-2">
-            <h1 id="home-title" className="type-display">
-              {home.hero.title}
-            </h1>
-            <p className="max-w-[40rem] type-lede text-ink-soft">
-              {home.hero.summary}
-            </p>
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <PillLink to={page("/projects/")} size="lg">
-                See the work
-                <ArrowRight aria-hidden="true" strokeWidth={2.6} />
-              </PillLink>
-              <PillLink to={page("/blog/")} size="lg" variant="paper">
-                Read the essays
-              </PillLink>
-            </div>
+        <div className="flex flex-col gap-6 pt-6 sm:pt-10">
+          <h1 id="home-title" className="max-w-5xl type-display">
+            {home.hero.title}
+          </h1>
+          <p className="max-w-[40rem] type-lede text-ink-soft">
+            {home.hero.summary}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <PillLink to={page("/projects/")} size="lg">
+              See the work
+              <ArrowRight aria-hidden="true" strokeWidth={2.6} />
+            </PillLink>
+            <PillLink to={page("/blog/")} size="lg" variant="paper">
+              Read the essays
+            </PillLink>
           </div>
         </div>
       </section>

@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
  * in Chromium. Unknown strings get an estimate.
  */
 const measured: Record<string, number> = {
-  "Hassan Raza": 4.457,
   "404": 1.435,
   Obelisk: 2.572,
   Polaris: 2.385,

@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./system/theme-toggle"
 import { useCommandPalette } from "./system/command-palette"
 import { MenuSheet, MenuSheetClose } from "./system/overlays"
-import { FitText } from "./studio/fit-text"
 import { PillAnchor, PillLink } from "./studio/pill"
 import { springs } from "./studio/motion"
 
@@ -236,7 +235,7 @@ export function SiteFooter() {
   return (
     <footer
       data-block={section === "ink" ? "tomato" : section}
-      className="print-scope flex flex-col gap-14 border-t-2 border-footer-rule bg-ink-fixed pt-16 text-paper-fixed print:hidden"
+      className="print-scope flex flex-col gap-14 border-t-2 border-footer-rule bg-ink-fixed pt-16 pb-12 text-paper-fixed print:hidden"
     >
       <div className="frame grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div className="flex flex-col items-start gap-5">
@@ -297,9 +296,6 @@ export function SiteFooter() {
             className="size-4 transition-transform duration-300 ease-(--ease-pop) group-hover:-translate-y-1"
           />
         </a>
-      </div>
-      <div aria-hidden="true" className="frame overflow-clip text-block">
-        <FitText text="Hassan Raza" className="-mb-[0.14em] select-none" />
       </div>
     </footer>
   )
