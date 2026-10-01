@@ -1,1 +1,81 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>AI on Muhammad Hassan Raza</title><link>https://mhassan.dev/tags/ai/</link><description>Recent content in AI on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Fri, 25 Sep 2026 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Obelisk</title><link>https://mhassan.dev/projects/obelisk/</link><pubDate>Sun, 01 Feb 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/projects/obelisk/</guid><description>An AI marketing platform where specialist agents write, plan and analyze from a company&amp;#39;s own material, without leaking one customer&amp;#39;s brand into another&amp;#39;s.</description></item><item><title>Anatomia</title><link>https://mhassan.dev/projects/anatomia/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/projects/anatomia/</guid><description>A nurse callback and case review product where transcripts, AI triage and follow-up calls all have to stay attached to the right patient.</description></item><item><title>RISQ</title><link>https://mhassan.dev/projects/risq/</link><pubDate>Fri, 25 Sep 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/projects/risq/</guid><description>Scoring intake calls for mass tort firms: separating real claimants from coached callers, with evidence a reviewer can follow.</description></item><item><title>Bonnet</title><link>https://mhassan.dev/projects/bonnet/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/projects/bonnet/</guid><description>An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can actually use.</description></item><item><title>Agent Middleware: What Kept Obelisk's Agents in Line</title><link>https://mhassan.dev/blog/langgraph-multi-agent-middleware/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/langgraph-multi-agent-middleware/</guid><description>Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work.</description></item><item><title>LLMs Can't Save Bad UX</title><link>https://mhassan.dev/blog/llms-cant-save-bad-ux/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/llms-cant-save-bad-ux/</guid><description>When an AI feature flops, the model is rarely the problem. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt.</description></item><item><title>Scoring Fraud in Legal Intake Calls</title><link>https://mhassan.dev/blog/fraud-scoring-legal-intake/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/fraud-scoring-legal-intake/</guid><description>Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.</description></item><item><title>Structured Logging for AI Debugging</title><link>https://mhassan.dev/blog/structured-logging-ai-debugging/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/structured-logging-ai-debugging/</guid><description>Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs.</description></item><item><title>LangChain in Production: What the Tutorials Leave Out</title><link>https://mhassan.dev/blog/langchain-production/</link><pubDate>Sun, 01 Feb 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/langchain-production/</guid><description>Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>AI</title>
+        <link>https://mhassan.dev/tags/ai/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>AI</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/ai/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[RISQ]]></title>
+            <link>https://mhassan.dev/projects/risq/</link>
+            <guid isPermaLink="false">https://mhassan.dev/projects/risq/</guid>
+            <pubDate>Fri, 25 Sep 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Scoring intake calls for mass tort firms: separating real claimants from coached callers, with evidence a reviewer can follow.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Scoring Fraud in Legal Intake Calls]]></title>
+            <link>https://mhassan.dev/blog/fraud-scoring-legal-intake/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/fraud-scoring-legal-intake/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Agent Middleware: What Kept Obelisk's Agents in Line]]></title>
+            <link>https://mhassan.dev/blog/langgraph-multi-agent-middleware/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/langgraph-multi-agent-middleware/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[LLMs Can't Save Bad UX]]></title>
+            <link>https://mhassan.dev/blog/llms-cant-save-bad-ux/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/llms-cant-save-bad-ux/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[When an AI feature flops, the model is rarely the problem. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Structured Logging for AI Debugging]]></title>
+            <link>https://mhassan.dev/blog/structured-logging-ai-debugging/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/structured-logging-ai-debugging/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Anatomia]]></title>
+            <link>https://mhassan.dev/projects/anatomia/</link>
+            <guid isPermaLink="false">https://mhassan.dev/projects/anatomia/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A nurse callback and case review product where transcripts, AI triage and follow-up calls all have to stay attached to the right patient.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Bonnet]]></title>
+            <link>https://mhassan.dev/projects/bonnet/</link>
+            <guid isPermaLink="false">https://mhassan.dev/projects/bonnet/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can actually use.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[LangChain in Production: What the Tutorials Leave Out]]></title>
+            <link>https://mhassan.dev/blog/langchain-production/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/langchain-production/</guid>
+            <pubDate>Sun, 01 Feb 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Obelisk]]></title>
+            <link>https://mhassan.dev/projects/obelisk/</link>
+            <guid isPermaLink="false">https://mhassan.dev/projects/obelisk/</guid>
+            <pubDate>Sun, 01 Feb 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[An AI marketing platform where specialist agents write, plan and analyze from a company's own material, without leaking one customer's brand into another's.]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Tags</title>
+        <link>https://mhassan.dev/tags/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Tags</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[Advisor]]></title>
+            <link>https://mhassan.dev/tags/advisor/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/advisor/</guid>
+            <pubDate>Mon, 17 Feb 2025 07:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Advisor.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Agents]]></title>
+            <link>https://mhassan.dev/tags/agents/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/agents/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Agents.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[AI]]></title>
+            <link>https://mhassan.dev/tags/ai/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/ai/</guid>
+            <pubDate>Fri, 25 Sep 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about AI.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Analytics]]></title>
+            <link>https://mhassan.dev/tags/analytics/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/analytics/</guid>
+            <pubDate>Fri, 25 Sep 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Analytics.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Architecture]]></title>
+            <link>https://mhassan.dev/tags/architecture/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/architecture/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Architecture.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Arduino]]></title>
+            <link>https://mhassan.dev/tags/arduino/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/arduino/</guid>
+            <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Arduino.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[AWS]]></title>
+            <link>https://mhassan.dev/tags/aws/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/aws/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about AWS.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Azure]]></title>
+            <link>https://mhassan.dev/tags/azure/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/azure/</guid>
+            <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Azure.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Backend Development]]></title>
+            <link>https://mhassan.dev/tags/backend-development/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/backend-development/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Backend Development.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Best Practices]]></title>
+            <link>https://mhassan.dev/tags/best-practices/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/best-practices/</guid>
+            <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Best Practices.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[C++]]></title>
+            <link>https://mhassan.dev/tags/c++/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/c++/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about C++.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Career]]></title>
+            <link>https://mhassan.dev/tags/career/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/career/</guid>
+            <pubDate>Mon, 17 Feb 2025 07:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Career.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Code Review]]></title>
+            <link>https://mhassan.dev/tags/code-review/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/code-review/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Code Review.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Cogitator]]></title>
+            <link>https://mhassan.dev/tags/cogitator/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/cogitator/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Cogitator.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Components]]></title>
+            <link>https://mhassan.dev/tags/components/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/components/</guid>
+            <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Components.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Concurrency]]></title>
+            <link>https://mhassan.dev/tags/concurrency/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/concurrency/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Concurrency.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Contributing]]></title>
+            <link>https://mhassan.dev/tags/contributing/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/contributing/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Contributing.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Creative Tools]]></title>
+            <link>https://mhassan.dev/tags/creative-tools/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/creative-tools/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Creative Tools.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Developer Tools]]></title>
+            <link>https://mhassan.dev/tags/developer-tools/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/developer-tools/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Developer Tools.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Development]]></title>
+            <link>https://mhassan.dev/tags/development/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/development/</guid>
+            <pubDate>Mon, 17 Feb 2025 07:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Development.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Django]]></title>
+            <link>https://mhassan.dev/tags/django/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/django/</guid>
+            <pubDate>Fri, 25 Sep 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Django.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[DMCA]]></title>
+            <link>https://mhassan.dev/tags/dmca/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/dmca/</guid>
+            <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about DMCA.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[ERP]]></title>
+            <link>https://mhassan.dev/tags/erp/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/erp/</guid>
+            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about ERP.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Evlog]]></title>
+            <link>https://mhassan.dev/tags/evlog/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/evlog/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Evlog.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Fallow]]></title>
+            <link>https://mhassan.dev/tags/fallow/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/fallow/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Fallow.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[FastAPI]]></title>
+            <link>https://mhassan.dev/tags/fastapi/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/fastapi/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about FastAPI.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Final Year Project]]></title>
+            <link>https://mhassan.dev/tags/final-year-project/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/final-year-project/</guid>
+            <pubDate>Mon, 17 Feb 2025 07:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Final Year Project.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Fraud Detection]]></title>
+            <link>https://mhassan.dev/tags/fraud-detection/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/fraud-detection/</guid>
+            <pubDate>Fri, 25 Sep 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Fraud Detection.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Free Courses]]></title>
+            <link>https://mhassan.dev/tags/free-courses/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/free-courses/</guid>
+            <pubDate>Tue, 01 Apr 2025 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Free Courses.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[freeCodeCamp]]></title>
+            <link>https://mhassan.dev/tags/freecodecamp/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/freecodecamp/</guid>
+            <pubDate>Tue, 01 Apr 2025 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about freeCodeCamp.]]></description>
+        </item>
+    </channel>
+</rss>

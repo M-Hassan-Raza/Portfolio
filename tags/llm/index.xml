@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>LLM on Muhammad Hassan Raza</title><link>https://mhassan.dev/tags/llm/</link><description>Recent content in LLM on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Fri, 25 Sep 2026 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/tags/llm/index.xml" rel="self" type="application/rss+xml"/><item><title>LLMs Can't Save Bad UX</title><link>https://mhassan.dev/blog/llms-cant-save-bad-ux/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/llms-cant-save-bad-ux/</guid><description>When an AI feature flops, the model is rarely the problem. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt.</description></item><item><title>Scoring Fraud in Legal Intake Calls</title><link>https://mhassan.dev/blog/fraud-scoring-legal-intake/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/fraud-scoring-legal-intake/</guid><description>Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>LLM</title>
+        <link>https://mhassan.dev/tags/llm/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>LLM</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/llm/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[Scoring Fraud in Legal Intake Calls]]></title>
+            <link>https://mhassan.dev/blog/fraud-scoring-legal-intake/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/fraud-scoring-legal-intake/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[LLMs Can't Save Bad UX]]></title>
+            <link>https://mhassan.dev/blog/llms-cant-save-bad-ux/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/llms-cant-save-bad-ux/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[When an AI feature flops, the model is rarely the problem. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt.]]></description>
+        </item>
+    </channel>
+</rss>

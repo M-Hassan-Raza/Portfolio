@@ -1,1 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cogitator on Muhammad Hassan Raza</title><link>https://mhassan.dev/tags/cogitator/</link><description>Recent content in Cogitator on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Wed, 08 Apr 2026 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/tags/cogitator/index.xml" rel="self" type="application/rss+xml"/><item><title>TF-IDF in OCaml: When Functional Programming Clicks</title><link>https://mhassan.dev/blog/tfidf-in-ocaml/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/tfidf-in-ocaml/</guid><description>Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Cogitator</title>
+        <link>https://mhassan.dev/tags/cogitator/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Cogitator</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/cogitator/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[TF-IDF in OCaml: When Functional Programming Clicks]]></title>
+            <link>https://mhassan.dev/blog/tfidf-in-ocaml/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/tfidf-in-ocaml/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps.]]></description>
+        </item>
+    </channel>
+</rss>

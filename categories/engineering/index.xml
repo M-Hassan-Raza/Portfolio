@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Engineering on Muhammad Hassan Raza</title><link>https://mhassan.dev/categories/engineering/</link><description>Recent content in Engineering on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Fri, 25 Sep 2026 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/categories/engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>Most of My Pull Requests Started as an Annoyance</title><link>https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</guid><description>Drive-by fixes in qBittorrent, Dokploy and django-hijack: which ones merged, which didn&amp;#39;t, and what the rejections taught me about scope.</description></item><item><title>The Best Way to Learn a Codebase Is to Break Someone Else's</title><link>https://mhassan.dev/blog/best-way-to-learn-a-codebase/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/best-way-to-learn-a-codebase/</guid><description>What maintainers of kitty, calibre, libtorrent and Fallow taught me in review threads, usually by explaining why my fix was wrong in a way I hadn&amp;#39;t considered.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Engineering</title>
+        <link>https://mhassan.dev/categories/engineering/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Engineering</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/categories/engineering/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[The Best Way to Learn a Codebase Is to Break Someone Else's]]></title>
+            <link>https://mhassan.dev/blog/best-way-to-learn-a-codebase/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/best-way-to-learn-a-codebase/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[What maintainers of kitty, calibre, libtorrent and Fallow taught me in review threads, usually by explaining why my fix was wrong in a way I hadn't considered.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Most of My Pull Requests Started as an Annoyance]]></title>
+            <link>https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Drive-by fixes in qBittorrent, Dokploy and django-hijack: which ones merged, which didn't, and what the rejections taught me about scope.]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,1 +1,88 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Categories on Muhammad Hassan Raza</title><link>https://mhassan.dev/categories/</link><description>Recent content in Categories on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Fri, 25 Sep 2026 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>AI Systems</title><link>https://mhassan.dev/categories/ai-systems/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/ai-systems/</guid><description/></item><item><title>Backend</title><link>https://mhassan.dev/categories/backend/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/backend/</guid><description/></item><item><title>Engineering</title><link>https://mhassan.dev/categories/engineering/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/engineering/</guid><description/></item><item><title>Product</title><link>https://mhassan.dev/categories/product/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/product/</guid><description/></item><item><title>Software Design</title><link>https://mhassan.dev/categories/software-design/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/software-design/</guid><description/></item><item><title>Performance</title><link>https://mhassan.dev/categories/performance/</link><pubDate>Wed, 12 Feb 2025 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/performance/</guid><description/></item><item><title>Web Development</title><link>https://mhassan.dev/categories/web-development/</link><pubDate>Wed, 12 Feb 2025 10:00:00 +0500</pubDate><guid>https://mhassan.dev/categories/web-development/</guid><description/></item><item><title>Legal</title><link>https://mhassan.dev/categories/legal/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://mhassan.dev/categories/legal/</guid><description/></item><item><title>Vue.js</title><link>https://mhassan.dev/categories/vue.js/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://mhassan.dev/categories/vue.js/</guid><description/></item><item><title>Projects</title><link>https://mhassan.dev/categories/projects/</link><pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate><guid>https://mhassan.dev/categories/projects/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Categories</title>
+        <link>https://mhassan.dev/categories/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Categories</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/categories/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[AI systems]]></title>
+            <link>https://mhassan.dev/categories/ai-systems/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/ai-systems/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about AI systems.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Backend]]></title>
+            <link>https://mhassan.dev/categories/backend/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/backend/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Backend.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Engineering]]></title>
+            <link>https://mhassan.dev/categories/engineering/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/engineering/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Engineering.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Legal]]></title>
+            <link>https://mhassan.dev/categories/legal/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/legal/</guid>
+            <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Legal.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Performance]]></title>
+            <link>https://mhassan.dev/categories/performance/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/performance/</guid>
+            <pubDate>Wed, 12 Feb 2025 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Performance.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Product]]></title>
+            <link>https://mhassan.dev/categories/product/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/product/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Product.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Projects]]></title>
+            <link>https://mhassan.dev/categories/projects/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/projects/</guid>
+            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Projects.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Software Design]]></title>
+            <link>https://mhassan.dev/categories/software-design/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/software-design/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Software Design.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Vue.js]]></title>
+            <link>https://mhassan.dev/categories/vue.js/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/vue.js/</guid>
+            <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Vue.js.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Web Development]]></title>
+            <link>https://mhassan.dev/categories/web-development/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/web-development/</guid>
+            <pubDate>Wed, 12 Feb 2025 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Web Development.]]></description>
+        </item>
+    </channel>
+</rss>

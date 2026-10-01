@@ -1,1 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>GitHub Pages on Muhammad Hassan Raza</title><link>https://mhassan.dev/tags/github-pages/</link><description>Recent content in GitHub Pages on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Sat, 15 Feb 2025 14:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/tags/github-pages/index.xml" rel="self" type="application/rss+xml"/><item><title>What I Actually Spend on Running mhassan.dev: $8/year</title><link>https://mhassan.dev/blog/free-website-hosting/</link><pubDate>Sat, 15 Feb 2025 14:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/free-website-hosting/</guid><description>The full cost of running this site, what&amp;#39;s free, and the tradeoffs behind each choice.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>GitHub Pages</title>
+        <link>https://mhassan.dev/tags/github-pages/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>GitHub Pages</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/github-pages/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[What I Actually Spend on Running mhassan.dev: $8/year]]></title>
+            <link>https://mhassan.dev/blog/free-website-hosting/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/free-website-hosting/</guid>
+            <pubDate>Sat, 15 Feb 2025 09:00:00 GMT</pubDate>
+            <description><![CDATA[The full cost of running this site, what's free, and the tradeoffs behind each choice.]]></description>
+        </item>
+    </channel>
+</rss>

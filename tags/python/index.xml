@@ -1,1 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Python on Muhammad Hassan Raza</title><link>https://mhassan.dev/tags/python/</link><description>Recent content in Python on Muhammad Hassan Raza</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Fri, 25 Sep 2026 10:00:00 +0500</lastBuildDate><atom:link href="https://mhassan.dev/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Every Abstraction I Regret</title><link>https://mhassan.dev/blog/every-abstraction-i-regret/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/every-abstraction-i-regret/</guid><description>A short list of abstractions I added too early, why they got worse over time, and the heuristics I use now to avoid repeating it.</description></item><item><title>How Pyscn Analyzes Python with Go and tree-sitter</title><link>https://mhassan.dev/blog/go-treesitter-code-analyzer/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/go-treesitter-code-analyzer/</guid><description>How Pyscn uses Go and tree-sitter to analyze Python code quickly for dead code, clone detection, and dependency insight.</description></item><item><title>Most of My Pull Requests Started as an Annoyance</title><link>https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</link><pubDate>Wed, 08 Apr 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</guid><description>Drive-by fixes in qBittorrent, Dokploy and django-hijack: which ones merged, which didn&amp;#39;t, and what the rejections taught me about scope.</description></item><item><title>LangChain in Production: What the Tutorials Leave Out</title><link>https://mhassan.dev/blog/langchain-production/</link><pubDate>Sun, 01 Feb 2026 10:00:00 +0500</pubDate><guid>https://mhassan.dev/blog/langchain-production/</guid><description>Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.</description></item><item><title>Smart Dustbin: IoT with Arduino, Python, Kotlin &amp; Azure</title><link>https://mhassan.dev/projects/iot-garbage-monitoring/</link><pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate><guid>https://mhassan.dev/projects/iot-garbage-monitoring/</guid><description>An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Python</title>
+        <link>https://mhassan.dev/tags/python/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Thu, 01 Oct 2026 20:41:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Python</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/python/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[Every Abstraction I Regret]]></title>
+            <link>https://mhassan.dev/blog/every-abstraction-i-regret/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/every-abstraction-i-regret/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A short list of abstractions I added too early, why they got worse over time, and the heuristics I use now to avoid repeating it.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[How Pyscn Analyzes Python with Go and tree-sitter]]></title>
+            <link>https://mhassan.dev/blog/go-treesitter-code-analyzer/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/go-treesitter-code-analyzer/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[How Pyscn uses Go and tree-sitter to analyze Python code quickly for dead code, clone detection, and dependency insight.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Most of My Pull Requests Started as an Annoyance]]></title>
+            <link>https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/pull-requests-that-started-as-annoyances/</guid>
+            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Drive-by fixes in qBittorrent, Dokploy and django-hijack: which ones merged, which didn't, and what the rejections taught me about scope.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[LangChain in Production: What the Tutorials Leave Out]]></title>
+            <link>https://mhassan.dev/blog/langchain-production/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/langchain-production/</guid>
+            <pubDate>Sun, 01 Feb 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Smart Dustbin: IoT with Arduino, Python, Kotlin & Azure]]></title>
+            <link>https://mhassan.dev/projects/iot-garbage-monitoring/</link>
+            <guid isPermaLink="false">https://mhassan.dev/projects/iot-garbage-monitoring/</guid>
+            <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints.]]></description>
+        </item>
+    </channel>
+</rss>

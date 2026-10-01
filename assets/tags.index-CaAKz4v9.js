@@ -1,0 +1,1 @@
+import{j as o}from"./index-CNa_Je9G.js";import{T as t}from"./taxonomies-Befawaqn.js";import"./entry-list-CYDsF72b.js";import"./section-heading-DaNQw8eV.js";const s=()=>o.jsx(t,{kind:"tags"});export{s as component};
