@@ -1,0 +1,1017 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./theme.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Plumbing only. Every colour and font value lives in theme.css;
+ * this file maps those names into Tailwind and holds shared mechanics.
+ */
+
+/* Stacking tiers. Components use z-sticky, z-modal ... never raw numbers. */
+@theme static {
+  --z-index-base: 0;
+  --z-index-raised: 10;
+  --z-index-sticky: 100;
+  --z-index-dropdown: 200;
+  --z-index-overlay: 300;
+  --z-index-modal: 310;
+  --z-index-popover: 400;
+  --z-index-toast: 500;
+  --z-index-tooltip: 600;
+  --z-index-skip-link: 700;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+  --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-wipe: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* CSS approximation of the Settle spring (one soft overshoot). */
+  --ease-settle: linear(
+    0,
+    0.2 7%,
+    0.58 17%,
+    0.9 28%,
+    1.04 38%,
+    1.07 45%,
+    1.04 56%,
+    1 70%,
+    0.995 84%,
+    1
+  );
+  /* CSS approximation of the Pop spring (bouncier). */
+  --ease-pop: linear(
+    0,
+    0.3 6%,
+    0.85 15%,
+    1.12 24%,
+    1.14 29%,
+    1.03 40%,
+    0.97 50%,
+    1.01 64%,
+    1
+  );
+
+  --spacing-section: 8rem;
+  --spacing-section-sm: 5rem;
+  --container-content: 80rem;
+  --container-read: 42.5rem;
+}
+
+@theme inline {
+  --z-index-toast-stack: calc(100 - var(--toast-index, 0));
+
+  --font-sans: var(--font-sans-family);
+  --font-heading: var(--font-heading-family);
+  --font-serif: var(--font-serif-family);
+  --font-mono: var(--font-mono-family);
+
+  /* Paper and ink */
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-paper-hover: var(--paper-hover);
+  --color-paper-fixed: var(--paper-fixed);
+  --color-paper-fixed-raised: var(--paper-fixed-raised);
+  --color-paper-fixed-sunk: var(--paper-fixed-sunk);
+  --color-ink: var(--ink);
+  --color-ink-hover: var(--ink-hover);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-fixed: var(--ink-fixed);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-footer-rule: var(--footer-rule);
+  --color-pop: var(--pop);
+  --color-sticker-shade: var(--sticker-shade);
+
+  /* The current block (set by [data-block] in theme.css). */
+  --color-block: var(--block);
+  --color-block-deep: var(--block-deep);
+  --color-block-tint: var(--block-tint);
+  --color-on-block: var(--on-block);
+  --color-block-text: var(--block-text);
+
+  /* Named blocks, for the few places that need one outside a scope. */
+  --color-tomato: var(--tomato);
+  --color-ultramarine: var(--ultramarine);
+  --color-grass: var(--grass);
+  --color-lemon: var(--lemon);
+  --color-violet: var(--violet);
+  --color-pink: var(--pink);
+
+  /* shadcn semantic names */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-soft: var(--muted-soft);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ghost-hover: var(--ghost-hover);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-tint-hover: var(--destructive-tint-hover);
+  --color-destructive-ring: var(--destructive-ring);
+  --color-destructive-border: var(--destructive-border);
+  --color-destructive-soft-foreground: var(--destructive-soft-foreground);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-border-strong: var(--border-strong);
+  --color-hairline: var(--hairline);
+  --color-outline-border: var(--outline-border);
+  --color-input: var(--input);
+  --color-input-tint: var(--input-tint);
+  --color-input-tint-hover: var(--input-tint-hover);
+  --color-input-disabled: var(--input-disabled);
+  --color-input-border-soft: var(--input-border-soft);
+  --color-ring: var(--ring);
+  --color-ring-soft: var(--ring-soft);
+  --color-overlay: var(--overlay);
+  --color-tab-active: var(--tab-active);
+  --color-tab-active-border: var(--tab-active-border);
+  --color-kbd-inverse: var(--kbd-inverse);
+  --color-tooltip: var(--tooltip);
+  --color-tooltip-foreground: var(--tooltip-foreground);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-signal-hover: var(--signal-hover);
+  --color-signal-tint: var(--signal-tint);
+  --color-signal-tint-foreground: var(--signal-tint-foreground);
+  --color-selection: var(--selection);
+  --color-grid-line: var(--grid-line);
+  --color-code-surface: var(--code-surface);
+  --color-code-foreground: var(--code-foreground);
+  --color-ascii-ink: var(--ascii-ink);
+  --color-ascii-ink-accent: var(--ascii-ink-accent);
+  --color-ascii-faint: var(--ascii-faint);
+  --color-ascii-plate: var(--ascii-plate);
+  --color-ascii-plate-ink: var(--ascii-plate-ink);
+
+  /* Cards and buttons are rounded; blocks never are. */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+
+  /* Hard sticker shadows: rest, lift on hover, press on click. */
+  --shadow-rest: 4px 4px 0 var(--sticker-shade);
+  --shadow-lift: 7px 7px 0 var(--sticker-shade);
+  --shadow-press: 1px 1px 0 var(--sticker-shade);
+  --shadow-small: 3px 3px 0 var(--sticker-shade);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring-soft;
+  }
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+    font-variation-settings: "opsz" 14;
+  }
+  body {
+    @apply bg-paper text-ink;
+    position: relative;
+    font-weight: 450;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--selection);
+    color: var(--selection-foreground);
+  }
+  :focus-visible {
+    outline: 3px solid var(--focus, var(--ink));
+    outline-offset: 3px;
+  }
+  /* A block: full-bleed colour, straight edges, its own type colour. */
+  .surface-block {
+    --focus: var(--block-deep);
+    background: var(--block);
+    color: var(--on-block);
+  }
+  .surface-ink {
+    --focus: var(--paper);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  a,
+  button,
+  summary,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+  :where(.tabular, time, [data-num]) {
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+}
+
+@plugin "@tailwindcss/typography";
+
+/* ── ASCII art ─────────────────────────────────────────────────────────── */
+@font-face {
+  /* Variable Cascadia subset: ink ramp + scramble glyphs, no GSUB, 7 KB. */
+  font-family: "Ascii Ink";
+  src: url("/fonts/ascii-ink.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: block;
+}
+@font-face {
+  /* Metric-matched fallback so the grid never overflows while swapping. */
+  font-family: "Ascii Ink Fallback";
+  src: local("Menlo"), local("Consolas"), local("DejaVu Sans Mono");
+  size-adjust: 97.3%;
+}
+.ascii-frame {
+  --ascii-adv: 0.5859375;
+  position: relative;
+  max-width: 100%;
+  container-type: inline-size;
+  aspect-ratio: var(--ascii-cols) / calc(var(--ascii-rows) * 2);
+  overflow: clip;
+  content-visibility: auto;
+  contain-intrinsic-size: auto none;
+  color: var(--ascii-ink);
+  mask-image: var(--ascii-mask);
+  -webkit-user-select: none;
+  user-select: none;
+  transition:
+    color 300ms var(--ease-out-quint),
+    background-color 300ms var(--ease-out-quint);
+}
+.ascii-art {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: "Ascii Ink", "Ascii Ink Fallback", ui-monospace, monospace;
+  font-size: calc(100cqi / (var(--ascii-cols) * var(--ascii-adv)));
+  line-height: calc(var(--ascii-adv) * 2);
+  font-variation-settings: "wght" var(--ascii-wght);
+  font-variant-ligatures: none;
+  font-feature-settings:
+    "calt" 0,
+    "liga" 0;
+  font-kerning: none;
+  font-synthesis: none;
+  letter-spacing: 0;
+  text-rendering: optimizeSpeed;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  white-space: pre;
+  overflow: clip;
+}
+.ascii-art-fx {
+  position: absolute;
+  inset: 0;
+}
+.ascii-art-fx > span {
+  display: block;
+}
+.ascii-frame[data-fx="live"] > .ascii-art:not(.ascii-art-fx),
+.ascii-frame[data-fx="armed"] > .ascii-art {
+  visibility: hidden;
+}
+/* Photo covers are jp2a positives for a dark ground, so they always print on a plate. */
+.ascii-frame[data-tone="photo"] {
+  background: var(--ascii-plate);
+  color: var(--ascii-plate-ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-js] .ascii-frame[data-reveal]:not([data-fx]) > .ascii-art {
+    visibility: hidden;
+    animation: ascii-failsafe 0s linear 2.5s forwards;
+  }
+}
+@keyframes ascii-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+@media print {
+  .ascii-frame {
+    display: none;
+  }
+}
+
+.scramble {
+  position: relative;
+  display: inline-block;
+}
+.scramble-glyphs {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  white-space: inherit;
+  pointer-events: none;
+}
+.scramble[data-scramble="live"] > .scramble-text {
+  color: transparent;
+}
+
+/*
+ * Covers print in two inks. At rest: ink on the card's paper. When the card
+ * or row is touched, the cover floods with that piece's own block colour.
+ */
+.cover-print .ascii-frame,
+.cover-print .ascii-frame[data-tone] {
+  --ascii-wght: 560;
+  background: var(--paper-sunk);
+  color: var(--ink);
+}
+.cover-print-block .ascii-frame,
+.cover-print-block .ascii-frame[data-tone],
+.group:is(:hover, :focus-visible) .cover-print .ascii-frame {
+  --ascii-wght: 560;
+  background: var(--block);
+  color: var(--block-deep);
+}
+.cover-print-deep .ascii-frame,
+.cover-print-deep .ascii-frame[data-tone] {
+  --ascii-wght: 480;
+  background: var(--block-deep);
+  color: var(--block);
+}
+/* Photo covers are positives for a dark ground: always print light-on-deep when coloured. */
+.cover-print-block .ascii-frame[data-tone="photo"],
+.cover-print-deep .ascii-frame[data-tone="photo"],
+.group:is(:hover, :focus-visible) .cover-print .ascii-frame[data-tone="photo"] {
+  background: var(--block-deep);
+  color: var(--block);
+  --ascii-wght: 600;
+}
+.cover-print .ascii-frame[data-tone="photo"] {
+  background: var(--ascii-plate);
+  color: var(--ascii-plate-ink);
+  --ascii-wght: 420;
+}
+
+/* ── Type ──────────────────────────────────────────────────────────────── */
+/* One chunky family for every headline, sentence case, no swapped words. */
+@utility type-display-xl {
+  font-family: var(--font-sans-family);
+  font-size: clamp(3.25rem, 7.4vw + 1rem, 9rem);
+  font-weight: 800;
+  font-stretch: 90%;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+@utility type-display {
+  font-family: var(--font-sans-family);
+  font-size: clamp(2.6rem, 5vw + 1rem, 5.75rem);
+  font-weight: 800;
+  font-stretch: 90%;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+@utility type-title {
+  font-family: var(--font-sans-family);
+  font-size: clamp(2.25rem, 3.4vw + 1rem, 4.5rem);
+  font-weight: 800;
+  font-stretch: 92%;
+  font-variation-settings: "opsz" 80;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+@utility type-h2 {
+  font-family: var(--font-sans-family);
+  font-size: clamp(1.9rem, 2.4vw + 1rem, 3.25rem);
+  font-weight: 800;
+  font-stretch: 92%;
+  font-variation-settings: "opsz" 60;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  text-wrap: balance;
+}
+@utility type-h3 {
+  font-family: var(--font-sans-family);
+  font-size: 1.4rem;
+  font-weight: 720;
+  font-variation-settings: "opsz" 28;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+@utility type-lede {
+  font-family: var(--font-serif-family);
+  font-size: clamp(1.2rem, 0.8vw + 1rem, 1.5rem);
+  font-weight: 400;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 0;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+@utility type-serif-title {
+  font-family: var(--font-serif-family);
+  font-weight: 520;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+@utility type-annotation {
+  font-family: var(--font-serif-family);
+  font-style: italic;
+  font-weight: 420;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+}
+@utility type-label {
+  font-family: var(--font-sans-family);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  font-variation-settings: "opsz" 12;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+@utility type-numeral {
+  font-family: var(--font-sans-family);
+  font-size: clamp(5rem, 12vw, 11rem);
+  font-weight: 800;
+  font-stretch: 85%;
+  font-variation-settings: "opsz" 96;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+}
+@utility tabular {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────── */
+@utility frame {
+  width: 100%;
+  max-width: calc(var(--container-content) + 2 * clamp(16px, 4vw, 40px));
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+@utility frame-read {
+  width: 100%;
+  max-width: calc(var(--container-read) + 2 * clamp(16px, 4vw, 40px));
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Fit-to-width type: font-size in container units, so a word lands on both
+ * edges without JS or layout shift. --fit is the word's advance in em at the
+ * .fit-text settings, measured once per string in Chromium.
+ */
+.fit {
+  container-type: inline-size;
+  width: 100%;
+}
+.fit-text {
+  display: block;
+  font-size: calc(100cqi / var(--fit, 3));
+  font-weight: 800;
+  font-stretch: 88%;
+  font-variation-settings: "opsz" 96;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+/* Line mask reveal: page titles rise once on first paint. */
+.reveal-line {
+  display: block;
+  overflow: clip;
+  overflow-clip-margin: 0.08em;
+  padding-bottom: 0.04em;
+}
+.reveal-line > span {
+  display: inline-block;
+  animation: line-up 700ms var(--ease-wipe) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+}
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+/* ── Sticker mechanics ─────────────────────────────────────────────────── */
+/* Tilted card: straightens and lifts on hover, presses in on click. */
+.tilt-card {
+  --tilt: 0deg;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-rest);
+  transform: rotate(var(--tilt));
+  transition:
+    transform 420ms var(--ease-settle),
+    box-shadow 420ms var(--ease-settle);
+  will-change: transform;
+}
+@media (width < 25rem) {
+  .tilt-card {
+    --tilt: clamp(-1deg, var(--tilt), 1deg) !important;
+  }
+}
+.tilt-card:is(:hover, :focus-visible, :focus-within) {
+  transform: rotate(0deg) translate(-3px, -3px);
+  box-shadow: var(--shadow-lift);
+}
+.tilt-card:active {
+  transform: rotate(0deg) translate(3px, 3px);
+  box-shadow: var(--shadow-press);
+  transition-duration: 90ms;
+  transition-timing-function: ease-out;
+}
+
+/* Buttons: ink outline, hard shadow, press in on click. */
+.pressable {
+  box-shadow: var(--shadow-small);
+  transition:
+    transform 260ms var(--ease-settle),
+    background-color 160ms ease,
+    box-shadow 260ms var(--ease-settle);
+}
+.pressable:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--sticker-shade);
+}
+.pressable:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--sticker-shade);
+  transition-duration: 90ms;
+}
+.pressable-flat {
+  transition:
+    transform 260ms var(--ease-settle),
+    background-color 160ms ease;
+}
+.pressable-flat:active {
+  transform: scale(0.96);
+  transition-duration: 90ms;
+}
+
+/* ── Hover floods the row ──────────────────────────────────────────────── */
+.wipe {
+  position: relative;
+  isolation: isolate;
+}
+.wipe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--block);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 200ms var(--ease-wipe);
+  pointer-events: none;
+}
+.wipe > * {
+  position: relative;
+}
+.wipe:hover::before,
+.wipe:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition-duration: 280ms;
+}
+.wipe:hover,
+.wipe:focus-visible {
+  --focus: var(--block-deep);
+  color: var(--on-block);
+}
+.wipe:hover .wipe-soft,
+.wipe:focus-visible .wipe-soft {
+  color: var(--on-block);
+}
+
+/*
+ * Scribbles draw once when they arrive. The stroke is revealed by a mask
+ * that sweeps along the mark (a conic sweep for the circle), so stroke width
+ * stays even at any size.
+ */
+@property --draw {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+.scribble {
+  --draw: 100%;
+  mask-image: linear-gradient(
+    to right,
+    #000 var(--draw),
+    transparent calc(var(--draw) + 0.5%)
+  );
+  transition: --draw 750ms var(--ease-draw) var(--scribble-delay, 200ms);
+}
+.scribble[data-mark="circle"] {
+  mask-image: conic-gradient(
+    from 330deg,
+    #000 var(--draw),
+    transparent calc(var(--draw) + 0.5%)
+  );
+}
+.scribble path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+:root[data-js] .scribble[data-draw]:not([data-drawn]) {
+  --draw: 0%;
+}
+/* The static 404 has no scripts, so its mark draws with a keyframe instead. */
+.scribble-css {
+  animation: draw-in 1000ms var(--ease-draw) 350ms both;
+}
+@keyframes draw-in {
+  from {
+    --draw: 0%;
+  }
+  to {
+    --draw: 100%;
+  }
+}
+
+/* Book spines: hover or tap pulls one off the shelf. */
+.spine {
+  transform: rotate(var(--lean, 0deg));
+  transform-origin: bottom right;
+  transition: transform 420ms var(--ease-settle);
+}
+.spine:is(:hover, :focus-visible, [data-popup-open]) {
+  transform: translateY(-22px) rotate(0deg);
+}
+.spine-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ToC marks fill as you read. */
+.toc-dot {
+  transition:
+    background-color 300ms ease,
+    transform 400ms var(--ease-pop);
+}
+.toc-link[data-active] .toc-dot {
+  background: var(--block);
+  transform: scale(1.35);
+}
+.toc-link[data-read] .toc-dot {
+  background: var(--block);
+}
+
+/* ── Motion ────────────────────────────────────────────────────────────── */
+:root {
+  --dur-instant: 90ms;
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-slow: 480ms;
+  --dur-reveal: 900ms;
+  --rise: 10px;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rise: 0px;
+    --dur-slow: 1ms;
+    --dur-reveal: 1ms;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+  .tilt-card,
+  .spine,
+  .pressable,
+  .wipe::before,
+  .ascii-frame {
+    transition: opacity 120ms ease !important;
+  }
+  .reveal-line > span {
+    animation: fade-in 150ms linear both;
+  }
+  .scribble,
+  .scribble-css {
+    --draw: 100% !important;
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Router page transitions: a short cross-fade. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 160ms var(--ease-out-quint) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 260ms var(--ease-out-quint) both;
+  }
+  ::view-transition-group(*) {
+    animation-duration: 420ms;
+    animation-timing-function: var(--ease-out-quint);
+  }
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ── Prose ─────────────────────────────────────────────────────────────── */
+/* Reading surfaces are always paper and ink, set in Fraunces. */
+.prose-site {
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-lead: var(--ink-soft);
+  --tw-prose-links: var(--ink);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-counters: var(--ink-soft);
+  --tw-prose-bullets: var(--ink);
+  --tw-prose-hr: var(--ink);
+  --tw-prose-quotes: var(--ink);
+  --tw-prose-quote-borders: transparent;
+  --tw-prose-captions: var(--ink-soft);
+  --tw-prose-kbd: var(--ink);
+  --tw-prose-kbd-shadows: var(--line-strong);
+  --tw-prose-code: var(--ink);
+  --tw-prose-pre-code: var(--code-foreground);
+  --tw-prose-pre-bg: var(--code-surface);
+  --tw-prose-th-borders: var(--ink);
+  --tw-prose-td-borders: var(--line);
+  font-family: var(--font-serif-family);
+  font-size: 1.1875rem;
+  font-weight: 380;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 0;
+  line-height: 1.65;
+}
+.prose-site :where(p, li) {
+  text-wrap: pretty;
+}
+.prose-site :where(h2, h3, h4):not(:where(.not-prose *)) {
+  font-family: var(--font-sans-family);
+  font-stretch: 92%;
+  letter-spacing: -0.03em;
+  scroll-margin-top: 6rem;
+}
+.prose-site :where(h2):not(:where(.not-prose *)) {
+  font-size: 1.9em;
+  font-weight: 800;
+  line-height: 1.05;
+  margin-top: 2.2em;
+}
+.prose-site :where(h3):not(:where(.not-prose *)) {
+  font-size: 1.3em;
+  font-weight: 720;
+}
+.prose-site :where(h2, h3, h4) a {
+  text-decoration: none;
+  font-weight: inherit;
+}
+.prose-site :where(a):not(:where(h2 a, h3 a, h4 a, .not-prose *)) {
+  font-weight: 450;
+  text-decoration-line: underline;
+  text-decoration-color: var(--block-text);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-thickness 160ms var(--ease-out-quint);
+}
+.prose-site :where(a):not(:where(h2 a, h3 a, h4 a, .not-prose *)):hover {
+  text-decoration-thickness: 0.4em;
+  text-decoration-skip-ink: none;
+}
+.prose-site :where(strong) {
+  font-weight: 620;
+}
+/* Pull quotes: chunky type in the piece's colour, never a side bar. */
+.prose-site :where(blockquote):not(:where(.not-prose *)) {
+  font-family: var(--font-sans-family);
+  font-style: normal;
+  font-size: clamp(1.5rem, 1.6vw + 1rem, 2.1rem);
+  font-weight: 750;
+  font-stretch: 92%;
+  font-variation-settings: "opsz" 48;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--block-text);
+  border: 0;
+  padding: 0;
+  margin: 1.6em 0;
+  quotes: none;
+}
+.prose-site :where(blockquote p:first-of-type)::before,
+.prose-site :where(blockquote p:last-of-type)::after {
+  content: none;
+}
+.prose-site :where(code):not(:where(pre code)) {
+  font-family: var(--font-mono-family);
+  font-size: 0.82em;
+  font-weight: 500;
+  background: var(--paper-sunk);
+  border-radius: 0.35em;
+  padding: 0.12em 0.4em;
+}
+.prose-site :where(code):not(:where(pre code))::before,
+.prose-site :where(code):not(:where(pre code))::after {
+  content: none;
+}
+.prose-site :where(pre) {
+  font-family: var(--font-mono-family);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  border-radius: var(--radius-md);
+  margin: 0;
+}
+.prose-site :where(img):not(:where(.not-prose *)) {
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--ink);
+}
+.prose-site :where(hr) {
+  border: 0;
+  height: 2px;
+  background: var(--ink);
+}
+.prose-site :where(table) {
+  font-family: var(--font-sans-family);
+  font-size: 0.85em;
+}
+.prose-site :where(th) {
+  font-weight: 700;
+}
+[data-rehype-pretty-code-figure] code [data-line] {
+  color: var(--shiki-foreground);
+}
+
+/* Without JavaScript, entrance animations never run: show everything as-is. */
+:root:not([data-js]) .settle {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ── Command palette and toasts, in sticker dress ────────────────────── */
+[data-slot="dialog-content"] [data-slot="command-input-wrapper"] {
+  padding: 0.25rem 0.25rem 0.5rem;
+}
+[data-slot="dialog-content"] [data-slot="input-group"] {
+  height: 3.25rem !important;
+  border: 2px solid var(--ink);
+  border-radius: 9999px !important;
+  background: var(--paper);
+  padding-inline: 0.5rem;
+}
+[data-slot="dialog-content"] [data-slot="command-input"] {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+[data-slot="dialog-content"] [data-slot="command-input"]::placeholder {
+  color: var(--ink-faint);
+}
+[data-slot="dialog-content"] [data-slot="command-input"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+[data-slot="dialog-content"] [cmdk-group-heading] {
+  font-size: 0.8125rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+  padding: 0.75rem 0.625rem 0.375rem;
+}
+[data-slot="toast"] {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-rest);
+}
+
+/*
+ * Books pages keep their authored HTML (a flat run of title, cover, author,
+ * review). A dense grid pins each cover to the left of its own text.
+ */
+.prose-site .book-container {
+  display: grid;
+  grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  column-gap: 1.5rem;
+  @media (width >= 40rem) {
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+    column-gap: 2.75rem;
+  }
+}
+.prose-site .book-container > h3 {
+  grid-column: 2;
+  margin: 3.5rem 0 0.25rem;
+  font-family: var(--font-sans-family);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
+}
+.prose-site .book-container > .book-cover {
+  grid-column: 1;
+  min-width: 0;
+  width: 100%;
+  grid-row: span 3;
+  align-self: start;
+  margin-top: 3.5rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-rest);
+  padding: 8px;
+  transform: rotate(-2deg);
+  transition:
+    transform 420ms var(--ease-settle),
+    box-shadow 420ms var(--ease-settle);
+}
+.prose-site .book-container > .book-cover:nth-of-type(2n) {
+  transform: rotate(1.75deg);
+}
+.prose-site .book-container > .book-cover:hover {
+  transform: rotate(0deg) translate(-3px, -3px);
+  box-shadow: var(--shadow-lift);
+}
+.prose-site .book-container > .book-cover .ascii-frame {
+  --ascii-wght: 560;
+  border-radius: var(--radius-sm);
+  background: var(--block);
+  color: var(--block-deep);
+}
+.prose-site .book-container > .book-cover .ascii-frame[data-tone="photo"] {
+  background: var(--ascii-plate);
+  color: var(--ascii-plate-ink);
+  --ascii-wght: 460;
+}
+.prose-site .book-container > .author {
+  grid-column: 2;
+  margin: 0;
+  font-family: var(--font-sans-family);
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+.prose-site .book-container > .review {
+  grid-column: 2;
+  margin: 1rem 0 0;
+  align-self: start;
+  font-family: var(--font-serif-family);
+  font-size: 1.1rem;
+  font-weight: 380;
+  font-stretch: 100%;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--ink);
+}
+/* Covers inside prose keep the ASCII grid's own metrics, not the prose <pre> ones. */
+.prose-site .ascii-frame > .ascii-art {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: calc(100cqi / (var(--ascii-cols) * var(--ascii-adv)));
+  line-height: calc(var(--ascii-adv) * 2);
+}

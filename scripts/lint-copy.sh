@@ -9,7 +9,7 @@ cd "$(dirname "$0")/.."
 if [ $# -gt 0 ]; then
   files=("$@")
 else
-  mapfile -t files < <(find content $( [ -d data ] && echo data ) -type f \( -name '*.md' -o -name '*.yaml' \) | sort)
+  mapfile -t files < <(find content $( [ -d data ] && echo data ) -type f \( -name '*.md' -o -name '*.mdx' -o -name '*.yaml' \) | sort)
 fi
 
 # "pattern :: message". Matched case-insensitively against prose lines.

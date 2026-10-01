@@ -1,13 +1,14 @@
 .env
-# Ignore Hugo generated files
-public/
-resources/
-.hugo_build.lock
-.nojekyll
 .playwright-cli/
-isabelFastRender/
-isableFastRender/
 output/
 
 # Local-only source material (client screenshots etc.), never published
 private/
+
+# React build and generated contracts
+node_modules/
+dist/
+.output/
+.tanstack/
+.content-collections/
+src/routeTree.gen.ts

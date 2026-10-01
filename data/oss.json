@@ -1,17 +1,23 @@
 {
-  "generated": "2026-09-25",
-  "merged": 170,
+  "generated": "2026-09-30",
+  "merged": 185,
   "projects": [
     {
       "fork": false,
       "language": "Rust",
       "name": "fallow",
       "repo": "fallow-rs/fallow",
-      "stars": 4881,
+      "stars": 4963,
       "url": "https://github.com/fallow-rs/fallow",
       "blurb": "Dead-code and dependency analysis for TypeScript and JavaScript",
-      "merged": 33,
+      "merged": 34,
       "prs": [
+        {
+          "title": "feat: add per-package changedSince baselines",
+          "url": "https://github.com/fallow-rs/fallow/pull/2969",
+          "number": 2969,
+          "merged": "2026-09-30"
+        },
         {
           "title": "fix(graph): resolve effective barrel exports",
           "url": "https://github.com/fallow-rs/fallow/pull/2210",
@@ -217,11 +223,17 @@
       "language": "Go",
       "name": "pyscn",
       "repo": "ludo-technologies/pyscn",
-      "stars": 1083,
+      "stars": 1085,
       "url": "https://github.com/ludo-technologies/pyscn",
       "blurb": "Code-quality analyzer for Python, written in Go",
-      "merged": 31,
+      "merged": 32,
       "prs": [
+        {
+          "title": "fix(lcom): connect Python protocol dispatch",
+          "url": "https://github.com/ludo-technologies/pyscn/pull/824",
+          "number": 824,
+          "merged": "2026-09-30"
+        },
         {
           "title": "Build aggregate analysis from one project snapshot",
           "url": "https://github.com/ludo-technologies/pyscn/pull/704",
@@ -415,11 +427,29 @@
       "language": "C++",
       "name": "libtorrent",
       "repo": "arvidn/libtorrent",
-      "stars": 6073,
+      "stars": 6076,
       "url": "https://github.com/arvidn/libtorrent",
       "blurb": "The BitTorrent library under qBittorrent and Deluge",
-      "merged": 22,
+      "merged": 25,
       "prs": [
+        {
+          "title": "Handle rooted redirect references",
+          "url": "https://github.com/arvidn/libtorrent/pull/8822",
+          "number": 8822,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Optimize rare partial piece selection",
+          "url": "https://github.com/arvidn/libtorrent/pull/8918",
+          "number": 8918,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Fix sparse file copies on Windows",
+          "url": "https://github.com/arvidn/libtorrent/pull/8917",
+          "number": 8917,
+          "merged": "2026-09-27"
+        },
         {
           "title": "Fix redirects with query and fragment paths",
           "url": "https://github.com/arvidn/libtorrent/pull/8813",
@@ -559,7 +589,7 @@
       "language": "Python",
       "name": "calibre",
       "repo": "kovidgoyal/calibre",
-      "stars": 26009,
+      "stars": 26046,
       "url": "https://github.com/kovidgoyal/calibre",
       "blurb": "The e-book manager most people use",
       "merged": 22,
@@ -703,11 +733,35 @@
       "language": "Python",
       "name": "kitty",
       "repo": "kovidgoyal/kitty",
-      "stars": 35068,
+      "stars": 35128,
       "url": "https://github.com/kovidgoyal/kitty",
       "blurb": "GPU-accelerated terminal emulator",
-      "merged": 18,
+      "merged": 22,
       "prs": [
+        {
+          "title": "Preserve new hyperlinks during automatic collection",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10566",
+          "number": 10566,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Fix session expansion when option values match the command",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10558",
+          "number": 10558,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Preserve transparency across launch color overrides",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10557",
+          "number": 10557,
+          "merged": "2026-09-27"
+        },
+        {
+          "title": "ssh kitten: Preserve SSH option values after --kitten",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10553",
+          "number": 10553,
+          "merged": "2026-09-27"
+        },
         {
           "title": "Fix session discovery with goto_session options",
           "url": "https://github.com/kovidgoyal/kitty/pull/10419",
@@ -823,11 +877,35 @@
       "language": "Shell",
       "name": "Mole",
       "repo": "tw93/Mole",
-      "stars": 68398,
+      "stars": 68851,
       "url": "https://github.com/tw93/Mole",
       "blurb": "Command-line cleanup and maintenance tool for macOS",
-      "merged": 17,
+      "merged": 21,
       "prs": [
+        {
+          "title": "Keep LaunchAgent uninstall tied to the selected app",
+          "url": "https://github.com/tw93/Mole/pull/1625",
+          "number": 1625,
+          "merged": "2026-09-29"
+        },
+        {
+          "title": "Fix status retry cadence after collector failures",
+          "url": "https://github.com/tw93/Mole/pull/1623",
+          "number": 1623,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Bound installer discovery and verify confirmed removals",
+          "url": "https://github.com/tw93/Mole/pull/1621",
+          "number": 1621,
+          "merged": "2026-09-27"
+        },
+        {
+          "title": "Preserve partial scan coverage in analyze",
+          "url": "https://github.com/tw93/Mole/pull/1618",
+          "number": 1618,
+          "merged": "2026-09-27"
+        },
         {
           "title": "Fix purge cancellation and speed up project navigation",
           "url": "https://github.com/tw93/Mole/pull/1545",
@@ -937,7 +1015,7 @@
       "language": "Python",
       "name": "docling",
       "repo": "docling-project/docling",
-      "stars": 67908,
+      "stars": 68225,
       "url": "https://github.com/docling-project/docling",
       "blurb": "Document conversion for AI pipelines, started at IBM Research",
       "merged": 10,
@@ -1009,11 +1087,23 @@
       "language": "C++",
       "name": "qBittorrent",
       "repo": "qbittorrent/qBittorrent",
-      "stars": 40295,
+      "stars": 40477,
       "url": "https://github.com/qbittorrent/qBittorrent",
       "blurb": "Open-source BitTorrent client",
-      "merged": 6,
+      "merged": 8,
       "prs": [
+        {
+          "title": "Make RSS settings warning clickable",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/23917",
+          "number": 23917,
+          "merged": "2026-09-30"
+        },
+        {
+          "title": "Make disabled speed graphs warning clickable",
+          "url": "https://github.com/qbittorrent/qBittorrent/pull/24023",
+          "number": 24023,
+          "merged": "2026-09-30"
+        },
         {
           "title": "Fix Comment area background mismatch in Add New Torrent dialog",
           "url": "https://github.com/qbittorrent/qBittorrent/pull/23916",
@@ -1093,7 +1183,7 @@
       "language": "Python",
       "name": "django-health-check",
       "repo": "codingjoe/django-health-check",
-      "stars": 1424,
+      "stars": 1425,
       "url": "https://github.com/codingjoe/django-health-check",
       "blurb": "Health checks for Django apps",
       "merged": 3,
@@ -1123,7 +1213,7 @@
       "language": "TypeScript",
       "name": "evlog",
       "repo": "evloghq/evlog",
-      "stars": 1871,
+      "stars": 1876,
       "url": "https://github.com/evloghq/evlog",
       "blurb": "Structured, one-event-per-request logging",
       "merged": 2,
@@ -1165,7 +1255,7 @@
       "language": "JavaScript",
       "name": "fallow-skills",
       "repo": "fallow-rs/fallow-skills",
-      "stars": 124,
+      "stars": 126,
       "url": "https://github.com/fallow-rs/fallow-skills",
       "blurb": "Agent skills for working with Fallow",
       "merged": 1,

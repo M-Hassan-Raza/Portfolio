@@ -1,0 +1,16 @@
+node_modules
+dist
+.output
+.tanstack
+.content-collections
+src/routeTree.gen.ts
+pnpm-lock.yaml
+/content
+assets
+static
+private
+output
+.playwright-cli
+.claude
+
+data

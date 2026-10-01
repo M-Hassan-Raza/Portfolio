@@ -1,0 +1,38 @@
+---
+kind: project
+path: /projects/portfolio-site/
+title: mhassan.dev — This Portfolio
+description: TanStack Start, React, typed MDX content, accessible controls, and static GitHub Pages output. How the site is built.
+tier: early
+toc: true
+publishedAt: 2025-02-10T00:00:00.000Z
+tags:
+  - Portfolio
+  - Hugo
+  - PaperMod
+categories:
+  - Projects
+---
+This portfolio uses TanStack Start, React, and TypeScript. The build produces static HTML for GitHub Pages, so hosting requires no application server.
+
+## Application and Content
+
+TanStack Router owns navigation, route loaders, page metadata, and search parameters. Content Collections validates authored MDX and shared profile data against strict Zod schemas, then generates TypeScript types. Profile facts have one owner in `data/profile.yaml`.
+
+Page components consume those contracts directly. Base UI based shadcn controls provide accessible buttons and inputs. Search uses Fuse over the published content catalog, with the query stored in the URL.
+
+## Static Output
+
+TanStack Start discovers routes and follows internal links during prerendering. The output includes authored pages and topic collections. Build scripts generate feeds, sitemap, redirects, the search index, and a standalone 404 using the same catalog.
+
+Verification checks the published URL contract, page content, metadata, structured data, internal links, feeds, and sitemap before deployment.
+
+## Comments and Analytics
+
+Giscus maps page paths to GitHub Discussions. Umami provides page-view analytics. Both integrations retain their existing site configuration.
+
+## Development and Publishing
+
+`pnpm dev` generates content contracts and starts Vite. `pnpm verify` checks types, lint, formatting, copy, production output, and public URL contracts. The GitHub Actions workflow installs the locked dependencies, runs verification, and publishes `dist/client` on pushes to `main`.
+
+The earlier version used Hugo and PaperMod. Their templates, configuration, theme submodule, and runtime have been removed. Existing public paths remain part of the site's URL contract.
