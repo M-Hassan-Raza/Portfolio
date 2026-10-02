@@ -7,6 +7,8 @@
 @import "@fontsource-variable/bricolage-grotesque/standard.css";
 @import "@fontsource-variable/fraunces/full.css";
 @import "@fontsource-variable/fraunces/full-italic.css";
+/* Only downloaded when a visitor turns on the hyperlegible font. */
+@import "@fontsource-variable/atkinson-hyperlegible-next/index.css";
 
 :root {
   --font-sans-family:
@@ -83,6 +85,17 @@
   --overlay: oklch(0.19 0.008 55 / 0.55);
   /* The footer is always ink; at night it needs a rule to part from the page. */
   --footer-rule: var(--ink-fixed);
+
+  /* The terminal and vim plate: always ink, whatever the theme. */
+  --term-plate: var(--ink-fixed);
+  --term-raised: oklch(0.25 0.01 55);
+  --term-ink: var(--paper-fixed);
+  --term-soft: oklch(0.7 0.012 78);
+  --term-faint: oklch(0.48 0.01 62);
+  --term-prompt: oklch(0.8 0.17 152);
+  --term-error: oklch(0.72 0.19 33);
+  --term-accent: oklch(0.9 0.16 102);
+  --term-link: oklch(0.76 0.13 272);
 
   /* ── shadcn semantic names, bound to paper and ink ─────────────────── */
   --background: var(--paper);
@@ -294,4 +307,36 @@
   --sticker-shade: var(--ink-fixed);
   --ascii-blend: multiply;
   --ink-tone: oklch(0.58 0.012 60);
+}
+
+/*
+ * Reading settings (src/lib/preferences.ts). More contrast folds the soft
+ * greys into full ink and darkens hairlines; the OS can ask for it too.
+ */
+:root[data-contrast="more"] {
+  --ink-soft: var(--ink);
+  --ink-faint: var(--ink);
+  --line: var(--line-strong);
+}
+:root[data-contrast="more"] :is(.surface-block, .print-scope) {
+  --ink-soft: var(--ink-fixed);
+  --ink-faint: var(--ink-fixed);
+}
+@media (prefers-contrast: more) {
+  :root:not([data-contrast]) {
+    --ink-soft: var(--ink);
+    --ink-faint: var(--ink);
+    --line: var(--line-strong);
+  }
+  :root:not([data-contrast]) :is(.surface-block, .print-scope) {
+    --ink-soft: var(--ink-fixed);
+    --ink-faint: var(--ink-fixed);
+  }
+}
+
+/* Atkinson Hyperlegible replaces both the grotesque and the serif. */
+:root[data-font="legible"] {
+  --font-sans-family:
+    "Atkinson Hyperlegible Next Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif-family: var(--font-sans-family);
 }
