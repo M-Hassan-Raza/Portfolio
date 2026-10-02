@@ -1,0 +1,1 @@
+import{j as o,a6 as t}from"./index-Bc8VUTJt.js";import{a as r}from"./taxonomies-Cf3Zo2qE.js";import"./entry-list-CY2dI5mL.js";import"./section-heading-Dux5_MJk.js";function m(){return o.jsx(r,{topic:t.useLoaderData()})}export{m as component};

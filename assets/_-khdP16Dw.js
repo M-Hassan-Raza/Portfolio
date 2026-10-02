@@ -1,1 +1,0 @@
-import{j as o,e as t}from"./index-CNa_Je9G.js";import{D as e}from"./document-view-DMEktKQa.js";import"./section-heading-DaNQw8eV.js";import"./stat-block-KpkWWwI7.js";import"./entry-list-CYDsF72b.js";function p(){return o.jsx(e,{document:t.useLoaderData()})}export{p as component};
