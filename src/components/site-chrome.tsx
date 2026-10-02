@@ -1,6 +1,14 @@
 import { page, blockForSection } from "@/lib/studio"
 import { Link, useRouterState } from "@tanstack/react-router"
-import { ArrowUp, ArrowUpRight, Menu, Search, X } from "lucide-react"
+import {
+  ArrowUp,
+  ArrowUpRight,
+  BookOpenText,
+  Keyboard,
+  Menu,
+  Search,
+  X,
+} from "lucide-react"
 import { motion } from "motion/react"
 import { useState } from "react"
 import { profile } from "#content"
@@ -8,6 +16,7 @@ import type { Surface } from "@/lib/studio"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./system/theme-toggle"
 import { useCommandPalette } from "./system/command-palette"
+import { useQuirks } from "./system/quirks"
 import { MenuSheet, MenuSheetClose } from "./system/overlays"
 import { PillAnchor, PillLink } from "./studio/pill"
 import { springs } from "./studio/motion"
@@ -229,6 +238,42 @@ const footerGroups: {
   },
 ]
 
+/** Reading settings, the shortcut sheet and the way back up. */
+function FooterTools() {
+  const { openReadingSettings, openShortcuts } = useQuirks()
+  return (
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-semibold">
+      <button
+        type="button"
+        onClick={openReadingSettings}
+        className="inline-flex cursor-pointer items-center gap-1.5 hover:underline"
+      >
+        <BookOpenText aria-hidden="true" className="size-4" />
+        Reading settings
+      </button>
+      <button
+        type="button"
+        onClick={openShortcuts}
+        aria-keyshortcuts="?"
+        className="hidden cursor-pointer items-center gap-1.5 hover:underline md:inline-flex"
+      >
+        <Keyboard aria-hidden="true" className="size-4" />
+        Shortcuts
+      </button>
+      <a
+        href="#main-content"
+        className="group inline-flex items-center gap-1.5 hover:underline"
+      >
+        Back to top
+        <ArrowUp
+          aria-hidden="true"
+          className="size-4 transition-transform duration-300 ease-(--ease-pop) group-hover:-translate-y-1"
+        />
+      </a>
+    </div>
+  )
+}
+
 export function SiteFooter() {
   const pathname = useActivePath()
   const section = blockForSection(pathname)
@@ -286,16 +331,7 @@ export function SiteFooter() {
       </div>
       <div className="frame flex flex-wrap items-center justify-between gap-4 text-sm">
         <p>Made in Lahore. Set in Bricolage Grotesque and Fraunces.</p>
-        <a
-          href="#main-content"
-          className="group inline-flex items-center gap-1.5 font-semibold hover:underline"
-        >
-          Back to top
-          <ArrowUp
-            aria-hidden="true"
-            className="size-4 transition-transform duration-300 ease-(--ease-pop) group-hover:-translate-y-1"
-          />
-        </a>
+        <FooterTools />
       </div>
     </footer>
   )

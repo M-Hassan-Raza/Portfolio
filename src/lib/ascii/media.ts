@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react"
+import { usePreferences } from "@/lib/preferences"
 
 function mediaStore(query: string, serverValue: boolean) {
   const subscribe = (onChange: () => void) => {
@@ -15,10 +16,13 @@ function mediaStore(query: string, serverValue: boolean) {
 }
 
 /** Server snapshot says "reduce" so nothing animates until the client has actually checked. */
-export const usePrefersReducedMotion = mediaStore(
-  "(prefers-reduced-motion: reduce)",
-  true
-)
+const useOsReducedMotion = mediaStore("(prefers-reduced-motion: reduce)", true)
+
+/** The OS setting, or the site-level "Reduce motion" preference. */
+export function usePrefersReducedMotion() {
+  const os = useOsReducedMotion()
+  return usePreferences().reduceMotion || os
+}
 export const useFinePointer = mediaStore(
   "(hover: hover) and (pointer: fine)",
   false

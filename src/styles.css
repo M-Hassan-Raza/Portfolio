@@ -99,6 +99,7 @@
   --color-tomato: var(--tomato);
   --color-ultramarine: var(--ultramarine);
   --color-grass: var(--grass);
+  --color-grass-text: var(--grass-text);
   --color-lemon: var(--lemon);
   --color-violet: var(--violet);
   --color-pink: var(--pink);
@@ -161,6 +162,15 @@
   --color-ascii-faint: var(--ascii-faint);
   --color-ascii-plate: var(--ascii-plate);
   --color-ascii-plate-ink: var(--ascii-plate-ink);
+  --color-term-plate: var(--term-plate);
+  --color-term-raised: var(--term-raised);
+  --color-term-ink: var(--term-ink);
+  --color-term-soft: var(--term-soft);
+  --color-term-faint: var(--term-faint);
+  --color-term-prompt: var(--term-prompt);
+  --color-term-error: var(--term-error);
+  --color-term-accent: var(--term-accent);
+  --color-term-link: var(--term-link);
 
   /* Cards and buttons are rounded; blocks never are. */
   --radius-xs: 0.375rem;
@@ -758,6 +768,189 @@
   from {
     opacity: 0;
   }
+}
+
+/* ── Reading preferences (src/lib/preferences.ts) ─────────────────────── */
+/* Text size scales the root, so every rem on the site grows with it. */
+:root[data-text="large"] {
+  font-size: 112.5%;
+}
+:root[data-text="larger"] {
+  font-size: 125%;
+}
+
+/* The site-level "Reduce motion" does what the OS setting does, and more. */
+:root[data-motion="reduce"] {
+  --rise: 0px;
+  --dur-slow: 1ms;
+  --dur-reveal: 1ms;
+  scroll-behavior: auto;
+}
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+:root[data-motion="reduce"]::view-transition-group(*),
+:root[data-motion="reduce"]::view-transition-old(root),
+:root[data-motion="reduce"]::view-transition-new(root) {
+  animation: none !important;
+}
+:root[data-motion="reduce"]
+  .ascii-frame[data-reveal]:not([data-fx])
+  > .ascii-art {
+  visibility: visible;
+  animation: none;
+}
+:root[data-motion="reduce"] :is(.scribble, .scribble-css) {
+  --draw: 100% !important;
+}
+
+:root[data-links="underline"] a:not([data-slot="pill"]) {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+
+/* WCAG 1.4.12 text spacing: the minimums, rounded up. */
+:root[data-spacing="wide"] :where(p, li, dd, blockquote, figcaption) {
+  line-height: 1.9 !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.16em !important;
+}
+:root[data-spacing="wide"] .prose-site :where(p) {
+  margin-block: 0 2em;
+}
+
+/* Layout debugger from the palette. Not saved; a reload clears it. */
+:root[data-debug="outline"] [data-app-root] * {
+  outline: 1px solid var(--tomato) !important;
+  outline-offset: -1px;
+}
+:root[data-debug="outline"] [data-app-root] *:nth-child(3n + 1) {
+  outline-color: var(--ultramarine) !important;
+}
+:root[data-debug="outline"] [data-app-root] *:nth-child(3n + 2) {
+  outline-color: var(--grass) !important;
+}
+
+/* While an easter egg throws the page around, keep the mess on screen. */
+:root[data-quirk] [data-app-root] {
+  overflow: clip;
+}
+
+/* ── Easter egg mechanics (src/components/quirks) ──────────────────────── */
+/* 1337 mode: headings slip sideways in two block colours for a moment. */
+:root[data-quirk="leet"] :is(h1, h2, h3) {
+  animation: glitch 2.4s steps(1) infinite;
+}
+@keyframes glitch {
+  0%,
+  100% {
+    text-shadow: none;
+    translate: 0;
+  }
+  4% {
+    text-shadow:
+      3px 0 var(--tomato),
+      -3px 0 var(--ultramarine);
+    translate: -2px 0;
+  }
+  8% {
+    text-shadow:
+      -2px 0 var(--grass),
+      2px 0 var(--pink);
+    translate: 2px 0;
+  }
+  12% {
+    text-shadow: none;
+    translate: 0;
+  }
+  52% {
+    text-shadow:
+      4px 0 var(--ultramarine),
+      -4px 0 var(--tomato);
+    translate: 3px 0;
+  }
+  55% {
+    text-shadow: none;
+    translate: 0;
+  }
+}
+
+/* A terminal caret: solid, blinking, square. */
+.caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.15em;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: caret-blink 1.05s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Steam off a teapot: wavy strokes that rise and fade, staggered. */
+.steam {
+  stroke-dasharray: 120;
+  animation: steam 2.2s var(--ease-out-quint) infinite;
+}
+.steam:nth-child(2) {
+  animation-delay: 0.45s;
+}
+.steam:nth-child(3) {
+  animation-delay: 0.9s;
+}
+@keyframes steam {
+  0% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+    translate: 0 8px;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+    translate: 0 -18px;
+  }
+}
+
+/* Old CRT switching off: squash to a line, then to a dot. */
+.crt-off {
+  animation: crt-off 650ms var(--ease-in-out-quint) forwards;
+}
+@keyframes crt-off {
+  0% {
+    scale: 1 1;
+    filter: brightness(1);
+  }
+  55% {
+    scale: 1 0.004;
+    filter: brightness(3);
+  }
+  100% {
+    scale: 0 0.004;
+    filter: brightness(6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-quirk="leet"] :is(h1, h2, h3),
+  .caret,
+  .steam {
+    animation: none;
+  }
+}
+:root[data-motion="reduce"] :is(h1, h2, h3, .caret, .steam) {
+  animation: none !important;
 }
 
 /* ── Prose ─────────────────────────────────────────────────────────────── */

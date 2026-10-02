@@ -7,6 +7,7 @@ import { SiteProviders } from "@/components/system/providers"
 import { NotFoundView } from "@/components/views/not-found"
 import { ContentBody } from "@/components/content/body"
 import { requireDocument } from "@/lib/content/catalog"
+import { preferencesBootScript } from "@/lib/preferences"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRoute({
@@ -46,10 +47,11 @@ function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Lets CSS tell "JS will run" from no-JS before first paint, so ASCII reveals never flash. */}
+        {/* Lets CSS tell "JS will run" from no-JS before first paint, so ASCII reveals never flash.
+            Saved reading settings land in the same tick, so they never flash either. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.dataset.js=''",
+            __html: `document.documentElement.dataset.js='';${preferencesBootScript}`,
           }}
         />
         <HeadContent />
@@ -63,7 +65,7 @@ function RootDocument({ children }: { children: ReactNode }) {
           disableTransitionOnChange
         >
           <SiteProviders>
-            <div className="isolate flex min-h-dvh flex-col">
+            <div data-app-root className="isolate flex min-h-dvh flex-col">
               <a
                 href="#main-content"
                 className="sr-only rounded-full focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-skip-link focus:bg-ink focus:px-5 focus:py-3 focus:font-semibold focus:text-paper"

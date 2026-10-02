@@ -1,16 +1,34 @@
 import { useNavigate } from "@tanstack/react-router"
 import Fuse from "fuse.js"
 import {
+  ArrowDownToLine,
   ArrowUpRight,
+  ArrowUpToLine,
   AtSign,
+  BookOpenText,
+  Code,
+  Contrast,
+  Dices,
   FileText,
   FolderGit2,
   GitPullRequest,
+  Keyboard,
   Link2,
   Moon,
+  Palette,
+  Pause,
+  Printer,
   Rss,
+  ScanLine,
   Sun,
+  SquareTerminal,
+  TextCursorInput,
+  Type,
+  Underline,
+  ZoomIn,
+  ZoomOut,
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import {
   createContext,
@@ -39,10 +57,19 @@ import {
 } from "@/lib/content/search"
 import type { SearchEntry } from "@/lib/content/search"
 import { yearOf } from "@/lib/format"
+import {
+  stepTextSize,
+  toggleCopy,
+  togglePreference,
+  usePreferences,
+} from "@/lib/preferences"
+import type { Toggle } from "@/lib/preferences"
+import { eggForCommand } from "@/lib/quirks"
 import { mainNavigation, footerNavigation } from "@/lib/site"
 import { blockFor, blockForSection } from "@/lib/studio"
 import type { Surface } from "@/lib/studio"
 import { useCopy } from "./copy"
+import { QuirksProvider, useQuirks } from "./quirks"
 
 type PaletteState = { open: boolean; setOpen: (open: boolean) => void }
 const PaletteContext = createContext<PaletteState | null>(null)
@@ -77,24 +104,60 @@ const kindIcon = {
   "pull-request": GitPullRequest,
 } as const
 
-function isTypingTarget(target: EventTarget | null) {
-  return (
-    target instanceof HTMLElement &&
-    (target.isContentEditable ||
-      ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))
+const readable = searchEntries.filter(
+  (entry) => entry.kind === "essay" || entry.kind === "project"
+)
+
+const sourceRepo = "https://github.com/M-Hassan-Raza/Portfolio"
+
+const groups = ["Actions", "Reading", "Tools"] as const
+
+type PaletteCommand = {
+  id: string
+  group: (typeof groups)[number]
+  label: string
+  keywords: string
+  icon: LucideIcon
+  meta?: string
+  run: () => void
+}
+
+const toggleIcon: Record<Toggle, LucideIcon> = {
+  reduceMotion: Pause,
+  moreContrast: Contrast,
+  underlineLinks: Underline,
+  wideSpacing: TextCursorInput,
+  legibleFont: Type,
+}
+
+/** The palette's design tokens, as CSS a designer can paste somewhere. */
+function paletteAsCss() {
+  const tokens = getComputedStyle(document.documentElement)
+  const names = [
+    "paper",
+    "ink",
+    "tomato",
+    "ultramarine",
+    "grass",
+    "lemon",
+    "violet",
+    "pink",
+  ]
+  const lines = names.map(
+    (name) => `  --${name}: ${tokens.getPropertyValue(`--${name}`).trim()};`
   )
+  return `:root {\n${lines.join("\n")}\n}`
 }
 
 export function CommandPaletteProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
+      // A scene (terminal, vim, rain) owns the keyboard while it's up.
+      if (document.documentElement.dataset.scene) return
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault()
         setOpen((value) => !value)
-      } else if (event.key === "/" && !isTypingTarget(event.target)) {
-        event.preventDefault()
-        setOpen(true)
       }
     }
     window.addEventListener("keydown", onKey)
@@ -103,8 +166,10 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
   const value = useMemo(() => ({ open, setOpen }), [open])
   return (
     <PaletteContext value={value}>
-      {children}
-      <CommandPalette open={open} setOpen={setOpen} />
+      <QuirksProvider>
+        {children}
+        <CommandPalette open={open} setOpen={setOpen} />
+      </QuirksProvider>
     </PaletteContext>
   )
 }
@@ -114,11 +179,10 @@ function CommandPalette({ open, setOpen }: PaletteState) {
   const navigate = useNavigate()
   const { resolvedTheme, setTheme } = useTheme()
   const { copy } = useCopy()
+  const { openShortcuts, openReadingSettings, openTerminal, trigger } =
+    useQuirks()
+  const preferences = usePreferences()
   const trimmed = query.trim()
-  const results = useMemo(
-    () => (trimmed ? index.search(trimmed, { limit: 12 }) : []),
-    [trimmed]
-  )
 
   const close = useCallback(() => {
     setOpen(false)
@@ -134,6 +198,227 @@ function CommandPalette({ open, setOpen }: PaletteState) {
     },
     [close, navigate]
   )
+
+  const commands = useMemo<PaletteCommand[]>(() => {
+    const dark = resolvedTheme === "dark"
+    const outlined =
+      open && document.documentElement.dataset.debug === "outline"
+    return [
+      {
+        id: "copy-email",
+        group: "Actions",
+        label: "Copy email address",
+        keywords: "mail contact",
+        icon: AtSign,
+        meta: profile.email,
+        run: () => void copy(profile.email, "Email copied"),
+      },
+      {
+        id: "copy-link",
+        group: "Actions",
+        label: "Copy link to this page",
+        keywords: "url share yank",
+        icon: Link2,
+        meta: "y y",
+        run: () => void copy(window.location.href, "Link copied"),
+      },
+      {
+        id: "copy-markdown",
+        group: "Actions",
+        label: "Copy as Markdown link",
+        keywords: "md share cite reference",
+        icon: Code,
+        run: () =>
+          void copy(
+            `[${document.title}](${window.location.href})`,
+            "Markdown link copied"
+          ),
+      },
+      {
+        id: "theme",
+        group: "Actions",
+        label: `Switch to ${dark ? "light" : "dark"} theme`,
+        keywords: "dark light mode appearance",
+        icon: dark ? Sun : Moon,
+        run: () => setTheme(dark ? "light" : "dark"),
+      },
+      {
+        id: "random",
+        group: "Actions",
+        label: "Surprise me",
+        keywords: "random essay project lucky",
+        icon: Dices,
+        run: () => {
+          const pick = readable[Math.floor(Math.random() * readable.length)]
+          if (pick) void navigate({ to: pick.path })
+        },
+      },
+      {
+        id: "terminal",
+        group: "Tools",
+        label: "Open a terminal",
+        keywords: "shell console zsh bash command line quake",
+        icon: SquareTerminal,
+        meta: "`",
+        run: () => openTerminal(),
+      },
+      {
+        id: "shortcuts",
+        group: "Actions",
+        label: "Keyboard shortcuts",
+        keywords: "keys hotkeys vim help",
+        icon: Keyboard,
+        meta: "?",
+        run: openShortcuts,
+      },
+      {
+        id: "github",
+        group: "Actions",
+        label: "Open GitHub profile",
+        keywords: "code repos",
+        icon: GitPullRequest,
+        run: () => window.open(profile.links.github, "_blank", "noopener"),
+      },
+      {
+        id: "rss",
+        group: "Actions",
+        label: "RSS feed",
+        keywords: "subscribe feed reader",
+        icon: Rss,
+        run: () => window.location.assign("/index.xml"),
+      },
+      {
+        id: "reading-settings",
+        group: "Reading",
+        label: "Reading settings",
+        keywords: "accessibility a11y preferences",
+        icon: BookOpenText,
+        run: openReadingSettings,
+      },
+      {
+        id: "text-bigger",
+        group: "Reading",
+        label: "Make text bigger",
+        keywords: "font size zoom larger accessibility",
+        icon: ZoomIn,
+        meta: preferences.textSize === "larger" ? "Largest" : undefined,
+        run: () => stepTextSize(1),
+      },
+      {
+        id: "text-smaller",
+        group: "Reading",
+        label: "Make text smaller",
+        keywords: "font size zoom accessibility",
+        icon: ZoomOut,
+        meta: preferences.textSize === "default" ? "Default" : undefined,
+        run: () => stepTextSize(-1),
+      },
+      ...(Object.keys(toggleCopy) as Toggle[]).map((key) => ({
+        id: key,
+        group: "Reading" as const,
+        label: toggleCopy[key].label,
+        keywords: `${toggleCopy[key].detail} accessibility a11y`,
+        icon: toggleIcon[key],
+        meta: preferences[key] ? "On" : "Off",
+        run: () => togglePreference(key),
+      })),
+      {
+        id: "outline",
+        group: "Tools",
+        label: "Outline every box",
+        keywords: "debug layout css pesticide boxes grid",
+        icon: ScanLine,
+        meta: outlined ? "On" : "Off",
+        run: () => {
+          const root = document.documentElement
+          if (outlined) delete root.dataset.debug
+          else root.dataset.debug = "outline"
+        },
+      },
+      {
+        id: "copy-tokens",
+        group: "Tools",
+        label: "Copy the colour palette as CSS",
+        keywords: "design tokens colors oklch variables designer",
+        icon: Palette,
+        meta: "oklch",
+        run: () => void copy(paletteAsCss(), "Palette copied"),
+      },
+      {
+        id: "source",
+        group: "Tools",
+        label: "Read this site's source",
+        keywords: "github code repo view source",
+        icon: SquareTerminal,
+        run: () => window.open(sourceRepo, "_blank", "noopener"),
+      },
+      {
+        id: "top",
+        group: "Tools",
+        label: "Scroll to top",
+        keywords: "up start",
+        icon: ArrowUpToLine,
+        meta: "g g",
+        run: () => window.scrollTo({ top: 0 }),
+      },
+      {
+        id: "bottom",
+        group: "Tools",
+        label: "Scroll to bottom",
+        keywords: "down end footer",
+        icon: ArrowDownToLine,
+        meta: "⇧ G",
+        run: () =>
+          window.scrollTo({ top: document.documentElement.scrollHeight }),
+      },
+      {
+        id: "print",
+        group: "Tools",
+        label: "Print or save as PDF",
+        keywords: "pdf paper export",
+        icon: Printer,
+        run: () => setTimeout(() => window.print(), 150),
+      },
+    ]
+  }, [
+    copy,
+    navigate,
+    open,
+    openReadingSettings,
+    openShortcuts,
+    openTerminal,
+    preferences,
+    resolvedTheme,
+    setTheme,
+  ])
+
+  const commandIndex = useMemo(
+    () =>
+      new Fuse(commands, {
+        keys: [{ name: "label", weight: 3 }, "keywords"],
+        threshold: 0.3,
+        ignoreLocation: true,
+      }),
+    [commands]
+  )
+
+  const results = useMemo(
+    () => (trimmed ? index.search(trimmed, { limit: 12 }) : []),
+    [trimmed]
+  )
+  const matchedCommands = useMemo(
+    () =>
+      trimmed
+        ? commandIndex.search(trimmed, { limit: 5 }).map(({ item }) => item)
+        : [],
+    [commandIndex, trimmed]
+  )
+  const egg = eggForCommand(trimmed)
+
+  const run = (command: PaletteCommand) => {
+    close()
+    command.run()
+  }
 
   return (
     <CommandDialog
@@ -163,36 +448,67 @@ function CommandPalette({ open, setOpen }: PaletteState) {
             </span>
           </CommandEmpty>
           {trimmed ? (
-            <CommandGroup heading={`${results.length} results`}>
-              {results.map(({ item }) => {
-                const Icon = kindIcon[item.kind]
-                return (
+            <>
+              {egg && (
+                <CommandGroup heading="Terminal">
                   <PaletteItem
-                    key={item.path}
-                    value={item.path}
-                    onSelect={() => go(item)}
-                    hue={
-                      item.kind === "pull-request"
-                        ? "grass"
-                        : item.kind === "page"
-                          ? blockForSection(item.path)
-                          : blockFor(item.path)
-                    }
-                    icon={<Icon aria-hidden="true" />}
-                    meta={`${searchKindLabel[item.kind]}${item.date ? ` · ${yearOf(item.date)}` : ""}`}
+                    value={`egg ${egg.id}`}
+                    hue="grass"
+                    icon={<SquareTerminal aria-hidden="true" />}
+                    meta="Enter"
+                    onSelect={() => {
+                      close()
+                      trigger(egg)
+                    }}
                   >
-                    <span className="flex min-w-0 flex-1 flex-col">
-                      <span className="truncate font-semibold">
-                        {item.title}
-                      </span>
-                      <span className="truncate text-xs text-ink-soft">
-                        {item.description}
-                      </span>
-                    </span>
+                    <span className="font-mono">$ {trimmed}</span>
                   </PaletteItem>
-                )
-              })}
-            </CommandGroup>
+                </CommandGroup>
+              )}
+              {matchedCommands.length > 0 && (
+                <CommandGroup heading="Commands">
+                  {matchedCommands.map((command) => (
+                    <CommandRow
+                      key={command.id}
+                      command={command}
+                      onRun={run}
+                    />
+                  ))}
+                </CommandGroup>
+              )}
+              {results.length > 0 && (
+                <CommandGroup heading={`${results.length} results`}>
+                  {results.map(({ item }) => {
+                    const Icon = kindIcon[item.kind]
+                    return (
+                      <PaletteItem
+                        key={item.path}
+                        value={item.path}
+                        onSelect={() => go(item)}
+                        hue={
+                          item.kind === "pull-request"
+                            ? "grass"
+                            : item.kind === "page"
+                              ? blockForSection(item.path)
+                              : blockFor(item.path)
+                        }
+                        icon={<Icon aria-hidden="true" />}
+                        meta={`${searchKindLabel[item.kind]}${item.date ? ` · ${yearOf(item.date)}` : ""}`}
+                      >
+                        <span className="flex min-w-0 flex-1 flex-col">
+                          <span className="truncate font-semibold">
+                            {item.title}
+                          </span>
+                          <span className="truncate text-xs text-ink-soft">
+                            {item.description}
+                          </span>
+                        </span>
+                      </PaletteItem>
+                    )
+                  })}
+                </CommandGroup>
+              )}
+            </>
           ) : (
             <>
               <CommandGroup heading="Go to">
@@ -208,72 +524,45 @@ function CommandPalette({ open, setOpen }: PaletteState) {
                   </PaletteItem>
                 ))}
               </CommandGroup>
-              <CommandGroup heading="Actions">
-                <PaletteItem
-                  value="action copy email"
-                  hue="ink"
-                  icon={<AtSign aria-hidden="true" />}
-                  meta={profile.email}
-                  onSelect={() => {
-                    close()
-                    void copy(profile.email, "Email copied")
-                  }}
-                >
-                  Copy email address
-                </PaletteItem>
-                <PaletteItem
-                  value="action copy link"
-                  hue="ink"
-                  icon={<Link2 aria-hidden="true" />}
-                  onSelect={() => {
-                    close()
-                    void copy(window.location.href, "Link copied")
-                  }}
-                >
-                  Copy link to this page
-                </PaletteItem>
-                <PaletteItem
-                  value="action theme"
-                  hue="ink"
-                  icon={
-                    resolvedTheme === "dark" ? (
-                      <Sun aria-hidden="true" />
-                    ) : (
-                      <Moon aria-hidden="true" />
-                    )
-                  }
-                  onSelect={() => {
-                    close()
-                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
-                  }}
-                >
-                  Switch to {resolvedTheme === "dark" ? "light" : "dark"} theme
-                </PaletteItem>
-                <PaletteItem
-                  value="action github"
-                  hue="ink"
-                  icon={<GitPullRequest aria-hidden="true" />}
-                  onSelect={() => go({ path: profile.links.github })}
-                >
-                  Open GitHub profile
-                </PaletteItem>
-                <PaletteItem
-                  value="action rss"
-                  hue="ink"
-                  icon={<Rss aria-hidden="true" />}
-                  onSelect={() => {
-                    close()
-                    window.location.assign("/index.xml")
-                  }}
-                >
-                  RSS feed
-                </PaletteItem>
-              </CommandGroup>
+              {groups.map((group) => (
+                <CommandGroup key={group} heading={group}>
+                  {commands
+                    .filter((command) => command.group === group)
+                    .map((command) => (
+                      <CommandRow
+                        key={command.id}
+                        command={command}
+                        onRun={run}
+                      />
+                    ))}
+                </CommandGroup>
+              ))}
             </>
           )}
         </CommandList>
       </Command>
     </CommandDialog>
+  )
+}
+
+function CommandRow({
+  command,
+  onRun,
+}: {
+  command: PaletteCommand
+  onRun: (command: PaletteCommand) => void
+}) {
+  const Icon = command.icon
+  return (
+    <PaletteItem
+      value={`command ${command.id}`}
+      hue="ink"
+      icon={<Icon aria-hidden="true" />}
+      meta={command.meta}
+      onSelect={() => onRun(command)}
+    >
+      {command.label}
+    </PaletteItem>
   )
 }
 
