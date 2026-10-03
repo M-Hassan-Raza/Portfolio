@@ -1,4 +1,4 @@
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { profile } from "#content"
 import type { Graph } from "schema-dts"
 import { site } from "./site"

@@ -122,7 +122,8 @@ export function Teapot() {
       <motion.g
         style={{ originX: "100px", originY: "168px" }}
         animate={{ rotate: [0, -6, 5, -3, 0] }}
-        transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 0.6 }}
+        // A few wobbles, then it sits still: no loop left running.
+        transition={{ duration: 1.6, repeat: 3, repeatDelay: 0.6 }}
       >
         <g className="text-violet" fill="currentColor">
           <path d="M40 112 C14 104 18 82 8 70 L20 64 C28 80 36 92 58 98 Z" />

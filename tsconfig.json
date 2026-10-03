@@ -5,7 +5,8 @@
     "content-collections.ts",
     "scripts",
     "tests/*.ts",
-    "vite-plugin-ascii.ts"
+    "vite-plugin-ascii.ts",
+    "vite-plugin-page-chunks.ts"
   ],
   "compilerOptions": {
     "target": "ES2022",

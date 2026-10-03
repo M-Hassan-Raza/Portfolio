@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm content:build && vite dev --port 3000",
-    "build": "pnpm content:build && vite build && tsx scripts/static-output.tsx",
+    "dev": "pnpm content:build && pnpm cn:build && vite dev --port 3000",
+    "build": "pnpm content:build && pnpm cn:build && vite build && tsx scripts/static-output.tsx",
     "preview": "http-server dist/client -p 3000 -c-1",
-    "typecheck": "pnpm content:build && pnpm routes:build && tsc --noEmit",
+    "typecheck": "pnpm content:build && pnpm cn:build && pnpm routes:build && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "check:format": "prettier --check .",
@@ -15,6 +15,7 @@
     "ascii:downsample": "tsx scripts/ascii-downsample.ts",
     "verify": "pnpm typecheck && pnpm lint && pnpm check:tokens && pnpm check:format && pnpm check:copy && pnpm build && pnpm verify:artifacts",
     "content:build": "content-collections build",
+    "cn:build": "cn build --full --config src/lib/cn.config.ts -o src/lib/cn-tables.gen.js --quiet",
     "routes:build": "tsr generate",
     "verify:artifacts": "tsx scripts/verify-artifacts.ts"
   },
@@ -85,6 +86,11 @@
     "node": ">=24.0.0"
   },
   "imports": {
-    "#content": "./.content-collections/generated/index.js"
+    "#content": "./.content-collections/generated/index.js",
+    "#content/documents": "./.content-collections/split/documents.js",
+    "#content/text": "./.content-collections/split/text.js",
+    "#content/topic-slugs": "./.content-collections/split/topic-slugs.js",
+    "#content/oss-stats": "./.content-collections/split/oss-stats.js",
+    "#content/bodies/*": "./.content-collections/split/bodies/*.js"
   }
 }

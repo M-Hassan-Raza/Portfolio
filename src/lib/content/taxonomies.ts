@@ -1,6 +1,6 @@
-import slugify from "@sindresorhus/slugify"
-import type { Document } from "#content"
+import { topicSlugs } from "#content/topic-slugs"
 import { documents } from "./catalog"
+import type { Document } from "./types"
 
 export type TaxonomyKind = "tags" | "categories"
 export type Topic = {
@@ -10,8 +10,11 @@ export type Topic = {
   slug: string
   entries: Document[]
 }
+/** Slugs are made at content build time (split.ts) for every label in use. */
 export function taxonomyPath(kind: TaxonomyKind, label: string) {
-  return `/${kind}/${slugify(label, { preserveCharacters: ["+", "."], decamelize: false })}/`
+  const slug = topicSlugs[label]
+  if (slug === undefined) throw new Error(`No slug for topic: ${label}`)
+  return `/${kind}/${slug}/`
 }
 const byPath = new Map<string, Topic>()
 for (const document of documents) {

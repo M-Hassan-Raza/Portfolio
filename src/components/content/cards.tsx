@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react"
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { formatDate, formatReadingTime, yearOf } from "@/lib/format"
 import { blockFor } from "@/lib/studio"
 import { cn } from "@/lib/utils"

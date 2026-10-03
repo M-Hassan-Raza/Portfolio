@@ -1,5 +1,11 @@
 import { openSource } from "#content"
+import { texts } from "#content/text"
 import { documents } from "./catalog"
+
+/*
+ * Full-text search data. Heavy (every body as plain text), so only search
+ * imports it: the palette loads it on first open, /search/ with its route.
+ */
 
 export type SearchKind = "essay" | "project" | "page" | "pull-request"
 
@@ -28,7 +34,7 @@ export const searchEntries: SearchEntry[] = documents.flatMap((document) =>
           path: document.path,
           title: document.title,
           description: document.description,
-          text: document.text,
+          text: texts[document.path] ?? "",
           kind: kindOf[document.kind],
           ...(document.publishedAt && { date: document.publishedAt }),
           ...(document.cover && { cover: document.cover.ascii }),

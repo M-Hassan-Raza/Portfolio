@@ -1,25 +1,9 @@
-import type { Document } from "#content"
 import { books } from "./catalog"
+import type { ShelfEntry } from "./shelf"
+import type { Document } from "./types"
 
-/** One book as authored in a shelf page: title, author, cover and review. */
-export type Book = {
-  title: string
-  author: string
-  cover: string
-  review: string
-  shelf: Document
-  id: string
-}
-
-const entryPattern =
-  /###\s*<span className="book-subtitle">([\s\S]*?)<\/span>[\s\S]*?asset="([a-z0-9-]+)"[\s\S]*?<p className="author">Author:\s*([\s\S]*?)<\/p>[\s\S]*?<blockquote className="review">([\s\S]*?)<\/blockquote>/g
-
-function plain(html: string) {
-  return html
-    .replace(/<[^>]+>/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
-}
+/** One book on a shelf page, with the shelf it sits on. */
+export type Book = ShelfEntry & { shelf: Document; id: string }
 
 /** Shelves in the order they sit on the wall. */
 const shelfOrder = ["technical", "non-fiction", "fiction", "pakistan"]
@@ -33,16 +17,11 @@ export const shelves = books
   )
   .map((shelf) => ({
     shelf,
-    books: [...shelf.content.matchAll(entryPattern)].map(
-      ([, title = "", cover = "", author = "", review = ""]): Book => ({
-        title: plain(title),
-        author: plain(author),
-        cover,
-        review: plain(review),
-        shelf,
-        id: `${shelf.path}#${cover}`,
-      })
-    ),
+    books: shelf.books.map((entry): Book => ({
+      ...entry,
+      shelf,
+      id: `${shelf.path}#${entry.cover}`,
+    })),
   }))
 
 export const allBooks = shelves.flatMap((entry) => entry.books)

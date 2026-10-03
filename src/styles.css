@@ -546,7 +546,6 @@
   transition:
     transform 420ms var(--ease-settle),
     box-shadow 420ms var(--ease-settle);
-  will-change: transform;
 }
 @media (width < 25rem) {
   .tilt-card {
@@ -658,7 +657,7 @@
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-:root[data-js] .scribble[data-draw]:not([data-drawn]) {
+:root[data-enter] .scribble[data-enter-on]:not([data-entered]) {
   --draw: 0%;
 }
 /* The static 404 has no scripts, so its mark draws with a keyframe instead. */
@@ -700,6 +699,192 @@
 }
 .toc-link[data-read] .toc-dot {
   background: var(--block);
+}
+
+/*
+ * ── Entrances ──────────────────────────────────────────────────────────
+ * Elements with data-enter-on play these once, when the boot observer
+ * (src/lib/boot.ts) marks them data-entered. They only start hidden under
+ * :root[data-enter], which the same script sets, so without JavaScript (or
+ * without IntersectionObserver) everything is simply there. Compositor-only
+ * properties, so they stay smooth on weak machines.
+ */
+
+/* Settle: drops 24px into place, slightly rotated, one soft overshoot. */
+.settle {
+  transform: var(--settle-to, none);
+  transition:
+    opacity 260ms ease-out,
+    transform 640ms var(--ease-settle);
+  transition-delay: calc(var(--settle-i, 0) * 60ms);
+}
+:root[data-enter] .settle:not([data-entered]) {
+  opacity: 0;
+  transform: translateY(24px) rotate(var(--settle-from, 0deg));
+}
+
+/* Stat block: the numeral counts up, the shapes pop in one after another. */
+@property --stat-n {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+.stat-count {
+  position: relative;
+  display: inline-block;
+}
+:root[data-enter] .stat-count {
+  --stat-n: var(--stat-to);
+  counter-reset: stat var(--stat-n);
+  transition: --stat-n 1100ms var(--ease-out-quint);
+}
+:root[data-enter] .stat-block:not([data-entered]) .stat-count {
+  --stat-n: 0;
+}
+/* The real number keeps the width; the counter draws over it. */
+:root[data-enter] .stat-count > .stat-value {
+  visibility: hidden;
+}
+:root[data-enter] .stat-count::before {
+  content: counter(stat);
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+}
+.stat-shape {
+  transition:
+    opacity 200ms ease-out,
+    transform 520ms var(--ease-pop);
+  transition-delay: calc(100ms + var(--stat-i, 0) * 30ms);
+}
+:root[data-enter] .stat-block:not([data-entered]) .stat-shape {
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+/* Mobile menu rows drop in one after another each time the menu opens. */
+.menu-drop {
+  animation: menu-drop 560ms var(--ease-settle) both;
+  animation-delay: calc(var(--i, 0) * 35ms + 50ms);
+}
+@keyframes menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+/* Theme toggle: the sun half-turns away as the moon turns in, and back. */
+.theme-toggle-moon,
+.theme-toggle[data-dark] .theme-toggle-sun {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.4);
+}
+.theme-toggle[data-dark] .theme-toggle-sun {
+  transform: rotate(180deg) scale(0.4);
+}
+.theme-toggle[data-dark] .theme-toggle-moon {
+  opacity: 1;
+  transform: none;
+}
+.theme-toggle[data-flipped] :is(.theme-toggle-sun, .theme-toggle-moon) {
+  animation: 420ms var(--ease-settle) both;
+}
+.theme-toggle[data-flipped][data-dark] .theme-toggle-sun {
+  animation-name: theme-icon-out;
+}
+.theme-toggle[data-flipped][data-dark] .theme-toggle-moon {
+  animation-name: theme-moon-in;
+}
+.theme-toggle[data-flipped]:not([data-dark]) .theme-toggle-sun {
+  animation-name: theme-sun-in;
+}
+.theme-toggle[data-flipped]:not([data-dark]) .theme-toggle-moon {
+  animation-name: theme-icon-out;
+}
+@keyframes theme-icon-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes theme-moon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.4);
+  }
+}
+@keyframes theme-sun-in {
+  from {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.4);
+  }
+}
+.dizzy-note {
+  transform-origin: 100% 0;
+  rotate: -2deg;
+  animation: dizzy-in 520ms var(--ease-pop) both;
+}
+.dizzy-note[data-leaving] {
+  animation: dizzy-out 180ms ease-in both;
+}
+@keyframes dizzy-in {
+  from {
+    opacity: 0;
+    scale: 0.3;
+    rotate: 8deg;
+  }
+}
+@keyframes dizzy-out {
+  to {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+/* Reduced motion: entrances only fade, and the numeral doesn't count. */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-enter] .settle:not([data-entered]),
+  :root[data-enter] .stat-block:not([data-entered]) .stat-shape {
+    transform: none;
+  }
+  .settle,
+  .stat-shape {
+    transition: opacity 120ms ease-out;
+  }
+  .menu-drop {
+    animation-name: fade-in;
+  }
+  :root[data-enter] .stat-count > .stat-value {
+    visibility: visible;
+  }
+  :root[data-enter] .stat-count::before {
+    content: none;
+  }
+}
+:root[data-enter][data-motion="reduce"] .settle:not([data-entered]),
+:root[data-enter][data-motion="reduce"]
+  .stat-block:not([data-entered])
+  .stat-shape {
+  transform: none;
+}
+:root[data-enter][data-motion="reduce"] .stat-count > .stat-value {
+  visibility: visible;
+}
+:root[data-enter][data-motion="reduce"] .stat-count::before {
+  content: none;
+}
+@media print {
+  :root[data-enter] :is(.settle, .stat-shape) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  :root[data-enter] .stat-count > .stat-value {
+    visibility: visible;
+  }
+  :root[data-enter] .stat-count::before {
+    content: none;
+  }
 }
 
 /* ── Motion ────────────────────────────────────────────────────────────── */
@@ -768,6 +953,30 @@
   from {
     opacity: 0;
   }
+}
+
+/*
+ * ── Low-power machines ────────────────────────────────────────────────
+ * data-perf="low" (src/lib/boot.ts) marks weak machines and Save-Data. The
+ * design stays; the extras that cost a repaint every frame go: shadows and
+ * cover colours change at once instead of animating (a transition there
+ * repaints every glyph of an ASCII cover per frame), and overlays drop the
+ * backdrop blur. Movement itself (transform, opacity) is cheap and stays.
+ */
+:root[data-perf="low"] :is(.tilt-card, .pressable),
+:root[data-perf="low"] .prose-site .book-container > .book-cover {
+  transition-property: transform;
+}
+:root[data-perf="low"] .ascii-frame {
+  transition: none;
+}
+:root[data-perf="low"]
+  :is(
+    [data-slot="dialog-overlay"],
+    [data-slot="sheet-overlay"],
+    [data-slot="drawer-overlay"]
+  ) {
+  backdrop-filter: none;
 }
 
 /* ── Reading preferences (src/lib/preferences.ts) ─────────────────────── */
@@ -899,7 +1108,8 @@
 /* Steam off a teapot: wavy strokes that rise and fade, staggered. */
 .steam {
   stroke-dasharray: 120;
-  animation: steam 2.2s var(--ease-out-quint) infinite;
+  /* Steams while the teapot wobbles, then stops: no endless repaint. */
+  animation: steam 2.2s var(--ease-out-quint) 4;
 }
 .steam:nth-child(2) {
   animation-delay: 0.45s;
@@ -1077,12 +1287,6 @@
 }
 [data-rehype-pretty-code-figure] code [data-line] {
   color: var(--shiki-foreground);
-}
-
-/* Without JavaScript, entrance animations never run: show everything as-is. */
-:root:not([data-js]) .settle {
-  opacity: 1 !important;
-  transform: none !important;
 }
 
 /* ── Command palette and toasts, in sticker dress ────────────────────── */

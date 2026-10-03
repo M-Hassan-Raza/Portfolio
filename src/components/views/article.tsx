@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowLeft, ArrowRight, Mail, Rss } from "lucide-react"
+import { Suspense } from "react"
 import type { ReactNode } from "react"
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { profile } from "#content"
 import { articles, getDocument } from "@/lib/content/catalog"
 import { taxonomyPath } from "@/lib/content/taxonomies"
@@ -74,8 +75,7 @@ export function ReadingLayout({
   children?: ReactNode
   after?: ReactNode
 }) {
-  const showToc =
-    document.toc && document.headings.some((heading) => heading.depth === 2)
+  const showToc = document.toc && document.hasToc
   return (
     <div
       className={cn(
@@ -86,10 +86,9 @@ export function ReadingLayout({
     >
       {showToc && (
         <aside className="hidden lg:block">
-          <TableOfContents
-            headings={document.headings}
-            className="sticky top-28"
-          />
+          <Suspense fallback={null}>
+            <TableOfContents path={document.path} className="sticky top-28" />
+          </Suspense>
         </aside>
       )}
       <div
@@ -99,7 +98,7 @@ export function ReadingLayout({
         )}
       >
         {children}
-        {document.content.trim() && <ContentBody code={document.mdx} />}
+        {document.hasBody && <ContentBody path={document.path} />}
         {after}
       </div>
     </div>

@@ -1,27 +1,19 @@
 import { page, blockForSection } from "@/lib/studio"
 import { Link, useRouterState } from "@tanstack/react-router"
-import {
-  ArrowUp,
-  ArrowUpRight,
-  BookOpenText,
-  Keyboard,
-  Menu,
-  Search,
-  X,
-} from "lucide-react"
-import { motion } from "motion/react"
-import { useState } from "react"
+import { ArrowUp, BookOpenText, Keyboard, Menu, Search } from "lucide-react"
+import { Suspense, lazy, useState } from "react"
 import { profile } from "#content"
 import type { Surface } from "@/lib/studio"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./system/theme-toggle"
-import { useCommandPalette } from "./system/command-palette"
+import {
+  preloadCommandPalette,
+  useCommandPalette,
+} from "./system/command-palette"
 import { useQuirks } from "./system/quirks"
-import { MenuSheet, MenuSheetClose } from "./system/overlays"
 import { PillAnchor, PillLink } from "./studio/pill"
-import { springs } from "./studio/motion"
 
-const navItems: { label: string; path: string; block: Surface }[] = [
+export const navItems: { label: string; path: string; block: Surface }[] = [
   { label: "Work", path: "/projects/", block: "tomato" },
   { label: "Writing", path: "/blog/", block: "ultramarine" },
   { label: "Open source", path: "/open-source/", block: "grass" },
@@ -33,7 +25,7 @@ function useActivePath() {
   return useRouterState({ select: (state) => state.location.pathname })
 }
 
-function Wordmark() {
+export function Wordmark() {
   return (
     <span
       className="text-[1.3rem] leading-none font-extrabold tracking-[-0.045em] [font-stretch:90%]"
@@ -50,6 +42,8 @@ function SearchButton({ className }: { className?: string }) {
     <button
       type="button"
       onClick={() => setOpen(true)}
+      onPointerEnter={preloadCommandPalette}
+      onFocus={preloadCommandPalette}
       aria-label="Search the site"
       aria-keyshortcuts="Meta+K"
       className={cn(
@@ -115,92 +109,42 @@ export function SiteHeader() {
   )
 }
 
+/*
+ * The menu sheet (and the dialog machinery behind it) is its own chunk, loaded
+ * on the first tap; the button that opens it is plain.
+ */
+const loadMenuSheet = () => import("./mobile-menu")
+const MobileMenuSheet = lazy(loadMenuSheet)
+
 function MobileMenu({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false)
-  const { setOpen: openPalette } = useCommandPalette()
-  const items = [
-    ...navItems,
-    { label: "How I work", path: "/contact/", block: "pink" as const },
-  ]
+  const [mounted, setMounted] = useState(false)
+  if (open && !mounted) setMounted(true)
+  const preload = () => void loadMenuSheet().catch(() => undefined)
   return (
-    <MenuSheet
-      open={open}
-      onOpenChange={setOpen}
-      title="Menu"
-      description="Pages on this site"
-      trigger={
-        <button
-          type="button"
-          aria-label="Open menu"
-          className="pressable-flat grid size-10 cursor-pointer place-items-center rounded-full bg-ink text-paper md:hidden"
-        >
-          <Menu aria-hidden="true" className="size-4" strokeWidth={2.6} />
-        </button>
-      }
-    >
-      <div className="flex flex-col gap-6 px-4 pt-4 pb-6">
-        <div className="flex h-12 items-center justify-between pl-2">
-          <Link to="/" onClick={() => setOpen(false)} className="rounded-full">
-            <Wordmark />
-          </Link>
-          <MenuSheetClose
-            render={
-              <button
-                type="button"
-                aria-label="Close menu"
-                className="pressable-flat grid size-11 cursor-pointer place-items-center rounded-full border-2 border-ink text-ink"
-              />
-            }
-          >
-            <X aria-hidden="true" className="size-4" strokeWidth={2.6} />
-          </MenuSheetClose>
-        </div>
-        <nav aria-label="Mobile">
-          <ul className="flex flex-col border-t-2 border-ink">
-            {items.map((item, index) => (
-              <motion.li
-                key={item.path}
-                initial={{ opacity: 0, y: -12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...springs.settle, delay: 0.035 * index + 0.05 }}
-                data-block={item.block}
-                className="border-b-2 border-ink"
-              >
-                <Link
-                  to={item.path}
-                  onClick={() => setOpen(false)}
-                  aria-current={
-                    pathname.startsWith(item.path) ? "page" : undefined
-                  }
-                  className="wipe flex items-center justify-between px-2 py-3 text-[2.4rem] leading-none font-extrabold tracking-[-0.045em] [font-stretch:88%] aria-[current=page]:bg-block aria-[current=page]:text-on-block"
-                >
-                  <span>{item.label}</span>
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="size-6"
-                    strokeWidth={2.4}
-                  />
-                </Link>
-              </motion.li>
-            ))}
-          </ul>
-        </nav>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setOpen(false)
-              openPalette(true)
-            }}
-            className="pressable flex h-12 flex-1 cursor-pointer items-center gap-2 rounded-full border-2 border-ink bg-paper-raised px-4 font-semibold text-ink"
-          >
-            <Search aria-hidden="true" className="size-4" strokeWidth={2.4} />
-            Search the site
-          </button>
-          <ThemeToggle className="size-12" />
-        </div>
-      </div>
-    </MenuSheet>
+    <>
+      <button
+        type="button"
+        aria-label="Open menu"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onClick={() => setOpen(true)}
+        onPointerDown={preload}
+        onFocus={preload}
+        className="pressable-flat grid size-10 cursor-pointer place-items-center rounded-full bg-ink text-paper md:hidden"
+      >
+        <Menu aria-hidden="true" className="size-4" strokeWidth={2.6} />
+      </button>
+      {mounted && (
+        <Suspense fallback={null}>
+          <MobileMenuSheet
+            open={open}
+            onOpenChange={setOpen}
+            pathname={pathname}
+          />
+        </Suspense>
+      )}
+    </>
   )
 }
 

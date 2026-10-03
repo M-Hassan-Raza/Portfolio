@@ -14,3 +14,4 @@ output
 .claude
 
 data
+src/lib/cn-tables.gen.js

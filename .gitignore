@@ -12,3 +12,4 @@ dist/
 .tanstack/
 .content-collections/
 src/routeTree.gen.ts
+src/lib/cn-tables.gen.js

@@ -1,11 +1,11 @@
 import type { CSSProperties } from "react"
 import { cn } from "@/lib/utils"
-import { useDrawOnView } from "./motion"
+import { useEnter } from "@/lib/enter"
 
 /**
  * Hand-drawn marks, authored once and reused. Round caps, drawn from nothing
- * to full length when they scroll into view. One per screen at most, and
- * never on a headline word.
+ * to full length when they scroll into view (a CSS entrance, see styles.css).
+ * One per screen at most, and never on a headline word.
  */
 const marks = {
   circle: {
@@ -54,11 +54,11 @@ export function Scribble({
   /** Draw with a CSS keyframe (for pages that ship no JavaScript). */
   css?: boolean
 }) {
-  const { ref, drawn } = useDrawOnView<SVGSVGElement>()
+  const enter = useEnter<SVGSVGElement>()
   const mark = marks[variant]
   return (
     <svg
-      ref={ref}
+      {...(css ? {} : enter)}
       viewBox={mark.viewBox}
       aria-hidden="true"
       focusable="false"
@@ -69,8 +69,6 @@ export function Scribble({
         className
       )}
       data-mark={variant}
-      data-draw={css ? undefined : ""}
-      data-drawn={!css && drawn ? "" : undefined}
       style={{ "--scribble-delay": `${delay}ms` } as CSSProperties}
     >
       {mark.paths.map((path) => (

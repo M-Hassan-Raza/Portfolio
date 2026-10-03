@@ -2,6 +2,7 @@ import { useRouterState } from "@tanstack/react-router"
 import { X } from "lucide-react"
 import { motion } from "motion/react"
 import {
+  memo,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -15,6 +16,22 @@ import { complete, isWholeSecret, promptPath, run, toneClass } from "./shell"
 import type { Shell, Tone } from "./shell"
 
 type Line = { id: number; parts: { node: ReactNode; tone: Tone }[] }
+
+/** Lines kept on screen; older ones scroll away for good. */
+const scrollback = 300
+
+/** One printed line. Memoised: typing re-renders the prompt, not the log. */
+const TerminalLine = memo(function PrintedLine({ line }: { line: Line }) {
+  return (
+    <div className="break-words whitespace-pre-wrap">
+      {line.parts.map((part, index) => (
+        <span key={index} className={toneClass[part.tone]}>
+          {part.node}
+        </span>
+      ))}
+    </div>
+  )
+})
 
 export type TerminalBridge = Pick<
   Shell,
@@ -99,7 +116,7 @@ export function Terminal({
 
   const print = useCallback((node: ReactNode, tone: Tone = "ink") => {
     setLines((current) => [
-      ...current,
+      ...current.slice(-(scrollback - 1)),
       { id: nextId.current++, parts: [{ node, tone }] },
     ])
   }, [])
@@ -329,13 +346,7 @@ export function Terminal({
           className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-5 py-4 text-[0.875rem] leading-relaxed sm:text-[0.9375rem]"
         >
           {lines.map((line) => (
-            <div key={line.id} className="break-words whitespace-pre-wrap">
-              {line.parts.map((part, index) => (
-                <span key={index} className={toneClass[part.tone]}>
-                  {part.node}
-                </span>
-              ))}
-            </div>
+            <TerminalLine key={line.id} line={line} />
           ))}
           <label className={busy ? "flex opacity-0" : "flex"}>
             <Prompt path={pathname} />

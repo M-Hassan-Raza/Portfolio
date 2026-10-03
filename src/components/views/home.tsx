@@ -1,7 +1,8 @@
 import { page } from "@/lib/studio"
 import { ArrowRight } from "lucide-react"
-import { openSource, profile } from "#content"
-import type { Document } from "#content"
+import { profile } from "#content"
+import { ossStats } from "#content/oss-stats"
+import type { Document } from "@/lib/content/types"
 import { requireDocument } from "@/lib/content/catalog"
 import { allBooks } from "@/lib/content/books"
 import { ProjectCard, entryRow } from "@/components/content/cards"
@@ -156,7 +157,7 @@ export function HomeView({
           />
           <div className="grid gap-16 md:grid-cols-2 md:gap-12">
             <StatBlock
-              value={openSource.merged}
+              value={ossStats.merged}
               label="merged pull requests in tools I use every day"
             >
               <ArrowLink to={page("/open-source/")} className="self-start">

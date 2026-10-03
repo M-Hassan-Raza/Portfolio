@@ -1,13 +1,15 @@
+import { Suspense, use } from "react"
+import { profile } from "#content"
+import { ossStats } from "#content/oss-stats"
 import { CodeBlock } from "./code-block"
-import { MDXContent } from "@content-collections/mdx/react"
-import { profile, openSource } from "#content"
 import { AsciiCover, Screen } from "./ascii-cover"
 import { cn } from "@/lib/utils"
 import { coverAsset } from "@/components/studio/cover-card"
+import { loadBody } from "@/lib/content/bodies"
 import type { ComponentProps } from "react"
 
 function OssCount() {
-  return openSource.merged
+  return ossStats.merged
 }
 function ProofList() {
   return (
@@ -18,7 +20,7 @@ function ProofList() {
         </li>
       ))}
       <li>
-        <strong>{openSource.merged}</strong> merged pull requests in open-source
+        <strong>{ossStats.merged}</strong> merged pull requests in open-source
         tools like kitty, calibre and libtorrent.
       </li>
       <li>Entropy Labs: {profile.recognition.join("; ")}.</li>
@@ -37,16 +39,27 @@ const components = {
   pre: CodeBlock,
 }
 
+/**
+ * The body of the document at `path`. Its chunk is already loaded by the time
+ * this renders (route loader, or the client entry before hydration), so `use`
+ * reads it synchronously; Suspense is only a safety net.
+ */
 export function ContentBody({
-  code,
+  path,
   className,
 }: {
-  code: string
+  path: string
   className?: string
 }) {
   return (
     <div className={cn("prose-site prose max-w-none", className)}>
-      <MDXContent code={code} components={components} />
+      <Suspense fallback={null}>
+        <Body path={path} />
+      </Suspense>
     </div>
   )
+}
+function Body({ path }: { path: string }) {
+  const { default: Component } = use(loadBody(path))
+  return <Component components={components} />
 }

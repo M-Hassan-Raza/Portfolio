@@ -5,6 +5,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite"
 import viteReact from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 import { asciiArt } from "./vite-plugin-ascii"
+import { pageChunks } from "./vite-plugin-page-chunks"
 
 export default defineConfig({
   publicDir: "static",
@@ -22,5 +23,6 @@ export default defineConfig({
       },
     }),
     viteReact(),
+    pageChunks(),
   ],
 })

@@ -1,7 +1,7 @@
 import { page } from "@/lib/studio"
 import { ArrowRight, Download } from "lucide-react"
 import { profile } from "#content"
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { ContentBody } from "@/components/content/body"
 import { Settle } from "@/components/studio/motion"
 import { PillAnchor, PillLink } from "@/components/studio/pill"
@@ -66,7 +66,7 @@ export function AboutView({
       <section aria-label="A note" className="frame">
         <div className="mx-auto flex max-w-read flex-col gap-6">
           <p className="type-label text-ink-soft">A note from Hassan</p>
-          <ContentBody code={document.mdx} />
+          <ContentBody path={document.path} />
         </div>
       </section>
 

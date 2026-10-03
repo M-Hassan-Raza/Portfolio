@@ -1,4 +1,4 @@
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { IndexList } from "@/components/studio/index-list"
 import { entryRow } from "./cards"
 
