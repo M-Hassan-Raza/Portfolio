@@ -1,0 +1,1 @@
+import{j as e,c as p}from"./index-D7leiY8S.js";function x({block:s,title:a,children:c,className:l}){return e.jsxs("div",{"data-block":s,className:p("surface-block flex flex-col gap-3 px-6 py-10 sm:px-10",l),children:[e.jsx("p",{className:"type-display text-block-deep",children:a}),e.jsx("p",{className:"type-lede",children:c})]})}export{x as E};
