@@ -1,19 +1,15 @@
 import { cn } from "@/lib/utils"
-import { useLayoutEffect, useRef, useState } from "react"
+import { Suspense, lazy, useLayoutEffect, useRef, useState } from "react"
 import type { CSSProperties } from "react"
 import { manifest } from "virtual:ascii-manifest"
-import {
-  useAsciiLens,
-  useAsciiReveal,
-  useAsciiShimmer,
-} from "@/lib/ascii/hooks"
 import type {
   LensOptions,
   RevealOptions,
   ShimmerOptions,
 } from "@/lib/ascii/layers"
-import { useFinePointer, usePrefersReducedMotion } from "@/lib/ascii/media"
-import { seedFrom } from "@/lib/ascii/rng"
+
+/** The effects engine loads only for covers that use it. */
+const AsciiEffectsLayer = lazy(() => import("./ascii-effects"))
 
 const GLOB_PREFIX = "/assets/ascii-covers/"
 /** Covers denser than this are photographs (jp2a positives for a dark ground), not set type. */
@@ -36,6 +32,11 @@ const serverArt: Record<string, string> = import.meta.env.SSR
   : {}
 const clientCache = new Map<string, string>()
 
+/** Warms a cover's chunk ahead of a hover that will show it. */
+export function preloadArt(asset: string) {
+  void loadArt(asset).catch(() => undefined)
+}
+
 function loadArt(asset: string): Promise<string> {
   const cached = clientCache.get(asset)
   if (cached !== undefined) return Promise.resolve(cached)
@@ -49,9 +50,6 @@ export interface AsciiEffects {
   lens?: boolean | Omit<LensOptions, "seed">
   shimmer?: boolean | Omit<ShimmerOptions, "seed">
 }
-
-const opts = <T extends object>(value: boolean | T | undefined): T =>
-  typeof value === "object" ? value : ({} as T)
 
 export function AsciiArt({
   asset,
@@ -90,28 +88,6 @@ export function AsciiArt({
     if (html && preRef.current?.firstChild) setReady(true)
   }, [html])
 
-  const reducedMotion = usePrefersReducedMotion()
-  const finePointer = useFinePointer()
-  const live = ready && !reducedMotion
-  const seed = seedFrom(asset)
-  const wantsReveal = !!effects?.reveal
-  useAsciiReveal(frameRef, {
-    ...opts(effects?.reveal),
-    seed,
-    enabled: live && wantsReveal,
-    hold: wantsReveal && !live,
-  })
-  useAsciiLens(frameRef, {
-    ...opts(effects?.lens),
-    seed,
-    enabled: live && finePointer && !!effects?.lens,
-  })
-  useAsciiShimmer(frameRef, {
-    ...opts(effects?.shimmer),
-    seed,
-    enabled: live && !!effects?.shimmer,
-  })
-
   return (
     <div
       ref={frameRef}
@@ -138,6 +114,16 @@ export function AsciiArt({
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: html ?? "" }}
       />
+      {effects && (
+        <Suspense fallback={null}>
+          <AsciiEffectsLayer
+            frameRef={frameRef}
+            asset={asset}
+            effects={effects}
+            ready={ready}
+          />
+        </Suspense>
+      )}
     </div>
   )
 }

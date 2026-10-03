@@ -1,7 +1,8 @@
-import { allDocuments } from "#content"
-import type { Document } from "#content"
+import { documents as allDocuments } from "#content/documents"
+import type { Document } from "./types"
 
-export const documents = allDocuments
+/** Every document without its body; bodies load per page (./bodies.ts). */
+export const documents: readonly Document[] = allDocuments
 const byPath = new Map<string, Document>()
 export const redirects = new Map<string, string>()
 for (const document of documents) {

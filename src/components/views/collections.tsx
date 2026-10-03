@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowRight, ArrowUpRight, Rss } from "lucide-react"
 import { useState } from "react"
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { articles, projects, requireDocument } from "@/lib/content/catalog"
 import { shelves } from "@/lib/content/books"
 import { formatDate, formatReadingTime, yearOf } from "@/lib/format"
@@ -35,11 +35,11 @@ export function CollectionView({ document }: { document: Collection }) {
 }
 
 function Intro({ document }: { document: Document }) {
-  if (!document.content.trim()) return null
+  if (!document.hasBody) return null
   return (
     <div className="frame">
       <div className="max-w-read">
-        <ContentBody code={document.mdx} />
+        <ContentBody path={document.path} />
       </div>
     </div>
   )

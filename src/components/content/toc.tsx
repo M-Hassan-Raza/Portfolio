@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react"
-import type { Document } from "#content"
+import { use, useEffect, useMemo, useState } from "react"
+import { loadBody } from "@/lib/content/bodies"
 import { cn } from "@/lib/utils"
 
 /**
@@ -7,12 +7,14 @@ import { cn } from "@/lib/utils"
  * reached it; the current one grows a little. No left bar.
  */
 export function TableOfContents({
-  headings,
+  path,
   className,
 }: {
-  headings: Document["headings"]
+  /** The document whose body (and headings) is on the page. */
+  path: string
   className?: string
 }) {
+  const { headings } = use(loadBody(path))
   const items = useMemo(
     () => headings.filter((heading) => heading.depth === 2),
     [headings]
@@ -24,17 +26,23 @@ export function TableOfContents({
       .map((heading) => window.document.getElementById(heading.id))
       .filter((element) => element !== null)
     if (targets.length === 0) return
-    function update() {
-      const line = window.innerHeight * 0.3
-      let index = -1
-      targets.forEach((target, position) => {
-        if (target.getBoundingClientRect().top <= line) index = position
-      })
-      setCurrent(index)
-    }
-    update()
-    window.addEventListener("scroll", update, { passive: true })
-    return () => window.removeEventListener("scroll", update)
+    // The root reaches far above the viewport and stops 30% down it, so a
+    // heading "intersects" once it has scrolled past that reading line. The
+    // browser reports crossings; nothing is measured on scroll.
+    const passed = new Set<number>()
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const index = targets.indexOf(entry.target as HTMLElement)
+          if (entry.isIntersecting) passed.add(index)
+          else passed.delete(index)
+        }
+        setCurrent(passed.size ? Math.max(...passed) : -1)
+      },
+      { rootMargin: "100000px 0px -70% 0px" }
+    )
+    for (const target of targets) observer.observe(target)
+    return () => observer.disconnect()
   }, [items])
 
   if (items.length === 0) return null

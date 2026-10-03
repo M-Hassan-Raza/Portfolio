@@ -22,6 +22,11 @@ import {
   openSourceSchema,
   highlightsSchema,
 } from "./src/lib/content/schema"
+import { readShelf } from "./src/lib/content/shelf"
+import {
+  writeContentSplit,
+  writeOpenSourceStats,
+} from "./src/lib/content/split"
 
 // Syntax colors come from --shiki-* tokens in src/theme.css, so code follows the site theme.
 const codeTheme = createCssVariablesTheme({
@@ -61,14 +66,19 @@ const documents = defineCollection({
         [rehypePrettyCode, { theme: codeTheme, keepBackground: false }],
       ],
     })
+    const isShelf =
+      document.path.startsWith("/books/") && document.path !== "/books/"
     return {
       ...document,
       mdx,
       text,
       headings,
       readingMinutes: Math.ceil(readingTime(text).minutes),
+      hasBody: document.content.trim() !== "",
+      books: isShelf ? readShelf(document.content) : [],
     }
   },
+  onSuccess: (built) => writeContentSplit(built),
 })
 const profile = defineSingleton({
   name: "profile",
@@ -81,6 +91,7 @@ const openSource = defineSingleton({
   filePath: "data/oss.json",
   parser: "json",
   schema: openSourceSchema,
+  onSuccess: (built) => (built ? writeOpenSourceStats(built) : undefined),
 })
 const highlights = defineSingleton({
   name: "curatedWork",

@@ -18,6 +18,7 @@ export default [
     ignores: [
       "eslint.config.js",
       "src/routeTree.gen.ts",
+      "src/lib/cn-tables.gen.js",
       "dist/**",
       ".output/**",
       ".tanstack/**",

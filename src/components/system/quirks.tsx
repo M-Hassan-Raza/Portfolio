@@ -1,8 +1,9 @@
 import { useNavigate } from "@tanstack/react-router"
-import { AnimatePresence } from "motion/react"
 import { useTheme } from "next-themes"
 import {
+  Suspense,
   createContext,
+  lazy,
   use,
   useCallback,
   useEffect,
@@ -12,21 +13,11 @@ import {
 } from "react"
 import type { ReactNode } from "react"
 import { flushSync } from "react-dom"
-import { AsciiRain } from "@/components/quirks/ascii-rain"
-import {
-  HireScene,
-  KonamiScene,
-  LeetBanner,
-  LeetcodeScene,
-  RestoreScreen,
-  SecretBadge,
-  TypingHud,
-} from "@/components/quirks/scenes"
 import type { Scene } from "@/components/quirks/shell"
-import { Terminal } from "@/components/quirks/terminal"
+import type { SceneState } from "@/components/quirks/stage"
 import type { TerminalBridge } from "@/components/quirks/terminal"
-import { Vim } from "@/components/quirks/vim"
 import { prefersStillness } from "@/lib/preferences"
+import { prefetchWhenIdle } from "@/lib/prefetch"
 import {
   bufferChar,
   eggs,
@@ -41,8 +32,24 @@ import { barrelRoll, fall, leetMode, wait } from "@/lib/quirks-effects"
 import { page } from "@/lib/studio"
 import { useCommandPalette } from "./command-palette"
 import { useCopy } from "./copy"
-import { ReadingSettingsDialog } from "./reading-settings"
-import { ShortcutsDialog } from "./shortcuts-dialog"
+
+/*
+ * The scenes, the terminal and both dialogs are their own chunks: most visits
+ * never open them, so they load on first use (or when the browser is idle on
+ * a fast connection) instead of with every page.
+ */
+const loadStage = () => import("@/components/quirks/stage")
+const Stage = lazy(loadStage)
+const ShortcutsDialog = lazy(() =>
+  import("./shortcuts-dialog").then((module) => ({
+    default: module.ShortcutsDialog,
+  }))
+)
+const ReadingSettingsDialog = lazy(() =>
+  import("./reading-settings").then((module) => ({
+    default: module.ReadingSettingsDialog,
+  }))
+)
 
 type Quirks = {
   openShortcuts: () => void
@@ -58,11 +65,6 @@ export function useQuirks() {
   if (!value) throw new Error("useQuirks needs QuirksProvider")
   return value
 }
-
-type SceneState =
-  | { kind: "terminal"; handoff?: string; key: number }
-  | { kind: "konami" | "rain" | "vim" | "leetcode" | "hire" }
-  | null
 
 /** Eggs without a terminal command, and the scene each one plays. */
 const sceneFor: Partial<Record<EggId, Scene | "konami">> = {
@@ -379,54 +381,54 @@ export function QuirksProvider({ children }: { children: ReactNode }) {
     [openTerminal, trigger, unlock]
   )
 
+  // Mount each lazy part the first time it's needed, then keep it mounted so
+  // exit animations still play.
+  const onStage = Boolean(scene || restoring || leet || badge || hud)
+  const [staged, setStaged] = useState(false)
+  if (onStage && !staged) setStaged(true)
+  const [dialogs, setDialogs] = useState({ shortcuts: false, settings: false })
+  if (shortcutsOpen && !dialogs.shortcuts)
+    setDialogs({ ...dialogs, shortcuts: true })
+  if (settingsOpen && !dialogs.settings)
+    setDialogs({ ...dialogs, settings: true })
+
+  useEffect(() => {
+    prefetchWhenIdle(loadStage, { heavy: true, keyboard: true })
+  }, [])
+
   return (
     <QuirksContext value={value}>
       {children}
-      <ShortcutsDialog open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
-      <ReadingSettingsDialog
-        open={settingsOpen}
-        onOpenChange={setSettingsOpen}
-      />
-      <AnimatePresence>
-        {scene?.kind === "terminal" && (
-          <Terminal
-            key={scene.key}
-            handoff={scene.handoff}
+      <Suspense fallback={null}>
+        {dialogs.shortcuts && (
+          <ShortcutsDialog
+            open={shortcutsOpen}
+            onOpenChange={setShortcutsOpen}
+          />
+        )}
+        {dialogs.settings && (
+          <ReadingSettingsDialog
+            open={settingsOpen}
+            onOpenChange={setSettingsOpen}
+          />
+        )}
+      </Suspense>
+      {staged && (
+        <Suspense fallback={null}>
+          <Stage
+            scene={scene}
             suspended={suspended}
-            onClose={closeScene}
-            bridge={bridge}
-          />
-        )}
-      </AnimatePresence>
-      {scene?.kind === "vim" && (
-        <Vim onExit={closeScene} onEscaped={() => unlock("vim-quit")} />
-      )}
-      {scene?.kind === "rain" && <AsciiRain onDone={closeScene} />}
-      <AnimatePresence>
-        {scene?.kind === "konami" && (
-          <KonamiScene key="konami" onDone={closeScene} />
-        )}
-      </AnimatePresence>
-      {scene?.kind === "leetcode" && <LeetcodeScene onClose={closeScene} />}
-      {scene?.kind === "hire" && <HireScene onClose={closeScene} />}
-      {restoring && <RestoreScreen />}
-      <AnimatePresence>
-        {leet && <LeetBanner key="leet" seconds={leetHoldMs / 1000 + 0.6} />}
-      </AnimatePresence>
-      <AnimatePresence>
-        {badge && (
-          <SecretBadge
-            key={badge.place}
-            name={badge.name}
-            place={badge.place}
+            restoring={restoring}
+            leetSeconds={leet ? leetHoldMs / 1000 + 0.6 : null}
+            badge={badge}
+            hud={hud}
             total={eggs.length}
-            top={scene?.kind === "vim"}
+            bridge={bridge}
+            closeScene={closeScene}
+            unlock={unlock}
           />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {hud && !scene && <TypingHud key="hud" text={hud} />}
-      </AnimatePresence>
+        </Suspense>
+      )}
     </QuirksContext>
   )
 }

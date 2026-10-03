@@ -1,7 +1,6 @@
 import { page, blockForSection } from "@/lib/studio"
 import { Link } from "@tanstack/react-router"
 import {
-  ArrowRight,
   ArrowUpRight,
   AtSign,
   CalendarDays,
@@ -11,10 +10,10 @@ import {
   MapPin,
 } from "lucide-react"
 import type { ReactNode } from "react"
-import type { Document } from "#content"
-import { openSource, profile } from "#content"
+import type { Document } from "@/lib/content/types"
+import { profile } from "#content"
+import { ossStats } from "#content/oss-stats"
 import { documents } from "@/lib/content/catalog"
-import { shelves } from "@/lib/content/books"
 import { groupBy, yearOf } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import { ContentBody } from "@/components/content/body"
@@ -23,14 +22,8 @@ import { EntryList } from "@/components/content/entry-list"
 import { useCopy } from "@/components/system/copy"
 import { BlockHero } from "@/components/studio/block-hero"
 import { PillAnchor } from "@/components/studio/pill"
-import { SectionHeading } from "@/components/studio/section-heading"
-import { Shelf } from "@/components/studio/shelf"
 import { MetaPill, Stamp } from "@/components/studio/tag"
-import {
-  TiltCard,
-  TiltCardAnchor,
-  TiltCardLink,
-} from "@/components/studio/tilt-card"
+import { TiltCard, TiltCardAnchor } from "@/components/studio/tilt-card"
 import { ReadingLayout } from "./article"
 
 /** Any plain page: a block in its section's colour and a calm reading column. */
@@ -50,7 +43,7 @@ export function GenericPage({
         size={document.title.length > 9 ? "l" : "xl"}
         lede={document.description}
       />
-      {document.content.trim() ? (
+      {document.hasBody ? (
         <ReadingLayout
           document={document}
           after={
@@ -225,9 +218,9 @@ export function ResumeView({ document }: { document: Document }) {
           </TiltCard>
         </aside>
         <div className="flex min-w-0 flex-col gap-14">
-          {document.content.trim() && (
+          {document.hasBody && (
             <div className="max-w-read">
-              <ContentBody code={document.mdx} />
+              <ContentBody path={document.path} />
             </div>
           )}
           <ResumeSection title="Experience">
@@ -255,8 +248,8 @@ export function ResumeView({ document }: { document: Document }) {
           </ResumeSection>
           <ResumeSection title="Open source">
             <p className="font-serif text-ink-soft">
-              {openSource.merged} merged pull requests across{" "}
-              {openSource.projects.length} projects.{" "}
+              {ossStats.merged} merged pull requests across {ossStats.projects}{" "}
+              projects.{" "}
               <Link
                 to={page("/open-source/")}
                 className="font-sans font-bold text-ink underline decoration-2 underline-offset-4"
@@ -344,62 +337,6 @@ function ResumeSection({
       <h2 className="type-h2">{title}</h2>
       {children}
     </section>
-  )
-}
-
-/* ── Book shelf page ────────────────────────────────────────────────── */
-
-export function ShelfPage({ document }: { document: Document }) {
-  const shelf = shelves.find((entry) => entry.shelf.path === document.path)
-  const others = shelves.filter((entry) => entry.shelf.path !== document.path)
-  return (
-    <div data-block="lemon" className="flex flex-col gap-16 pb-24 sm:gap-20">
-      <BlockHero
-        block="lemon"
-        kicker={shelf ? `${shelf.books.length} books` : "Books"}
-        title={document.title}
-        size="l"
-        lede={document.description}
-      />
-      {shelf && (
-        <div className="frame">
-          <Shelf books={shelf.books} />
-        </div>
-      )}
-      <div className="frame flex flex-col gap-16">
-        <ContentBody code={document.mdx} />
-        {document.comments && (
-          <div className="mx-auto w-full max-w-read">
-            <Comments path={document.path} />
-          </div>
-        )}
-        <nav aria-label="Other shelves" className="flex flex-col gap-8">
-          <SectionHeading title="Other shelves" />
-          <ul className="grid gap-6 sm:grid-cols-3">
-            {others.map(({ shelf: other, books }, index) => (
-              <li key={other.path}>
-                <TiltCardLink
-                  to={other.path}
-                  tiltIndex={index}
-                  className="flex h-full flex-col gap-2 bg-paper-raised p-6 text-ink"
-                >
-                  <span className="type-label text-ink-soft">
-                    {books.length} books
-                  </span>
-                  <span className="flex items-center justify-between gap-2 type-h3">
-                    {other.title}
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="size-5 transition-transform duration-300 ease-(--ease-pop) group-hover:translate-x-1"
-                    />
-                  </span>
-                </TiltCardLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </div>
   )
 }
 

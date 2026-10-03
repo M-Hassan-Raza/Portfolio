@@ -26,7 +26,11 @@ export function AsciiRain({ onDone }: { onDone: () => void }) {
     const glyph = tokens.getPropertyValue("--grass").trim()
     const head = tokens.getPropertyValue("--paper-fixed").trim()
 
-    const scale = window.devicePixelRatio || 1
+    // Fill cost grows with every device pixel; chunky glyphs don't need them all.
+    const scale = Math.min(
+      window.devicePixelRatio || 1,
+      document.documentElement.dataset.perf === "low" ? 1 : 1.5
+    )
     const width = window.innerWidth
     const height = window.innerHeight
     canvas.width = width * scale

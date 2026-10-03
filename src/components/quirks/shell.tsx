@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import { profile } from "#content"
-import { searchEntries } from "@/lib/content/search"
+import { documents } from "@/lib/content/catalog"
 import type { EggId } from "@/lib/quirks"
 import { ping as measure } from "@/lib/quirks-effects"
 import { Locomotive, Sandwich, Stamp, Teapot, cow } from "./graphics"
@@ -67,10 +67,18 @@ const listedSections = [
 const files = ["about.txt", "contact.txt", "resume.pdf"]
 const resumeUrl = "/assets/muhammad-hassan-raza-resume.pdf"
 
+/** What `cd` and `ls` can reach: essays, case studies and plain pages. */
+const entries = documents.filter(
+  (document) =>
+    document.kind === "article" ||
+    document.kind === "project" ||
+    document.kind === "page"
+)
+
 const slugsIn = (prefix: string) =>
-  searchEntries
+  entries
     .filter((entry) => entry.path.startsWith(prefix) && entry.path !== prefix)
-    .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))
+    .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
     .map((entry) => entry.path.slice(prefix.length).replace(/\/$/, ""))
 
 function resolvePath(target: string, cwd: string) {
@@ -86,11 +94,11 @@ function resolvePath(target: string, cwd: string) {
   if (base && rest.length === 0) return base
   if (base && rest.length === 1) {
     const path = `${base}${rest[0]}/`
-    return searchEntries.some((entry) => entry.path === path) ? path : null
+    return entries.some((entry) => entry.path === path) ? path : null
   }
   // Relative to the current section: `cd some-essay` from ~/blog.
   const inCwd = `${cwd}${clean}/`
-  return searchEntries.some((entry) => entry.path === inCwd) ? inCwd : null
+  return entries.some((entry) => entry.path === inCwd) ? inCwd : null
 }
 
 /** "/blog/x/" → "~/blog/x" */
@@ -188,7 +196,7 @@ async function rm(args: string[], shell: Shell) {
   }
   shell.found("rm-rf")
   const doomed = [
-    ...searchEntries.map((entry) => entry.path),
+    ...entries.map((entry) => entry.path),
     "/assets/fonts/",
     "/assets/favicon.svg",
     "/index.xml",

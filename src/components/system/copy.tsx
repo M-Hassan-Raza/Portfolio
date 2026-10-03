@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
-import { toast } from "@/components/ui/toast"
+import { notify } from "./notify"
 
 /** Copies text, reports through a toast, and exposes a short-lived "copied" flag. */
 export function useCopy(resetMs = 1600) {
@@ -14,9 +14,9 @@ export function useCopy(resetMs = 1600) {
         setCopied(true)
         clearTimeout(timer.current)
         timer.current = setTimeout(() => setCopied(false), resetMs)
-        toast.add({ title: label, description: text })
+        notify({ title: label, description: text })
       } catch {
-        toast.add({
+        notify({
           title: "Could not copy",
           description: `Select it instead: ${text}`,
           type: "error",

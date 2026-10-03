@@ -6,9 +6,10 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome"
 import { SiteProviders } from "@/components/system/providers"
 import { NotFoundView } from "@/components/views/not-found"
 import { ContentBody } from "@/components/content/body"
-import { requireDocument } from "@/lib/content/catalog"
 import { preferencesBootScript } from "@/lib/preferences"
+import { deviceBootScript, enterBootScript } from "@/lib/boot"
 import appCss from "../styles.css?url"
+import bricolageLatin from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2?url"
 
 export const Route = createRootRoute({
   head: () => ({
@@ -19,6 +20,16 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      // Every page sets its headline and body in Bricolage. Preloading the
+      // Latin file starts it with the stylesheet instead of after it, so the
+      // fallback-to-Bricolage swap lands sooner on slow connections.
+      {
+        rel: "preload",
+        href: bricolageLatin,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       {
         rel: "preload",
         href: "/fonts/ascii-ink.woff2",
@@ -36,9 +47,7 @@ export const Route = createRootRoute({
     ],
   }),
   notFoundComponent: () => (
-    <NotFoundView
-      body={<ContentBody code={requireDocument("/404.html").mdx} />}
-    />
+    <NotFoundView body={<ContentBody path="/404.html" />} />
   ),
   shellComponent: RootDocument,
 })
@@ -48,10 +57,11 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Lets CSS tell "JS will run" from no-JS before first paint, so ASCII reveals never flash.
-            Saved reading settings land in the same tick, so they never flash either. */}
+            Saved reading settings, the low-power flag and the entrance observer land in the same
+            tick (src/lib/boot.ts), so none of them wait for the app. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.dataset.js='';${preferencesBootScript}`,
+            __html: `document.documentElement.dataset.js='';${preferencesBootScript}${deviceBootScript}${enterBootScript}`,
           }}
         />
         <HeadContent />

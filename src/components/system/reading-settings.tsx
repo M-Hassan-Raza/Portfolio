@@ -9,7 +9,7 @@ import {
 } from "@/lib/preferences"
 import type { TextSize, Toggle } from "@/lib/preferences"
 import { cn } from "@/lib/utils"
-import { PanelDialog } from "./overlays"
+import { PanelDialog } from "./panel-dialog"
 
 const sizeLabels: Record<TextSize, { label: string; glyph: string }> = {
   default: { label: "Default text size", glyph: "text-sm" },

@@ -1,24 +1,65 @@
-import { MDXContent } from "@content-collections/mdx/react"
-import { mkdir, readFile, writeFile } from "node:fs/promises"
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { join, dirname } from "node:path"
 import { renderToStaticMarkup } from "react-dom/server"
 import { Feed } from "feed"
 import { SitemapStream, streamToPromise } from "sitemap"
 import { profile } from "#content"
-import type { Document } from "#content"
+import NotFoundBody from "#content/bodies/404"
+import type { Document } from "../src/lib/content/types"
 import { documents, requireDocument } from "../src/lib/content/catalog"
 import { topics } from "../src/lib/content/taxonomies"
 import { redirects } from "../src/lib/content/redirects"
 import { searchEntries } from "../src/lib/content/search"
 import { site } from "../src/lib/site"
+import { bodySlug } from "../src/lib/content/body-slug"
+import { viewOf } from "../src/components/content/view-names"
+import { pageChunksFile, pageChunksRecord } from "../vite-plugin-page-chunks"
+import type { PageChunks } from "../vite-plugin-page-chunks"
 import { NotFoundView } from "../src/components/views/not-found"
 
 const output = "dist/client"
+const artifactPath = (path: string) =>
+  join(output, path.endsWith("/") ? `${path}index.html` : path)
 async function write(path: string, content: string | Buffer) {
-  const file = join(output, path.endsWith("/") ? `${path}index.html` : path)
+  const file = artifactPath(path)
   await mkdir(dirname(file), { recursive: true })
   await writeFile(file, content)
 }
+
+/*
+ * A page's body and its view are chunks of their own, and the client entry
+ * waits for both before hydrating. Preloading them in the HTML downloads them
+ * alongside the app instead of after it.
+ */
+const pageChunks = JSON.parse(
+  await readFile(join(output, pageChunksFile), "utf8")
+) as PageChunks
+for (const document of documents.filter(
+  (entry) => entry.kind !== "not-found"
+)) {
+  const view = viewOf(document)
+  const wanted = [
+    ...(document.hasBody
+      ? (pageChunks.bodies[bodySlug(document.path)] ?? [])
+      : []),
+    ...(view ? (pageChunks.views[view] ?? []) : []),
+  ]
+  if (document.hasBody && !pageChunks.bodies[bodySlug(document.path)])
+    throw new Error(`No body chunk for ${document.path}`)
+  if (view && !pageChunks.views[view])
+    throw new Error(`No view chunk for ${document.path} (${view})`)
+  const file = artifactPath(document.path)
+  const html = await readFile(file, "utf8")
+  if (!html.includes("</head>")) throw new Error(`No <head> in ${file}`)
+  const links = [...new Set(wanted)]
+    .filter((href) => !html.includes(`href="${href}"`))
+    .map((href) => `<link rel="modulepreload" href="${href}"/>`)
+    .join("")
+  await writeFile(file, html.replace("</head>", `${links}</head>`))
+}
+// Kept outside the published folder for scripts/verify-artifacts.ts.
+await writeFile(pageChunksRecord, JSON.stringify(pageChunks))
+await rm(join(output, dirname(pageChunksFile)), { recursive: true })
 function feedFor(path: string, title: string) {
   return new Feed({
     title,
@@ -129,7 +170,7 @@ await write(
           <NotFoundView
             body={
               <div className="prose-site prose max-w-none">
-                <MDXContent code={missing.mdx} />
+                <NotFoundBody />
               </div>
             }
           />

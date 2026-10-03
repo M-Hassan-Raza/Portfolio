@@ -1,5 +1,5 @@
 import { ArrowUpRight, ChevronDown, GitMerge, Star } from "lucide-react"
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { curatedWork, openSource } from "#content"
 import { formatDate, formatMonthYear } from "@/lib/format"
 import { ContentBody } from "@/components/content/body"
@@ -52,10 +52,10 @@ export function OpenSourceView({ document }: { document: Document }) {
         }
       />
 
-      {document.content.trim() && (
+      {document.hasBody && (
         <div className="frame">
           <div className="max-w-read">
-            <ContentBody code={document.mdx} />
+            <ContentBody path={document.path} />
           </div>
         </div>
       )}

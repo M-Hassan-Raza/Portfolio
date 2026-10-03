@@ -1,7 +1,8 @@
 import { Fragment } from "react"
 import { MetaPill } from "@/components/studio/tag"
 import { eggs, shortcutGroups, useFoundEggs } from "@/lib/quirks"
-import { Keys, PanelDialog } from "./overlays"
+import { Keys } from "./keys"
+import { PanelDialog } from "./panel-dialog"
 
 const isMac = () =>
   typeof navigator !== "undefined" &&

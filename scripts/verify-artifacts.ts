@@ -7,9 +7,16 @@ import { documents } from "../src/lib/content/catalog"
 import { topics } from "../src/lib/content/taxonomies"
 import { redirects } from "../src/lib/content/redirects"
 import { searchEntries } from "../src/lib/content/search"
+import { bodySlug } from "../src/lib/content/body-slug"
+import { viewOf } from "../src/components/content/view-names"
+import { pageChunksRecord } from "../vite-plugin-page-chunks"
+import type { PageChunks } from "../vite-plugin-page-chunks"
 import { mainNavigation, footerNavigation, site } from "../src/lib/site"
 
 const output = "dist/client"
+const pageChunks = JSON.parse(
+  readFileSync(pageChunksRecord, "utf8")
+) as PageChunks
 const artifactPath = (path: string) =>
   join(output, path.endsWith("/") ? `${path}index.html` : path)
 const requiredPaths = z
@@ -87,11 +94,27 @@ for (const document of documents.filter(
     })
     .parse(JSON.parse(structuredData))
   assert(graph["@graph"].length, `Empty structured data: ${document.path}`)
-  if (document.content.trim())
+  if (document.hasBody) {
     assert(
       $(".prose").text().trim(),
       `Missing prerendered prose: ${document.path}`
     )
+  }
+  // Bodies and views are chunks of their own; the page must preload them
+  // alongside the app, or hydration waits on a second round trip.
+  const preloaded = new Set(
+    $("link[rel=modulepreload]")
+      .map((_, element) => $(element).attr("href"))
+      .get()
+  )
+  const view = viewOf(document)
+  for (const file of [
+    ...(document.hasBody
+      ? (pageChunks.bodies[bodySlug(document.path)] ?? ["(missing body)"])
+      : []),
+    ...(view ? (pageChunks.views[view] ?? ["(missing view)"]) : []),
+  ])
+    assert(preloaded.has(file), `Not preloaded: ${file} on ${document.path}`)
 }
 for (const [path, target] of redirects) {
   const $ = load(readFileSync(artifactPath(path), "utf8"))

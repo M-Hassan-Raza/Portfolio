@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowRight } from "lucide-react"
 import type { CSSProperties, ReactNode } from "react"
-import { NotePopover } from "@/components/system/overlays"
+import { NotePopover } from "@/components/system/note-popover"
 import { firstSentence } from "@/lib/content/books"
 import type { Book } from "@/lib/content/books"
 import { hashOf } from "@/lib/studio"

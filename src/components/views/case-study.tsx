@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowUpRight } from "lucide-react"
 import type { ReactNode } from "react"
-import type { Document } from "#content"
+import type { Document } from "@/lib/content/types"
 import { projects } from "@/lib/content/catalog"
 import { padIndex, yearOf } from "@/lib/format"
 import { blockFor, page } from "@/lib/studio"
