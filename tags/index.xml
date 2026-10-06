@@ -4,7 +4,7 @@
         <title>Tags</title>
         <link>https://mhassan.dev/tags/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:43:05 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -60,7 +60,7 @@
             <title><![CDATA[AWS]]></title>
             <link>https://mhassan.dev/tags/aws/</link>
             <guid isPermaLink="false">https://mhassan.dev/tags/aws/</guid>
-            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about AWS.]]></description>
         </item>
         <item>
@@ -123,7 +123,7 @@
             <title><![CDATA[Concurrency]]></title>
             <link>https://mhassan.dev/tags/concurrency/</link>
             <guid isPermaLink="false">https://mhassan.dev/tags/concurrency/</guid>
-            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about Concurrency.]]></description>
         </item>
         <item>
@@ -167,6 +167,13 @@
             <guid isPermaLink="false">https://mhassan.dev/tags/dmca/</guid>
             <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about DMCA.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[DynamoDB]]></title>
+            <link>https://mhassan.dev/tags/dynamodb/</link>
+            <guid isPermaLink="false">https://mhassan.dev/tags/dynamodb/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about DynamoDB.]]></description>
         </item>
         <item>
             <title><![CDATA[ERP]]></title>
@@ -216,13 +223,6 @@
             <guid isPermaLink="false">https://mhassan.dev/tags/free-courses/</guid>
             <pubDate>Tue, 01 Apr 2025 05:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about Free Courses.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[freeCodeCamp]]></title>
-            <link>https://mhassan.dev/tags/freecodecamp/</link>
-            <guid isPermaLink="false">https://mhassan.dev/tags/freecodecamp/</guid>
-            <pubDate>Tue, 01 Apr 2025 05:00:00 GMT</pubDate>
-            <description><![CDATA[Writing and work about freeCodeCamp.]]></description>
         </item>
     </channel>
 </rss>

@@ -4,7 +4,7 @@
         <title>Backend</title>
         <link>https://mhassan.dev/categories/backend/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Tue, 06 Oct 2026 08:30:21 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:43:05 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -14,6 +14,13 @@
             <link>https://mhassan.dev/categories/backend/</link>
         </image>
         <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[A Cron Job That Did Nothing Took Down My Deploy Platform]]></title>
+            <link>https://mhassan.dev/blog/cron-job-that-did-nothing-oom/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/cron-job-that-did-nothing-oom/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[In July 2026 a stock-replenishment job that produced zero results ate the memory on Polaris's 4 GB VPS until the kernel killed Dokploy. How it got there, what made it worse, and what I changed.]]></description>
+        </item>
         <item>
             <title><![CDATA[Taking Obelisk's Backend Deploy From 54 Minutes to 32]]></title>
             <link>https://mhassan.dev/blog/obelisk-backend-deploy-time/</link>
@@ -34,6 +41,13 @@
             <guid isPermaLink="false">https://mhassan.dev/blog/postgres-polling-to-redis-streams/</guid>
             <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
             <description><![CDATA[A Django app whose SSE endpoints polled Postgres from sleeping request threads, and the outbox, relay and Redis Streams setup that replaced them in March 2026.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[An SMS Queue That Wouldn't Drain, and the DynamoDB Row Every Send Rewrote]]></title>
+            <link>https://mhassan.dev/blog/sms-queue-dynamodb-throughput/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/sms-queue-dynamodb-throughput/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[In September 2026 an SMS backlog on AWS drained at four or five messages a minute, and a few weeks later adding workers stopped making sends faster. How I drained the queue by hand, and the DynamoDB items every send was rewriting.]]></description>
         </item>
         <item>
             <title><![CDATA[I Shipped a Race Condition That Oversold Stock (And Other War Stories)]]></title>
