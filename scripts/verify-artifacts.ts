@@ -1,8 +1,9 @@
 import assert from "node:assert/strict"
-import { existsSync, readFileSync } from "node:fs"
+import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { join } from "node:path"
 import { load } from "cheerio"
 import { z } from "zod"
+import { parseDocument } from "yaml"
 import { documents } from "../src/lib/content/catalog"
 import { topics } from "../src/lib/content/taxonomies"
 import { redirects } from "../src/lib/content/redirects"
@@ -31,6 +32,36 @@ for (const item of [...mainNavigation, ...footerNavigation])
     documents.some((document) => document.path === item.path),
     `Missing navigation target: ${item.path}`
   )
+// Content Collections skips a file whose front matter fails to parse, so a
+// stray colon can drop a post without failing the build. Check every source.
+for (const file of readdirSync("content", {
+  recursive: true,
+  encoding: "utf8",
+})) {
+  if (!file.endsWith(".mdx")) continue
+  const source = readFileSync(join("content", file), "utf8")
+  const frontMatter = /^---\n([\s\S]*?)\n---/.exec(source)?.[1] ?? ""
+  const parsed = parseDocument(frontMatter)
+  assert.equal(
+    parsed.errors.length,
+    0,
+    `Invalid front matter: content/${file}: ${parsed.errors[0]?.message}`
+  )
+  const data = parsed.toJS() as {
+    path?: string
+    draft?: boolean
+    publishedAt?: string
+  }
+  if (
+    data.draft ||
+    (data.publishedAt && Date.parse(data.publishedAt) > Date.now())
+  )
+    continue
+  assert(
+    documents.some((document) => document.path === data.path),
+    `Content file missing from the build: content/${file}`
+  )
+}
 const canonicalPaths = [
   ...documents
     .filter((document) => document.kind !== "not-found")
