@@ -28,7 +28,7 @@ proof:
   - value: "2 h to 25 min"
     label: "manual onboarding flow, after the automation work at Entropy"
   - value: "750 to 230 ms"
-    label: "reporting endpoint, from reshaping the query rather than adding hardware"
+    label: "reporting endpoint, after reshaping the query, on the same hardware"
   - value: "15+"
     label: "specialist agents running in Obelisk"
 

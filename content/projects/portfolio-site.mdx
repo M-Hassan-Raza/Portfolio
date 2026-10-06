@@ -13,26 +13,32 @@ tags:
 categories:
   - Projects
 ---
-This portfolio uses TanStack Start, React, and TypeScript. The build produces static HTML for GitHub Pages, so hosting requires no application server.
+This portfolio runs on TanStack Start, React and TypeScript. The build produces static HTML for GitHub Pages, so there's no application server to host.
 
-## Application and Content
+## Application and content
 
-TanStack Router owns navigation, route loaders, page metadata, and search parameters. Content Collections validates authored MDX and shared profile data against strict Zod schemas, then generates TypeScript types. Profile facts have one owner in `data/profile.yaml`.
+TanStack Router owns navigation, route loaders, page metadata and search parameters. Content Collections validates the MDX and shared profile data against strict Zod schemas, then generates TypeScript types. Profile facts live in one place, `data/profile.yaml`.
 
-Page components consume those contracts directly. Base UI based shadcn controls provide accessible buttons and inputs. Search uses Fuse over the published content catalog, with the query stored in the URL.
+Page components use those types directly. Buttons and inputs are shadcn controls built on Base UI. Search runs Fuse over the published content catalog and keeps the query in the URL.
 
-## Static Output
+## Loading only what a page needs
 
-TanStack Start discovers routes and follows internal links during prerendering. The output includes authored pages and topic collections. Build scripts generate feeds, sitemap, redirects, the search index, and a standalone 404 using the same catalog.
+The app bundle carries metadata for every page, and each page body is its own chunk. Route loaders fetch the body, and the build preloads it in that page's prerendered HTML, so content never waits on hydration. Search text loads on demand. The command palette, dialogs, mobile menu, toasts and easter eggs load the first time someone opens them. That took the main bundle from 460 KB to 158 KB gzipped, and an article page now loads 165 KB of JavaScript, down from over 450 KB.
 
-Verification checks the published URL contract, page content, metadata, structured data, internal links, feeds, and sitemap before deployment.
+On weak machines, or with Save-Data on, the site sets `data-perf="low"` and drops repaint-heavy hover transitions, backdrop blur and page cross-fades.
 
-## Comments and Analytics
+## Static output
 
-Giscus maps page paths to GitHub Discussions. Umami provides page-view analytics. Both integrations retain their existing site configuration.
+TanStack Start discovers routes and follows internal links during prerendering. The output includes authored pages and topic collections. Build scripts generate feeds, the sitemap, redirects, the search index, per-page chunk preloads and a standalone 404 from the same catalog.
 
-## Development and Publishing
+Before deployment, verification checks the published URL contract, page content, metadata, structured data, internal links, feeds and the sitemap.
 
-`pnpm dev` generates content contracts and starts Vite. `pnpm verify` checks types, lint, formatting, copy, production output, and public URL contracts. The GitHub Actions workflow installs the locked dependencies, runs verification, and publishes `dist/client` on pushes to `main`.
+## Comments and analytics
 
-The earlier version used Hugo and PaperMod. Their templates, configuration, theme submodule, and runtime have been removed. Existing public paths remain part of the site's URL contract.
+Giscus maps page paths to GitHub Discussions. Umami counts page views. Both kept their configuration through the move off Hugo.
+
+## Development and publishing
+
+`pnpm dev` builds the content types and starts Vite. `pnpm verify` checks types, lint, design tokens, formatting and copy, then builds the site and checks the output and public URLs. The GitHub Actions workflow installs the locked dependencies, runs verification, and publishes `dist/client` on pushes to `main`.
+
+The earlier version used Hugo and PaperMod. Their templates, configuration, theme submodule and runtime are gone, and every existing public path still resolves; the build checks them against a fixed list.

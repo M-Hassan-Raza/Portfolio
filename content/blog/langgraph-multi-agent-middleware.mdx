@@ -2,9 +2,9 @@
 kind: article
 path: /blog/langgraph-multi-agent-middleware/
 title: "Agent Middleware: What Kept Obelisk's Agents in Line"
-description: Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work.
+description: Obelisk runs more than fifteen specialist agents. Model choice, context, cost, retries and approvals all ended up in a middleware layer around them, and this is how that layer works.
 publishedAt: 2026-04-08T05:00:00.000Z
-updatedAt: 2026-09-25T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - LangChain
   - LangGraph
@@ -21,37 +21,37 @@ toc: true
 ---
 [Obelisk](/projects/obelisk/) is the AI marketing platform we build at Entropy Labs. It runs more than fifteen specialist agents: brand voice, SEO, email, paid ads, strategy and so on, all behind one API.
 
-Writing an agent turned out to be the easy part. The hard part was everything wrapped around each model call: which model to use, what to do when the conversation gets long, how to stop an agent calling the same tool forever, when to ask a human before spending money, and what to do when something fails. Early on, each agent handled those things its own way. That didn't last.
+Most of the work ended up in what wraps each model call: which model to use, what to do when the conversation gets long, how to stop an agent calling the same tool forever, when to ask a human before spending money, and what to do when something fails. Early on, each agent handled those things its own way, which didn't last long.
 
-What worked was pulling every one of those concerns into middleware: small, separate layers that run around every model and tool call, which each agent opts in or out of. LangChain's agent middleware gave us the hooks. The decisions below are the ones that mattered. I've left out our actual thresholds and routing rules, because those are ours, but the shape is the useful part.
+We pulled every one of those concerns into middleware, small separate layers that run around every model and tool call and that each agent opts in or out of. LangChain's agent middleware gave us the hooks. Below are the decisions that mattered. Our thresholds and routing rules are left out.
 
 ## One concern per layer
 
-Each middleware does one thing: pick the model, trim the context, cap the calls, gate the dangerous tools, recover from errors. An agent declares which ones it wants. The SEO agent, which uses a handful of tools, doesn't need tool filtering. The strategy agent, which can reach dozens of tools, does.
+Each middleware does one thing: pick the model, trim the context, cap the calls, gate the dangerous tools, or recover from errors. An agent declares which ones it wants. The SEO agent, which uses a handful of tools, doesn't need tool filtering. The strategy agent, which can reach dozens of tools, does.
 
-Order matters more than I expected. Model selection has to run first, so every later layer knows which model it's dealing with. Context trimming has to run before the call-limit check, or a long conversation burns its budget on retries. Approval gates have to sit close to the tool call, so nothing downstream can reroute around them. We found most of those orderings by getting them wrong.
+Order matters a lot. Model selection has to run first, so every later layer knows which model it's dealing with. Context trimming has to run before the call-limit check, or a long conversation burns its budget on retries. Approval gates have to sit close to the tool call, so nothing downstream can reroute around them. We found most of those orderings by getting them wrong.
 
-## Choose the model per request, not per agent
+## Picking the model per request
 
-Obelisk supports several model providers. The model is chosen when a request arrives, not when the agent is built. The same agent can run on one provider for one customer and another for a customer with a different contract or their own keys.
+Obelisk supports several model providers, and the model is chosen when a request arrives. The same agent can run on one provider for one customer and on another for a customer with a different contract or their own keys.
 
-That was painful to build, because every provider streams, counts tokens and reports errors a little differently. It paid off three ways: cheap models for cheap jobs like summarizing, customer-supplied keys, and a fallback when one provider has a bad afternoon.
+That was painful to build, because every provider streams, counts tokens and reports errors a little differently. In return we can use cheap models for cheap jobs like summarizing, accept customer-supplied keys, and fall back when one provider has a bad afternoon.
 
-## Summarize before the smallest window fills up
+## Summarizing long conversations
 
-Long sessions with tool calls and research results fill context windows faster than you'd think. When a conversation gets close to a threshold, a summarization layer compresses the older messages with a cheap model and keeps the recent ones as they are.
+Long sessions with tool calls and research results fill context windows quickly. When a conversation gets close to a threshold, a summarization layer compresses the older messages with a cheap model and keeps the recent ones as they are.
 
-Two details made it work. The threshold is set well below the *smallest* context window we support, not the largest, so switching models mid-conversation never overflows. And every summarization is recorded: when it fired, how much it compressed. When an agent "forgets" something, that record is the first thing we check.
+The threshold is set well below the *smallest* context window we support, so switching models mid-conversation never overflows. Every summarization is also recorded, with when it fired and how much it compressed. When an agent "forgets" something, that record is the first thing we check.
 
-## Give each request only the tools it needs
+## Filtering tools per request
 
-Obelisk has a lot of tools. Handing all of them to every call is a bad idea: the model spends tokens reading descriptions it won't use, and a longer menu means more wrong picks. For agents with large toolsets, a cheap classifier picks a small relevant subset per request, with a few tools, like knowledge-base search, always included.
+Obelisk has a lot of tools. Handing all of them to every call is a bad idea: the model spends tokens reading descriptions it won't use, and a longer menu means more wrong picks. For agents with large toolsets, a cheap classifier picks a small relevant subset per request, and a few tools, like knowledge-base search, are always included.
 
-The effect was obvious in the logs: fewer irrelevant tool calls and a lot less prompt spent on tool descriptions.
+After that went in, the logs showed fewer irrelevant tool calls and a lot less prompt spent on tool descriptions.
 
-## Ask a human before spending money
+## Approval before sending or spending
 
-Anything that sends, publishes or spends goes through an approval gate. The agent proposes the call, the graph pauses, and the person sees exactly what's about to happen, including a spend warning when there's money involved. They can approve it, edit the arguments, or reject it.
+Anything that sends, publishes or spends goes through an approval gate. The agent proposes the call, the graph pauses, and the person sees what's about to happen, including a spend warning when there's money involved. They can approve it, edit the arguments, or reject it.
 
 ```python
 HumanInTheLoopMiddleware(
@@ -63,13 +63,13 @@ HumanInTheLoopMiddleware(
 )
 ```
 
-This needs a checkpointer, because the conversation has to survive the pause, sometimes for hours. It's also the single feature that made people comfortable letting agents touch real accounts.
+This needs a checkpointer, because the conversation has to survive the pause, sometimes for hours. More than anything else in the system, this gate is what made people comfortable letting agents touch real accounts.
 
-## Retry what can be retried, and nothing else
+## Retries
 
-The default instinct with errors is "retry three times and hope". That's fine for a timeout and terrible for a malformed email, which you'd just send malformed three times.
+The default instinct with errors is "retry three times and hope". That's fine for a timeout. For a malformed email it means sending it malformed three times.
 
-So errors get classified first. Timeouts and rate limits get retried with backoff. Validation and auth failures don't. When retries run out, the agent gets the error as a message and decides what to do (try something else, ask the user, say it failed) instead of the whole conversation crashing.
+So errors get classified first. Timeouts and rate limits get retried with backoff; validation and auth failures don't. When retries run out, the agent gets the error as a message and decides what to do (try something else, ask the user, say it failed), and the conversation carries on.
 
 ```python
 @wrap_tool_call
@@ -83,16 +83,18 @@ def retry_transient(request, handler):
             sleep(backoff(attempt))
 ```
 
-Tool inputs are validated against their schemas before the call, so a bad argument fails fast and cleanly instead of halfway through a side effect.
+Tool inputs are validated against their schemas before the call, so a bad argument fails before any side effect starts.
 
-## Many small agents beat one big one
+## Splitting the general agent
 
 The first version had one general agent with a very long system prompt that tried to cover every job. It wrote ad copy when asked for analytics and started research when someone wanted a quick answer.
 
-Splitting it up fixed most of that. Each agent has a short prompt, its own tools and its own output style, and a bug in one doesn't break the others. We route to agents directly from the product, since the UI already knows which kind of conversation it's in. We don't use an agent to pick agents. That's simpler to debug and one less model call deciding what the next model call should be.
+Splitting it into specialists fixed most of that. Each agent has a short prompt, its own tools and its own output style, and a bug in one doesn't break the others. We route to agents directly from the product, since the UI already knows which kind of conversation it's in, so there's no agent picking agents. That's simpler to debug and saves a model call whose only job is deciding what the next model call should be.
 
-## What I'd do differently
+## Middleware first, logs from day one
 
-1. **Build the middleware first.** We bolted it onto working agents over several months. Treating it as the foundation from day one would have saved a lot of refactoring.
-2. **Log structured events from the start.** Debugging a many-agent system with print statements does not scale. Request IDs on every event came later than they should have. There's a post on [structured logging](/blog/structured-logging-ai-debugging/) about what we do now.
-3. **Resist the orchestrator agent.** It's tempting. Direct routing plus good middleware is more predictable than a model deciding which model to call.
+We bolted the middleware onto working agents over several months. Building it first and adding agents on top would have saved a lot of refactoring.
+
+Structured events should have been there from the start too. Debugging a many-agent system with print statements does not scale, and request IDs on every event came later than they should have. There's a post on [structured logging](/blog/structured-logging-ai-debugging/) about what we do now.
+
+An orchestrator agent is tempting, and I'd still resist it. Direct routing plus good middleware is more predictable than a model deciding which model to call.

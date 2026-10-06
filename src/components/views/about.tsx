@@ -12,20 +12,20 @@ const resumePdf = "/assets/muhammad-hassan-raza-resume.pdf"
 
 const values: { title: string; body: string }[] = [
   {
-    title: "The unglamorous middle",
-    body: "The stock count that has to stay right when two cashiers sell the last item at once. The tenant boundary nobody should be able to cross.",
+    title: "The plumbing",
+    body: "The stock count that has to stay right when two cashiers sell the last item at once, and the tenant boundary nobody should be able to cross.",
   },
   {
-    title: "Edge cases are the product",
+    title: "Edge cases",
     body: "Client work for retail shops turned into Polaris and taught me that the edge cases are the product.",
   },
   {
-    title: "Break it, then explain it",
+    title: "Breaking things on purpose",
     body: "The fastest way to understand a system is to break it and then explain why it broke.",
   },
   {
-    title: "Real systems, not toys",
-    body: "Start from a real system, not a toy that can’t break. Talk about tradeoffs, because the textbook answer is usually one of several.",
+    title: "How I teach",
+    body: "Start from a system that can break, and talk through the tradeoffs, because the textbook answer is usually one of several.",
   },
 ]
 
@@ -120,8 +120,8 @@ export function AboutView({
               For the record
             </h2>
             <p className="type-lede">
-              Entropy Labs, the company. These belong to the team, not to me
-              alone.
+              Recognition for Entropy Labs, the company. The credit is shared
+              with the whole team.
             </p>
           </div>
           <ul className="flex flex-col border-t-2 border-current">

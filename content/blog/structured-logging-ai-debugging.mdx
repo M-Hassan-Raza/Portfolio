@@ -2,8 +2,9 @@
 kind: article
 path: /blog/structured-logging-ai-debugging/
 title: Structured Logging for AI Debugging
-description: Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs.
+description: Logging one structured event per request with evlog, so an AI assistant can follow what happened in a request.
 publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Logging
   - AI
@@ -17,9 +18,9 @@ cover:
 comments: true
 toc: true
 ---
-When an AI coding assistant tries to help you debug a production issue, it reads your logs. If your logs are scattered `console.log` calls with inconsistent formatting, the AI can't help you. It doesn't know which log lines belong to the same request, what the timing was, or what the error context means.
+When an AI coding assistant tries to help you debug a production issue, it reads your logs. If your logs are scattered `console.log` calls with inconsistent formatting, it can't do much with them. It doesn't know which log lines belong to the same request, what the timing was, or what the error context means.
 
-[Evlog](https://github.com/evloghq/evlog) is a structured logging library by [Hugo Richard](https://github.com/HugoRCD), designed around the "wide event" pattern. One structured event per request, with all context attached. I've been using it in my projects and it's particularly useful when you're debugging with AI tools, because the log output is machine-readable by design.
+[Evlog](https://github.com/evloghq/evlog) is a structured logging library by [Hugo Richard](https://github.com/HugoRCD), designed around the "wide event" pattern: one structured event per request, with all the context attached. I've been using it in my projects, and it's particularly useful when you're debugging with AI tools, because the log output is machine-readable by design.
 
 ## The Problem with console.log
 
@@ -34,13 +35,13 @@ A typical Node.js app logs like this:
 [ERROR] Failed to send confirmation email
 ```
 
-Six log lines for one request. To understand what happened, you need to mentally stitch them together, match the timing, and figure out which lines belong to which request when there are 50 concurrent users.
+That's six log lines for one request. To understand what happened you have to stitch them together by timing and work out which lines belong to which request when there are 50 concurrent users.
 
-An AI assistant reading these logs has the same problem, but worse: it can't infer the causal chain between lines without explicit correlation.
+An AI assistant reading these logs has the same problem, and without explicit correlation it can't infer the causal chain between lines.
 
 ## One Event Per Request
 
-Evlog flips the model. Instead of many log calls, you build up a single event throughout the request lifecycle:
+With evlog you build up one event over the request lifecycle:
 
 ```typescript
 import { createRequestLogger } from 'evlog'
@@ -81,11 +82,11 @@ When the request finishes, evlog emits one structured JSON event:
 }
 ```
 
-Every field is on the same event. Duration is automatic. The AI assistant can read one JSON object and understand the entire request: who made it, what happened, how long it took, and what was unusual.
+Every field is on the same event, and duration is filled in for you. An AI assistant can read one JSON object and see who made the request, what happened, how long it took and what was unusual.
 
 ## Self-Documenting Errors
 
-The most useful feature for AI debugging is evlog's error structure. Instead of `throw new Error("Failed to sync")`, you create errors with `why` and `fix` fields:
+For AI debugging, the most useful part of evlog is its error structure. Where you'd normally write `throw new Error("Failed to sync")`, you create errors with `why` and `fix` fields:
 
 ```typescript
 throw new EvlogError({
@@ -98,23 +99,18 @@ throw new EvlogError({
 })
 ```
 
-When an AI reads this error in a log, it has three things it usually lacks:
-1. **What happened** (the message)
-2. **Why it happened** (root cause, not just the symptom)
-3. **How to fix it** (actionable next step, not just "check the docs")
-
-This is the difference between an AI saying "there's an error on line 47" and "the GitHub sync failed because you've exceeded the rate limit: you can either wait an hour or switch to a different API token."
+An AI reading this error in a log gets the message, the root cause and a next step it can act on, which is more than it usually has to go on. That's the difference between an AI saying "there's an error on line 47" and "the GitHub sync failed because you've exceeded the rate limit: you can either wait an hour or switch to a different API token."
 
 ## Automatic Context Injection
 
 Evlog's framework integrations (Nuxt, Next.js, Express, Fastify, Hono, SvelteKit) automatically attach request context without manual wiring:
 
-- **Request method and path** from the HTTP layer
-- **Duration** from request start to response end
-- **Status code** from the response
-- **Environment** (service name, deployment version, commit hash, region) from runtime detection
+- request method and path, from the HTTP layer
+- duration, from request start to response end
+- status code, from the response
+- environment (service name, deployment version, commit hash, region), from runtime detection
 
-The Nuxt module enables this with zero config:
+In Nuxt it's one module entry:
 
 ```typescript
 // nuxt.config.ts
@@ -126,14 +122,10 @@ export default defineNuxtConfig({
 })
 ```
 
-Every server route automatically gets a request logger with duration tracking. You don't need to import anything or set up middleware: the module injects it.
+Every server route then gets a request logger with duration tracking. The module injects it, so there's nothing to import and no middleware to set up.
 
-## Why This Matters for AI-Assisted Debugging
+## Pasting logs into a model
 
-Most of us now paste logs into a model and ask what went wrong. The answer is only as good as the logs.
-
-Structured events with correlation, timing, and self-documenting errors give the AI everything it needs to reason about the problem. Scattered console.log calls force the AI to guess at relationships between log lines, often incorrectly.
-
-Logs now have two readers, you and the model you paste them into. One JSON event per request, with context attached and errors that explain themselves, works for both.
+Most of us now paste logs into a model and ask what went wrong, and the answer is only as good as the logs. With correlation, timing and the error's `why` and `fix` on one event, the model has what it needs to reason about the problem. With scattered console.log calls it has to guess how the lines relate, and it often guesses wrong. The same JSON event is easier for me to read, too.
 
 I liked it enough to send a couple of small fixes upstream: [a docs fix](https://github.com/evloghq/evlog/pull/260) for the Cloudflare Workers setup and [one that skips unnecessary Nitro adapter probes](https://github.com/evloghq/evlog/pull/298).

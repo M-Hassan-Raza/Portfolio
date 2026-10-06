@@ -4,6 +4,7 @@ path: /blog/every-abstraction-i-regret/
 title: Every Abstraction I Regret
 description: A short list of abstractions I added too early, why they got worse over time, and the heuristics I use now to avoid repeating it.
 publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Software Design
   - Architecture
@@ -19,16 +20,16 @@ cover:
 comments: true
 toc: true
 ---
-The best code I ever deleted was a utility function called `format_response`. It accepted a response object, a format string, a fallback value, an optional transformer function, and a boolean for whether to strip whitespace. It was used in exactly one place.
+The best code I ever deleted was a utility function called `format_response`. It accepted a response object, a format string, a fallback value, an optional transformer function, and a boolean for whether to strip whitespace. It was used in one place.
 
-I wrote it because I thought I'd need it again. I didn't. It sat in `utils.py` for eight months, collecting type: ignore comments and confusing every developer who opened the file.
+I wrote it because I thought I'd need it again, and I never did. It sat in `utils.py` for eight months, collecting type: ignore comments and confusing every developer who opened the file.
 
-This is a post about the abstractions I built too early, the patterns I reached for reflexively, and the DRY violations that would have been better left wet.
+This post is about the abstractions I built too early and the DRY violations that would have been better left wet.
 
 ---
 ## The Generic Service Layer That Served Nobody
 
-Early in Polaris, I built a "generic" service layer. The idea was elegant: every model gets a service class with standard CRUD operations, validation hooks, and permission checks. Write it once, inherit everywhere.
+Early in Polaris, I built a "generic" service layer. The idea was that every model gets a service class with standard CRUD operations, validation hooks, and permission checks, written once and inherited everywhere.
 
 ```python
 class BaseService:
@@ -52,20 +53,20 @@ class BaseService:
         pass  # Override in subclass
 ```
 
-Every subclass overrode every method. `ProductService._validate` had nothing in common with `CustomerService._validate`. The "shared" base class was just an empty method contract that added indirection without reducing duplication.
+Every subclass overrode every method. `ProductService._validate` had nothing in common with `CustomerService._validate`. The "shared" base class was an empty method contract that added indirection without reducing duplication.
 
-Worse: when I needed behavior that didn't fit the create/read/update/delete pattern, like Polaris's FIFO inventory consumption or double-entry ledger operations, the service layer fought me. The abstraction assumed all operations are CRUD. Financial operations aren't.
+When I needed behavior that didn't fit the create/read/update/delete pattern, like Polaris's FIFO inventory consumption or double-entry ledger operations, the service layer fought me. It assumed every operation was CRUD, and financial operations aren't.
 
 ### What Replaced It
 
-Individual service classes with no shared base. `LedgerService` has `credit_customer` and `reverse`. `InventoryService` has `consume_inventory` and `receive_batch`. They share nothing because they do nothing in common.
+I replaced it with individual service classes and no shared base. `LedgerService` has `credit_customer` and `reverse`. `InventoryService` has `consume_inventory` and `receive_batch`. They share nothing because they do nothing in common.
 
-The code is "less clean" by DRY standards. It's dramatically easier to understand and modify.
+By DRY standards the code is "less clean", and it's much easier to understand and modify.
 
 ---
 ## Django Signals for Everything
 
-The [performance log](/blog/optimizing-django-performance/) covers what signals did to Polaris's speed. The worse problem was debugging them.
+The [performance log](/blog/optimizing-django-performance/) covers what signals did to Polaris's speed. Debugging them was worse.
 
 At one point, creating a sale in Polaris triggered a chain like this:
 
@@ -75,11 +76,11 @@ At one point, creating a sale in Polaris triggered a chain like this:
 4. `post_save` on `Sale` (again) → update customer balance
 5. Custom signal `balance_changed` → invalidate cached reports
 
-Good luck tracing a bug through that. There's no call stack. There's no explicit invocation. `grep` finds the handler, but not what triggers it, because signals are implicit coupling disguised as decoupling.
+Good luck tracing a bug through that. There's no call stack and no explicit invocation. `grep` finds the handler but not what triggers it, because signals are implicit coupling disguised as decoupling.
 
 ### What Replaced It
 
-Explicit function calls.
+I replaced them with explicit function calls.
 
 ```python
 class SaleService:
@@ -90,26 +91,26 @@ class SaleService:
             self._invalidate_reports(sale.customer_id)
 ```
 
-This is "worse" by separation-of-concerns standards. `SaleService` now knows about inventory and reporting. But every developer who reads `complete_sale` can trace the entire execution path without leaving the function. That's worth more than architectural purity.
+By separation-of-concerns standards this is "worse", since `SaleService` now knows about inventory and reporting. But anyone reading `complete_sale` can trace the whole execution path without leaving the function, and I'll take that over architectural purity.
 
-### When Signals Are Actually Good
+### When Signals Make Sense
 
-Cross-app boundaries where loose coupling matters. Your `billing` app doesn't need to know about your `analytics` app. A signal that fires on "payment completed" is fine when the handler is in a different bounded context.
+Signals belong at app boundaries where loose coupling matters. Your `billing` app doesn't need to know about your `analytics` app, so a "payment completed" signal is fine when the handler lives in a different bounded context.
 
-But using signals within a single app's core business logic? That's abstractions for the sake of architecture diagrams, not for the sake of understanding code.
+Inside a single app's core business logic, they mostly serve the architecture diagram.
 
 ---
 ## The "Reusable" Component Library
 
-In a frontend project, I built a component library before I had components to put in it. A `BaseCard` with 12 props. A `BaseButton` with configurable size, variant, icon position, loading state, and disabled tooltip.
+In a frontend project, I built a component library before I had components to put in it: a `BaseCard` with 12 props, and a `BaseButton` with configurable size, variant, icon position, loading state, and disabled tooltip.
 
-Usage of `BaseCard` across the entire project: 3 places, each with completely different layouts that made the "base" props irrelevant. Two of the three instances passed so many overrides that the component was essentially a `<div>` with extra steps.
+`BaseCard` was used in 3 places across the project, each with a completely different layout that made the "base" props irrelevant. Two of the three instances passed so many overrides that the component was essentially a `<div>` with extra steps.
 
-The button was worse. I added a `tooltipPosition` prop because one button needed a left-aligned tooltip. Now every button in the system carries tooltip positioning logic it doesn't use. The component API grew to accommodate every edge case, which meant every consumer had to understand the entire API surface even when they just needed a button.
+The button was worse. I added a `tooltipPosition` prop because one button needed a left-aligned tooltip. Now every button in the system carries tooltip positioning logic it doesn't use. The component API grew to accommodate every edge case, which meant every consumer had to understand the whole API when all they wanted was a button.
 
 ### What I Do Now
 
-I start with the raw HTML elements. When I have three truly similar components that share non-trivial logic, I extract the shared part. Not before.
+I start with the raw HTML elements, and I only extract the shared part once I have three similar components with non-trivial logic in common.
 
 ```vue
 <!-- Three similar buttons? Copy-paste is fine until it isn't. -->
@@ -120,7 +121,7 @@ I start with the raw HTML elements. When I have three truly similar components t
 </button>
 ```
 
-The third button has loading state. That's one button. Not a component library.
+The third button has a loading state. That's one button, and no reason for a component library.
 
 ---
 ## The Config-Driven Architecture
@@ -137,29 +138,29 @@ INVENTORY_CONFIG = {
 }
 ```
 
-The idea: different clients could customize behavior without code changes. Just update the config!
+The idea was that different clients could customize behavior without code changes. Just update the config!
 
-In practice, every "configuration" eventually needed code changes anyway. "Allow negative stock" sounds like a boolean, but the business logic for negative stock is fundamentally different from positive-stock-only logic. It needs its own code path, with different validation, different reporting, and different financial implications.
+Every "configuration" eventually needed code changes anyway. "Allow negative stock" sounds like a boolean, but the business logic for negative stock is very different from positive-stock-only logic. It needs its own code path, with its own validation, reporting, and financial implications.
 
-I ended up with code riddled with `if settings.INVENTORY_CONFIG["allow_negative_stock"]:` branches, each one tested independently, each one a potential bug surface. The config spread the complexity across every function that read it instead of removing it.
+I ended up with code riddled with `if settings.INVENTORY_CONFIG["allow_negative_stock"]:` branches, each one tested independently and each one a possible bug. The config took the complexity and spread it across every function that read it.
 
 ### What Replaced It
 
-Hard-coded business rules that match the actual client's requirements. When a new client needs different behavior, I evaluate whether it's a genuine variation or a different product. Usually, it's a different product.
+I went back to hard-coded business rules that match the client's requirements. When a new client needs different behavior, I work out whether it's a real variation or a different product. Usually it's a different product.
 
-Configuration is for deployment parameters: database URLs, API keys, feature flags for A/B tests. Business rules are code. They deserve tests, type checking, and code review, none of which work well on JSON objects.
+Configuration is for deployment parameters: database URLs, API keys, feature flags for A/B tests. Business rules are code. They deserve tests, type checking, and code review, none of which work well on a dict of settings.
 
 ---
 ## The Pattern I Keep Coming Back To
 
-Every abstraction I regret shares the same origin story: I built it because I imagined a future need, not because I had a present one. The generic service layer was for "when we have 50 models." The config-driven architecture was for "when we have multiple clients." The component library was for "when we have a design system."
+Every abstraction I regret was built for a need I only expected to have. The generic service layer was for "when we have 50 models." The config-driven architecture was for "when we have multiple clients." The component library was for "when we have a design system."
 
-None of those futures arrived the way I imagined. When they arrived at all, the actual requirements were different enough that the abstraction didn't fit.
+None of those futures arrived the way I imagined, and when they arrived at all, the requirements were different enough that the abstraction didn't fit.
 
-The abstractions I don't regret? They were all extracted, never invented. I wrote the code three times, noticed the pattern, and pulled it out. `TenantAwareQuerySet` in Polaris started as copy-pasted `.filter(organization=org)` calls. When I had 15 models all doing the same filter, the abstraction was obvious and correct.
+The abstractions I don't regret were all extracted from code that already existed. I wrote the code three times, noticed the pattern, and pulled it out. `TenantAwareQuerySet` in Polaris started as copy-pasted `.filter(organization=org)` calls. When I had 15 models all doing the same filter, the abstraction was obvious and correct.
 
-The heuristic: **if you can't point to three existing call sites that would use the abstraction, you're speculating.** Speculation in code is expensive because it's permanent until someone is brave enough to delete it.
+My rule now is that if you can't point to three existing call sites that would use the abstraction, you're speculating. Speculation in code is expensive because it's permanent until someone is brave enough to delete it.
 
-And deleting abstractions is harder than deleting regular code. Regular code has no dependents. An abstraction has consumers, each of which was shaped by the abstraction's API. Removing it means refactoring every consumer. The abstraction calcifies.
+And deleting abstractions is harder than deleting regular code. Regular code has no dependents. An abstraction has consumers, each of which was shaped by the abstraction's API. Removing it means refactoring every consumer, so it tends to stay.
 
-So when you're about to create `BaseService`, `GenericHandler`, or `AbstractProcessor`: write the specific thing first. Write it again when you need it again. By the third time, you'll know what the abstraction actually is, not what you imagined it might be.
+So when you're about to create `BaseService`, `GenericHandler`, or `AbstractProcessor`, write the specific thing first, and write it again when you need it again. By the third time you'll have seen what the abstraction is.

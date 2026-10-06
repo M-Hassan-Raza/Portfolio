@@ -4,6 +4,7 @@ path: /blog/preloading-data-for-performance/
 title: The Invoice Page That Took 4 Seconds to Search
 description: How preloading product data cut search latency from 4 seconds to instant on a POS invoice page, and when this pattern breaks down.
 publishedAt: 2025-02-12T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Performance
   - Vue.js
@@ -18,13 +19,13 @@ cover:
 comments: true
 toc: true
 ---
-In [Polaris](/projects/polaris), the POS system I built for retail shops, the invoice page has a product search bar. A cashier types a product name, results appear, they click to add it to the invoice. Simple.
+In [Polaris](/projects/polaris), the POS system I built for retail shops, the invoice page has a product search bar. A cashier types a product name, results appear, and they click to add it to the invoice.
 
-Except it wasn't. Every keystroke fired an API call. On a shop with 500 products, search took 3-4 seconds because each request hit the database, serialized the response, and traveled back over the network. Cashiers were waiting on every single search. During rush hours, this was painful.
+The first version fired an API call on every keystroke. On a shop with 500 products, search took 3-4 seconds, because each request hit the database, serialized the response and traveled back over the network. Cashiers waited on every search, which hurt during rush hours.
 
-## The Fix: Load Everything on Mount
+## Loading the catalog on mount
 
-The product catalog for a typical Polaris shop is 200-800 products. That's maybe 50KB of JSON. There's no reason to fetch it on every search when you can load it once.
+The product catalog for a typical Polaris shop is 200-800 products, maybe 50KB of JSON. There's no reason to fetch it on every search when you can load it once.
 
 ```vue
 <script setup>
@@ -53,22 +54,22 @@ function searchProducts() {
 </script>
 ```
 
-Search went from 3-4 seconds to effectively instant. The initial page load added maybe 200ms for fetching the catalog, but that happens once while the page is rendering anyway. The cashier doesn't notice.
+Search went from 3-4 seconds to effectively instant. Fetching the catalog added maybe 200ms to the initial page load, but that happens once while the page is rendering anyway, and the cashier doesn't notice.
 
-## When This Breaks Down
+## When this breaks down
 
 This pattern has a ceiling. It works for Polaris because:
 
-- **Catalog size is bounded.** Retail shops have hundreds of products, not millions. If you're building an e-commerce platform with 50,000 SKUs, preloading everything is not an option.
-- **Data changes slowly.** Products don't update mid-transaction. If your data changes every few seconds, you'll serve stale results.
-- **Search is simple.** String matching on name and SKU. If you need fuzzy matching, relevance scoring, or faceted search, you need a server-side search engine.
+- The catalog size is bounded. Retail shops have hundreds of products. If you're building an e-commerce platform with 50,000 SKUs, preloading everything is not an option.
+- The data changes slowly. Products don't update mid-transaction. If your data changes every few seconds, you'll serve stale results.
+- The search is simple string matching on name and SKU. If you need fuzzy matching, relevance scoring or faceted search, you need a server-side search engine.
 
-## What To Do When It Doesn't Fit
+## Options for bigger catalogs
 
 For larger catalogs, the progression is:
 
-1. **Debounced server search** — wait 300ms after the last keystroke, then fire one API call. Eliminates the per-keystroke storm.
-2. **Server-side search with an index** — PostgreSQL trigram indexes or Elasticsearch. Required once you're past a few thousand items.
-3. **Virtual scrolling for results** — if you're showing 10,000 results in a dropdown, render only what's visible. Libraries like `vue-virtual-scroller` handle this.
+1. Debounced server search. Wait 300ms after the last keystroke, then fire one API call, which stops the per-keystroke storm.
+2. Server-side search with an index, such as PostgreSQL trigram indexes or Elasticsearch. You need this once you're past a few thousand items.
+3. Virtual scrolling for results. If you're showing 10,000 results in a dropdown, render only what's visible; libraries like `vue-virtual-scroller` handle this.
 
-The right answer depends on how much data you have and how fast it changes. For Polaris, preloading 500 products on mount was the simplest fix that solved the real problem.
+Which one you need depends on how much data you have and how fast it changes. For Polaris, preloading 500 products on mount was the simplest fix for a cashier waiting four seconds per search.

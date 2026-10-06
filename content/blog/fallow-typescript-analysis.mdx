@@ -2,8 +2,9 @@
 kind: article
 path: /blog/fallow-typescript-analysis/
 title: How Fallow Analyzes TypeScript in Under a Second
-description: How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and leaning on Rust.
+description: How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and doing the work in Rust.
 publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Rust
   - TypeScript
@@ -19,15 +20,15 @@ toc: true
 ---
 [Fallow](https://github.com/fallow-rs/fallow) is a codebase analyzer written in Rust for TypeScript and JavaScript projects, created by [Bart Waardenburg](https://github.com/BartWaardenburg). I contribute to it, and [my pull requests](https://github.com/fallow-rs/fallow/pulls?q=author%3AM-Hassan-Raza) are where most of this understanding came from. It finds unused files, dead exports, unlisted dependencies, code duplication, circular dependencies, and complexity hotspots. It's a Rust alternative to [Knip](https://github.com/webpro-nl/knip).
 
-By the project's own benchmarks it runs 6 to 46 times faster than Knip on real repositories, with 4 to 11 times less memory. Here's how the internals work.
+By the project's own benchmarks it runs 6 to 46 times faster than Knip on real repositories, with 4 to 11 times less memory. These are the internals behind those numbers.
 
 ## No TypeScript Compiler
 
-The biggest performance decision was avoiding the TypeScript compiler entirely. Knip runs through `tsc` to build a type-checked AST. This is thorough but expensive: you pay for type checking, declaration merging, and module resolution that a dead-code detector doesn't need.
+The biggest performance decision was skipping the TypeScript compiler. Knip runs through `tsc` to build a type-checked AST. This is thorough but expensive: you pay for type checking, declaration merging, and module resolution that a dead-code detector doesn't need.
 
-Fallow uses [Oxc](https://oxc.rs), a Rust-native parser for JavaScript and TypeScript. Oxc parses syntax into an AST and provides scope-aware binding analysis through `oxc_semantic`, but it doesn't do type checking. For dead code detection, you need to know "what does this file export?" and "what does this file import?" Both are syntactic questions. You don't need to resolve types to answer them.
+Fallow uses [Oxc](https://oxc.rs), a Rust-native parser for JavaScript and TypeScript. Oxc parses syntax into an AST and provides scope-aware binding analysis through `oxc_semantic`, but it doesn't do type checking. For dead code detection, you need to know "what does this file export?" and "what does this file import?" Both are syntactic questions.
 
-The tradeoff: Fallow can't detect unused type-narrowing exports or exports that are only used via type inference. In practice, these are rare enough that the 10-40x speedup is worth it. This was an intentional design decision by the project's creator.
+The cost is that Fallow can't detect unused type-narrowing exports or exports that are only used via type inference. These are rare enough that the 6-46x speedup is worth it, and the project's creator made that call deliberately.
 
 ## Cache-Friendly Edge Storage
 
@@ -48,7 +49,7 @@ pub struct ModuleNode {
 }
 ```
 
-When you traverse a module's imports, you're iterating over a contiguous slice of memory. The CPU prefetcher loves this. It's the same pattern game engines use for entity-component systems: structure of arrays instead of array of structures.
+When you traverse a module's imports, you're iterating over a contiguous slice of memory, which the CPU prefetcher loves. It's the same pattern game engines use for entity-component systems: structure of arrays instead of array of structures.
 
 The project also enforces compile-time size assertions to prevent accidental bloat:
 
@@ -58,21 +59,21 @@ const _: () = assert!(std::mem::size_of::<ModuleNode>() == 104);
 const _: () = assert!(std::mem::size_of::<SymbolReference>() == 16);
 ```
 
-If someone adds a field that bumps the size, the build fails. This catches memory regressions before they become performance regressions.
+If someone adds a field that bumps the size, the build fails, so memory regressions get caught before they show up as slowdowns.
 
 ## Suffix Array Clone Detection
 
 Code duplication detection usually involves pairwise comparison of every pair of code blocks for similarity. That's O(n^2) and falls apart on large codebases.
 
-Fallow uses suffix arrays instead. The approach:
+Fallow uses suffix arrays instead:
 
-1. **Tokenize** each source file into a sequence of abstract tokens (identifiers normalized, literals replaced with type markers)
-2. **Concatenate** all token sequences with sentinel separators between files
-3. **Build a suffix array** over the concatenated sequence using O(N log N) prefix-doubling with radix sort
-4. **Compute the LCP array** (Longest Common Prefix) to find maximal repeated subsequences
-5. **Extract clone families** from LCP runs that span different files
+1. Tokenize each source file into a sequence of abstract tokens (identifiers normalized, literals replaced with type markers)
+2. Concatenate all token sequences with sentinel separators between files
+3. Build a suffix array over the concatenated sequence using O(N log N) prefix-doubling with radix sort
+4. Compute the LCP array (Longest Common Prefix) to find maximal repeated subsequences
+5. Extract clone families from LCP runs that span different files
 
-This finds all duplicated code blocks across the entire codebase in a single pass. No pairwise comparison. The suffix array construction is the expensive part, but it's O(N log N) where N is the total token count, not O(files^2).
+This finds every duplicated block across the codebase in a single pass, with no pairwise comparison. Building the suffix array is the expensive step, at O(N log N) where N is the total token count, compared with O(files^2) for pairwise matching.
 
 On Next.js with 20,000 files, duplication detection completes in about 3 seconds. jscpd (the standard JavaScript duplicate detector) takes 24 seconds on the same codebase.
 
@@ -82,15 +83,15 @@ Parsing is embarrassingly parallel, since each file is independent. Fallow uses 
 
 But cold parsing is still the bottleneck for large projects. Fallow's caching layer stores parsed results keyed by file content hash. On subsequent runs, only modified files get re-parsed. This turns a 1.5-second cold analysis into a ~200ms warm analysis, because most files don't change between runs.
 
-The cache key is a content hash, not a timestamp. This means renaming a file without changing its content doesn't invalidate the cache, and two files with identical content share a cache entry.
+Because the cache key is a content hash, renaming a file without changing its content doesn't invalidate the cache, and two files with identical content share a cache entry.
 
 ## 84 Framework Plugins, Zero Config
 
 Fallow ships with 84 plugins that detect framework-specific patterns (Next.js page routes, Storybook stories, Vitest test files, Tailwind configs, etc.) and mark the relevant files as entry points. Without this, a dead-code detector would flag your `pages/index.tsx` as unused because nothing explicitly imports it.
 
-The plugins are auto-detected from `package.json` dependencies, with no configuration. If you have `next` in your dependencies, Fallow knows that files matching `app/**/page.tsx` are entry points. This is what makes zero-config work on real projects.
+The plugins are auto-detected from `package.json` dependencies, with no configuration. If you have `next` in your dependencies, Fallow knows that files matching `app/**/page.tsx` are entry points, which is how it gets away with zero config on real projects.
 
-## Real Numbers
+## Benchmarks
 
 Benchmarked on Apple M5, 32GB RAM, median of 5 runs:
 
@@ -104,4 +105,4 @@ Benchmarked on Apple M5, 32GB RAM, median of 5 runs:
 
 Knip v5 can't analyze Next.js at all (exits with errors). Fallow handles it in under 2 seconds using less memory than Knip uses on a project 1/10th the size.
 
-The performance comes from the combination of all these decisions: no type checker, cache-friendly data structures, suffix arrays for duplication, parallel parsing, and incremental caching. No single trick, just consistently choosing the faster approach at every layer of the pipeline. Contributing to a codebase with this level of performance engineering has been one of the best learning experiences for writing fast Rust.
+The speed comes from all of these decisions together: skipping the type checker, keeping data structures cache-friendly, finding duplication with suffix arrays, and parsing in parallel with an incremental cache. Each layer of the pipeline picks the faster option. Contributing to a codebase with this much performance engineering has been one of the best ways I've found to learn fast Rust.

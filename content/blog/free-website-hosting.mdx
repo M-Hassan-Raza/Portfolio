@@ -1,11 +1,13 @@
 ---
 kind: article
 path: /blog/free-website-hosting/
-title: "What I Actually Spend on Running mhassan.dev: $8/year"
+title: "What It Costs to Run mhassan.dev: $8/year"
 description: The full cost of running this site, what's free, and the tradeoffs behind each choice.
 publishedAt: 2025-02-15T09:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Hugo
+  - TanStack Start
   - GitHub Pages
   - Portfolio
   - Web Development
@@ -14,15 +16,15 @@ cover:
   alt: Portfolio hosting cost breakdown cover
 comments: true
 ---
-My portfolio costs me about $8/year. That's the domain. Everything else is free.
+My portfolio costs me about $8/year, all of it for the domain. Everything else is free, and the reasons for each pick are below.
 
-Here's the full breakdown and the tradeoffs behind each choice.
+I wrote this in February 2025, when the site ran on Hugo. In October 2026 I moved it to TanStack Start; the last section covers what changed. The hosting, domain, analytics and comments are the same, and so is the bill.
 
 ## The Stack
 
 | What | Tool | Cost |
 |------|------|------|
-| Static site generator | Hugo + PaperMod | Free |
+| Static site generator | Hugo + PaperMod (TanStack Start since October 2026) | Free |
 | Hosting | GitHub Pages | Free |
 | Domain | Porkbun (mhassan.dev) | ~$8/year |
 | Analytics | Umami Cloud (hobby plan) | Free |
@@ -31,28 +33,32 @@ Here's the full breakdown and the tradeoffs behind each choice.
 
 ## Why Hugo Over Next.js or Astro
 
-I tried Astro first. It was fine. But Hugo builds my entire site in under 200ms. Astro took 4 seconds. For a markdown blog with no client-side interactivity, that's 4 seconds of complexity I don't need.
+I tried Astro first and it was fine, but builds took 4 seconds; Hugo builds my entire site in under 200ms. For a markdown blog with no client-side interactivity, that's 4 seconds of complexity I don't need.
 
-Hugo also means zero JavaScript in the output by default. No hydration, no runtime, no bundle. My portfolio loads fast on bad connections because there's almost nothing to load except HTML, CSS, and images.
+Hugo also ships no JavaScript by default, so there's nothing to hydrate or bundle. My portfolio loads fast on bad connections because there's almost nothing to load except HTML, CSS, and images.
 
-The downside: Hugo's templating language is ugly. If you've ever written `{{ with .Params.cover }}{{ if .image }}` you know what I mean. But I only touch templates when I'm customizing PaperMod, which is maybe twice a year.
+The downside is that Hugo's templating language is ugly. If you've ever written `{{ with .Params.cover }}{{ if .image }}` you know what I mean. I only touch templates when I'm customizing PaperMod, which is maybe twice a year.
 
 ## Porkbun Over Cloudflare
 
-Cloudflare Registrar is cheaper for some TLDs, but Porkbun gives you free WHOIS privacy, the dashboard isn't designed for infrastructure engineers, and the DNS setup for GitHub Pages took about 3 minutes. I set a CNAME record, GitHub provisioned the SSL cert, done.
+Cloudflare Registrar is cheaper for some TLDs, but Porkbun gives you free WHOIS privacy and a dashboard that wasn't designed for infrastructure engineers, and the DNS setup for GitHub Pages took about 3 minutes. I set a CNAME record, GitHub provisioned the SSL cert, done.
 
 ## Umami Over Google Analytics
 
-Google Analytics is free too, but it's also a privacy liability. I don't want a cookie banner on my portfolio. Umami gives me page views, referrers, and device breakdowns, which is everything I look at, without tracking individual users or requiring consent.
+Google Analytics is free too, but it's also a privacy liability, and I don't want a cookie banner on my portfolio. Umami gives me page views, referrers, and device breakdowns, which is everything I look at, without tracking individual users or requiring consent.
 
-I use Umami's hosted hobby plan. The dashboard is clean, it doesn't set cookies, and my visitors don't get fingerprinted.
+I use Umami's hosted hobby plan. The dashboard is clean, and it sets no cookies and doesn't fingerprint visitors.
 
-## Giscus: Comments That Filter Themselves
+## Giscus for Comments
 
-Giscus uses GitHub Discussions as a backend. The "limitation" that commenters need a GitHub account is the point: it means I get comments from developers, not spam bots. Moderation is handled through GitHub's existing tools. No database, no backend, no Disqus ads.
+Giscus uses GitHub Discussions as a backend. Commenters need a GitHub account, which keeps spam bots out and means comments come from developers. Moderation goes through GitHub's existing tools, with no database, backend, or Disqus ads.
 
-## What I'd Change
+## Replacing the Homepage
 
-I'd still pick Hugo. The one thing I did change, eventually, was replacing PaperMod's profile-mode homepage with a custom one. PaperMod is excellent for posts, but a centered avatar and subtitle can only say so much.
+The first thing I changed, eventually, was swapping PaperMod's profile-mode homepage for a custom one. PaperMod is excellent for posts, but a centered avatar and subtitle can only say so much.
 
-Total recurring cost: one domain renewal.
+## Leaving Hugo
+
+In October 2026 I moved the site to TanStack Start, with the posts as MDX, as part of a full redesign. A command palette, keyboard shortcuts and reading settings followed a few days later. It still prerenders every page to static HTML, so GitHub Pages serves it the same way as before.
+
+The cost of leaving Hugo was the thing I'd praised it for. The first build shipped every post to every page, and on a slow phone over 3G a page took about nine seconds to become usable. Splitting each post into its own chunk and loading the palette and other extras on first use took the main bundle from 460 KB to 158 KB gzipped. That's still more JavaScript than Hugo ever sent, and it's the trade I made for the features.
