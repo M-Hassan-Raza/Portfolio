@@ -4,7 +4,7 @@
         <title>C++</title>
         <link>https://mhassan.dev/tags/c++/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:21 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -26,7 +26,7 @@
             <link>https://mhassan.dev/projects/pgm-editor/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/pgm-editor/</guid>
             <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[A deep dive into my university project - a simple yet powerful image editor built with C++.]]></description>
+            <description><![CDATA[My university project, a grayscale image editor in C++ that loads, filters and transforms PGM images.]]></description>
         </item>
     </channel>
 </rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Redis</title>
+        <link>https://mhassan.dev/tags/redis/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Redis</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/redis/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[Moving SMS Realtime Off Postgres Polling and Onto Redis Streams]]></title>
+            <link>https://mhassan.dev/blog/postgres-polling-to-redis-streams/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/postgres-polling-to-redis-streams/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A Django app whose SSE endpoints polled Postgres from sleeping request threads, and the outbox, relay and Redis Streams setup that replaced them in March 2026.]]></description>
+        </item>
+    </channel>
+</rss>

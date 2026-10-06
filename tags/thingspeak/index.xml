@@ -4,7 +4,7 @@
         <title>ThingSpeak</title>
         <link>https://mhassan.dev/tags/thingspeak/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -19,7 +19,7 @@
             <link>https://mhassan.dev/projects/iot-garbage-monitoring/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/iot-garbage-monitoring/</guid>
             <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints.]]></description>
+            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app, plus what it taught me about hardware constraints.]]></description>
         </item>
     </channel>
 </rss>

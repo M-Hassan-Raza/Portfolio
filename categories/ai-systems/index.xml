@@ -4,7 +4,7 @@
         <title>AI systems</title>
         <link>https://mhassan.dev/categories/ai-systems/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:21 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -19,21 +19,21 @@
             <link>https://mhassan.dev/blog/fraud-scoring-legal-intake/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/fraud-scoring-legal-intake/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.]]></description>
+            <description><![CDATA[Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score is the one that grades the interviewer.]]></description>
         </item>
         <item>
             <title><![CDATA[Agent Middleware: What Kept Obelisk's Agents in Line]]></title>
             <link>https://mhassan.dev/blog/langgraph-multi-agent-middleware/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/langgraph-multi-agent-middleware/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work.]]></description>
+            <description><![CDATA[Obelisk runs more than fifteen specialist agents. Model choice, context, cost, retries and approvals all ended up in a middleware layer around them, and this is how that layer works.]]></description>
         </item>
         <item>
             <title><![CDATA[LangChain in Production: What the Tutorials Leave Out]]></title>
             <link>https://mhassan.dev/blog/langchain-production/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/langchain-production/</guid>
             <pubDate>Sun, 01 Feb 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.]]></description>
+            <description><![CDATA[Where LangChain is worth using, where it gets in the way, and the defaults that stop our AI features failing silently: timeouts, validation, persistent state, tracing and pinned versions.]]></description>
         </item>
     </channel>
 </rss>

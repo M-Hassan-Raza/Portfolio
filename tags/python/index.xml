@@ -4,7 +4,7 @@
         <title>Python</title>
         <link>https://mhassan.dev/tags/python/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -14,6 +14,20 @@
             <link>https://mhassan.dev/tags/python/</link>
         </image>
         <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[kitty's Parallel Test Runner Said OK While Its Workers Crashed]]></title>
+            <link>https://mhassan.dev/blog/kitty-parallel-test-runner-fork-crash/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/kitty-parallel-test-runner-fork-crash/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A missing addSubTest and an ignored exit status let kitty's new parallel test runner report success after failures. Fixing that exposed seven segfaulting workers on my Mac, and Kovid Goyal fixed those his own way.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Taking Obelisk's Backend Deploy From 54 Minutes to 32]]></title>
+            <link>https://mhassan.dev/blog/obelisk-backend-deploy-time/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/obelisk-backend-deploy-time/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Our backend deploys had crept up to almost an hour. Docker was fine. Most of the time went to migration tests waiting on one Postgres advisory lock, and to five Cloud Run services promoted one at a time.]]></description>
+        </item>
         <item>
             <title><![CDATA[Every Abstraction I Regret]]></title>
             <link>https://mhassan.dev/blog/every-abstraction-i-regret/</link>
@@ -40,14 +54,14 @@
             <link>https://mhassan.dev/blog/langchain-production/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/langchain-production/</guid>
             <pubDate>Sun, 01 Feb 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.]]></description>
+            <description><![CDATA[Where LangChain is worth using, where it gets in the way, and the defaults that stop our AI features failing silently: timeouts, validation, persistent state, tracing and pinned versions.]]></description>
         </item>
         <item>
             <title><![CDATA[Smart Dustbin: IoT with Arduino, Python, Kotlin & Azure]]></title>
             <link>https://mhassan.dev/projects/iot-garbage-monitoring/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/iot-garbage-monitoring/</guid>
             <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints.]]></description>
+            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app, plus what it taught me about hardware constraints.]]></description>
         </item>
     </channel>
 </rss>

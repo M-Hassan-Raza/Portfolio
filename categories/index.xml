@@ -4,7 +4,7 @@
         <title>Categories</title>
         <link>https://mhassan.dev/categories/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -25,7 +25,7 @@
             <title><![CDATA[Backend]]></title>
             <link>https://mhassan.dev/categories/backend/</link>
             <guid isPermaLink="false">https://mhassan.dev/categories/backend/</guid>
-            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about Backend.]]></description>
         </item>
         <item>
@@ -41,6 +41,13 @@
             <guid isPermaLink="false">https://mhassan.dev/categories/legal/</guid>
             <pubDate>Wed, 12 Feb 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about Legal.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Open Source]]></title>
+            <link>https://mhassan.dev/categories/open-source/</link>
+            <guid isPermaLink="false">https://mhassan.dev/categories/open-source/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Writing and work about Open Source.]]></description>
         </item>
         <item>
             <title><![CDATA[Performance]]></title>

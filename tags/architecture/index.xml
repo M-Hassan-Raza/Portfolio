@@ -4,7 +4,7 @@
         <title>Architecture</title>
         <link>https://mhassan.dev/tags/architecture/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:21 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -14,6 +14,13 @@
             <link>https://mhassan.dev/tags/architecture/</link>
         </image>
         <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[Moving SMS Realtime Off Postgres Polling and Onto Redis Streams]]></title>
+            <link>https://mhassan.dev/blog/postgres-polling-to-redis-streams/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/postgres-polling-to-redis-streams/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A Django app whose SSE endpoints polled Postgres from sleeping request threads, and the outbox, relay and Redis Streams setup that replaced them in March 2026.]]></description>
+        </item>
         <item>
             <title><![CDATA[Every Abstraction I Regret]]></title>
             <link>https://mhassan.dev/blog/every-abstraction-i-regret/</link>

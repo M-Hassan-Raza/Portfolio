@@ -1,0 +1,88 @@
+const M=`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       .000000000000000:                :OOOOOx                                                                                                                                ,dk0XNWWWWNKkl'         ;ldOKXNNNXKOd;.
+                       .MMMMMMMMMMMMMMMo               dMMMMMMN                                                                                                                                kMMMMMMMMMMMMMMX,      .MMMMMMMMMMMMMMMk.
+                       .MMMMKkkkkkkkkkk;             .OMMMMMMMN                                                                                                                                kN0xoc:::lkWMMMMW'     .MW0dc;,',c0MMMMMX.
+                       .MMMM:                       ,NMMNKMMMMN       ...  .,:;.   .;:;.                                                     .o;.                                                         .NMMMMo      '          oMMMMMc     ...  .,:;.   .;:;.
+                       .MMMM:                      lWMMK.lMMMMN      :MMMdxWMMMM0;0MMMMMN;                                                   ,MMMNOo;.                                                    .NMMMM:                 ,MMMMMc    :MMMdkMMMMM0:KMMMMMX'
+                       .MMMMK0KKK0xl'            .OMMMO  lMMMMN      :MMMMWOOWMMMMM0OWMMMN                                                   .XMMMMMMMW0d:.                                        .,,,;cxNMMMWo                 .KMMMMX     :MMMMWOOMMMMMW0OWMMMN
+                       .MMMMMMMMMMMMMNo         .XMMWl   lMMMMN      :MMMMc  cMMMMo  :MMMM'                                                     .:oOXMMMMMMW0d:.                                   cMMMMMMMNxc.                 ,XMMMMK.     :MMMM:  oMMMMl  oMMMM'
+                       .MNOxolldkXMMMMMN.      ;WMMN'    lMMMMN      :MMMM'  'MMMM:  .MMMM:                             ,llllllllllllll,             .'cxKWMMMMMWK.                                cMMMMMMMMNOc               .kMMMMWo       :MMMM.  ;MMMM'  ;MMMM:
+                        .         ;NMMMMK     dMMM0.     lMMMMN      :MMMM'  'MMMM;  .MMMM:                             xMMMMMMMMMMMMMMd                  .lKMMMMM'                                 ....,l0MMMMN,           .xWMMMWd.        :MMMM.  ;MMMM'  ;MMMM:
+                                   cMMMMM'    WMMMWNNNNNNWMMMMMNNN.  :MMMM'  'MMMM;  .MMMM:                             xMMMMMMMMMMMMMMd             .;oOXMMMMMMNO.                                        oMMMMN         .dWMMMWo.          :MMMM.  ;MMMM'  ;MMMM:
+                                   cMMMMM'    WMMMMMMMMMMMMMMMMMMM.  :MMMM'  'MMMM;  .MMMM:                             .,,,,,,,,,,,,,,.       .,lx0WMMMMMMXkl,.                                           .MMMMM,       lWMMMWd.            :MMMM.  ;MMMM'  ;MMMM:
+                       .          ;NMMMMX     cllllllllll0MMMMWoll   :MMMM'  'MMMM;  .MMMM:                                                  'WMMMMMMMXkc,.                                   ..          .kMMMMW.     lNMMMKc               :MMMM.  ;MMMM'  ;MMMM:
+                      .MN0xollldkXMMMMMX'                lMMMMN      :MMMM'  'MMMM;  .MMMM:                                                  ,MMWKxc'                                         dMWKOxdooox0WMMMMMl     kMMMMMXKKKKKKKKKKKc    :MMMM.  ;MMMM'  ;MMMM:
+                      .MMMMMMMMMMMMMMNo                  lMMMMN      :MMMM'  'MMMM;  .MMMM:                                                  .:.                                              dMMMMMMMMMMMMMMMK;      0MMMMMMMMMMMMMMMMMo    :MMMM.  ;MMMM'  ;MMMM:
+                       :oxOKXNNNX0kl'                    ,xxxxo      'kkkk.  .kkkk'  .kkkk'                                                                                                   .:oxOKXNNNXKOxc.        lkkkkkkkkkkkkkkkkk;    'kkkk.  .kkkk.  .kkkk'
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                              ..    ... .. ..,     .         ..        '      '    .       .                       .     .                    ,         .
+                                                                              .l     .:.d'' .;    .o. oc,.l' c: .l'    l;c.oc,c;c .: c,c c;:    c,;;,c oc;    ;l;,'o :., l  :: ,': :..'.:     :  c,;',. o:.
+                                                                             ..;  ; .:. ;'. ,      ,. ,.  .; .,  .;    ,', ,. , ,  ; , , ,,'    ,''' , ,..    ;';..: .:  '. .;..', ,   o.     '. ,''.'. ,..
+                                                                                                                                                                                       .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`;export{M as default};

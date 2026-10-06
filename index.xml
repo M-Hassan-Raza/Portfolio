@@ -4,7 +4,7 @@
         <title>Muhammad Hassan Raza</title>
         <link>https://mhassan.dev/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:21 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -14,6 +14,34 @@
             <link>https://mhassan.dev/</link>
         </image>
         <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[kitty's Parallel Test Runner Said OK While Its Workers Crashed]]></title>
+            <link>https://mhassan.dev/blog/kitty-parallel-test-runner-fork-crash/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/kitty-parallel-test-runner-fork-crash/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A missing addSubTest and an ignored exit status let kitty's new parallel test runner report success after failures. Fixing that exposed seven segfaulting workers on my Mac, and Kovid Goyal fixed those his own way.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Taking Obelisk's Backend Deploy From 54 Minutes to 32]]></title>
+            <link>https://mhassan.dev/blog/obelisk-backend-deploy-time/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/obelisk-backend-deploy-time/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Our backend deploys had crept up to almost an hour. Docker was fine. Most of the time went to migration tests waiting on one Postgres advisory lock, and to five Cloud Run services promoted one at a time.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[PgBouncer Transaction Pooling Broke Row-Level Security in Polaris]]></title>
+            <link>https://mhassan.dev/blog/pgbouncer-transaction-pooling-row-level-security/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/pgbouncer-transaction-pooling-row-level-security/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[I put PgBouncer in front of Postgres to stop a login outage. Two weeks later customer search started returning empty lists on some requests, because tenant isolation depended on a session variable and transaction pooling doesn't keep sessions.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Moving SMS Realtime Off Postgres Polling and Onto Redis Streams]]></title>
+            <link>https://mhassan.dev/blog/postgres-polling-to-redis-streams/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/postgres-polling-to-redis-streams/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A Django app whose SSE endpoints polled Postgres from sleeping request threads, and the outbox, relay and Redis Streams setup that replaced them in March 2026.]]></description>
+        </item>
         <item>
             <title><![CDATA[Cogitator]]></title>
             <link>https://mhassan.dev/projects/cogitator/</link>
@@ -54,14 +82,14 @@
             <link>https://mhassan.dev/blog/fallow-typescript-analysis/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/fallow-typescript-analysis/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and leaning on Rust.]]></description>
+            <description><![CDATA[How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and doing the work in Rust.]]></description>
         </item>
         <item>
             <title><![CDATA[Scoring Fraud in Legal Intake Calls]]></title>
             <link>https://mhassan.dev/blog/fraud-scoring-legal-intake/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/fraud-scoring-legal-intake/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score measures the interviewer, not the caller.]]></description>
+            <description><![CDATA[Coached callers, invented doctors and borrowed photos. How RISQ scores intake calls for mass tort firms, and why the most useful score is the one that grades the interviewer.]]></description>
         </item>
         <item>
             <title><![CDATA[How Pyscn Analyzes Python with Go and tree-sitter]]></title>
@@ -75,14 +103,14 @@
             <link>https://mhassan.dev/blog/langgraph-multi-agent-middleware/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/langgraph-multi-agent-middleware/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Obelisk runs more than fifteen specialist agents. The agents were the easy part. Model choice, context, cost, retries and approvals all ended up in a middleware layer, and that layer is what made it work.]]></description>
+            <description><![CDATA[Obelisk runs more than fifteen specialist agents. Model choice, context, cost, retries and approvals all ended up in a middleware layer around them, and this is how that layer works.]]></description>
         </item>
         <item>
             <title><![CDATA[LLMs Can't Save Bad UX]]></title>
             <link>https://mhassan.dev/blog/llms-cant-save-bad-ux/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/llms-cant-save-bad-ux/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[When an AI feature flops, the model is rarely the problem. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt.]]></description>
+            <description><![CDATA[When an AI feature flops, look at the UX before you blame the model. Three features I watched fail, what fixed them, and the questions I now ask before anyone writes a prompt.]]></description>
         </item>
         <item>
             <title><![CDATA[Most of My Pull Requests Started as an Annoyance]]></title>
@@ -96,21 +124,21 @@
             <link>https://mhassan.dev/blog/structured-logging-ai-debugging/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/structured-logging-ai-debugging/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs.]]></description>
+            <description><![CDATA[Logging one structured event per request with evlog, so an AI assistant can follow what happened in a request.]]></description>
         </item>
         <item>
             <title><![CDATA[TF-IDF in OCaml: When Functional Programming Clicks]]></title>
             <link>https://mhassan.dev/blog/tfidf-in-ocaml/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/tfidf-in-ocaml/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps.]]></description>
+            <description><![CDATA[Building a local code search engine in OCaml was a good excuse to learn TF-IDF, pure pipelines, and where immutability helps.]]></description>
         </item>
         <item>
             <title><![CDATA[I Shipped a Race Condition That Oversold Stock (And Other War Stories)]]></title>
             <link>https://mhassan.dev/blog/war-stories-from-production/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/war-stories-from-production/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the unexciting fixes that held.]]></description>
+            <description><![CDATA[Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the small fixes that held.]]></description>
         </item>
         <item>
             <title><![CDATA[Anatomia]]></title>
@@ -124,7 +152,7 @@
             <link>https://mhassan.dev/projects/bonnet/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/bonnet/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can actually use.]]></description>
+            <description><![CDATA[An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can use.]]></description>
         </item>
         <item>
             <title><![CDATA[Go Load Balancer]]></title>
@@ -138,7 +166,7 @@
             <link>https://mhassan.dev/blog/langchain-production/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/langchain-production/</guid>
             <pubDate>Sun, 01 Feb 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Where LangChain earns its place, where it gets in the way, and the handful of habits that kept our AI features from failing quietly: timeouts, validation, real persistence, tracing and pinned versions.]]></description>
+            <description><![CDATA[Where LangChain is worth using, where it gets in the way, and the defaults that stop our AI features failing silently: timeouts, validation, persistent state, tracing and pinned versions.]]></description>
         </item>
         <item>
             <title><![CDATA[Obelisk]]></title>
@@ -148,7 +176,7 @@
             <description><![CDATA[An AI marketing platform where specialist agents write, plan and analyze from a company's own material, without leaking one customer's brand into another's.]]></description>
         </item>
         <item>
-            <title><![CDATA[Free Web Dev Platforms That Are Actually Worth Your Time]]></title>
+            <title><![CDATA[Free Web Dev Platforms Worth Your Time]]></title>
             <link>https://mhassan.dev/blog/web-dev-resources/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/web-dev-resources/</guid>
             <pubDate>Tue, 01 Apr 2025 05:00:00 GMT</pubDate>
@@ -166,21 +194,21 @@
             <link>https://mhassan.dev/projects/iot-garbage-monitoring/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/iot-garbage-monitoring/</guid>
             <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints.]]></description>
+            <description><![CDATA[An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app, plus what it taught me about hardware constraints.]]></description>
         </item>
         <item>
             <title><![CDATA[Building a C++ Image Editor]]></title>
             <link>https://mhassan.dev/projects/pgm-editor/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/pgm-editor/</guid>
             <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[A deep dive into my university project - a simple yet powerful image editor built with C++.]]></description>
+            <description><![CDATA[My university project, a grayscale image editor in C++ that loads, filters and transforms PGM images.]]></description>
         </item>
         <item>
             <title><![CDATA[PixelCryptor: Hiding Executables Inside Images]]></title>
             <link>https://mhassan.dev/projects/pixelcryptor/</link>
             <guid isPermaLink="false">https://mhassan.dev/projects/pixelcryptor/</guid>
             <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[A Django project that embeds executable files within images using delimiter-based concatenation — and why real steganography is harder than this.]]></description>
+            <description><![CDATA[A Django project that embeds executable files within images using delimiter-based concatenation, and why real steganography is harder than this.]]></description>
         </item>
         <item>
             <title><![CDATA[Fiction Books]]></title>
@@ -195,34 +223,6 @@
             <guid isPermaLink="false">https://mhassan.dev/books/books-non-fiction/</guid>
             <pubDate>Sat, 15 Feb 2025 12:00:00 GMT</pubDate>
             <description><![CDATA[Geopolitics, psychology, and a couple of books about why people do what they do.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Books on Pakistan]]></title>
-            <link>https://mhassan.dev/books/books-pakistan/</link>
-            <guid isPermaLink="false">https://mhassan.dev/books/books-pakistan/</guid>
-            <pubDate>Sat, 15 Feb 2025 12:00:00 GMT</pubDate>
-            <description><![CDATA[History, politics and identity: books that helped me understand where I live.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Technical Books]]></title>
-            <link>https://mhassan.dev/books/books-technical/</link>
-            <guid isPermaLink="false">https://mhassan.dev/books/books-technical/</guid>
-            <pubDate>Sat, 15 Feb 2025 12:00:00 GMT</pubDate>
-            <description><![CDATA[The books behind how I think about software, data systems and craft.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[What I Actually Spend on Running mhassan.dev: $8/year]]></title>
-            <link>https://mhassan.dev/blog/free-website-hosting/</link>
-            <guid isPermaLink="false">https://mhassan.dev/blog/free-website-hosting/</guid>
-            <pubDate>Sat, 15 Feb 2025 09:00:00 GMT</pubDate>
-            <description><![CDATA[The full cost of running this site, what's free, and the tradeoffs behind each choice.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[The Invoice Page That Took 4 Seconds to Search]]></title>
-            <link>https://mhassan.dev/blog/preloading-data-for-performance/</link>
-            <guid isPermaLink="false">https://mhassan.dev/blog/preloading-data-for-performance/</guid>
-            <pubDate>Wed, 12 Feb 2025 05:00:00 GMT</pubDate>
-            <description><![CDATA[How preloading product data cut search latency from 4 seconds to instant on a POS invoice page, and when this pattern breaks down.]]></description>
         </item>
     </channel>
 </rss>

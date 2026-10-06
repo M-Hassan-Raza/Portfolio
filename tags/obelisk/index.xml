@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Obelisk</title>
+        <link>https://mhassan.dev/tags/obelisk/</link>
+        <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en-US</language>
+        <image>
+            <title>Obelisk</title>
+            <url>https://mhassan.dev/assets/social-card.png</url>
+            <link>https://mhassan.dev/tags/obelisk/</link>
+        </image>
+        <copyright>Muhammad Hassan Raza</copyright>
+        <item>
+            <title><![CDATA[Taking Obelisk's Backend Deploy From 54 Minutes to 32]]></title>
+            <link>https://mhassan.dev/blog/obelisk-backend-deploy-time/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/obelisk-backend-deploy-time/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Our backend deploys had crept up to almost an hour. Docker was fine. Most of the time went to migration tests waiting on one Postgres advisory lock, and to five Cloud Run services promoted one at a time.]]></description>
+        </item>
+    </channel>
+</rss>

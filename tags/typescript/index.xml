@@ -4,7 +4,7 @@
         <title>TypeScript</title>
         <link>https://mhassan.dev/tags/typescript/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -19,14 +19,14 @@
             <link>https://mhassan.dev/blog/fallow-typescript-analysis/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/fallow-typescript-analysis/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and leaning on Rust.]]></description>
+            <description><![CDATA[How Fallow gets dead-code and dependency analysis done fast by skipping the TypeScript compiler, flattening graph storage, and doing the work in Rust.]]></description>
         </item>
         <item>
             <title><![CDATA[Structured Logging for AI Debugging]]></title>
             <link>https://mhassan.dev/blog/structured-logging-ai-debugging/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/structured-logging-ai-debugging/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Why one structured event per request makes AI-assisted debugging far more useful than a pile of scattered console logs.]]></description>
+            <description><![CDATA[Logging one structured event per request with evlog, so an AI assistant can follow what happened in a request.]]></description>
         </item>
     </channel>
 </rss>

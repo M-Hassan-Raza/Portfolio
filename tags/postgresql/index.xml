@@ -4,7 +4,7 @@
         <title>PostgreSQL</title>
         <link>https://mhassan.dev/tags/postgresql/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -15,11 +15,32 @@
         </image>
         <copyright>Muhammad Hassan Raza</copyright>
         <item>
+            <title><![CDATA[Taking Obelisk's Backend Deploy From 54 Minutes to 32]]></title>
+            <link>https://mhassan.dev/blog/obelisk-backend-deploy-time/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/obelisk-backend-deploy-time/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[Our backend deploys had crept up to almost an hour. Docker was fine. Most of the time went to migration tests waiting on one Postgres advisory lock, and to five Cloud Run services promoted one at a time.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[PgBouncer Transaction Pooling Broke Row-Level Security in Polaris]]></title>
+            <link>https://mhassan.dev/blog/pgbouncer-transaction-pooling-row-level-security/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/pgbouncer-transaction-pooling-row-level-security/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[I put PgBouncer in front of Postgres to stop a login outage. Two weeks later customer search started returning empty lists on some requests, because tenant isolation depended on a session variable and transaction pooling doesn't keep sessions.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Moving SMS Realtime Off Postgres Polling and Onto Redis Streams]]></title>
+            <link>https://mhassan.dev/blog/postgres-polling-to-redis-streams/</link>
+            <guid isPermaLink="false">https://mhassan.dev/blog/postgres-polling-to-redis-streams/</guid>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[A Django app whose SSE endpoints polled Postgres from sleeping request threads, and the outbox, relay and Redis Streams setup that replaced them in March 2026.]]></description>
+        </item>
+        <item>
             <title><![CDATA[I Shipped a Race Condition That Oversold Stock (And Other War Stories)]]></title>
             <link>https://mhassan.dev/blog/war-stories-from-production/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/war-stories-from-production/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the unexciting fixes that held.]]></description>
+            <description><![CDATA[Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the small fixes that held.]]></description>
         </item>
         <item>
             <title><![CDATA[Polaris Performance Log: The Django Mistakes I Made First]]></title>

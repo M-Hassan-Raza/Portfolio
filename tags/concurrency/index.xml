@@ -4,7 +4,7 @@
         <title>Concurrency</title>
         <link>https://mhassan.dev/tags/concurrency/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:21 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -19,7 +19,7 @@
             <link>https://mhassan.dev/blog/war-stories-from-production/</link>
             <guid isPermaLink="false">https://mhassan.dev/blog/war-stories-from-production/</guid>
             <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
-            <description><![CDATA[Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the unexciting fixes that held.]]></description>
+            <description><![CDATA[Two cashiers selling the last item, a chain that returned nothing, and a lock that only worked when both requests hit the same process. Bugs I shipped, and the small fixes that held.]]></description>
         </item>
         <item>
             <title><![CDATA[Go Load Balancer]]></title>

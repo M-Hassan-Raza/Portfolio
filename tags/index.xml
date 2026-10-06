@@ -4,7 +4,7 @@
         <title>Tags</title>
         <link>https://mhassan.dev/tags/</link>
         <description>Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.</description>
-        <lastBuildDate>Sat, 03 Oct 2026 09:18:29 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Oct 2026 08:30:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
@@ -46,7 +46,7 @@
             <title><![CDATA[Architecture]]></title>
             <link>https://mhassan.dev/tags/architecture/</link>
             <guid isPermaLink="false">https://mhassan.dev/tags/architecture/</guid>
-            <pubDate>Wed, 08 Apr 2026 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about Architecture.]]></description>
         </item>
         <item>
@@ -158,7 +158,7 @@
             <title><![CDATA[Django]]></title>
             <link>https://mhassan.dev/tags/django/</link>
             <guid isPermaLink="false">https://mhassan.dev/tags/django/</guid>
-            <pubDate>Fri, 25 Sep 2026 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 06 Oct 2026 05:00:00 GMT</pubDate>
             <description><![CDATA[Writing and work about Django.]]></description>
         </item>
         <item>
