@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-30",
-  "merged": 185,
+  "generated": "2026-10-06",
+  "merged": 188,
   "projects": [
     {
       "fork": false,
       "language": "Rust",
       "name": "fallow",
       "repo": "fallow-rs/fallow",
-      "stars": 4963,
+      "stars": 5009,
       "url": "https://github.com/fallow-rs/fallow",
       "blurb": "Dead-code and dependency analysis for TypeScript and JavaScript",
       "merged": 34,
@@ -223,7 +223,7 @@
       "language": "Go",
       "name": "pyscn",
       "repo": "ludo-technologies/pyscn",
-      "stars": 1085,
+      "stars": 1089,
       "url": "https://github.com/ludo-technologies/pyscn",
       "blurb": "Code-quality analyzer for Python, written in Go",
       "merged": 32,
@@ -427,7 +427,7 @@
       "language": "C++",
       "name": "libtorrent",
       "repo": "arvidn/libtorrent",
-      "stars": 6076,
+      "stars": 6082,
       "url": "https://github.com/arvidn/libtorrent",
       "blurb": "The BitTorrent library under qBittorrent and Deluge",
       "merged": 25,
@@ -587,9 +587,165 @@
     {
       "fork": false,
       "language": "Python",
+      "name": "kitty",
+      "repo": "kovidgoyal/kitty",
+      "stars": 35178,
+      "url": "https://github.com/kovidgoyal/kitty",
+      "blurb": "GPU-accelerated terminal emulator",
+      "merged": 24,
+      "prs": [
+        {
+          "title": "Run all requested Go test names",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10613",
+          "number": 10613,
+          "merged": "2026-10-06"
+        },
+        {
+          "title": "Fix inverted Cursor.text_blink assignments",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10607",
+          "number": 10607,
+          "merged": "2026-10-05"
+        },
+        {
+          "title": "Preserve new hyperlinks during automatic collection",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10566",
+          "number": 10566,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Fix session expansion when option values match the command",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10558",
+          "number": 10558,
+          "merged": "2026-09-28"
+        },
+        {
+          "title": "Preserve transparency across launch color overrides",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10557",
+          "number": 10557,
+          "merged": "2026-09-27"
+        },
+        {
+          "title": "ssh kitten: Preserve SSH option values after --kitten",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10553",
+          "number": 10553,
+          "merged": "2026-09-27"
+        },
+        {
+          "title": "Fix session discovery with goto_session options",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10419",
+          "number": 10419,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix alpha-mask leak when growing the font canvas",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10418",
+          "number": 10418,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix EOF handling for empty DnD transfers",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10417",
+          "number": 10417,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix explicit stdin sources in the DnD kitten",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10416",
+          "number": 10416,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix empty hints selection handling",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10415",
+          "number": 10415,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Fix notification close mode",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10414",
+          "number": 10414,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Restore hints named-group program arguments",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10413",
+          "number": 10413,
+          "merged": "2026-08-28"
+        },
+        {
+          "title": "Add an independent DnD copy mode",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10412",
+          "number": 10412,
+          "merged": "2026-08-27"
+        },
+        {
+          "title": "Fix composed animation frame metadata",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10410",
+          "number": 10410,
+          "merged": "2026-08-27"
+        },
+        {
+          "title": "Fix builtin kitten development guide",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10359",
+          "number": 10359,
+          "merged": "2026-08-14"
+        },
+        {
+          "title": "Fix Bash SSH hostname detection",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10358",
+          "number": 10358,
+          "merged": "2026-08-14"
+        },
+        {
+          "title": "Document last non-empty get-text extent",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10357",
+          "number": 10357,
+          "merged": "2026-08-13"
+        },
+        {
+          "title": "Skip disabled Bash command hook",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10354",
+          "number": 10354,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Complete session file completion",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10353",
+          "number": 10353,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Relink when linker commands change",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10350",
+          "number": 10350,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Quote choose-files shell output",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10348",
+          "number": 10348,
+          "merged": "2026-08-12"
+        },
+        {
+          "title": "Avoid interpolating SSH login shell paths in fallback helpers",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10038",
+          "number": 10038,
+          "merged": "2026-05-20"
+        },
+        {
+          "title": "Quote SSH bootstrap symlink moves",
+          "url": "https://github.com/kovidgoyal/kitty/pull/10035",
+          "number": 10035,
+          "merged": "2026-05-19"
+        }
+      ]
+    },
+    {
+      "fork": false,
+      "language": "Python",
       "name": "calibre",
       "repo": "kovidgoyal/calibre",
-      "stars": 26046,
+      "stars": 26071,
       "url": "https://github.com/kovidgoyal/calibre",
       "blurb": "The e-book manager most people use",
       "merged": 22,
@@ -730,158 +886,20 @@
     },
     {
       "fork": false,
-      "language": "Python",
-      "name": "kitty",
-      "repo": "kovidgoyal/kitty",
-      "stars": 35128,
-      "url": "https://github.com/kovidgoyal/kitty",
-      "blurb": "GPU-accelerated terminal emulator",
-      "merged": 22,
-      "prs": [
-        {
-          "title": "Preserve new hyperlinks during automatic collection",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10566",
-          "number": 10566,
-          "merged": "2026-09-28"
-        },
-        {
-          "title": "Fix session expansion when option values match the command",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10558",
-          "number": 10558,
-          "merged": "2026-09-28"
-        },
-        {
-          "title": "Preserve transparency across launch color overrides",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10557",
-          "number": 10557,
-          "merged": "2026-09-27"
-        },
-        {
-          "title": "ssh kitten: Preserve SSH option values after --kitten",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10553",
-          "number": 10553,
-          "merged": "2026-09-27"
-        },
-        {
-          "title": "Fix session discovery with goto_session options",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10419",
-          "number": 10419,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Fix alpha-mask leak when growing the font canvas",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10418",
-          "number": 10418,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Fix EOF handling for empty DnD transfers",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10417",
-          "number": 10417,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Fix explicit stdin sources in the DnD kitten",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10416",
-          "number": 10416,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Fix empty hints selection handling",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10415",
-          "number": 10415,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Fix notification close mode",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10414",
-          "number": 10414,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Restore hints named-group program arguments",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10413",
-          "number": 10413,
-          "merged": "2026-08-28"
-        },
-        {
-          "title": "Add an independent DnD copy mode",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10412",
-          "number": 10412,
-          "merged": "2026-08-27"
-        },
-        {
-          "title": "Fix composed animation frame metadata",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10410",
-          "number": 10410,
-          "merged": "2026-08-27"
-        },
-        {
-          "title": "Fix builtin kitten development guide",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10359",
-          "number": 10359,
-          "merged": "2026-08-14"
-        },
-        {
-          "title": "Fix Bash SSH hostname detection",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10358",
-          "number": 10358,
-          "merged": "2026-08-14"
-        },
-        {
-          "title": "Document last non-empty get-text extent",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10357",
-          "number": 10357,
-          "merged": "2026-08-13"
-        },
-        {
-          "title": "Skip disabled Bash command hook",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10354",
-          "number": 10354,
-          "merged": "2026-08-12"
-        },
-        {
-          "title": "Complete session file completion",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10353",
-          "number": 10353,
-          "merged": "2026-08-12"
-        },
-        {
-          "title": "Relink when linker commands change",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10350",
-          "number": 10350,
-          "merged": "2026-08-12"
-        },
-        {
-          "title": "Quote choose-files shell output",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10348",
-          "number": 10348,
-          "merged": "2026-08-12"
-        },
-        {
-          "title": "Avoid interpolating SSH login shell paths in fallback helpers",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10038",
-          "number": 10038,
-          "merged": "2026-05-20"
-        },
-        {
-          "title": "Quote SSH bootstrap symlink moves",
-          "url": "https://github.com/kovidgoyal/kitty/pull/10035",
-          "number": 10035,
-          "merged": "2026-05-19"
-        }
-      ]
-    },
-    {
-      "fork": false,
       "language": "Shell",
       "name": "Mole",
       "repo": "tw93/Mole",
-      "stars": 68851,
+      "stars": 69386,
       "url": "https://github.com/tw93/Mole",
       "blurb": "Command-line cleanup and maintenance tool for macOS",
-      "merged": 21,
+      "merged": 22,
       "prs": [
+        {
+          "title": "Keep operation history tied to each run",
+          "url": "https://github.com/tw93/Mole/pull/1688",
+          "number": 1688,
+          "merged": "2026-10-06"
+        },
         {
           "title": "Keep LaunchAgent uninstall tied to the selected app",
           "url": "https://github.com/tw93/Mole/pull/1625",
@@ -1015,7 +1033,7 @@
       "language": "Python",
       "name": "docling",
       "repo": "docling-project/docling",
-      "stars": 68225,
+      "stars": 68430,
       "url": "https://github.com/docling-project/docling",
       "blurb": "Document conversion for AI pipelines, started at IBM Research",
       "merged": 10,
@@ -1087,7 +1105,7 @@
       "language": "C++",
       "name": "qBittorrent",
       "repo": "qbittorrent/qBittorrent",
-      "stars": 40477,
+      "stars": 40594,
       "url": "https://github.com/qbittorrent/qBittorrent",
       "blurb": "Open-source BitTorrent client",
       "merged": 8,
@@ -1183,7 +1201,7 @@
       "language": "Python",
       "name": "django-health-check",
       "repo": "codingjoe/django-health-check",
-      "stars": 1425,
+      "stars": 1426,
       "url": "https://github.com/codingjoe/django-health-check",
       "blurb": "Health checks for Django apps",
       "merged": 3,
@@ -1213,7 +1231,7 @@
       "language": "TypeScript",
       "name": "evlog",
       "repo": "evloghq/evlog",
-      "stars": 1876,
+      "stars": 1885,
       "url": "https://github.com/evloghq/evlog",
       "blurb": "Structured, one-event-per-request logging",
       "merged": 2,
@@ -1255,7 +1273,7 @@
       "language": "JavaScript",
       "name": "fallow-skills",
       "repo": "fallow-rs/fallow-skills",
-      "stars": 126,
+      "stars": 128,
       "url": "https://github.com/fallow-rs/fallow-skills",
       "blurb": "Agent skills for working with Fallow",
       "merged": 1,

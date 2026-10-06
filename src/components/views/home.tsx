@@ -25,7 +25,7 @@ function requireProject(path: string) {
 const offers = [
   "Architecture and AI reviews",
   "Hands-on builds",
-  "Advisory for teams shipping something real",
+  "Advice for teams already shipping",
 ]
 
 export function HomeView({
@@ -222,8 +222,8 @@ export function HomeView({
             </h2>
             <p className="max-w-xl type-lede">
               I take on a small amount of outside work: architecture and AI
-              reviews, hands-on builds, and advisory for teams shipping
-              something real.
+              reviews, hands-on builds, and advice for teams that are already
+              shipping.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <PillLink to={page("/contact/")} size="lg">

@@ -6,7 +6,7 @@ description: A nurse callback and case review product where transcripts, AI tria
 tier: flagship
 toc: true
 publishedAt: 2026-04-08T05:00:00.000Z
-updatedAt: 2026-09-25T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Healthcare
   - FastAPI
@@ -19,7 +19,7 @@ cover:
 weight: 4
 projectLabel: Clinical callback workflow
 outcomes:
-  - Transcripts and recordings encrypted and access-controlled by default, not as a later compliance pass
+  - Transcripts and recordings encrypted and access-controlled by default from the start
   - "AI limited to bounded jobs: summarizing, urgency scoring and drafting, with a nurse deciding"
   - Callbacks, recordings and follow-ups tied to one case across every role handoff
 facts:
@@ -49,16 +49,16 @@ Transcripts, recordings and anything linked to a patient are treated as sensitiv
 
 ## AI that assists without deciding
 
-The AI does specific, checkable jobs: summarizing a transcript, scoring urgency, labeling priority and drafting the callback. A nurse reviews every case. That split is what makes the AI useful in a clinical setting: it saves reading time without anyone pretending the model is making clinical decisions.
+The AI does specific, checkable jobs: summarizing a transcript, scoring urgency, labeling priority and drafting the callback. A nurse reviews every case. That split lets the AI save reading time in a clinical setting without anyone pretending the model is making clinical decisions.
 
-## Handoffs are the product
+## Handoffs between roles
 
 A case moves through nurse review, doctor review, waiting states and completion. Most of the ways a care workflow fails are handoff failures: the doctor sees the case without the context the nurse had, or a follow-up goes out against the wrong record. So the case carries its context with it (medications, allergies, history, the call itself) through every stage, and every state change is recorded.
 
 ## Follow-up calls that know where they belong
 
-Outbound voice follow-up only helps if the call, its recording, its transcript and the resulting state all end up on the right case. Most of that work was plumbing, and all of it was necessary.
+Outbound voice follow-up only helps if the call, its recording, its transcript and the resulting state all end up on the right case. Most of that work was plumbing.
 
-## What I took away
+## What people judge it on
 
-Products like this are judged on trust long before polish. If access rules are fuzzy, audit trails thin, or context gets lost between roles, people stop relying on the system, however good the AI is.
+People judge products like this on trust long before polish. If access rules are fuzzy, audit trails thin, or context gets lost between roles, they stop relying on the system, however good the AI is.

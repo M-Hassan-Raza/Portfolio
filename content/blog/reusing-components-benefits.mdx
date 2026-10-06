@@ -4,6 +4,7 @@ path: /blog/reusing-components-benefits/
 title: When to Extract a Component (and When to Just Copy-Paste)
 description: The 3-usage-sites heuristic for component extraction, a premature ConfirmDialog that cost me time, and why copy-paste is sometimes the right call in Vue.
 publishedAt: 2025-02-12T00:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Vue.js
   - Components
@@ -18,24 +19,25 @@ cover:
 comments: true
 toc: true
 ---
-Early in building [Polaris](/projects/polaris), I extracted a `ConfirmDialog` component after using it exactly once. I figured I'd need it everywhere — deletes, password changes, dangerous actions. Classic foresight.
+Early in building [Polaris](/projects/polaris), I extracted a `ConfirmDialog` component after using it exactly once. I figured I'd need it everywhere (deletes, password changes, dangerous actions). Classic foresight.
 
-Then the second use case needed a text input inside the dialog. The third needed two buttons with custom labels instead of "Confirm/Cancel". The fourth needed async validation before confirming. Within a month, my clean `ConfirmDialog` had 8 props, 3 slots, and a `mode` prop that changed its behavior entirely.
+Then the second use case needed a text input inside the dialog. The third needed two buttons with custom labels instead of "Confirm/Cancel". The fourth needed async validation before confirming. Within a month, my clean `ConfirmDialog` had 8 props, 3 slots, and a `mode` prop that changed how it behaved.
 
 I'd have been better off copy-pasting the original 20 lines and tweaking each one independently.
 
 ## The 3-Usage-Sites Rule
 
-I now follow a simple heuristic: **don't extract until three call sites would all benefit from the same change.** Looking similar doesn't count.
+I now wait until three call sites would all benefit from the same change before extracting. Looking similar doesn't count.
 
 Two similar components might diverge tomorrow. Three that stay identical for a few weeks probably share real structure worth abstracting.
 
-## What Actually Worked: The Price Display
+## The Price Display
 
-Here's a component that was worth extracting. In Polaris, prices show up in invoices, product lists, reports, and receipts. Every single one needs the same formatting: locale-aware number formatting with the currency symbol from the shop's settings.
+The price display was worth extracting. In Polaris, prices show up in invoices, product lists, reports, and receipts. Every one of them needs the same formatting: locale-aware number formatting with the currency symbol from the shop's settings.
 
 ```vue
-<script setup>
+<script setup lang="ts">
+import { computed } from 'vue'
 import { useShopStore } from '@/stores/shop'
 
 const props = defineProps<{
@@ -57,13 +59,13 @@ const formatted = computed(() =>
 </template>
 ```
 
-One prop. No slots. No modes. Every call site wants exactly the same thing: show this number as a price. When I changed the formatting logic to handle zero-decimal currencies, it fixed everywhere at once.
+It has one prop and no slots or modes, and every call site wants the same thing: show this number as a price. When I changed the formatting logic to handle zero-decimal currencies, every price picked up the fix.
 
-That's the test: **would a change here fix a real inconsistency across the app?** If yes, extract. If each usage is going to diverge, copy-paste and let them evolve independently.
+The test I use is whether a change here would fix a real inconsistency across the app. If so, extract. If each usage is going to diverge, copy-paste and let them evolve separately.
 
 ## Signals That You Extracted Too Early
 
-- The component has a `mode` or `variant` prop that fundamentally changes its behavior (not styling — behavior).
+- The component has a `mode` or `variant` prop that changes its behavior, beyond styling.
 - You're adding slots to handle "special cases" in specific call sites.
 - You find yourself passing callbacks through 3 layers of props to handle one caller's edge case.
 - The component file is growing faster than the features that use it.
@@ -74,4 +76,4 @@ That's the test: **would a change here fix a real inconsistency across the app?*
 - Three or more call sites pass the same props in the same pattern.
 - A formatting rule (dates, currencies, statuses) should be consistent but you've implemented it slightly differently in each place.
 
-The goal is the right seams, not fewer files. Sometimes that means a shared component. Sometimes it means three similar-looking blocks of code that happen to serve different purposes.
+The aim is to split code along the lines where it changes. Sometimes that means a shared component, and sometimes three similar-looking blocks that serve different purposes.

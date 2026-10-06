@@ -6,7 +6,7 @@ description: A small HTTP load balancer and dashboard in Go, built to understand
 tier: side
 toc: true
 publishedAt: 2026-04-08T05:00:00.000Z
-updatedAt: 2026-09-25T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Go
   - Networking
@@ -30,15 +30,15 @@ It has three parts: the balancer, a toy backend server, and a dashboard for watc
 
 ## What it does
 
-- **Round-robin selection** across healthy backends, behind a mutex, using `httputil.ReverseProxy` for the actual proxying.
-- **Health checks** every 30 seconds: a TCP dial with a three-second timeout. A backend that fails is skipped until it answers again.
-- **Sensible server timeouts** for reads, writes and idle connections, and a graceful shutdown that gives in-flight requests a few seconds to finish.
-- **A dashboard** that polls a status endpoint, shows each backend's health and response times, and lets you mark a backend as not ready, which is how you'd take one out for maintenance.
+- Round-robin selection across healthy backends, behind a mutex, with `httputil.ReverseProxy` doing the proxying.
+- Health checks every 30 seconds: a TCP dial with a three-second timeout. A backend that fails is skipped until it answers again.
+- Server timeouts for reads, writes and idle connections, and a graceful shutdown that gives in-flight requests a few seconds to finish.
+- A dashboard that polls a status endpoint, shows each backend's health and response times, and lets you mark a backend as not ready, which is how you'd take one out for maintenance.
 
-## What I took from it
+## Locking, health checks and shutdown
 
-**Health state is read constantly and written rarely.** Every request reads it; the checker writes it every thirty seconds. A read-write mutex fits that better than a channel, and it's easier to reason about.
+Every request reads the health state, and the checker writes it once every thirty seconds. For that read-heavy pattern a read-write mutex fits better than a channel, and it's easier to reason about.
 
-**A TCP check tells you less than you'd hope.** A port that accepts connections can still be returning errors. A production balancer should check an HTTP health endpoint, and ideally watch real responses too. Knowing that gap is most of the value of building this.
+A TCP check tells you less than I'd hoped. A port that accepts connections can still be returning errors, so a production balancer should check an HTTP health endpoint and ideally watch real responses too. Finding that gap was the main reason building this was worth it.
 
-**Graceful shutdown is a feature.** Without it, every deploy drops whatever was in flight.
+Without graceful shutdown, every deploy drops whatever requests were in flight.

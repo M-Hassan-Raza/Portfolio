@@ -1,0 +1,156 @@
+---
+kind: article
+path: /blog/obelisk-backend-deploy-time/
+title: Taking Obelisk's Backend Deploy From 54 Minutes to 32
+description: Our backend deploys had crept up to almost an hour. Docker was fine. Most of the time went to migration tests waiting on one Postgres advisory lock, and to five Cloud Run services promoted one at a time.
+publishedAt: 2026-10-06T05:00:00.000Z
+tags:
+  - Obelisk
+  - PostgreSQL
+  - Performance
+  - Python
+  - Production
+categories:
+  - Backend
+cover:
+  ascii: post-deploy-time
+  alt: Backend deploy time going from 54 to 32 minutes
+comments: true
+toc: true
+---
+On 31 July 2026 I spent most of a day on the deploy pipeline for [Obelisk](/projects/obelisk/), the AI marketing platform we build at Entropy Labs. The backend is FastAPI on Cloud Run, with Alembic for migrations, pytest for tests, and a Cloud Build pipeline that tests, builds one image, migrates the database and then promotes an API, a handful of workers and a scheduler. I worked through it with Codex on GPT-5.6, which did most of the log reading, timing breakdowns and test bisecting. Which of its findings to act on, and how to split the gate, were my calls.
+
+Across the last 60 builds, a successful backend deploy averaged 52 to 54 minutes, with one at 68. Queueing accounted for about 50 seconds of that. Two weeks earlier the same pipeline had been down to roughly 15 minutes, which made the number more annoying.
+
+## Docker was fine
+
+My first guess was Docker caching. Both pipeline files passed `--cache-from` with the `:latest` image, and Cloud Build workers are ephemeral, so I assumed there was nothing on the worker for the cache to come from. According to the build logs, BuildKit was importing the remote cache manifest directly, the Python, Playwright, LibreOffice and OS layers were all cache hits, and the image build in the latest run took 38 seconds.
+
+Here is where the latest prelive deploy, 53m47s in total, spent its time:
+
+| Step | Time |
+|---|---:|
+| Deployment regression tests | 36m14s |
+| Application service promotion | 7m11s |
+| Database migration | 3m30s |
+| Release recovery verification | 2m34s |
+| Scheduler promotion | 2m18s |
+| Lint, types, image build, the rest | about 2m |
+
+The test step ran 3,267 tests in 33m26s of pytest time, plus environment setup.
+
+## How the gate got to 3,267 tests
+
+On 14 July the deploy gate was 482 tests and took 16 minutes. Nearly all of that was fixture setup: every database test built the full schema with `metadata.create_all` in a fresh Postgres schema. Running the suite under pytest-xdist with eight workers brought it to about three and a half minutes. Eight workers building the full schema at once exhausted Postgres's lock table, so I wrapped schema create and drop in a cluster-wide advisory lock. Row-level test work stayed parallel and only the DDL queued, which was fine for 482 tests.
+
+In the two weeks after that, most feature branches appended their own tests to the deploy gate script. Its git log from that stretch reads like a changelog: "Run session regressions in deployment gate", "test(notion): enforce deployment regression coverage", "Gate admin behavior regressions", "Run Instantly tests in deployment gate". Each addition was reasonable on its own, and nobody was watching the total.
+
+By 31 July the gate collected about 3,280 cases from 391 files. The models covered 262 tables and there were 508 Alembic migration files. The migration tests' fixture in `tests/migrations/conftest.py` created and dropped the complete schema for every test, under the same global advisory lock, so the migration tests ran one at a time no matter how many workers xdist had. Two tests that replay the full migration history took 184 and 175 seconds by themselves.
+
+Before changing anything I checked whether this was a bloat problem, since "just delete tests" was the obvious suggestion (mine included). There were about 150 credible candidates: around 60 repeated migration-lineage assertions that could become one graph-wide check, 65 to 70 tests that parsed Cloud Build YAML or source files, and 24 tests for a legacy adoption path. The 83 YAML and source-parser tests ran in 1.12 seconds combined, and the legacy tests weren't in the deploy gate. Removing all 150 would have saved less than a minute.
+
+## One database per worker
+
+The advisory lock existed because all xdist workers shared one database. Each worker getting its own database lets every schema lock be scoped to that database and stop blocking the other workers. pytest-xdist exports `PYTEST_XDIST_WORKER` and `PYTEST_XDIST_TESTRUNUID`, so the conftest rewrites the database name before settings load:
+
+```python
+def _isolated_worker_database_name(base_name: str, *, worker_id: str, test_run_uid: str) -> str:
+    """Build one PostgreSQL database name per xdist worker and test run."""
+    safe_worker = re.sub(r"[^a-zA-Z0-9_]", "_", worker_id)
+    safe_run = re.sub(r"[^a-zA-Z0-9]", "", test_run_uid)[:12] or "run"
+    suffix = f"_pytest_{safe_run}_{safe_worker}"
+    return f"{base_name[: 63 - len(suffix)]}{suffix}"  # Postgres caps names at 63 bytes
+
+
+worker_id = os.environ.get("PYTEST_XDIST_WORKER")
+run_uid = os.environ.get("PYTEST_XDIST_TESTRUNUID")
+if worker_id and run_uid and (base := os.environ.get("DB_NAME")):
+    os.environ["DB_NAME"] = _isolated_worker_database_name(base, worker_id=worker_id, test_run_uid=run_uid)
+```
+
+The session fixture drops that database on teardown, and the schema lock ID is derived from the database name, so two workers never wait on each other:
+
+```python
+def postgres_advisory_lock_id(namespace: int, owner: str) -> int:
+    """Return a stable positive advisory-lock ID scoped to one owned resource."""
+    digest = blake2b(owner.encode(), digest_size=8).digest()
+    return (namespace ^ int.from_bytes(digest)) & ((1 << 63) - 1)
+```
+
+On a sample of the 36 slowest migration tests this went from 47 seconds to 24, with zero test databases left behind afterwards. Switching xdist from `--dist=loadfile` to `--dist=worksteal` took the full local gate from 8m58s to 5m26s, since one slow file no longer pinned a worker while the others sat idle.
+
+## Detours
+
+The first full local run at eight workers produced a red wall of database errors about a third of the way through. I spent a while assuming the isolation was wrong before finding that the local Docker disk had filled up and Postgres had crashed. I reran against a temporary native Postgres cluster and the suite passed: 3,267 tests in 7m45s locally.
+
+Cloud Build was less generous. Our backend builds run on an 8 vCPU, 8 GB worker, and the first cloud run with the new fixtures was still in the test step at 28 minutes when I cancelled it. A 32-CPU worker would have helped the tests, but most of a deploy is spent waiting on Cloud Run, and extra CPUs do nothing for that, so we didn't want it. The 8 CPU / 32 GB machine type wasn't available to us either. Later, eight xdist workers froze the 8 GB machine at 10% of the suite, and I dropped the cloud worker count to four, which ran normally.
+
+I also found the backend pipeline running `uv sync` three times in parallel (lint, type check and tests each had their own environment), all competing for the same 8 GB. It now syncs once into `/workspace` and the other steps use `uv run --no-sync`.
+
+## Splitting the deploy gate
+
+Faster fixtures alone weren't going to make a 3,267-test gate fit on an 8 GB worker in a reasonable time. We split it in two. The deploy gate keeps the tests that protect a release: database migrations, auth, billing and payments, agent queues and recovery, legal holds, worker entry points, and every public API contract. The large provider behaviour matrices for integrations like Shopify (about 619 tests on its own), Instantly and Notion moved to a full regression gate, which runs as a separate Cloud Build trigger on pull requests, and no tests were deleted.
+
+The new deploy script runs the core set wide, then migrations with a smaller pool, then a short serial tail for the tests that kill processes or work across the whole database:
+
+```bash
+# Release safety: contracts, durable agent runs, billing, auth, compliance, workers.
+uv run pytest -q -n "${workers}" --dist=worksteal -m "not llm_integration" \
+  tests/agent_worker tests/contracts tests/release_control tests/payments tests/auth ...
+
+# Migration tests rebuild schema state by design; a smaller pool keeps
+# their DDL from exhausting the 8 GB worker.
+uv run pytest -q -n "${migration_workers}" --dist=worksteal tests/migrations tests/test_alembic_lineage.py
+
+# Real process death and database-wide migration boundaries stay serial.
+uv run pytest -q tests/agent_worker/test_postgres_resume_restart.py tests/test_alembic_fresh_install.py ...
+```
+
+The deploy gate came out at 1,687 tests and ran in about four minutes locally. On prelive the test step dropped from 36m14s to 22 minutes and the whole deploy finished in 43m46s.
+
+Production then failed at 82% of the migration tests. Main still had an older version of a test that asserted a hard-coded migration head copied from prelive, while prelive's version checked for "one head, and this migration is in its history". I moved the prelive version to main and reran. The production test step went from 41m43s to 19m47s.
+
+## The release tail
+
+With the tests trimmed, the roughly 18 minutes after them stood out. Two changes did most of the work there.
+
+The release recovery check looks in the release journal for an earlier, half-finished release before this build takes ownership. It ran after the image push even though it doesn't depend on the image. In Cloud Build that was one line, `waitFor: ['push-container-image']` becoming `waitFor: ['-']`, so it now runs alongside the tests and finishes before they do.
+
+Application promotion moved traffic to five Cloud Run services one at a time, so the fifth one started almost four minutes after the first. The release coordinator now writes a rollback intent for every service to the journal first, then promotes them concurrently, then verifies each one:
+
+```python
+for plan in plans:
+    current = self._mark_promotion_intent(current, plan)
+
+# Persist every rollback intent before any concurrent traffic mutation.
+with ThreadPoolExecutor(max_workers=len(promotion_plans)) as executor:
+    futures = [executor.submit(self._promote_service, plan, svc) for plan, svc in promotion_plans]
+    for future in futures:
+        future.result()
+
+for plan, svc in service_plans:
+    current = self._verify_promoted_service(current, plan, svc)
+```
+
+If any promotion fails, the journal already has what it needs to roll back all five. On the next prelive deploy the five services started promotion within 0.3 seconds of each other, and the step went from 5m44s to about 2m30s.
+
+I also built a separate release image for migrations and release jobs: the same locked virtualenv on `python:3.13-slim`, without Playwright's Chromium or the document tooling. It went from 1.05 GB to between 364 and 375 MB. I expected it to speed up the migration job's cold start. One migration ran about 25 seconds faster, and on production the first run wasn't meaningfully faster at all, so the image size was never what made migrations slow.
+
+## Numbers
+
+| Backend deploy | Before | Tests fixed and split | Release tail fixed |
+|---|---:|---:|---:|
+| Prelive | 53m47s | 43m46s | 31m41s |
+| Production | 63m47s | 41m05s | 38m44s (first run, cold cache) |
+
+The production figure in the last column includes a one-time Docker rebuild, because the slim image changed the Dockerfile's stage layout. The frontend went from 8m27s to 5m33s the same day, mostly by installing dependencies once and building the Vite bundle once.
+
+Other branches already in flight were paused at a safe point and rebased onto the new pipeline before their next deploys.
+
+## Still on the list
+
+The rest of the time is mostly tests on a small machine and Cloud Run doing Cloud Run things. My estimate at the time was 20 to 23 minutes if the core and migration tests could run side by side on a machine with more memory.
+
+We kept going later. In August the migration tests started cloning databases from once-per-run Postgres templates, which by then meant skipping a replay of 671 revisions per test, and the local migration pool went from 125 to 59 seconds. In September the two remaining promotion steps were merged into one cohort. A typical backend deploy now takes 20 to 25 minutes.
+
+Next time I'd give the deploy gate a time budget and have CI fail the build when the gate goes over it, with the slowest files listed. The gate went from 482 tests to 3,267 in about two weeks of reviewed pull requests, and the first time anyone added it up was when deploys were taking an hour. There are more bugs of my own making in [war stories from production](/blog/war-stories-from-production/).

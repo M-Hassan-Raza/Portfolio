@@ -6,7 +6,7 @@ description: "Retail operations software for shops that bill all day: invoices, 
 tier: flagship
 toc: true
 publishedAt: 2025-02-10T00:00:00.000Z
-updatedAt: 2026-09-25T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - Django
   - Vue
@@ -22,7 +22,7 @@ weight: 2
 projectLabel: Retail operations platform
 outcomes:
   - Billing, refunds, stock and ledgers stay consistent with several cashiers working at once
-  - Every organization's data isolated in the database, not just in the app
+  - Every organization's data isolated at the database level
   - Supplier price lists imported from CSV, Excel and PDF files as they arrive
 facts:
   role: Built it end to end
@@ -43,28 +43,28 @@ facts:
 ---
 Polaris started as client work through Commit Software and turned into the system several retail shops run their day on. It covers the parts a shop touches constantly: invoices and quotations, refunds, stock, customer credit, supplier purchasing, expenses, reports, and the admin around all of it.
 
-It's the project that taught me the edge cases are the product. A billing screen is easy. A billing screen that stays right when two cashiers sell the last item, a customer returns half an order on credit, and a supplier's price list arrives as a scanned PDF is the actual job.
+Most of the work is in the edge cases. A billing screen has to stay right when two cashiers sell the last item, a customer returns half an order on credit, and a supplier's price list arrives as a scanned PDF.
 
 <Screen asset="polaris-modules" caption="The home screen. Every tile is a workflow that has to agree with the others." />
 
-## Stock comes from batches, never from a loose number
+## Stock derived from batches
 
 A product's quantity is always derived from batch records, never typed in: what came in, from whom, at what cost, and what's left. That rule made every other module stricter. Billing, restocking, cycle counts and supplier returns all have to go through the same contract, and none of them can "just fix the number".
 
-It's more work up front. It's also why stock counts in Polaris can be trusted at the end of the day.
+It costs more work up front, and it's why stock counts in Polaris can be trusted at the end of the day.
 
-## Correct with more than one person working
+## Several cashiers at once
 
-The race conditions came first, as they do. Two cashiers selling the last unit took stock negative, and two operations on one customer could leave a balance that matched neither. The [war stories post](/blog/war-stories-from-production/) has the details. The fixes that stuck:
+The race conditions came first, as they do. Two cashiers selling the last unit took stock negative, and two operations on one customer could leave a balance that matched neither. The [war stories post](/blog/war-stories-from-production/) has the details. These are the fixes that stuck:
 
-- row locks that fail fast instead of queueing, with a short retry, so a cashier sees a blip instead of a spinner
+- row locks that fail fast and retry briefly instead of queueing, so a cashier sees a blip at worst
 - version checks, so a stale form can't overwrite newer edits
 - per-customer and per-supplier advisory locks for ledger work, with keys that mean the same thing on every worker process
 - tests that pin those contracts down, including one that checks lock keys come out the same under different hash seeds
 
 ## Tenants separated in the database
 
-Polaris is multi-tenant. The organization is set once per request and carried down into the database session, so the separation doesn't depend on every query remembering a filter. That kind of isolation is invisible when it works, and it should stay that way.
+Polaris is multi-tenant. The organization is set once per request and carried down into the database session, so the separation doesn't depend on every query remembering a filter.
 
 ## Supplier files arrive however suppliers like
 
@@ -72,8 +72,8 @@ Price lists come as CSV, Excel and PDF, with inconsistent names, missing units a
 
 <Screen asset="polaris-reorder" caption="Generating a supplier order from low-stock items." />
 
-## What I'd do differently
+## If I started it again
 
-- **Explicit services before signals.** Early versions spread business rules across Django signals. They're now plain service functions you can read top to bottom. The [performance log](/blog/optimizing-django-performance/) covers that and the other early mistakes.
-- **Concurrency tests on day one.** Every serious bug in Polaris was a concurrency bug that a two-thread test would have caught.
-- **A written contract for every module boundary.** The worst bugs lived between modules, not inside them.
+- I'd write explicit services from the start. Early versions spread business rules across Django signals; they're now plain service functions you can read top to bottom. The [performance log](/blog/optimizing-django-performance/) covers that and the other early mistakes.
+- Concurrency tests on day one. Every serious bug in Polaris was a concurrency bug that a two-thread test would have caught.
+- A written contract for every module boundary, since the worst bugs lived in the gaps between modules.

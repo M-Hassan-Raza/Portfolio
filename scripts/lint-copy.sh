@@ -26,6 +26,16 @@ rules=(
   "^#+ *(what i learned|the meta-lesson|key takeaways?|conclusion|the bottom line|final thoughts)\s*$ :: Boilerplate heading. Name the actual lesson."
   "^[A-Z][a-z']+\. [A-Z][a-z']+\.$ :: Two-word dramatic fragment."
   "\[(FACT|STORY)\?\] :: Unconfirmed fact marker. Resolve before publishing."
+  "\bthe (easy|hard|real) (part|problem|question|work|lesson)\b :: 'The hard part was' setup. State the problem directly."
+  "turned out to be the (easy|hard)|\b(it )?turns out\b :: Fake-surprise phrase."
+  "(more than i expected|than you'?d (think|expect)|you'?d be surprised) :: Fake-surprise phrase."
+  "^(\*\*)?(the )?(fix|result|lesson|catch|trick|takeaway|upshot|kicker)(\*\*)?: :: Colon reveal. Write a normal sentence."
+  "[.!?] (the )?(fix|result|lesson|catch|trick|takeaway|upshot): :: Colon reveal. Write a normal sentence."
+  "\b(load-bearing|leverag(e|es|ed|ing)|robust|crisp|unglamorous|battle-tested|north star|double down|sweet spot|first-class citizen)\b :: AI house vocabulary."
+  "\b(quietly|honestly|truly|incredibly|fundamentally)\b :: Intensifier filler."
+  "^\s*([0-9]+\.|[-*]) \*\*[^*]{2,80}[.:]\*\* :: Bold lead-in bullet. Write plain bullets or prose."
+  "^#+ *(what i'?d do differently|lessons learned|wrapping up|takeaways)\s*$ :: Boilerplate heading. Name the actual lesson."
+  "\b(why|the result|the answer|so what changed)\? (because|it|the)\b :: Rhetorical Q&A. Just say it."
 )
 
 errors=0

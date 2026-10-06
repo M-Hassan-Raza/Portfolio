@@ -2,11 +2,11 @@
 kind: project
 path: /projects/bonnet/
 title: Bonnet
-description: An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can actually use.
+description: An AI brand-development tool that turns a creative brief into research, strategy, creative direction, moodboards and a document a team can use.
 tier: flagship
 toc: true
 publishedAt: 2026-04-08T05:00:00.000Z
-updatedAt: 2026-09-25T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - AI
   - Next.js
@@ -19,7 +19,7 @@ weight: 6
 projectLabel: AI brand workflow
 outcomes:
   - Long-running generation you can watch, cancel and rerun step by step
-  - Research grounded in a narrow, relevant library rather than a general knowledge base
+  - Research grounded in a narrow library of relevant case-study material
   - Exports that come out clean, with citations, however messy the model output was
 facts:
   role: Backend execution flow and much of the frontend
@@ -42,18 +42,18 @@ Bonnet takes a creative brief (business, audience, competitors, goals, tone) and
 
 A full run takes a while. The backend treats it as a series of steps with their own state, streams progress to the browser over websockets, and supports cancelling and rerunning a single step without starting over. The goal was that someone watching it always knows what stage it's in, what changed on a rerun, and where the output lives.
 
-## Cleaning up model output is product work
+## Normalizing model output
 
-Model output doesn't arrive in one tidy shape. It mixes markdown, half-structured fragments and generated text, and that has to be normalized before it can be shown and exported. Skip that layer and the product looks broken even when the model technically answered.
+Model output arrives as a mix of markdown, half-structured fragments and generated text, and it has to be normalized before it can be shown or exported. Without that layer the product looks broken even when the model technically answered.
 
 ## Narrow retrieval
 
-The research step searches a focused library of case-study material, not a general knowledge base. The narrower contract is easier to reason about and keeps the research grounded in examples that matter for brand work.
+The research step searches a focused library of case-study material. A narrow contract like that is easier to reason about, and it keeps the research grounded in examples that matter for brand work.
 
-## Assets are half the product
+## Assets and exports
 
-Moodboards, reports and images have to survive the trip from generation to storage to review to PDF export. File handling, metadata and asset shapes that the frontend can rely on took as much care as the text pipeline.
+Moodboards, reports and images have to survive the trip from generation to storage to review to PDF export. File handling, metadata and asset formats the frontend could rely on took as much care as the text pipeline.
 
-## What I took away
+## Agreeing on what a project is
 
-The hard part of products like this is rarely the model call. It's keeping a long run understandable, interruptible and worth trusting. The product only felt coherent once execution state, retrieval, assets and exports all agreed on what a project actually was.
+Most of the work in a product like this goes into keeping a long run understandable and interruptible, so people trust what comes out of it. Bonnet only started to feel coherent once execution state, retrieval, assets and exports all agreed on what a project was.

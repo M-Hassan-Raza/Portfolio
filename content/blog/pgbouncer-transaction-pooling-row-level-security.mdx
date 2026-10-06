@@ -1,0 +1,146 @@
+---
+kind: article
+path: /blog/pgbouncer-transaction-pooling-row-level-security/
+title: PgBouncer Transaction Pooling Broke Row-Level Security in Polaris
+description: I put PgBouncer in front of Postgres to stop a login outage. Two weeks later customer search started returning empty lists on some requests, because tenant isolation depended on a session variable and transaction pooling doesn't keep sessions.
+publishedAt: 2026-10-06T05:00:00.000Z
+tags:
+  - Production
+  - Django
+  - PostgreSQL
+  - Polaris
+categories:
+  - Backend
+cover:
+  ascii: post-pgbouncer
+  alt: SET LOCAL above the row counts from eight identical requests
+comments: true
+toc: true
+---
+On March 30, 2026, customer search in [Polaris](/projects/polaris/) stopped working in production. Polaris is the retail POS and ERP I build and run on my own, and its invoice screen searches customers and products from two large lookup lists it loads up front. Locally everything worked. In production the lists came back empty on some requests and full on others, and the cause was a change I had made thirteen days earlier to fix a different outage. I debugged both with Codex on GPT-5.4 doing much of the tracing and log reading, and I made the calls on what to change.
+
+This is a different bug from the ones in [I shipped a race condition that oversold stock](/blog/war-stories-from-production/). That post is about locks. This one is about a Postgres session variable and a connection pooler that hands out connections per transaction.
+
+## March 17: running out of connections
+
+On the morning of March 17 logins started failing with tracebacks ending in Django's `ensure_connection`. Postgres was refusing new connections, and a few things in the code were making it worse:
+
+- Middleware resolved `request.user` on every request, including public routes like `/login` and the CSRF bootstrap endpoint, so any request with a stale session cookie hit the database before the view ran.
+- The AI assistant kept its own async Postgres pools per worker (SQL, LangGraph checkpoints, pgvector), outside anything Django was counting.
+- Gunicorn workers were hardcoded to 2 in both the Dockerfile and the Procfile.
+
+I'd been fighting pool exhaustion on and off for a while, so I skipped the hotfix and put PgBouncer in front of Postgres. Everything runs on one VPS, so PgBouncer went on the same box on port 6432 in `pool_mode = transaction`, with direct access on 5432 kept for migrations and maintenance commands. On the Django side, roughly:
+
+```python
+use_pooled = not debug and pgbouncer_enabled
+DATABASES["default"].update({
+    "HOST": pgbouncer_host if use_pooled else direct_host,
+    "PORT": pgbouncer_port if use_pooled else direct_port,
+    "CONN_MAX_AGE": 0,
+    "CONN_HEALTH_CHECKS": True,
+    "DISABLE_SERVER_SIDE_CURSORS": use_pooled and pool_mode == "transaction",
+})
+```
+
+Worker count now came from `WEB_CONCURRENCY` (1 for the rollout), every AI pool got `pool_size=1` and `max_overflow=0`, and the tenant, session-security and RBAC middlewares skip user resolution on public routes.
+
+The only setup snag was auth. The Postgres role's password is stored as SCRAM, and the MD5 line I first put in PgBouncer's `userlist.txt` failed with `wrong password type`. Copying the SCRAM secret from `pg_authid` into the userlist and setting `auth_type = scram-sha-256` fixed it.
+
+`DISABLE_SERVER_SIDE_CURSORS` is in Django's docs for this setup, because named cursors don't survive being moved between server connections. I set it and didn't go looking for anything else in the app that assumed a session would outlive a transaction.
+
+## March 30: search breaks after a bill
+
+The first report was "after generating a bill, customer search doesn't work anymore". That sounded like frontend state, so I looked there first. The create-bill mutation was invalidating the full customer and product lookup caches, and TanStack Query refetched both after every sale. I narrowed the invalidation, added logic to replay the active search when the backing list was replaced, and shipped it. Soon after, search was broken on first load and after a hard refresh too. I reverted the replay logic and kept the narrower invalidation, and search stayed broken.
+
+Then I looked at what `/customers/list/all/` was returning:
+
+```json
+{"results": [], "count": 0, "total_balance": "<non-zero>", "overdue_count": 7}
+```
+
+The invoice screen can only search what this endpoint returns, and it was returning no customers. In a Django shell the same queryset returned all 138 customers for the organization.
+
+## The tenant gap in DRF views
+
+Polaris isolates tenants with Postgres row-level security. Every tenant table has a policy like this, with `FORCE ROW LEVEL SECURITY` so it applies to the table owner as well:
+
+```sql
+CREATE POLICY tenant_isolation_sim_customer ON sim_customer
+USING (organization_id = NULLIF(current_setting('app.current_org_id', true), '')::integer);
+```
+
+`TenantMiddleware` set that variable at the start of each authenticated request with a plain `SET app.current_org_id = ...`. When the variable is missing, `current_setting(..., true)` returns NULL, the comparison is never true, and reads return zero rows with no error.
+
+Calling the list view without the middleware reproduced the empty payload, which led me to a real bug. The lookup routes are root-mounted DRF `@api_view` functions, and for API-key and mobile token auth, DRF authenticates inside the view, after `TenantMiddleware` has already run and seen an anonymous user. Walking the URL resolver turned up 66 routes behind the same decorator with that gap. I moved tenant binding into one shared helper used by the middleware, the decorator and the auth classes, and committed it. That fixed the empty lists locally, and production kept returning them.
+
+## Eight identical requests
+
+My next guess was stale workers, since I'd deployed by hand and an old container answering some of the traffic would explain a mix of results. Recycling everything changed nothing. So I replayed the same authenticated request eight times in a row from a terminal:
+
+| Request | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| Customers returned | 138 | 138 | 138 | 0 | 0 | 0 | 138 | 0 |
+
+Same session, same user and same organization each time, which `/user` confirmed. Cloudflare reported `cf-cache-status: DYNAMIC`, so nothing was being cached at the edge.
+
+Earlier that morning I'd fixed a related-looking failure: `ActionLog` inserts were failing with "new row violates row-level security policy" on `sim_actionlog`. A policy with only a `USING` clause applies the same expression as the check for inserts, so a missing tenant makes writes fail loudly where reads return nothing. The cause there was a Python-side cache in `_set_pg_tenant` that remembered "this org is already set" and skipped the `SET`, even after Django had reopened the database connection and the setting was gone. I'd made it track the connection as well as the org id.
+
+The request-level helper had the same kind of shortcut, skipping the `SET` when the Python context variable already held the right organization. I removed it so every authenticated request re-asserted its scope, deployed, and got more zeros.
+
+## Two queries, two scopes
+
+I should have read the payload more carefully at the start. `count: 0` next to a non-zero `total_balance` meant two queries in one request ran with different tenant scope: one could see the customers and the other couldn't.
+
+With `CONN_MAX_AGE=0` and Django in autocommit, each query outside an explicit transaction is its own transaction. In transaction pooling mode PgBouncer assigns a server connection when a transaction starts and takes it back at commit. So a request went like this:
+
+1. `SET app.current_org_id = '1'` runs as its own transaction on server connection A.
+2. The customer list query runs on whichever server connection is free next, say B. B has no setting, or whatever the previous client left on it.
+3. The balance aggregate lands on A, or on C, with its own luck.
+
+PgBouncer's documentation has a table of session features that don't work in transaction mode, and `SET` is on it.
+
+There was a worse version of this waiting. A session-level `SET` stays on the server connection after the client is done with it, so the next client can inherit someone else's `app.current_org_id`. Production had one real organization at the time, which is probably why a leftover setting usually pointed at the right data and the bug looked like flakiness. With a second tenant, a stale setting would have shown one shop another shop's rows.
+
+It took thirteen days to show up because the rollout started small. With one Gunicorn worker and light traffic, PgBouncer mostly handed back the same server connection, so the setting usually happened to be there. By March 30 I had raised the worker count and traffic had grown, and once requests overlapped, the queries in a single request started landing on different server connections.
+
+## SET LOCAL inside a request transaction
+
+The fix wraps each authenticated request in a transaction when the app is behind a transaction-mode pooler, and sets the variable with `SET LOCAL`, which lasts until that transaction ends. Simplified from the commit:
+
+```python
+@contextmanager
+def tenant_context(organization):
+    previous_org = get_current_organization()
+    set_current_organization(organization)
+
+    if _uses_transaction_scoped_pg_tenant():  # pooled and pool_mode == "transaction"
+        with transaction.atomic():
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SET LOCAL app.current_org_id = %s", [str(organization.id)]
+                )
+            try:
+                yield
+            finally:
+                restore(previous_org)
+        return
+
+    # Direct connection: the session-level SET still works here.
+    ...
+```
+
+`TenantMiddleware` now calls `get_response` inside `tenant_context(org)`. The whole request is one transaction, PgBouncer keeps it on one server connection until commit, and the setting disappears with the transaction, so there's nothing left behind for the next client. `set_config('app.current_org_id', ..., true)` does the same thing as `SET LOCAL` if you'd rather call a function.
+
+After deploying it, `/customers/list/all/` returned 138 rows on every request, and search has stayed fixed since.
+
+This is close to Django's `ATOMIC_REQUESTS` for tenant-scoped requests, and it has the same cost: a request holds a server connection for its whole duration, so a slow request occupies a pool slot that transaction pooling would otherwise have released between queries. I never measured what that did to latency, and I haven't noticed a slowdown. The AI assistant's streaming views were the obvious risk, since a stream can run for a long time. In July I changed those views to stop holding tenant scope across `await`s and later gave AI streams their own async tenant context.
+
+July also fixed something that had made all of this harder to see. `_set_pg_tenant` used to catch any exception, log a warning and carry on, so a failed `SET` turned into an empty list instead of an error. It now closes the connection and raises.
+
+## Before turning on transaction pooling again
+
+Search the codebase for anything that lives on the session: `SET` without `LOCAL`, session-level `pg_advisory_lock`, `LISTEN`, prepared statements, temporary tables. Polaris's ledger already used `pg_advisory_xact_lock`, which is transaction-scoped and fine. Management commands that need session-level locks now go over the direct connection.
+
+Run the same authenticated request a few dozen times against staging behind the pooler and compare the counts. One request at a time on a laptop with a direct connection will never show this.
+
+And if a response contains two numbers that should agree and don't, start there before touching the frontend.

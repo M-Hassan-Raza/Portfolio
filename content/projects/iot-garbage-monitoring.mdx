@@ -2,7 +2,7 @@
 kind: project
 path: /projects/iot-garbage-monitoring/
 title: "Smart Dustbin: IoT with Arduino, Python, Kotlin & Azure"
-description: An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app — and what I learned about hardware constraints.
+description: An IoT garbage monitoring system built with Arduino sensors, ESP8266 WiFi, a Python desktop dashboard, and a Kotlin Android app, plus what it taught me about hardware constraints.
 tier: early
 toc: true
 publishedAt: 2025-02-16T00:00:00.000Z
@@ -28,24 +28,24 @@ long cm = duration / 29 / 2;
 
 The ESP8266 connects to a laptop or cloud endpoint over TCP and forwards the readings.
 
-## What Actually Worked
+## What Worked
 
-**The sensor accuracy was better than expected.** The HC-SR04 reliably measured garbage levels within 1-2cm accuracy in a 22cm bin. The math is basic physics (speed of sound / 2 for round trip), and it just works.
+The HC-SR04 measured garbage levels to within 1-2cm in a 22cm bin. The math is basic physics (speed of sound, halved for the round trip).
 
-**ThingSpeak for quick visualization.** Publishing sensor data to ThingSpeak via MQTT gave us a real-time dashboard with almost no code. For prototyping IoT, it's hard to beat.
+Publishing sensor data to ThingSpeak over MQTT gave us a real-time dashboard with almost no code. For prototyping IoT, it's hard to beat.
 
-**The Android app was overkill but fun.** We built a Kotlin app that shows bin status and sends notifications when it's full. In practice, a simple web dashboard would've been enough, but the exercise of piping IoT data all the way to a phone notification was worth it.
+The Kotlin Android app was overkill but fun. It shows bin status and sends a notification when the bin is full. A web dashboard would have been enough, but piping IoT data all the way to a phone notification was a worthwhile exercise.
 
 ## What I'd Change
 
-**Power management was an afterthought.** The Arduino and ESP8266 run continuously, which drains batteries fast. A production system would need sleep modes — wake up, take a reading, transmit, sleep. We never implemented this because we had wall power during the demo.
+Power management was an afterthought. The Arduino and ESP8266 run continuously, which drains batteries fast. A production system would need sleep modes: wake up, take a reading, transmit, sleep. We never implemented this because we had wall power during the demo.
 
-**WiFi reliability.** The ESP8266 drops connections silently. Our code had a basic reconnect loop, but it wasn't robust. In a real deployment, you'd want MQTT with QoS 1 (at-least-once delivery) and proper offline buffering.
+The ESP8266 drops WiFi connections silently. Our code had a basic reconnect loop that didn't hold up well. A real deployment would want MQTT with QoS 1 (at-least-once delivery) and offline buffering.
 
-**The Azure IoT Hub integration was premature.** We added it because it sounded impressive for the project defense. ThingSpeak was doing everything we needed. Don't add cloud infrastructure complexity to a project that works fine without it.
+We added Azure IoT Hub because it sounded impressive for the project defense, while ThingSpeak was already doing everything we needed. I wouldn't add cloud infrastructure to a project that works fine without it again.
 
-## The Real Lesson
+## Physical Constraints
 
-The hardest part of IoT isn't the code — it's the physical constraints. Sensor placement matters (mount it wrong and you measure the bin wall, not the garbage). WiFi range matters (the ESP8266 has a weak antenna). Power matters. These are problems you don't encounter in pure software projects, and they taught me more than the actual code did.
+Most of the difficulty was physical. Mount the sensor wrong and you measure the bin wall instead of the garbage. The ESP8266 has a weak antenna, so WiFi range is limited, and power was a problem the whole way through. Pure software projects never put these in front of you, and I learned more from them than from the code.
 
 Source code: [Arduino](https://github.com/M-Hassan-Raza/arduino_smart_dustbin) | [ESP8266](https://github.com/M-Hassan-Raza/esp8266_smart_dustbin) | [Edge Layer](https://github.com/M-Hassan-Raza/smart_dustbin_edge_layer)

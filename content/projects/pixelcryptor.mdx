@@ -2,7 +2,7 @@
 kind: project
 path: /projects/pixelcryptor/
 title: "PixelCryptor: Hiding Executables Inside Images"
-description: A Django project that embeds executable files within images using delimiter-based concatenation — and why real steganography is harder than this.
+description: A Django project that embeds executable files within images using delimiter-based concatenation, and why real steganography is harder than this.
 tier: early
 toc: true
 publishedAt: 2025-02-16T00:00:00.000Z
@@ -33,12 +33,12 @@ Image formats like JPEG and PNG store their data length in headers. Most viewers
 
 ## Why This Is Naive (And That's the Point)
 
-This isn't real steganography. Real steganography modifies the least significant bits of pixel data to encode hidden information, making it undetectable even under statistical analysis. This project just concatenates bytes — anyone who looks at the file size or runs `hexdump` will immediately see the appended data.
+Real steganography hides information in the pixel data itself, usually by modifying the least significant bits, so it stays undetectable even under statistical analysis. This project concatenates bytes. Anyone who looks at the file size or runs `hexdump` will see the appended data straight away.
 
-I built it as a university project to understand binary file manipulation, Azure Blob Storage integration, and Django file handling. The interesting part wasn't the "obfuscation" itself — it was learning how image formats define their data boundaries and why appending arbitrary bytes doesn't corrupt the image.
+I built it as a university project to understand binary file manipulation, Azure Blob Storage integration, and Django file handling. The "obfuscation" was the least interesting part. I got more out of learning how image formats define their data boundaries and why appending arbitrary bytes doesn't corrupt the image.
 
 ## The Azure Integration
 
-Files are stored and retrieved from Azure Blob Storage. The upload/download logic is straightforward, but the useful lesson was handling binary data through Django's file upload pipeline without corrupting bytes — `request.FILES` gives you `UploadedFile` objects that need to be read as binary, not decoded as text.
+Files are stored in and retrieved from Azure Blob Storage. The upload/download logic is straightforward. What took care was getting binary data through Django's file upload pipeline without corrupting bytes: `request.FILES` gives you `UploadedFile` objects that need to be read as binary, not decoded as text.
 
-Check out the source on [GitHub](https://github.com/M-Hassan-Raza/malware_obfuscation).
+The source is on [GitHub](https://github.com/M-Hassan-Raza/malware_obfuscation).

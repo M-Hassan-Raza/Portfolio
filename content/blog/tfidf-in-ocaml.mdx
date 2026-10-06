@@ -2,8 +2,9 @@
 kind: article
 path: /blog/tfidf-in-ocaml/
 title: "TF-IDF in OCaml: When Functional Programming Clicks"
-description: Building a local code search engine in OCaml turned out to be a good excuse to learn TF-IDF, pure pipelines, and where immutability actually helps.
+description: Building a local code search engine in OCaml was a good excuse to learn TF-IDF, pure pipelines, and where immutability helps.
 publishedAt: 2026-04-08T05:00:00.000Z
+updatedAt: 2026-10-06T05:00:00.000Z
 tags:
   - OCaml
   - Functional Programming
@@ -18,7 +19,7 @@ toc: true
 ---
 I built [Cogitator](https://github.com/M-Hassan-Raza/cogitator), a local code search engine in OCaml. It indexes code chunks using TF-IDF, ranks results by cosine similarity, and outputs them as RAG prompts for LLMs. The whole thing is about 500 lines of OCaml.
 
-I didn't pick OCaml because it was the obvious choice. I picked it because I wanted to learn it. It turned out to suit the problem in ways I didn't expect.
+I picked OCaml because I wanted to learn it, and it happened to suit the problem well.
 
 ## The Tokenization Pipeline
 
@@ -42,7 +43,7 @@ let tokenize text =
   |> List.filter (fun w -> not (Stopwords.is_stopword w))
 ```
 
-Each function takes a value, returns a value, no mutation. You can read the pipeline top-to-bottom and know exactly what happens. In Python, I would've written this as a series of list comprehensions or a loop with intermediate variables. It would work, but it wouldn't read as cleanly.
+Each function takes a value and returns a value without mutating anything, so you can read the pipeline top to bottom and know what happens at each step. In Python I would've written this as a series of list comprehensions or a loop with intermediate variables, which works but is harder to follow.
 
 The `split_camel` function uses character-level pattern matching to detect transitions from lowercase to uppercase:
 
@@ -77,7 +78,7 @@ let split_camel s =
 
 ## TF-IDF: Maps All the Way Down
 
-The TF-IDF computation is where OCaml's `Map` module shines. Term frequency is a fold over tokens into a `StringMap`:
+Most of the TF-IDF computation is folds into OCaml's `Map` module. Term frequency is a fold over tokens into a `StringMap`:
 
 ```ocaml
 let term_frequency tokens =
@@ -95,7 +96,7 @@ let term_frequency tokens =
   StringMap.map (fun count -> float_of_int count /. total) counts
 ```
 
-Inverse document frequency follows the same shape: fold over the corpus, count documents containing each term, take the log:
+Inverse document frequency works the same way. Fold over the corpus, count documents containing each term, take the log:
 
 ```ocaml
 let inverse_document_frequency corpus =
@@ -146,11 +147,13 @@ let fuzzy_expand query_tokens idf =
     StringMap.empty query_tokens
 ```
 
-The `match` expression for distance-to-weight is cleaner than an if/else chain. Pattern matching is one of those features that, once you have it, makes every language without it feel clumsy.
+The `match` from distance to weight reads better than an if/else chain would. After a while with pattern matching, languages without it start to feel clumsy.
 
 ## What OCaml Gave Me
 
-**Exhaustive pattern matching caught real bugs.** The `file_kind` type is a variant:
+### Exhaustive matching
+
+The `file_kind` type is a variant:
 
 ```ocaml
 type file_kind =
@@ -159,12 +162,16 @@ type file_kind =
   | Text
 ```
 
-Every `match` on this type must handle all three cases. When I added `Markdown` as a third variant, the compiler flagged every function that didn't handle it. In Python, I'd have found those bugs in production.
+Every `match` on this type has to handle all three cases, so when I added `Markdown` as a third variant the compiler flagged every function that didn't handle it. In Python, I'd have found those bugs in production.
 
-**Composition replaced architecture.** There's no dependency injection, no strategy pattern, no abstract base classes. The tokenization pipeline is just function composition. The search is just `tokenize → vectorize → cosine similarity → sort`. Each piece is testable in isolation because there are no side effects to mock.
+### Composition
 
-**The type system made refactoring fearless.** When I changed the `search_result` type from a tuple to a record, the compiler caught every usage that needed updating. I didn't need to grep for call sites or run the test suite to find breakage.
+The code has no dependency injection, strategy pattern or abstract base classes. The tokenization pipeline is function composition, and search is `tokenize → vectorize → cosine similarity → sort`. Each piece can be tested in isolation because there are no side effects to mock.
 
-The codebase is small, about 500 lines of library code. But it handles tokenization, stemming, TF-IDF indexing, cosine similarity search, fuzzy matching, result merging, cache persistence, and a REPL. In Python, that same feature set would be significantly more code, and I'd have less confidence that it all fits together correctly.
+### Refactoring
 
-OCaml isn't the right tool for everything. But for data transformation pipelines where correctness matters and the domain is well-defined, it's hard to beat.
+When I changed the `search_result` type from a tuple to a record, the compiler caught every usage that needed updating. I didn't need to grep for call sites or run the test suite to find what broke.
+
+The library is about 500 lines and covers tokenization, stemming, TF-IDF indexing, cosine similarity search, fuzzy matching, result merging, cache persistence, and a REPL. The same feature set in Python would be noticeably more code, and I'd be less sure it all fit together.
+
+I wouldn't use OCaml for everything. For a data transformation pipeline with a well-defined domain, where correctness matters, it's a very good fit.

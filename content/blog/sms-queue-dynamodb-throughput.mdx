@@ -1,0 +1,160 @@
+---
+kind: article
+path: /blog/sms-queue-dynamodb-throughput/
+title: An SMS Queue That Wouldn't Drain, and the DynamoDB Row Every Send Rewrote
+description: In September 2026 an SMS backlog on AWS drained at four or five messages a minute, and a few weeks later adding workers stopped making sends faster. How I drained the queue by hand, and the DynamoDB items every send was rewriting.
+publishedAt: 2026-10-06T05:00:00.000Z
+tags:
+  - Production
+  - AWS
+  - DynamoDB
+  - Concurrency
+  - Performance
+categories:
+  - Backend
+cover:
+  ascii: post-sms-queue
+  alt: pending: 20k, the stuck SMS campaign
+comments: true
+toc: true
+---
+In September 2026 a lot of my evenings went to client work for an SMS platform for insurance marketers. Their customers push leads in through an API and the platform texts them. Everything runs on AWS: API Gateway in front of an intake Lambda, an SQS queue per sending route, a sender Lambda behind each queue, and DynamoDB holding message state, credit balances and rate counters. The shared routes pace themselves to 240 sends a minute, a carrier-safe rate, and the upstream SMS provider sits behind the sender.
+
+I did most of the digging with Codex driving CloudShell, on GPT-5.6 in early September and GPT-6 by the end of the month. It ran the queries and read the logs. I read along, decided what to try next, and approved every change before it touched production. Two incidents came out of that month, a few weeks apart, and both ended up inside the send path.
+
+## 20,000 messages "pending"
+
+On the night of 3 September a customer's 25,000-message test campaign showed about 20,000 as pending on their dashboard. The first answer I got back said our dispatcher had zero invocations in 24 hours and every queue was empty, so the batch must have bypassed our sender. That made no sense for traffic that came in through our own API. When I pushed, the check had been run against an older dispatcher. The campaign had arrived, 23,986 records of it, and was queued on an older shared route that the customer's processor still pointed at. That route had a 2,000-a-day cap everyone had forgotten about. Two days earlier I had raised the customer's dedicated route to 100,000 a day, and this batch never touched it.
+
+## Three limits on one route
+
+I raised the shared route's cap to 100,000 a day and published the config as a new Lambda version. The queue still had 17,767 messages waiting and barely moved. The second limit was concurrency: the event source mapping and the Lambda were both pinned to two workers, while the route had been designed for sixteen. I raised both to 16 and the in-flight count jumped from about 42 to about 145. The daily counter read 2,029 of 100,000, with no Lambda errors and no throttles. Sends were running at four or five a minute against a 240-a-minute cap.
+
+The third limit is the one I never fully explained. The mapping allowed 16 concurrent invocations and AWS was running one to three. Each invocation was healthy, about 4.3 seconds with no errors. Over the next few hours I tried, in order:
+
+- Two provisioned pollers on the mapping. They read messages faster than the function finished them, and the DLQ went from 347 to 366 in minutes. I reverted it and redrove the DLQ (384 messages by then).
+- Batch size 5. The handler processes records one after another and reports partial batch failures, and five records at roughly 4 seconds each fit inside the 30-second timeout and 90-second visibility window. About 900 messages went in flight. Completed sends barely changed.
+- Disabling and re-enabling the trigger to reset its scaling.
+- A fresh mapping pinned to the new version. The console showed it as Enabled, and it processed nothing for several minutes, so I rolled it back.
+- Raising `maxReceiveCount` on the queue from 5 to 20, so valid messages stopped landing in the DLQ while all this went on. That change stayed.
+
+My one suspect is the handler itself. After each send it sleeps to hold the route's pace:
+
+```python
+def _send_spacing_seconds(sends_per_hour: int, concurrency: int) -> float:
+    return 3600.0 * concurrency / sends_per_hour  # 16 workers at 240/min -> 4.0 s
+```
+
+A function that spends most of its time asleep may look slow to the SQS poller, and the poller may scale accordingly. I never verified that. By 7 September the same trigger was moving the same queue at about 240 records a minute, so whatever held it back on the 3rd didn't last.
+
+## Draining it by hand
+
+With the customer waiting, I disabled the managed trigger and ran the drain from CloudShell: 16 threads, each receiving five messages, synchronously invoking the same deployed sender with an SQS-shaped event, and deleting only the records the function reported as done. Going through the real sender meant its idempotency checks, send windows and atomic 240-a-minute guard all still applied.
+
+```python
+def process_batch(_):
+    msgs = sqs.receive_message(QueueUrl=q, MaxNumberOfMessages=5,
+                               WaitTimeSeconds=2, VisibilityTimeout=90).get("Messages", [])
+    if not msgs:
+        return 0
+    records = [to_sqs_record(m, queue_arn) for m in msgs]
+    resp = lam.invoke(FunctionName=fn, Qualifier=version,
+                      InvocationType="RequestResponse",
+                      Payload=json.dumps({"Records": records}))
+    body = json.loads(resp["Payload"].read() or b"{}")
+    failed = {f["itemIdentifier"] for f in body.get("batchItemFailures", [])}
+    done = [m for m in msgs if m["MessageId"] not in failed]
+    if done:
+        sqs.delete_message_batch(QueueUrl=q, Entries=[
+            {"Id": str(i), "ReceiptHandle": m["ReceiptHandle"]} for i, m in enumerate(done)])
+    return len(done)
+```
+
+It started at about 190 records a minute and settled near 240, which is what 16 workers sleeping 4 seconds per send should produce. A CloudShell timeout killed it partway through. Because nothing was deleted until the sender confirmed it, I restarted it in the background and the unacknowledged messages came back on their own. It finished at 21,348 processed, with the main queue and the DLQ at zero on two checks a couple of minutes apart. Then I re-enabled the normal trigger at batch 5 and concurrency 16.
+
+An empty queue only means the sender accepted everything. For the 22,178 records that came in on 2 September, 11,497 had reached handsets, 2,360 were still waiting on a final receipt, 7,075 had failed (6,028 of them to carrier spam filtering) and 1,246 were skipped on purpose. I sent the customer those numbers separately from "the queue is drained".
+
+## A limiter that called every conflict a daily limit
+
+On 8 September the same customer reported that sending had frozen. It hadn't stopped, but 1,179 messages were parked with the reason `daily_rate_limited` while the day's counter sat at 41,115 of 100,000. The deployed rate reservation was a DynamoDB transaction that bumps the minute and day counters with a condition on each, and its error handling looked like this:
+
+```python
+except ClientError as exc:
+    if exc.response["Error"]["Code"] == "TransactionCanceledException":
+        return "daily_rate_limited" if RATE_DAY_LIMIT > 0 else "minute_rate_limited"
+    raise
+
+# later
+delay = 900 if reason == "daily_rate_limited" else RATE_LIMIT_DELAY_SECONDS
+```
+
+DynamoDB cancels a transaction when a condition fails, and also when another transaction is touching the same item at that moment (`TransactionConflict`). With 16 workers bumping the same counter items, conflicts were routine, and each one sent a message to the back of the line for 15 minutes. The fix, shipped that night, reads the cancellation reasons and only reports a cap when that cap's condition failed:
+
+```python
+reasons = exc.response.get("CancellationReasons", [])
+for index, (_, _, reason) in enumerate(checks):
+    if index < len(reasons) and reasons[index].get("Code") == "ConditionalCheckFailed":
+        return reason
+return "minute_rate_limited"  # short delay; the conditions still enforce both caps
+```
+
+## Callbacks fighting over the credit-retry record
+
+On 10 September AWS alarm emails started arriving from the delivery-callback service, 29 failures in an hour. Delivery receipts were colliding while updating a shared record that controls retries after credit rejections, even though most receipts had no reason to touch it. I stopped ordinary delivery confirmations from writing to that record, saved each callback before processing it so a failure could be replayed, and wrapped the writes in bounded retries that only fire on explicit contention:
+
+```python
+for attempt in range(8):
+    try:
+        return operation(**request)
+    except Exception as exc:
+        if not is_transaction_conflict(exc) or attempt == 7:
+            raise
+        time.sleep(random.uniform(0.01, min(0.05 * 2 ** attempt, 0.5)))
+```
+
+A check of 122,925 stored delivery attempts from 9 September onward found no missing statuses or retry registrations, so nothing needed replaying.
+
+## "Verizon is slow"
+
+On 28 September the customer asked why Verizon traffic was being throttled when the Verizon lane had no cap. All 30 requests I sampled from that hour had no `carrier` field, so the intake treated them as unknown carrier and routed them to the shared lane capped at 240 a minute. Our API example omitted the field, which can't have helped, and the fix was one extra field in their requests.
+
+The next day, with the field in place and a 150,000-message Verizon campaign running, they measured under 100 a minute. Our logs showed 77, from a sender with two workers. Eight workers gave about 200 a minute. Sixteen gave only about 240, with more than 100 transaction conflicts a minute. Inside each send's transaction, the code read the customer's account item, decremented `available`, incremented `reserved`, and wrote the whole item back on the condition that its revision hadn't changed. The daily usage counter got the same treatment. Every worker sending for that customer was rewriting the same two items, so each commit invalidated everyone else's snapshot.
+
+## ADD instead of read-and-rewrite
+
+I replaced both rewrites with atomic increments inside the same `TransactWriteItems` call, keeping the checks that matter as condition expressions:
+
+```python
+{
+    "Update": {
+        "Key": {"pk": f"ACCOUNT#{account_id}", "sk": "ACCOUNT"},
+        "UpdateExpression": "ADD #available :available, #reserved :reserved, "
+                            "#consumed :consumed, revision :one",
+        "ConditionExpression": "attribute_exists(pk) AND #available >= :one "
+                               "AND compliance_status = :approved AND operational_status = :active",
+    }
+}
+# daily counter, same transaction
+"UpdateExpression": "ADD attempts :one",
+"ConditionExpression": "attribute_not_exists(attempts) OR attempts < :limit",
+```
+
+Delivery settlement uses the same helper with different deltas. Two sends can still conflict if they hit the item at the same instant, and the jittered retry handles that, but there is no longer a stale copy for another commit to invalidate between the read and the write. 165 tests passed, including credit exhaustion and duplicate receipts.
+
+| Workers | Code | Sends per minute |
+| --- | --- | --- |
+| 2 | read-and-rewrite | 77 |
+| 8 | read-and-rewrite | about 200 |
+| 16 | read-and-rewrite | about 240, with 100+ conflicts a minute |
+| 8 | atomic `ADD` | about 350 |
+| 12 | atomic `ADD` | 500, then 493 |
+
+The last row is two consecutive full minutes on 30 September against a 500-a-minute ceiling the team asked for, with the waiting queue falling from 527 to 118.
+
+## The 400 ms that wasn't ours
+
+That same day the customer sent a theory: at 9 requests a second they got about 450 sends a minute, and at 10 a second their request latency doubled from 200 to 400 ms and throughput dropped to 350, so we must have a concurrency problem. Our intake showed no 429s and no errors, server-side handling averaging about 155 ms with 95% under roughly 216 ms, and at most 6 of 10 available workers in use. I sent them those numbers, suggested staying at 9, and asked for the exact test windows so we could line up their timings with our logs.
+
+## What I'd check first next time
+
+Before touching concurrency or pollers, I'd list every item one send writes in DynamoDB and ask which of them every worker shares. Here it was the account balance, the daily counter and the credit-retry record. Any item on that list caps throughput no matter how many workers you add, and conflicts on it will show up dressed as something else unless the code reads `CancellationReasons`. I'd also keep a list of every cap on every route, so a forgotten 2,000 a day can't sit unnoticed on an old route. If you like this sort of thing, the [war stories post](/blog/war-stories-from-production/) has the PostgreSQL versions of the same mistake.
