@@ -19,7 +19,7 @@ cover:
 comments: true
 toc: true
 ---
-These are bugs I shipped between 2024 and 2026. Most were in [Polaris](/projects/polaris/), the retail system I built for shops that bill all day, and one was in an AI pipeline at Entropy Labs.
+These are bugs I shipped between 2024 and 2026. Most were in [Polaris](/projects/polaris/), the retail system I built for shops that bill all day, and one was in an AI pipeline at Entropy & Co.
 
 ## Two cashiers, one item
 
@@ -52,7 +52,7 @@ I keep relearning that `transaction.atomic()` gives you consistency and does not
 
 ## A chain that returned nothing, politely
 
-At Entropy Labs I had a LangChain retrieval chain that worked in tests and in staging, and in production returned an empty string with no exception and nothing in the logs.
+At Entropy & Co., I had a LangChain retrieval chain that worked in tests and in staging, and in production returned an empty string with no exception and nothing in the logs.
 
 I checked the model config, the keys and the rate limits, then added logging to every step, and every step ran. The cause was further up: under certain inputs the prompt template rendered an empty message list. The model received nothing, replied with nothing, and the chain passed that along as a successful result.
 

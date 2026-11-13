@@ -120,7 +120,7 @@ export function AboutView({
               For the record
             </h2>
             <p className="type-lede">
-              Recognition for Entropy Labs, the company. The credit is shared
+              Recognition for Entropy & Co., the company. The credit is shared
               with the whole team.
             </p>
           </div>

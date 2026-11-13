@@ -1,7 +1,7 @@
 export const site = {
   url: "https://mhassan.dev",
   description:
-    "Muhammad Hassan Raza runs product and engineering at Entropy Labs, builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.",
+    "Muhammad Hassan Raza runs product and engineering at Entropy & Co., builds backend and AI systems that hold up in production, and gets patches merged into open-source tools like kitty, calibre and libtorrent.",
   language: "en-US",
   socialImage: "/assets/social-card.png",
   umami: {

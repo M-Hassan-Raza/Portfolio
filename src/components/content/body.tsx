@@ -23,7 +23,7 @@ function ProofList() {
         <strong>{ossStats.merged}</strong> merged pull requests in open-source
         tools like kitty, calibre and libtorrent.
       </li>
-      <li>Entropy Labs: {profile.recognition.join("; ")}.</li>
+      <li>Entropy & Co.: {profile.recognition.join("; ")}.</li>
     </ul>
   )
 }

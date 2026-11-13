@@ -18,7 +18,7 @@ cover:
 comments: true
 toc: true
 ---
-On 31 July 2026 I spent most of a day on the deploy pipeline for [Obelisk](/projects/obelisk/), the AI marketing platform we build at Entropy Labs. The backend is FastAPI on Cloud Run, with Alembic for migrations, pytest for tests, and a Cloud Build pipeline that tests, builds one image, migrates the database and then promotes an API, a handful of workers and a scheduler. I worked through it with Codex on GPT-5.6, which did most of the log reading, timing breakdowns and test bisecting. Which of its findings to act on, and how to split the gate, were my calls.
+On 31 July 2026 I spent most of a day on the deploy pipeline for [Obelisk](/projects/obelisk/), the AI marketing platform we build at Entropy & Co. The backend is FastAPI on Cloud Run, with Alembic for migrations, pytest for tests, and a Cloud Build pipeline that tests, builds one image, migrates the database and then promotes an API, a handful of workers and a scheduler. I worked through it with Codex on GPT-5.6, which did most of the log reading, timing breakdowns and test bisecting. Which of its findings to act on, and how to split the gate, were my calls.
 
 Across the last 60 builds, a successful backend deploy averaged 52 to 54 minutes, with one at 68. Queueing accounted for about 50 seconds of that. Two weeks earlier the same pipeline had been down to roughly 15 minutes, which made the number more annoying.
 
